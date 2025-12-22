@@ -1517,7 +1517,7 @@
 
     <!-- Slide Indicator -->
     <div style="position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%); z-index: 1000; background: rgba(26, 35, 68, 0.9); backdrop-filter: blur(10px); padding: 0.75rem 1.5rem; border-radius: 50px; border: 1px solid rgba(0, 217, 160, 0.3); color: var(--text); font-size: 0.9rem; font-weight: 600;">
-        <span id="slideIndicator">1 / 7</span>
+        <span id="slideIndicator">1/7</span>
     </div>
 
     <footer>
@@ -1529,14 +1529,33 @@
         let currentSlide = 1;
         const totalSlides = 7;
 
+        function updateSlideIndicator() {
+            const indicator = document.getElementById('slideIndicator');
+            if (indicator) {
+                indicator.textContent = `${currentSlide}/${totalSlides}`;
+            }
+            
+            // Update button states
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            if (prevBtn) {
+                prevBtn.style.opacity = currentSlide === 1 ? '0.5' : '1';
+                prevBtn.style.cursor = currentSlide === 1 ? 'not-allowed' : 'pointer';
+            }
+            if (nextBtn) {
+                nextBtn.style.opacity = currentSlide === totalSlides ? '0.5' : '1';
+                nextBtn.style.cursor = currentSlide === totalSlides ? 'not-allowed' : 'pointer';
+            }
+        }
+
         function showSlide(n) {
             const slides = document.querySelectorAll('.slide');
             
             if (n > totalSlides) {
-                currentSlide = 1;
+                currentSlide = totalSlides;
             }
             if (n < 1) {
-                currentSlide = totalSlides;
+                currentSlide = 1;
             }
             
             slides.forEach(slide => {
@@ -1551,34 +1570,36 @@
                     behavior: 'smooth'
                 });
             }
+            
+            updateSlideIndicator();
         }
 
         function nextSlide() {
-            currentSlide++;
-            if (currentSlide > totalSlides) {
-                currentSlide = totalSlides;
-                return;
+            if (currentSlide < totalSlides) {
+                currentSlide++;
+                showSlide(currentSlide);
             }
-            showSlide(currentSlide);
         }
 
         function prevSlide() {
-            currentSlide--;
-            if (currentSlide < 1) {
-                currentSlide = 1;
-                return;
+            if (currentSlide > 1) {
+                currentSlide--;
+                showSlide(currentSlide);
             }
-            showSlide(currentSlide);
         }
 
         // Keyboard navigation
         document.addEventListener('keydown', function(e) {
-            if (e.key === 'ArrowRight' || e.key === ' ') {
+            // Prevent default for navigation keys
+            if (e.key === 'ArrowRight' || e.key === 'ArrowLeft' || 
+                (e.key === ' ' && e.target === document.body)) {
                 e.preventDefault();
-                nextSlide();
-            } else if (e.key === 'ArrowLeft') {
-                e.preventDefault();
-                prevSlide();
+                
+                if (e.key === 'ArrowRight' || e.key === ' ') {
+                    nextSlide();
+                } else if (e.key === 'ArrowLeft') {
+                    prevSlide();
+                }
             }
         });
 
