@@ -807,12 +807,114 @@
             font-size: 1.05rem;
             background-color: var(--light-bg);
             transition: all 0.3s ease;
+            height: auto;
+            overflow-y: auto;
+        }
+        
+        .query-select option {
+            white-space: normal;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            padding: 12px 10px;
+            line-height: 1.6;
+            min-height: 50px;
+            height: auto;
         }
         
         .query-select:focus {
             outline: none;
             border-color: var(--secondary-color);
             box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+        }
+
+        /* Custom dropdown for multi-line support */
+        .custom-select-wrapper {
+            position: relative;
+            width: 100%;
+            margin-bottom: 18px;
+        }
+        
+        .custom-select-trigger {
+            width: 100%;
+            padding: 16px;
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            font-size: 1.05rem;
+            background-color: var(--light-bg);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            min-height: 56px;
+            line-height: 1.6;
+            white-space: normal;
+            word-wrap: break-word;
+        }
+        
+        .custom-select-trigger:hover {
+            border-color: var(--secondary-color);
+        }
+        
+        .custom-select-trigger.open {
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+        }
+        
+        .custom-select-trigger::after {
+            content: '▼';
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-left: 12px;
+            flex-shrink: 0;
+        }
+        
+        .custom-select-trigger.open::after {
+            content: '▲';
+        }
+        
+        .custom-select-options {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background-color: white;
+            border: 2px solid var(--secondary-color);
+            border-radius: 12px;
+            margin-top: 4px;
+            max-height: 400px;
+            overflow-y: auto;
+            z-index: 1000;
+            display: none;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .custom-select-options.open {
+            display: block;
+        }
+        
+        .custom-option {
+            padding: 1px 16px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            border-bottom: 1px solid var(--border-color);
+            white-space: normal;
+            word-wrap: break-word;
+            line-height: 1.6;
+            font-size: 1.05rem;
+        }
+        
+        .custom-option:last-child {
+            border-bottom: none;
+        }
+        
+        .custom-option:hover {
+            background-color: rgba(16, 185, 129, 0.1);
+        }
+        
+        .custom-option.selected {
+            background-color: rgba(16, 185, 129, 0.15);
+            font-weight: 500;
         }
         
         .response-area {
@@ -1251,7 +1353,7 @@
             
             <div class="overview">
                 <h3 class="overview-title">Overview</h3>
-                <p>Our <strong>Multimodal AI</strong> framework offers flexible tools that process diverse data streams—from equipment sensors to visual inspections to operator reports. Powered by a <strong>Multi-Agent System</strong>, specialized agents can be configured to address the specific challenges you identify in your operations. We'd like to understand where <strong>you</strong> see opportunities for AI to lower production costs and improve throughput. The architecture supports <strong>collaborative intelligence</strong> between maintenance, operations, and logistics—but we're interested in hearing where you think this technology could have the most impact on your cost structure and allocation capabilities.</p>            
+                <p>Our <strong>Multimodal AI</strong> framework offers flexible tools that process diverse data streams—from equipment sensors to visual inspections to operator reports. Powered by a <strong>Multi-Agent System</strong>, specialized agents can be configured to address your <strong> operational challenges</strong> across the full risk management cycle: <strong>Predict</strong> risks, <strong>Protect</strong> workers in real-time, and <strong>Mitigate</strong> incidents through rapid learning. The architecture supports <strong>collaborative intelligence</strong> between maintenance, operations, logistics, and safety teams—enabling stronger <strong>operational reliability</strong> and <strong>safety records</strong>, which are increasingly critical for stakeholder confidence and contractual commitments.</p>            
             </div>
 
         <div class="dashboard">
@@ -1270,15 +1372,25 @@
             <div class="chart-container">
                 <h3 class="chart-title">Interactive AI Demo—What Would You Like to Explore?</h3>
                 <p>These are examples of how the AI can analyze operational scenarios. We're curious: what questions would be most valuable for your team to answer quickly?</p>
-                <select class="query-select" id="erpQuerySelect">
-                    <option value="">-- Select a mining operations query --</option>
-                    <option value="oil_sensor_anomaly">Detect oil contamination anomalies in hydraulic systems using sensor data</option>
-                    <option value="oil_degradation">Predict oil degradation rates and optimal replacement intervals</option>
-                    <option value="oil_temp_correlation">Analyze correlation between oil temperature and equipment performance</option>
-                    <option value="maintenance_backlog">Analyze maintenance backlog trends and resource allocation</option>
-                    <option value="conveyor_bearing_prediction">Predict conveyor bearing failures based on vibration and temperature patterns</option>
-                    <option value="crusher_wear_prediction">Forecast crusher liner wear and optimize replacement scheduling</option>
-                </select>
+                
+                <div class="custom-select-wrapper">
+                    <div class="custom-select-trigger" id="customSelectTrigger">
+                        <span id="selectedText">-- Select a mining operations query --</span>
+                    </div>
+                    <div class="custom-select-options" id="customSelectOptions">
+                        <div class="custom-option" data-value="">-- Select a mining operations query --</div>
+                        <div class="custom-option" data-value="oil_sensor_anomaly">Detect oil contamination anomalies in hydraulic systems using sensor data</div>
+                        <div class="custom-option" data-value="oil_degradation">Predict oil degradation rates and optimal replacement intervals</div>
+                        <div class="custom-option" data-value="oil_temp_correlation">Analyze correlation between oil temperature and equipment performance</div>
+                        <div class="custom-option" data-value="maintenance_backlog">Analyze maintenance backlog trends and resource allocation</div>
+                        <div class="custom-option" data-value="conveyor_bearing_prediction">Predict conveyor bearing failures based on vibration and temperature patterns</div>
+                        <div class="custom-option" data-value="crusher_wear_prediction">Forecast crusher liner wear and optimize replacement scheduling</div>
+                        <div class="custom-option" data-value="ground_stability_risk"><strong>[Safety: Prevention Stage]</strong> Assess Esterhazy K3 mine stability using seismic, stress, and fracture data from the past 90 days. Correlate with ground fall history and current personnel locations.</div>
+                        <div class="custom-option" data-value="machine_safety_compliance"><strong>[Safety: Protection Stage]</strong> Review Mulberry Plant Granulation Building video/sensor data from the last 7 days for LOTO compliance, guard integrity, and unauthorized zone entry.</div>
+                        <div class="custom-option" data-value="process_safety_incident"><strong>[Safety: Mitigation Stage]</strong> Analyze Faustina Sulfuric Acid Plant Tier‑2 vapor release alarm data (60 min pre‑alarm to resolution). Trace root cause, assess ESD response, and identify safety control gaps.</div>
+                    </div>
+                </div>
+                
                 <div class="response-area">
                     <div class="response-title">AI Response (Sample):</div>
                     <div id="aiResponse">Select a mining operations query from the dropdown to see a mock AI analysis for demo purposes.</div>
@@ -1288,13 +1400,12 @@
             <div class="potential-roi">
                 <h3 class="potential-roi-title">Where Could This Drive Cost Reduction?</h3>
                 <ul class="roi-list">
+                    <li><strong>Enhanced Safety & Compliance:</strong> AI-powered hazard detection prevents incidents, reduces man-hours lost, and avoids shutdowns—<span class="metric-highlight">critical for allocation reliability and stakeholder confidence</span></li>
+                    <li><strong>25-40%</strong> unplanned downtime reduction (including safety events) → significantly lower lost production costs</li>
+                    <li><strong>20-30%</strong> maintenance optimization → reduce both planned and emergency spend while maintaining safety standards</li>
+                    <li><strong>30-50%</strong> faster incident resolution → minimize extended production losses and improve operational efficiency</li>
                     <li><strong>We'd like your input:</strong> Where do you see the biggest opportunities in your operations?</li>
-                    <li><strong>25-40%</strong> downtime reduction → significantly lower lost production costs</li>
-                    <li><strong>20-30%</strong> maintenance optimization → reduce both planned and emergency spend</li>
-                    <li><strong>15-25%</strong> better asset utilization → maximize return on capital equipment</li>
-                    <li><strong>30-50%</strong> faster incident resolution → minimize extended production losses</li>
-                    <li><strong>15-25%</strong> operational efficiency gains → lower per-ton production cost</li>
-                    <li><strong>Scalable across sites</strong> → position for cost competitiveness as Jansen supply arrives (2027)</li>
+                    <li><strong>Scalable across sites</strong> → position for cost competitiveness and safety leadership as Jansen supply arrives (2027)</li>
                 </ul>
             </div>
         </div>
@@ -2347,9 +2458,50 @@
         }, 100);
     });
         
+        // Custom dropdown functionality
+        const customSelectTrigger = document.getElementById('customSelectTrigger');
+        const customSelectOptions = document.getElementById('customSelectOptions');
+        const selectedText = document.getElementById('selectedText');
+        const options = document.querySelectorAll('.custom-option');
+        
+        customSelectTrigger.addEventListener('click', function(e) {
+            e.stopPropagation();
+            customSelectTrigger.classList.toggle('open');
+            customSelectOptions.classList.toggle('open');
+        });
+        
+        options.forEach(option => {
+            option.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const value = this.getAttribute('data-value');
+                const text = this.innerHTML;
+                
+                // Update selected text
+                selectedText.innerHTML = text;
+                
+                // Remove selected class from all options
+                options.forEach(opt => opt.classList.remove('selected'));
+                
+                // Add selected class to clicked option
+                this.classList.add('selected');
+                
+                // Close dropdown
+                customSelectTrigger.classList.remove('open');
+                customSelectOptions.classList.remove('open');
+                
+                // Trigger the response update
+                updateQueryResponse(value);
+            });
+        });
+        
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function() {
+            customSelectTrigger.classList.remove('open');
+            customSelectOptions.classList.remove('open');
+        });
+        
         // ERP Query System with Specific Mining Queries
-        document.getElementById('erpQuerySelect').addEventListener('change', function() {
-            const query = this.value;
+        function updateQueryResponse(query) {
             let response = "Select a mining operations query from the dropdown to see detailed AI analysis.";
             
             if (query === 'oil_sensor_anomaly') {
@@ -2549,7 +2701,7 @@
                             <li>Implement automated lubrication system for critical bearings on high-usage conveyors</li>
                             <li>Install belt tracking sensors with automatic tensioning on primary conveyors</li>
                             <li>Upgrade motor cooling and dust protection on conveyors C-12 through C-18</li>
-                            <li>Expected reduction in failures: <span class="metric-highlight">25-30%</span> with estimated savings of <span class="metric-highlight">12-15% reduction in conveyor maintenance costs</span></li>
+                            <li>Expected reduction in failures: <span class="metric-highlight">25-30%</span> with estimated <span class="metric-highlight">12-15% reduction in conveyor maintenance costs</span></li>
                         </ul>
                     </div>
                 `;
@@ -2653,9 +2805,9 @@
                         <p><strong>Optimization Recommendations:</strong></p>
                         <ul>
                             <li>C-04 requires <span class="metric-highlight">scheduled shutdown within 5 days</span> - coordinate with production planning to minimize impact</li>
-                            <li>Coordinating C-02 and C-04 replacements during next planned maintenance could reduce overall downtime by <span class="metric-highlight">22%</span></li>
+                            <li>Coordinating C-02 and C-04 replacements during next planned maintenance could reduce overall downtime by <span class="metric-highlight">18-22%</span></li>
                             <li>Wear rate analysis indicates <span class="metric-highlight">harder ore composition</span> from Zone 2A affecting C-02 liner life</li>
-                            <li>Predictive scheduling optimizes liner life by <span class="metric-highlight">8-12%</span> and reduces replacement costs by <span class="metric-highlight">10-14% annually</span></li>
+                            <li>Predictive scheduling optimizes liner life by <span class="metric-highlight">6-9%</span> and reduces replacement costs by <span class="metric-highlight">8-12% annually</span></li>
                         </ul>
                     </div>
                 `;
@@ -2712,10 +2864,205 @@
                         </ul>
                     </div>
                 `;
+            } else if (query === 'ground_stability_risk') {
+                response = `
+                    <p><strong>Ground Stability & Fall of Ground Risk Assessment</strong></p>
+                    <p>Multi-sensor AI analysis of rock mass stability and fall of ground (FoG) risks across active mining sections:</p>
+                    
+                    <div class="response-details">
+                        <table class="response-table">
+                            <tr>
+                                <th>Location / Zone</th>
+                                <th>Risk Level</th>
+                                <th>Critical Change Indicators</th>
+                                <th>Predicted FoG Probability (30d)</th>
+                            </tr>
+                            <tr>
+                                <td>Section K3-7, Primary Haulage</td>
+                                <td><span class="priority-high">CRITICAL</span></td>
+                                <td>Seismic energy +220%, crack propagation +400% (14 days)</td>
+                                <td>34%</td>
+                            </tr>
+                            <tr>
+                                <td>Panel K3-12, Production Zone</td>
+                                <td><span class="priority-high">HIGH</span></td>
+                                <td>Stress pillar deformation, microseismic clustering</td>
+                                <td>18%</td>
+                            </tr>
+                            <tr>
+                                <td>Access Drift to Shaft B</td>
+                                <td><span class="priority-medium">MEDIUM</span></td>
+                                <td>Increased moisture seepage correlating with stress maps</td>
+                                <td>7%</td>
+                            </tr>
+                        </table>
+                        
+                        <p><strong>Critical Safety Findings:</strong></p>
+                        <ul>
+                            <li><span class="metric-highlight">Section K3-7</span>: Shows <span class="metric-highlight">400% increase</span> in microfracture propagation over 14 days—most rapid degradation trend recorded in this shaft</li>
+                            <li>Seismic monitoring arrays detected <span class="metric-highlight">220% rise</span> in low-magnitude seismic events, concentrated in pattern consistent with impending slab failure</li>
+                            <li>AI cross-referenced data with recent incident patterns, finding <span class="metric-highlight">91% correlation</span> in pre-collapse signal characteristics</li>
+                            <li>Current ground support in K3-7 rated for historical conditions and may be under-specified for current accelerated stress regime</li>
+                        </ul>
+                        
+                        <p><strong>Safety & Operational Impact Assessment:</strong></p>
+                        <ul>
+                            <li><strong>Personnel at Direct Risk:</strong> Up to 63 miners and technicians work in or traverse high-risk K3-7 section during standard shift cycle</li>
+                            <li><strong>Production Impact:</strong> Significant FoG event would trigger immediate regulatory inspection, potentially halting operations in affected area for <span class="metric-highlight">2-4 weeks minimum</span></li>
+                            <li><strong>Capacity Loss:</strong> Could result in <span class="metric-highlight">~15% loss of site production capacity</span> during investigation and remediation period</li>
+                            <li><strong>Historical Context:</strong> Industry data shows major FoG events lead to extended shutdowns, regulatory scrutiny, and allocation impacts</li>
+                        </ul>
+                        
+                        <p><strong>AI-Recommended Mitigation Actions:</strong></p>
+                        <ul>
+                            <li><strong>IMMEDIATE (0-24h):</strong> Restrict access to Section K3-7 for non-essential personnel; deploy additional ground-penetrating radar for real-time mapping</li>
+                            <li><strong>SHORT-TERM (72h):</strong> Install secondary, sacrificial ground support (additional bolts, mesh) in high-risk zones; implement 24/7 AI monitoring dashboard</li>
+                            <li><strong>MEDIUM-TERM (14 days):</strong> Execute phased destressing program in K3-7 based on AI-prescribed sequencing; redesign long-term support plans using AI-derived rock mass models</li>
+                            <li><strong>LONG-TERM (30 days):</strong> Integrate continuous AI monitoring with automated early warning system tied directly to evacuation protocols</li>
+                        </ul>
+                        
+                        <p style="background: rgba(239, 68, 68, 0.08); padding: 15px; border-left: 4px solid #ef4444; border-radius: 8px; margin-top: 15px;">
+                            <strong>⚠️ Value Proposition:</strong> Proactive AI-driven intervention prevents potential fatalities, avoids multi-week production shutdowns, and maintains operational continuity—critical for allocation reliability and stakeholder confidence. Ground stability monitoring directly addresses the type of incidents that have historically impacted operational performance industry-wide.
+                        </p>
+                    </div>
+                `;
+            } else if (query === 'machine_safety_compliance') {
+                response = `
+                    <p><strong>Machine Safety & LOTO Compliance Monitoring</strong></p>
+                    <p>AI analysis of video and sensor data for critical safety procedure adherence around processing equipment:</p>
+                    
+                    <div class="response-details">
+                        <table class="response-table">
+                            <tr>
+                                <th>Equipment / Location</th>
+                                <th>Hazard Level</th>
+                                <th>Primary Compliance Issue</th>
+                                <th>Frequency (7 days)</th>
+                            </tr>
+                            <tr>
+                                <td>Ribbon Blender #4, Line 3</td>
+                                <td><span class="priority-high">CRITICAL</span></td>
+                                <td>Guard removed during active cleaning cycle; LOTO not applied</td>
+                                <td>3 violations (Severe)</td>
+                            </tr>
+                            <tr>
+                                <td>Crusher #7, Maintenance Bay</td>
+                                <td><span class="priority-high">HIGH</span></td>
+                                <td>Entry into red zone while equipment in maintenance mode but not fully isolated</td>
+                                <td>12 violations (High)</td>
+                            </tr>
+                            <tr>
+                                <td>Conveyor Drive #12</td>
+                                <td><span class="priority-medium">MEDIUM</span></td>
+                                <td>Safety interlock bypass attempts via manual override</td>
+                                <td>9 attempts (Medium)</td>
+                            </tr>
+                        </table>
+                        
+                        <p><strong>Critical Safety Findings:</strong></p>
+                        <ul>
+                            <li><span class="metric-highlight">Blender #4</span> operations show repeat violation pattern: guards removed to speed cleaning, creating exposure to rotating equipment hazards</li>
+                            <li>LOTO compliance is <span class="metric-highlight">below 60%</span> for non-routine maintenance tasks, indicating systemic procedural breakdown</li>
+                            <li>AI behavioral analysis identifies that pressure to minimize downtime is strongest correlating factor with safety procedure shortcuts</li>
+                            <li>Current safeguards (reliance on human supervision, periodic audits) show <span class="metric-highlight">limited effectiveness</span> at preventing real-time violations</li>
+                        </ul>
+                        
+                        <p><strong>Incident Risk & Regulatory Analysis:</strong></p>
+                        <ul>
+                            <li><strong>Imminent Risk:</strong> Conditions around Blender #4 are statistically similar to patterns preceding serious industry incidents; AI assigns <span class="metric-highlight">high probability</span> of lost-time incident within 90 days if practices continue</li>
+                            <li><strong>Personnel Exposure:</strong> 18 maintenance technicians and 9 production operators routinely work with identified high-risk equipment</li>
+                            <li><strong>Regulatory Consequences:</strong> Repeat violations could be classified as "Willful," leading to enhanced penalties and potential external oversight requirements</li>
+                            <li><strong>Cultural Impact:</strong> Persistent unaddressed violations erode safety culture, signaling that production timelines consistently outweigh safety protocols</li>
+                        </ul>
+                        
+                        
+                        <p><strong>AI-Recommended Safety Actions:</strong></p>
+                        <ul>
+                            <li><strong>IMMEDIATE (0-4h):</strong> Issue mandatory stand-down for all personnel working on Blender #4 and similar equipment; enforce guard integrity check before any restart</li>
+                            <li><strong>SHORT-TERM (24h):</strong> Install AI-powered computer vision cameras with real-time alerting for guard removal or zone intrusion; alerts go directly to area supervisors' mobile devices</li>
+                            <li><strong>MEDIUM-TERM (7 days):</strong> Integrate AI compliance data with digital LOTO system to auto-lock equipment if guards removed without valid LOTO permit</li>
+                            <li><strong>LONG-TERM (30 days):</strong> Use AI analytics to identify teams and shifts with high violation rates; tailor targeted training and coaching using data-driven insights</li>
+                        </ul>
+                        
+                        <p style="background: rgba(239, 68, 68, 0.08); padding: 15px; border-left: 4px solid #ef4444; border-radius: 8px; margin-top: 15px;">
+                            <strong>⚠️ Value Proposition:</strong> AI system acts as 24/7 digital safety observer, enforcing procedural adherence and protecting workers. Provides management with objective data to break cycles of compliance failures before serious incidents occur. Maintaining strong safety records is essential for operational continuity, regulatory standing, and stakeholder confidence.
+                        </p>
+                    </div>
+                `;
+            } else if (query === 'process_safety_incident') {
+                response = `
+                    <div class="response-container">
+                        <p><strong>Post-Incident Forensic Analysis & System Learning</strong></p>
+                        <p>AI reconstruction and root cause analysis of the Faustina Plant Tier-2 vapor release event:</p>
+                        
+                        <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+                            <thead>
+                                <tr style="background: rgba(239, 68, 68, 0.1);">
+                                    <th style="padding: 12px; text-align: left; border: 1px solid #e5e7eb;">System Component</th>
+                                    <th style="padding: 12px; text-align: left; border: 1px solid #e5e7eb;">Status at T-0 (Alarm)</th>
+                                    <th style="padding: 12px; text-align: left; border: 1px solid #e5e7eb;">Deviation from Standard</th>
+                                    <th style="padding: 12px; text-align: left; border: 1px solid #e5e7eb;">Contribution to Failure Chain</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="padding: 10px; border: 1px solid #e5e7eb;"><strong>Main Feed Valve (FCV-112)</strong></td>
+                                    <td style="padding: 10px; border: 1px solid #e5e7eb;">Stuck at 82% open</td>
+                                    <td style="padding: 10px; border: 1px solid #e5e7eb;">Failed closed command from controller</td>
+                                    <td style="padding: 10px; border: 1px solid #e5e7eb;"><span class="metric-highlight">Primary Initiating Cause</span></td>
+                                </tr>
+                                <tr style="background: rgba(0, 0, 0, 0.02);">
+                                    <td style="padding: 10px; border: 1px solid #e5e7eb;"><strong>Pressure Safety System (PSV-205)</strong></td>
+                                    <td style="padding: 10px; border: 1px solid #e5e7eb;">48-minute delay to actuation</td>
+                                    <td style="padding: 10px; border: 1px solid #e5e7eb;">Calibration drift exceeding limits</td>
+                                    <td style="padding: 10px; border: 1px solid #e5e7eb;"><span class="metric-highlight">Critical Escalation Factor</span></td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 10px; border: 1px solid #e5e7eb;"><strong>Operator Console Alert</strong></td>
+                                    <td style="padding: 10px; border: 1px solid #e5e7eb;">Logged at T-0</td>
+                                    <td style="padding: 10px; border: 1px solid #e5e7eb;">No audible alarm triggered</td>
+                                    <td style="padding: 10px; border: 1px solid #e5e7eb;">Software configuration error</td>
+                                </tr>
+                                <tr style="background: rgba(0, 0, 0, 0.02);">
+                                    <td style="padding: 10px; border: 1px solid #e5e7eb;"><strong>Unit ESD Sequence</strong></td>
+                                    <td style="padding: 10px; border: 1px solid #e5e7eb;">Auto-initiated at T+3min</td>
+                                    <td style="padding: 10px; border: 1px solid #e5e7eb;">Bypassed pre-purge step</td>
+                                    <td style="padding: 10px; border: 1px solid #e5e7eb;">Design flaw in logic tree</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <p><strong>Critical Incident Reconstruction:</strong></p>
+                        <ul>
+                            <li><strong>Root Cause Chain:</strong> Mechanical failure of FCV-112 (40% probability) combined with a latent calibration failure of PSV-205 (60% probability) created a "double failure" scenario that overwhelmed basic process controls</li>
+                            <li><strong>Systemic & Human Factors:</strong> The AI cross-referenced maintenance logs and found FCV-112 was <span class="metric-highlight">4 months overdue</span> for its predictive maintenance service. The PSV-205 calibration drift had been slowly trending for <span class="metric-highlight">90 days</span> but never breached the static alert threshold until failure</li>
+                            <li><strong>Response Analysis:</strong> While the ESD activated, the missing pre-purge step extended the vapor cloud duration by approximately <span class="metric-highlight">8 minutes</span>. Perimeter sensors confirmed the cloud was contained within the primary bund, validating the effectiveness of physical controls but not procedural ones</li>
+                        </ul>
+                        
+                        <p><strong>Safety & Operational Impact Assessment:</strong></p>
+                        <ul>
+                            <li><strong>Production & Capacity Impact:</strong> The incident resulted in a full-unit shutdown for one production cycle, directly reducing quarterly site output by an estimated <span class="metric-highlight">1.5-2.5%</span>. A recurrence with community impact could lead to a regulatory production curtailment of <span class="metric-highlight">15-25%</span> for multiple quarters.</li>
+                            <li><strong>Regulatory & Efficiency Risk:</strong> A Tier-2 reportable event typically triggers <span class="metric-highlight">200-300% more inspection hours</span> from agencies like OSHA/EPA over the following year, diverting significant management and technical resources. Manual root cause investigations for such events historically take <span class="metric-highlight">3-5 weeks to close</span>.</li>
+                            <li><strong>Systemic Exposure:</strong> The identified "double failure" pattern indicates a potential <span class="metric-highlight">70% higher risk</span> of similar overpressure events in 3 other process units with identical valve and relief system configurations.</li>
+                        </ul>
+                        
+                        <p><strong>AI-Recommended Mitigation & Learning Actions:</strong></p>
+                        <ul>
+                            <li><strong>IMMEDIATE (0-24h):</strong> Implement a temporary procedural guard requiring manual verification of PSV-205 status every 4 hours; update the alarm management software to ensure all Tier-2 alerts are audible</li>
+                            <li><strong>SHORT-TERM (72h):</strong> Overhaul the predictive maintenance algorithm to incorporate AI-derived degradation trends (like the PSV-205 drift), moving from calendar-based to condition-based scheduling. Correct the ESD sequence logic</li>
+                            <li><strong>MEDIUM-TERM (14 days):</strong> Launch a "double failure" scenario review for the top 5 highest-hazard processes, using this incident as a model. Update all Process Hazard Analysis (PHA) documents</li>
+                            <li><strong>LONG-TERM (30 days):</strong> Integrate this incident's data into the AI's simulation engine to create a new training module for operators and engineers on recognizing coupled failures</li>
+                        </ul>
+                        
+                        <p style="background: rgba(239, 68, 68, 0.08); padding: 15px; border-left: 4px solid #ef4444; border-radius: 8px; margin-top: 15px;">
+                            <strong>⚠️ Value Proposition:</strong> This AI-driven mitigation turns a single incident into organization-wide learning. It closes specific technical gaps and, more importantly, upgrades the entire safety management system by identifying and fixing latent flaws in procedures, maintenance, and design logic, preventing the next incident before the precursor occurs.
+                        </p>
+                    </div>
+                `;
             }
             
             document.getElementById('aiResponse').innerHTML = response;
-        });
+        }
         
         // Initialize causal graph when the page loads
         window.addEventListener('load', function() {
