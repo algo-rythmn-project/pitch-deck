@@ -114,7 +114,7 @@
         }
         
         .container {
-            max-width: 1280px;
+            max-width: 1350px;
             margin: 0 auto;
             padding: 0 24px;
         }
@@ -122,6 +122,10 @@
         section {
             padding: 120px 0;
             position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
         h1, h2, h3, h4, h5 {
@@ -130,17 +134,20 @@
         }
         
         h1 {
-            font-size: 3.75rem;
-            letter-spacing: -0.025em;
-            margin-bottom: 1.5rem;
+            font-size: 4.5rem;
+            letter-spacing: -0.03em;
+            margin-bottom: 2rem;
+            font-weight: 800;
+            line-height: 1.1;
         }
         
         h2 {
-            font-size: 2.5rem;
-            letter-spacing: -0.015em;
-            margin-bottom: 1rem;
+            font-size: 3rem;
+            letter-spacing: -0.02em;
+            margin-bottom: 1.5rem;
             position: relative;
             display: inline-block;
+            font-weight: 800;
         }
         
         h2.section-title {
@@ -175,15 +182,17 @@
         
         p {
             margin-bottom: 1.5rem;
-            font-size: 1.125rem;
+            font-size: 1.2rem;
             color: var(--gray-600);
-            line-height: 1.7;
+            line-height: 1.8;
         }
         
         .lead {
-            font-size: 1.25rem;
-            font-weight: 300;
+            font-size: 1.4rem;
+            font-weight: 400;
             color: var(--gray-600);
+            line-height: 1.8;
+            max-width: 1000px;
         }
         
         .text-gradient {
@@ -344,9 +353,13 @@
         .hero {
             padding-top: 160px;
             padding-bottom: 100px;
-            background: linear-gradient(135deg, #f8fafc 0%, #f0f9ff 100%);
+            background: linear-gradient(135deg, #ffffff 0%, #f0f9ff 50%, #ede9fe 100%);
             position: relative;
             overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
         .hero:before {
@@ -356,27 +369,27 @@
             right: 0;
             width: 60%;
             height: 100%;
-            background: url("data:image/svg+xml,%3Csvg width='1200' height='600' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3ClinearGradient id='a' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%231a56db' stop-opacity='0.05'/%3E%3Cstop offset='100%25' stop-color='%233b82f6' stop-opacity='0.05'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M0 0h1200v600H0z' fill='url(%23a)'/%3E%3C/svg%3E");
-            background-size: cover;
+            background: radial-gradient(circle at top right, rgba(26, 86, 219, 0.08) 0%, transparent 70%);
             z-index: 0;
         }
         
         .hero-content {
             position: relative;
             z-index: 1;
-            max-width: 900px;
+            max-width: 1000px;
         }
         
         .hero-subtitle {
             display: inline-block;
-            padding: 8px 20px;
-            background: rgba(26, 86, 219, 0.1);
+            padding: 10px 24px;
+            background: rgba(26, 86, 219, 0.12);
             color: var(--primary-blue);
             border-radius: 30px;
-            font-weight: 600;
-            font-size: 0.875rem;
-            margin-bottom: 24px;
-            border: 1px solid rgba(26, 86, 219, 0.2);
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 32px;
+            border: 2px solid rgba(26, 86, 219, 0.2);
+            letter-spacing: 0.5px;
         }
         
         .hero-actions {
@@ -393,30 +406,31 @@
         
         .section-header {
             text-align: center;
-            max-width: 900px;
-            margin: 0 auto 80px;
+            max-width: 1000px;
+            margin: 0 auto 100px;
         }
         
         .section-subtitle {
-            font-size: 1.125rem;
+            font-size: 1.35rem;
             color: var(--gray-600);
-            margin-top: 20px;
+            margin-top: 24px;
             line-height: 1.8;
+            font-weight: 400;
         }
         
         .product-features {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 40px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
             margin-top: 20px;
         }
         
         .product-feature {
             background: var(--white);
-            border-radius: var(--border-radius);
-            padding: 48px 36px;
-            box-shadow: var(--shadow-md);
-            border: 1px solid var(--gray-200);
+            border-radius: 20px;
+            padding: 30px 40px;
+            box-shadow: var(--shadow-lg);
+            border: 2px solid var(--gray-100);
             text-align: center;
             transition: var(--transition);
             position: relative;
@@ -431,13 +445,26 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 4px;
+            height: 5px;
             background: var(--anime-gradient);
+            border-radius: 20px 20px 0 0;
         }
         
         .product-feature:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-xl);
+            transform: translateY(-12px);
+            box-shadow: 0 24px 48px rgba(0, 0, 0, 0.15);
+            border-color: var(--primary-blue);
+        }
+        
+        .product-feature h3 {
+            font-size: 1.6rem;
+            margin-bottom: 16px;
+            color: var(--gray-900);
+        }
+        
+        .product-feature p {
+            font-size: 1.1rem;
+            line-height: 1.8;
         }
         
         .feature-number {
@@ -457,17 +484,17 @@
         }
         
         .feature-icon {
-            width: 88px;
-            height: 88px;
-            margin: 0 auto 28px;
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 32px;
             background: var(--travel-gradient);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 2rem;
-            box-shadow: 0 8px 16px rgba(26, 86, 219, 0.2);
+            font-size: 2.5rem;
+            box-shadow: 0 12px 24px rgba(26, 86, 219, 0.3);
         }
         
         /* Templates Section */
@@ -484,41 +511,52 @@
         
         .template-card {
             background: var(--white);
-            border-radius: var(--border-radius);
-            padding: 40px 36px;
-            box-shadow: var(--shadow-md);
-            border: 1px solid var(--gray-200);
+            border-radius: 20px;
+            padding: 48px 44px;
+            box-shadow: var(--shadow-lg);
+            border: 2px solid var(--gray-100);
             transition: var(--transition);
             display: flex;
             flex-direction: column;
         }
         
         .template-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-lg);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
             border-color: var(--primary-blue);
         }
         
         .template-header {
             display: flex;
             align-items: center;
-            margin-bottom: 24px;
-            gap: 16px;
-            padding-bottom: 20px;
-            border-bottom: 2px solid var(--gray-100);
+            margin-bottom: 28px;
+            gap: 20px;
+            padding-bottom: 24px;
+            border-bottom: 3px solid var(--gray-100);
+        }
+        
+        .template-header h4 {
+            font-size: 1.6rem;
+            color: var(--gray-900);
+        }
+        
+        .template-content p {
+            font-size: 1.15rem;
+            line-height: 1.9;
         }
         
         .template-icon {
-            width: 56px;
-            height: 56px;
+            width: 68px;
+            height: 68px;
             background: var(--light-blue);
-            border-radius: 12px;
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--primary-blue);
-            font-size: 1.5rem;
+            font-size: 2rem;
             flex-shrink: 0;
+            box-shadow: 0 4px 12px rgba(26, 86, 219, 0.15);
         }
         
         /* Anime Pilgrimage Section */
@@ -624,24 +662,35 @@
         
         .community-stat {
             text-align: center;
-            padding: 24px;
-            background: var(--gray-50);
-            border-radius: var(--border-radius);
-            border: 1px solid var(--gray-200);
+            padding: 32px;
+            background: white;
+            border-radius: 16px;
+            border: 2px solid var(--gray-100);
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+        }
+        
+        .community-stat:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-blue);
         }
         
         .stat-number {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--primary-blue);
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: var(--travel-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
             line-height: 1;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
         }
         
         .stat-label {
-            font-size: 0.95rem;
-            color: var(--gray-600);
-            font-weight: 500;
+            font-size: 1.15rem;
+            color: var(--gray-700);
+            font-weight: 600;
         }
         
         /* Market Timing Section */
@@ -658,13 +707,13 @@
         
         .timing-card {
             background: var(--white);
-            border-radius: var(--border-radius);
-            padding: 48px 36px;
-            box-shadow: var(--shadow-md);
-            border: 1px solid var(--gray-200);
+            border-radius: 20px;
+            padding: 56px 40px;
+            box-shadow: var(--shadow-lg);
+            border: 2px solid var(--gray-100);
             text-align: center;
             transition: var(--transition);
-            min-height: 320px;
+            min-height: 380px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -672,22 +721,34 @@
         }
         
         .timing-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-xl);
+            transform: translateY(-12px);
+            box-shadow: 0 24px 48px rgba(0, 0, 0, 0.15);
+            border-color: var(--primary-blue);
+        }
+        
+        .timing-card h4 {
+            font-size: 1.6rem;
+            margin-bottom: 16px;
+            color: var(--gray-900);
+        }
+        
+        .timing-card p {
+            font-size: 1.15rem;
+            line-height: 1.8;
         }
         
         .timing-icon {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 28px;
+            width: 96px;
+            height: 96px;
+            margin: 0 auto 32px;
             background: var(--travel-gradient);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 1.75rem;
-            box-shadow: 0 8px 16px rgba(26, 86, 219, 0.25);
+            font-size: 2.5rem;
+            box-shadow: 0 12px 24px rgba(26, 86, 219, 0.3);
         }
         
         .timing-card:nth-child(2) .timing-icon {
@@ -716,7 +777,7 @@
         .cta-content {
             position: relative;
             z-index: 1;
-            max-width: 700px;
+            max-width: 1000px;
             margin: 0 auto;
         }
         
@@ -743,27 +804,39 @@
         
         .platform-card {
             background: var(--white);
-            border-radius: var(--border-radius);
-            padding: 5px 20px;
+            border-radius: 20px;
+            padding: 40px 40px;
             box-shadow: var(--shadow-lg);
             text-align: center;
             width: 500px;
             transition: var(--transition);
-            border: 1px solid var(--gray-200);
+            border: 2px solid var(--gray-100);
             display: flex;
             flex-direction: column;
             align-items: center;
         }
         
         .platform-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-xl);
+            transform: translateY(-12px);
+            box-shadow: 0 24px 48px rgba(0, 0, 0, 0.15);
+            border-color: var(--primary-blue);
+        }
+        
+        .platform-card h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--gray-900);
+        }
+        
+        .platform-card p {
+            font-size: 1.15rem;
+            line-height: 1.8;
         }
         
         .platform-icon {
-            font-size: 4rem;
+            font-size: 5rem;
             color: var(--primary-blue);
-            margin-bottom: 32px;
+            margin-bottom: 40px;
         }
         
         /* Footer */
@@ -863,17 +936,33 @@
             }
         }
         
-        @media (max-width: 768px) {
+        @media (max-width: 1000px) {
             section {
                 padding: 80px 0;
             }
             
             h1 {
-                font-size: 2.5rem;
+                font-size: 3rem;
             }
             
             h2 {
-                font-size: 2rem;
+                font-size: 2.2rem;
+            }
+            
+            h3 {
+                font-size: 1.5rem;
+            }
+            
+            .lead {
+                font-size: 1.15rem;
+            }
+            
+            p {
+                font-size: 1.05rem;
+            }
+            
+            .section-subtitle {
+                font-size: 1.1rem;
             }
             
             .nav-links {
@@ -908,13 +997,25 @@
             }
         }
         
-        @media (max-width: 480px) {
+        @media (max-width: 500px) {
             h1 {
-                font-size: 2rem;
+                font-size: 2.5rem;
             }
             
             h2 {
-                font-size: 1.75rem;
+                font-size: 1.9rem;
+            }
+            
+            h3 {
+                font-size: 1.3rem;
+            }
+            
+            .lead {
+                font-size: 1.05rem;
+            }
+            
+            p {
+                font-size: 1rem;
             }
             
             .container {
@@ -928,6 +1029,304 @@
             .platform-card {
                 padding: 24px 20px;
             }
+        }
+        
+        /* Slide number styling */
+        .slide-number {
+            position: absolute;
+            bottom: 24px;
+            right: 24px;
+            font-size: 0.875rem;
+            color: var(--gray-400);
+            font-weight: 500;
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 6px 12px;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Quote card styling */
+        .quote-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 32px;
+            border-left: 4px solid var(--primary-blue);
+            box-shadow: var(--shadow-md);
+            margin: 24px 0;
+            font-style: italic;
+        }
+        
+        .quote-author {
+            font-weight: 600;
+            color: var(--gray-800);
+            margin-top: 16px;
+            font-style: normal;
+        }
+        
+        /* Metric styling */
+        .metric-large {
+            font-size: 5rem;
+            font-weight: 800;
+            color: var(--primary-blue);
+            line-height: 1;
+            margin-bottom: 16px;
+            text-align: center;
+            background: var(--travel-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .metric-label {
+            font-size: 1.25rem;
+            color: var(--gray-700);
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 48px;
+            margin: 0px 0;
+            padding: 0px 0;
+        }
+        
+        .metric-grid > div {
+            padding: 32px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: var(--shadow-lg);
+            border: 2px solid var(--gray-100);
+            transition: var(--transition);
+        }
+        
+        .metric-grid > div:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+            border-color: var(--primary-blue);
+        }
+        
+        /* Problem points styling */
+        .problem-points {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+            margin-top: 60px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .problem-point {
+            display: flex;
+            align-items: flex-start;
+            gap: 24px;
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            border: 2px solid var(--gray-200);
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+        }
+        
+        .problem-point:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-xl);
+            border-color: var(--primary-blue);
+        }
+        
+        .problem-point i {
+            color: var(--primary-blue);
+            font-size: 2rem;
+            margin-top: 4px;
+            flex-shrink: 0;
+            background: var(--light-blue);
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+        }
+        
+        .problem-point h4 {
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+            color: var(--gray-900);
+        }
+        
+        .problem-point p {
+            font-size: 1.15rem;
+            margin: 0;
+            line-height: 1.7;
+        }
+        
+        /* Storyboard styling */
+        .storyboard-container {
+            margin-top: 80px;
+        }
+        
+        .storyboard-steps {
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+            margin-top: 50px;
+            flex-wrap: nowrap;
+            position: relative;
+            padding-top: 50px;
+        }
+        
+        .storyboard-steps::before {
+            content: '';
+            position: absolute;
+            top: 25px;
+            left: 10%;
+            right: 10%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-purple) 0%, var(--secondary-blue) 33%, var(--accent-pink) 66%, #8b5cf6 100%);
+            border-radius: 4px;
+            z-index: 0;
+        }
+        
+        .storyboard-step {
+            flex: 1;
+            min-width: 220px;
+            position: relative;
+            transition: var(--transition);
+            z-index: 1;
+        }
+        
+        .storyboard-step:hover {
+            transform: translateY(-10px);
+        }
+        
+        .step-number {
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            background: var(--accent-purple);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.5rem;
+            z-index: 2;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+        
+        .step-number.step-2 {
+            background: var(--secondary-blue);
+        }
+        
+        .step-number.step-3 {
+            background: var(--accent-pink);
+        }
+        
+        .step-number.step-4 {
+            background: #8b5cf6;
+        }
+        
+        .step-content {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 60px 30px 40px 30px;
+            height: 100%;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+        
+        .step-icon {
+            width: 100px;
+            height: 100px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+        }
+        
+        .step-icon i {
+            font-size: 2.5rem;
+            color: white;
+        }
+        
+        /* Anime example styling */
+        .anime-example {
+            margin-top: 80px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: var(--border-radius-lg);
+            padding: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+        
+        .example-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+        }
+        
+        .example-box {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .example-box h4 {
+            color: white;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .example-box h4 i.fa-film {
+            color: var(--accent-purple);
+        }
+        
+        .example-box h4 i.fa-camera {
+            color: var(--accent-pink);
+        }
+        
+        .example-box h4 i.fa-paint-brush {
+            color: var(--secondary-blue);
+        }
+        
+        .example-visual {
+            height: 200px;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.3) 0%, rgba(59, 130, 246, 0.3) 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+        
+        .example-visual.pink {
+            background: linear-gradient(135deg, rgba(236, 72, 153, 0.3) 0%, rgba(139, 92, 246, 0.3) 100%);
+        }
+        
+        .example-visual.blue {
+            background: linear-gradient(135deg, rgba(26, 86, 219, 0.3) 0%, rgba(139, 92, 246, 0.3) 100%);
+        }
+        
+        .time-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px 30px;
+            border-radius: 30px;
         }
         
         /* Animation Classes */
@@ -954,7 +1353,7 @@
                 Tabiji Kizuna
             </a>
             <ul class="nav-links">
-                <li><a href="#product"><span class="jp-text">製品概要</span><span class="en-text">Product</span></a></li>
+                <li><a href="#solution"><span class="jp-text">製品概要</span><span class="en-text">Product</span></a></li>
                 <li><a href="#templates"><span class="jp-text">テンプレート</span><span class="en-text">Templates</span></a></li>
                 <li><a href="#anime"><span class="jp-text">聖地巡礼</span><span class="en-text">Anime</span></a></li>
                 <li><a href="#community"><span class="jp-text">コミュニティ</span><span class="en-text">Community</span></a></li>
@@ -965,13 +1364,14 @@
                         <button class="lang-btn" data-lang="en">English</button>
                     </div>
                 </li>
-                <li><a href="#contact" class="btn" style="padding: 8px 20px;color:white;"><span class="jp-text">デモ体験</span><span class="en-text">Try Demo</span></a></li>
+                <li><a href="mailto:support@algo-rythmn.ai" class="btn" style="padding: 8px 20px;color:white;"><span class="jp-text">デモをリクエスト</span><span class="en-text">Request A Demo</span></a></li>
             </ul>
         </div>
     </header>
 
     <!-- Hero Section -->
     <section class="hero">
+        <div class="slide-number">1</div>
         <div class="container">
             <div class="hero-content">
                 <div class="hero-subtitle">Smart, Personalized AI Travel Platform</div>
@@ -981,8 +1381,8 @@
                 <p class="lead en-text">Tabiji Kizuna is a Generative AI-powered travel platform featuring personalized itinerary creation, interactive travel experiences, global community sharing, and the market-leading "Anime Pilgrimage Navigator."</p>
                 
                 <div class="hero-actions">
-                    <a href="https://project2601.algo-rythmn.ai/" class="btn" target="_blank">
-                        <i class="fas fa-play-circle"></i> <span class="jp-text">デモを体験</span><span class="en-text">Try Demo</span>
+                    <a href="mailto:support@algo-rythmn.ai" class="btn">
+                        <i class="fas fa-envelope"></i> <span class="jp-text">デモをリクエスト</span><span class="en-text">Request A Demo</span>
                     </a>
                     <a href="#anime" class="btn btn-anime">
                         <i class="fas fa-map-marked-alt"></i> <span class="jp-text">聖地巡礼機能を見る</span><span class="en-text">Anime Pilgrimage</span>
@@ -995,14 +1395,91 @@
         </div>
     </section>
 
-    <!-- Product Overview Section -->
-    <section id="product" class="product-section">
+    <!-- === SLIDE 2: PROBLEM EXPLAINED === -->
+    <section style="padding: 80px 0; min-height: 100vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #ffffff 0%, #f1f1f1 100%);">
+        <div class="slide-number">2</div>
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title text-center jp-text">製品概要</h2>
-                <h2 class="section-title text-center en-text">Product Overview</h2>
-                <p class="section-subtitle jp-font jp-text">AIを活用した包括的な旅行プラットフォーム。市場の一般的な旅行アプリを超える、3つのコア機能を提供します。</p>
-                <p class="section-subtitle en-text">A comprehensive AI-powered travel platform offering three core features that go beyond typical travel apps.</p>
+                <h2 class="section-title text-center jp-text" style="font-size: 3.2rem;">旅行計画はまだ複雑すぎる</h2>
+                <h2 class="section-title text-center en-text" style="font-size: 3.2rem;">Travel planning is still too complex</h2>
+                <p class="section-subtitle" style="font-size: 1.3rem; color: var(--gray-700); margin-top: 24px;"><span class="jp-text">旅行者が直面する3つの根本的な課題</span><span class="en-text">Three fundamental challenges travelers face</span></p>
+            </div>
+            
+            <div class="problem-points">
+                <div class="problem-point">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <div>
+                        <h4 class="jp-text">圧倒的で断片的なプロセス</h4>
+                        <h4 class="en-text">Overwhelming and fragmented process</h4>
+                        <p class="jp-text" style="margin: 8px 0 0 0; font-size: 0.95rem;">平均的な旅行者は計画に12時間以上を費やし、15以上のサイトやアプリを参照</p>
+                        <p class="en-text" style="margin: 8px 0 0 0; font-size: 0.95rem;">The average traveler spends 12+ hours planning across 15+ sites and apps</p>
+                    </div>
+                </div>
+                
+                <div class="problem-point">
+                    <i class="fas fa-times-circle"></i>
+                    <div>
+                        <h4 class="jp-text">パーソナライゼーションがない</h4>
+                        <h4 class="en-text">No true personalization</h4>
+                        <p class="jp-text" style="margin: 8px 0 0 0; font-size: 0.95rem;">「一人ひとりに合った旅」はマーケティングスローガンに留まっている</p>
+                        <p class="en-text" style="margin: 8px 0 0 0; font-size: 0.95rem;">"Travel for everyone" remains just a marketing slogan</p>
+                    </div>
+                </div>
+                
+                <div class="problem-point">
+                    <i class="fas fa-ban"></i>
+                    <div>
+                        <h4 class="jp-text">見えないから改善できない</h4>
+                        <h4 class="en-text">You can't improve what you can't see</h4>
+                        <p class="jp-text" style="margin: 8px 0 0 0; font-size: 0.95rem;">旅行者の実際の行動や好みに関するデータが不足している</p>
+                        <p class="en-text" style="margin: 8px 0 0 0; font-size: 0.95rem;">Lack of data on actual traveler behavior and preferences</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- === SLIDE 3: THE BIG QUESTION & CURRENT STATE === -->
+    <section style="padding: 100px 0; background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%); color: white; min-height: 100vh; display: flex; align-items: center; justify-content: center; position: relative;">
+        <div style="position: absolute; inset: 0; background: url(&quot;data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h60v60H0z' fill='none'/%3E%3Cpath d='M30 0v60M0 30h60' stroke='white' stroke-width='0.5' opacity='0.1'/%3E%3C/svg%3E&quot;); opacity: 0.3;"></div>
+        <div class="slide-number" style="color: rgba(255, 255, 255, 0.7); background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(10px);">3</div>
+        <div class="container" style="position: relative; z-index: 1;">
+            <div style="text-align: center; margin-bottom: 80px;">
+                <h2 style="font-size: 4rem; margin-bottom: 32px; color: white; font-weight: 800; letter-spacing: -0.03em;">"How can AI make my travel easier?"</h2>
+                <p style="font-size: 1.6rem; color: rgba(255, 255, 255, 0.95); max-width: 900px; margin: 0 auto; line-height: 1.6;">
+                    <span class="jp-text">すべての旅行者が求める答え</span>
+                    <span class="en-text">The answer every traveler seeks</span>
+                </p>
+            </div>
+            
+            <div style="margin-top: 60px;">
+                <h3 class="jp-text" style="color: white; text-align: center; margin-bottom: 50px; font-size: 2.2rem; font-weight: 700;">既存の旅行アプリはまだ不十分</h3>
+                <h3 class="en-text" style="color: white; text-align: center; margin-bottom: 50px; font-size: 2.2rem; font-weight: 700;">Existing travel apps still fall short</h3>
+                
+                <div class="quote-card" style="max-width: 900px; margin: 30px auto; background: rgba(255, 255, 255, 0.12); border-left: 5px solid white; backdrop-filter: blur(10px); padding: 40px 48px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);">
+                    <p class="jp-text" style="color: white; font-size: 1.3rem; line-height: 1.8; margin-bottom: 20px;">「15以上のサイトやアプリを行ったり来たりして、ノートやスプレッドシートで管理しています... 計画だけで週末が終わってしまいます。」</p>
+                    <p class="en-text" style="color: white; font-size: 1.3rem; line-height: 1.8; margin-bottom: 20px;">"I jump between 15+ sites and apps, managing everything in notes and spreadsheets... Planning alone takes up my entire weekend."</p>
+                    <div class="quote-author" style="color: rgba(255, 255, 255, 0.95); font-size: 1.1rem;"><span class="jp-text">- 頻繁に旅行する会社員</span><span class="en-text">- Frequent Traveler</span></div>
+                </div>
+                
+                <div class="quote-card" style="max-width: 900px; margin: 30px auto; background: rgba(255, 255, 255, 0.12); border-left: 5px solid white; backdrop-filter: blur(10px); padding: 40px 48px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);">
+                    <p class="jp-text" style="color: white; font-size: 1.3rem; line-height: 1.8; margin-bottom: 20px;">「旅行アプリは人気スポットしか勧めません。私の好みや予算、旅行スタイルを本当に理解してくれるツールが欲しいです。」</p>
+                    <p class="en-text" style="color: white; font-size: 1.3rem; line-height: 1.8; margin-bottom: 20px;">"Travel apps only recommend popular spots. I want a tool that truly understands my preferences, budget, and travel style."</p>
+                    <div class="quote-author" style="color: rgba(255, 255, 255, 0.95); font-size: 1.1rem;"><span class="jp-text">- アニメファン・バックパッカー</span><span class="en-text">- Anime Fan & Backpacker</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- === SLIDE 4: SOLUTION OVERVIEW & DATA ADVANTAGE === -->
+    <section id="solution" class="product-section">
+        <div class="slide-number">4</div>
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title text-center jp-text">Tabiji Kizuna: AI旅行プラットフォーム</h2>
+                <h2 class="section-title text-center en-text">Tabiji Kizuna: The AI Travel Platform</h2>
+                <p class="section-subtitle jp-font jp-text">あなたの好みを学習し、完璧にパーソナライズされた旅を実現するAIアシスタント</p>
+                <p class="section-subtitle en-text">Your AI travel assistant that learns your preferences and creates perfectly personalized journeys</p>
             </div>
             
             <div class="product-features">
@@ -1031,6 +1508,17 @@
                 <div class="product-feature fade-in">
                     <div class="feature-number">3</div>
                     <div class="feature-icon">
+                        <i class="fas fa-torii-gate"></i>
+                    </div>
+                    <h3 class="jp-font jp-text">アニメ聖地巡礼ナビゲーター</h3>
+                    <h3 class="en-text">Anime Pilgrimage Navigator</h3>
+                    <p class="jp-font jp-text">アニメの画像をアップロードするだけで、AIが実在の場所を特定。現地で撮影した写真をアニメ風に変換して共有できます。</p>
+                    <p class="en-text">Simply upload an anime image and AI identifies the real-world location. Transform your on-site photos into anime style and share.</p>
+                </div>
+                
+                <div class="product-feature fade-in">
+                    <div class="feature-number">4</div>
+                    <div class="feature-icon">
                         <i class="fas fa-users"></i>
                     </div>
                     <h3 class="jp-font jp-text">コミュニティ共有</h3>
@@ -1042,8 +1530,9 @@
         </div>
     </section>
 
-    <!-- Templates Section -->
+    <!-- === SLIDE 5: Templates Section === -->
     <section id="templates" class="templates-section">
+        <div class="slide-number">5</div>
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title text-center jp-text">AI旅行テンプレート</h2>
@@ -1084,8 +1573,9 @@
         </div>
     </section>
 
-    <!-- Anime Pilgrimage Section -->
+    <!-- === SLIDE 6: ANIME PILGRIMAGE NAVIGATOR === -->
     <section id="anime" class="anime-section">
+        <div class="slide-number" style="color: rgba(255, 255, 255, 0.7); background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(10px);">6</div>
         <div class="container">
             <div class="section-header" style="color: white; display: flex; flex-direction: column; align-items: center; margin-bottom: 30px;">
                 <div class="anime-badge">Market Differentiator</div>
@@ -1095,62 +1585,153 @@
                 <p class="section-subtitle en-text" style="color: rgba(255, 255, 255, 0.9);">The decisive differentiating point from typical AI travel apps. Our AI support for Japan's "anime pilgrimage" tourism boom.</p>
             </div>
             
-            <div class="anime-features">
-                <div class="anime-feature fade-in">
-                    <div class="anime-feature-header">
-                        <div class="anime-feature-icon">
-                            <i class="fas fa-eye"></i>
-                        </div>
-                        <div>
-                            <h4 class="jp-font jp-text">ビジュアル認識</h4>
-                            <h4 class="en-text">Visual Recognition</h4>
-                        </div>
-                    </div>
-                    <p class="jp-font jp-text" style="color: rgba(255, 255, 255, 0.9);">アニメのスクリーンショットをアップロード → AIが正確な実在世界の場所を特定</p>
-                    <p class="en-text" style="color: rgba(255, 255, 255, 0.9);">Upload anime screenshot → AI finds exact real-world location</p>
+            <!-- Storyboard Section -->
+            <div class="storyboard-container">
+                <div style="text-align: center; margin-bottom: 50px;">
+                    <h3 class="jp-text" style="color: white; margin-bottom: 20px; font-size: 2rem;">どのように機能するか</h3>
+                    <h3 class="en-text" style="color: white; margin-bottom: 20px; font-size: 2rem;">How It Works</h3>
+                    <p class="jp-font jp-text" style="color: rgba(255, 255, 255, 0.9); font-size: 1.1rem;">4つの簡単なステップでアニメの世界を現実の旅に</p>
+                    <p class="en-text" style="color: rgba(255, 255, 255, 0.9); font-size: 1.1rem;">4 simple steps to turn anime worlds into real-world travel</p>
                 </div>
                 
-                <div class="anime-feature fade-in">
-                    <div class="anime-feature-header">
-                        <div class="anime-feature-icon">
-                            <i class="fas fa-magic"></i>
-                        </div>
-                        <div>
-                            <h4 class="jp-font jp-text">スタイル転送</h4>
-                            <h4 class="en-text">Style Transfer</h4>
+                <!-- Storyboard Steps -->
+                <div class="storyboard-steps">
+                    <!-- Step 1 -->
+                    <div class="storyboard-step fade-in">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <div class="step-icon">
+                                <i class="fas fa-upload"></i>
+                            </div>
+                            <h4 style="color: white; text-align: center; margin-bottom: 15px;">アニメ画像アップロード</h4>
+                            <h4 style="color: white; text-align: center; margin-bottom: 15px;" class="en-text">Upload Anime Image</h4>
+                            <p style="color: rgba(255, 255, 255, 0.9); text-align: center; font-size: 0.95rem;">
+                                <span class="jp-text">お気に入りのアニメのスクリーンショットまたは画像をアップロード</span>
+                                <span class="en-text">Upload screenshot or image from your favorite anime</span>
+                            </p>
                         </div>
                     </div>
-                    <p class="jp-font jp-text" style="color: rgba(255, 255, 255, 0.9);">場所で写真を撮影 → アニメアートスタイルに変換してSNS共有</p>
-                    <p class="en-text" style="color: rgba(255, 255, 255, 0.9);">Take photos at a location → Transform into anime art style for social sharing</p>
+                    
+                    <!-- Step 2 -->
+                    <div class="storyboard-step fade-in">
+                        <div class="step-number step-2">2</div>
+                        <div class="step-content">
+                            <div class="step-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <h4 style="color: white; text-align: center; margin-bottom: 15px;">AIが場所を特定</h4>
+                            <h4 style="color: white; text-align: center; margin-bottom: 15px;" class="en-text">AI Identifies Location</h4>
+                            <p style="color: rgba(255, 255, 255, 0.9); text-align: center; font-size: 0.95rem;">
+                                <span class="jp-text">コンピュータービジョンAIが正確な実在世界の場所を特定し、地図上に表示</span>
+                                <span class="en-text">Computer vision AI identifies exact real-world location and shows on map</span>
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 3 -->
+                    <div class="storyboard-step fade-in">
+                        <div class="step-number step-3">3</div>
+                        <div class="step-content">
+                            <div class="step-icon">
+                                <i class="fas fa-camera"></i>
+                            </div>
+                            <h4 style="color: white; text-align: center; margin-bottom: 15px;">現地で写真撮影</h4>
+                            <h4 style="color: white; text-align: center; margin-bottom: 15px;" class="en-text">Take Photo On-Site</h4>
+                            <p style="color: rgba(255, 255, 255, 0.9); text-align: center; font-size: 0.95rem;">
+                                <span class="jp-text">現地を訪れ、同じアングルで写真を撮影</span>
+                                <span class="en-text">Visit the location and take a photo from the same angle</span>
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 4 -->
+                    <div class="storyboard-step fade-in">
+                        <div class="step-number step-4">4</div>
+                        <div class="step-content">
+                            <div class="step-icon">
+                                <i class="fas fa-share-alt"></i>
+                            </div>
+                            <h4 style="color: white; text-align: center; margin-bottom: 15px;">アニメ風に変換して共有</h4>
+                            <h4 style="color: white; text-align: center; margin-bottom: 15px;" class="en-text">Anime-Style Transform & Share</h4>
+                            <p style="color: rgba(255, 255, 255, 0.9); text-align: center; font-size: 0.95rem;">
+                                <span class="jp-text">AIが写真をアニメアートスタイルに変換、SNSで簡単共有</span>
+                                <span class="en-text">AI transforms photo into anime art style, easy social sharing</span>
+                            </p>
+                        </div>
+                    </div>
                 </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- === SLIDE 7: ANIME PILGRIMAGE EXAMPLE === -->
+    <section style="padding: 80px 0; background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 50%, #f59e0b 100%); min-height: 100vh; display: flex; align-items: center; justify-content: center;">
+        <div class="slide-number" style="color: rgba(255, 255, 255, 0.7); background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(10px);">7</div>
+        <div class="container">
+            <!-- Example Use Case -->
+            <div style="text-align: center; margin-bottom: 40px;">
+                <h3 class="jp-text" style="color: white; margin-bottom: 10px; font-size: 1.75rem;">実例：『君の名は。』新宿区信濃町歩道橋</h3>
+                <h3 class="en-text" style="color: white; margin-bottom: 10px; font-size: 1.75rem;">Example: 'Your Name' in Shinanomachi Footbridge, Shinjuku City</h3>
+                <p style="color: rgba(255, 255, 255, 0.95);">アニメの世界をリアルな旅へ変換</p>
             </div>
             
-            <div style="margin-top: 50px; padding: 48px 40px; background: rgba(255, 255, 255, 0.08); border-radius: var(--border-radius-lg); border: 1px solid rgba(255, 255, 255, 0.15); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);">
-                <h3 class="jp-text" style="color: white; margin-bottom: 32px; text-align: center; font-size: 1.75rem;">戦略的優位性</h3>
-                <h3 class="en-text" style="color: white; margin-bottom: 32px; text-align: center; font-size: 1.75rem;">Strategic Advantages</h3>
-                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; text-align: center;">
-                    <div>
-                        <h4 style="color: white; font-size: 1.1rem;"><i class="fas fa-copyright"></i> <span class="jp-text">公式IPライセンス</span><span class="en-text">Official IP License</span></h4>
-                        <p class="jp-font jp-text" style="color: rgba(255, 255, 255, 0.8); font-size: 0.95rem;">著作権問題なしの公式コンテンツ</p>
-                        <p class="en-text" style="color: rgba(255, 255, 255, 0.8); font-size: 0.95rem;">Official content with no copyright issues</p>
+            <div class="example-grid">
+                <div>
+                    <div class="example-box">
+                        <h4><i class="fas fa-film"></i> <span class="jp-text">アニメシーン</span><span class="en-text">Anime Scene</span></h4>
+                        <div class="example-visual" style="height: 250px; padding: 0; overflow: hidden; background: none;">
+                            <img src="anime.png" alt="Anime scene from Your Name" style="width: 100%; height: 100%; object-fit: cover;" />
+                        </div>
+                        <p style="color: rgba(255, 255, 255, 0.9); margin-top: 15px; font-size: 0.95rem;">
+                            <span class="jp-text">『君の名は。』のランドマークシーンをアップロード</span>
+                            <span class="en-text">Upload landmark scene from 'Your Name'</span>
+                        </p>
                     </div>
-                    <div>
-                        <h4 style="color: white; font-size: 1.1rem;"><i class="fas fa-landmark"></i> <span class="jp-text">観光地パートナーシップ</span><span class="en-text">Tourism Partnerships</span></h4>
-                        <p class="jp-font jp-text" style="color: rgba(255, 255, 255, 0.8); font-size: 0.95rem;">スタンプラリー・限定グッズ実現</p>
-                        <p class="en-text" style="color: rgba(255, 255, 255, 0.8); font-size: 0.95rem;">Enable stamp rallies & exclusive merch</p>
+                    
+                    <div class="example-box">
+                        <h4><i class="fas fa-camera"></i> <span class="jp-text">現実世界</span><span class="en-text">Real World</span></h4>
+                        <div class="example-visual pink" style="height: 250px; padding: 0; overflow: hidden; background: none;">
+                            <img src="real.png" alt="Real world location photo" style="width: 100%; height: 100%; object-fit: cover;" />
+                        </div>
+                        <p style="color: rgba(255, 255, 255, 0.9); margin-top: 15px; font-size: 0.95rem;">
+                            <span class="jp-text">実際の信濃町歩道橋の風景を撮影</span>
+                            <span class="en-text">Take photo of actual Shinanomachi Footbridge scenery</span>
+                        </p>
                     </div>
-                    <div>
-                        <h4 style="color: white; font-size: 1.1rem;"><i class="fas fa-shield-alt"></i> <span class="jp-text">二重セクター戦略</span><span class="en-text">Dual-Sector Strategy</span></h4>
-                        <p class="jp-font jp-text" style="color: rgba(255, 255, 255, 0.8); font-size: 0.95rem;">競争的優位性（モート）の構築</p>
-                        <p class="en-text" style="color: rgba(255, 255, 255, 0.8); font-size: 0.95rem;">Dual-sector positioning creates a competitive moat</p>
+
+                </div>
+                
+                <div>
+                    <div class="example-box">
+                        <h4><i class="fas fa-map-marker-alt"></i> <span class="jp-text">AI位置特定</span><span class="en-text">AI Location</span></h4>
+                        <div class="example-visual" style="height: 250px; padding: 0; overflow: hidden; background: none;">
+                            <img src="location.png" alt="AI identified location on map" style="width: 100%; height: 100%; object-fit: cover;" />
+                        </div>
+                        <p style="color: rgba(255, 255, 255, 0.9); margin-top: 15px; font-size: 0.95rem;">
+                            <span class="jp-text">AIが新宿区信濃町歩道橋の正確な場所を地図上に表示</span>
+                            <span class="en-text">AI shows exact Shinanomachi Footbridge location on map</span>
+                        </p>
+                    </div>
+
+                    <div class="example-box">
+                        <h4><i class="fas fa-paint-brush"></i> <span class="jp-text">AI変換結果</span><span class="en-text">AI Transformation Result</span></h4>
+                        <div class="example-visual blue" style="height: 250px; padding: 0; overflow: hidden; background: none;">
+                            <img src="ai_transform.png" alt="AI transformed anime-style image" style="width: 100%; height: 100%; object-fit: cover;" />
+                        </div>
+                        <p style="color: rgba(255, 255, 255, 0.9); margin-top: 15px; font-size: 0.95rem;">
+                            <span class="jp-text">AIが写真をアニメスタイルに変換</span>
+                            <span class="en-text">AI transforms photo into anime style</span>
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Community Section -->
+    <!-- === SLIDE 8: Community Section === -->
     <section id="community" class="community-section">
+        <div class="slide-number">8</div>
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title text-center jp-text">コミュニティ共有</h2>
@@ -1173,7 +1754,7 @@
                             <div class="stat-label en-text">Shared itineraries</div>
                         </div>
                         <div class="community-stat fade-in">
-                            <div class="stat-number">50+</div>
+                            <div class="stat-number">100+</div>
                             <div class="stat-label jp-font jp-text">国・地域</div>
                             <div class="stat-label en-text">Countries & regions</div>
                         </div>
@@ -1194,11 +1775,42 @@
                     </div>
                 </div>
             </div>
+            
+            <!-- Data Advantage Section -->
+            <div style="margin-top: 80px;">
+                <div class="section-header" style="margin-bottom: 25px;">
+                    <h3 class="section-title text-center jp-text">大規模で独自のプロプライエタリデータセット</h3>
+                    <h3 class="section-title text-center en-text">Large, Unique Proprietary Dataset</h3>
+                    <p class="section-subtitle jp-font jp-text">コミュニティが生み出す旅のビッグデータ</p>
+                    <p class="section-subtitle en-text">Travel big data created by our community</p>
+                </div>
+                
+                <div class="metric-grid" style="margin-top: 20px;">
+                    <div style="text-align: center;">
+                        <div class="metric-large">1M+</div>
+                        <div class="metric-label jp-text">旅行ルート</div>
+                        <div class="metric-label en-text">Travel Routes</div>
+                    </div>
+                    
+                    <div style="text-align: center;">
+                        <div class="metric-large">50K+</div>
+                        <div class="metric-label jp-text">目的地</div>
+                        <div class="metric-label en-text">Destinations</div>
+                    </div>
+                    
+                    <div style="text-align: center;">
+                        <div class="metric-large">600K+</div>
+                        <div class="metric-label jp-text">旅行活動</div>
+                        <div class="metric-label en-text">Travel Activities</div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- Market Timing Section -->
+    <!-- === SLIDE 9: Market Timing Section === -->
     <section id="timing" class="timing-section">
+        <div class="slide-number">9</div>
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title text-center jp-text">完璧な市場タイミング</h2>
@@ -1241,18 +1853,19 @@
         </div>
     </section>
 
-    <!-- Platform Section -->
+    <!-- === SLIDE 10: Platform Section === -->
     <section class="platform-section">
+        <div class="slide-number">10</div>
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title text-center jp-text">利用可能プラットフォーム</h2>
                 <h2 class="section-title text-center en-text">Available Platforms</h2>
-                <p class="section-subtitle jp-font jp-text">WebアプリとiOSアプリで利用可能。すべてのデバイスで一貫した優れたユーザー体験を提供します。</p>
-                <p class="section-subtitle en-text">Available as Web app and iOS app. Provides a consistent, excellent user experience across all devices.</p>
+                <p class="section-subtitle jp-font jp-text">Web、iOS、Androidアプリで利用可能。すべてのデバイスで一貫した優れたユーザー体験を提供します。</p>
+                <p class="section-subtitle en-text">Available as Web, iOS, and Android apps. Provides a consistent, excellent user experience across all devices.</p>
             </div>
             
-            <div class="platform-cards">
-                <div class="platform-card fade-in">
+            <div class="platform-cards" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; max-width: 1200px; margin: 0 auto;">
+                <div class="platform-card fade-in" style="width: auto;">
                     <div class="platform-icon">
                         <i class="fas fa-globe"></i>
                     </div>
@@ -1261,7 +1874,7 @@
                     <p class="en-text">Access directly from your browser. Available on any device - PC, tablet, or smartphone.</p>
                 </div>
                 
-                <div class="platform-card fade-in">
+                <div class="platform-card fade-in" style="width: auto;">
                     <div class="platform-icon">
                         <i class="fab fa-apple"></i>
                     </div>
@@ -1269,16 +1882,26 @@
                     <p class="jp-font jp-text">App Storeからダウンロード。オフライン機能や通知など、モバイルに最適化された体験を提供。</p>
                     <p class="en-text">Download from the App Store. Offers a mobile-optimized experience with offline features and notifications.</p>
                 </div>
+                
+                <div class="platform-card fade-in" style="width: auto;">
+                    <div class="platform-icon">
+                        <i class="fab fa-android"></i>
+                    </div>
+                    <h3>Android App</h3>
+                    <p class="jp-font jp-text">Google Play Storeからダウンロード。Androidデバイス向けに最適化された完全な機能を提供。</p>
+                    <p class="en-text">Download from Google Play Store. Offers full features optimized for Android devices.</p>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- CTA Section -->
     <section id="contact" class="cta-section">
+        <div class="slide-number" style="color: rgba(255, 255, 255, 0.7); background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(10px);">11</div>
         <div class="container">
             <div class="cta-content">
-                <h2 class="section-title text-center jp-text" style="color: white;">旅路、絆 - あなただけの旅の物語</h2>
-                <h2 class="section-title text-center en-text" style="color: white;">Your Journey, Your Story</h2>
+                <h1 class="section-title text-center jp-text" style="color: white;">旅路、絆 - あなただけの旅の物語</h1>
+                <h1 class="section-title text-center en-text" style="color: white;">Your Journey, Your Story</h1>
                 <p class="section-subtitle jp-text" style="color: rgba(255, 255, 255, 0.9);">AIを活用した完全な旅行プラットフォームで、市場の一般的な旅行アプリを超える体験を。今すぐデモを体験してください。</p>
                 <p class="section-subtitle en-text" style="color: rgba(255, 255, 255, 0.9);">Experience beyond typical travel apps with our complete AI-powered platform. Try the demo now.</p>
                 
@@ -1361,8 +1984,6 @@
             
             <div class="copyright">
                 <p>&copy; 2025 Tabiji Kizuna by Algo-Rythmn Corp. All rights reserved.</p>
-                <p class="jp-text">AIを活用した完全な旅行プラットフォーム - 製品概要の全機能と市場差別化ポイントである聖地巡礼ナビゲーターを搭載</p>
-                <p class="en-text" style="color: rgba(255, 255, 255, 0.6); margin-top: 8px;">Generative AI Travel Platform - Featuring all product overview functions and the market-differentiating Anime Pilgrimage Navigator</p>
             </div>
         </div>
     </footer>
