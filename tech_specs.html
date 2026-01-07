@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Algo-Rythmn API v2.0</title>
+  <title>AlgoMind v2.0 | Algo-Rythmn</title>
   <style>
     /* Reset and Base Styles */
     * {
@@ -63,6 +63,18 @@
       font-weight: 600;
       color: #000;
       letter-spacing: -0.025em;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .nav-logo-tech {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: #2563eb;
+      background: #eff6ff;
+      padding: 2px 8px;
+      border-radius: 9999px;
     }
 
     .nav-links {
@@ -111,6 +123,32 @@
       max-width: 1280px;
       margin: 0 auto;
       text-align: center;
+    }
+
+    .hero-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+      padding: 0.5rem 1rem;
+      background: linear-gradient(135deg, #eff6ff 0%, #e8e8ff 100%);
+      border-radius: 9999px;
+      border: 1px solid #e5e7eb;
+    }
+
+    .hero-brand-badge {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #2563eb;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .hero-brand-name {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #111827;
+      letter-spacing: -0.025em;
     }
 
     .hero-subtitle {
@@ -373,13 +411,14 @@
       font-weight: 600;
       color: #9ca3af;
       border-bottom: 1px solid #e5e7eb;
+      background: #f9fafb;
     }
 
     .comparison-table th:first-child {
       width: 20%;
       position: sticky;
       left: 0;
-      background: white;
+      background: #f9fafb;
       z-index: 10;
     }
 
@@ -402,12 +441,13 @@
       color: #111827;
       position: sticky;
       left: 0;
-      background: white;
+      background: #f9fafb;
       transition: background-color 0.2s;
+      font-weight: 600;
     }
 
     .comparison-table tr:hover td:first-child {
-      background: #f9fafb;
+      background: #f3f4f6;
     }
 
     .comparison-table tr:hover {
@@ -434,6 +474,131 @@
     }
 
     .comparison-footer-link:hover {
+      text-decoration: underline;
+    }
+
+    /* System Requirements */
+    .requirements {
+      padding: 96px 0;
+      background: #f9fafb;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    .requirements-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .requirements-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .requirements-title {
+      font-size: 3rem;
+      font-weight: 700;
+      color: #000;
+      margin-bottom: 1rem;
+    }
+
+    .requirements-subtitle {
+      font-size: 1.25rem;
+      color: #6b7280;
+      max-width: 768px;
+      margin: 0 auto;
+    }
+
+    .requirements-table-container {
+      overflow-x: auto;
+      padding-bottom: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    .requirements-table {
+      width: 100%;
+      min-width: 1000px;
+      border-collapse: collapse;
+      text-align: left;
+      background: white;
+      border-radius: 1rem;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    .requirements-table th {
+      padding: 1.5rem 1rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: #9ca3af;
+      border-bottom: 2px solid #e5e7eb;
+      background: #f9fafb;
+    }
+
+    .requirements-table th:first-child {
+      width: 25%;
+      position: sticky;
+      left: 0;
+      background: #f9fafb;
+      z-index: 10;
+    }
+
+    .requirements-table th:not(:first-child) {
+      width: 18.75%;
+      font-size: 1.125rem;
+      font-weight: 500;
+      color: #6b7280;
+      text-align: center;
+    }
+
+    .requirements-table td {
+      padding: 1.5rem 1rem;
+      font-size: 0.875rem;
+      border-bottom: 1px solid #f3f4f6;
+      line-height: 1.6;
+      font-weight: 500;
+    }
+
+    .requirements-table td:first-child {
+      color: #111827;
+      position: sticky;
+      left: 0;
+      background: white;
+      transition: background-color 0.2s;
+      font-weight: 600;
+    }
+
+    .requirements-table tr:hover td:first-child {
+      background: #f9fafb;
+    }
+
+    .requirements-table tr:hover {
+      background: #f9fafb;
+      transition: background-color 0.2s;
+    }
+
+    .requirements-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .requirements-note {
+      text-align: center;
+      max-width: 768px;
+      margin: 3rem auto 0;
+      padding: 1.5rem;
+      background: #eff6ff;
+      border-radius: 1rem;
+      color: #1e40af;
+      font-size: 0.875rem;
+    }
+
+    .requirements-note a {
+      color: #1d4ed8;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .requirements-note a:hover {
       text-decoration: underline;
     }
 
@@ -535,6 +700,10 @@
         font-size: 3.125rem;
       }
 
+      .requirements-title {
+        font-size: 3.125rem;
+      }
+
       .footer-grid {
         grid-template-columns: repeat(4, 1fr);
       }
@@ -557,7 +726,10 @@
   <!-- Navigation -->
   <nav class="navbar glass-nav">
     <div class="nav-container">
-      <div class="nav-logo">Algo-Rythmn</div>
+      <div class="nav-logo">
+        Algo-Rythmn
+        <span class="nav-logo-tech">AlgoMind</span>
+      </div>
       <div class="nav-links">
         <a href="#overview" class="nav-link">Overview</a>
         <a href="#intelligence" class="nav-link">Intelligence</a>
@@ -572,17 +744,25 @@
   <!-- Hero Section -->
   <section id="overview" class="hero">
     <div class="hero-container">
-      <h2 class="hero-subtitle fade-in">Algo-Rythmn API v2.0</h2>
-      <h1 class="hero-title fade-in">Intelligence.<br>Orchestrated.</h1>
+      <div class="hero-brand fade-in">
+        <span class="hero-brand-badge">Now Available</span>
+        <span class="hero-brand-name">AlgoMind v2.0</span>
+      </div>
+      <h1 class="hero-title fade-in">
+        Intelligence.<br>
+        Orchestrated.
+      </h1>
       <p class="hero-description fade-in">
         The leap from single-agent simplicity to enterprise-grade orchestration.
-        <span class="hero-description-accent">It's not just an update. It's a new species of API.</span>
+        <span class="hero-description-accent">Powered by AlgoMind technology.</span>
       </p>
       <div class="hero-buttons fade-in">
-        <button class="hero-button-primary">Get Started</button>
+        <a href="#intelligence" class="nav-link">
+          <button class="hero-button-primary">Get Started with AlgoMind</button>
+        </a>
         <a href="mailto:support@algo-rythmn.ai" style="text-decoration: none;">
           <button class="hero-button-secondary">
-            Contact Us <span>→</span>
+            Contact Our Team <span>→</span>
           </button>
         </a>
       </div>
@@ -595,7 +775,7 @@
       <div class="bento-header">
         <h2 class="bento-title fade-in">Power in every dimension.</h2>
         <p class="bento-description fade-in">
-          We redesigned the core architecture to handle the complexities of the modern enterprise.
+          AlgoMind's redesigned core architecture handles the complexities of the modern enterprise.
         </p>
       </div>
 
@@ -608,7 +788,7 @@
           <div class="bento-category">Architecture</div>
           <div class="bento-card-title bento-card-title-large">From Solo to Symphony.</div>
           <div class="bento-card-description">
-            v1.0 was a single agent. v2.0 is a specialized workforce. Multi-agent orchestration handles diverse workflows tailored to your specific data ecosystems.
+            AlgoMind v1.0 was a single agent. v2.0 is a specialized workforce. Multi-agent orchestration handles diverse workflows tailored to your specific data ecosystems.
           </div>
         </div>
 
@@ -620,7 +800,7 @@
           <div class="bento-category">Reasoning</div>
           <div class="bento-card-title bento-card-title-large">No more black boxes.</div>
           <div class="bento-card-description">
-            Advanced explainability tuned for enterprise, revealing the ‘why’ behind every decision with clarity, transparency, and trust built in.
+            Advanced explainability tuned for enterprise, revealing the 'why' behind every decision with clarity, transparency, and trust built into AlgoMind.
           </div>
         </div>
 
@@ -632,7 +812,7 @@
           <div class="bento-category">Governance</div>
           <div class="bento-card-title bento-card-title-large">Fortress-grade.</div>
           <div class="bento-card-description">
-            Role-based access enforces boundaries, audit logs track actions, and strict data isolation ensures secure, transparent, compliance-ready governance.
+            Role-based access enforces boundaries, audit logs track actions, and strict data isolation ensures secure, transparent, compliance-ready governance in AlgoMind.
           </div>
         </div>
 
@@ -644,7 +824,7 @@
           <div class="bento-category">Planning Engine</div>
           <div class="bento-card-title bento-card-title-large">Adaptive Intelligence.</div>
           <div class="bento-card-description">
-            Moving beyond simple cues. v2.0 introduces an adaptive planning engine capable of managing multi-step, multi-domain tasks with human-like foresight.
+            Moving beyond simple cues. AlgoMind v2.0 introduces an adaptive planning engine capable of managing multi-step, multi-domain tasks with human-like foresight.
           </div>
         </div>
 
@@ -656,7 +836,7 @@
           <div class="bento-category">Integration</div>
           <div class="bento-card-title bento-card-title-large">Plug into anything.</div>
           <div class="bento-card-description">
-            MCP-powered connectivity to your entire tech stack. Seamlessly integrate with client-specific systems, databases, and third-party tools.
+            MCP-powered connectivity to your entire tech stack. Seamlessly integrate AlgoMind with client-specific systems, databases, and third-party tools.
           </div>
         </div>
 
@@ -668,7 +848,7 @@
           <div class="bento-category">Performance</div>
           <div class="bento-card-title bento-card-title-large">Built for scale.</div>
           <div class="bento-card-description">
-            Enterprise-grade performance with sub-second response times. Handle thousands of concurrent requests without breaking a sweat.
+            Enterprise-grade performance with sub-second response times. AlgoMind handles thousands of concurrent requests without breaking a sweat.
           </div>
         </div>
       </div>
@@ -679,15 +859,15 @@
   <section id="specs" class="comparison">
     <div class="comparison-container">
       <div class="comparison-header">
-        <h2 class="comparison-title fade-in">Compare Versions.</h2>
-        <p class="comparison-subtitle fade-in">See how far we've come.</p>
+        <h2 class="comparison-title fade-in">AlgoMind Evolution.</h2>
+        <p class="comparison-subtitle fade-in">See how far we've come with AlgoMind technology.</p>
       </div>
 
       <div class="comparison-table-container hide-scrollbar">
         <table class="comparison-table">
           <thead>
             <tr>
-              <th>Feature Category</th>
+              <th></th>
               <th>v1.0</th>
               <th>v1.5</th>
               <th>v1.8</th>
@@ -724,7 +904,7 @@
               <td>Adaptive planning across multi‑step, multi‑domain tasks</td>
             </tr>
             <tr class="fade-in">
-              <td>Data Access</td>
+              <td>Data Requirements</td>
               <td>API‑level access to database</td>
               <td>API‑level access to database</td>
               <td>Full database access with controlled permissions</td>
@@ -736,6 +916,13 @@
               <td>Improved accuracy via intent recognition</td>
               <td>Higher accuracy through multi‑agent specialization</td>
               <td>Enterprise‑grade accuracy with domain‑tuned agents</td>
+            </tr>
+            <tr class="fade-in">
+              <td>Processing Latency</td>
+              <td>500‑1000 ms (P95)</td>
+              <td>300‑700 ms (P95)</td>
+              <td>150‑400 ms (P95)</td>
+              <td>50‑200 ms (P95) with parallel optimization</td>
             </tr>
             <tr class="fade-in">
               <td>Security & Governance</td>
@@ -778,9 +965,8 @@
 
       <div class="comparison-footer">
         <p class="comparison-footer-text">
-          v1.0 through v1.8 are legacy supported. New deployments default to v2.0.
+          AlgoMind v1.0 through v1.8 are legacy supported. New deployments default to v2.0.
         </p>
-        <a href="#" class="comparison-footer-link">Download full technical documentation ></a>
       </div>
     </div>
   </section>
@@ -790,27 +976,26 @@
     <div class="footer-container">
       <div class="footer-grid">
         <div class="footer-column">
-          <h4>Product</h4>
+          <h4>AlgoMind</h4>
           <ul>
-            <li><a href="#">Overview</a></li>
-            <li><a href="#">Pricing</a></li>
-            <li><a href="#">Customers</a></li>
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#specs">Version Comparison</a></li>
           </ul>
         </div>
         <div class="footer-column">
           <h4>Resources</h4>
           <ul>
-            <li><a href="#">Documentation</a></li>
+            <li><a href="#">AlgoMind Documentation</a></li>
             <li><a href="#">API Reference</a></li>
-            <li><a href="#">Community</a></li>
+            <li><a href="#">Developer Community</a></li>
           </ul>
         </div>
         <div class="footer-column">
           <h4>Company</h4>
           <ul>
-            <li><a href="#">About</a></li>
+            <li><a href="https://algo-rythmn.ai/home/#about">About Algo-Rythmn</a></li>
             <li><a href="#">Careers</a></li>
-            <li><a href="#">Blog</a></li>
+            <li><a href="https://algo-rythmn.ai/blog">Blog</a></li>
           </ul>
         </div>
         <div class="footer-column">
@@ -818,12 +1003,13 @@
           <ul>
             <li><a href="#">Privacy Policy</a></li>
             <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Compliance</a></li>
           </ul>
         </div>
       </div>
       <div class="footer-bottom">
-        <p>Copyright © 2025 Algo-Rythmn Corp. All rights reserved.</p>
-        <p>Designed in Calgary, AB</p>
+        <p>Copyright © 2026 Algo-Rythmn Corp. All rights reserved. AlgoMind is a technology brand of Algo-Rythmn.</p>
+        <p>Designed in Calgary, AB | Engineered for the world</p>
       </div>
     </div>
   </footer>
@@ -847,8 +1033,8 @@
     document.addEventListener('DOMContentLoaded', () => {
       const fadeElements = document.querySelectorAll('.fade-in');
       fadeElements.forEach(el => {
-        // Add staggered delay based on order (reduced from 200ms to 100ms for faster animations)
-        const delay = Array.from(fadeElements).indexOf(el) * 100;
+        // Add staggered delay based on order
+        const delay = Array.from(fadeElements).indexOf(el) * 10;
         el.style.transitionDelay = `${delay}ms`;
         observer.observe(el);
       });
