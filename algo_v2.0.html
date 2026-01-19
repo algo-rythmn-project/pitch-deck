@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Algo-Rythmn.ai v2.0 | Intelligent Orchestration for Farmers Edge</title>
+    <title>AlgoMind | Intelligent Orchestration for Corvian</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -28,8 +28,7 @@
             --neutral-900: #202124;
             
             /* Accents - Used sparingly for emphasis */
-            --accent-green: #34A853;        /* Success, growth - aligned with agriculture */
-            --accent-orange: #FB8C00;       /* Attention, warnings */
+            --accent-blue: #152896;        /* Success, growth - aligned with agriculture */
             
             /* Typography */
             --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -86,18 +85,21 @@
         }
         
         h1 { font-size: 3.5rem; }
-        h2 { font-size: 2.5rem; }
+        h2 { font-size: 2.5rem; margin-bottom:2px}
         h3 { font-size: 2rem; }
         h4 { font-size: 1.5rem; }
         
         .section-subtitle {
             font-size: 0.875rem;
-            font-weight: 600;
+            font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 1.2px;
+            letter-spacing: 1.5px;
             color: var(--primary-blue);
             margin-bottom: var(--spacing-sm);
             display: inline-block;
+            padding: 6px 12px;
+            background: rgba(0, 102, 255, 0.08);
+            border-radius: 20px;
         }
         
         .section-description {
@@ -448,7 +450,7 @@
             padding: var(--spacing-lg);
             margin-bottom: var(--spacing-md);
             box-shadow: var(--shadow-sm);
-            border-left: 4px solid var(--accent-orange);
+            border-left: 4px solid var(--primary-blue);
             transition: var(--transition-base);
         }
         
@@ -495,6 +497,100 @@
             transform: translateY(-2px);
             box-shadow: 0 8px 24px rgba(0, 122, 255, 0.3);
             background: linear-gradient(135deg, var(--primary-blue-dark) 0%, #0047B3 100%);
+        }
+
+        /* ===== PILOT DOMAINS ===== */
+        .pilot-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-xl);
+        }
+
+        .pilot-card {
+            background: white;
+            border-radius: var(--border-radius-md);
+            padding: var(--spacing-lg);
+            text-align: center;
+            border: 1px solid var(--neutral-200);
+            transition: var(--transition-base);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pilot-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--blue-gradient);
+        }
+
+        .pilot-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary-blue-light);
+        }
+
+        .pilot-badge {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--accent-green);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .pilot-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--blue-gradient-subtle);
+            border-radius: var(--border-radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: var(--spacing-md);
+            margin-top: var(--spacing-sm);
+        }
+
+        .pilot-icon i {
+            font-size: 2rem;
+            color: var(--primary-blue);
+        }
+
+        .pilot-card h4 {
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .pilot-card p {
+            color: var(--neutral-500);
+            font-size: 0.9375rem;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .pilot-metrics {
+            display: flex;
+            justify-content: center;
+            gap: var(--spacing-sm);
+            margin-top: auto;
+            flex-wrap: wrap;
+        }
+
+        .metric-badge {
+            background: rgba(0, 102, 255, 0.08);
+            color: var(--primary-blue);
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
         }
         
         /* ===== FOOTER ===== */
@@ -562,7 +658,8 @@
             
             .metrics-container,
             .pain-points-grid,
-            .decision-grid {
+            .decision-grid,
+            .pilot-grid {
                 grid-template-columns: 1fr;
             }
             
@@ -644,17 +741,17 @@
     <header>
         <div class="container">
             <div class="logo-container">
-                <div class="logo-text">Algo<span>-Rythmn.ai</span></div>
+                <div class="logo-text">Algo-Rythmn.ai | <span>AlgoMind Pro</span></div>
             </div>
             
             <div class="header-content">
-                <span class="section-subtitle">Strategic Technology Partnership</span>
+                <span class="section-subtitle">Enterprise AI Orchestration for Corvian</span>
                 <h1>Enterprise Intelligence for Digital Agriculture</h1>
-                <p class="header-tagline">Algo-Rythmn.ai v2.0 delivers enterprise-grade, multi-agent orchestration that transforms data silos into integrated workflows, reduces technical complexity, and accelerates digital transformation for global agricultural innovation.</p>
+                <p class="header-tagline">AlgoMind Pro delivers enterprise-grade, multi-agent orchestration that transforms data silos into integrated workflows, reduces technical complexity, and accelerates digital transformation for global agricultural innovation.</p>
                 
                 <div style="margin-top: var(--spacing-lg);">
-                    <button class="cta-button" id="scheduleButton">
-                        <i class="fas fa-calendar-alt"></i> Schedule Executive Briefing
+                    <button class="cta-button" id="ctaContactButton">
+                        <i class="fas fa-calendar-check"></i> Contact Our Team
                     </button>
                 </div>
             </div>
@@ -711,41 +808,61 @@
                 <table class="evolution-table">
                     <thead>
                         <tr>
-                            <th>System Architecture</th>
-                            <th>v1.0</th>
-                            <th>v2.0</th>
+                            <th></th>
+                            <th>AlgoMind</th>
+                            <th>AlgoMind Pro</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td><strong>Architecture</strong></td>
-                            <td class="v1-col">Single-agent framework</td>
-                            <td class="v2-col">Multi-agent with domain-specialized orchestration</td>
+                            <td><strong>System Design</strong></td>
+                            <td class="v1-col">Streamlined single-agent framework with essential tools</td>
+                            <td class="v2-col">Multi-agent orchestration with supervisor–specialist architecture</td>
                         </tr>
                         <tr>
-                            <td><strong>Task Execution</strong></td>
-                            <td class="v1-col">Basic tool integration</td>
-                            <td class="v2-col">Tailored workflows for agricultural data ecosystems</td>
+                            <td><strong>Decision Transparency</strong></td>
+                            <td class="v1-col">Basic decision logging</td>
+                            <td class="v2-col">Real-time reasoning traces and operational canvas for full visibility</td>
                         </tr>
                         <tr>
-                            <td><strong>Transparency</strong></td>
-                            <td class="v1-col">Limited visibility</td>
-                            <td class="v2-col">Enterprise explainability & audit logs</td>
+                            <td><strong>Data Intelligence</strong></td>
+                            <td class="v1-col">Foundational data processing and reporting</td>
+                            <td class="v2-col">Advanced analytics, agronomic insights, reusable artifacts, and rich outputs</td>
                         </tr>
                         <tr>
-                            <td><strong>Planning</strong></td>
-                            <td class="v1-col">Not available</td>
-                            <td class="v2-col">Adaptive planning for multi-domain agricultural tasks</td>
+                            <td><strong>User Interaction</strong></td>
+                            <td class="v1-col">Single-turn queries with clear responses</td>
+                            <td class="v2-col">Multi-turn memory, contextual follow-up, and timeline playback</td>
                         </tr>
                         <tr>
-                            <td><strong>Latency</strong></td>
-                            <td class="v1-col">500-1000 ms (P95)</td>
-                            <td class="v2-col">50-200 ms (P95) with parallel optimization</td>
+                            <td><strong>Security & Safety</strong></td>
+                            <td class="v1-col">Standard API-level security protocols</td>
+                            <td class="v2-col">Layered safety checks, human-in-the-loop workflows, and isolated execution</td>
                         </tr>
                         <tr>
-                            <td><strong>Governance</strong></td>
-                            <td class="v1-col">Basic API security</td>
-                            <td class="v2-col">Enterprise-grade compliance & data isolation</td>
+                            <td><strong>Enterprise Readiness</strong></td>
+                            <td class="v1-col">Baseline compliance for general use</td>
+                            <td class="v2-col">Full governance suite with audit trails, data isolation, and extensible tooling</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tooling</strong></td>
+                            <td class="v1-col">Core toolset for basic tasks and queries</td>
+                            <td class="v2-col">Dynamic tool selection with plug-and-play integrations for specialized workflows</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Deployment Flexibility</strong></td>
+                            <td class="v1-col">Cloud-based setup with standard configurations</td>
+                            <td class="v2-col">Modular deployment across cloud, hybrid, and air-gapped environments</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Scalability</strong></td>
+                            <td class="v1-col">Suitable for lean teams and straightforward use cases</td>
+                            <td class="v2-col">Designed for complex environments, large datasets, and enterprise-scale operations</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Integration</strong></td>
+                            <td class="v1-col">Basic API connectivity</td>
+                            <td class="v2-col">Extensible ecosystem with MCP integrations for client-specific systems</td>
                         </tr>
                     </tbody>
                 </table>
@@ -759,7 +876,7 @@
             <div class="section-header">
                 <span class="section-subtitle">Targeted Solutions</span>
                 <h2>Addressing Agricultural Technology Challenges</h2>
-                <p class="section-description">Direct alignment with Farmers Edge's strategic initiatives to overcome industry-specific barriers to digital transformation.</p>
+                <p class="section-description">Direct alignment with Corvian's strategic initiatives to overcome industry-specific barriers to digital transformation.</p>
             </div>
             
             <div class="pain-points-grid animate-on-scroll">
@@ -815,6 +932,17 @@
                     <p class="card-content">Stringent requirements for data isolation, audit trails, and regulatory compliance in global agricultural operations.</p>
                     <div style="margin-top: var(--spacing-md);">
                         <span style="display: inline-block; background: rgba(0, 122, 255, 0.1); color: var(--primary-blue); padding: 6px 12px; border-radius: 20px; font-size: 0.875rem; font-weight: 500;">Solution: RBAC & schema isolation</span>
+                    </div>
+                </div>
+
+                <div class="pain-point card">
+                    <div class="card-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3 class="card-title">Slow Time-to-Insight</h3>
+                    <p class="card-content">Delays in processing and analyzing complex datasets result in missed opportunities and reactive rather than proactive decision-making.</p>
+                    <div style="margin-top: var(--spacing-md);">
+                        <span style="display: inline-block; background: rgba(0, 122, 255, 0.1); color: var(--primary-blue); padding: 6px 12px; border-radius: 20px; font-size: 0.875rem; font-weight: 500;">Solution: Real-time analytics pipeline</span>
                     </div>
                 </div>
             </div>
@@ -967,22 +1095,18 @@
                     Let's schedule a technical deep-dive to align on pilot scope, success metrics, and integration strategy. We can deploy the MVP in 60 days with joint commitment.
                 </p>
                 
-                <button class="cta-button" id="scheduleButton">
-                    <i class="fas fa-calendar-check"></i> Schedule Executive Briefing
+                <button class="cta-button" id="ctaContactButton">
+                    <i class="fas fa-calendar-check"></i> Contact Our Team
                 </button>
                 
                 <div style="margin-top: var(--spacing-xl); display: flex; justify-content: center; gap: var(--spacing-lg); flex-wrap: wrap;">
                     <div style="display: flex; align-items: center; gap: var(--spacing-xs);">
                         <i class="fas fa-envelope" style="color: var(--primary-blue);"></i>
-                        <span style="color: var(--neutral-500);">support@algo-rythmn.ai</span>
+                        <a href="mailto:support@algo-rythmn.ai" style="color: var(--neutral-500); text-decoration: none; transition: var(--transition-fast);" onmouseover="this.style.color='var(--primary-blue)'" onmouseout="this.style.color='var(--neutral-500)'">support@algo-rythmn.ai</a>
                     </div>
                     <div style="display: flex; align-items: center; gap: var(--spacing-xs);">
-                        <i class="fas fa-phone" style="color: var(--primary-blue);"></i>
-                        <span style="color: var(--neutral-500);">+1 (415) 123-ALGO</span>
-                    </div>
-                    <div style="display: flex; align-items: center; gap: var(--spacing-xs);">
-                        <i class="fas fa-clock" style="color: var(--primary-blue);"></i>
-                        <span style="color: var(--neutral-500);">60-Day MVP Deployment</span>
+                        <i class="fas fa-map-marker-alt" style="color: var(--primary-blue);"></i>
+                        <span style="color: var(--neutral-500);">Calgary, Alberta, Canada</span>
                     </div>
                 </div>
             </div>
@@ -1002,14 +1126,14 @@
                     </a>
                     <div class="contact-item">
                         <i class="fas fa-map-marker-alt"></i>
-                        <span>San Francisco | London | Singapore</span>
+                        <span>Calgary, AB</span>
                     </div>
                 </div>
             </div>
             
             <div class="copyright">
-                <p>© 2026 Algo-Rythmn.ai Technologies. All rights reserved. | Enterprise-Grade AI Orchestration Platform</p>
-                <p style="margin-top: var(--spacing-xs); font-size: 0.8125rem;">Confidential – Prepared for Farmers Edge Executive Review</p>
+                <p>© 2026 Algo-Rythmn Corp. All rights reserved. | Enterprise-Grade AI Orchestration Platform</p>
+                <p style="margin-top: var(--spacing-xs); font-size: 0.8125rem;">Confidential – Prepared for Corvian Executive Review</p>
             </div>
         </div>
     </footer>
@@ -1034,23 +1158,15 @@
         });
         
         // CTA Button Interaction
-        document.getElementById('scheduleButton').addEventListener('click', function() {
-            const originalText = this.innerHTML;
-            this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Connecting...';
-            this.disabled = true;
-            
-            setTimeout(() => {
-                this.innerHTML = '<i class="fas fa-check"></i> Request Confirmed';
-                this.style.background = 'linear-gradient(135deg, var(--accent-green) 0%, #2E8B57 100%)';
-                
-                setTimeout(() => {
-                    this.innerHTML = originalText;
-                    this.disabled = false;
-                    this.style.background = 'var(--blue-gradient)';
-                    alert('Thank you for your interest. Our enterprise partnership team will contact you within 24 hours to schedule an executive briefing.');
-                }, 2000);
-            }, 1000);
-        });
+        const scheduleBtn = document.getElementById('scheduleButton');
+        const ctaBtn = document.getElementById('ctaContactButton');
+        
+        const handleEmailClick = function() {
+            window.location.href = 'mailto:support@algo-rythmn.ai?subject=Executive%20Briefing%20Request&body=Hello%2C%0A%0AI%20am%20interested%20in%20scheduling%20an%20executive%20briefing%20for%20AlgoMind%20Pro.%0A%0APlease%20let%20me%20know%20your%20availability.%0A%0AThank%20you';
+        };
+        
+        if (scheduleBtn) scheduleBtn.addEventListener('click', handleEmailClick);
+        if (ctaBtn) ctaBtn.addEventListener('click', handleEmailClick);
         
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
