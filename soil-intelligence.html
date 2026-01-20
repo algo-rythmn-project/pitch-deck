@@ -20,32 +20,38 @@
         }
         
         :root {
-            --primary: #2d5c2a;
-            --secondary: #7cb342;
-            --accent: #ff9800;
-            --light: #f5f9f4;
-            --dark: #1a3318;
-            --gray: #6c757d;
-            --light-gray: #e9ecef;
-            --enhance:#ff9100;
-            --competitive: #f8b34b;
-            --differentiator: #9b59b6;
+            --primary: #1A472A;        /* Deep forest green */
+            --secondary: #2E8B57;      /* Sea green */
+            --accent: #FF8C00;         /* Dark orange - earth tone */
+            --light: #F5F9F3;          /* Very light green */
+            --dark: #0D2818;           /* Darkest green */
+            --gray: #5D6D7E;           /* Modern gray-blue */
+            --light-gray: #EAEDED;     /* Soft gray */
+            --enhance: #1A472A;        /* Carrot orange */
+            --competitive: #2E8B57;    /* Sunflower yellow */
+            --unique-green: #1A472A;   /* Teal green for unique features */
+            --unique-light: #2E8B57;   /* Lighter teal */
+            --earth-brown: #8B4513;    /* Soil brown */
+            --sky-blue: #3498DB;       /* Fresh blue */
+            --premium-blue: #1C4E80;   /* Deep blue for enhanced features */
         }
         
         body {
-            background-color: #f8f9fa;
-            color: #333;
+            background-color: #FAFDF9;
+            color: #2C3E50;
             line-height: 1.6;
         }
         
         header {
             background: linear-gradient(135deg, var(--primary), var(--dark));
             color: white;
-            padding: 1.2rem 0;
+            padding: 1rem 0;
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 20px rgba(26, 71, 42, 0.15);
+            backdrop-filter: blur(10px);
+            background-color: rgba(26, 71, 42, 0.95);
         }
         
         .container {
@@ -67,6 +73,7 @@
             gap: 12px;
             font-size: 1.8rem;
             font-weight: 700;
+            color: white;
         }
         
         .logo i {
@@ -88,33 +95,49 @@
         }
         
         nav a {
-            color: white;
+            color: rgba(255, 255, 255, 0.9);
             text-decoration: none;
             font-weight: 600;
             font-size: 0.9rem;
-            padding: 8px 12px;
-            border-radius: 4px;
+            padding: 8px 16px;
+            border-radius: 20px;
             transition: all 0.3s ease;
         }
         
         nav a:hover, nav a.active {
-            background-color: rgba(255, 255, 255, 0.15);
+            background-color: rgba(255, 140, 0, 0.2);
             color: var(--accent);
+            transform: translateY(-2px);
         }
         
         .hero {
-            background: linear-gradient(rgba(45, 92, 42, 0.9), rgba(26, 51, 24, 0.95)), url('https://images.unsplash.com/photo-1586771107445-d3ca888129fe?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');
+            background: linear-gradient(135deg, rgba(26, 71, 42, 0.9) 0%, rgba(13, 40, 24, 0.95) 100%), 
+                        url('https://images.unsplash.com/photo-1586771107445-d3ca888129fe?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');
             background-size: cover;
             background-position: center;
             color: white;
-            padding: 5rem 0;
+            padding: 6rem 0;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 50%, rgba(255, 140, 0, 0.1) 0%, transparent 50%);
         }
         
         .hero h1 {
-            font-size: 3.2rem;
+            font-size: 3.5rem;
             margin-bottom: 1.2rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+            font-weight: 800;
+            position: relative;
         }
         
         .hero .subtitle {
@@ -122,6 +145,7 @@
             color: var(--accent);
             font-weight: 600;
             margin-bottom: 1.5rem;
+            position: relative;
         }
         
         .hero p {
@@ -129,51 +153,53 @@
             max-width: 800px;
             margin: 0 auto 2rem;
             opacity: 0.9;
+            position: relative;
+            line-height: 1.8;
         }
         
         .btn {
             display: inline-block;
-            background-color: var(--accent);
+            background: linear-gradient(135deg, var(--accent), var(--enhance));
             color: white;
-            padding: 14px 32px;
-            border-radius: 8px;
+            padding: 16px 36px;
+            border-radius: 30px;
             text-decoration: none;
             font-weight: 600;
             font-size: 1.05rem;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             border: none;
             cursor: pointer;
-            box-shadow: 0 2px 8px rgba(255, 153, 0, 0.2);
+            box-shadow: 0 4px 15px rgba(255, 140, 0, 0.3);
             position: relative;
             overflow: hidden;
+            letter-spacing: 0.5px;
         }
         
         .btn:hover {
-            background-color: #e68900;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255, 153, 0, 0.3);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(255, 140, 0, 0.4);
         }
         
         .btn-secondary {
-            background-color: transparent;
+            background: transparent;
             border: 2px solid white;
-            box-shadow: 0 2px 8px rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
         }
         
         .btn-secondary:hover {
-            background-color: rgba(255, 255, 255, 0.15);
+            background-color: rgba(255, 255, 255, 0.1);
             border-color: var(--accent);
-            box-shadow: 0 4px 16px rgba(255, 255, 255, 0.2);
+            box-shadow: 0 6px 20px rgba(255, 255, 255, 0.2);
         }
         
-        .btn-differentiator {
-            background: linear-gradient(135deg, var(--differentiator), #8e44ad);
-            box-shadow: 0 2px 8px rgba(155, 89, 182, 0.25);
+        .btn-unique {
+            background: linear-gradient(135deg, var(--unique-green), var(--unique-light));
+            box-shadow: 0 4px 15px rgba(30, 111, 92, 0.3);
         }
         
-        .btn-differentiator:hover {
-            background: linear-gradient(135deg, #8e44ad, #7d3c98);
-            box-shadow: 0 6px 20px rgba(155, 89, 182, 0.4);
+        .btn-unique:hover {
+            background: linear-gradient(135deg, var(--unique-light), var(--unique-green));
+            box-shadow: 0 8px 25px rgba(30, 111, 92, 0.4);
         }
         
         section {
@@ -182,41 +208,45 @@
         
         .section-title {
             text-align: center;
-            margin-bottom: 3.5rem;
+            margin-bottom: 4rem;
         }
         
         .section-title h2 {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             color: var(--primary);
             margin-bottom: 1rem;
             position: relative;
             display: inline-block;
+            font-weight: 700;
         }
         
         .section-title h2:after {
             content: '';
             position: absolute;
-            width: 80px;
-            height: 4px;
-            background-color: var(--accent);
-            bottom: -10px;
+            width: 100px;
+            height: 5px;
+            background: linear-gradient(90deg, var(--accent), var(--secondary));
+            bottom: -15px;
             left: 50%;
             transform: translateX(-50%);
+            border-radius: 3px;
         }
         
         .section-title p {
             color: var(--gray);
             max-width: 700px;
-            margin: 0 auto;
-            font-size: 1.1rem;
+            margin: 2rem auto 0;
+            font-size: 1.2rem;
+            line-height: 1.8;
         }
         
         .comparison-section {
-            background-color: #f8f9fa;
-            border-radius: 12px;
+            background-color: white;
+            border-radius: 16px;
             padding: 2.5rem;
             margin-bottom: 4rem;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 8px 30px rgba(26, 71, 42, 0.08);
+            border: 1px solid var(--light-gray);
         }
         
         .comparison-title {
@@ -224,27 +254,37 @@
             margin-bottom: 1.5rem;
             text-align: center;
             font-size: 1.8rem;
+            font-weight: 700;
         }
         
         .comparison-grid {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
-            gap: 1.5rem;
+            gap: 2rem;
             margin-bottom: 2rem;
         }
         
         .comparison-card {
             background-color: white;
-            border-radius: 8px;
-            padding: 1.5rem;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--light-gray);
+        }
+        
+        .comparison-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
         }
         
         .comparison-card h4 {
             color: var(--primary);
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
             border-bottom: 2px solid var(--light-gray);
+            font-size: 1.3rem;
+            font-weight: 700;
         }
         
         .feature-list {
@@ -252,32 +292,33 @@
         }
         
         .feature-list li {
-            padding: 0.5rem 0;
+            padding: 0.6rem 0;
             border-bottom: 1px dashed var(--light-gray);
             display: flex;
-            align-items: center;
+            align-items: flex-start;
         }
         
         .feature-list li i {
-            margin-right: 10px;
-            font-size: 0.9rem;
+            margin-right: 12px;
+            font-size: 1rem;
+            margin-top: 3px;
         }
         
         .competitive-feature i {
             color: var(--competitive);
         }
         
-        .differentiator-feature i {
-            color: var(--differentiator);
+        .unique-feature i {
+            color: var(--unique-green);
         }
         
-        .differentiator-badge {
+        .unique-badge {
             display: inline-block;
-            background-color: var(--differentiator);
+            background: linear-gradient(135deg, var(--unique-green), var(--unique-light));
             color: white;
             font-size: 0.75rem;
             font-weight: 700;
-            padding: 3px 8px;
+            padding: 4px 10px;
             border-radius: 12px;
             margin-left: 8px;
             vertical-align: middle;
@@ -285,11 +326,11 @@
         
         .competitive-badge {
             display: inline-block;
-            background-color: var(--competitive);
+            background: linear-gradient(135deg, var(--competitive), #e67e22);
             color: white;
             font-size: 0.75rem;
             font-weight: 700;
-            padding: 3px 8px;
+            padding: 4px 10px;
             border-radius: 12px;
             margin-left: 8px;
             vertical-align: middle;
@@ -298,53 +339,55 @@
         .mvp-modules {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
+            gap: 2.5rem;
             margin-bottom: 4rem;
         }
         
         .module-card {
             background-color: white;
-            border-radius: 12px;
+            border-radius: 16px;
             overflow: hidden;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 8px 30px rgba(26, 71, 42, 0.08);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             height: 100%;
-            border-top: 4px solid var(--enhance);
+            border-top: 5px solid var(--enhance);
             display: flex;
             flex-direction: column;
+            border: 1px solid var(--light-gray);
         }
         
-        .module-card.differentiator {
-            border-top: 4px solid var(--differentiator);
-            box-shadow: 0 6px 15px rgba(155, 89, 182, 0.15);
+        .module-card.unique {
+            border-top: 5px solid var(--unique-green);
+            box-shadow: 0 8px 30px rgba(30, 111, 92, 0.12);
         }
         
         .module-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+            transform: translateY(-12px);
+            box-shadow: 0 20px 40px rgba(26, 71, 42, 0.15);
         }
         
-        .module-card.differentiator:hover {
-            box-shadow: 0 15px 30px rgba(155, 89, 182, 0.2);
+        .module-card.unique:hover {
+            box-shadow: 0 20px 40px rgba(30, 111, 92, 0.2);
         }
         
         .module-header {
-            background: linear-gradient(to right, var(--enhance), var(--competitive));
+            background: linear-gradient(135deg, var(--accent), var(--competitive));
             color: white;
-            padding: 1.5rem;
+            padding: 1.8rem;
         }
         
-        .module-header.differentiator {
-            background: linear-gradient(to right, var(--differentiator), #a86bc2);
+        .module-header.unique {
+            background: linear-gradient(135deg, var(--unique-green), var(--unique-light));
         }
         
         .module-header h3 {
             font-size: 1.3rem;
             margin-bottom: 0.5rem;
+            font-weight: 700;
         }
         
         .module-body {
-            padding: 1.8rem;
+            padding: 2rem;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
@@ -353,6 +396,7 @@
         .module-body p {
             color: var(--gray);
             margin-bottom: 1.5rem;
+            line-height: 1.7;
         }
         
         .module-features {
@@ -361,130 +405,143 @@
         }
         
         .module-features li {
-            padding: 0.5rem 0;
+            padding: 0.6rem 0;
             border-bottom: 1px dashed var(--light-gray);
             display: flex;
-            align-items: center;
+            align-items: flex-start;
         }
         
         .module-features li i {
             color: var(--secondary);
-            margin-right: 10px;
+            margin-right: 12px;
+            margin-top: 3px;
         }
-        
+
         .module-button {
             margin-top: auto;
             text-align: right;
-            padding-top: 1rem;
+            padding-top: 1.5rem;
             align-self: flex-end;
         }
 
         .data-table-container {
             background-color: white;
-            border-radius: 12px;
+            border-radius: 16px;
             overflow: hidden;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 8px 30px rgba(26, 71, 42, 0.08);
             overflow-x: auto;
+            border: 1px solid var(--light-gray);
         }
         
         table {
             width: 100%;
-            border-collapse: collapse;
+            border-collapse: separate;
+            border-spacing: 0;
         }
         
         th {
-            background-color: var(--light);
-            color: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--dark));
+            color: white;
             font-weight: 700;
-            padding: 1.2rem 1rem;
+            padding: 1.5rem 1.2rem;
             text-align: left;
-            border-bottom: 2px solid var(--secondary);
+            border-bottom: none;
+            font-size: 1rem;
         }
         
         td {
-            padding: 1rem;
+            padding: 1.2rem;
             border-bottom: 1px solid var(--light-gray);
+            vertical-align: top;
         }
         
         tr:hover {
-            background-color: #f9fdf8;
+            background-color: #F8FCF7;
         }
         
         .priority-high {
-            background-color: #ffeaa7;
-            color: #d35400;
-            padding: 4px 12px;
+            background-color: #FFEAA7;
+            color: #D35400;
+            padding: 6px 14px;
             border-radius: 20px;
             font-size: 0.85rem;
             font-weight: 600;
+            display: inline-block;
         }
         
         .priority-critical {
-            background-color: #ffcccc;
-            color: #c0392b;
-            padding: 4px 12px;
+            background-color: #FFCCCC;
+            color: #C0392B;
+            padding: 6px 14px;
             border-radius: 20px;
             font-size: 0.85rem;
             font-weight: 600;
+            display: inline-block;
         }
         
         .priority-medium {
-            background-color: #d6eaf8;
-            color: #2c3e50;
-            padding: 4px 12px;
+            background-color: #D6EAF8;
+            color: #2C3E50;
+            padding: 6px 14px;
             border-radius: 20px;
             font-size: 0.85rem;
             font-weight: 600;
+            display: inline-block;
         }
         
         .map-container {
             height: 500px;
-            border-radius: 12px;
+            border-radius: 16px;
             overflow: hidden;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 8px 30px rgba(26, 71, 42, 0.08);
             margin-bottom: 2rem;
+            border: 1px solid var(--light-gray);
         }
         
         .chart-container {
             background-color: white;
-            border-radius: 12px;
-            padding: 1.5rem;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 8px 30px rgba(26, 71, 42, 0.08);
             margin-bottom: 2rem;
             height: 400px;
+            border: 1px solid var(--light-gray);
         }
         
         .dashboard {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 2rem;
+            gap: 2.5rem;
             margin-bottom: 3rem;
         }
         
         .dashboard-card {
             background-color: white;
-            border-radius: 12px;
-            padding: 1.8rem;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 8px 30px rgba(26, 71, 42, 0.08);
+            border: 1px solid var(--light-gray);
         }
         
         .dashboard-card h3 {
             color: var(--primary);
             margin-bottom: 1.5rem;
-            padding-bottom: 0.8rem;
+            padding-bottom: 1rem;
             border-bottom: 2px solid var(--light-gray);
+            font-size: 1.4rem;
+            font-weight: 700;
         }
         
         .metric {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 1rem;
-            padding-bottom: 1rem;
+            margin-bottom: 1.2rem;
+            padding-bottom: 1.2rem;
             border-bottom: 1px dashed var(--light-gray);
         }
         
         .metric-value {
-            font-size: 1rem;
+            font-size: 1.1rem;
             font-weight: 700;
             color: var(--primary);
         }
@@ -503,7 +560,7 @@
         }
         
         .negative {
-            color: #e74c3c;
+            color: #E74C3C;
         }
         
         .data-category {
@@ -517,30 +574,45 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            font-weight: 700;
         }
         
         footer {
-            background-color: var(--dark);
+            background: linear-gradient(135deg, var(--dark), var(--primary));
             color: white;
-            padding: 3rem 0;
+            padding: 4rem 0;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent), var(--secondary));
         }
         
         .footer-content {
             display: flex;
             flex-direction: column;
             align-items: center;
+            position: relative;
+            z-index: 1;
         }
         
         .footer-logo {
-            font-size: 2rem;
-            font-weight: 700;
+            font-size: 2.2rem;
+            font-weight: 800;
             margin-bottom: 1.5rem;
-            color: var(--accent);
+            color: white;
         }
         
         .copyright {
-            margin-top: 2rem;
+            margin-top: 2.5rem;
             color: rgba(255, 255, 255, 0.7);
             font-size: 0.9rem;
         }
@@ -552,11 +624,21 @@
             color: white;
             font-size: 1.5rem;
             cursor: pointer;
+            padding: 8px;
+            border-radius: 8px;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        @media (max-width: 1200px) {
+            .mvp-modules {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
         
         @media (max-width: 992px) {
             .mvp-modules {
                 grid-template-columns: 1fr;
+                gap: 2rem;
             }
             
             .dashboard {
@@ -565,6 +647,7 @@
             
             .comparison-grid {
                 grid-template-columns: 1fr;
+                gap: 1.5rem;
             }
             
             nav ul {
@@ -576,7 +659,8 @@
                 background-color: var(--primary);
                 flex-direction: column;
                 padding: 1rem 0;
-                box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+                z-index: 1000;
             }
             
             nav ul.active {
@@ -598,11 +682,37 @@
             }
             
             .hero h1 {
-                font-size: 2.5rem;
+                font-size: 2.8rem;
             }
             
             .section-title h2 {
-                font-size: 2rem;
+                font-size: 2.2rem;
+            }
+            
+            .hero {
+                padding: 4rem 0;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero .subtitle {
+                font-size: 1.4rem;
+            }
+            
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+            
+            section {
+                padding: 3rem 0;
+            }
+            
+            .container {
+                width: 95%;
             }
         }
         
@@ -613,20 +723,21 @@
             border-bottom: 2px solid var(--light-gray);
             flex-wrap: wrap;
             justify-content: center;
+            gap: 0.5rem;
         }
         
         .tab-btn {
-            padding: 1rem 1.5rem;
+            padding: 1rem 1.8rem;
             background: white;
             border: 2px solid transparent;
-            border-radius: 8px 8px 0 0;
+            border-radius: 10px 10px 0 0;
             font-size: 1.05rem;
             font-weight: 600;
             color: var(--gray);
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
-            margin: 0 4px;
+            margin: 0 2px;
         }
         
         .tab-btn:hover {
@@ -651,7 +762,7 @@
             left: 0;
             width: 100%;
             height: 4px;
-            background: linear-gradient(90deg, var(--accent), #ffc107);
+            background: linear-gradient(90deg, var(--accent), var(--secondary));
             border-radius: 2px;
         }
         
@@ -666,44 +777,53 @@
         .search-box {
             display: flex;
             margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
         
         .search-box input {
             flex: 1;
-            padding: 12px 18px;
+            padding: 14px 20px;
             border: 1px solid var(--light-gray);
             border-radius: 30px 0 0 30px;
             font-size: 1rem;
+            background-color: white;
         }
         
         .search-box button {
-            background: linear-gradient(135deg, var(--secondary), #689f38);
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
             color: white;
             border: none;
-            padding: 0 28px;
+            padding: 0 32px;
             border-radius: 0 30px 30px 0;
             cursor: pointer;
             font-weight: 600;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 2px 8px rgba(124, 179, 66, 0.2);
+            box-shadow: 0 4px 15px rgba(46, 139, 87, 0.2);
         }
         
         .search-box button:hover {
-            background: linear-gradient(135deg, #689f38, var(--secondary));
-            box-shadow: 0 4px 16px rgba(124, 179, 66, 0.3);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            box-shadow: 0 6px 20px rgba(46, 139, 87, 0.3);
         }
         
         .legend {
             display: flex;
             flex-wrap: wrap;
-            gap: 1rem;
-            margin-top: 1rem;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+            justify-content: center;
         }
         
         .legend-item {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
+            background-color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
         }
         
         .legend-color {
@@ -716,31 +836,31 @@
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            background: linear-gradient(135deg, var(--primary), #1a3318);
+            background: linear-gradient(135deg, var(--primary), var(--dark));
             color: white;
-            padding: 14px 28px;
-            border-radius: 8px;
+            padding: 16px 32px;
+            border-radius: 30px;
             text-decoration: none;
             font-weight: 600;
             margin-top: 1rem;
-            margin-right: 0.5rem;
-            margin-bottom: 0.5rem;
+            margin-right: 1rem;
+            margin-bottom: 1rem;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             border: none;
             cursor: pointer;
-            box-shadow: 0 3px 12px rgba(45, 92, 42, 0.25);
+            box-shadow: 0 6px 20px rgba(26, 71, 42, 0.2);
             font-size: 1rem;
         }
         
         .download-btn:hover {
             background: linear-gradient(135deg, var(--dark), var(--primary));
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(45, 92, 42, 0.35);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(26, 71, 42, 0.3);
         }
         
         .download-btn:active {
-            transform: translateY(0);
-            box-shadow: 0 2px 8px rgba(45, 92, 42, 0.3);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 15px rgba(26, 71, 42, 0.25);
         }
         
         .download-btn i {
@@ -750,27 +870,34 @@
         .scorecard {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-top: 1.5rem;
+            gap: 2rem;
+            margin-top: 2rem;
         }
         
         .score-item {
-            background: var(--light);
-            border-radius: 8px;
-            padding: 1.2rem;
+            background: linear-gradient(135deg, white, var(--light));
+            border-radius: 12px;
+            padding: 1.5rem;
             text-align: center;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+            border: 1px solid var(--light-gray);
+            transition: transform 0.3s ease;
+        }
+        
+        .score-item:hover {
+            transform: translateY(-5px);
         }
         
         .score-value {
-            font-size: 2.2rem;
-            font-weight: 700;
+            font-size: 2.5rem;
+            font-weight: 800;
             color: var(--primary);
             margin: 0.5rem 0;
         }
         
         .score-label {
             color: var(--gray);
-            font-size: 0.9rem;
+            font-size: 0.95rem;
         }
         
         .comparison-table {
@@ -779,30 +906,30 @@
         }
         
         .comparison-table th {
-            background-color: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--dark));
             color: white;
         }
         
         .rank-badge {
             display: inline-block;
-            padding: 4px 10px;
+            padding: 6px 12px;
             border-radius: 20px;
-            font-weight: 600;
+            font-weight: 700;
             font-size: 0.85rem;
         }
         
         .rank-1 {
-            background-color: gold;
+            background: linear-gradient(135deg, gold, #FFD700);
             color: #8a6d00;
         }
         
         .rank-2 {
-            background-color: silver;
+            background: linear-gradient(135deg, silver, #C0C0C0);
             color: #6c757d;
         }
         
         .rank-3 {
-            background-color: #cd7f32;
+            background: linear-gradient(135deg, #cd7f32, #b56c2c);
             color: white;
         }
         
@@ -813,12 +940,12 @@
         
         .trend-up {
             color: var(--secondary);
-            font-weight: 600;
+            font-weight: 700;
         }
         
         .trend-down {
-            color: #e74c3c;
-            font-weight: 600;
+            color: #E74C3C;
+            font-weight: 700;
         }
         
         .filter-controls {
@@ -829,11 +956,12 @@
         }
         
         .filter-select {
-            padding: 10px 15px;
-            border-radius: 6px;
+            padding: 12px 18px;
+            border-radius: 8px;
             border: 1px solid var(--light-gray);
             background-color: white;
             min-width: 200px;
+            font-size: 1rem;
         }
         
         .comparison-radar-container {
@@ -847,25 +975,26 @@
         }
         
         .proprietary-index {
-            background: linear-gradient(135deg, var(--differentiator), #8e44ad);
+            background: linear-gradient(135deg, var(--unique-green), var(--unique-light));
             color: white;
-            border-radius: 12px;
-            padding: 2rem;
+            border-radius: 16px;
+            padding: 2.5rem;
             margin-bottom: 2rem;
-            box-shadow: 0 8px 20px rgba(155, 89, 182, 0.2);
+            box-shadow: 0 10px 30px rgba(30, 111, 92, 0.2);
         }
         
         .proprietary-index h3 {
             color: white;
             margin-bottom: 1rem;
+            font-size: 1.5rem;
         }
         
         .proprietary-index .index-value {
-            font-size: 3.5rem;
+            font-size: 4rem;
             font-weight: 800;
             text-align: center;
-            margin: 1.5rem 0;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            margin: 2rem 0;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
         }
         
         .index-scale {
@@ -880,88 +1009,102 @@
         }
         
         .scale-bar {
-            height: 10px;
+            height: 12px;
             background-color: rgba(255, 255, 255, 0.3);
-            border-radius: 5px;
+            border-radius: 6px;
             margin-bottom: 8px;
             overflow: hidden;
         }
         
         .scale-fill {
             height: 100%;
-            border-radius: 5px;
+            border-radius: 6px;
         }
         
         .scale-low {
-            background-color: #2ecc71;
+            background: linear-gradient(90deg, #2ecc71, #27ae60);
         }
         
         .scale-moderate {
-            background-color: #f39c12;
+            background: linear-gradient(90deg, #f39c12, #e67e22);
         }
         
         .scale-high {
-            background-color: #e74c3c;
+            background: linear-gradient(90deg, #e74c3c, #c0392b);
         }
         
         .scale-critical {
-            background-color: #c0392b;
+            background: linear-gradient(90deg, #c0392b, #a93226);
         }
         
         .value-prop-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            gap: 2.5rem;
             margin-top: 3rem;
         }
         
         .value-prop-card {
             background: white;
-            border-radius: 12px;
-            padding: 2rem;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
-            border-top: 4px solid var(--differentiator);
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            border-top: 5px solid var(--unique-green);
+            transition: transform 0.3s ease;
+        }
+        
+        .value-prop-card:hover {
+            transform: translateY(-5px);
         }
         
         .value-prop-card h4 {
-            color: var(--differentiator);
+            color: var(--unique-green);
             margin-bottom: 1rem;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+            font-size: 1.3rem;
         }
         
         .revenue-stream-card {
             background: white;
-            border-radius: 12px;
-            padding: 1.8rem;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
             margin-bottom: 1.5rem;
-            border-left: 4px solid var(--differentiator);
+            border-left: 5px solid var(--unique-green);
+            transition: transform 0.3s ease;
+        }
+        
+        .revenue-stream-card:hover {
+            transform: translateX(5px);
         }
         
         .revenue-stream-card h4 {
             color: var(--primary);
-            margin-bottom: 0.8rem;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
         }
         
         .revenue-metric {
             display: flex;
             justify-content: space-between;
-            margin-top: 1rem;
-            padding-top: 1rem;
+            margin-top: 1.2rem;
+            padding-top: 1.2rem;
             border-top: 1px dashed var(--light-gray);
         }
         
         /* Biological Product Matching Specific Styles */
         .product-match-section {
             background: linear-gradient(135deg, #f8f5ff, #eef2ff);
+            border-radius: 16px;
+            padding: 2rem;
         }
         
         .compatibility-meter {
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: 1.5rem;
             margin: 1.5rem 0;
         }
         
@@ -993,68 +1136,75 @@
         
         .mode-of-action {
             display: inline-block;
-            padding: 4px 10px;
-            border-radius: 15px;
-            font-size: 0.8rem;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
             font-weight: 600;
-            margin-right: 8px;
-            margin-bottom: 8px;
+            margin-right: 10px;
+            margin-bottom: 10px;
         }
         
         .moa-antagonism {
             background-color: #d4edda;
             color: #155724;
+            border: 1px solid #c3e6cb;
         }
         
         .moa-competition {
             background-color: #cce5ff;
             color: #004085;
+            border: 1px solid #b8daff;
         }
         
         .moa-parasitism {
             background-color: #f8d7da;
             color: #721c24;
+            border: 1px solid #f5c6cb;
         }
         
         .moa-stimulation {
             background-color: #fff3cd;
             color: #856404;
+            border: 1px solid #ffeaa7;
         }
         
         .product-match-highlight {
-            background: linear-gradient(135deg, #9b59b6, #8e44ad);
+            background: linear-gradient(135deg, var(--unique-green), var(--unique-light));
             color: white;
-            border-radius: 12px;
-            padding: 2rem;
+            border-radius: 16px;
+            padding: 2.5rem;
             margin: 2rem 0;
-            box-shadow: 0 8px 20px rgba(155, 89, 182, 0.2);
+            box-shadow: 0 10px 30px rgba(30, 111, 92, 0.2);
         }
         
         .product-match-highlight h3 {
             color: white;
             margin-bottom: 1rem;
+            font-size: 1.5rem;
         }
         
         .product-insight {
             background-color: #fff3cd;
-            border-radius: 8px;
+            border-radius: 12px;
             padding: 1.5rem;
             margin-top: 1.5rem;
-            border-left: 4px solid #ffc107;
+            border-left: 5px solid #ffc107;
         }
         
         .product-insight h5 {
             color: #856404;
             margin-bottom: 0.5rem;
             font-size: 1.1rem;
+            font-weight: 700;
         }
         
         .sampling-engine {
             background-color: white;
-            border-radius: 12px;
-            padding: 2rem;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
             margin-top: 2rem;
+            border: 1px solid var(--light-gray);
         }
         
         .sampling-flow {
@@ -1069,24 +1219,25 @@
             text-align: center;
             flex: 1;
             min-width: 150px;
-            padding: 1rem;
+            padding: 1.5rem;
         }
         
         .flow-icon {
-            width: 60px;
-            height: 60px;
-            background-color: var(--light);
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--light), white);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 1rem;
-            font-size: 1.5rem;
+            margin: 0 auto 1.5rem;
+            font-size: 1.8rem;
             color: var(--primary);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
         }
         
         .flow-arrow {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             color: var(--gray);
             padding: 0 1rem;
         }
@@ -1102,57 +1253,223 @@
             font-size: 0.75rem;
             font-weight: 700;
             padding: 3px 8px;
-            border-radius: 12px;
+            border-radius: 30px;
             vertical-align: middle;
-            margin-left: 8px;
+            margin-left: 0px;
+            margin-right: 3px;
+            text-transform: uppercase;
+            letter-spacing: 0px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            border: 2px solid;
+        }
+        
+        .feature-badge:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+        }
+        
+        .badge-unique {
+            background: linear-gradient(135deg, var(--unique-green), var(--unique-light));
+            color: white;
+            border-color: var(--unique-green);
+            box-shadow: 0 4px 12px rgba(26, 111, 92, 0.3);
+        }
+        
+        .badge-unique:hover {
+            background: linear-gradient(135deg, var(--unique-light), var(--unique-green));
+            box-shadow: 0 6px 16px rgba(26, 111, 92, 0.4);
+        }
+        
+        .badge-enhanced {
+            background: linear-gradient(135deg, var(--accent), #e67e22);
+            color: white;
+            border-color: var(--accent);
+            box-shadow: 0 4px 12px rgba(255, 140, 0, 0.3);
+        }
+        
+        .badge-enhanced:hover {
+            background: linear-gradient(135deg, #e67e22, var(--accent));
+            box-shadow: 0 6px 16px rgba(255, 140, 0, 0.4);
         }
 
         .unique-value-box {
-            margin-top: 1rem;
-            padding: 0.8rem;
-            background-color: #f0f7ff;
-            border-radius: 6px;
-            border-left: 3px solid var(--differentiator);
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: linear-gradient(135deg, #f0f7ff, #e6f2ff);
+            border-radius: 10px;
+            border-left: 5px solid var(--unique-green);
         }
 
         .enhanced-value-box {
-            margin-top: 1rem;
-            padding: 0.8rem;
-            background-color: #fff3cd;
-            border-radius: 6px;
-            border-left: 3px solid var(--accent);
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+            border-radius: 10px;
+            border-left: 5px solid var(--accent);
         }
         
         /* Consolidated table styles */
         .module-badge {
             display: inline-block;
-            width: 24px;
-            height: 24px;
+            width: 28px;
+            height: 28px;
             border-radius: 50%;
             color: white;
             font-weight: 700;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
             text-align: center;
-            line-height: 24px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            line-height: 28px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
         }
 
         .data-table-container table td ul {
             margin: 0.5rem 0;
+            padding-left: 1.2rem;
         }
 
         .data-table-container table td ul li {
-            padding: 0.2rem 0;
-            font-size: 0.9rem;
-            line-height: 1.4;
+            padding: 0.3rem 0;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            position: relative;
+        }
+
+        .data-table-container table td ul li:before {
+            content: "•";
+            color: var(--secondary);
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
         }
 
         .data-table-container table tr:nth-child(even) {
-            background-color: #f9fdf8;
+            background-color: #F9FDF8;
         }
 
         .data-table-container table tr:hover {
-            background-color: #e8f5e8;
+            background-color: #F0F9ED;
+        }
+        
+        /* Info box at top of data requirements */
+        .info-box {
+            background: linear-gradient(135deg, #E8F5E8, #D4EDDA);
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 2.5rem;
+            border-left: 5px solid var(--secondary);
+        }
+        
+        .info-box h4 {
+            color: var(--primary);
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.2rem;
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, var(--dark), var(--primary));
+        }
+        
+        /* Animation for module cards */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .module-card {
+            animation: fadeInUp 0.5s ease-out;
+        }
+        
+        /* Staggered animation for module cards */
+        .module-card:nth-child(1) { animation-delay: 0.1s; }
+        .module-card:nth-child(2) { animation-delay: 0.2s; }
+        .module-card:nth-child(3) { animation-delay: 0.3s; }
+        .module-card:nth-child(4) { animation-delay: 0.4s; }
+        .module-card:nth-child(5) { animation-delay: 0.5s; }
+        .module-card:nth-child(6) { animation-delay: 0.6s; }
+        
+        /* Gradient backgrounds for sections */
+        #mvp-modules {
+            position: relative;
+        }
+        
+        #mvp-modules::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 300px;
+            background: linear-gradient(135deg, rgba(245, 249, 243, 0.8) 0%, rgba(230, 245, 230, 0.6) 100%);
+            z-index: -1;
+        }
+        
+        #data-requirements {
+            position: relative;
+        }
+        
+        #data-requirements::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 200px;
+            background: linear-gradient(135deg, rgba(245, 249, 243, 0.9) 0%, rgba(230, 245, 230, 0.7) 100%);
+            z-index: -1;
+        }
+        
+        /* NEW: Better color harmony for unique modules */
+        .module-card.unique .module-features li i {
+            color: var(--unique-light);
+        }
+        
+        .module-card.unique .module-header {
+            box-shadow: inset 0 -3px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* NEW: Subtle pattern for module headers */
+        .module-header {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .module-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.15;
         }
     </style>
 </head>
@@ -1186,7 +1503,7 @@
         <div class="container">
             <h1>Soil Intelligence Platform for Agribusiness</h1>
             <div class="subtitle">Transforming Soil Chemical & Biological Data into Strategic Business Outcomes</div>
-            <p style="max-width: 900px; margin: 1.5rem auto 2.5rem; font-size: 1.1rem; line-height: 1.7;">The industry is rich in data but poor in actionable intelligence. We are the missing link that converts soil composition into commercial strategy. Our platform powers <strong>market-driven product placement</strong> for precision sales, <strong>revenue-optimized crop planning</strong> for maximum profitability, and <strong>supply chain quality matching</strong> for guaranteed premium market access.</p>
+            <p style="max-width: 900px; margin: 1.5rem auto 2.5rem; font-size: 1.1rem; line-height: 1.7;">The agriculture industry sits on a mountain of data but struggles to find the insights that drive profit. We bridge that gap, transforming raw soil analysis into a strategic business engine. Our platform delivers market-driven product placement for targeted sales, revenue-optimized crop planning for peak profitability, and supply chain quality matching to secure premium market access.</p>
             
             <div style="margin-top: 2.5rem;">
                 <a href="mailto:support@algo-rythmn.ai" class="btn btn-secondary" style="margin-right: 1rem;">Request Demo</a>
@@ -1204,63 +1521,63 @@
             </div>
             
             <div class="mvp-modules" style="grid-template-columns: repeat(3, 1fr);">
-                <!-- Module 1: UNIQUE FEATURE -->
-                <div class="module-card differentiator">
-                    <div class="module-header differentiator">
+                <!-- Module 1 -->
+                <div class="module-card">
+                    <div class="module-header">
                         <div class="module-header-content">
                             <div>
                                 <h3>1. Biological Product Placement</h3>
                                 <p>Market-facing product recommendation engine</p>
                             </div>
-                            <span class="feature-badge" style="background-color: white; color: var(--differentiator);">Unique Feature</span>
+                            <span class="feature-badge badge-enhanced" style="color:#1A472A">Unique Feature</span>
                         </div>
                     </div>
                     <div class="module-body">
                         <div class="module-content">
                             <p><strong>Market Gap:</strong> Existing platforms don't connect soil data to specific product performance or sales strategy.</p>
                             <ul class="module-features">
-                                <li><i class="fas fa-star"></i> Product-performance matching across 100+ biologicals</li>
-                                <li><i class="fas fa-star"></i> ROI-based placement recommendations</li>
-                                <li><i class="fas fa-star"></i> Market opportunity heatmaps</li>
-                                <li><i class="fas fa-star"></i> Competitor product gap analysis</li>
-                                <li><i class="fas fa-star"></i> Sales territory optimization</li>
+                                <li><i class="fas fa-check-circle"></i> Product-performance matching across 100+ biologicals</li>
+                                <li><i class="fas fa-check-circle"></i> ROI-driven placement recommendations</li>
+                                <li><i class="fas fa-check-circle"></i> Market opportunity heatmaps</li>
+                                <li><i class="fas fa-check-circle"></i> Competitor product gap analysis</li>
+                                <li><i class="fas fa-check-circle"></i> Sales territory optimization</li>
                             </ul>
-                            <div class="unique-value-box">
-                                <p style="font-size: 0.9rem; margin: 0;"><i class="fas fa-lightbulb"></i> <strong>Unique Value:</strong> Converts soil data into sales intelligence for biological companies</p>
+                            <div class="enhanced-value-box">
+                                <p style="font-size: 0.9rem; margin: 0;"><i class="fas fa-lightbulb"></i> <strong>Key Value:</strong> Converts soil data into sales intelligence for biological companies</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 
-                <!-- MODULE 2 NOW: Market-Driven Variety Selection (WAS Module 3) -->
-                <div class="module-card differentiator">
-                    <div class="module-header differentiator">
+                <!-- Module 2 -->
+                <div class="module-card">
+                    <div class="module-header">
                         <div class="module-header-content">
                             <div>
                                 <h3>2. Market-Driven Variety Selection</h3>
                                 <p>Quality-focused variety matching for premium markets</p>
                             </div>
-                            <span class="feature-badge" style="background-color: white; color: var(--differentiator);">Unique Feature</span>
+                            <span class="feature-badge badge-enhanced" style="color:#1A472A">Unique Feature</span>
                         </div>
                     </div>
                     <div class="module-body">
                         <div class="module-content">
                             <p><strong>Market Gap:</strong> Existing tools optimize for yield, not market quality premiums or processor requirements.</p>
                             <ul class="module-features">
-                                <li><i class="fas fa-star"></i> Malt barley quality optimization</li>
-                                <li><i class="fas fa-star"></i> Canola oil profile matching</li>
-                                <li><i class="fas fa-star"></i> Processor-specific quality targets</li>
-                                <li><i class="fas fa-star"></i> Premium market access optimization</li>
-                                <li><i class="fas fa-star"></i> Breeder collaboration intelligence</li>
+                                <li><i class="fas fa-check-circle"></i> Quality-focused crop matching for premium outcomes</li>
+                                <li><i class="fas fa-check-circle"></i> Soil-to-market profile alignment</li>
+                                <li><i class="fas fa-check-circle"></i> Processor-specific quality targeting</li>
+                                <li><i class="fas fa-check-circle"></i> Premium market access optimization</li>
+                                <li><i class="fas fa-check-circle"></i> Breeder collaboration insights</li>
                             </ul>
-                            <div class="unique-value-box">
-                                <p style="font-size: 0.9rem; margin: 0;"><i class="fas fa-industry"></i> <strong>Unique Value:</strong> Connects soil composition to end-market quality requirements</p>
+                            <div class="enhanced-value-box">
+                                <p style="font-size: 0.9rem; margin: 0;"><i class="fas fa-industry"></i> <strong>Key Value:</strong> Guide crop variety choices to maximize premium market outcomes</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 
-                <!-- MODULE 3 NOW: Advanced Soil Health Intelligence (WAS Module 2) -->
+                <!-- Module 3 -->
                 <div class="module-card">
                     <div class="module-header">
                         <div class="module-header-content">
@@ -1268,83 +1585,83 @@
                                 <h3>3. Advanced Soil Health Intelligence</h3>
                                 <p>Proactive fertilizer impact & resilience modeling</p>
                             </div>
-                            <span class="feature-badge" style="background-color: white; color: var(--accent);">Enhanced Feature</span>
+                            <span class="feature-badge badge-enhanced">Enhanced Feature</span>
                         </div>
                     </div>
                     <div class="module-body">
                         <div class="module-content">
                             <p><strong>Market Enhancement:</strong> Goes beyond scoring to predict fertilizer impacts on soil biology.</p>
                             <ul class="module-features">
-                                <li><i class="fas fa-check-circle"></i> NH3/fertilizer long-term impact analysis</li>
+                                <li><i class="fas fa-check-circle"></i> Long-term NH₃/fertilizer impact modeling</li>
                                 <li><i class="fas fa-check-circle"></i> Urease inhibitor recommendations</li>
-                                <li><i class="fas fa-check-circle"></i> Microbial diversity-yield correlation</li>
-                                <li><i class="fas fa-check-circle"></i> Variable rate biological application mapping</li>
-                                <li><i class="fas fa-check-circle"></i> Legacy fertilizer effect modeling</li>
+                                <li><i class="fas fa-check-circle"></i> Microbial diversity–yield correlation</li>
+                                <li><i class="fas fa-check-circle"></i> Variable-rate biological application mapping</li>
+                                <li><i class="fas fa-check-circle"></i> Legacy fertilizer effect analysis</li>
                             </ul>
                             <div class="enhanced-value-box">
-                                <p style="font-size: 0.9rem; margin: 0;"><i class="fas fa-chart-line"></i> <strong>Enhancement:</strong> Adds predictive modeling for fertilizer impact on soil biology</p>
+                                <p style="font-size: 0.9rem; margin: 0;"><i class="fas fa-chart-line"></i> <strong>Key Value:</strong> Predict fertilizer and biological impacts on soil resilience and productivity</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Module 4: UNIQUE FEATURE -->
-                <div class="module-card differentiator">
-                    <div class="module-header differentiator">
+                <!-- Module 4 -->
+                <div class="module-card">
+                    <div class="module-header">
                         <div class="module-header-content">
                             <div>
                                 <h3>4. Revenue-Optimized Crop Rotation</h3>
                                 <p>Multi-year economic planning engine</p>
                             </div>
-                            <span class="feature-badge" style="background-color: white; color: var(--differentiator);">Unique Feature</span>
+                            <span class="feature-badge badge-enhanced" style="color:#1A472A">Unique Feature</span>
                         </div>
                     </div>
                     <div class="module-body">
                         <div class="module-content">
                             <p><strong>Market Gap:</strong> No platform integrates real-time market prices with soil data for multi-year planning.</p>
                             <ul class="module-features">
-                                <li><i class="fas fa-star"></i> Real-time market price integration</li>
-                                <li><i class="fas fa-star"></i> 5-year protein & carbon optimization</li>
-                                <li><i class="fas fa-star"></i> Revenue projection modeling</li>
-                                <li><i class="fas fa-star"></i> Contract opportunity matching</li>
-                                <li><i class="fas fa-star"></i> Risk-adjusted rotation planning</li>
+                                <li><i class="fas fa-check-circle"></i> Real-time market price integration</li>
+                                <li><i class="fas fa-check-circle"></i> 5-year protein & carbon optimization</li>
+                                <li><i class="fas fa-check-circle"></i> Revenue projection engine</li>
+                                <li><i class="fas fa-check-circle"></i> Contract opportunity matching</li>
+                                <li><i class="fas fa-check-circle"></i> Risk-adjusted rotation planning</li>
                             </ul>
-                            <div class="unique-value-box">
-                                <p style="font-size: 0.9rem; margin: 0;"><i class="fas fa-sack-dollar"></i> <strong>Unique Value:</strong> Dynamic economic modeling that updates with market changes</p>
+                            <div class="enhanced-value-box">
+                                <p style="font-size: 0.9rem; margin: 0;"><i class="fas fa-sack-dollar"></i> <strong>Key Value:</strong> Enable multi-year crop planning with dynamic market integration</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Module 5: UNIQUE FEATURE -->
-                <div class="module-card differentiator">
-                    <div class="module-header differentiator">
+                <!-- Module 5 -->
+                <div class="module-card">
+                    <div class="module-header">
                         <div class="module-header-content">
                             <div>
                                 <h3>5. Supply Chain Quality Matching</h3>
                                 <p>Processor-to-soil connection platform</p>
                             </div>
-                            <span class="feature-badge" style="background-color: white; color: var(--differentiator);">Unique Feature</span>
+                            <span class="feature-badge badge-enhanced" style="color:#1A472A">Unique Feature</span>
                         </div>
                     </div>
                     <div class="module-body">
                         <div class="module-content">
                             <p><strong>Market Gap:</strong> No platform connects soil profiles to specific processor quality requirements.</p>
                             <ul class="module-features">
-                                <li><i class="fas fa-star"></i> Brewery malt quality matching</li>
-                                <li><i class="fas fa-star"></i> Canola processor oil profile requirements</li>
-                                <li><i class="fas fa-star"></i> Mill-specific wheat protein targets</li>
-                                <li><i class="fas fa-star"></i> Premium market access intelligence</li>
-                                <li><i class="fas fa-star"></i> Contract specification alignment</li>
+                                <li><i class="fas fa-check-circle"></i> Contract specification compliance engine</li>
+                                <li><i class="fas fa-check-circle"></i> Processor-specific quality thresholds</li>
+                                <li><i class="fas fa-check-circle"></i> Buyer contract intelligence mapping</li>
+                                <li><i class="fas fa-check-circle"></i> Premium market access validation</li>
+                                <li><i class="fas fa-check-circle"></i> End-to-end supply chain integration</li>
                             </ul>
-                            <div class="unique-value-box">
-                                <p style="font-size: 0.9rem; margin: 0;"><i class="fas fa-warehouse"></i> <strong>Unique Value:</strong> Creates direct connections between soil and processor needs</p>
+                            <div class="enhanced-value-box">
+                                <p style="font-size: 0.9rem; margin: 0;"><i class="fas fa-warehouse"></i> <strong>Key Value:</strong> Creates direct connections between soil and processor needs</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Module 6: ENHANCED SHARED FEATURE -->
+                <!-- Module 6 -->
                 <div class="module-card">
                     <div class="module-header">
                         <div class="module-header-content">
@@ -1352,7 +1669,7 @@
                                 <h3>6. Research-Grounded Analytics</h3>
                                 <p>Evidence-based intelligence platform</p>
                             </div>
-                            <span class="feature-badge" style="background-color: white; color: var(--accent);">Enhanced Feature</span>
+                            <span class="feature-badge badge-enhanced">Enhanced Feature</span>
                         </div>
                     </div>
                     <div class="module-body">
@@ -1366,7 +1683,7 @@
                                 <li><i class="fas fa-check-circle"></i> Performance benchmarking</li>
                             </ul>
                             <div class="enhanced-value-box">
-                                <p style="font-size: 0.9rem; margin: 0;"><i class="fas fa-graduation-cap"></i> <strong>Enhancement:</strong> Grounds AI recommendations in academic research</p>
+                                <p style="font-size: 0.9rem; margin: 0;"><i class="fas fa-graduation-cap"></i> <strong>Key Value:</strong> Grounds AI recommendations in academic research and agronomic expertise</p>
                             </div>
                         </div>
                     </div>
@@ -1383,15 +1700,15 @@
                 <p>Comprehensive data acquisition strategy for validating all six modules with targeted datasets.</p>
             </div>
             
-            <div style="background-color: #e8f5e8; padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem;">
-                <h4 style="color: var(--primary); margin-bottom: 0.5rem;"><i class="fas fa-info-circle"></i> How to Use This Table</h4>
+            <div class="info-box">
+                <h4><i class="fas fa-info-circle"></i> How to Use This Table</h4>
                 <p style="margin-bottom: 0;">Each module requires specific data types to validate its unique value proposition. This table shows all required data across modules, with color-coding to indicate which modules require each data type.</p>
             </div>
             
             <!-- Legend for Module Requirements -->
-            <div class="legend" style="margin-bottom: 1.5rem; justify-content: center;">
+            <div class="legend" style="margin-bottom: 2.5rem; justify-content: center;">
                 <div class="legend-item">
-                    <div class="legend-color" style="background-color: var(--differentiator);"></div>
+                    <div class="legend-color" style="background-color: var(--unique-green);"></div>
                     <span>Module 1: Biological Product Placement</span>
                 </div>
                 <div class="legend-item">
@@ -1426,7 +1743,7 @@
                             <th width="15%">Primary Source</th>
                             <th width="15%">Collection Method</th>
                             <th width="15%">Primary Purpose</th>
-                            <th width="20%">Modules Requiring This Data</th>
+                            <th width="20%">MVP Modules Requiring This Data</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -1450,8 +1767,8 @@
                             <td>Chemical assays, DNA sequencing, biological quantification</td>
                             <td><strong>Foundation:</strong> Establish baseline soil profile for all predictive models</td>
                             <td>
-                                <div style="display: flex; flex-wrap: wrap; gap: 3px;">
-                                    <span class="module-badge" style="background-color: var(--differentiator);">1</span>
+                                <div style="display: flex; flex-wrap: wrap; gap: 4px;">
+                                    <span class="module-badge" style="background-color: var(--unique-green);">1</span>
                                     <span class="module-badge" style="background-color: #2ecc71;">2</span>
                                     <span class="module-badge" style="background-color: #3498db;">3</span>
                                     <span class="module-badge" style="background-color: #e74c3c;">4</span>
@@ -1482,8 +1799,8 @@
                             <td>Structured trial protocols, product dossiers, meta-analysis</td>
                             <td><strong>Performance correlation:</strong> Link soil conditions to product outcomes</td>
                             <td>
-                                <div style="display: flex; flex-wrap: wrap; gap: 3px;">
-                                    <span class="module-badge" style="background-color: var(--differentiator);">1</span>
+                                <div style="display: flex; flex-wrap: wrap; gap: 4px;">
+                                    <span class="module-badge" style="background-color: var(--unique-green);">1</span>
                                     <span class="module-badge" style="background-color: #3498db;">3</span>
                                     <span class="module-badge" style="background-color: #9b59b6;">6</span>
                                 </div>
@@ -1508,8 +1825,8 @@
                             <td>API integration, economic analysis, price surveys</td>
                             <td><strong>Economic optimization:</strong> Enable revenue-maximizing decisions</td>
                             <td>
-                                <div style="display: flex; flex-wrap: wrap; gap: 3px;">
-                                    <span class="module-badge" style="background-color: var(--differentiator);">1</span>
+                                <div style="display: flex; flex-wrap: wrap; gap: 4px;">
+                                    <span class="module-badge" style="background-color: var(--unique-green);">1</span>
                                     <span class="module-badge" style="background-color: #e74c3c;">4</span>
                                     <span class="module-badge" style="background-color: #f39c12;">5</span>
                                 </div>
@@ -1534,7 +1851,7 @@
                             <td>Lab analysis, breeder data sharing, database integration</td>
                             <td><strong>Quality optimization:</strong> Match genetics to soil for premium markets</td>
                             <td>
-                                <div style="display: flex; flex-wrap: wrap; gap: 3px;">
+                                <div style="display: flex; flex-wrap: wrap; gap: 4px;">
                                     <span class="module-badge" style="background-color: #2ecc71;">2</span>
                                     <span class="module-badge" style="background-color: #f39c12;">5</span>
                                 </div>
@@ -1559,7 +1876,7 @@
                             <td>Historical data digitization, API integration</td>
                             <td><strong>Temporal analysis:</strong> Understand long-term trends and impacts</td>
                             <td>
-                                <div style="display: flex; flex-wrap: wrap; gap: 3px;">
+                                <div style="display: flex; flex-wrap: wrap; gap: 4px;">
                                     <span class="module-badge" style="background-color: #3498db;">3</span>
                                     <span class="module-badge" style="background-color: #e74c3c;">4</span>
                                     <span class="module-badge" style="background-color: #9b59b6;">6</span>
@@ -1585,7 +1902,7 @@
                             <td>API integration, remote sensing, historical analysis</td>
                             <td><strong>Environmental calibration:</strong> Isolate soil effects from weather</td>
                             <td>
-                                <div style="display: flex; flex-wrap: wrap; gap: 3px;">
+                                <div style="display: flex; flex-wrap: wrap; gap: 4px;">
                                     <span class="module-badge" style="background-color: #2ecc71;">2</span>
                                     <span class="module-badge" style="background-color: #e74c3c;">4</span>
                                     <span class="module-badge" style="background-color: #9b59b6;">6</span>
@@ -1611,8 +1928,8 @@
                             <td>Document analysis, geospatial analysis, partnership data</td>
                             <td><strong>Market access:</strong> Connect production to specific buyer requirements</td>
                             <td>
-                                <div style="display: flex; flex-wrap: wrap; gap: 3px;">
-                                    <span class="module-badge" style="background-color: var(--differentiator);">1</span>
+                                <div style="display: flex; flex-wrap: wrap; gap: 4px;">
+                                    <span class="module-badge" style="background-color: var(--unique-green);">1</span>
                                     <span class="module-badge" style="background-color: #f39c12;">5</span>
                                 </div>
                             </td>
@@ -1639,8 +1956,8 @@
                             <td>Literature aggregation, expert interviews, data scraping</td>
                             <td><strong>Evidence base:</strong> Ground recommendations in proven science</td>
                             <td>
-                                <div style="display: flex; flex-wrap: wrap; gap: 3px;">
-                                    <span class="module-badge" style="background-color: var(--differentiator);">1</span>
+                                <div style="display: flex; flex-wrap: wrap; gap: 4px;">
+                                    <span class="module-badge" style="background-color: var(--unique-green);">1</span>
                                     <span class="module-badge" style="background-color: #3498db;">3</span>
                                     <span class="module-badge" style="background-color: #9b59b6;">6</span>
                                 </div>
@@ -1665,7 +1982,7 @@
                             <td>Actuarial analysis, LCA database integration, benchmarking</td>
                             <td><strong>Risk management:</strong> Enable resilient and sustainable decisions</td>
                             <td>
-                                <div style="display: flex; flex-wrap: wrap; gap: 3px;">
+                                <div style="display: flex; flex-wrap: wrap; gap: 4px;">
                                     <span class="module-badge" style="background-color: #3498db;">3</span>
                                     <span class="module-badge" style="background-color: #e74c3c;">4</span>
                                     <span class="module-badge" style="background-color: #9b59b6;">6</span>
@@ -1691,8 +2008,8 @@
                             <td>CRM data extraction, market analysis, surveys</td>
                             <td><strong>Commercial optimization:</strong> Convert technical insights to sales strategy</td>
                             <td>
-                                <div style="display: flex; flex-wrap: wrap; gap: 3px;">
-                                    <span class="module-badge" style="background-color: var(--differentiator);">1</span>
+                                <div style="display: flex; flex-wrap: wrap; gap: 4px;">
+                                    <span class="module-badge" style="background-color: var(--unique-green);">1</span>
                                     <span class="module-badge" style="background-color: #f39c12;">5</span>
                                 </div>
                             </td>
@@ -1702,7 +2019,7 @@
             </div>
             
             <!-- Summary Statistics -->
-            <div class="scorecard" style="margin-top: 2rem;">
+            <div class="scorecard" style="margin-top: 3rem;">
                 <div class="score-item">
                     <div class="score-value">10</div>
                     <div class="score-label">Data Categories</div>
@@ -1721,9 +2038,9 @@
                 </div>
             </div>
             
-            <div style="text-align: center; margin-top: 3rem;">
-                <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
-                    <button onclick="downloadConsolidatedDataRequirements('AlgoRythmn_Data_Requirements')" class="download-btn" style="padding: 16px 32px; font-size: 1.1rem;">
+            <div style="text-align: center; margin-top: 4rem;">
+                <div style="display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: center;">
+                    <button onclick="downloadConsolidatedDataRequirements('AlgoRythmn_Data_Requirements')" class="download-btn" style="padding: 18px 36px; font-size: 1.1rem;">
                         <i class="fas fa-file-pdf"></i> Download Full Data Requirements
                     </button>
                 </div>
@@ -1738,7 +2055,7 @@
                 <div class="footer-logo">
                     <i></i> Algo-Rythmn.ai
                 </div>
-                <p>Transforming soil data into business intelligence for agribusiness</p>
+                <p style="max-width: 600px; margin: 0 auto 1.5rem; font-size: 1.1rem; opacity: 0.9;">Transforming soil data into business intelligence for agribusiness</p>
                 <div class="copyright">
                     &copy; 2026 Algo-Rythmn.ai. All rights reserved.
                 </div>
@@ -1838,8 +2155,8 @@
                     tempContainer.style.top = '0';
                     
                     // Add a header for the section
-                    tempContainer.innerHTML = `<div style="margin-bottom: 30px; border-bottom: 2px solid #2d5c2a; padding-bottom: 10px;">
-                        <h2 style="color: #2d5c2a; margin: 0;">${tabTitle}</h2>
+                    tempContainer.innerHTML = `<div style="margin-bottom: 30px; border-bottom: 2px solid #1A472A; padding-bottom: 10px;">
+                        <h2 style="color: #1A472A; margin: 0;">${tabTitle}</h2>
                     </div>` + tabContent.innerHTML;
                     
                     document.body.appendChild(tempContainer);
@@ -1975,7 +2292,7 @@
                 
                 // Title
                 pdf.setFontSize(20);
-                pdf.setTextColor(45, 92, 42);
+                pdf.setTextColor(26, 71, 42);
                 pdf.text('Algo-Rythmn.ai: Data Requirements', 105, yPos, { align: 'center' });
                 
                 yPos += 10;
