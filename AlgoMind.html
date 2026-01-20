@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlgoMind | Intelligent Orchestration for Corvian</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ===== PROFESSIONAL DESIGN SYSTEM ===== */
+        :root {
+            /* Unified Blue Theme - Apple-inspired palette */
+            --primary-blue: #007AFF;        /* Apple-like primary blue: vibrant, trustworthy */
+            --primary-blue-dark: #0056CC;   /* Darker shade for hover states */
+            --primary-blue-light: #4DA6FF;  /* Lighter tint for backgrounds */
+            --blue-gradient: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-dark) 100%);
+            
+            /* Supporting Blues - Creating depth and hierarchy */
+            --blue-gray: #8E9EAE;           /* For secondary text and borders */
+            --blue-gray-light: #F5F7FA;     /* Light backgrounds */
+            --blue-gray-dark: #5A6673;      /* Darker secondary elements */
+            
+            /* Neutrals - Apple's minimalist foundation */
+            --neutral-100: #F5F7FA;
+            --neutral-200: #E8EAED;
+            --neutral-500: #5F6368;
+            --neutral-700: #3C4043;
+            --neutral-900: #202124;
+            
+            /* Accents - Used sparingly for emphasis */
+            --accent-blue: #152896;        /* Success, growth - aligned with agriculture */
+            
+            /* Typography */
+            --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            
+            /* Spacing & Shadows - Apple-inspired subtlety */
+            --spacing-xs: 8px;
+            --spacing-sm: 16px;
+            --spacing-md: 24px;
+            --spacing-lg: 40px;
+            --spacing-xl: 64px;
+            --spacing-xxl: 80px;
+            
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.12);
+            
+            --border-radius-sm: 8px;
+            --border-radius-md: 12px;
+            --border-radius-lg: 20px;
+            
+            /* Animation */
+            --transition-fast: 0.2s cubic-bezier(0.2, 0, 0, 1);
+            --transition-base: 0.3s cubic-bezier(0.2, 0, 0, 1);
+        }
+        
+        /* ===== BASE STYLES ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-primary);
+            background-color: white;
+            color: var(--neutral-900);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-md);
+        }
+        
+        /* ===== TYPOGRAPHY ===== */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 600;
+            line-height: 1.2;
+            color: var(--neutral-900);
+            letter-spacing: -0.01em;
+        }
+        
+        h1 { font-size: 3.5rem; }
+        h2 { font-size: 2.5rem; margin-bottom:2px}
+        h3 { font-size: 2rem; }
+        h4 { font-size: 1.5rem; }
+        
+        .section-subtitle {
+            font-size: 0.875rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--primary-blue);
+            margin-bottom: var(--spacing-sm);
+            display: inline-block;
+            padding: 6px 12px;
+            background: rgba(0, 102, 255, 0.08);
+            border-radius: 20px;
+        }
+        
+        .section-description {
+            font-size: 1.125rem;
+            color: var(--neutral-500);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* ===== HEADER ===== */
+        header {
+            background: linear-gradient(135deg, 
+                rgba(0, 122, 255, 0.02) 0%, 
+                rgba(0, 122, 255, 0.08) 100%);
+            border-bottom: 1px solid var(--neutral-200);
+            padding: var(--spacing-xxl) 0 var(--spacing-xl);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(0, 122, 255, 0.05) 0%, transparent 70%);
+            z-index: 0;
+        }
+        
+        .logo-container {
+            margin-bottom: var(--spacing-xl);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .logo-text {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--neutral-900);
+            letter-spacing: -0.5px;
+        }
+        
+        .logo-text span {
+            color: var(--primary-blue);
+        }
+        
+        .header-content {
+            max-width: 800px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .header-content h1 {
+            margin-bottom: var(--spacing-md);
+            background: linear-gradient(135deg, var(--neutral-900) 0%, var(--neutral-700) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .header-tagline {
+            font-size: 1.25rem;
+            color: var(--neutral-500);
+            margin-bottom: var(--spacing-lg);
+            max-width: 700px;
+        }
+        
+        /* ===== SECTIONS ===== */
+        .section {
+            padding: var(--spacing-xxl) 0;
+        }
+        
+        .section:nth-child(even) {
+            background-color: var(--neutral-100);
+        }
+        
+        .section-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto var(--spacing-xl);
+        }
+        
+        /* ===== CARDS ===== */
+        .card {
+            background: white;
+            border-radius: var(--border-radius-md);
+            padding: var(--spacing-lg);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition-base);
+            border: 1px solid var(--neutral-200);
+            height: 100%;
+        }
+        
+        .card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-4px);
+            border-color: var(--primary-blue-light);
+        }
+        
+        .card-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, 
+                rgba(0, 122, 255, 0.1) 0%, 
+                rgba(0, 122, 255, 0.2) 100%);
+            border-radius: var(--border-radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .card-icon i {
+            font-size: 1.5rem;
+            color: var(--primary-blue);
+        }
+        
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--neutral-900);
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .card-content {
+            color: var(--neutral-500);
+            font-size: 0.9375rem;
+            line-height: 1.5;
+        }
+        
+        /* ===== EVOLUTION TABLE ===== */
+        .evolution-container {
+            background: white;
+            border-radius: var(--border-radius-md);
+            padding: var(--spacing-lg);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--neutral-200);
+            overflow: hidden;
+        }
+        
+        .evolution-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: var(--spacing-lg);
+        }
+        
+        .evolution-table th {
+            background-color: var(--neutral-100);
+            color: var(--neutral-700);
+            padding: var(--spacing-md) var(--spacing-sm);
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.875rem;
+            border-bottom: 2px solid var(--neutral-200);
+            letter-spacing: 0.5px;
+        }
+        
+        .evolution-table td {
+            padding: var(--spacing-md) var(--spacing-sm);
+            border-bottom: 1px solid var(--neutral-200);
+            font-size: 0.9375rem;
+            transition: var(--transition-fast);
+        }
+        
+        .evolution-table tr:hover td {
+            background-color: rgba(0, 122, 255, 0.02);
+        }
+        
+        .v1-col {
+            color: var(--neutral-500);
+            position: relative;
+        }
+        
+        .v2-col {
+            background-color: rgba(0, 122, 255, 0.04);
+            color: var(--primary-blue-dark);
+            font-weight: 500;
+            position: relative;
+            border-left: 3px solid var(--primary-blue);
+        }
+        
+        /* ===== PAIN POINTS GRID ===== */
+        .pain-points-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-lg);
+        }
+        
+        .pain-point {
+            position: relative;
+        }
+        
+        .pain-point::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 100%;
+            background: var(--blue-gradient);
+            border-radius: 3px 0 0 3px;
+        }
+        
+        /* ===== METRICS ===== */
+        .metrics-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-xl);
+        }
+        
+        .metric {
+            text-align: center;
+            padding: var(--spacing-lg);
+            background: white;
+            border-radius: var(--border-radius-md);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition-base);
+            border-top: 3px solid var(--primary-blue);
+        }
+        
+        .metric:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+            border-top-color: var(--accent-green);
+        }
+        
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-blue-dark);
+            margin: var(--spacing-sm) 0;
+            line-height: 1;
+        }
+        
+        .metric-label {
+            color: var(--neutral-500);
+            font-size: 0.9375rem;
+            font-weight: 500;
+        }
+        
+        /* ===== TIMELINE ===== */
+        .timeline {
+            position: relative;
+            max-width: 900px;
+            margin: var(--spacing-xl) auto 0;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 24px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--neutral-200);
+        }
+        
+        .timeline-item {
+            display: flex;
+            margin-bottom: var(--spacing-xl);
+            position: relative;
+        }
+        
+        .timeline-marker {
+            width: 16px;
+            height: 16px;
+            background: white;
+            border: 3px solid var(--primary-blue);
+            border-radius: 50%;
+            position: absolute;
+            left: 17px;
+            top: 0;
+            z-index: 2;
+            box-shadow: 0 0 0 4px white;
+        }
+        
+        .timeline-content {
+            margin-left: 64px;
+            padding: var(--spacing-md);
+            background: white;
+            border-radius: var(--border-radius-md);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--neutral-200);
+            flex: 1;
+        }
+        
+        .timeline-week {
+            display: inline-block;
+            background: rgba(0, 122, 255, 0.1);
+            color: var(--primary-blue);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8125rem;
+            font-weight: 600;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        /* ===== DECISION CARDS ===== */
+        .decision-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-lg);
+        }
+        
+        .decision-card {
+            padding: var(--spacing-lg);
+            background: white;
+            border-radius: var(--border-radius-md);
+            box-shadow: var(--shadow-sm);
+            border-top: 4px solid var(--primary-blue);
+            transition: var(--transition-base);
+        }
+        
+        .decision-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .decision-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(0, 122, 255, 0.1);
+            border-radius: var(--border-radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        /* ===== RISKS ===== */
+        .risks-container {
+            max-width: 900px;
+            margin: var(--spacing-lg) auto 0;
+        }
+        
+        .risk-item {
+            background: white;
+            border-radius: var(--border-radius-md);
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-md);
+            box-shadow: var(--shadow-sm);
+            border-left: 4px solid var(--primary-blue);
+            transition: var(--transition-base);
+        }
+        
+        .risk-item:hover {
+            transform: translateX(4px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        /* ===== CTA SECTION ===== */
+        .cta-section {
+            background: linear-gradient(135deg, 
+                rgba(0, 122, 255, 0.08) 0%, 
+                rgba(0, 122, 255, 0.04) 100%);
+            border: 1px solid var(--neutral-200);
+            border-radius: var(--border-radius-md);
+            padding: var(--spacing-xl);
+            text-align: center;
+            margin: var(--spacing-xxl) 0;
+        }
+        
+        .cta-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--blue-gradient);
+            color: white;
+            padding: 16px 40px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition-base);
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 16px rgba(0, 122, 255, 0.2);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 122, 255, 0.3);
+            background: linear-gradient(135deg, var(--primary-blue-dark) 0%, #0047B3 100%);
+        }
+
+        /* ===== PILOT DOMAINS ===== */
+        .pilot-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-xl);
+        }
+
+        .pilot-card {
+            background: white;
+            border-radius: var(--border-radius-md);
+            padding: var(--spacing-lg);
+            text-align: center;
+            border: 1px solid var(--neutral-200);
+            transition: var(--transition-base);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pilot-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--blue-gradient);
+        }
+
+        .pilot-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary-blue-light);
+        }
+
+        .pilot-badge {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--accent-green);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .pilot-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--blue-gradient-subtle);
+            border-radius: var(--border-radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: var(--spacing-md);
+            margin-top: var(--spacing-sm);
+        }
+
+        .pilot-icon i {
+            font-size: 2rem;
+            color: var(--primary-blue);
+        }
+
+        .pilot-card h4 {
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .pilot-card p {
+            color: var(--neutral-500);
+            font-size: 0.9375rem;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .pilot-metrics {
+            display: flex;
+            justify-content: center;
+            gap: var(--spacing-sm);
+            margin-top: auto;
+            flex-wrap: wrap;
+        }
+
+        .metric-badge {
+            background: rgba(0, 102, 255, 0.08);
+            color: var(--primary-blue);
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        /* ===== FOOTER ===== */
+        footer {
+            background-color: var(--neutral-900);
+            color: white;
+            padding: var(--spacing-xl) 0 var(--spacing-lg);
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .footer-contact {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-xs);
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #BDC1C6;
+            text-decoration: none;
+            transition: var(--transition-fast);
+            font-size: 0.9375rem;
+        }
+        
+        .contact-item:hover {
+            color: white;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: var(--spacing-md);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #9AA0A6;
+            font-size: 0.875rem;
+        }
+        
+        /* ===== RESPONSIVE DESIGN ===== */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 2rem; }
+            h3 { font-size: 1.75rem; }
+            
+            .section {
+                padding: var(--spacing-xl) 0;
+            }
+            
+            .header-tagline {
+                font-size: 1.125rem;
+            }
+            
+            .metrics-container,
+            .pain-points-grid,
+            .decision-grid,
+            .pilot-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .timeline::before {
+                left: 20px;
+            }
+            
+            .timeline-marker {
+                left: 13px;
+            }
+            
+            .timeline-content {
+                margin-left: 48px;
+            }
+            
+            .evolution-container {
+                padding: var(--spacing-md);
+                overflow-x: auto;
+            }
+            
+            .evolution-table {
+                min-width: 700px;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+                gap: var(--spacing-lg);
+            }
+        }
+        
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* ===== ACCESSIBILITY ===== */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+        
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="logo-container">
+                <div class="logo-text">Algo-Rythmn.ai | <span>AlgoMind Pro</span></div>
+            </div>
+            
+            <div class="header-content">
+                <span class="section-subtitle">Enterprise AI Orchestration for Corvian</span>
+                <h1>Enterprise Intelligence for Digital Agriculture</h1>
+                <p class="header-tagline">AlgoMind Pro delivers enterprise-grade, multi-agent orchestration that transforms data silos into integrated workflows, reduces technical complexity, and accelerates digital transformation for global agricultural innovation.</p>
+                
+                <div style="margin-top: var(--spacing-lg);">
+                    <button class="cta-button" id="ctaContactButton">
+                        <i class="fas fa-calendar-check"></i> Contact Our Team
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Executive Summary -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Strategic Partnership</span>
+                <h2>Executive Summary</h2>
+                <p class="section-description">Addressing core challenges in agricultural technology with enterprise-grade AI orchestration designed for scale, security, and measurable ROI.</p>
+            </div>
+            
+            <div class="metrics-container animate-on-scroll">
+                <div class="metric">
+                    <i class="fas fa-bolt" style="font-size: 2rem; color: var(--primary-blue);"></i>
+                    <div class="metric-value">&lt;4w</div>
+                    <div class="metric-label">Integration Time Reduction</div>
+                </div>
+                
+                <div class="metric">
+                    <i class="fas fa-chart-line" style="font-size: 2rem; color: var(--primary-blue);"></i>
+                    <div class="metric-value">30%↓</div>
+                    <div class="metric-label">Cost Per Decision</div>
+                </div>
+                
+                <div class="metric">
+                    <i class="fas fa-tachometer-alt" style="font-size: 2rem; color: var(--primary-blue);"></i>
+                    <div class="metric-value">&lt;200ms</div>
+                    <div class="metric-label">End-to-End Latency (P95)</div>
+                </div>
+                
+                <div class="metric">
+                    <i class="fas fa-shield-alt" style="font-size: 2rem; color: var(--primary-blue);"></i>
+                    <div class="metric-value">100%</div>
+                    <div class="metric-label">Compliance Readiness</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Technology Evolution -->
+    <section class="section" style="background-color: var(--neutral-100);">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Platform Evolution</span>
+                <h2>From Single Agent to Enterprise Orchestration</h2>
+                <p class="section-description">A systematic evolution from basic automation to sophisticated multi-agent intelligence designed for complex agricultural ecosystems.</p>
+            </div>
+            
+            <div class="evolution-container animate-on-scroll">
+                <table class="evolution-table">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>AlgoMind</th>
+                            <th>AlgoMind Pro</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>System Design</strong></td>
+                            <td class="v1-col">Streamlined single-agent framework with essential tools</td>
+                            <td class="v2-col">Multi-agent orchestration with supervisor–specialist architecture</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Decision Transparency</strong></td>
+                            <td class="v1-col">Basic decision logging</td>
+                            <td class="v2-col">Real-time reasoning traces and operational canvas for full visibility</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Data Intelligence</strong></td>
+                            <td class="v1-col">Foundational data processing and reporting</td>
+                            <td class="v2-col">Advanced analytics, agronomic insights, reusable artifacts, and rich outputs</td>
+                        </tr>
+                        <tr>
+                            <td><strong>User Interaction</strong></td>
+                            <td class="v1-col">Single-turn queries with clear responses</td>
+                            <td class="v2-col">Multi-turn memory, contextual follow-up, and timeline playback</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Security & Safety</strong></td>
+                            <td class="v1-col">Standard API-level security protocols</td>
+                            <td class="v2-col">Layered safety checks, human-in-the-loop workflows, and isolated execution</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Enterprise Readiness</strong></td>
+                            <td class="v1-col">Baseline compliance for general use</td>
+                            <td class="v2-col">Full governance suite with audit trails, data isolation, and extensible tooling</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tooling</strong></td>
+                            <td class="v1-col">Core toolset for basic tasks and queries</td>
+                            <td class="v2-col">Dynamic tool selection with plug-and-play integrations for specialized workflows</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Deployment Flexibility</strong></td>
+                            <td class="v1-col">Cloud-based setup with standard configurations</td>
+                            <td class="v2-col">Modular deployment across cloud, hybrid, and air-gapped environments</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Scalability</strong></td>
+                            <td class="v1-col">Suitable for lean teams and straightforward use cases</td>
+                            <td class="v2-col">Designed for complex environments, large datasets, and enterprise-scale operations</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Integration</strong></td>
+                            <td class="v1-col">Basic API connectivity</td>
+                            <td class="v2-col">Extensible ecosystem with MCP integrations for client-specific systems</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Pain Points & Solutions -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Targeted Solutions</span>
+                <h2>Addressing Agricultural Technology Challenges</h2>
+                <p class="section-description">Direct alignment with Corvian's strategic initiatives to overcome industry-specific barriers to digital transformation.</p>
+            </div>
+            
+            <div class="pain-points-grid animate-on-scroll">
+                <div class="pain-point card">
+                    <div class="card-icon">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <h3 class="card-title">Data Silos & Integration Complexity</h3>
+                    <p class="card-content">Disconnected IoT sensors, ERP systems, and predictive models limiting actionable insights across the agricultural value chain.</p>
+                    <div style="margin-top: var(--spacing-md);">
+                        <span style="display: inline-block; background: rgba(0, 122, 255, 0.1); color: var(--primary-blue); padding: 6px 12px; border-radius: 20px; font-size: 0.875rem; font-weight: 500;">Solution: MCP-powered unified data flow</span>
+                    </div>
+                </div>
+                
+                <div class="pain-point card">
+                    <div class="card-icon">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <h3 class="card-title">Computational Inefficiency</h3>
+                    <p class="card-content">High operational costs from inefficient resource utilization in complex agricultural modeling and forecasting.</p>
+                    <div style="margin-top: var(--spacing-md);">
+                        <span style="display: inline-block; background: rgba(0, 122, 255, 0.1); color: var(--primary-blue); padding: 6px 12px; border-radius: 20px; font-size: 0.875rem; font-weight: 500;">Solution: Domain-tuned intelligent agents</span>
+                    </div>
+                </div>
+                
+                <div class="pain-point card">
+                    <div class="card-icon">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <h3 class="card-title">Lack of Decision Transparency</h3>
+                    <p class="card-content">Black-box AI models undermining stakeholder trust and compliance with agricultural regulations.</p>
+                    <div style="margin-top: var(--spacing-md);">
+                        <span style="display: inline-block; background: rgba(0, 122, 255, 0.1); color: var(--primary-blue); padding: 6px 12px; border-radius: 20px; font-size: 0.875rem; font-weight: 500;">Solution: Enterprise-grade explainability</span>
+                    </div>
+                </div>
+                
+                <div class="pain-point card">
+                    <div class="card-icon">
+                        <i class="fas fa-project-diagram"></i>
+                    </div>
+                    <h3 class="card-title">Complex Agricultural Workflows</h3>
+                    <p class="card-content">Manual, error-prone multi-step processes from field data collection to actionable advisory reporting.</p>
+                    <div style="margin-top: var(--spacing-md);">
+                        <span style="display: inline-block; background: rgba(0, 122, 255, 0.1); color: var(--primary-blue); padding: 6px 12px; border-radius: 20px; font-size: 0.875rem; font-weight: 500;">Solution: Adaptive planning engine</span>
+                    </div>
+                </div>
+                
+                <div class="pain-point card">
+                    <div class="card-icon">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <h3 class="card-title">Compliance & Data Governance</h3>
+                    <p class="card-content">Stringent requirements for data isolation, audit trails, and regulatory compliance in global agricultural operations.</p>
+                    <div style="margin-top: var(--spacing-md);">
+                        <span style="display: inline-block; background: rgba(0, 122, 255, 0.1); color: var(--primary-blue); padding: 6px 12px; border-radius: 20px; font-size: 0.875rem; font-weight: 500;">Solution: RBAC & schema isolation</span>
+                    </div>
+                </div>
+
+                <div class="pain-point card">
+                    <div class="card-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3 class="card-title">Slow Time-to-Insight</h3>
+                    <p class="card-content">Delays in processing and analyzing complex datasets result in missed opportunities and reactive rather than proactive decision-making.</p>
+                    <div style="margin-top: var(--spacing-md);">
+                        <span style="display: inline-block; background: rgba(0, 122, 255, 0.1); color: var(--primary-blue); padding: 6px 12px; border-radius: 20px; font-size: 0.875rem; font-weight: 500;">Solution: Real-time analytics pipeline</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- MVP Timeline -->
+    <section class="section" style="background-color: var(--neutral-100);">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Implementation Roadmap</span>
+                <h2>Proposed MVP: 60-Day Value Demonstration</h2>
+                <p class="section-description">A structured pilot delivering measurable outcomes and a clear pathway to enterprise-scale deployment.</p>
+            </div>
+            
+            <div class="timeline animate-on-scroll">
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-week">WEEKS 1-2: FOUNDATION</span>
+                        <h4 style="margin-bottom: var(--spacing-xs);">Integration & Data Onboarding</h4>
+                        <p>Connect representative farm datasets (telemetry, imagery, yield) via secure API; deploy MCP adapters for unified agricultural data flow.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-week">WEEKS 3-4: INTELLIGENCE</span>
+                        <h4 style="margin-bottom: var(--spacing-xs);">Specialized Agent Deployment</h4>
+                        <p>Deploy two domain-specific agents: <strong>Agricultural Data Normalization</strong> and <strong>Predictive Advisory Planner</strong> with full explainability framework.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-week">WEEKS 5-6: VISIBILITY</span>
+                        <h4 style="margin-bottom: var(--spacing-xs);">Operational Dashboard & Governance</h4>
+                        <p>Enterprise dashboard showing agent decisions, reasoning trace, and RBAC controls with exportable compliance audit logs.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-week">WEEKS 7-8: VALIDATION</span>
+                        <h4 style="margin-bottom: var(--spacing-xs);">ROI Measurement & Scaling Roadmap</h4>
+                        <p>Quantitative KPI validation against baseline, agronomist feedback integration, and comprehensive scaling strategy.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: var(--spacing-xl);" class="animate-on-scroll">
+                <h4 style="margin-bottom: var(--spacing-md); color: var(--neutral-700);">MVP Deliverables</h4>
+                <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: var(--spacing-sm);">
+                    <span style="background: rgba(0, 122, 255, 0.1); color: var(--primary-blue); padding: 8px 16px; border-radius: 20px; font-weight: 500; font-size: 0.875rem;">Pre-built Agricultural Connectors</span>
+                    <span style="background: rgba(0, 122, 255, 0.1); color: var(--primary-blue); padding: 8px 16px; border-radius: 20px; font-weight: 500; font-size: 0.875rem;">Domain-Specialized Agents</span>
+                    <span style="background: rgba(0, 122, 255, 0.1); color: var(--primary-blue); padding: 8px 16px; border-radius: 20px; font-weight: 500; font-size: 0.875rem;">Enterprise Dashboard</span>
+                    <span style="background: rgba(0, 122, 255, 0.1); color: var(--primary-blue); padding: 8px 16px; border-radius: 20px; font-weight: 500; font-size: 0.875rem;">Compliance Framework</span>
+                    <span style="background: rgba(0, 122, 255, 0.1); color: var(--primary-blue); padding: 8px 16px; border-radius: 20px; font-weight: 500; font-size: 0.875rem;">ROI Validation Report</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Decision Points -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Strategic Alignment</span>
+                <h2>Key Partnership Decision Points</h2>
+                <p class="section-description">Critical alignment areas to ensure pilot success and maximize return on technology investment.</p>
+            </div>
+            
+            <div class="decision-grid animate-on-scroll">
+                <div class="decision-card">
+                    <div class="decision-icon">
+                        <i class="fas fa-bullseye" style="font-size: 1.5rem; color: var(--primary-blue);"></i>
+                    </div>
+                    <h4 style="margin-bottom: var(--spacing-sm);">Scope Definition</h4>
+                    <p style="color: var(--neutral-500); font-size: 0.9375rem;">Targeted pilot on field-level recommendations or comprehensive cross-product integration (IoT → models → advisory → reporting)?</p>
+                </div>
+                
+                <div class="decision-card">
+                    <div class="decision-icon">
+                        <i class="fas fa-database" style="font-size: 1.5rem; color: var(--primary-blue);"></i>
+                    </div>
+                    <h4 style="margin-bottom: var(--spacing-sm);">Data Access Protocol</h4>
+                    <p style="color: var(--neutral-500); font-size: 0.9375rem;">Secure API or database access for representative agricultural datasets to validate platform performance with real-world complexity.</p>
+                </div>
+                
+                <div class="decision-card">
+                    <div class="decision-icon">
+                        <i class="fas fa-chart-bar" style="font-size: 1.5rem; color: var(--primary-blue);"></i>
+                    </div>
+                    <h4 style="margin-bottom: var(--spacing-sm);">Success Metrics Framework</h4>
+                    <p style="color: var(--neutral-500); font-size: 0.9375rem;">Joint definition of 2-3 KPIs (integration efficiency, decision accuracy, operational cost reduction) for objective ROI validation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Risks & Mitigation -->
+    <section class="section" style="background-color: var(--neutral-100);">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Risk Management</span>
+                <h2>Proactive Risk Mitigation Strategy</h2>
+                <p class="section-description">Identified implementation challenges with planned mitigation strategies to ensure pilot success.</p>
+            </div>
+            
+            <div class="risks-container animate-on-scroll">
+                <div class="risk-item">
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: var(--spacing-sm);">
+                        <i class="fas fa-exclamation-triangle" style="color: var(--accent-orange);"></i>
+                        <h4 style="color: var(--neutral-900);">Agricultural Data Complexity</h4>
+                    </div>
+                    <p style="margin-bottom: var(--spacing-xs); color: var(--neutral-500);"><strong>Challenge:</strong> Variability in sensor data formats, seasonal inconsistencies, and integration with legacy agricultural systems.</p>
+                    <p style="color: var(--neutral-500);"><strong>Mitigation:</strong> Pre-deployment schema validation with representative datasets; adaptive normalization agents specifically tuned for agricultural data patterns.</p>
+                </div>
+                
+                <div class="risk-item">
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: var(--spacing-sm);">
+                        <i class="fas fa-cogs" style="color: var(--accent-orange);"></i>
+                        <h4 style="color: var(--neutral-900);">Integration with Legacy Infrastructure</h4>
+                    </div>
+                    <p style="margin-bottom: var(--spacing-xs); color: var(--neutral-500);"><strong>Challenge:</strong> Diverse protocols and data models across agricultural IoT ecosystems and enterprise systems.</p>
+                    <p style="color: var(--neutral-500);"><strong>Mitigation:</strong> Phased approach beginning with single product line; leverage MCP adapters to minimize custom development for established agricultural data standards.</p>
+                </div>
+                
+                <div class="risk-item">
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: var(--spacing-sm);">
+                        <i class="fas fa-gavel" style="color: var(--accent-orange);"></i>
+                        <h4 style="color: var(--neutral-900);">Regulatory Compliance & Data Sovereignty</h4>
+                    </div>
+                    <p style="margin-bottom: var(--spacing-xs); color: var(--neutral-500);"><strong>Challenge:</strong> Meeting agricultural data regulations, cross-border data transfer restrictions, and client-specific governance requirements.</p>
+                    <p style="color: var(--neutral-500);"><strong>Mitigation:</strong> Architecture with inherent data isolation; comprehensive audit logging from MVP inception; compliance validation framework integrated into deployment pipeline.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA -->
+    <section class="container">
+        <div class="cta-section" id="contact">
+            <div class="cta-content">
+                <h3 style="margin-bottom: var(--spacing-md); color: var(--neutral-900);">Ready to Transform Agricultural Intelligence?</h3>
+                <p style="margin-bottom: var(--spacing-lg); color: var(--neutral-500); max-width: 600px; margin-left: auto; margin-right: auto;">
+                    Let's schedule a technical deep-dive to align on pilot scope, success metrics, and integration strategy. We can deploy the MVP in 60 days with joint commitment.
+                </p>
+                
+                <button class="cta-button" id="ctaContactButton">
+                    <i class="fas fa-calendar-check"></i> Contact Our Team
+                </button>
+                
+                <div style="margin-top: var(--spacing-xl); display: flex; justify-content: center; gap: var(--spacing-lg); flex-wrap: wrap;">
+                    <div style="display: flex; align-items: center; gap: var(--spacing-xs);">
+                        <i class="fas fa-envelope" style="color: var(--primary-blue);"></i>
+                        <a href="mailto:support@algo-rythmn.ai" style="color: var(--neutral-500); text-decoration: none; transition: var(--transition-fast);" onmouseover="this.style.color='var(--primary-blue)'" onmouseout="this.style.color='var(--neutral-500)'">support@algo-rythmn.ai</a>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: var(--spacing-xs);">
+                        <i class="fas fa-map-marker-alt" style="color: var(--primary-blue);"></i>
+                        <span style="color: var(--neutral-500);">Calgary, Alberta, Canada</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">Algo-Rythmn.ai</div>
+                
+                <div class="footer-contact">
+                    <a href="mailto:support@algo-rythmn.ai" class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>Enterprise Partnership Team</span>
+                    </a>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Calgary, AB</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>© 2026 Algo-Rythmn Corp. All rights reserved. | Enterprise-Grade AI Orchestration Platform</p>
+                <p style="margin-top: var(--spacing-xs); font-size: 0.8125rem;">Confidential – Prepared for Corvian Executive Review</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+        
+        // CTA Button Interaction
+        const scheduleBtn = document.getElementById('scheduleButton');
+        const ctaBtn = document.getElementById('ctaContactButton');
+        
+        const handleEmailClick = function() {
+            window.location.href = 'mailto:support@algo-rythmn.ai?subject=Executive%20Briefing%20Request&body=Hello%2C%0A%0AI%20am%20interested%20in%20scheduling%20an%20executive%20briefing%20for%20AlgoMind%20Pro.%0A%0APlease%20let%20me%20know%20your%20availability.%0A%0AThank%20you';
+        };
+        
+        if (scheduleBtn) scheduleBtn.addEventListener('click', handleEmailClick);
+        if (ctaBtn) ctaBtn.addEventListener('click', handleEmailClick);
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Reduced motion preference
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            document.querySelectorAll('*').forEach(el => {
+                el.style.animationDuration = '0.01ms';
+                el.style.animationIterationCount = '1';
+                el.style.transitionDuration = '0.01ms';
+            });
+        }
+    </script>
+</body>
+</html>
