@@ -1,0 +1,2166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algo-Rythmn.ai | Soil Intelligence Platform for Agribusiness</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #2d5c2a;
+            --secondary: #7cb342;
+            --accent: #ff9800;
+            --light: #f5f9f4;
+            --dark: #1a3318;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --enhance:#ff9100;
+            --competitive: #f8b34b;
+            --differentiator: #9b59b6;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--dark));
+            color: white;
+            padding: 1.2rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        .logo i {
+            color: var(--accent);
+        }
+        
+        .tagline {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--accent);
+            letter-spacing: 1px;
+            margin-top: 4px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        nav a:hover, nav a.active {
+            background-color: rgba(255, 255, 255, 0.15);
+            color: var(--accent);
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(45, 92, 42, 0.9), rgba(26, 51, 24, 0.95)), url('https://images.unsplash.com/photo-1586771107445-d3ca888129fe?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 5rem 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 3.2rem;
+            margin-bottom: 1.2rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .hero .subtitle {
+            font-size: 1.8rem;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 14px 32px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.05rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(255, 153, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn:hover {
+            background-color: #e68900;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 153, 0, 0.3);
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            border: 2px solid white;
+            box-shadow: 0 2px 8px rgba(255, 255, 255, 0.1);
+        }
+        
+        .btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+            border-color: var(--accent);
+            box-shadow: 0 4px 16px rgba(255, 255, 255, 0.2);
+        }
+        
+        .btn-differentiator {
+            background: linear-gradient(135deg, var(--differentiator), #8e44ad);
+            box-shadow: 0 2px 8px rgba(155, 89, 182, 0.25);
+        }
+        
+        .btn-differentiator:hover {
+            background: linear-gradient(135deg, #8e44ad, #7d3c98);
+            box-shadow: 0 6px 20px rgba(155, 89, 182, 0.4);
+        }
+        
+        section {
+            padding: 5rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3.5rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background-color: var(--accent);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .section-title p {
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+        
+        .comparison-section {
+            background-color: #f8f9fa;
+            border-radius: 12px;
+            padding: 2.5rem;
+            margin-bottom: 4rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+        
+        .comparison-title {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-size: 1.8rem;
+        }
+        
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .comparison-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+        }
+        
+        .comparison-card h4 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--light-gray);
+        }
+        
+        .feature-list {
+            list-style: none;
+        }
+        
+        .feature-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px dashed var(--light-gray);
+            display: flex;
+            align-items: center;
+        }
+        
+        .feature-list li i {
+            margin-right: 10px;
+            font-size: 0.9rem;
+        }
+        
+        .competitive-feature i {
+            color: var(--competitive);
+        }
+        
+        .differentiator-feature i {
+            color: var(--differentiator);
+        }
+        
+        .differentiator-badge {
+            display: inline-block;
+            background-color: var(--differentiator);
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 12px;
+            margin-left: 8px;
+            vertical-align: middle;
+        }
+        
+        .competitive-badge {
+            display: inline-block;
+            background-color: var(--competitive);
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 12px;
+            margin-left: 8px;
+            vertical-align: middle;
+        }
+        
+        .mvp-modules {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+        
+        .module-card {
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+            border-top: 4px solid var(--enhance);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .module-card.differentiator {
+            border-top: 4px solid var(--differentiator);
+            box-shadow: 0 6px 15px rgba(155, 89, 182, 0.15);
+        }
+        
+        .module-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+        }
+        
+        .module-card.differentiator:hover {
+            box-shadow: 0 15px 30px rgba(155, 89, 182, 0.2);
+        }
+        
+        .module-header {
+            background: linear-gradient(to right, var(--enhance), var(--competitive));
+            color: white;
+            padding: 1.5rem;
+        }
+        
+        .module-header.differentiator {
+            background: linear-gradient(to right, var(--differentiator), #a86bc2);
+        }
+        
+        .module-header h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .module-body {
+            padding: 1.8rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .module-body p {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+        }
+        
+        .module-features {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+        
+        .module-features li {
+            padding: 0.5rem 0;
+            border-bottom: 1px dashed var(--light-gray);
+            display: flex;
+            align-items: center;
+        }
+        
+        .module-features li i {
+            color: var(--secondary);
+            margin-right: 10px;
+        }
+        
+        .module-button {
+            margin-top: auto;
+            text-align: right;
+            padding-top: 1rem;
+            align-self: flex-end;
+        }
+
+        .data-table-container {
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+            overflow-x: auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th {
+            background-color: var(--light);
+            color: var(--primary);
+            font-weight: 700;
+            padding: 1.2rem 1rem;
+            text-align: left;
+            border-bottom: 2px solid var(--secondary);
+        }
+        
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        tr:hover {
+            background-color: #f9fdf8;
+        }
+        
+        .priority-high {
+            background-color: #ffeaa7;
+            color: #d35400;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        
+        .priority-critical {
+            background-color: #ffcccc;
+            color: #c0392b;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        
+        .priority-medium {
+            background-color: #d6eaf8;
+            color: #2c3e50;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        
+        .map-container {
+            height: 500px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+            margin-bottom: 2rem;
+        }
+        
+        .chart-container {
+            background-color: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+            margin-bottom: 2rem;
+            height: 400px;
+        }
+        
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .dashboard-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 1.8rem;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        .dashboard-card h3 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 2px solid var(--light-gray);
+        }
+        
+        .metric {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px dashed var(--light-gray);
+        }
+        
+        .metric-value {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .metric-label {
+            color: var(--gray);
+        }
+        
+        .metric-change {
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        .positive {
+            color: var(--secondary);
+        }
+        
+        .negative {
+            color: #e74c3c;
+        }
+        
+        .data-category {
+            margin-bottom: 3rem;
+        }
+        
+        .data-category h3 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+        }
+        
+        .copyright {
+            margin-top: 2rem;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        @media (max-width: 992px) {
+            .mvp-modules {
+                grid-template-columns: 1fr;
+            }
+            
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+            
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--primary);
+                flex-direction: column;
+                padding: 1rem 0;
+                box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+            }
+            
+            nav ul.active {
+                display: flex;
+            }
+            
+            nav ul li {
+                width: 100%;
+                text-align: center;
+            }
+            
+            nav ul li a {
+                display: block;
+                padding: 15px;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+        
+        /* Additional styles for tabs and interactive elements */
+        .tab-navigation {
+            display: flex;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid var(--light-gray);
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .tab-btn {
+            padding: 1rem 1.5rem;
+            background: white;
+            border: 2px solid transparent;
+            border-radius: 8px 8px 0 0;
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--gray);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            margin: 0 4px;
+        }
+        
+        .tab-btn:hover {
+            color: var(--primary);
+            background: #f8f9fa;
+            border-color: var(--light-gray);
+            transform: translateY(-2px);
+        }
+        
+        .tab-btn.active {
+            color: var(--primary);
+            background: white;
+            border-color: var(--light-gray);
+            border-bottom-color: white;
+            z-index: 1;
+        }
+        
+        .tab-btn.active:after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent), #ffc107);
+            border-radius: 2px;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .search-box {
+            display: flex;
+            margin-bottom: 2rem;
+        }
+        
+        .search-box input {
+            flex: 1;
+            padding: 12px 18px;
+            border: 1px solid var(--light-gray);
+            border-radius: 30px 0 0 30px;
+            font-size: 1rem;
+        }
+        
+        .search-box button {
+            background: linear-gradient(135deg, var(--secondary), #689f38);
+            color: white;
+            border: none;
+            padding: 0 28px;
+            border-radius: 0 30px 30px 0;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 2px 8px rgba(124, 179, 66, 0.2);
+        }
+        
+        .search-box button:hover {
+            background: linear-gradient(135deg, #689f38, var(--secondary));
+            box-shadow: 0 4px 16px rgba(124, 179, 66, 0.3);
+        }
+        
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+        }
+        
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, var(--primary), #1a3318);
+            color: white;
+            padding: 14px 28px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 1rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 3px 12px rgba(45, 92, 42, 0.25);
+            font-size: 1rem;
+        }
+        
+        .download-btn:hover {
+            background: linear-gradient(135deg, var(--dark), var(--primary));
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(45, 92, 42, 0.35);
+        }
+        
+        .download-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 8px rgba(45, 92, 42, 0.3);
+        }
+        
+        .download-btn i {
+            font-size: 1.1rem;
+        }
+        
+        .scorecard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .score-item {
+            background: var(--light);
+            border-radius: 8px;
+            padding: 1.2rem;
+            text-align: center;
+        }
+        
+        .score-value {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 0.5rem 0;
+        }
+        
+        .score-label {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            margin-top: 1.5rem;
+        }
+        
+        .comparison-table th {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .rank-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+        
+        .rank-1 {
+            background-color: gold;
+            color: #8a6d00;
+        }
+        
+        .rank-2 {
+            background-color: silver;
+            color: #6c757d;
+        }
+        
+        .rank-3 {
+            background-color: #cd7f32;
+            color: white;
+        }
+        
+        .rank-other {
+            background-color: var(--light-gray);
+            color: var(--gray);
+        }
+        
+        .trend-up {
+            color: var(--secondary);
+            font-weight: 600;
+        }
+        
+        .trend-down {
+            color: #e74c3c;
+            font-weight: 600;
+        }
+        
+        .filter-controls {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .filter-select {
+            padding: 10px 15px;
+            border-radius: 6px;
+            border: 1px solid var(--light-gray);
+            background-color: white;
+            min-width: 200px;
+        }
+        
+        .comparison-radar-container {
+            height: 400px;
+            margin-bottom: 2rem;
+        }
+        
+        .baseline-chart-container {
+            height: 350px;
+            margin-bottom: 2rem;
+        }
+        
+        .proprietary-index {
+            background: linear-gradient(135deg, var(--differentiator), #8e44ad);
+            color: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 20px rgba(155, 89, 182, 0.2);
+        }
+        
+        .proprietary-index h3 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+        
+        .proprietary-index .index-value {
+            font-size: 3.5rem;
+            font-weight: 800;
+            text-align: center;
+            margin: 1.5rem 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .index-scale {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1.5rem;
+        }
+        
+        .scale-item {
+            text-align: center;
+            flex: 1;
+        }
+        
+        .scale-bar {
+            height: 10px;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 5px;
+            margin-bottom: 8px;
+            overflow: hidden;
+        }
+        
+        .scale-fill {
+            height: 100%;
+            border-radius: 5px;
+        }
+        
+        .scale-low {
+            background-color: #2ecc71;
+        }
+        
+        .scale-moderate {
+            background-color: #f39c12;
+        }
+        
+        .scale-high {
+            background-color: #e74c3c;
+        }
+        
+        .scale-critical {
+            background-color: #c0392b;
+        }
+        
+        .value-prop-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .value-prop-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+            border-top: 4px solid var(--differentiator);
+        }
+        
+        .value-prop-card h4 {
+            color: var(--differentiator);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .revenue-stream-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.8rem;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--differentiator);
+        }
+        
+        .revenue-stream-card h4 {
+            color: var(--primary);
+            margin-bottom: 0.8rem;
+        }
+        
+        .revenue-metric {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px dashed var(--light-gray);
+        }
+        
+        /* Biological Product Matching Specific Styles */
+        .product-match-section {
+            background: linear-gradient(135deg, #f8f5ff, #eef2ff);
+        }
+        
+        .compatibility-meter {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .meter-bar {
+            flex: 1;
+            height: 20px;
+            background-color: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .meter-fill {
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+        
+        .meter-high {
+            background: linear-gradient(90deg, #2ecc71, #27ae60);
+        }
+        
+        .meter-medium {
+            background: linear-gradient(90deg, #f39c12, #e67e22);
+        }
+        
+        .meter-low {
+            background: linear-gradient(90deg, #e74c3c, #c0392b);
+        }
+        
+        .mode-of-action {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+        
+        .moa-antagonism {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        
+        .moa-competition {
+            background-color: #cce5ff;
+            color: #004085;
+        }
+        
+        .moa-parasitism {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        
+        .moa-stimulation {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        
+        .product-match-highlight {
+            background: linear-gradient(135deg, #9b59b6, #8e44ad);
+            color: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 8px 20px rgba(155, 89, 182, 0.2);
+        }
+        
+        .product-match-highlight h3 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+        
+        .product-insight {
+            background-color: #fff3cd;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            border-left: 4px solid #ffc107;
+        }
+        
+        .product-insight h5 {
+            color: #856404;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .sampling-engine {
+            background-color: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+            margin-top: 2rem;
+        }
+        
+        .sampling-flow {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .flow-step {
+            text-align: center;
+            flex: 1;
+            min-width: 150px;
+            padding: 1rem;
+        }
+        
+        .flow-icon {
+            width: 60px;
+            height: 60px;
+            background-color: var(--light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+        
+        .flow-arrow {
+            font-size: 1.5rem;
+            color: var(--gray);
+            padding: 0 1rem;
+        }
+
+        .module-header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .feature-badge {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 12px;
+            vertical-align: middle;
+            margin-left: 8px;
+        }
+
+        .unique-value-box {
+            margin-top: 1rem;
+            padding: 0.8rem;
+            background-color: #f0f7ff;
+            border-radius: 6px;
+            border-left: 3px solid var(--differentiator);
+        }
+
+        .enhanced-value-box {
+            margin-top: 1rem;
+            padding: 0.8rem;
+            background-color: #fff3cd;
+            border-radius: 6px;
+            border-left: 3px solid var(--accent);
+        }
+        
+        /* Consolidated table styles */
+        .module-badge {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            color: white;
+            font-weight: 700;
+            font-size: 0.8rem;
+            text-align: center;
+            line-height: 24px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .data-table-container table td ul {
+            margin: 0.5rem 0;
+        }
+
+        .data-table-container table td ul li {
+            padding: 0.2rem 0;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .data-table-container table tr:nth-child(even) {
+            background-color: #f9fdf8;
+        }
+
+        .data-table-container table tr:hover {
+            background-color: #e8f5e8;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Navigation -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div>
+                    <div class="logo">
+                        <span>Algo-Rythmn.ai</span>
+                    </div>
+                    <div class="tagline">Soil Intelligence for Agribusiness</div>
+                </div>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <nav>
+                    <ul id="mainNav">
+                        <li><a href="#overview" class="active">Overview</a></li>
+                        <li><a href="#mvp-modules">MVP Modules</a></li>
+                        <li><a href="#data-requirements">Data Requirements</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="overview">
+        <div class="container">
+            <h1>Soil Intelligence Platform for Agribusiness</h1>
+            <div class="subtitle">Transforming Soil Chemical & Biological Data into Strategic Business Outcomes</div>
+            <p style="max-width: 900px; margin: 1.5rem auto 2.5rem; font-size: 1.1rem; line-height: 1.7;">The industry is rich in data but poor in actionable intelligence. We are the missing link that converts soil composition into commercial strategy. Our platform powers <strong>market-driven product placement</strong> for precision sales, <strong>revenue-optimized crop planning</strong> for maximum profitability, and <strong>supply chain quality matching</strong> for guaranteed premium market access.</p>
+            
+            <div style="margin-top: 2.5rem;">
+                <a href="mailto:support@algo-rythmn.ai" class="btn btn-secondary" style="margin-right: 1rem;">Request Demo</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- MVP Modules Section (WITH MODULE 2 AND 3 SWAPPED) -->
+    <section id="mvp-modules">
+        <div class="container">
+            
+            <div class="section-title" style="margin-top: 4rem;">
+                <h2>Our MVP Modules</h2>
+                <p>Unique solutions that address unmet market needs</p>
+            </div>
+            
+            <div class="mvp-modules" style="grid-template-columns: repeat(3, 1fr);">
+                <!-- Module 1: UNIQUE FEATURE -->
+                <div class="module-card differentiator">
+                    <div class="module-header differentiator">
+                        <div class="module-header-content">
+                            <div>
+                                <h3>1. Biological Product Placement</h3>
+                                <p>Market-facing product recommendation engine</p>
+                            </div>
+                            <span class="feature-badge" style="background-color: white; color: var(--differentiator);">Unique Feature</span>
+                        </div>
+                    </div>
+                    <div class="module-body">
+                        <div class="module-content">
+                            <p><strong>Market Gap:</strong> Existing platforms don't connect soil data to specific product performance or sales strategy.</p>
+                            <ul class="module-features">
+                                <li><i class="fas fa-star"></i> Product-performance matching across 100+ biologicals</li>
+                                <li><i class="fas fa-star"></i> ROI-based placement recommendations</li>
+                                <li><i class="fas fa-star"></i> Market opportunity heatmaps</li>
+                                <li><i class="fas fa-star"></i> Competitor product gap analysis</li>
+                                <li><i class="fas fa-star"></i> Sales territory optimization</li>
+                            </ul>
+                            <div class="unique-value-box">
+                                <p style="font-size: 0.9rem; margin: 0;"><i class="fas fa-lightbulb"></i> <strong>Unique Value:</strong> Converts soil data into sales intelligence for biological companies</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- MODULE 2 NOW: Market-Driven Variety Selection (WAS Module 3) -->
+                <div class="module-card differentiator">
+                    <div class="module-header differentiator">
+                        <div class="module-header-content">
+                            <div>
+                                <h3>2. Market-Driven Variety Selection</h3>
+                                <p>Quality-focused variety matching for premium markets</p>
+                            </div>
+                            <span class="feature-badge" style="background-color: white; color: var(--differentiator);">Unique Feature</span>
+                        </div>
+                    </div>
+                    <div class="module-body">
+                        <div class="module-content">
+                            <p><strong>Market Gap:</strong> Existing tools optimize for yield, not market quality premiums or processor requirements.</p>
+                            <ul class="module-features">
+                                <li><i class="fas fa-star"></i> Malt barley quality optimization</li>
+                                <li><i class="fas fa-star"></i> Canola oil profile matching</li>
+                                <li><i class="fas fa-star"></i> Processor-specific quality targets</li>
+                                <li><i class="fas fa-star"></i> Premium market access optimization</li>
+                                <li><i class="fas fa-star"></i> Breeder collaboration intelligence</li>
+                            </ul>
+                            <div class="unique-value-box">
+                                <p style="font-size: 0.9rem; margin: 0;"><i class="fas fa-industry"></i> <strong>Unique Value:</strong> Connects soil composition to end-market quality requirements</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- MODULE 3 NOW: Advanced Soil Health Intelligence (WAS Module 2) -->
+                <div class="module-card">
+                    <div class="module-header">
+                        <div class="module-header-content">
+                            <div>
+                                <h3>3. Advanced Soil Health Intelligence</h3>
+                                <p>Proactive fertilizer impact & resilience modeling</p>
+                            </div>
+                            <span class="feature-badge" style="background-color: white; color: var(--accent);">Enhanced Feature</span>
+                        </div>
+                    </div>
+                    <div class="module-body">
+                        <div class="module-content">
+                            <p><strong>Market Enhancement:</strong> Goes beyond scoring to predict fertilizer impacts on soil biology.</p>
+                            <ul class="module-features">
+                                <li><i class="fas fa-check-circle"></i> NH3/fertilizer long-term impact analysis</li>
+                                <li><i class="fas fa-check-circle"></i> Urease inhibitor recommendations</li>
+                                <li><i class="fas fa-check-circle"></i> Microbial diversity-yield correlation</li>
+                                <li><i class="fas fa-check-circle"></i> Variable rate biological application mapping</li>
+                                <li><i class="fas fa-check-circle"></i> Legacy fertilizer effect modeling</li>
+                            </ul>
+                            <div class="enhanced-value-box">
+                                <p style="font-size: 0.9rem; margin: 0;"><i class="fas fa-chart-line"></i> <strong>Enhancement:</strong> Adds predictive modeling for fertilizer impact on soil biology</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Module 4: UNIQUE FEATURE -->
+                <div class="module-card differentiator">
+                    <div class="module-header differentiator">
+                        <div class="module-header-content">
+                            <div>
+                                <h3>4. Revenue-Optimized Crop Rotation</h3>
+                                <p>Multi-year economic planning engine</p>
+                            </div>
+                            <span class="feature-badge" style="background-color: white; color: var(--differentiator);">Unique Feature</span>
+                        </div>
+                    </div>
+                    <div class="module-body">
+                        <div class="module-content">
+                            <p><strong>Market Gap:</strong> No platform integrates real-time market prices with soil data for multi-year planning.</p>
+                            <ul class="module-features">
+                                <li><i class="fas fa-star"></i> Real-time market price integration</li>
+                                <li><i class="fas fa-star"></i> 5-year protein & carbon optimization</li>
+                                <li><i class="fas fa-star"></i> Revenue projection modeling</li>
+                                <li><i class="fas fa-star"></i> Contract opportunity matching</li>
+                                <li><i class="fas fa-star"></i> Risk-adjusted rotation planning</li>
+                            </ul>
+                            <div class="unique-value-box">
+                                <p style="font-size: 0.9rem; margin: 0;"><i class="fas fa-sack-dollar"></i> <strong>Unique Value:</strong> Dynamic economic modeling that updates with market changes</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Module 5: UNIQUE FEATURE -->
+                <div class="module-card differentiator">
+                    <div class="module-header differentiator">
+                        <div class="module-header-content">
+                            <div>
+                                <h3>5. Supply Chain Quality Matching</h3>
+                                <p>Processor-to-soil connection platform</p>
+                            </div>
+                            <span class="feature-badge" style="background-color: white; color: var(--differentiator);">Unique Feature</span>
+                        </div>
+                    </div>
+                    <div class="module-body">
+                        <div class="module-content">
+                            <p><strong>Market Gap:</strong> No platform connects soil profiles to specific processor quality requirements.</p>
+                            <ul class="module-features">
+                                <li><i class="fas fa-star"></i> Brewery malt quality matching</li>
+                                <li><i class="fas fa-star"></i> Canola processor oil profile requirements</li>
+                                <li><i class="fas fa-star"></i> Mill-specific wheat protein targets</li>
+                                <li><i class="fas fa-star"></i> Premium market access intelligence</li>
+                                <li><i class="fas fa-star"></i> Contract specification alignment</li>
+                            </ul>
+                            <div class="unique-value-box">
+                                <p style="font-size: 0.9rem; margin: 0;"><i class="fas fa-warehouse"></i> <strong>Unique Value:</strong> Creates direct connections between soil and processor needs</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Module 6: ENHANCED SHARED FEATURE -->
+                <div class="module-card">
+                    <div class="module-header">
+                        <div class="module-header-content">
+                            <div>
+                                <h3>6. Research-Grounded Analytics</h3>
+                                <p>Evidence-based intelligence platform</p>
+                            </div>
+                            <span class="feature-badge" style="background-color: white; color: var(--accent);">Enhanced Feature</span>
+                        </div>
+                    </div>
+                    <div class="module-body">
+                        <div class="module-content">
+                            <p><strong>Market Enhancement:</strong> Integrates academic research and product validation into recommendations.</p>
+                            <ul class="module-features">
+                                <li><i class="fas fa-check-circle"></i> Peer-reviewed research integration</li>
+                                <li><i class="fas fa-check-circle"></i> Product performance validation database</li>
+                                <li><i class="fas fa-check-circle"></i> Agronomist expertise capture</li>
+                                <li><i class="fas fa-check-circle"></i> High-yield pattern recognition</li>
+                                <li><i class="fas fa-check-circle"></i> Performance benchmarking</li>
+                            </ul>
+                            <div class="enhanced-value-box">
+                                <p style="font-size: 0.9rem; margin: 0;"><i class="fas fa-graduation-cap"></i> <strong>Enhancement:</strong> Grounds AI recommendations in academic research</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Data Requirements Section -->
+    <section id="data-requirements" style="background-color: #f8f9fa;">
+        <div class="container">
+            <div class="section-title">
+                <h2>Data Requirements for MVP Validation</h2>
+                <p>Comprehensive data acquisition strategy for validating all six modules with targeted datasets.</p>
+            </div>
+            
+            <div style="background-color: #e8f5e8; padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem;">
+                <h4 style="color: var(--primary); margin-bottom: 0.5rem;"><i class="fas fa-info-circle"></i> How to Use This Table</h4>
+                <p style="margin-bottom: 0;">Each module requires specific data types to validate its unique value proposition. This table shows all required data across modules, with color-coding to indicate which modules require each data type.</p>
+            </div>
+            
+            <!-- Legend for Module Requirements -->
+            <div class="legend" style="margin-bottom: 1.5rem; justify-content: center;">
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: var(--differentiator);"></div>
+                    <span>Module 1: Biological Product Placement</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #2ecc71;"></div>
+                    <span>Module 2: Market-Driven Variety Selection</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #3498db;"></div>
+                    <span>Module 3: Soil Health Intelligence</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #e74c3c;"></div>
+                    <span>Module 4: Revenue-Optimized Rotation</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #f39c12;"></div>
+                    <span>Module 5: Supply Chain Quality Matching</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #9b59b6;"></div>
+                    <span>Module 6: Research-Grounded Analytics</span>
+                </div>
+            </div>
+            
+            <!-- Consolidated Data Requirements Table -->
+            <div class="data-table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th width="15%">Data Category</th>
+                            <th width="20%">Specific Data Points Required</th>
+                            <th width="15%">Primary Source</th>
+                            <th width="15%">Collection Method</th>
+                            <th width="15%">Primary Purpose</th>
+                            <th width="20%">Modules Requiring This Data</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Soil & Biological Data -->
+                        <tr>
+                            <td><strong>Soil Composition & Biological Profile</strong></td>
+                            <td>
+                                <ul style="margin: 0; padding-left: 1.2rem;">
+                                    <li>Chemical nutrient levels (N, P, K, micronutrients)</li>
+                                    <li>Soil texture, pH, and organic matter %</li>
+                                    <li>Pathogen concentrations (organisms/g soil)</li>
+                                    <li>Beneficial microbe populations (bacteria, fungi, nematodes)</li>
+                                    <li>Enzyme activity levels</li>
+                                    <li>Soil respiration rates</li>
+                                    <li>Organism-soil interaction dynamics and symbiotic relationships</li>
+                                    <li>Mycorrhizal associations and root colonization rates</li>
+                                    <li>Soil food web structure and trophic interactions</li>
+                                </ul>
+                            </td>
+                            <td>Comprehensive soil testing labs</td>
+                            <td>Chemical assays, DNA sequencing, biological quantification</td>
+                            <td><strong>Foundation:</strong> Establish baseline soil profile for all predictive models</td>
+                            <td>
+                                <div style="display: flex; flex-wrap: wrap; gap: 3px;">
+                                    <span class="module-badge" style="background-color: var(--differentiator);">1</span>
+                                    <span class="module-badge" style="background-color: #2ecc71;">2</span>
+                                    <span class="module-badge" style="background-color: #3498db;">3</span>
+                                    <span class="module-badge" style="background-color: #e74c3c;">4</span>
+                                    <span class="module-badge" style="background-color: #f39c12;">5</span>
+                                    <span class="module-badge" style="background-color: #9b59b6;">6</span>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <!-- Product & Input Performance Data -->
+                        <tr>
+                            <td><strong>Product & Input Performance Database</strong></td>
+                            <td>
+                                <ul style="margin: 0; padding-left: 1.2rem;">
+                                    <li>Biological product efficacy by soil type (200+ products)</li>
+                                    <li>Fertilizer performance data by soil condition</li>
+                                    <li>Application rate-response curves</li>
+                                    <li>Mode of action documentation</li>
+                                    <li>Formulation compatibility data</li>
+                                    <li>Urease/nitrification inhibitor efficacy</li>
+                                    <li>Crop protection product performance</li>
+                                    <li>Product literature and technical datasheets from biological companies</li>
+                                    <li>Independent lab reports validating manufacturer claims</li>
+                                    <li>Third-party certification and quality assurance data</li>
+                                </ul>
+                            </td>
+                            <td>Manufacturers, independent trials, research institutions</td>
+                            <td>Structured trial protocols, product dossiers, meta-analysis</td>
+                            <td><strong>Performance correlation:</strong> Link soil conditions to product outcomes</td>
+                            <td>
+                                <div style="display: flex; flex-wrap: wrap; gap: 3px;">
+                                    <span class="module-badge" style="background-color: var(--differentiator);">1</span>
+                                    <span class="module-badge" style="background-color: #3498db;">3</span>
+                                    <span class="module-badge" style="background-color: #9b59b6;">6</span>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <!-- Economic & Market Data -->
+                        <tr>
+                            <td><strong>Economic & Market Intelligence</strong></td>
+                            <td>
+                                <ul style="margin: 0; padding-left: 1.2rem;">
+                                    <li>ROI calculations by product application</li>
+                                    <li>Real-time commodity prices (10+ crops)</li>
+                                    <li>Forward contract pricing and premium structures</li>
+                                    <li>Input cost structures (seed, fertilizer, chemicals)</li>
+                                    <li>Operational costs (machinery, labor, fuel)</li>
+                                    <li>Historical price volatility (5+ years)</li>
+                                    <li>Market share data by region and product</li>
+                                </ul>
+                            </td>
+                            <td>Market APIs, commodity exchanges, farm records</td>
+                            <td>API integration, economic analysis, price surveys</td>
+                            <td><strong>Economic optimization:</strong> Enable revenue-maximizing decisions</td>
+                            <td>
+                                <div style="display: flex; flex-wrap: wrap; gap: 3px;">
+                                    <span class="module-badge" style="background-color: var(--differentiator);">1</span>
+                                    <span class="module-badge" style="background-color: #e74c3c;">4</span>
+                                    <span class="module-badge" style="background-color: #f39c12;">5</span>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <!-- Crop Quality & Genetics Data -->
+                        <tr>
+                            <td><strong>Crop Quality & Genetic Data</strong></td>
+                            <td>
+                                <ul style="margin: 0; padding-left: 1.2rem;">
+                                    <li>Malt barley quality parameters by variety</li>
+                                    <li>Canola oil profiles (fatty acid composition)</li>
+                                    <li>Wheat protein & gluten specifications</li>
+                                    <li>Quality stability across environments</li>
+                                    <li>Breeder trial results and G×E interactions</li>
+                                    <li>Genomic markers for quality traits</li>
+                                    <li>Variety registration and performance data</li>
+                                </ul>
+                            </td>
+                            <td>Breeders, processors, national variety trials</td>
+                            <td>Lab analysis, breeder data sharing, database integration</td>
+                            <td><strong>Quality optimization:</strong> Match genetics to soil for premium markets</td>
+                            <td>
+                                <div style="display: flex; flex-wrap: wrap; gap: 3px;">
+                                    <span class="module-badge" style="background-color: #2ecc71;">2</span>
+                                    <span class="module-badge" style="background-color: #f39c12;">5</span>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <!-- Agronomic & Historical Data -->
+                        <tr>
+                            <td><strong>Agronomic & Historical Records</strong></td>
+                            <td>
+                                <ul style="margin: 0; padding-left: 1.2rem;">
+                                    <li>20-year fertilizer application history</li>
+                                    <li>Field-level crop rotation history (10+ years)</li>
+                                    <li>Yield response to previous crops</li>
+                                    <li>Disease and weed pressure records</li>
+                                    <li>Soil pH and OM changes over time</li>
+                                    <li>Application timing and method records</li>
+                                    <li>Cover crop and tillage history</li>
+                                </ul>
+                            </td>
+                            <td>Farm management software, soil test archives</td>
+                            <td>Historical data digitization, API integration</td>
+                            <td><strong>Temporal analysis:</strong> Understand long-term trends and impacts</td>
+                            <td>
+                                <div style="display: flex; flex-wrap: wrap; gap: 3px;">
+                                    <span class="module-badge" style="background-color: #3498db;">3</span>
+                                    <span class="module-badge" style="background-color: #e74c3c;">4</span>
+                                    <span class="module-badge" style="background-color: #9b59b6;">6</span>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <!-- Environmental & Climate Data -->
+                        <tr>
+                            <td><strong>Environmental & Climate Data</strong></td>
+                            <td>
+                                <ul style="margin: 0; padding-left: 1.2rem;">
+                                    <li>Weather patterns during critical growth stages</li>
+                                    <li>GDD accumulation and chilling hours</li>
+                                    <li>Precipitation timing and amounts</li>
+                                    <li>Soil moisture and temperature profiles</li>
+                                    <li>Daylight hours by latitude and season</li>
+                                    <li>Evapotranspiration rates</li>
+                                    <li>Climate risk models and projections</li>
+                                </ul>
+                            </td>
+                            <td>Weather stations, satellite data, climate APIs</td>
+                            <td>API integration, remote sensing, historical analysis</td>
+                            <td><strong>Environmental calibration:</strong> Isolate soil effects from weather</td>
+                            <td>
+                                <div style="display: flex; flex-wrap: wrap; gap: 3px;">
+                                    <span class="module-badge" style="background-color: #2ecc71;">2</span>
+                                    <span class="module-badge" style="background-color: #e74c3c;">4</span>
+                                    <span class="module-badge" style="background-color: #9b59b6;">6</span>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <!-- Supply Chain & Logistics Data -->
+                        <tr>
+                            <td><strong>Supply Chain & Logistics</strong></td>
+                            <td>
+                                <ul style="margin: 0; padding-left: 1.2rem;">
+                                    <li>Processor quality specifications by end-use</li>
+                                    <li>Elevator locations, capacities, and requirements</li>
+                                    <li>Freight cost zones and transportation options</li>
+                                    <li>Rail siding access points and schedules</li>
+                                    <li>On-farm storage capacity and conditions</li>
+                                    <li>Identity preservation handling protocols</li>
+                                    <li>Traceability and certification requirements</li>
+                                </ul>
+                            </td>
+                            <td>Processors, logistics providers, certification bodies</td>
+                            <td>Document analysis, geospatial analysis, partnership data</td>
+                            <td><strong>Market access:</strong> Connect production to specific buyer requirements</td>
+                            <td>
+                                <div style="display: flex; flex-wrap: wrap; gap: 3px;">
+                                    <span class="module-badge" style="background-color: var(--differentiator);">1</span>
+                                    <span class="module-badge" style="background-color: #f39c12;">5</span>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <!-- Agronomist Research & Product Literature -->
+                        <tr>
+                            <td><strong>Agronomist Research & Product Literature</strong></td>
+                            <td>
+                                <ul style="margin: 0; padding-left: 1.2rem;">
+                                    <li>1,000+ peer-reviewed papers on soil-plant interactions</li>
+                                    <li>University extension trial data</li>
+                                    <li>Meta-analyses on key agronomic practices</li>
+                                    <li>Independent product validation reports</li>
+                                    <li>Long-term study results (10+ years)</li>
+                                    <li>Agronomist expertise and field observations</li>
+                                    <li>Agronomist research on soil biology and microbial efficacy</li>
+                                    <li>Expert knowledge on organism-soil interactions and benefits</li>
+                                    <li>Biological product validation studies from research institutions</li>
+                                    <li>Regulatory frameworks and compliance data</li>
+                                </ul>
+                            </td>
+                            <td>Academic journals, research institutions, regulatory agencies</td>
+                            <td>Literature aggregation, expert interviews, data scraping</td>
+                            <td><strong>Evidence base:</strong> Ground recommendations in proven science</td>
+                            <td>
+                                <div style="display: flex; flex-wrap: wrap; gap: 3px;">
+                                    <span class="module-badge" style="background-color: var(--differentiator);">1</span>
+                                    <span class="module-badge" style="background-color: #3498db;">3</span>
+                                    <span class="module-badge" style="background-color: #9b59b6;">6</span>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <!-- Risk & Sustainability Data -->
+                        <tr>
+                            <td><strong>Risk & Sustainability Metrics</strong></td>
+                            <td>
+                                <ul style="margin: 0; padding-left: 1.2rem;">
+                                    <li>Crop insurance actuarial data and failure rates</li>
+                                    <li>Price volatility indices and hedging options</li>
+                                    <li>Carbon footprint factors and sequestration rates</li>
+                                    <li>Water usage benchmarks and efficiency metrics</li>
+                                    <li>Biodiversity impact scores</li>
+                                    <li>Leaching and runoff potential indices</li>
+                                    <li>ESG reporting requirements</li>
+                                </ul>
+                            </td>
+                            <td>Insurers, sustainability consortiums, government agencies</td>
+                            <td>Actuarial analysis, LCA database integration, benchmarking</td>
+                            <td><strong>Risk management:</strong> Enable resilient and sustainable decisions</td>
+                            <td>
+                                <div style="display: flex; flex-wrap: wrap; gap: 3px;">
+                                    <span class="module-badge" style="background-color: #3498db;">3</span>
+                                    <span class="module-badge" style="background-color: #e74c3c;">4</span>
+                                    <span class="module-badge" style="background-color: #9b59b6;">6</span>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <!-- Sales & Business Intelligence -->
+                        <tr>
+                            <td><strong>Sales & Business Intelligence</strong></td>
+                            <td>
+                                <ul style="margin: 0; padding-left: 1.2rem;">
+                                    <li>Territory sales performance data</li>
+                                    <li>Competitor product positioning and market share</li>
+                                    <li>Sales cycle timing and conversion rates</li>
+                                    <li>Customer segmentation and buying patterns</li>
+                                    <li>Product adoption rates by region</li>
+                                    <li>Pricing strategy effectiveness</li>
+                                    <li>Channel partner performance</li>
+                                </ul>
+                            </td>
+                            <td>CRM systems, market intelligence firms, sales records</td>
+                            <td>CRM data extraction, market analysis, surveys</td>
+                            <td><strong>Commercial optimization:</strong> Convert technical insights to sales strategy</td>
+                            <td>
+                                <div style="display: flex; flex-wrap: wrap; gap: 3px;">
+                                    <span class="module-badge" style="background-color: var(--differentiator);">1</span>
+                                    <span class="module-badge" style="background-color: #f39c12;">5</span>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- Summary Statistics -->
+            <div class="scorecard" style="margin-top: 2rem;">
+                <div class="score-item">
+                    <div class="score-value">10</div>
+                    <div class="score-label">Data Categories</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-value">70+</div>
+                    <div class="score-label">Specific Data Points</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-value">6</div>
+                    <div class="score-label">MVP Modules Covered</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-value">15+</div>
+                    <div class="score-label">Primary Data Sources</div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 3rem;">
+                <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
+                    <button onclick="downloadConsolidatedDataRequirements('AlgoRythmn_Data_Requirements')" class="download-btn" style="padding: 16px 32px; font-size: 1.1rem;">
+                        <i class="fas fa-file-pdf"></i> Download Full Data Requirements
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <i></i> Algo-Rythmn.ai
+                </div>
+                <p>Transforming soil data into business intelligence for agribusiness</p>
+                <div class="copyright">
+                    &copy; 2026 Algo-Rythmn.ai. All rights reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            document.getElementById('mainNav').classList.toggle('active');
+        });
+        
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', function() {
+                document.getElementById('mainNav').classList.remove('active');
+            });
+        });
+        
+        // Function to activate a specific tab
+        function activateTab(tabId) {
+            // Find the tab button
+            const tabButton = document.querySelector(`[data-tab="${tabId}"]`);
+            if (tabButton) {
+                tabButton.click();
+            }
+        }
+        
+        // Tab functionality
+        document.querySelectorAll('.tab-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const tabId = this.getAttribute('data-tab');
+                
+                // Remove active class from all tabs in the same navigation
+                const tabContainer = this.closest('.tab-navigation');
+                tabContainer.querySelectorAll('.tab-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                
+                // Add active class to clicked tab
+                this.classList.add('active');
+                
+                // Hide all tab content in the data requirements section
+                const section = document.getElementById('data-requirements');
+                const tabContents = section.querySelectorAll('.tab-content');
+                tabContents.forEach(content => {
+                    content.classList.remove('active');
+                });
+                
+                // Show selected tab content
+                const selectedTab = document.getElementById(tabId);
+                if (selectedTab) {
+                    selectedTab.classList.add('active');
+                }
+            });
+        });
+        
+        // PDF Download Function
+        async function downloadAllDataRequirements(filename) {
+            const { jsPDF } = window.jspdf;
+            
+            // Show loading indicator
+            const originalContent = event.target.innerHTML;
+            event.target.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating Full Report...';
+            event.target.disabled = true;
+            
+            try {
+                const pdf = new jsPDF('p', 'mm', 'a4');
+                const imgWidth = 210; 
+                const pageHeight = 297; 
+                
+                const tabs = ['conceptTab1', 'conceptTab2', 'conceptTab3', 'conceptTab4', 'conceptTab5', 'conceptTab6'];
+                const titles = [
+                    'Module 1: Biological Product Placement',
+                    'Module 2: Market-Driven Variety Selection',
+                    'Module 3: Soil Health Intelligence',
+                    'Module 4: Revenue-Optimized Rotation',
+                    'Module 5: Supply Chain Quality Matching',
+                    'Module 6: Research-Grounded Analytics'
+                ];
+
+                for (let i = 0; i < tabs.length; i++) {
+                    const tabId = tabs[i];
+                    const tabTitle = titles[i];
+                    
+                    const tabContent = document.getElementById(tabId);
+                    if (!tabContent) continue;
+
+                    // Create temp container for this specific tab
+                    const tempContainer = document.createElement('div');
+                    tempContainer.style.width = '750px';
+                    tempContainer.style.padding = '40px';
+                    tempContainer.style.backgroundColor = 'white';
+                    tempContainer.style.position = 'absolute';
+                    tempContainer.style.left = '-9999px';
+                    tempContainer.style.top = '0';
+                    
+                    // Add a header for the section
+                    tempContainer.innerHTML = `<div style="margin-bottom: 30px; border-bottom: 2px solid #2d5c2a; padding-bottom: 10px;">
+                        <h2 style="color: #2d5c2a; margin: 0;">${tabTitle}</h2>
+                    </div>` + tabContent.innerHTML;
+                    
+                    document.body.appendChild(tempContainer);
+                    
+                    // Generate canvas from HTML
+                    const canvas = await html2canvas(tempContainer, {
+                        scale: 1.5,
+                        useCORS: true,
+                        logging: false,
+                        backgroundColor: '#ffffff'
+                    });
+                    
+                    document.body.removeChild(tempContainer);
+                    
+                    const imgHeight = (canvas.height * imgWidth) / canvas.width;
+                    let heightLeft = imgHeight;
+                    let position = 0;
+                    const imgData = canvas.toDataURL('image/jpeg', 0.95);
+                    
+                    if (i > 0) pdf.addPage();
+                    
+                    // Add first page of this module
+                    pdf.addImage(imgData, 'JPEG', 0, 0, imgWidth, imgHeight);
+                    heightLeft -= pageHeight;
+                    
+                    // Add additional pages if module is long
+                    while (heightLeft > 0) {
+                        position -= pageHeight;
+                        pdf.addPage();
+                        pdf.addImage(imgData, 'JPEG', 0, position, imgWidth, imgHeight);
+                        heightLeft -= pageHeight;
+                    }
+                }
+                
+                // Save PDF
+                pdf.save(filename + '.pdf');
+                
+            } catch (error) {
+                console.error('Error generating PDF:', error);
+                alert('Error generating PDF. Please try again.');
+            } finally {
+                // Restore button
+                event.target.innerHTML = originalContent;
+                event.target.disabled = false;
+            }
+        }
+
+        // PDF Download Function (Single Tab - Legacy)
+        async function downloadTabAsPDF(tabId, filename) {
+            const { jsPDF } = window.jspdf;
+            
+            // Show loading indicator
+            const originalContent = event.target.innerHTML;
+            event.target.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating PDF...';
+            event.target.disabled = true;
+            
+            try {
+                // Get the tab content
+                const tabContent = document.getElementById(tabId);
+                if (!tabContent) {
+                    alert('Tab content not found');
+                    return;
+                }
+                
+                // Create a temporary container for rendering
+                const tempContainer = document.createElement('div');
+                tempContainer.style.width = '800px';
+                tempContainer.style.padding = '40px';
+                tempContainer.style.backgroundColor = 'white';
+                tempContainer.style.position = 'absolute';
+                tempContainer.style.left = '-9999px';
+                tempContainer.innerHTML = tabContent.innerHTML;
+                document.body.appendChild(tempContainer);
+                
+                // Generate canvas from HTML
+                const canvas = await html2canvas(tempContainer, {
+                    scale: 2,
+                    useCORS: true,
+                    logging: false,
+                    backgroundColor: '#ffffff'
+                });
+                
+                // Remove temporary container
+                document.body.removeChild(tempContainer);
+                
+                // Create PDF
+                const imgWidth = 210;
+                const pageHeight = 297;
+                const imgHeight = (canvas.height * imgWidth) / canvas.width;
+                let heightLeft = imgHeight;
+                let position = 0;
+                
+                const pdf = new jsPDF('p', 'mm', 'a4');
+                const imgData = canvas.toDataURL('image/png');
+                
+                // Add first page
+                pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                heightLeft -= pageHeight;
+                
+                // Add additional pages if needed
+                while (heightLeft > 0) {
+                    position = heightLeft - imgHeight;
+                    pdf.addPage();
+                    pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                    heightLeft -= pageHeight;
+                }
+                
+                // Save PDF
+                pdf.save(filename + '.pdf');
+                
+            } catch (error) {
+                console.error('Error generating PDF:', error);
+                alert('Error generating PDF. Please try again.');
+            } finally {
+                // Restore button
+                event.target.innerHTML = originalContent;
+                event.target.disabled = false;
+            }
+        }
+
+        // Consolidated Data Requirements PDF Generator
+        async function downloadConsolidatedDataRequirements(filename) {
+            const { jsPDF } = window.jspdf;
+            
+            // Show loading indicator
+            const originalContent = event.target.innerHTML;
+            event.target.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating Consolidated Report...';
+            event.target.disabled = true;
+            
+            try {
+                const pdf = new jsPDF('p', 'mm', 'a4');
+                let yPos = 20;
+                
+                // Title
+                pdf.setFontSize(20);
+                pdf.setTextColor(45, 92, 42);
+                pdf.text('Algo-Rythmn.ai: Data Requirements', 105, yPos, { align: 'center' });
+                
+                yPos += 10;
+                pdf.setFontSize(12);
+                pdf.setTextColor(100, 100, 100);
+                pdf.text('Comprehensive Data Strategy for All Six MVP Modules', 105, yPos, { align: 'center' });
+                
+                yPos += 20;
+                
+                // Add summary
+                pdf.setFontSize(11);
+                pdf.setTextColor(0, 0, 0);
+                pdf.setFont(undefined, 'bold');
+                pdf.text('Data Requirements Summary:', 20, yPos);
+                yPos += 10;
+                
+                pdf.setFont(undefined, 'normal');
+                pdf.text('• 10 Data Categories', 25, yPos);
+                yPos += 7;
+                pdf.text('• 70+ Specific Data Points', 25, yPos);
+                yPos += 7;
+                pdf.text('• 6 MVP Modules Covered', 25, yPos);
+                yPos += 7;
+                pdf.text('• 15+ Primary Data Sources', 25, yPos);
+                yPos += 15;
+                
+                // Extract all table data from the page
+                const table = document.querySelector('.data-table-container table');
+                if (!table) {
+                    throw new Error('Data table not found');
+                }
+                
+                const rows = table.querySelectorAll('tbody tr');
+                const dataCategories = [];
+                
+                rows.forEach(row => {
+                    const cells = row.querySelectorAll('td');
+                    if (cells.length > 0) {
+                        const title = cells[0].textContent.trim();
+                        const pointsHtml = cells[1].innerHTML;
+                        const points = [];
+                        const liElements = cells[1].querySelectorAll('li');
+                        liElements.forEach(li => {
+                            points.push(li.textContent.trim());
+                        });
+                        
+                        const source = cells[2].textContent.trim();
+                        const method = cells[3].textContent.trim();
+                        const purpose = cells[4].textContent.trim();
+                        
+                        const modules = [];
+                        const moduleBadges = cells[5].querySelectorAll('.module-badge');
+                        moduleBadges.forEach(badge => {
+                            modules.push(badge.textContent.trim());
+                        });
+                        
+                        dataCategories.push({
+                            title: title,
+                            points: points,
+                            source: source,
+                            method: method,
+                            purpose: purpose,
+                            modules: modules.join(', ')
+                        });
+                    }
+                });
+                
+                // Add content to PDF
+                pdf.setFontSize(11);
+                
+                dataCategories.forEach((category, index) => {
+                    if (yPos > 250) {
+                        pdf.addPage();
+                        yPos = 20;
+                    }
+                    
+                    // Category title
+                    pdf.setFontSize(12);
+                    pdf.setFont(undefined, 'bold');
+                    pdf.text(`${index + 1}. ${category.title}`, 20, yPos);
+                    yPos += 7;
+                    
+                    // Modules
+                    pdf.setFontSize(9);
+                    pdf.setFont(undefined, 'normal');
+                    const modulesText = `Modules: ${category.modules}`;
+                    pdf.text(modulesText, 20, yPos);
+                    yPos += 6;
+                    
+                    // Source and Method
+                    pdf.setFont(undefined, 'bold');
+                    pdf.text('Source:', 20, yPos);
+                    pdf.setFont(undefined, 'normal');
+                    pdf.text(category.source, 50, yPos);
+                    yPos += 6;
+                    
+                    pdf.setFont(undefined, 'bold');
+                    pdf.text('Method:', 20, yPos);
+                    pdf.setFont(undefined, 'normal');
+                    pdf.text(category.method, 50, yPos);
+                    yPos += 8;
+                    
+                    // Purpose
+                    pdf.setFont(undefined, 'bold');
+                    pdf.text('Purpose:', 20, yPos);
+                    pdf.setFont(undefined, 'normal');
+                    const splitPurpose = pdf.splitTextToSize(category.purpose, 160);
+                    pdf.text(splitPurpose, 20, yPos + 6);
+                    yPos += splitPurpose.length * 5 + 8;
+                    
+                    // Data points
+                    pdf.setFont(undefined, 'bold');
+                    pdf.text('Data Points:', 20, yPos);
+                    yPos += 6;
+                    
+                    pdf.setFontSize(8);
+                    pdf.setFont(undefined, 'normal');
+                    category.points.forEach(point => {
+                        if (yPos > 270) {
+                            pdf.addPage();
+                            yPos = 20;
+                        }
+                        const wrappedText = pdf.splitTextToSize(point, 165);
+                        pdf.text(wrappedText, 25, yPos);
+                        yPos += wrappedText.length * 4 + 2;
+                    });
+                    
+                    yPos += 8;
+                });
+                
+                // Save PDF
+                pdf.save(filename + '.pdf');
+                
+            } catch (error) {
+                console.error('Error generating PDF:', error);
+                alert('Error generating PDF. Please try again.');
+            } finally {
+                // Restore button
+                event.target.innerHTML = originalContent;
+                event.target.disabled = false;
+            }
+        }
+
+        function downloadDataAcquisitionPlan(filename) {
+            alert(`The detailed 12-week data acquisition plan will be generated for: ${filename}`);
+            // Implement similar PDF generation for the data acquisition plan
+        }
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    // Update active nav link
+                    document.querySelectorAll('nav a').forEach(link => {
+                        link.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                    
+                    // Scroll to target
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Initialize all components when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Ensure first tab content is visible on page load
+            const firstActiveTab = document.querySelector('.tab-btn.active');
+            if (firstActiveTab) {
+                const firstTabId = firstActiveTab.getAttribute('data-tab');
+                const firstTabContent = document.getElementById(firstTabId);
+                if (firstTabContent) {
+                    firstTabContent.classList.add('active');
+                }
+            }
+        });
+    </script>
+</body>
+</html>
