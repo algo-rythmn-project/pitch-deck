@@ -759,11 +759,15 @@
         </div>
         
         <div class="nav-section">
-            <h3>Core Modules</h3>
+            <h3>Overview</h3>
             <div class="nav-item active" data-section="dashboard">
                 <i class="fas fa-tachometer-alt"></i>
-                <span>Dashboard Overview</span>
+                <span>Core Modules</span>
             </div>
+        </div>
+
+        <div class="nav-section">
+            <h3>Crop Intelligence</h3>
             <div class="nav-item" data-section="crop-recommendations">
                 <i class="fas fa-leaf"></i>
                 <span>Crop Recommendations</span>
@@ -803,10 +807,10 @@
         </div>
         
         <div class="nav-section">
-            <h3>Soil Health</h3>
+            <h3>Soil Health Intelligence</h3>
             <div class="nav-item" data-section="soil-health">
                 <i class="fas fa-heartbeat"></i>
-                <span>Soil Health Intelligence</span>
+                <span>Soil Health</span>
             </div>
         </div>
         
@@ -1995,7 +1999,7 @@
                                         </div>
                                     </div>
                                     <div class="comparison-box red">
-                                        <h4 style="margin-bottom: 10px; color: #1a3c2e;">Without Inhibitor</h4>
+                                        <h4 style="margin-bottom: 10px; color: #1a3c2e;">Without Urease Inhibitor</h4>
                                         <div class="data-item" style="border: none; padding: 0; margin: 10px 0;">
                                             <div class="data-label">Microbial Diversity</div>
                                             <div class="data-value">-22% over 5 years</div>
@@ -2893,7 +2897,7 @@
                 <i class="fas fa-robot"></i> AlgoMind Pro
             </div>
             <div class="chat-subtitle">
-                <span class="status-indicator"></span> Online • Analyzing latest scouting reports & satellite imagery
+                <span class="status-indicator"></span> Online
             </div>
         </div>
         
@@ -2947,6 +2951,180 @@
     </div>
 
     <script>
+        // Section-specific chatbot samples
+        const sectionChatData = {
+            'dashboard': {
+                initialMessage: "Hello. I have analyzed the latest scouting reports and satellite imagery for Olds College. How can I assist with your field decisions today?",
+                sampleQuestions: [
+                    { text: "Overview of Field 14", query: "Give me an overview of Field 14" },
+                    { text: "Soil health metrics", query: "What are the soil health metrics for my fields?" },
+                    { text: "Priority alerts", query: "What are the priority alerts for this week?" },
+                    { text: "Best performing fields", query: "Which fields are performing best?" }
+                ],
+                sampleConversation: [
+                    { sender: "You", text: "What are the priority recommendations for Field 14?", isUser: true },
+                    { sender: "AlgoMind Pro", text: "For Field 14, I recommend: 1) Apply phosphorus-solubilizing bacteria for 18-22% yield increase, 2) Consider Hard Red Spring Wheat for optimal ROI, and 3) Implement seed treatment for fusarium protection based on soil DNA analysis.", isUser: false }
+                ]
+            },
+            'crop-recommendations': {
+                initialMessage: "I'm ready to analyze crop recommendations based on soil data, market prices, and historical performance. Which field would you like me to evaluate?",
+                sampleQuestions: [
+                    { text: "Recommended crop", query: "Based on background information such as fertility, DNA testing, soil type, historical weather, and grain prices, what is the recommended crop for this land?" },
+                    { text: "Revenue projection", query: "What is the predicted gross revenue at current grain prices?" },
+                    { text: "Market conditions", query: "What are current market conditions for major crops?" },
+                    { text: "Risk factors", query: "What are the risk factors for this crop recommendation?" }
+                ],
+                sampleConversation: [
+                    { sender: "You", text: "Based on background information such as fertility, DNA testing, soil type, historical weather, and grain prices, what is the recommended crop for this land?", isUser: true },
+                    { sender: "AlgoMind Pro", text: "Based on Field 14's soil fertility (high nitrogen, pH 6.8), DNA testing results, clay loam soil type, historical weather patterns, and current grain prices, I recommend <strong>Hard Red Spring Wheat</strong> with 92% confidence. Key factors: excellent nitrogen availability, low disease pressure from DNA tests, and favorable market conditions at $8.50/bu.", isUser: false },
+                    { sender: "You", text: "What is the predicted gross revenue at current grain prices?", isUser: true },
+                    { sender: "AlgoMind Pro", text: "At current grain prices, projected gross revenue is <strong>$68,200</strong> for Field 14 (80 acres × 100 bu/acre × $8.50/bu). Net revenue estimated at $25,400 after production costs of $42,800.", isUser: false }
+                ]
+            },
+            'crop-rotation': {
+                initialMessage: "I can help optimize your crop rotation strategy for protein development, carbon capture, and disease management. What's your planning timeframe?",
+                sampleQuestions: [
+                    { text: "5-year rotation plan", query: "Can you develop a five-year crop rotation designed to maximize protein development and carbon capture while considering soil pathogens, fertilizer efficiency, and weather?" },
+                    { text: "Protein optimization", query: "How can I maximize protein development in my rotation?" },
+                    { text: "Carbon capture", query: "What rotation maximizes carbon capture?" },
+                    { text: "Disease management", query: "How does this rotation address soil pathogens?" }
+                ],
+                sampleConversation: [
+                    { sender: "You", text: "Can you develop a five-year crop rotation designed to maximize protein development and carbon capture while considering soil pathogens, fertilizer efficiency, and weather?", isUser: true },
+                    { sender: "AlgoMind Pro", text: "I recommend: <strong>Canola → HRS Wheat → Peas → Durum → Canola</strong>. This rotation maximizes protein development (avg. 15.8%) and carbon capture (2.3 tons/acre/year). Benefits: pea N-fixation supports durum protein, canola breaks cereal disease cycles, excellent fertilizer efficiency, and weather-resilient crop diversity.", isUser: false }
+                ]
+            },
+            'biologicals': {
+                initialMessage: "I'm analyzing soil biology data and treatment options. Which biological treatments or seed treatments are you considering?",
+                sampleQuestions: [
+                    { text: "Biological benefits", query: "Which fields would benefit most from phosphorus-solubilizing bacteria or specific biological products?" },
+                    { text: "Seed treatments", query: "Which seed treatments are recommended to maximize production given existing soil-borne diseases?" },
+                    { text: "Inoculant decision", query: "Do I need to add an inoculant on this field for this particular legume or are levels in the soil sufficient?" },
+                    { text: "Treatment ROI", query: "What's the expected ROI for these biological treatments?" }
+                ],
+                sampleConversation: [
+                    { sender: "You", text: "Which fields would benefit most from phosphorus-solubilizing bacteria or specific biological products?", isUser: true },
+                    { sender: "AlgoMind Pro", text: "Field 22 and Field 45 show highest potential for phosphorus-solubilizing bacteria (18-22% yield increase) - high total P but low available P. Field 31 would benefit from mycorrhizal inoculants. Expected ROI ranges from $25-45/acre depending on field conditions.", isUser: false },
+                    { sender: "You", text: "Which seed treatments are recommended to maximize production given existing soil-borne diseases?", isUser: true },
+                    { sender: "AlgoMind Pro", text: "Based on soil DNA testing: Field 14 needs Vibrance Extreme for fusarium and rhizoctonia. Field 22 requires clubroot-resistant treatment. Field 31 benefits from pea inoculant (rhizobia at 45% optimal). These treatments address your specific soil-borne disease profiles.", isUser: false }
+                ]
+            },
+            'variety-selection': {
+                initialMessage: "I have variety performance data across multiple soil types and conditions. Which crop variety selection are you working on?",
+                sampleQuestions: [
+                    { text: "Best variety for field", query: "Which specific seed variety or hybrid should be grown in this field to optimize production?" },
+                    { text: "Variety performance", query: "How do different varieties perform in similar soil conditions?" },
+                    { text: "Disease resistance", query: "Which varieties have the best disease resistance?" },
+                    { text: "Quality characteristics", query: "What quality characteristics does this variety provide?" }
+                ],
+                sampleConversation: [
+                    { sender: "You", text: "Which specific seed variety or hybrid should be grown in this field to optimize production?", isUser: true },
+                    { sender: "AlgoMind Pro", text: "For Field 14, I recommend <strong>AAC Brandon HRS Wheat</strong> (94/100 match score). Key advantages: 14.5% protein potential in your soil type, excellent fusarium resistance (DNA test shows risk), strong performance in clay loam (avg. 105 bu/acre), and optimal maturity for your climate zone.", isUser: false }
+                ]
+            },
+            'fertility': {
+                initialMessage: "I'm ready to analyze fertility strategies including urease inhibitors, nitrogen management, and variable rate applications. What's your focus area?",
+                sampleQuestions: [
+                    { text: "Urease inhibitors", query: "Which fields would benefit from a urease inhibitor, and which type is best suited for the specific soil?" },
+                    { text: "VR technology", query: "Should I apply variable rate (VR) technology to biologicals in addition to fertility?" },
+                    { text: "Nitrogen strategy", query: "What's the optimal nitrogen management strategy?" },
+                    { text: "Fertilizer efficiency", query: "How can I improve fertilizer use efficiency?" }
+                ],
+                sampleConversation: [
+                    { sender: "You", text: "Which fields would benefit from a urease inhibitor, and which type is best suited for the specific soil?", isUser: true },
+                    { sender: "AlgoMind Pro", text: "Fields 22 and 45 need urease inhibitors due to high pH (7.2+) and planned fall urea application. <strong>NBPT-type inhibitors</strong> are best suited for these high-pH soils. Expected benefit: 15-20% reduction in N loss, equivalent to $18-25/acre savings.", isUser: false },
+                    { sender: "You", text: "Should I apply variable rate (VR) technology to biologicals in addition to fertility?", isUser: true },
+                    { sender: "AlgoMind Pro", text: "Yes, absolutely. VR application of biologicals increases ROI by 15-25% compared to uniform application. Your soil variability maps show zones with 3-4x response differential. I recommend VR for both P-solubilizing bacteria and fertility applications on Fields 14, 22, and 45.", isUser: false }
+                ]
+            },
+            'supply-chain': {
+                initialMessage: "I can match your crop quality profiles with processor requirements. Which market or processor are you targeting?",
+                sampleQuestions: [
+                    { text: "Best market match", query: "Where can I find the best malt barley to fit a specific company's profile?" },
+                    { text: "Quality profiles", query: "What soil profiles or hybrids produce the best malt barley or canola oil for specific industry requirements?" },
+                    { text: "Processor requirements", query: "What are the specific processor quality requirements?" },
+                    { text: "Contract opportunities", query: "What premium contract opportunities are available?" }
+                ],
+                sampleConversation: [
+                    { sender: "You", text: "Where can I find the best malt barley to fit a specific company's profile?", isUser: true },
+                    { sender: "AlgoMind Pro", text: "For <strong>Anheuser-Busch</strong> profile, <strong>CDC Copeland</strong> in Field 14 is your best match (94/100 score). Soil profile: pH 6.8, protein potential 13.8% (target: 12.5-13.5%), excellent plumpness and germination potential. Field 22 is secondary option with 89/100 match.", isUser: false },
+                    { sender: "You", text: "What soil profiles or hybrids produce the best malt barley or canola oil for specific industry requirements?", isUser: true },
+                    { sender: "AlgoMind Pro", text: "For malt barley: pH 6.5-7.0, moderate N, clay loam soils produce optimal protein (12.5-13.5%). For high-oleic canola: pH 6.0-7.5, well-drained soils, hybrids like Platinum or Nexera achieve >72% oleic acid. Your Fields 14 and 31 match these profiles perfectly.", isUser: false }
+                ]
+            },
+            'soil-health': {
+                initialMessage: "I'm analyzing soil health metrics including microbial diversity, organic matter, and long-term fertility impacts. How can I help?",
+                sampleQuestions: [
+                    { text: "NH₃ impact", query: "Does the long term use of NH₃ as a nitrogen source affect soil biological health? Or any other fertilizer." },
+                    { text: "Diversity & yield", query: "How does bacteria diversity affect crop yield and what crop does it affect the most?" },
+                    { text: "Inoculant needs", query: "Do I need to add an inoculant on this field for this particular legume or are levels in the soil sufficient?" },
+                    { text: "Soil health score", query: "What's the overall soil health score for my fields?" }
+                ],
+                sampleConversation: [
+                    { sender: "You", text: "Does the long term use of NH₃ as a nitrogen source affect soil biological health? Or any other fertilizer.", isUser: true },
+                    { sender: "AlgoMind Pro", text: "Yes. Long-term NH₃ use reduces microbial diversity by 22%, mycorrhizal fungi by 65%, and nitrogen-fixing bacteria by 40% over 5 years. Urease inhibitors and incorporating organic amendments can mitigate these effects. Rotating with ESN or biological N sources helps maintain soil health.", isUser: false },
+                    { sender: "You", text: "How does bacteria diversity affect crop yield and what crop does it affect the most?", isUser: true },
+                    { sender: "AlgoMind Pro", text: "Strong positive correlation (+0.82). <strong>Wheat is most affected</strong>: +8.2 bu/acre per 10% diversity increase, followed by barley (+6.5 bu/acre), canola (+3.5 bu/acre), and peas (+2.8 bu/acre). Field 14 has 74% diversity index, supporting 92% of maximum yield potential.", isUser: false },
+                    { sender: "You", text: "Do I need to add an inoculant on this field for this particular legume or are levels in the soil sufficient?", isUser: true },
+                    { sender: "AlgoMind Pro", text: "For peas on Field 31: <strong>Yes, inoculant recommended</strong>. Soil tests show rhizobia at 45 cells/g (optimal >100). Last legume crop was 4 years ago. Peat-based pea inoculant will provide +15 bu/acre ROI. Cost: $8.50/acre, benefit: $45-60/acre.", isUser: false }
+                ]
+            },
+            'data-analysis': {
+                initialMessage: "I can query platform data across all fields to identify patterns and top performers. What would you like to analyze?",
+                sampleQuestions: [
+                    { text: "Yield characteristics", query: "What are the common soil and variety characteristics for hard red spring wheat yielding over 100 bu/acre versus those yielding under 35 bu/acre?" },
+                    { text: "Top variety", query: "What was the top-performing variety on the platform last year?" },
+                    { text: "Performance analysis", query: "Compare performance across different soil types" },
+                    { text: "Historical trends", query: "What are the yield trends over the past 5 years?" }
+                ],
+                sampleConversation: [
+                    { sender: "You", text: "What are the common soil and variety characteristics for hard red spring wheat yielding over 100 bu/acre versus those yielding under 35 bu/acre?", isUser: true },
+                    { sender: "AlgoMind Pro", text: "<strong>>100 bu/acre fields:</strong> pH 6.5-7.0, organic matter >3.5%, microbial diversity >70%, clay loam soils, varieties with fusarium resistance. <strong><35 bu/acre fields:</strong> pH <6.0 or >7.5, organic matter <2%, sandy soils, poor variety selection, high disease pressure. Field 14 matches high-yielding profile.", isUser: false },
+                    { sender: "You", text: "What was the top-performing variety on the platform last year?", isUser: true },
+                    { sender: "AlgoMind Pro", text: "<strong>CDC Landmark</strong> was the top-performing HRS wheat variety with an average yield of 112 bu/acre across 47 fields. It excelled in clay loam soils with pH 6.5-7.0. Second was AAC Brandon (108 bu/acre avg). Both are excellent choices for Field 14.", isUser: false }
+                ]
+            }
+        };
+
+        // Function to update chatbot content based on section
+        function updateChatbotForSection(sectionId) {
+            const chatData = sectionChatData[sectionId] || sectionChatData['dashboard'];
+            const chatBody = document.getElementById('chat-body');
+            
+            // Clear existing messages
+            chatBody.innerHTML = '';
+            
+            // Add initial bot message
+            addMessage('AlgoMind Pro', chatData.initialMessage, false);
+            
+            // Add sample conversation
+            if (chatData.sampleConversation && chatData.sampleConversation.length > 0) {
+                chatData.sampleConversation.forEach(msg => {
+                    setTimeout(() => {
+                        addMessage(msg.sender, msg.text, msg.isUser);
+                    }, 500);
+                });
+            }
+            
+            // Update quick question chips
+            const quickQuestionsContainer = document.querySelector('.quick-questions');
+            if (quickQuestionsContainer && chatData.sampleQuestions) {
+                quickQuestionsContainer.innerHTML = '';
+                chatData.sampleQuestions.forEach(q => {
+                    const chip = document.createElement('div');
+                    chip.className = 'question-chip';
+                    chip.setAttribute('data-question', q.query);
+                    chip.textContent = q.text;
+                    chip.addEventListener('click', function() {
+                        const question = this.getAttribute('data-question');
+                        chatInput.value = question;
+                        sendBtn.click();
+                    });
+                    quickQuestionsContainer.appendChild(chip);
+                });
+            }
+        }
+
         // Navigation functionality
         document.querySelectorAll('.nav-item').forEach(item => {
             item.addEventListener('click', function() {
@@ -2972,6 +3150,9 @@
                 // Update page title
                 const pageTitleText = document.getElementById('page-title-text');
                 pageTitleText.textContent = this.querySelector('span').textContent;
+                
+                // Update chatbot content for the new section
+                updateChatbotForSection(sectionId);
             });
         });
         
@@ -3079,7 +3260,8 @@
             }
         });
         
-        // Quick question chips
+        // Quick question chips (will be set up by updateChatbotForSection)
+        // Initial setup on page load
         quickQuestions.forEach(chip => {
             chip.addEventListener('click', function() {
                 const question = this.getAttribute('data-question');
@@ -3087,6 +3269,9 @@
                 sendBtn.click();
             });
         });
+        
+        // Initialize chatbot with dashboard section on page load
+        updateChatbotForSection('dashboard');
         
         // Field selector change
         document.getElementById('field-select').addEventListener('change', function() {
