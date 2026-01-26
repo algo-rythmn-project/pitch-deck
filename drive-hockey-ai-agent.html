@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strategic Partnership Proposal | Algo-Rythmn.ai + Drive Hockey Analytics</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-navy: #0A1A3A;
+            --secondary-blue: #1A5FED;
+            --accent-teal: #00D4C9;
+            --accent-gold: #FFB547;
+            --light-bg: #F8FAFC;
+            --dark-text: #1E293B;
+            --medium-gray: #64748B;
+            --light-gray: #CBD5E1;
+            --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 20px 40px -10px rgba(26, 95, 237, 0.12);
+            --border-radius: 16px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-text);
+            background-color: var(--light-bg);
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+        
+        /* Header & Hero */
+        .hero-header {
+            background: linear-gradient(135deg, var(--primary-navy) 0%, #13244E 100%);
+            color: white;
+            padding: 80px 0 100px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(26, 95, 237, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(0, 212, 201, 0.1) 0%, transparent 50%);
+        }
+        
+        .logo-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 80px;
+        }
+        
+        .company-logo {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 1.8rem;
+            color: white;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-accent {
+            color: var(--accent-teal);
+        }
+        
+        .partner-logo {
+            font-weight: 600;
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .hero-content {
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 3.8rem;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            background: linear-gradient(90deg, #FFFFFF 0%, rgba(255, 255, 255, 0.9) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.3rem;
+            font-weight: 300;
+            max-width: 700px;
+            margin: 0 auto 50px;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.85);
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(90deg, var(--accent-teal) 0%, #00B4AC 100%);
+            color: var(--primary-navy);
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 18px 42px;
+            border-radius: 50px;
+            text-decoration: none;
+            box-shadow: 0 10px 30px rgba(0, 212, 201, 0.3);
+            transition: var(--transition);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(0, 212, 201, 0.4);
+        }
+        
+        /* Sections */
+        .section {
+            padding: 100px 0;
+        }
+        
+        .section-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 70px;
+        }
+        
+        .section-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 2.8rem;
+            color: var(--primary-navy);
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--medium-gray);
+            line-height: 1.7;
+        }
+        
+        /* Cards */
+        .card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 40px;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+            height: 100%;
+            border: 1px solid rgba(203, 213, 225, 0.3);
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .card-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary-navy);
+            margin-bottom: 0px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .card-icon {
+            margin-right: 12px;
+            color: var(--secondary-blue);
+        }
+        
+        .highlight-card {
+            background: linear-gradient(135deg, var(--primary-navy) 0%, #1A2B5C 100%);
+            color: white;
+            padding: 50px;
+        }
+        
+        .highlight-card .card-title {
+            color: white;
+        }
+        
+        /* Stats */
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 30px 20px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: var(--border-radius);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(203, 213, 225, 0.2);
+        }
+        
+        .stat-number {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 3.2rem;
+            background: linear-gradient(90deg, var(--secondary-blue) 0%, var(--accent-teal) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            font-size: 0.95rem;
+            color: var(--medium-gray);
+            font-weight: 500;
+        }
+        
+        /* Use Cases */
+        .use-cases-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+        
+        .use-case-card {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+        }
+        
+        .use-case-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .use-case-header {
+            padding: 30px 30px 20px;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .persona {
+            display: inline-block;
+            background: rgba(26, 95, 237, 0.1);
+            color: var(--secondary-blue);
+            font-weight: 600;
+            font-size: 0.9rem;
+            padding: 8px 16px;
+            border-radius: 50px;
+            margin-bottom: 15px;
+        }
+        
+        .query-example {
+            background: var(--light-bg);
+            border-left: 4px solid var(--accent-teal);
+            padding: 20px;
+            margin: 25px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        /* Architecture */
+        .architecture-diagram {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 60px 0;
+        }
+        
+        .architecture-layer {
+            text-align: center;
+            padding: 40px 25px;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--card-shadow);
+            position: relative;
+        }
+        
+        .layer-number {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent-teal);
+            color: var(--primary-navy);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.2rem;
+        }
+        
+        /* Phases */
+        .phases-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+        
+        .phase {
+            position: relative;
+            padding: 40px 30px 30px;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--card-shadow);
+        }
+        
+        .phase-number {
+            position: absolute;
+            top: -25px;
+            left: 30px;
+            background: linear-gradient(135deg, var(--secondary-blue) 0%, #0A4BC8 100%);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 1.5rem;
+        }
+        
+        /* Table */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 40px 0;
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+        }
+        
+        .comparison-table th {
+            background: var(--primary-navy);
+            color: white;
+            font-weight: 600;
+            text-align: left;
+            padding: 25px 30px;
+        }
+        
+        .comparison-table td {
+            padding: 25px 30px;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .comparison-table tr:hover {
+            background: rgba(26, 95, 237, 0.03);
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--primary-navy);
+            color: white;
+            padding: 80px 0 50px;
+            margin-top: 100px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+        
+        .footer-logo {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 1.8rem;
+            color: white;
+            margin-bottom: 15px;
+        }
+        
+        .footer-contact {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .footer-contact a {
+            color: var(--accent-teal);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-contact a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero-title {
+                font-size: 3.2rem;
+            }
+            
+            .section-title {
+                font-size: 2.4rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 25px;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .section {
+                padding: 70px 0;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .use-cases-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Header -->
+    <header class="hero-header">
+        <div class="container">
+            <div class="logo-container">
+                <div class="company-logo">
+                    Algo-<span class="logo-accent">Rythmn</span>.ai
+                </div>
+                <div class="partner-logo">× Drive Hockey Analytics</div>
+            </div>
+            
+            <div class="hero-content">
+                <h1 class="hero-title">The AI Agentic Intelligence Layer for Hockey Analytics</h1>
+                <p class="hero-subtitle"><span style="color: #11b3aa; font-weight: 700;">From Static Dashboards to Strategic Advantage.</span> We build the proprietary AI agents that transform your platform into a conversational decision engine—autonomously scouting talent, predicting development, and powering dynamic NHLe projections.</p>
+                <a href="#contact" class="cta-button">Schedule Technical Deep Dive</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Executive Summary -->
+    <section class="section" id="executive-summary">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Executive Summary</h2>
+                <p class="section-subtitle">Drive Hockey Analytics has established leadership in making pro-level analytics accessible across all hockey levels. This partnership with Algo-Rythmn.ai will build a proprietary AI layer that transforms data into competitive advantage.</p>
+            </div>
+            
+            <div class="card highlight-card">
+                <h3 class="card-title">Strategic Opportunity</h3>
+                <p>We propose building an <strong>AI Agentic Layer</strong> on top of your existing dashboard technology, creating an interactive, predictive, and "LLM-ready" decision engine that focuses on enhancing NHL equivalency projections for junior players using comprehensive feeder league data, all accessible through natural language conversation.</p>
+            </div>
+            
+            <div class="stats-container">
+                <div class="stat-item">
+                    <div class="stat-number">$4.7B</div>
+                    <div class="stat-label">Projected AI in Sports Market by 2034</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">62%</div>
+                    <div class="stat-label">Fans See Positive AI Impact on Talent Acquisition</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">20.6%</div>
+                    <div class="stat-label">CAGR of Sports Analytics Market</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">70%</div>
+                    <div class="stat-label">Reduction in Manual Data Processing Time</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Challenge -->
+    <section class="section" style="background-color: #F0F7FF;">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Beyond the Analytics Parity Trap</h2>
+                <p class="section-subtitle">The hockey analytics industry has reached an inflection point where data access is becoming commoditized. True competitive advantage now comes from the proprietary intelligence layer built on top of that data.</p>
+            </div>
+            
+            <div class="architecture-diagram">
+                <div class="architecture-layer">
+                    <div class="layer-number">1</div>
+                    <h3 class="card-title">Data Silos & Fragmentation</h3>
+                    <p>Performance metrics, biometrics, and scouting reports exist in disconnected systems, preventing unified player assessment.</p>
+                </div>
+                <div class="architecture-layer">
+                    <div class="layer-number">2</div>
+                    <h3 class="card-title">Static Dashboards vs. Dynamic Decisions</h3>
+                    <p>Traditional BI tools present historical snapshots but lack real-time "what-if" scenario modeling capabilities.</p>
+                </div>
+                <div class="architecture-layer">
+                    <div class="layer-number">3</div>
+                    <h3 class="card-title">Translation Gap in Projections</h3>
+                    <p>Current NHLe models lack contextual nuance for accurately translating performance across different league environments.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Solution -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">The AI Agentic Intelligence Layer</h2>
+                <p class="section-subtitle">An advanced AI system that transforms your data infrastructure into a conversational, predictive analytics platform—moving from descriptive analytics to prescriptive intelligence.</p>
+            </div>
+            
+            <div class="architecture-diagram">
+                <div class="architecture-layer">
+                    <div class="layer-number">1</div>
+                    <h3 class="card-title">Data Orchestration</h3>
+                    <p>Unifying tracking data, feeder league statistics, and historical NHL performance using modern data fabric architecture.</p>
+                </div>
+                <div class="architecture-layer">
+                    <div class="layer-number">2</div>
+                    <h3 class="card-title">Advanced Analytics Engine</h3>
+                    <p>Implementing <strong>dynamic NHLe</strong> coefficients that simulate space deficits and pressure-decay rates, plus predictive models for injury risk and development trajectories.</p>
+                </div>
+                <div class="architecture-layer">
+                    <div class="layer-number">3</div>
+                    <h3 class="card-title">LLM & Agentic Interface</h3>
+                    <p>Natural language processing that interprets queries, triggers analytical workflows, and generates conversational insights.</p>
+                </div>
+                <div class="architecture-layer">
+                    <div class="layer-number">4</div>
+                    <h3 class="card-title">Enhanced Visualization</h3>
+                    <p>Your existing dashboard, now powered by automated insights, predictive visualizations, and embedded AI recommendations.</p>
+                </div>
+            </div>
+            
+            <div class="card highlight-card" style="margin-top: 60px;">
+                <h3 class="card-title">Key Differentiator: From Tool to Collaborative Agent</h3>
+                <p>Unlike basic chatbots, our <strong>agentic AI</strong> reasons, plans, and executes multi-step analytical tasks autonomously—running comparisons, generating projections, and compiling scouting reports based on single natural language requests. It becomes a collaborative partner in the decision-making process.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Use Cases -->
+    <section class="section" style="background-color: #F8FAFC;">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Transformative Use Cases</h2>
+                <p class="section-subtitle">Practical applications of the AI Agentic Layer across different organizational roles and decision-making scenarios.</p>
+            </div>
+            
+            <div class="use-cases-grid">
+                <!-- Use Case 1 -->
+                <div class="use-case-card">
+                    <div class="use-case-header">
+                        <div class="persona">NHL Director of Amateur Scouting</div>
+                        <h3 class="card-title">European Prospect Identification</h3>
+                    </div>
+                    <div style="padding: 10px 30px 30px;">
+                        <p><strong>Goal:</strong> Identify draft-eligible players with highest NHL projection from European junior leagues.</p>
+                        <div class="query-example">
+                            "Find all 2026 draft-eligible centers from the SHL U20 league who have a dynamic NHLe projected points/60 in the top quartile, but whose skating explosiveness score has improved by more than 15% this season. Compare their micro-action tagging for defensive stick positioning."
+                        </div>
+                        <p><strong>AI Agent Action:</strong> Executes <strong>dynamic NHLe</strong> projection model, filters players, analyzes biomechanical trends, retrieves computer vision analysis, and presents ranked shortlist with reasoning.</p>
+                    </div>
+                </div>
+                
+                <!-- Use Case 2 -->
+                <div class="use-case-card">
+                    <div class="use-case-header">
+                        <div class="persona">USHL General Manager</div>
+                        <h3 class="card-title">Roster Optimization & Simulation</h3>
+                    </div>
+                    <div style="padding: 10px 30px 30px;">
+                        <p><strong>Goal:</strong> Optimize roster construction and player development focus through scenario modeling.</p>
+                        <div class="query-example">
+                            "Simulate the impact on our team's expected goal differential if we move Player A from wing to center and increase his power play time by 25%. Factor in his historical performance in different roles and current fatigue metrics."
+                        </div>
+                        <p><strong>AI Agent Action:</strong> Accesses historical performance data across positions, runs lineup optimization models, integrates wearable fatigue data, and generates visual report with confidence intervals.</p>
+                    </div>
+                </div>
+                
+                <!-- Use Case 3 -->
+                <div class="use-case-card">
+                    <div class="use-case-header">
+                        <div class="persona">Player Development Coach</div>
+                        <h3 class="card-title">Personalized Development Plans</h3>
+                    </div>
+                    <div style="padding: 10px 30px 30px;">
+                        <p><strong>Goal:</strong> Create data-driven, personalized development plans for prospects based on historical comparables.</p>
+                        <div class="query-example">
+                            "For our top defensive prospect, identify three NHL players with the most similar playing styles and physical profiles when they were 19. Show me the specific skills those players improved most between ages 19-22, and create a 12-month training priority list."
+                        </div>
+                        <p><strong>AI Agent Action:</strong> Executes "digital twin" search across historical data, performs gap analysis on skill progression, and synthesizes findings into periodized training recommendations.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card highlight-card" style="margin-top: 30px;">
+                <h3 class="card-title">Advanced NHL Equivalency Projection</h3>
+                <p>Our AI layer will enhance your existing NHLe models by incorporating contextual factors that simple multipliers miss:</p>
+                <ul style="columns: 2; column-gap: 60px; margin-top: 20px;">
+                    <li style="margin-bottom: 12px; break-inside: avoid;"><strong>Context-Aware Analytics:</strong> Weighing performance against league strength, teammate quality, and high-leverage situations (e.g., playoff performance).</li>
+                    <li style="margin-bottom: 12px; break-inside: avoid;"><strong>Biomechanical Integration:</strong> Using skeletal pose estimation from video to analyze "explosive gait" and joint angles, predicting adaptability to NHL pace.</li>
+                    <li style="margin-bottom: 12px; break-inside: avoid;"><strong>Micro-Action Forecasting:</strong> Predicting NHL success based on "invisible" habits like stick-blade positioning and pre-pass scanning frequency.</li>
+                    <li style="margin-bottom: 12px; break-inside: avoid;"><strong>Dynamic Coefficients:</strong> Moving beyond static league multipliers to player-specific translation factors that evolve with performance trends.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Competitive Advantage -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Strategic Competitive Advantages</h2>
+                <p class="section-subtitle">Transforming your platform from a utility into an indispensable strategic partner.</p>
+            </div>
+            
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Capability</th>
+                        <th>Current Market Standard</th>
+                        <th>Drive Analytics + AI Agentic Layer</th>
+                        <th>Business Impact</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Insight Generation</strong></td>
+                        <td>Manual analysis, static reports</td>
+                        <td><span style="color: #0A4BC8; font-weight: 700;">Automated, predictive</span> insights delivered conversationally</td>
+                        <td>Reduces scout/analyst time on data processing by ~70%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Player Projection</strong></td>
+                        <td>Basic NHLe multipliers</td>
+                        <td><span style="color: #0A4BC8; font-weight: 700;">Dynamic NHLe projection models</span> with contextual simulation and biomechanical filtering</td>
+                        <td>Reduces "toxic contract" risk from failed signings by 25%+</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Market Coverage</strong></td>
+                        <td>Limited by human scout travel</td>
+                        <td><span style="color: #0A4BC8; font-weight: 700;">24/7</span> automated monitoring of global feeder leagues</td>
+                        <td>Identifies "hidden gems" in secondary markets for asset arbitrage</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Platform Stickiness</strong></td>
+                        <td>Tool-based engagement</td>
+                        <td><span style="color: #0A4BC8; font-weight: 700;">Collaborative, agentic</span> workflow integration</td>
+                        <td>Transforms platform from utility to indispensable strategic partner</td>
+                    </tr>
+                    <tr>
+                        <td><strong>IP Sovereignty</strong></td>
+                        <td>Third-party AI dependencies</td>
+                        <td><span style="color: #0A4BC8; font-weight: 700;">Proprietary</span> algorithms that become core company assets</td>
+                        <td>Creates lasting competitive moats and increases valuation</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="card highlight-card" style="margin-top: 60px;">
+                <h3 class="card-title">Intellectual Property Sovereignty</h3>
+                <p>Unlike relying on third-party AI services, this partnership will build proprietary algorithms and models that become Drive Hockey Analytics' core intellectual property. This IP becomes a valuable, non-replicable asset that increases your company's valuation and creates lasting competitive moats. The dynamic NHLe model itself becomes a market-defining innovation.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Implementation Roadmap -->
+    <section class="section" style="background-color: #F0F7FF;">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Phased Implementation Roadmap</h2>
+                <p class="section-subtitle">A strategic, risk-managed approach to building and deploying the AI Agentic Layer.</p>
+            </div>
+            
+            <div class="phases-container">
+                <div class="phase">
+                    <div class="phase-number">1</div>
+                    <h3 class="card-title">Foundation & Integration</h3>
+                    <p><strong>Months 1-3</strong></p>
+                    <ul style="margin-top: 20px; padding-left: 20px; color: var(--medium-gray);">
+                        <li style="margin-bottom: 10px;">Data pipeline unification across existing sources</li>
+                        <li style="margin-bottom: 10px;">Development of core <strong>dynamic NHLe</strong> projection models</li>
+                        <li style="margin-bottom: 10px;">Basic natural language query interface for data retrieval</li>
+                        <li><strong>Outcome:</strong> Internal prototype demonstrating automated player comparisons</li>
+                    </ul>
+                </div>
+                
+                <div class="phase">
+                    <div class="phase-number">2</div>
+                    <h3 class="card-title">Intelligence & Prediction</h3>
+                    <p><strong>Months 4-6</strong></p>
+                    <ul style="margin-top: 20px; padding-left: 20px; color: var(--medium-gray);">
+                        <li style="margin-bottom: 10px;">Integration of biomechanical assessment algorithms</li>
+                        <li style="margin-bottom: 10px;">Development of "digital twin" historical matching system</li>
+                        <li style="margin-bottom: 10px;">Advanced "what-if" scenario simulation capabilities</li>
+                        <li><strong>Outcome:</strong> Beta release with select USHL and partner teams</li>
+                    </ul>
+                </div>
+                
+                <div class="phase">
+                    <div class="phase-number">3</div>
+                    <h3 class="card-title">Scale & Optimization</h3>
+                    <p><strong>Months 7-12</strong></p>
+                    <ul style="margin-top: 20px; padding-left: 20px; color: var(--medium-gray);">
+                        <li style="margin-bottom: 10px;">Full agentic workflow automation (report generation, alerting)</li>
+                        <li style="margin-bottom: 10px;">Expansion to international league data integration</li>
+                        <li style="margin-bottom: 10px;">Advanced visualization and dashboard embedding</li>
+                        <li><strong>Outcome:</strong> Enterprise-ready platform for NHL, NCAA, and major junior teams</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ROI & Conclusion -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Expected Return on Investment</h2>
+                <p class="section-subtitle">Value creation across multiple dimensions for both Drive Hockey Analytics and your clients.</p>
+            </div>
+            
+            <div class="stats-container">
+                <div class="stat-item">
+                    <div class="stat-number">50%</div>
+                    <div class="stat-label">Accelerated Coaching & Scouting Decisions</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">30-40%</div>
+                    <div class="stat-label">Reduced International Travel Budgets</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">90%</div>
+                    <div class="stat-label">Analyst Time Shifted to High-Value Tasks</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">25%+</div>
+                    <div class="stat-label">Reduction in "Toxic Contract" Risk</div>
+                </div>
+            </div>
+            
+            <div class="card highlight-card" style="margin-top: 60px;">
+                <h3 class="card-title">Conclusion: Redefining the Future of Hockey Analytics</h3>
+                <p>The AI revolution in sports analytics is transitioning from experimental to essential. This partnership represents a strategic opportunity to leverage Drive Hockey Analytics' established technology and augment it with a proprietary AI layer that delivers unprecedented access, superior projections through dynamic NHLe, and sustainable competitive advantage.</p>
+                <p style="margin-top: 20px;">We are prepared to begin a discovery phase to tailor this solution to your specific architecture and client needs. Let's build the future of hockey intelligence together.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <div class="footer-logo">Algo-<span style="color: var(--accent-teal);">Rythmn</span>.ai</div>
+                    <p class="footer-contact">
+                        <a href="mailto:support@algo-rythmn.ai">support@algo-rythmn.ai</a><br>
+                        Calgary, Alberta, Canada
+                    </p>
+                </div>
+                
+                <div>
+                    <h3 class="card-title" style="color: white; margin-bottom: 20px;">Proposal Prepared For</h3>
+                    <p class="footer-contact">
+                        Drive Hockey Analytics<br>
+                        Strategic Partnership Review
+                    </p>
+                </div>
+                
+                <div>
+                    <h3 class="card-title" style="color: white; margin-bottom: 20px;">Next Steps</h3>
+                    <p class="footer-contact">
+                        1. Technical deep dive session<br>
+                        2. Architecture compatibility review<br>
+                        3. Pilot program scoping
+                    </p>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                © 2026 Algo-Rythmn.ai | Confidential Partnership Proposal for Drive Hockey Analytics
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
