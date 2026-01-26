@@ -184,14 +184,7 @@
             font-weight: 700;
             font-size: 1.5rem;
             color: var(--primary-navy);
-            margin-bottom: 0px;
-            display: flex;
-            align-items: center;
-        }
-        
-        .card-icon {
-            margin-right: 12px;
-            color: var(--secondary-blue);
+            margin-bottom: 20px;
         }
         
         .highlight-card {
@@ -242,7 +235,7 @@
         /* Use Cases */
         .use-cases-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            grid-template-columns: repeat(2, 1fr);
             gap: 40px;
             margin-top: 40px;
         }
@@ -319,6 +312,89 @@
             justify-content: center;
             font-weight: 800;
             font-size: 1.2rem;
+        }
+        
+        /* Workflow Comparison */
+        .workflow-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin: 60px 0;
+        }
+        
+        .workflow-column {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 40px;
+            box-shadow: var(--card-shadow);
+        }
+        
+        .workflow-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 1.3rem;
+            color: var(--primary-navy);
+            margin-bottom: 30px;
+            text-align: center;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--light-gray);
+        }
+        
+        .workflow-current .workflow-title {
+            color: var(--medium-gray);
+        }
+        
+        .workflow-future .workflow-title {
+            color: var(--accent-teal);
+        }
+        
+        .workflow-step {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 25px;
+            padding-bottom: 25px;
+            border-bottom: 1px dashed var(--light-gray);
+        }
+        
+        .workflow-step:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .step-number {
+            background: var(--light-gray);
+            color: var(--medium-gray);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .workflow-future .step-number {
+            background: var(--accent-teal);
+            color: white;
+        }
+        
+        .step-content h4 {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--dark-text);
+        }
+        
+        .workflow-current .step-content h4 {
+            color: var(--medium-gray);
+        }
+        
+        .step-content p {
+            font-size: 0.95rem;
+            color: var(--medium-gray);
+            line-height: 1.5;
         }
         
         /* Phases */
@@ -443,6 +519,11 @@
             .section-title {
                 font-size: 2.4rem;
             }
+            
+            .workflow-comparison {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
         }
         
         @media (max-width: 768px) {
@@ -467,6 +548,12 @@
             }
             
             .use-cases-grid {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 30px;
+            }
+            
+            .architecture-diagram {
                 grid-template-columns: 1fr;
             }
         }
@@ -484,8 +571,8 @@
             </div>
             
             <div class="hero-content">
-                <h1 class="hero-title">The AI Agentic Intelligence Layer for Hockey Analytics</h1>
-                <p class="hero-subtitle"><span style="color: #11b3aa; font-weight: 700;">From Static Dashboards to Strategic Advantage.</span> We build the proprietary AI agents that transform your platform into a conversational decision engine—autonomously scouting talent, predicting development, and powering dynamic NHLe projections.</p>
+                <h1 class="hero-title">Activating Your Data with AI Agentic Intelligence</h1>
+                <p class="hero-subtitle"><span style="color: #11b3aa; font-weight: 700;">From Advanced Analytics to Autonomous Strategy.</span> We build the proprietary AI layer that transforms your sophisticated tactical platform into a conversational decision engine—turning your Escape Reports, video analysis, and player metrics into predictive, prescriptive intelligence.</p>
                 <a href="#contact" class="cta-button">Schedule Technical Deep Dive</a>
             </div>
         </div>
@@ -496,30 +583,30 @@
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title">Executive Summary</h2>
-                <p class="section-subtitle">Drive Hockey Analytics has established leadership in making pro-level analytics accessible across all hockey levels. This partnership with Algo-Rythmn.ai will build a proprietary AI layer that transforms data into competitive advantage.</p>
+                <p class="section-subtitle">Drive Hockey Analytics has built a best-in-class tactical analytics platform with pro-level tools for zone analysis, video integration, and performance dashboards. This partnership will add an AI Agentic Layer that transforms these powerful but static reports into an interactive, predictive intelligence system.</p>
             </div>
             
             <div class="card highlight-card">
-                <h3 class="card-title">Strategic Opportunity</h3>
-                <p>We propose building an <strong>AI Agentic Layer</strong> on top of your existing dashboard technology, creating an interactive, predictive, and "LLM-ready" decision engine that focuses on enhancing NHL equivalency projections for junior players using comprehensive feeder league data, all accessible through natural language conversation.</p>
+                <h3 class="card-title">Strategic Opportunity: From Post-Game Analysis to Pre-Game Strategy</h3>
+                <p>We propose building an <strong>AI Agentic Intelligence Layer</strong> that integrates directly with your existing dashboard technology—your <strong>Escape Reports</strong>, video tagging system, and team performance dashboards. This layer will create a conversational interface that automates analysis, predicts outcomes, and prescribes strategies, moving your platform from descriptive reporting to prescriptive coaching.</p>
             </div>
             
             <div class="stats-container">
+                <div class="stat-item">
+                    <div class="stat-number">70%</div>
+                    <div class="stat-label">Reduction in Manual Video Tagging & Report Analysis Time</div>
+                </div>
                 <div class="stat-item">
                     <div class="stat-number">$4.7B</div>
                     <div class="stat-label">Projected AI in Sports Market by 2034</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number">62%</div>
-                    <div class="stat-label">Fans See Positive AI Impact on Talent Acquisition</div>
+                    <div class="stat-number">50%</div>
+                    <div class="stat-label">Accelerated Coaching & Scouting Decisions</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number">20.6%</div>
-                    <div class="stat-label">CAGR of Sports Analytics Market</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">70%</div>
-                    <div class="stat-label">Reduction in Manual Data Processing Time</div>
+                    <div class="stat-number">25%+</div>
+                    <div class="stat-label">Reduction in "Toxic Contract" Risk</div>
                 </div>
             </div>
         </div>
@@ -530,24 +617,24 @@
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title">Beyond the Analytics Parity Trap</h2>
-                <p class="section-subtitle">The hockey analytics industry has reached an inflection point where data access is becoming commoditized. True competitive advantage now comes from the proprietary intelligence layer built on top of that data.</p>
+                <p class="section-subtitle">Your platform already delivers NHL-caliber tactical analysis. The next competitive edge comes from operationalizing this depth—transforming hours of manual report analysis into seconds of automated insight.</p>
             </div>
             
             <div class="architecture-diagram">
                 <div class="architecture-layer">
                     <div class="layer-number">1</div>
-                    <h3 class="card-title">Data Silos & Fragmentation</h3>
-                    <p>Performance metrics, biometrics, and scouting reports exist in disconnected systems, preventing unified player assessment.</p>
+                    <h3 class="card-title">Operational Friction in Depth</h3>
+                    <p>Your <strong>Escape Reports</strong> and video analysis provide exceptional depth but require manual synthesis. Coaches spend hours post-game cross-referencing tables, tagging video, and drawing conclusions.</p>
                 </div>
                 <div class="architecture-layer">
                     <div class="layer-number">2</div>
-                    <h3 class="card-title">Static Dashboards vs. Dynamic Decisions</h3>
-                    <p>Traditional BI tools present historical snapshots but lack real-time "what-if" scenario modeling capabilities.</p>
+                    <h3 class="card-title">Static Reports vs. Dynamic Strategy</h3>
+                    <p>Your dashboards show brilliant <strong>what happened</strong> analysis but lack <strong>what-if</strong> simulation capabilities. They can't predict which defensive pairings will best counter tomorrow's opponent's forecheck.</p>
                 </div>
                 <div class="architecture-layer">
                     <div class="layer-number">3</div>
-                    <h3 class="card-title">Translation Gap in Projections</h3>
-                    <p>Current NHLe models lack contextual nuance for accurately translating performance across different league environments.</p>
+                    <h3 class="card-title">Data Silos Within Your Platform</h3>
+                    <p>Skill metrics (sprint leaderboards), tactical reports (zone exits), and video analysis exist as separate modules. True intelligence requires synthesizing across all these data streams automatically.</p>
                 </div>
             </div>
         </div>
@@ -558,35 +645,131 @@
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title">The AI Agentic Intelligence Layer</h2>
-                <p class="section-subtitle">An advanced AI system that transforms your data infrastructure into a conversational, predictive analytics platform—moving from descriptive analytics to prescriptive intelligence.</p>
+                <p class="section-subtitle">An advanced AI system that transforms your data infrastructure into a conversational, predictive analytics platform—activating the deep insights already captured in your reports.</p>
             </div>
             
             <div class="architecture-diagram">
                 <div class="architecture-layer">
                     <div class="layer-number">1</div>
-                    <h3 class="card-title">Data Orchestration</h3>
-                    <p>Unifying tracking data, feeder league statistics, and historical NHL performance using modern data fabric architecture.</p>
+                    <h3 class="card-title">Intelligent Data Orchestration</h3>
+                    <p>Unifying your <strong>skill metrics</strong>, <strong>tactical reports</strong>, <strong>video tags</strong>, and <strong>team performance dashboards</strong> into a single queryable knowledge fabric.</p>
                 </div>
                 <div class="architecture-layer">
                     <div class="layer-number">2</div>
-                    <h3 class="card-title">Advanced Analytics Engine</h3>
-                    <p>Implementing <strong>dynamic NHLe</strong> coefficients that simulate space deficits and pressure-decay rates, plus predictive models for injury risk and development trajectories.</p>
+                    <h3 class="card-title">Predictive & Prescriptive Engine</h3>
+                    <p>Implementing <strong>dynamic simulation models</strong> that use your data to forecast outcomes, optimize line matchups, and recommend strategic adjustments based on historical performance.</p>
                 </div>
                 <div class="architecture-layer">
                     <div class="layer-number">3</div>
-                    <h3 class="card-title">LLM & Agentic Interface</h3>
-                    <p>Natural language processing that interprets queries, triggers analytical workflows, and generates conversational insights.</p>
+                    <h3 class="card-title">Conversational Interface</h3>
+                    <p>Natural language processing that interprets coaching queries, triggers multi-step analytical workflows across your platform, and generates actionable insights in plain language.</p>
                 </div>
                 <div class="architecture-layer">
                     <div class="layer-number">4</div>
-                    <h3 class="card-title">Enhanced Visualization</h3>
-                    <p>Your existing dashboard, now powered by automated insights, predictive visualizations, and embedded AI recommendations.</p>
+                    <h3 class="card-title">Automated Workflow Integration</h3>
+                    <p>Your existing dashboards, now enhanced with AI-generated insights, predictive visualizations, automated video clip generation, and embedded strategic recommendations.</p>
+                </div>
+            </div>
+            
+            <!-- New Workflow Comparison Section -->
+            <div class="section-header" style="margin-top: 100px;">
+                <h2 class="section-title">Transforming the Coaching Workflow</h2>
+                <p class="section-subtitle">How AI transforms manual post-game analysis into automated pre-game strategy</p>
+            </div>
+            
+            <div class="workflow-comparison">
+                <div class="workflow-column workflow-current">
+                    <h3 class="workflow-title">Current Post-Game Workflow</h3>
+                    
+                    <div class="workflow-step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>Export & Review Reports</h4>
+                            <p>Coach manually exports the <strong>Escape Report</strong>, <strong>TOI Dashboard</strong>, and <strong>Player Impact</strong> metrics after the game.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="workflow-step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>Manual Video Tagging</h4>
+                            <p>Video coordinator spends 2-3 hours tagging key moments, drawing zones, and syncing with event data in your video analysis module.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="workflow-step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>Cross-Reference Analysis</h4>
+                            <p>Coaching staff manually cross-reference reports with video, identifying patterns (e.g., which D-pairs struggled vs. specific forechecks).</p>
+                        </div>
+                    </div>
+                    
+                    <div class="workflow-step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h4>Intuitive Strategy Session</h4>
+                            <p>Based on synthesized insights, coaching staff holds meeting to develop intuitive strategy adjustments for next game.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="workflow-step">
+                        <div class="step-number">5</div>
+                        <div class="step-content">
+                            <h4>Manual Player Communication</h4>
+                            <p>Coaches manually compile video clips and notes to share with individual players about adjustments needed.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="workflow-column workflow-future">
+                    <h3 class="workflow-title">AI-Powered Future Workflow</h3>
+                    
+                    <div class="workflow-step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>Automated Report Synthesis</h4>
+                            <p>AI Agent <strong>auto-generates narrative report</strong> highlighting key tactical failures/successes from integrated data streams immediately post-game.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="workflow-step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>Intelligent Video Processing</h4>
+                            <p>AI <strong>automatically tags key moments</strong>, generates highlight reels for coaching review, and syncs clips with relevant metrics.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="workflow-step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>Conversational Strategy Exploration</h4>
+                            <p>Coach asks: <em>"Which defensive pairings had the lowest success rate against their 1-2-2 forecheck, and what were their most common failed exit types?"</em> AI instantly analyzes and responds.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="workflow-step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h4>Predictive Simulation & Planning</h4>
+                            <p>AI runs <strong>"what-if" simulations</strong> for next game: <em>"Simulate using more stretch passes against Team Coastal's forecheck based on their O-zone time%."</em></p>
+                        </div>
+                    </div>
+                    
+                    <div class="workflow-step">
+                        <div class="step-number">5</div>
+                        <div class="step-content">
+                            <h4>Automated Player Development</h4>
+                            <p>AI <strong>generates personalized video clips and training recommendations</strong> for each player based on their performance gaps, sent automatically.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
             
             <div class="card highlight-card" style="margin-top: 60px;">
                 <h3 class="card-title">Key Differentiator: From Tool to Collaborative Agent</h3>
-                <p>Unlike basic chatbots, our <strong>agentic AI</strong> reasons, plans, and executes multi-step analytical tasks autonomously—running comparisons, generating projections, and compiling scouting reports based on single natural language requests. It becomes a collaborative partner in the decision-making process.</p>
+                <p>Unlike basic chatbots, our <strong>agentic AI</strong> reasons, plans, and executes multi-step analytical tasks autonomously—synthesizing across your Escape Reports, video analysis, and performance dashboards based on single natural language requests. It becomes a collaborative partner in the decision-making process, not just another reporting tool.</p>
             </div>
         </div>
     </section>
@@ -596,7 +779,7 @@
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title">Transformative Use Cases</h2>
-                <p class="section-subtitle">Practical applications of the AI Agentic Layer across different organizational roles and decision-making scenarios.</p>
+                <p class="section-subtitle">Practical applications of the AI Agentic Layer across different organizational roles, using your existing platform features as the foundation.</p>
             </div>
             
             <div class="use-cases-grid">
@@ -615,7 +798,7 @@
                     </div>
                 </div>
                 
-                <!-- Use Case 2 -->
+                <!-- Use Case 2 - Enhanced -->
                 <div class="use-case-card">
                     <div class="use-case-header">
                         <div class="persona">USHL General Manager</div>
@@ -624,13 +807,13 @@
                     <div style="padding: 10px 30px 30px;">
                         <p><strong>Goal:</strong> Optimize roster construction and player development focus through scenario modeling.</p>
                         <div class="query-example">
-                            "Simulate the impact on our team's expected goal differential if we move Player A from wing to center and increase his power play time by 25%. Factor in his historical performance in different roles and current fatigue metrics."
+                            "Using our Team Performance dashboard data, simulate the impact on expected goal differential if we move Player A from wing to center and increase his power play time by 25%. Factor in his historical performance in different roles from video analysis tags."
                         </div>
-                        <p><strong>AI Agent Action:</strong> Accesses historical performance data across positions, runs lineup optimization models, integrates wearable fatigue data, and generates visual report with confidence intervals.</p>
+                        <p><strong>AI Agent Action:</strong> Accesses your <strong>TOI dashboards</strong> and <strong>player impact metrics</strong>, runs lineup optimization models, integrates role performance data from video tags, and generates visual report with confidence intervals.</p>
                     </div>
                 </div>
                 
-                <!-- Use Case 3 -->
+                <!-- Use Case 3 - Enhanced -->
                 <div class="use-case-card">
                     <div class="use-case-header">
                         <div class="persona">Player Development Coach</div>
@@ -639,20 +822,37 @@
                     <div style="padding: 10px 30px 30px;">
                         <p><strong>Goal:</strong> Create data-driven, personalized development plans for prospects based on historical comparables.</p>
                         <div class="query-example">
-                            "For our top defensive prospect, identify three NHL players with the most similar playing styles and physical profiles when they were 19. Show me the specific skills those players improved most between ages 19-22, and create a 12-month training priority list."
+                            "For our top defensive prospect, analyze his Escape Report success rates in each zone. Identify three NHL players with similar playing styles and physical profiles when they were 19. Show me the specific skills those players improved most between ages 19-22, and create a 12-month training priority list."
                         </div>
-                        <p><strong>AI Agent Action:</strong> Executes "digital twin" search across historical data, performs gap analysis on skill progression, and synthesizes findings into periodized training recommendations.</p>
+                        <p><strong>AI Agent Action:</strong> Analyzes your <strong>Escape Report data</strong>, executes "digital twin" search across historical data, performs gap analysis on skill progression, and synthesizes findings into periodized training recommendations.</p>
+                    </div>
+                </div>
+            
+            
+                <!-- Use Case 4 - Based on Their Dashboard -->
+                <div class="use-case-card">
+                    <div class="use-case-header">
+                        <div class="persona">NHL Assistant Coach - Video & Strategy</div>
+                        <h3 class="card-title">Automated Game Review & Prep</h3>
+                    </div>
+                    <div style="padding: 10px 30px 30px;">
+                        <p><strong>Goal:</strong> Dramatically reduce manual video review time while improving strategic preparation for next opponent.</p>
+                        <div class="query-example">
+                            "After last night's loss, analyze our Escape Report showing 54.2% D-zone exit success. Which two defensemen had the lowest success rate against their 1-2-2 forecheck? What were their most common failed exit types? Show me video clips of each failure type and suggest one technical adjustment for each player."
+                        </div>
+                        <p><strong>AI Agent Action:</strong> Analyzes <strong>Escape Report data</strong>, categorizes failure types from <strong>video tags</strong>, auto-generates clipped examples for each player, and delivers a report with actionable recommendations in under 60 seconds.</p>
                     </div>
                 </div>
             </div>
-            <div class="card highlight-card" style="margin-top: 30px;">
-                <h3 class="card-title">Advanced NHL Equivalency Projection</h3>
-                <p>Our AI layer will enhance your existing NHLe models by incorporating contextual factors that simple multipliers miss:</p>
+            
+            <div class="card highlight-card" style="margin-top: 60px;">
+                <h3 class="card-title">Advanced NHL Equivalency Projection Enhanced by Your Data</h3>
+                <p>Our AI layer will enhance your existing NHLe models by incorporating contextual factors that simple multipliers miss, using the rich data you already capture:</p>
                 <ul style="columns: 2; column-gap: 60px; margin-top: 20px;">
-                    <li style="margin-bottom: 12px; break-inside: avoid;"><strong>Context-Aware Analytics:</strong> Weighing performance against league strength, teammate quality, and high-leverage situations (e.g., playoff performance).</li>
-                    <li style="margin-bottom: 12px; break-inside: avoid;"><strong>Biomechanical Integration:</strong> Using skeletal pose estimation from video to analyze "explosive gait" and joint angles, predicting adaptability to NHL pace.</li>
-                    <li style="margin-bottom: 12px; break-inside: avoid;"><strong>Micro-Action Forecasting:</strong> Predicting NHL success based on "invisible" habits like stick-blade positioning and pre-pass scanning frequency.</li>
-                    <li style="margin-bottom: 12px; break-inside: avoid;"><strong>Dynamic Coefficients:</strong> Moving beyond static league multipliers to player-specific translation factors that evolve with performance trends.</li>
+                    <li style="margin-bottom: 12px; break-inside: avoid;"><strong>Tactical Context Integration:</strong> Weighing performance against system execution success from your <strong>Escape Reports</strong> and opponent quality from <strong>Team Performance dashboards</strong>.</li>
+                    <li style="margin-bottom: 12px; break-inside: avoid;"><strong>Biomechanical Integration:</strong> Using your sensor data on "explosive gait" and joint angles from skill metrics, predicting adaptability to NHL pace.</li>
+                    <li style="margin-bottom: 12px; break-inside: avoid;"><strong>Micro-Action Forecasting:</strong> Predicting NHL success based on "invisible" habits like stick-blade positioning visible in your video analysis.</li>
+                    <li style="margin-bottom: 12px; break-inside: avoid;"><strong>Dynamic Coefficients:</strong> Moving beyond static league multipliers to player-specific translation factors that evolve with performance trends in your longitudinal data.</li>
                 </ul>
             </div>
         </div>
@@ -663,7 +863,7 @@
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title">Strategic Competitive Advantages</h2>
-                <p class="section-subtitle">Transforming your platform from a utility into an indispensable strategic partner.</p>
+                <p class="section-subtitle">Transforming your platform from a sophisticated analytical tool into an indispensable strategic partner.</p>
             </div>
             
             <table class="comparison-table">
@@ -689,16 +889,16 @@
                         <td>Reduces "toxic contract" risk from failed signings by 25%+</td>
                     </tr>
                     <tr>
-                        <td><strong>Market Coverage</strong></td>
-                        <td>Limited by human scout travel</td>
-                        <td><span style="color: #0A4BC8; font-weight: 700;">24/7</span> automated monitoring of global feeder leagues</td>
-                        <td>Identifies "hidden gems" in secondary markets for asset arbitrage</td>
+                        <td><strong>Tactical Analysis</strong></td>
+                        <td>Post-game reports (Escape/Entry, TOI) showing <em>what happened</em></td>
+                        <td><span style="color: #0A4BC8; font-weight: 700;">Pre-game simulation & prescriptive alerts</span> recommending <em>what to do</em></td>
+                        <td>Transforms platform from a <span style="color: #0A4BC8; font-weight: 700;">post-mortem tool</span> to an <span style="color: #0A4BC8; font-weight: 700;">active strategic assistant</span></td>
                     </tr>
                     <tr>
-                        <td><strong>Platform Stickiness</strong></td>
-                        <td>Tool-based engagement</td>
-                        <td><span style="color: #0A4BC8; font-weight: 700;">Collaborative, agentic</span> workflow integration</td>
-                        <td>Transforms platform from utility to indispensable strategic partner</td>
+                        <td><strong>Video Integration</strong></td>
+                        <td>Manual tagging and synchronization with data</td>
+                        <td><span style="color: #0A4BC8; font-weight: 700;">Automated event tagging, AI-clipped highlight reels</span> for coaching</td>
+                        <td>Cuts film study time by 60-80%, allowing focus on teaching</td>
                     </tr>
                     <tr>
                         <td><strong>IP Sovereignty</strong></td>
@@ -711,7 +911,7 @@
             
             <div class="card highlight-card" style="margin-top: 60px;">
                 <h3 class="card-title">Intellectual Property Sovereignty</h3>
-                <p>Unlike relying on third-party AI services, this partnership will build proprietary algorithms and models that become Drive Hockey Analytics' core intellectual property. This IP becomes a valuable, non-replicable asset that increases your company's valuation and creates lasting competitive moats. The dynamic NHLe model itself becomes a market-defining innovation.</p>
+                <p>Unlike relying on third-party AI services, this partnership will build proprietary algorithms and models that become Drive Hockey Analytics' core intellectual property. The AI models trained on your unique combination of skill metrics, tactical reports, and video data become non-replicable assets. This IP becomes a valuable, non-replicable asset that increases your company's valuation and creates lasting competitive moats. The integrated system itself becomes a market-defining innovation.</p>
             </div>
         </div>
     </section>
@@ -721,7 +921,7 @@
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title">Phased Implementation Roadmap</h2>
-                <p class="section-subtitle">A strategic, risk-managed approach to building and deploying the AI Agentic Layer.</p>
+                <p class="section-subtitle">A strategic, risk-managed approach to building and deploying the AI Agentic Layer, integrating with your existing architecture.</p>
             </div>
             
             <div class="phases-container">
@@ -730,10 +930,10 @@
                     <h3 class="card-title">Foundation & Integration</h3>
                     <p><strong>Months 1-3</strong></p>
                     <ul style="margin-top: 20px; padding-left: 20px; color: var(--medium-gray);">
-                        <li style="margin-bottom: 10px;">Data pipeline unification across existing sources</li>
-                        <li style="margin-bottom: 10px;">Development of core <strong>dynamic NHLe</strong> projection models</li>
-                        <li style="margin-bottom: 10px;">Basic natural language query interface for data retrieval</li>
-                        <li><strong>Outcome:</strong> Internal prototype demonstrating automated player comparisons</li>
+                        <li style="margin-bottom: 10px;">API integration with your existing <strong>skill metrics</strong>, <strong>Escape Reports</strong>, and <strong>dashboard data</strong></li>
+                        <li style="margin-bottom: 10px;">Development of core <strong>dynamic NHLe</strong> projection models using your historical data</li>
+                        <li style="margin-bottom: 10px;">Basic natural language query interface for data retrieval across your platform</li>
+                        <li><strong>Outcome:</strong> Internal prototype demonstrating automated player comparisons and report synthesis</li>
                     </ul>
                 </div>
                 
@@ -742,10 +942,10 @@
                     <h3 class="card-title">Intelligence & Prediction</h3>
                     <p><strong>Months 4-6</strong></p>
                     <ul style="margin-top: 20px; padding-left: 20px; color: var(--medium-gray);">
-                        <li style="margin-bottom: 10px;">Integration of biomechanical assessment algorithms</li>
-                        <li style="margin-bottom: 10px;">Development of "digital twin" historical matching system</li>
-                        <li style="margin-bottom: 10px;">Advanced "what-if" scenario simulation capabilities</li>
-                        <li><strong>Outcome:</strong> Beta release with select USHL and partner teams</li>
+                        <li style="margin-bottom: 10px;">Integration with your <strong>video analysis system</strong> for automated tagging</li>
+                        <li style="margin-bottom: 10px;">Development of <strong>tactical simulation models</strong> using your Escape Report data</li>
+                        <li style="margin-bottom: 10px;">Advanced "what-if" scenario simulation for line matchups and strategies</li>
+                        <li><strong>Outcome:</strong> Beta release with select USHL and partner teams featuring conversational strategy exploration</li>
                     </ul>
                 </div>
                 
@@ -754,10 +954,10 @@
                     <h3 class="card-title">Scale & Optimization</h3>
                     <p><strong>Months 7-12</strong></p>
                     <ul style="margin-top: 20px; padding-left: 20px; color: var(--medium-gray);">
-                        <li style="margin-bottom: 10px;">Full agentic workflow automation (report generation, alerting)</li>
-                        <li style="margin-bottom: 10px;">Expansion to international league data integration</li>
-                        <li style="margin-bottom: 10px;">Advanced visualization and dashboard embedding</li>
-                        <li><strong>Outcome:</strong> Enterprise-ready platform for NHL, NCAA, and major junior teams</li>
+                        <li style="margin-bottom: 10px;">Full agentic workflow automation (auto-report generation, alerting, video clip creation)</li>
+                        <li style="margin-bottom: 10px;">Advanced visualization and dashboard embedding within your existing interface</li>
+                        <li style="margin-bottom: 10px;">Personalized AI assistant features for players and parents accessing their data</li>
+                        <li><strong>Outcome:</strong> Enterprise-ready platform for NHL, NCAA, and major junior teams with complete AI integration</li>
                     </ul>
                 </div>
             </div>
@@ -774,12 +974,12 @@
             
             <div class="stats-container">
                 <div class="stat-item">
-                    <div class="stat-number">50%</div>
-                    <div class="stat-label">Accelerated Coaching & Scouting Decisions</div>
+                    <div class="stat-number">70-80%</div>
+                    <div class="stat-label">Reduction in Manual Video Analysis Time</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number">30-40%</div>
-                    <div class="stat-label">Reduced International Travel Budgets</div>
+                    <div class="stat-number">50%</div>
+                    <div class="stat-label">Accelerated Coaching & Scouting Decisions</div>
                 </div>
                 <div class="stat-item">
                     <div class="stat-number">90%</div>
@@ -792,9 +992,8 @@
             </div>
             
             <div class="card highlight-card" style="margin-top: 60px;">
-                <h3 class="card-title">Conclusion: Redefining the Future of Hockey Analytics</h3>
-                <p>The AI revolution in sports analytics is transitioning from experimental to essential. This partnership represents a strategic opportunity to leverage Drive Hockey Analytics' established technology and augment it with a proprietary AI layer that delivers unprecedented access, superior projections through dynamic NHLe, and sustainable competitive advantage.</p>
-                <p style="margin-top: 20px;">We are prepared to begin a discovery phase to tailor this solution to your specific architecture and client needs. Let's build the future of hockey intelligence together.</p>
+                <h3 class="card-title">Conclusion: Redefining the Future of Hockey Intelligence</h3>
+                <p>Drive Hockey Analytics has built the most sophisticated tactical platform for youth and amateur hockey. This partnership adds a proprietary AI layer that transforms your data capture into autonomous intelligence—delivering unprecedented automation, superior projections, and sustainable competitive advantage. We're ready to begin technical discovery and tailor this solution to your architecture. Let's transform your platform from the best tool for measuring the game into the essential system for winning it.</p>
             </div>
         </div>
     </section>
@@ -822,9 +1021,9 @@
                 <div>
                     <h3 class="card-title" style="color: white; margin-bottom: 20px;">Next Steps</h3>
                     <p class="footer-contact">
-                        1. Technical deep dive session<br>
-                        2. Architecture compatibility review<br>
-                        3. Pilot program scoping
+                        1. Technical deep dive & architecture review<br>
+                        2. Data integration compatibility assessment<br>
+                        3. Pilot program scoping with timeline
                     </p>
                 </div>
             </div>
