@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --primary-navy: #0A1A3A;
@@ -61,7 +62,8 @@
             bottom: 0;
             background: 
                 radial-gradient(circle at 20% 80%, rgba(26, 95, 237, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(0, 212, 201, 0.1) 0%, transparent 50%);
+                radial-gradient(circle at 80% 20%, rgba(0, 212, 201, 0.1) 0%, transparent 50%),
+                url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%231a5fed' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
         }
         
         .logo-container {
@@ -88,6 +90,10 @@
             font-weight: 600;
             font-size: 1.2rem;
             opacity: 0.9;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 20px;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
         
         .hero-content {
@@ -108,13 +114,26 @@
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
+            position: relative;
+        }
+        
+        .hero-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-teal) 0%, var(--secondary-blue) 100%);
+            border-radius: 2px;
         }
         
         .hero-subtitle {
             font-size: 1.3rem;
             font-weight: 300;
             max-width: 700px;
-            margin: 0 auto 50px;
+            margin: 40px auto 50px;
             line-height: 1.7;
             color: rgba(255, 255, 255, 0.85);
         }
@@ -130,6 +149,8 @@
             text-decoration: none;
             box-shadow: 0 10px 30px rgba(0, 212, 201, 0.3);
             transition: var(--transition);
+            position: relative;
+            overflow: hidden;
         }
         
         .cta-button:hover {
@@ -137,15 +158,56 @@
             box-shadow: 0 15px 35px rgba(0, 212, 201, 0.4);
         }
         
+        .cta-button i {
+            margin-right: 10px;
+        }
+        
+        /* Visual Elements */
+        .visual-element {
+            position: absolute;
+            z-index: 1;
+            opacity: 0.5;
+        }
+        
+        .hockey-puck {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle at 30% 30%, #333, #000);
+            border-radius: 50%;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transform: rotate(15deg);
+        }
+        
+        .data-node {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(26, 95, 237, 0.2);
+            border: 2px solid rgba(26, 95, 237, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--secondary-blue);
+        }
+        
         /* Sections */
         .section {
             padding: 100px 0;
+            position: relative;
         }
         
         .section-header {
             text-align: center;
             max-width: 800px;
             margin: 0 auto 70px;
+            position: relative;
+        }
+        
+        .section-icon {
+            font-size: 2.5rem;
+            color: var(--accent-teal);
+            margin-bottom: 20px;
         }
         
         .section-title {
@@ -172,11 +234,18 @@
             transition: var(--transition);
             height: 100%;
             border: 1px solid rgba(203, 213, 225, 0.3);
+            position: relative;
         }
         
         .card:hover {
             transform: translateY(-10px);
             box-shadow: var(--shadow-hover);
+        }
+        
+        .card-icon {
+            font-size: 2rem;
+            color: var(--secondary-blue);
+            margin-bottom: 20px;
         }
         
         .card-title {
@@ -191,10 +260,26 @@
             background: linear-gradient(135deg, var(--primary-navy) 0%, #1A2B5C 100%);
             color: white;
             padding: 50px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .highlight-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(0, 212, 201, 0.1) 0%, transparent 70%);
         }
         
         .highlight-card .card-title {
             color: white;
+        }
+        
+        .highlight-card .card-icon {
+            color: var(--accent-teal);
         }
         
         /* Stats */
@@ -212,6 +297,18 @@
             border-radius: var(--border-radius);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(203, 213, 225, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .stat-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--secondary-blue) 0%, var(--accent-teal) 100%);
         }
         
         .stat-number {
@@ -246,6 +343,7 @@
             overflow: hidden;
             box-shadow: var(--card-shadow);
             transition: var(--transition);
+            position: relative;
         }
         
         .use-case-card:hover {
@@ -256,10 +354,20 @@
         .use-case-header {
             padding: 30px 30px 20px;
             border-bottom: 1px solid var(--light-gray);
+            position: relative;
+        }
+        
+        .use-case-icon {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            font-size: 2rem;
+            color: rgba(26, 95, 237, 0.1);
         }
         
         .persona {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
             background: rgba(26, 95, 237, 0.1);
             color: var(--secondary-blue);
             font-weight: 600;
@@ -267,6 +375,11 @@
             padding: 8px 16px;
             border-radius: 50px;
             margin-bottom: 15px;
+        }
+        
+        .persona i {
+            margin-right: 8px;
+            font-size: 0.8rem;
         }
         
         .query-example {
@@ -278,6 +391,18 @@
             font-size: 0.95rem;
             line-height: 1.6;
             border-radius: 0 8px 8px 0;
+            position: relative;
+        }
+        
+        .query-example::before {
+            content: '"';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 2rem;
+            color: var(--accent-teal);
+            opacity: 0.3;
+            font-family: serif;
         }
         
         /* Architecture */
@@ -314,6 +439,26 @@
             font-size: 1.2rem;
         }
         
+        .architecture-visual {
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .layer-visual {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--secondary-blue) 0%, #0A4BC8 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+        
         /* Workflow Comparison */
         .workflow-comparison {
             display: grid;
@@ -327,6 +472,7 @@
             border-radius: var(--border-radius);
             padding: 40px;
             box-shadow: var(--card-shadow);
+            position: relative;
         }
         
         .workflow-title {
@@ -430,6 +576,26 @@
             font-size: 1.5rem;
         }
         
+        .phase-visual {
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px 0 30px;
+        }
+        
+        .phase-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, var(--secondary-blue) 0%, #0A4BC8 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+        }
+        
         /* Table */
         .comparison-table {
             width: 100%;
@@ -462,12 +628,29 @@
             background: rgba(26, 95, 237, 0.03);
         }
         
+        .table-icon {
+            color: var(--accent-teal);
+            margin-right: 10px;
+        }
+        
         /* Footer */
         .footer {
             background: var(--primary-navy);
             color: white;
             padding: 80px 0 50px;
             margin-top: 100px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%2300d4c9' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
         }
         
         .footer-content {
@@ -475,6 +658,8 @@
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 60px;
             margin-bottom: 60px;
+            position: relative;
+            z-index: 2;
         }
         
         .footer-logo {
@@ -508,6 +693,8 @@
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             color: rgba(255, 255, 255, 0.5);
             font-size: 0.9rem;
+            position: relative;
+            z-index: 2;
         }
         
         /* Responsive */
@@ -523,6 +710,10 @@
             .workflow-comparison {
                 grid-template-columns: 1fr;
                 gap: 30px;
+            }
+            
+            .use-cases-grid {
+                grid-template-columns: 1fr;
             }
         }
         
@@ -547,12 +738,6 @@
                 font-size: 2rem;
             }
             
-            .use-cases-grid {
-                display: grid;
-                grid-template-columns: repeat(2, 1fr);
-                gap: 30px;
-            }
-            
             .architecture-diagram {
                 grid-template-columns: 1fr;
             }
@@ -562,18 +747,29 @@
 <body>
     <!-- Hero Header -->
     <header class="hero-header">
+        <!-- Visual elements -->
+        <div class="visual-element" style="top: 20%; left: 5%;">
+            <div class="data-node"><i class="fas fa-database"></i></div>
+        </div>
+        <div class="visual-element" style="top: 30%; right: 10%;">
+            <div class="data-node"><i class="fas fa-brain"></i></div>
+        </div>
+        <div class="visual-element" style="bottom: 20%; left: 15%;">
+            <div class="hockey-puck"></div>
+        </div>
+        
         <div class="container">
             <div class="logo-container">
-                <div class="company-logo">
+                <div class="company-logo" style="margin-right: 10px; color: white;">
                     Algo<span class="logo-accent">-Rythmn.ai</span>
                 </div>
                 <div class="partner-logo">× Drive Hockey Analytics</div>
             </div>
             
             <div class="hero-content">
-                <h1 class="hero-title">Activating Your Data with AI Agentic Intelligence</h1>
-                <p class="hero-subtitle"><span style="color: #11b3aa; font-weight: 700;">From Advanced Analytics to Autonomous Strategy.</span> We build the proprietary AI layer that transforms your sophisticated tactical platform into a conversational decision engine—turning your diverse hockey data streams to  into predictive, prescriptive intelligence.</p>
-                <a href="#contact" class="cta-button">Schedule Technical Deep Dive</a>
+                <h1 class="hero-title">Empowering Your Platform with Agentic AI Intelligence</h1>
+                <p class="hero-subtitle"><span style="color: #00D4C9; font-weight: 700;">From Advanced Analytics to Autonomous Strategy.</span> Our proprietary AI layer evolves your tactical platform into a conversational decision engine—transforming diverse hockey data streams into predictive and prescriptive intelligence that accelerates player development and strengthens expert decision‑making.</p>
+                <a href="#contact" class="cta-button"><i class="fas fa-calendar-alt"></i>Schedule Technical Deep Dive</a>
             </div>
         </div>
     </header>
@@ -582,11 +778,13 @@
     <section class="section" id="executive-summary">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">Executive Summary</h2>
-                <p class="section-subtitle">Drive Hockey Analytics has built a best-in-class tactical analytics platform with pro-level tools for zone analysis, video integration, and performance dashboards. This partnership will add an AI Agentic Layer that transforms these powerful but static reports into an interactive, predictive intelligence system.</p>
+                <div class="section-icon"><i class="fas fa-chess-king"></i></div>
+                <h2 class="section-title">Collaborative Partnership Overview</h2>
+                <p class="section-subtitle">Drive Hockey Analytics has built a best-in-class tactical analytics platform with pro-level tools for zone analysis, video integration, and performance dashboards. This partnership will add an <strong>AI Agentic Layer</strong> that elevates these capabilities with interactive, predictive intelligence—empowering coaches, scouts, and executives with faster, smarter decision‑making.</p>
             </div>
             
             <div class="card highlight-card">
+                <div class="card-icon"><i class="fas fa-bolt"></i></div>
                 <h3 class="card-title">Strategic Opportunity: From Post-Game Analysis to Pre-Game Strategy</h3>
                 <p>We propose building an <strong>AI Agentic Intelligence Layer</strong> that integrates directly with your existing dashboard technology—your performance analytics reports, video tagging system, and team performance dashboards. This layer will create a conversational interface that automates analysis, predicts outcomes, and prescribes strategies, moving your platform from descriptive reporting to prescriptive coaching.</p>
             </div>
@@ -616,6 +814,7 @@
     <section class="section" style="background-color: #F0F7FF;">
         <div class="container">
             <div class="section-header">
+                <div class="section-icon"><i class="fas fa-exclamation-triangle"></i></div>
                 <h2 class="section-title">Beyond the Analytics Parity Trap</h2>
                 <p class="section-subtitle">Your platform already delivers NHL-caliber tactical analysis. The next competitive edge comes from operationalizing this depth—transforming hours of manual report analysis into seconds of automated insight.</p>
             </div>
@@ -623,16 +822,25 @@
             <div class="architecture-diagram">
                 <div class="architecture-layer">
                     <div class="layer-number">1</div>
+                    <div class="architecture-visual">
+                        <div class="layer-visual"><i class="fas fa-hourglass-half"></i></div>
+                    </div>
                     <h3 class="card-title">Operational Friction in Depth</h3>
                     <p>Your performance reports and video analysis provide exceptional depth but require manual synthesis. Coaches spend hours post-game cross-referencing tables, tagging video, and drawing conclusions.</p>
                 </div>
                 <div class="architecture-layer">
                     <div class="layer-number">2</div>
+                    <div class="architecture-visual">
+                        <div class="layer-visual"><i class="fas fa-chart-line"></i></div>
+                    </div>
                     <h3 class="card-title">Static Reports vs. Dynamic Strategy</h3>
                     <p>Your dashboards show brilliant <strong>what happened</strong> analysis but lack <strong>what-if</strong> simulation capabilities. They can't predict which defensive pairings will best counter tomorrow's opponent's forecheck.</p>
                 </div>
                 <div class="architecture-layer">
                     <div class="layer-number">3</div>
+                    <div class="architecture-visual">
+                        <div class="layer-visual"><i class="fas fa-boxes"></i></div>
+                    </div>
                     <h3 class="card-title">Data Silos Within Your Platform</h3>
                     <p>Skill metrics (sprint leaderboards), tactical reports (zone exits), and video analysis exist as separate modules. True intelligence requires synthesizing across all these data streams automatically.</p>
                 </div>
@@ -644,6 +852,7 @@
     <section class="section">
         <div class="container">
             <div class="section-header">
+                <div class="section-icon"><i class="fas fa-cogs"></i></div>
                 <h2 class="section-title">The AI Agentic Intelligence Layer</h2>
                 <p class="section-subtitle">An advanced AI system that transforms your data infrastructure into a conversational, predictive analytics platform—activating the deep insights already captured in your reports.</p>
             </div>
@@ -651,21 +860,33 @@
             <div class="architecture-diagram">
                 <div class="architecture-layer">
                     <div class="layer-number">1</div>
+                    <div class="architecture-visual">
+                        <div class="layer-visual"><i class="fas fa-project-diagram"></i></div>
+                    </div>
                     <h3 class="card-title">Intelligent Data Orchestration</h3>
                     <p>Unifying your <strong>skill metrics</strong>, <strong>tactical reports</strong>, <strong>video tags</strong>, and <strong>team performance dashboards</strong> into a single queryable knowledge fabric.</p>
                 </div>
                 <div class="architecture-layer">
                     <div class="layer-number">2</div>
+                    <div class="architecture-visual">
+                        <div class="layer-visual"><i class="fas fa-brain"></i></div>
+                    </div>
                     <h3 class="card-title">Predictive & Prescriptive Engine</h3>
                     <p>Implementing <strong>dynamic simulation models</strong> that use your data to forecast outcomes, optimize line matchups, and recommend strategic adjustments based on historical performance.</p>
                 </div>
                 <div class="architecture-layer">
                     <div class="layer-number">3</div>
+                    <div class="architecture-visual">
+                        <div class="layer-visual"><i class="fas fa-comments"></i></div>
+                    </div>
                     <h3 class="card-title">Conversational Interface</h3>
                     <p>Natural language processing that interprets coaching queries, triggers multi-step analytical workflows across your platform, and generates actionable insights in plain language.</p>
                 </div>
                 <div class="architecture-layer">
                     <div class="layer-number">4</div>
+                    <div class="architecture-visual">
+                        <div class="layer-visual"><i class="fas fa-robot"></i></div>
+                    </div>
                     <h3 class="card-title">Automated Workflow Integration</h3>
                     <p>Your existing dashboards, now enhanced with AI-generated insights, predictive visualizations, automated video clip generation, and embedded strategic recommendations.</p>
                 </div>
@@ -673,7 +894,8 @@
             
             <!-- New Workflow Comparison Section -->
             <div class="section-header" style="margin-top: 100px;">
-                <h2 class="section-title">Adaptive Coaching Workflow</h2>
+                <div class="section-icon"><i class="fas fa-exchange-alt"></i></div>
+                <h2 class="section-title">Enhanced Coaching Workflow</h2>
                 <p class="section-subtitle">How AI transforms manual post-game analysis into automated pre-game strategy</p>
             </div>
             
@@ -768,6 +990,7 @@
             </div>
             
             <div class="card highlight-card" style="margin-top: 60px;">
+                <div class="card-icon"><i class="fas fa-chess-knight"></i></div>
                 <h3 class="card-title">Key Differentiator: From Tool to Collaborative Agent</h3>
                 <p>Unlike basic chatbots, our <strong>agentic AI</strong> reasons, plans, and executes multi-step analytical tasks autonomously—synthesizing across your diverse hockey data streams and performance dashboards based on single natural language requests. It becomes a collaborative partner in the decision-making process, not just another reporting tool.</p>
             </div>
@@ -778,6 +1001,7 @@
     <section class="section" style="background-color: #F8FAFC;">
         <div class="container">
             <div class="section-header">
+                <div class="section-icon"><i class="fas fa-lightbulb"></i></div>
                 <h2 class="section-title">Transformative Use Cases</h2>
                 <p class="section-subtitle">Practical applications of the AI Agentic Layer across different organizational roles, using your existing platform features as the foundation.</p>
             </div>
@@ -785,8 +1009,9 @@
             <div class="use-cases-grid">
                 <!-- Use Case 1 -->
                 <div class="use-case-card">
+                    <div class="use-case-icon"><i class="fas fa-search"></i></div>
                     <div class="use-case-header">
-                        <div class="persona">NHL Director of Amateur Scouting</div>
+                        <div class="persona"><i class="fas fa-user-tie"></i> NHL Director of Amateur Scouting</div>
                         <h3 class="card-title">European Prospect Identification</h3>
                     </div>
                     <div style="padding: 10px 30px 30px;">
@@ -798,10 +1023,11 @@
                     </div>
                 </div>
                 
-                <!-- Use Case 2 - Enhanced -->
+                <!-- Use Case 2 -->
                 <div class="use-case-card">
+                    <div class="use-case-icon"><i class="fas fa-users"></i></div>
                     <div class="use-case-header">
-                        <div class="persona">USHL General Manager</div>
+                        <div class="persona"><i class="fas fa-user-tie"></i> USHL General Manager</div>
                         <h3 class="card-title">Roster Optimization & Simulation</h3>
                     </div>
                     <div style="padding: 10px 30px 30px;">
@@ -813,10 +1039,11 @@
                     </div>
                 </div>
                 
-                <!-- Use Case 3 - Enhanced -->
+                <!-- Use Case 3 -->
                 <div class="use-case-card">
+                    <div class="use-case-icon"><i class="fas fa-running"></i></div>
                     <div class="use-case-header">
-                        <div class="persona">Player Development Coach</div>
+                        <div class="persona"><i class="fas fa-user-tie"></i> Player Development Coach</div>
                         <h3 class="card-title">Personalized Development Plans</h3>
                     </div>
                     <div style="padding: 10px 30px 30px;">
@@ -828,11 +1055,11 @@
                     </div>
                 </div>
             
-            
-                <!-- Use Case 4 - Based on Their Dashboard -->
+                <!-- Use Case 4 -->
                 <div class="use-case-card">
+                    <div class="use-case-icon"><i class="fas fa-video"></i></div>
                     <div class="use-case-header">
-                        <div class="persona">NHL Assistant Coach - Video & Strategy</div>
+                        <div class="persona"><i class="fas fa-user-tie"></i> NHL Assistant Coach - Video & Strategy</div>
                         <h3 class="card-title">Automated Game Review & Prep</h3>
                     </div>
                     <div style="padding: 10px 30px 30px;">
@@ -846,14 +1073,27 @@
             </div>
             
             <div class="card highlight-card" style="margin-top: 60px;">
-                <h3 class="card-title">Advanced NHL Equivalency Projection Enhanced by Your Data</h3>
+                <div class="card-icon"><i class="fas fa-chart-line"></i></div>
+                <h3 class="card-title">Enhanced NHL Equivalency Projection Supported by Your Data</h3>
                 <p>Our proprietary AI layer upgrades traditional NHLe models by integrating rich contextual data you already capture:</p>
-                <ul style="columns: 2; column-gap: 60px; margin-top: 20px;">
-                    <li style="margin-bottom: 12px; break-inside: avoid;"><strong>Tactical Context Integration:</strong> Weighs player performance against system execution and opponent quality.</li>
-                    <li style="margin-bottom: 12px; break-inside: avoid;"><strong>Biomechanical Integration:</strong> Uses sensor data (e.g. skating stride mechanics, edge angles) to assess adaptability to NHL pace.</li>
-                    <li style="margin-bottom: 12px; break-inside: avoid;"><strong>Micro-Action Forecasting:</strong> Forecasts success from subtle habits like stick-blade positioning in video.</li>
-                    <li style="margin-bottom: 12px; break-inside: avoid;"><strong>Dynamic Coefficients:</strong> Replaces static league multipliers with evolving, player-specific translation factors.</li>
-                </ul>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 20px;">
+                    <div style="background: rgba(255, 255, 255, 0.1); padding: 20px; border-radius: 8px;">
+                        <div style="color: var(--accent-teal); margin-bottom: 10px;"><i class="fas fa-chess-board"></i></div>
+                        <strong>Tactical Context Integration:</strong> Weighs player performance against system execution and opponent quality.
+                    </div>
+                    <div style="background: rgba(255, 255, 255, 0.1); padding: 20px; border-radius: 8px;">
+                        <div style="color: var(--accent-teal); margin-bottom: 10px;"><i class="fas fa-running"></i></div>
+                        <strong>Biomechanical Integration:</strong> Uses sensor data to assess adaptability to NHL pace.
+                    </div>
+                    <div style="background: rgba(255, 255, 255, 0.1); padding: 20px; border-radius: 8px;">
+                        <div style="color: var(--accent-teal); margin-bottom: 10px;"><i class="fas fa-search"></i></div>
+                        <strong>Micro-Action Forecasting:</strong> Forecasts success from subtle habits like stick-blade positioning.
+                    </div>
+                    <div style="background: rgba(255, 255, 255, 0.1); padding: 20px; border-radius: 8px;">
+                        <div style="color: var(--accent-teal); margin-bottom: 10px;"><i class="fas fa-sliders-h"></i></div>
+                        <strong>Dynamic Coefficients:</strong> Replaces static league multipliers with evolving, player-specific translation factors.
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -862,6 +1102,7 @@
     <section class="section">
         <div class="container">
             <div class="section-header">
+                <div class="section-icon"><i class="fas fa-trophy"></i></div>
                 <h2 class="section-title">Strategic Competitive Advantages</h2>
                 <p class="section-subtitle">Transforming your platform from a sophisticated analytical tool into an indispensable strategic partner.</p>
             </div>
@@ -877,31 +1118,31 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td><strong>Insight Generation</strong></td>
+                        <td><strong><i class="fas fa-chart-bar table-icon"></i> Insight Generation</strong></td>
                         <td>Manual analysis, static reports</td>
                         <td><span style="color: #0A4BC8; font-weight: 700;">Automated, predictive</span> insights delivered conversationally</td>
                         <td>Reduces scout/analyst time on data processing by ~70%</td>
                     </tr>
                     <tr>
-                        <td><strong>Player Projection</strong></td>
+                        <td><strong><i class="fas fa-user-friends table-icon"></i> Player Projection</strong></td>
                         <td>Basic NHLe multipliers</td>
-                        <td><span style="color: #0A4BC8; font-weight: 700;">Dynamic NHLe projection models</span> with contextual simulation and biomechanical filtering</td>
-                        <td>Improves prospect evaluation confidence through multi-factor analysis and historical pattern matching</td>
+                        <td><span style="color: #0A4BC8; font-weight: 700;">Dynamic NHLe projection models</span> with contextual simulation</td>
+                        <td>Improves prospect evaluation confidence through multi-factor analysis</td>
                     </tr>
                     <tr>
-                        <td><strong>Tactical Analysis</strong></td>
-                        <td>Post-game reports (Escape/Entry, TOI) showing <em>what happened</em></td>
+                        <td><strong><i class="fas fa-chess table-icon"></i> Tactical Analysis</strong></td>
+                        <td>Post-game reports showing <em>what happened</em></td>
                         <td><span style="color: #0A4BC8; font-weight: 700;">Pre-game simulation & prescriptive alerts</span> recommending <em>what to do</em></td>
                         <td>Transforms platform from a <span style="color: #0A4BC8; font-weight: 700;">post-mortem tool</span> to an <span style="color: #0A4BC8; font-weight: 700;">active strategic assistant</span></td>
                     </tr>
                     <tr>
-                        <td><strong>Video Integration</strong></td>
-                        <td>Manual tagging and synchronization with data</td>
-                        <td><span style="color: #0A4BC8; font-weight: 700;">Automated event tagging, AI-clipped highlight reels</span> for coaching</td>
+                        <td><strong><i class="fas fa-video table-icon"></i> Video Integration</strong></td>
+                        <td>Manual tagging and synchronization</td>
+                        <td><span style="color: #0A4BC8; font-weight: 700;">Automated event tagging, AI-clipped highlight reels</span></td>
                         <td>Cuts film study time by 60-80%, allowing focus on teaching</td>
                     </tr>
                     <tr>
-                        <td><strong>IP Sovereignty</strong></td>
+                        <td><strong><i class="fas fa-crown table-icon"></i> IP Sovereignty</strong></td>
                         <td>Third-party AI dependencies</td>
                         <td><span style="color: #0A4BC8; font-weight: 700;">Proprietary</span> algorithms that become core company assets</td>
                         <td>Creates lasting competitive moats and increases valuation</td>
@@ -910,6 +1151,7 @@
             </table>
             
             <div class="card highlight-card" style="margin-top: 60px;">
+                <div class="card-icon"><i class="fas fa-shield-alt"></i></div>
                 <h3 class="card-title">Intellectual Property Sovereignty</h3>
                 <p>Unlike relying on third-party AI services, this partnership will build proprietary algorithms and models that become Drive Hockey Analytics' core intellectual property. The AI models trained on your unique combination of skill metrics, tactical reports, and video data become non-replicable assets. This IP becomes a valuable, non-replicable asset that increases your company's valuation and creates lasting competitive moats. The integrated system itself becomes a market-defining innovation.</p>
             </div>
@@ -920,13 +1162,17 @@
     <section class="section" style="background-color: #F0F7FF;">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">Phased Implementation Roadmap</h2>
+                <div class="section-icon"><i class="fas fa-road"></i></div>
+                <h2 class="section-title">Collaborative Implementation Journey</h2>
                 <p class="section-subtitle">A strategic, risk-managed approach to building and deploying the AI Agentic Layer, integrating with your existing architecture.</p>
             </div>
             
             <div class="phases-container">
                 <div class="phase">
                     <div class="phase-number">1</div>
+                    <div class="phase-visual">
+                        <div class="phase-icon"><i class="fas fa-layer-group"></i></div>
+                    </div>
                     <h3 class="card-title">Foundation & Integration</h3>
                     <p><strong>Months 1-3</strong></p>
                     <ul style="margin-top: 20px; padding-left: 20px; color: var(--medium-gray);">
@@ -939,6 +1185,9 @@
                 
                 <div class="phase">
                     <div class="phase-number">2</div>
+                    <div class="phase-visual">
+                        <div class="phase-icon"><i class="fas fa-brain"></i></div>
+                    </div>
                     <h3 class="card-title">Intelligence & Prediction</h3>
                     <p><strong>Months 4-6</strong></p>
                     <ul style="margin-top: 20px; padding-left: 20px; color: var(--medium-gray);">
@@ -951,6 +1200,9 @@
                 
                 <div class="phase">
                     <div class="phase-number">3</div>
+                    <div class="phase-visual">
+                        <div class="phase-icon"><i class="fas fa-rocket"></i></div>
+                    </div>
                     <h3 class="card-title">Scale & Optimization</h3>
                     <p><strong>Months 7-12</strong></p>
                     <ul style="margin-top: 20px; padding-left: 20px; color: var(--medium-gray);">
@@ -968,6 +1220,7 @@
     <section class="section">
         <div class="container">
             <div class="section-header">
+                <div class="section-icon"><i class="fas fa-chart-pie"></i></div>
                 <h2 class="section-title">Expected Return on Investment</h2>
                 <p class="section-subtitle">Value creation across multiple dimensions for both Drive Hockey Analytics and your clients.</p>
             </div>
@@ -992,7 +1245,8 @@
             </div>
             
             <div class="card highlight-card" style="margin-top: 60px;">
-                <h3 class="card-title">Conclusion: Redefining the Future of Hockey Intelligence</h3>
+                <div class="card-icon"><i class="fas fa-flag-checkered"></i></div>
+                <h3 class="card-title">Conclusion: Enhancing the Future of Hockey Intelligence</h3>
                 <p>Drive Hockey Analytics has built the most sophisticated tactical platform for youth and amateur hockey. This partnership adds a proprietary AI layer that transforms your data capture into autonomous intelligence—<strong>delivering unprecedented automation, superior projections, and sustainable competitive advantage.</strong> We're ready to begin technical discovery and tailor this solution to your architecture. Let's transform your platform from the best tool for measuring the game into the essential system for winning it.</p>
             </div>
         </div>
@@ -1003,23 +1257,23 @@
         <div class="container">
             <div class="footer-content">
                 <div>
-                    <div class="footer-logo">Algo<span style="color: var(--accent-teal);">-Rythmn.ai</span></div>
+                    <div class="footer-logo" style="margin-right: 10px; color: white;">Algo<span style="color: var(--accent-teal);">-Rythmn.ai</span></div>
                     <p class="footer-contact">
-                        <a href="mailto:support@algo-rythmn.ai">support@algo-rythmn.ai</a><br>
-                        Calgary, Alberta, Canada
+                        <a href="mailto:support@algo-rythmn.ai"><i class="fas fa-envelope"></i> support@algo-rythmn.ai</a><br>
+                        <i class="fas fa-map-marker-alt"></i> Calgary, Alberta, Canada
                     </p>
                 </div>
                 
                 <div>
                     <h3 class="card-title" style="color: white; margin-bottom: 20px;">Proposal Prepared For</h3>
                     <p class="footer-contact">
-                        Drive Hockey Analytics<br>
+                        <strong>Drive Hockey Analytics</strong><br>
                         Strategic Partnership Review
                     </p>
                 </div>
                 
                 <div>
-                    <h3 class="card-title" style="color: white; margin-bottom: 20px;">Next Steps</h3>
+                    <h3 class="card-title" style="color: white; margin-bottom: 20px;">Next Collaborative Steps</h3>
                     <p class="footer-contact">
                         1. Technical deep dive & architecture review<br>
                         2. Data integration compatibility assessment<br>
