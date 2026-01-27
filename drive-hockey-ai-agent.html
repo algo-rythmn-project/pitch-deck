@@ -243,17 +243,22 @@
         }
         
         .card-icon {
-            font-size: 2rem;
+            font-size: 1.8rem;
             color: var(--secondary-blue);
-            margin-bottom: 20px;
+            margin-right: 15px;
+            display: flex;
+            vertical-align: middle;
         }
         
         .card-title {
             font-family: 'Montserrat', sans-serif;
             font-weight: 700;
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             color: var(--primary-navy);
             margin-bottom: 20px;
+            display: inline-block;
+            align-items: flex-start;
+            vertical-align: middle;
         }
         
         .highlight-card {
@@ -327,6 +332,206 @@
             font-size: 0.95rem;
             color: var(--medium-gray);
             font-weight: 500;
+        }
+        
+        /* ENHANCED WORKFLOW VISUALS */
+        .workflow-visual-container {
+            position: relative;
+            margin: 60px 0;
+            padding: 30px 0;
+        }
+        
+        .workflow-timeline {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            position: relative;
+        }
+        
+        .workflow-timeline::before {
+            content: '';
+            position: absolute;
+            top: 60px;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--medium-gray) 0%, var(--light-gray) 100%);
+            z-index: 1;
+        }
+        
+        .workflow-timeline-future::before {
+            background: linear-gradient(90deg, var(--accent-teal) 0%, var(--secondary-blue) 100%);
+        }
+        
+        .workflow-step-visual {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            width: 20%;
+        }
+        
+        .workflow-step-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            box-shadow: var(--card-shadow);
+            border: 4px solid var(--light-gray);
+            font-size: 1.5rem;
+            color: var(--medium-gray);
+            transition: var(--transition);
+        }
+        
+        .workflow-step-visual.current .workflow-step-icon {
+            border-color: var(--medium-gray);
+        }
+        
+        .workflow-step-visual.future .workflow-step-icon {
+            border-color: var(--accent-teal);
+            color: var(--accent-teal);
+            background: white;
+        }
+        
+        .workflow-step-label {
+            font-weight: 600;
+            margin-top: 10px;
+            color: var(--dark-text);
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+        
+        .workflow-step-time {
+            font-size: 0.85rem;
+            color: var(--medium-gray);
+            margin-top: 5px;
+            display: block;
+            max-width: 200px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        }
+        
+        .workflow-connector {
+            position: absolute;
+            top: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            height: 4px;
+            background: var(--light-gray);
+            z-index: 1;
+        }
+        
+        .workflow-comparison-visual {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin: 60px 0;
+        }
+        
+        .workflow-column-visual {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 40px;
+            box-shadow: var(--card-shadow);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .workflow-column-visual.current {
+            border-top: 5px solid var(--medium-gray);
+        }
+        
+        .workflow-column-visual.future {
+            border-top: 5px solid var(--accent-teal);
+        }
+        
+        .workflow-column-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary-navy);
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .workflow-column-title i {
+            margin-right: 12px;
+            font-size: 1.8rem;
+        }
+        
+        .workflow-column-visual.current .workflow-column-title {
+            color: var(--medium-gray);
+        }
+        
+        .workflow-column-visual.future .workflow-column-title {
+            color: var(--accent-teal);
+        }
+        
+        .workflow-step-visual-detailed {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 25px;
+            padding-bottom: 25px;
+            border-bottom: 1px dashed var(--light-gray);
+        }
+        
+        .workflow-step-visual-detailed:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .step-visual-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            background: var(--light-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            flex-shrink: 0;
+            font-size: 1.2rem;
+            color: var(--medium-gray);
+        }
+        
+        .workflow-column-visual.future .step-visual-icon {
+            background: rgba(0, 212, 201, 0.1);
+            color: var(--accent-teal);
+        }
+        
+        .step-visual-content h4 {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--dark-text);
+        }
+        
+        .workflow-column-visual.current .step-visual-content h4 {
+            color: var(--medium-gray);
+        }
+        
+        .step-visual-content p {
+            font-size: 0.95rem;
+            color: var(--medium-gray);
+            line-height: 1.5;
+        }
+        
+        .workflow-efficiency-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(90deg, var(--accent-teal) 0%, var(--secondary-blue) 100%);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
         }
         
         /* Use Cases */
@@ -459,88 +664,41 @@
             font-size: 1.5rem;
         }
         
-        /* Workflow Comparison */
-        .workflow-comparison {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            margin: 60px 0;
-        }
-        
-        .workflow-column {
+        /* Table */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 40px 0;
             background: white;
             border-radius: var(--border-radius);
-            padding: 40px;
+            overflow: hidden;
             box-shadow: var(--card-shadow);
-            position: relative;
         }
         
-        .workflow-title {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
-            font-size: 1.3rem;
-            color: var(--primary-navy);
-            margin-bottom: 30px;
-            text-align: center;
-            padding-bottom: 15px;
-            border-bottom: 2px solid var(--light-gray);
-        }
-        
-        .workflow-current .workflow-title {
-            color: var(--medium-gray);
-        }
-        
-        .workflow-future .workflow-title {
-            color: var(--accent-teal);
-        }
-        
-        .workflow-step {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 25px;
-            padding-bottom: 25px;
-            border-bottom: 1px dashed var(--light-gray);
-        }
-        
-        .workflow-step:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-            padding-bottom: 0;
-        }
-        
-        .step-number {
-            background: var(--light-gray);
-            color: var(--medium-gray);
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            margin-right: 15px;
-            flex-shrink: 0;
-        }
-        
-        .workflow-future .step-number {
-            background: var(--accent-teal);
+        .comparison-table th {
+            background: var(--primary-navy);
             color: white;
-        }
-        
-        .step-content h4 {
             font-weight: 600;
-            margin-bottom: 5px;
-            color: var(--dark-text);
+            text-align: left;
+            padding: 25px 30px;
         }
         
-        .workflow-current .step-content h4 {
-            color: var(--medium-gray);
+        .comparison-table td {
+            padding: 25px 30px;
+            border-bottom: 1px solid var(--light-gray);
         }
         
-        .step-content p {
-            font-size: 0.95rem;
-            color: var(--medium-gray);
-            line-height: 1.5;
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .comparison-table tr:hover {
+            background: rgba(26, 95, 237, 0.03);
+        }
+        
+        .table-icon {
+            color: var(--accent-teal);
+            margin-right: 10px;
         }
         
         /* Phases */
@@ -594,43 +752,6 @@
             justify-content: center;
             color: white;
             font-size: 2rem;
-        }
-        
-        /* Table */
-        .comparison-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 40px 0;
-            background: white;
-            border-radius: var(--border-radius);
-            overflow: hidden;
-            box-shadow: var(--card-shadow);
-        }
-        
-        .comparison-table th {
-            background: var(--primary-navy);
-            color: white;
-            font-weight: 600;
-            text-align: left;
-            padding: 25px 30px;
-        }
-        
-        .comparison-table td {
-            padding: 25px 30px;
-            border-bottom: 1px solid var(--light-gray);
-        }
-        
-        .comparison-table tr:last-child td {
-            border-bottom: none;
-        }
-        
-        .comparison-table tr:hover {
-            background: rgba(26, 95, 237, 0.03);
-        }
-        
-        .table-icon {
-            color: var(--accent-teal);
-            margin-right: 10px;
         }
         
         /* Footer */
@@ -707,13 +828,19 @@
                 font-size: 2.4rem;
             }
             
-            .workflow-comparison {
+            .workflow-comparison-visual {
                 grid-template-columns: 1fr;
                 gap: 30px;
             }
             
-            .use-cases-grid {
-                grid-template-columns: 1fr;
+            .workflow-timeline {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .workflow-step-visual {
+                width: 33%;
+                margin-bottom: 30px;
             }
         }
         
@@ -740,6 +867,30 @@
             
             .architecture-diagram {
                 grid-template-columns: 1fr;
+            }
+            
+            .workflow-step-visual {
+                width: 50%;
+            }
+            
+            .use-cases-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .use-case-visual-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .workflow-step-visual {
+                width: 100%;
+            }
+            
+            .workflow-timeline::before {
+                display: none;
             }
         }
     </style>
@@ -888,102 +1039,99 @@
                         <div class="layer-visual"><i class="fas fa-robot"></i></div>
                     </div>
                     <h3 class="card-title">Automated Workflow Integration</h3>
-                    <p>Your existing dashboards, now enhanced with AI-generated insights, predictive visualizations, automated video clip generation, and embedded strategic recommendations.</p>
+                    <p>Enhance your existing dashboards with AI-generated insights, predictive visualizations, automated video clip generation, and embedded strategic recommendations.</p>
                 </div>
             </div>
-            
-            <!-- New Workflow Comparison Section -->
-            <div class="section-header" style="margin-top: 100px;">
+        </div>
+    </section>
+
+    <!-- Enhanced Coaching Workflow -->
+    <section class="section" style="background-color: #F0F7FF;">
+        <div class="container">
+            <div class="section-header">
                 <div class="section-icon"><i class="fas fa-exchange-alt"></i></div>
                 <h2 class="section-title">Enhanced Coaching Workflow</h2>
                 <p class="section-subtitle">How AI transforms manual post-game analysis into automated pre-game strategy</p>
             </div>
             
-            <div class="workflow-comparison">
-                <div class="workflow-column workflow-current">
-                    <h3 class="workflow-title">Current Post-Game Workflow</h3>
-                    
-                    <div class="workflow-step">
-                        <div class="step-number">1</div>
-                        <div class="step-content">
-                            <h4>Export & Review Reports</h4>
-                            <p>Coach manually exports the <strong>Escape Report</strong>, <strong>TOI Dashboard</strong>, and <strong>Player Impact</strong> metrics after the game.</p>
-                        </div>
+            <!-- Timeline Visual -->
+            <div class="workflow-visual-container">                
+                <!-- Current Workflow Timeline -->
+                <div style="margin-bottom: 60px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+                        <h4 style="font-family: 'Montserrat', sans-serif; color: var(--medium-gray);"><i class="fas fa-history"></i> Current Post-Game Workflow</h4>
+                        <div style="background: var(--light-gray); color: var(--medium-gray); padding: 8px 16px; border-radius: 50px; font-size: 0.9rem; font-weight: 600;">~8-10 hours manual analysis</div>
                     </div>
                     
-                    <div class="workflow-step">
-                        <div class="step-number">2</div>
-                        <div class="step-content">
-                            <h4>Manual Video Tagging</h4>
-                            <p>Video coordinator spends 2-3 hours tagging key moments, drawing zones, and syncing with event data in your video analysis module.</p>
+                    <div class="workflow-timeline">
+                        <div class="workflow-step-visual current">
+                            <div class="workflow-step-icon"><i class="fas fa-file-export"></i></div>
+                            <div class="workflow-step-label">Export & Review Reports</div>
+                            <span class="workflow-step-time">Coach manually exports Escape Report, TOI Dashboard, and Player Impact metrics post-game.</span>
                         </div>
-                    </div>
-                    
-                    <div class="workflow-step">
-                        <div class="step-number">3</div>
-                        <div class="step-content">
-                            <h4>Cross-Reference Analysis</h4>
-                            <p>Coaching staff manually cross-reference reports with video, identifying patterns (e.g., which D-pairs struggled vs. specific forechecks).</p>
+                        
+                        <div class="workflow-step-visual current">
+                            <div class="workflow-step-icon"><i class="fas fa-video"></i></div>
+                            <div class="workflow-step-label">Manual Video Tagging</div>
+                            <span class="workflow-step-time">Video coordinator spends 2–3 hours tagging moments, drawing zones, syncing with event data.</span>
                         </div>
-                    </div>
-                    
-                    <div class="workflow-step">
-                        <div class="step-number">4</div>
-                        <div class="step-content">
-                            <h4>Intuitive Strategy Session</h4>
-                            <p>Based on synthesized insights, coaching staff holds meeting to develop intuitive strategy adjustments for next game.</p>
+                        
+                        <div class="workflow-step-visual current">
+                            <div class="workflow-step-icon"><i class="fas fa-search"></i></div>
+                            <div class="workflow-step-label">Cross-Reference Analysis</div>
+                            <span class="workflow-step-time">Coaches compare reports with video to spot patterns (e.g., D-pair struggles vs. forecheck).</span>
                         </div>
-                    </div>
-                    
-                    <div class="workflow-step">
-                        <div class="step-number">5</div>
-                        <div class="step-content">
-                            <h4>Manual Player Communication</h4>
-                            <p>Coaches manually compile video clips and notes to share with individual players about adjustments needed.</p>
+                        
+                        <div class="workflow-step-visual current">
+                            <div class="workflow-step-icon"><i class="fas fa-users"></i></div>
+                            <div class="workflow-step-label">Strategy Session</div>
+                            <span class="workflow-step-time">Staff meets to adjust strategy based on insights.</span>
+                        </div>
+                        
+                        <div class="workflow-step-visual current">
+                            <div class="workflow-step-icon"><i class="fas fa-user-check"></i></div>
+                            <div class="workflow-step-label">Player Communication</div>
+                            <span class="workflow-step-time">Coaches compile clips and notes for individual player review.</span>
                         </div>
                     </div>
                 </div>
                 
-                <div class="workflow-column workflow-future">
-                    <h3 class="workflow-title">AI-Powered Future Workflow</h3>
-                    
-                    <div class="workflow-step">
-                        <div class="step-number">1</div>
-                        <div class="step-content">
-                            <h4>Automated Report Synthesis</h4>
-                            <p>AI Agent <strong>auto-generates narrative report</strong> highlighting key tactical failures/successes from integrated data streams immediately post-game.</p>
-                        </div>
+                <!-- Future Workflow Timeline -->
+                <div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+                        <h4 style="font-family: 'Montserrat', sans-serif; color: var(--accent-teal);"><i class="fas fa-bolt"></i> AI-Powered Future Workflow</h4>
+                        <div style="background: linear-gradient(90deg, var(--accent-teal) 0%, var(--secondary-blue) 100%); color: white; padding: 8px 16px; border-radius: 50px; font-size: 0.9rem; font-weight: 600;">~60 seconds automated analysis</div>
                     </div>
                     
-                    <div class="workflow-step">
-                        <div class="step-number">2</div>
-                        <div class="step-content">
-                            <h4>Intelligent Video Processing</h4>
-                            <p>AI <strong>automatically tags key moments</strong>, generates highlight reels for coaching review, and syncs clips with relevant metrics.</p>
+                    <div class="workflow-timeline workflow-timeline-future">
+                        <div class="workflow-step-visual future">
+                            <div class="workflow-step-icon"><i class="fas fa-robot"></i></div>
+                            <div class="workflow-step-label">Automated Report Synthesis</div>
+                            <span class="workflow-step-time">AI generates post-game tactical summaries from integrated data.</span>
                         </div>
-                    </div>
-                    
-                    <div class="workflow-step">
-                        <div class="step-number">3</div>
-                        <div class="step-content">
-                            <h4>Conversational Strategy Exploration</h4>
-                            <p>Coach asks: <em>"Which defensive pairings had the lowest success rate against their 1-2-2 forecheck, and what were their most common failed exit types?"</em> AI instantly analyzes and responds.</p>
+                        
+                        <div class="workflow-step-visual future">
+                            <div class="workflow-step-icon"><i class="fas fa-tags"></i></div>
+                            <div class="workflow-step-label">Intelligent Video Processing</div>
+                            <span class="workflow-step-time">AI tags key moments, builds highlight reels, syncs clips with metrics.</span>
                         </div>
-                    </div>
-                    
-                    <div class="workflow-step">
-                        <div class="step-number">4</div>
-                        <div class="step-content">
-                            <h4>Predictive Simulation & Planning</h4>
-                            <p>AI runs <strong>"what-if" simulations</strong> for next game: <em>"Simulate using more stretch passes against Team Coastal's forecheck based on their O-zone time%."</em></p>
+                        
+                        <div class="workflow-step-visual future">
+                            <div class="workflow-step-icon"><i class="fas fa-comments"></i></div>
+                            <div class="workflow-step-label">Conversational Strategy Exploration</div>
+                            <span class="workflow-step-time">Coach asks tactical questions; AI delivers data-backed answers.</span>
                         </div>
-                    </div>
-                    
-                    <div class="workflow-step">
-                        <div class="step-number">5</div>
-                        <div class="step-content">
-                            <h4>Automated Player Development</h4>
-                            <p>AI <strong>generates personalized video clips and training recommendations</strong> for each player based on their performance gaps, sent automatically.</p>
+                        
+                        <div class="workflow-step-visual future">
+                            <div class="workflow-step-icon"><i class="fas fa-chart-line"></i></div>
+                            <div class="workflow-step-label">Predictive Simulation</div>
+                            <span class="workflow-step-time">AI runs “what-if” scenarios to test strategic adjustments.</span>
+                        </div>
+                        
+                        <div class="workflow-step-visual future">
+                            <div class="workflow-step-icon"><i class="fas fa-user-graduate"></i></div>
+                            <div class="workflow-step-label">Player Development Automation</div>
+                            <span class="workflow-step-time">AI sends personalized clips and training tips based on performance gaps.</span>
                         </div>
                     </div>
                 </div>
@@ -997,8 +1145,8 @@
         </div>
     </section>
 
-    <!-- Use Cases -->
-    <section class="section" style="background-color: #F8FAFC;">
+    <!-- Use Cases - Visual Version -->
+    <section class="section">
         <div class="container">
             <div class="section-header">
                 <div class="section-icon"><i class="fas fa-lightbulb"></i></div>
@@ -1099,7 +1247,7 @@
     </section>
 
     <!-- Competitive Advantage -->
-    <section class="section">
+    <section class="section"  style="background-color: #F0F7FF;">
         <div class="container">
             <div class="section-header">
                 <div class="section-icon"><i class="fas fa-trophy"></i></div>
@@ -1159,7 +1307,7 @@
     </section>
 
     <!-- Implementation Roadmap -->
-    <section class="section" style="background-color: #F0F7FF;">
+    <section class="section">
         <div class="container">
             <div class="section-header">
                 <div class="section-icon"><i class="fas fa-road"></i></div>
@@ -1176,10 +1324,10 @@
                     <h3 class="card-title">Foundation & Integration</h3>
                     <p><strong>Months 1-3</strong></p>
                     <ul style="margin-top: 20px; padding-left: 20px; color: var(--medium-gray);">
-                        <li style="margin-bottom: 10px;">API integration with your existing <strong>skill metrics</strong>, <strong>performance reports</strong>, and <strong>dashboard data</strong></li>
-                        <li style="margin-bottom: 10px;">Development of core <strong>dynamic NHLe</strong> projection models using your historical data</li>
-                        <li style="margin-bottom: 10px;">Basic natural language query interface for data retrieval across your platform</li>
-                        <li><strong>Outcome:</strong> Internal prototype demonstrating automated player comparisons and report synthesis</li>
+                        <li style="margin-bottom: 10px;">Connect APIs to skill metrics, reports, dashboards</li>
+                        <li style="margin-bottom: 10px;">Build NHLe models from historical data</li>
+                        <li style="margin-bottom: 10px;">Enable basic natural language queries</li>
+                        <li><strong>Outcome:</strong> Internal prototype for player comparisons and report automation</li>
                     </ul>
                 </div>
                 
@@ -1191,10 +1339,10 @@
                     <h3 class="card-title">Intelligence & Prediction</h3>
                     <p><strong>Months 4-6</strong></p>
                     <ul style="margin-top: 20px; padding-left: 20px; color: var(--medium-gray);">
-                        <li style="margin-bottom: 10px;">Integration with your <strong>video analysis system</strong> for automated tagging</li>
-                        <li style="margin-bottom: 10px;">Development of <strong>tactical simulation models</strong> using your Escape Report data</li>
-                        <li style="margin-bottom: 10px;">Advanced "what-if" scenario simulation for line matchups and strategies</li>
-                        <li><strong>Outcome:</strong> Beta release with select USHL and partner teams featuring conversational strategy exploration</li>
+                        <li style="margin-bottom: 10px;">Link video system for auto-tagging</li>
+                        <li style="margin-bottom: 10px;">Create tactical simulation models</li>
+                        <li style="margin-bottom: 10px;">Run advanced “what-if” strategy scenarios</li>
+                        <li><strong>Outcome:</strong> Beta release with USHL teams for strategy Q&A</li>
                     </ul>
                 </div>
                 
@@ -1206,10 +1354,10 @@
                     <h3 class="card-title">Scale & Optimization</h3>
                     <p><strong>Months 7-12</strong></p>
                     <ul style="margin-top: 20px; padding-left: 20px; color: var(--medium-gray);">
-                        <li style="margin-bottom: 10px;">Full agentic workflow automation (auto-report generation, alerting, video clip creation)</li>
-                        <li style="margin-bottom: 10px;">Advanced visualization and dashboard embedding within your existing interface</li>
-                        <li style="margin-bottom: 10px;">Personalized AI assistant features for players and parents accessing their data</li>
-                        <li><strong>Outcome:</strong> Enterprise-ready platform for NHL, NCAA, and major junior teams with complete AI integration</li>
+                        <li style="margin-bottom: 10px;">Automate full workflows: reports, alerts, clips</li>
+                        <li style="margin-bottom: 10px;">Embed advanced visuals in dashboards</li>
+                        <li style="margin-bottom: 10px;">Add personalized AI tools for players and parents</li>
+                        <li><strong>Outcome:</strong> Enterprise-ready platform for NHL, NCAA, and junior teams</li>
                     </ul>
                 </div>
             </div>
@@ -1217,7 +1365,7 @@
     </section>
 
     <!-- ROI & Conclusion -->
-    <section class="section">
+    <section class="section"  style="background-color: #F0F7FF;">
         <div class="container">
             <div class="section-header">
                 <div class="section-icon"><i class="fas fa-chart-pie"></i></div>
@@ -1247,7 +1395,7 @@
             <div class="card highlight-card" style="margin-top: 60px;">
                 <div class="card-icon"><i class="fas fa-flag-checkered"></i></div>
                 <h3 class="card-title">Conclusion: Enhancing the Future of Hockey Intelligence</h3>
-                <p>Drive Hockey Analytics has built the most sophisticated tactical platform for youth and amateur hockey. This partnership adds a proprietary AI layer that transforms your data capture into autonomous intelligence—<strong>delivering unprecedented automation, superior projections, and sustainable competitive advantage.</strong> We're ready to begin technical discovery and tailor this solution to your architecture. Let's transform your platform from the best tool for measuring the game into the essential system for winning it.</p>
+                <p>Drive Hockey Analytics powers the most advanced tactical platform in youth and amateur hockey. This partnership introduces a proprietary AI layer that converts raw data into autonomous intelligence—unlocking unmatched automation, sharper projections, and lasting competitive edge. We’re ready to begin technical discovery and tailor the solution to your architecture. Let’s evolve your platform from the best tool for measuring the game into the essential system for winning it.</p>
             </div>
         </div>
     </section>
