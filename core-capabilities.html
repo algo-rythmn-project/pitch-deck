@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algo-Rythmn.ai | Enterprise AI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #0f172a;     /* Deep Navy */
+            --accent: #0ea5e9;      /* Sky Blue */
+            --light: #f8fafc;       /* Off-white */
+            --text-main: #334155;   /* Gray text */
+            --text-muted: #64748b;  /* Muted gray */
+            --card-bg: #ffffff;     /* White card background */
+            --border-light: #e2e8f0; /* Light border */
+            --gradient-main: linear-gradient(135deg, var(--primary) 0%, #1e293b 100%);
+            --radius-orbit: 280px;  /* Distance from center for circle */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            letter-spacing: -0.02em;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .brand-tag {
+            background: var(--accent);
+            color: white;
+            padding: 5px 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.8rem;
+            border-radius: 50px;
+            margin-bottom: 20px;
+            display: inline-block;
+            font-weight: 600;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 100vh;
+            background: var(--gradient-main);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            position: relative;
+            padding: 0 10%;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            font-weight: 300;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-bottom: 40px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 16px;
+        }
+
+        .btn {
+            padding: 16px 32px;
+            border-radius: 100px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: white;
+            color: var(--primary);
+            border: 2px solid white;
+        }
+        .btn-primary:hover {
+            background: #e2e8f0;
+            border-color: #e2e8f0;
+            transform: scale(1.05);
+        }
+
+        .btn-accent {
+            background: var(--accent);
+            color: white;
+            border: 2px solid var(--accent);
+        }
+        .btn-accent:hover {
+            background: #0284c7;
+            border-color: #0284c7;
+            transform: scale(1.05);
+        }
+
+        .btn-outline {
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        .btn-outline:hover {
+            border-color: white;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* --- SECTION HEADERS --- */
+        section {
+            padding: 120px 0;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 16px;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 60px;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* --- FIXED INDUSTRY CIRCULAR LAYOUT --- */
+        .industry-circle-container {
+            position: relative;
+            width: 700px;
+            height: 700px;
+            margin: 60px auto;
+            display: flex; 
+            align-items: center;
+            justify-content: center;
+        }
+
+        .genai-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 180px;
+            height: 180px;
+            background: var(--gradient-main);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 20px 60px rgba(14, 165, 233, 0.3);
+            z-index: 10;
+            animation: pulse 4s infinite ease-in-out;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.05); }
+        }
+
+        .industry-circle {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .industry-item-circle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 260px;
+            height: 260px;
+            background: var(--card-bg);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+            border: 2px solid var(--border-light);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 5;
+            margin: -130px; /* Offset by half width to center on pivot point */
+        }
+
+        /* REMOVED THE CONFLICTING TRANSFORM HERE */
+        .industry-item-circle:hover {
+            /* Transform is now handled individually below to avoid shaking */
+            border-color: var(--accent);
+            box-shadow: 0 20px 50px rgba(14, 165, 233, 0.2);
+            z-index: 20;
+            cursor: pointer;
+        }
+
+        /* Specific positioning using rotation transforms for perfect circle */
+        .industry-item-circle:nth-child(2) { transform: rotate(270deg) translate(var(--radius-orbit)) rotate(-270deg); } /* Top */
+        .industry-item-circle:nth-child(3) { transform: rotate(342deg) translate(var(--radius-orbit)) rotate(-342deg); } /* Top Right */
+        .industry-item-circle:nth-child(4) { transform: rotate(54deg) translate(var(--radius-orbit)) rotate(-54deg); } /* Bottom Right */
+        .industry-item-circle:nth-child(5) { transform: rotate(126deg) translate(var(--radius-orbit)) rotate(-126deg); } /* Bottom Left */
+        .industry-item-circle:nth-child(6) { transform: rotate(198deg) translate(var(--radius-orbit)) rotate(-198deg); } /* Top Left */
+
+        /* HOVER STATES - Combining position with scale to prevent shaking */
+        .industry-item-circle:nth-child(2):hover { transform: rotate(270deg) translate(var(--radius-orbit)) rotate(-270deg) scale(1.15); }
+        .industry-item-circle:nth-child(3):hover { transform: rotate(342deg) translate(var(--radius-orbit)) rotate(-342deg) scale(1.15); }
+        .industry-item-circle:nth-child(4):hover { transform: rotate(54deg) translate(var(--radius-orbit)) rotate(-54deg) scale(1.15); }
+        .industry-item-circle:nth-child(5):hover { transform: rotate(126deg) translate(var(--radius-orbit)) rotate(-126deg) scale(1.15); }
+        .industry-item-circle:nth-child(6):hover { transform: rotate(198deg) translate(var(--radius-orbit)) rotate(-198deg) scale(1.15); }
+
+        .industry-icon-circle {
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+
+        .industry-item-circle h4 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            color: var(--primary);
+            line-height: 1.2;
+        }
+
+        .industry-item-circle p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.3;
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.3s ease;
+        }
+
+        /* Connecting lines visual */
+        .industry-circle::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: calc(var(--radius-orbit) * 2);
+            height: calc(var(--radius-orbit) * 2);
+            border: 2px dashed rgba(14, 165, 233, 0.15);
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .expertise-banner {
+            background: rgba(14, 165, 233, 0.05);
+            border: 1px solid rgba(14, 165, 233, 0.1);
+            border-radius: 12px;
+            padding: 24px;
+            margin-top: 40px;
+            text-align: center;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* --- CAPABILITIES TABS --- */
+        .tabs-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .tabs-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            background: rgba(14, 165, 233, 0.05);
+            padding: 8px;
+            border-radius: 100px;
+            border: 1px solid var(--border-light);
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .tab-btn {
+            padding: 12px 24px;
+            border-radius: 50px;
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .tab-btn:hover {
+            color: var(--primary);
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        .tab-btn.active {
+            background: white;
+            color: var(--primary);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border: 1px solid var(--border-light);
+        }
+
+        .new-badge {
+            background: linear-gradient(135deg, #ef4444 0%, #f97316 100%);
+            color: white;
+            font-size: 0.6rem;
+            font-weight: 800;
+            padding: 2px 6px;
+            border-radius: 10px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-left: 4px;
+            animation: glow 2s infinite alternate;
+        }
+
+        .tab-content {
+            display: none;
+            width: 100%;
+            animation: fadeUp 0.6s ease forwards;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .cap-layout {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 40px;
+        }
+
+        .cap-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .cap-card-small {
+            padding: 32px;
+            background: var(--card-bg);
+            border-radius: 16px;
+            border: 1px solid var(--border-light);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            height: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .cap-card-small:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+
+        .cap-card-small h4 {
+            color: var(--accent);
+            margin-bottom: 12px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .use-case-visual {
+            background: white;
+            border: 1px solid var(--border-light);
+            border-radius: 24px;
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border-left: 4px solid var(--accent);
+        }
+
+        .uc-badge {
+            background: var(--accent);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+            display: inline-block;
+        }
+
+        .feature-list {
+            list-style: none;
+            margin-top: 16px;
+        }
+        .feature-list li {
+            margin-bottom: 12px;
+            padding-left: 24px;
+            position: relative;
+            color: var(--text-muted);
+        }
+        .feature-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        /* --- WHY AGRICULTURE SECTION --- */
+        .why-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .challenges-list {
+            margin-bottom: 30px;
+        }
+
+        .challenge-item {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .challenge-icon {
+            width: 50px;
+            height: 50px;
+            background: #fff0f0;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ef4444;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .challenge-content h4 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .challenge-content p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .workflow-visual {
+            background: white;
+            padding: 40px;
+            border-radius: 24px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-light);
+        }
+
+        .workflow-title {
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .workflow-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            position: relative;
+        }
+
+        .wf-step {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            background: var(--light);
+            border-radius: 12px;
+            transition: transform 0.3s;
+        }
+
+        .wf-step:hover {
+            transform: translateX(10px);
+            background: #f0f9ff;
+            border: 1px solid #bae6fd;
+        }
+
+        .wf-icon {
+            width: 40px;
+            height: 40px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .wf-arrow {
+            text-align: center;
+            color: #cbd5e1;
+            font-size: 1.2rem;
+        }
+
+        /* --- COLLABORATION SECTION --- */
+        .collaboration-section {
+            background: var(--primary);
+            color: white;
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .collab-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .collab-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin: 50px 0;
+            text-align: left;
+        }
+
+        .collab-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 24px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .collab-item h4 {
+            color: var(--accent);
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .collab-item p {
+            font-size: 0.9rem;
+            color: #cbd5e1;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: #020617; /* Darker than primary */
+            color: white;
+            padding: 60px 0 40px;
+            border-top: 1px solid #1e293b;
+        }
+
+        .footer-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+
+        .brand-footer {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .contact-info {
+            margin-top: 10px;
+            color: #94a3b8;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .hero h1 { font-size: 2.8rem; }
+            .hero { padding: 0 24px; }
+            .cap-layout { grid-template-columns: 1fr; }
+            .tabs-nav { width: 100%; overflow-x: auto; justify-content: flex-start; }
+            .why-layout { grid-template-columns: 1fr; }
+            .collab-grid { grid-template-columns: 1fr; }
+            
+            /* Mobile version for industry circle */
+            .industry-circle-container {
+                width: 100%;
+                height: auto;
+                margin: 40px auto;
+                display: flex;
+                flex-direction: column;
+                padding-top: 20px;
+            }
+            
+            .genai-center {
+                position: relative;
+                top: auto;
+                left: auto;
+                transform: none !important;
+                width: 140px;
+                height: 140px;
+                margin: 0 auto 40px;
+                font-size: 1.2rem;
+                box-shadow: 0 10px 30px rgba(14, 165, 233, 0.3);
+            }
+            
+            .industry-circle {
+                display: contents; /* Removes the circle container layout logic on mobile */
+            }
+
+            .industry-circle::before { display: none; }
+            
+            /* Reset all transform logic for mobile */
+            .industry-item-circle, 
+            .industry-item-circle:nth-child(n) {
+                position: relative;
+                top: auto;
+                left: auto;
+                transform: none !important;
+                margin: 0 0 20px 0;
+                width: 100%;
+                max-width: 350px;
+                height: auto;
+                min-height: 180px;
+                border-radius: 16px;
+                padding: 24px;
+            }
+            
+            /* Add scale on hover for mobile in a simple way since positions are static */
+            .industry-item-circle:hover,
+            .industry-item-circle:nth-child(n):hover {
+                 transform: scale(1.05) !important;
+            }
+
+            .industry-item-circle p {
+                opacity: 1;
+                transform: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <section class="hero">
+        <div class="container">
+            <div class="brand-tag">Algo-Rythmn.ai</div>
+            <h1>AI That Works. <span style="color:#0ea5e9;">Not Just Chats.</span></h1>
+            <p>Deploy autonomous agent teams that turn complex industrial data into reliable, high-yield outcomes.</p>
+            <div class="cta-group">
+                <a href="#capabilities" class="btn btn-primary">Explore Capabilities</a>
+                <a href="mailto:support@algo-rythmn.ai" class="btn btn-outline">Schedule Demo</a>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <div class="section-header">
+                <h2>AI Solutions Built for Industry Complexity</h2>
+                <p class="subtitle">
+                    We build elite AI teams that turn messy, high‑dimensional data into clear, actionable insights. Backed by patented algorithms and PhD‑level mathematical expertise, our Calgary-based firm delivers tailored generative AI solutions that solve the toughest challenges across global industries.
+                </p>
+            </div>
+            
+            <div class="industry-circle-container">
+                <div class="industry-circle">
+                    <div class="genai-center">GenAI</div>
+                    
+                    <div class="industry-item-circle">
+                        <div class="industry-icon-circle"><i class="fas fa-leaf"></i></div>
+                        <h4>Precision Agriculture</h4>
+                        <p>LLM assistant for agricultural dashboards, partnering with the 4th largest US agricultural co-op.</p>
+                    </div>
+                    
+                    <div class="industry-item-circle">
+                        <div class="industry-icon-circle"><i class="fas fa-industry"></i></div>
+                        <h4>Industrial Operations</h4>
+                        <p>AI-driven optimization for potash & oil operations with predictive maintenance.</p>
+                    </div>
+                    
+                    <div class="industry-item-circle">
+                        <div class="industry-icon-circle"><i class="fas fa-plane"></i></div>
+                        <h4>Tourism</h4>
+                        <p>Generative AI travel platform with theme-based tours for entire journeys.</p>
+                    </div>
+                    
+                    <div class="industry-item-circle">
+                        <div class="industry-icon-circle"><i class="fas fa-chart-line"></i></div>
+                        <h4>Finance</h4>
+                        <p>Quantitative analysis and price trend prediction using machine learning models.</p>
+                    </div>
+                    
+                    <div class="industry-item-circle">
+                        <div class="industry-icon-circle"><i class="fas fa-hockey-puck"></i></div>
+                        <h4>Sports Analytics</h4>
+                        <p>AI-powered hockey evaluation transforming raw data into scouting intelligence.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="capabilities" style="background: rgba(248, 250, 252, 0.5);">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Core Capabilities</h2>
+            </div>
+
+            <div class="tabs-container">
+                <div class="tabs-nav">
+                    <button class="tab-btn active" onclick="openTab(event, 'c1')" style="font-size:1rem">
+                        Multi-Agent Teams <span class="new-badge">New</span>
+                    </button>
+                    <button class="tab-btn" onclick="openTab(event, 'c2')" style="font-size:1rem">
+                        Autonomous Workflows <span class="new-badge">New</span>
+                    </button>
+                    <button class="tab-btn" onclick="openTab(event, 'c3')" style="font-size:1rem">
+                        Predictive Intelligence
+                    </button>
+                    <button class="tab-btn" onclick="openTab(event, 'c4')" style="font-size:1rem">
+                        Natural Language Action
+                    </button>
+                    <button class="tab-btn" onclick="openTab(event, 'c5')" style="font-size:1rem">
+                        Generative Simulation
+                    </button>
+                </div>
+
+                <div id="c1" class="tab-content active">
+                    <div class="cap-layout">
+                        <div class="cap-details">
+                            <div class="cap-card-small">
+                                <h4>What We Sell</h4>
+                                <p><strong>AI Executive Team as a Service.</strong> A coordinated group of specialized agents collaborating on decisions.</p>
+                            </div>
+                            <div class="cap-card-small">
+                                <h4>How We Do It</h4>
+                                <p>Agents communicate through an orchestration layer, debating alternatives and accessing domain-specific knowledge to reach consensus.</p>
+                            </div>
+                            <div class="cap-card-small" style="grid-column: span 2;">
+                                <h4>Client Benefits</h4>
+                                <ul class="feature-list" style="display: grid; grid-template-columns: 1fr 1fr;">
+                                    <li>High-confidence recommendations</li>
+                                    <li>Analysis in hours, not weeks</li>
+                                    <li>Clear explanation of results</li>
+                                    <li>Scale expert knowledge</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="use-case-visual">
+                            <span class="uc-badge">Live Case Study</span>
+                            <h3>Strategic Hybrid Selection</h3>
+                            <p style="margin-top: 10px; font-size: 0.95rem; color: #475569;">
+                                <strong>The Question:</strong> "What hybrid should they plant in the coming season?"
+                            </p>
+                            <hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 20px 0;">
+                            <p style="font-size: 0.9rem;"><strong>The Agents' Output:</strong></p>
+                            <ul class="feature-list">
+                                <li><strong>Search Agent:</strong> Pulled 2024-25 hybrid performance data.</li>
+                                <li><strong>Enviro Agent:</strong> Analyzed planting speed & local weather.</li>
+                                <li><strong>Agronomy Agent:</strong> Applied handbook rules to data.</li>
+                            </ul>
+                            <div style="margin-top: 20px; padding: 15px; background: rgba(14, 165, 233, 0.1); border-radius: 8px; border: 1px solid var(--accent);">
+                                <i class="fas fa-check-circle" style="color: var(--accent);"></i> 
+                                <strong>Recommendation:</strong> Hybrid X in North Region (85% Confidence).
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="c2" class="tab-content">
+                    <div class="cap-layout">
+                        <div class="cap-details">
+                            <div class="cap-card-small">
+                                <h4>What We Sell</h4>
+                                <p><strong>Self-Executing Operations.</strong> Automation of workflows that usually require manual coordination.</p>
+                            </div>
+                            <div class="cap-card-small">
+                                <h4>How We Do It</h4>
+                                <p>We map your process and deploy agents to execute tasks, waiting only for final human approval.</p>
+                            </div>
+                            <div class="cap-card-small" style="grid-column: span 2;">
+                                <h4>Client Benefits</h4>
+                                <ul class="feature-list" style="display: grid; grid-template-columns: 1fr 1fr;">
+                                    <li>Reduce process time by 60-80%</li>
+                                    <li>Eliminate coordination errors</li>
+                                    <li>Free up staff for strategic work</li>
+                                    <li>24/7 operational efficiency</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="use-case-visual">
+                            <span class="uc-badge">Industrial Operations Use Case</span>
+                            <h3>Automated Maintenance Scheduling</h3>
+                            <p style="margin-top: 15px; color: var(--text-muted);">
+                                A potash mining operation needed to optimize equipment maintenance schedules.
+                            </p>
+                            <br>
+                            <p><strong>The Solution:</strong> Autonomous workflow that analyzes equipment data and automatically schedules repairs.</p>
+                            <br>
+                            <p style="color: var(--accent);"><strong>Result:</strong> 35% reduction in unplanned downtime.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="c3" class="tab-content">
+                    <div class="cap-layout">
+                        <div class="cap-details">
+                            <div class="cap-card-small">
+                                <h4>What We Sell</h4>
+                                <p><strong>Early Warning Systems.</strong> Proactive intelligence that spots risks before they impact operations.</p>
+                            </div>
+                            <div class="cap-card-small">
+                                <h4>How We Do It</h4>
+                                <p>Analyzing patterns across data sources to detect subtle anomalies and predict future challenges.</p>
+                            </div>
+                            <div class="cap-card-small" style="grid-column: span 2;">
+                                <h4>Client Benefits</h4>
+                                <ul class="feature-list" style="display: grid; grid-template-columns: 1fr 1fr;">
+                                    <li>Identify risks weeks in advance</li>
+                                    <li>Make proactive decisions</li>
+                                    <li>Reduce unexpected losses</li>
+                                    <li>Improve planning accuracy</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="use-case-visual">
+                            <span class="uc-badge">Finance Use Case</span>
+                            <h3>Market Trend Prediction</h3>
+                            <p style="margin-top: 15px; color: var(--text-muted);">
+                                An investment firm needed to predict commodity price movements for better portfolio allocation.
+                            </p>
+                            <br>
+                            <p><strong>The Solution:</strong> System analyzed historical price data, economic indicators, and market sentiment.</p>
+                            <br>
+                            <p style="color: var(--accent);"><strong>Result:</strong> Achieved 87% accuracy in predicting 30-day price direction.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="c4" class="tab-content">
+                    <div class="cap-layout">
+                        <div class="cap-details">
+                            <div class="cap-card-small">
+                                <h4>What We Sell</h4>
+                                <p><strong>Conversational Intelligence.</strong> Transform plain language requests into custom tools and reports.</p>
+                            </div>
+                            <div class="cap-card-small">
+                                <h4>How We Do It</h4>
+                                <p>Systems understand natural language requests and create customized solutions in real-time.</p>
+                            </div>
+                            <div class="cap-card-small" style="grid-column: span 2;">
+                                <h4>Client Benefits</h4>
+                                <ul class="feature-list" style="display: grid; grid-template-columns: 1fr 1fr;">
+                                    <li>Create tools in hours, not months</li>
+                                    <li>No technical skills required</li>
+                                    <li>Everyone can access data insights</li>
+                                    <li>Rapid response to changing needs</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="use-case-visual">
+                            <span class="uc-badge">Tourism Use Case</span>
+                            <h3>Personalized Travel Planning</h3>
+                            <p style="margin-top: 15px; color: var(--text-muted);">
+                                <em>"Create a 7-day anime pilgrimage tour in Japan."</em>
+                            </p>
+                            <br>
+                            <p><strong>The Solution:</strong> The AI generated a complete itinerary with maps, booking links, and personalized recommendations.</p>
+                            <br>
+                            <p style="color: var(--accent);"><strong>Result:</strong> Plan generated in 2 minutes vs. 8+ hours manual work.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="c5" class="tab-content">
+                    <div class="cap-layout">
+                        <div class="cap-details">
+                            <div class="cap-card-small">
+                                <h4>What We Sell</h4>
+                                <p><strong>Digital Twin Experimentation.</strong> Run thousands of "what-if" scenarios in a risk-free environment.</p>
+                            </div>
+                            <div class="cap-card-small">
+                                <h4>How We Do It</h4>
+                                <p>Create digital simulations of your operations to test decisions under various conditions.</p>
+                            </div>
+                            <div class="cap-card-small" style="grid-column: span 2;">
+                                <h4>Client Benefits</h4>
+                                <ul class="feature-list" style="display: grid; grid-template-columns: 1fr 1fr;">
+                                    <li>Test strategies without risk</li>
+                                    <li>Quantify potential ROI</li>
+                                    <li>Build resilient plans</li>
+                                    <li>Confidence in decisions</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="use-case-visual">
+                            <span class="uc-badge">Sports Analytics Use Case</span>
+                            <h3>Player Performance Simulation</h3>
+                            <p style="margin-top: 15px; color: var(--text-muted);">
+                                A hockey team needed to evaluate potential draft picks under various game conditions.
+                            </p>
+                            <br>
+                            <p><strong>The Solution:</strong> Digital twin ran 10,000+ game simulations across different scenarios.</p>
+                            <br>
+                            <p style="color: var(--accent);"><strong>Result:</strong> Identified optimal draft selections that increased projected win probability by 12%.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <div class="section-header">
+                <h2>Why Agriculture Needs GenAI</h2>
+                <p class="subtitle">Connecting your tech to real field pain points.</p>
+            </div>
+            
+            <div class="why-layout">
+                <div>
+                    <h3 style="margin-bottom: 25px; font-size: 1.8rem;">Challenges in Soil Analysis & Management</h3>
+                    
+                    <div class="challenges-list">
+                        <div class="challenge-item">
+                            <div class="challenge-icon"><i class="fas fa-database"></i></div>
+                            <div class="challenge-content">
+                                <h4>Fragmented Data</h4>
+                                <p>Critical data is siloed across sensor logs, satellite imagery, and manual field notes, making holistic analysis nearly impossible.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="challenge-item">
+                            <div class="challenge-icon"><i class="fas fa-exclamation-triangle"></i></div>
+                            <div class="challenge-content">
+                                <h4>Reactive Decisions</h4>
+                                <p>Growers often react to problems after they occur rather than preventing them, leading to yield loss and higher input costs.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="challenge-item">
+                            <div class="challenge-icon"><i class="fas fa-clipboard-list"></i></div>
+                            <div class="challenge-content">
+                                <h4>Labor-Intensive Reporting</h4>
+                                <p>Synthesis of agronomic data into usable reports takes valuable time away from actual field operations.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="background: #f1f5f9; padding: 20px; border-radius: 12px; border-left: 4px solid var(--accent);">
+                        <h4 style="color: var(--primary); margin-bottom: 8px;">The GenAI Solution</h4>
+                        <p style="font-size: 0.9rem; color: var(--text-muted);">
+                            We build intelligence layers over your soil and crop data to generate real-time field reports and learn from historical patterns to optimize inputs.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="workflow-visual">
+                    <h4 class="workflow-title">From Raw Data to Better Yield</h4>
+                    <div class="workflow-steps">
+                        <div class="wf-step">
+                            <div class="wf-icon"><i class="fas fa-server"></i></div>
+                            <div>
+                                <strong>1. Data Ingestion</strong>
+                                <div style="font-size: 0.8rem; color: var(--text-muted);">Sensors, Satellites, Manual Logs</div>
+                            </div>
+                        </div>
+                        
+                        <div class="wf-arrow"><i class="fas fa-arrow-down"></i></div>
+                        
+                        <div class="wf-step" style="background: rgba(14, 165, 233, 0.1); border: 1px solid var(--accent);">
+                            <div class="wf-icon" style="background: var(--accent); color: white;"><i class="fas fa-brain"></i></div>
+                            <div>
+                                <strong>2. GenAI Processing</strong>
+                                <div style="font-size: 0.8rem; color: var(--text-muted);">Pattern recognition & Cross-reference</div>
+                            </div>
+                        </div>
+                        
+                        <div class="wf-arrow"><i class="fas fa-arrow-down"></i></div>
+                        
+                        <div class="wf-step">
+                            <div class="wf-icon"><i class="fas fa-lightbulb"></i></div>
+                            <div>
+                                <strong>3. Actionable Insights</strong>
+                                <div style="font-size: 0.8rem; color: var(--text-muted);">"Increase Nitrogen in Sector 4"</div>
+                            </div>
+                        </div>
+                        
+                        <div class="wf-arrow"><i class="fas fa-arrow-down"></i></div>
+                        
+                        <div class="wf-step">
+                            <div class="wf-icon" style="color: #22c55e;"><i class="fas fa-seedling"></i></div>
+                            <div>
+                                <strong>4. Better Yield</strong>
+                                <div style="font-size: 0.8rem; color: var(--text-muted);">Optimized ROI & Healthy Crops</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="collaboration-section">
+        <div class="container">
+            <div class="collab-content">
+                <h2>Let's Build Together</h2>
+                <p style="font-size: 1.2rem; margin-top: 10px; opacity: 0.9;">We’re not just deploying tech — we’re co-creating with practitioners.</p>
+                
+                <div class="collab-grid">
+                    <div class="collab-item">
+                        <h4>Custom GenAI Models</h4>
+                        <p>Tailored specifically for your proprietary agri workflows and local datasets.</p>
+                    </div>
+                    <div class="collab-item">
+                        <h4>Seamless Integration</h4>
+                        <p>We connect directly with your existing tools (GIS, ERP, sensor networks).</p>
+                    </div>
+                    <div class="collab-item">
+                        <h4>Joint Development</h4>
+                        <p>Pilot programs that put you in the driver's seat of product evolution.</p>
+                    </div>
+                </div>
+
+                <div style="margin-top: 40px;">
+                    <a href="mailto:support@algo-rythmn.ai" class="btn btn-accent">Contact Our Team</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-flex">
+                <div>
+                    <div class="brand-footer">Algo-Rythmn.ai</div>
+                    <p class="contact-info">Calgary, Alberta | support@algo-rythmn.ai</p>
+                    <p style="font-size: 0.8rem; opacity: 0.6; margin-top: 10px;">Serving: Precision Ag, Industrial Ops, Tourism, Finance, Sports Analytics & More</p>
+                </div>
+                <div>
+                </div>
+            </div>
+            <div style="margin-top: 40px; color: #94a3b8; font-size: 0.8rem; border-top: 1px solid #334155; padding-top: 20px;">
+                &copy; 2026 Algo-Rythmn.ai. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+                tabcontent[i].classList.remove("active");
+            }
+            tablinks = document.getElementsByClassName("tab-btn");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(tabName).style.display = "block";
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.className += " active";
+        }
+    </script>
+
+</body>
+</html>
