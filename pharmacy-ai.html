@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algo-Rythmn.ai | Pharmacy Compliance Intelligence</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            /* MODERN HEALTHTECH PALETTE */
+            
+            /* Backgrounds */
+            --bg-body: #f8fafc;        /* Cool Light Grey */
+            --bg-surface: #ffffff;     /* Pure White */
+            --bg-highlight: #f0fdfa;   /* Very Pale Teal */
+            
+            /* Text */
+            --text-main: #0f172a;      /* Navy Black (Softer than pure black) */
+            --text-body: #475569;      /* Slate Grey */
+            --text-muted: #94a3b8;     /* Light Slate */
+            
+            /* Brand Colors - Pharmacy Friendly */
+            --primary: #0d9488;        /* Clinical Teal */
+            --primary-dark: #0f766e;   /* Deep Teal */
+            --primary-light: #ccfbf1;  /* Minty Wash */
+            
+            --secondary: #3b82f6;      /* Trust Blue */
+            
+            /* Functional Colors */
+            --status-law-bg: #fee2e2;
+            --status-law-text: #991b1b;
+            --status-ok-bg: #dcfce7;
+            --status-ok-text: #166534;
+            --status-warn-bg: #fef3c7;
+            --status-warn-text: #92400e;
+            
+            /* Effects */
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-card: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-float: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+            
+            --radius-md: 12px;
+            --radius-lg: 24px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif; /* Modern, geometric sans-serif */
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* LAYOUT UTILITIES */
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+        
+        /* TYPOGRAPHY */
+        h1, h2, h3 { letter-spacing: -0.025em; color: var(--text-main); }
+        
+        .section-header { text-align: center; margin-bottom: 80px; }
+        .section-header h2 { font-size: 2.75rem; font-weight: 700; margin-bottom: 16px; }
+        .section-header p { color: var(--text-body); font-size: 1.125rem; max-width: 600px; margin: 0 auto; line-height: 1.8; }
+
+        .tagline {
+            display: inline-block;
+            background: var(--primary-light);
+            color: var(--primary-dark);
+            font-weight: 700;
+            font-size: 0.75rem;
+            padding: 6px 12px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 16px;
+        }
+
+        /* BUTTONS */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 32px;
+            background: var(--primary);
+            color: white;
+            font-weight: 600;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 6px -1px rgba(13, 148, 136, 0.3);
+            font-size: 1rem;
+        }
+        .btn:hover { 
+            transform: translateY(-2px); 
+            background: var(--primary-dark);
+            box-shadow: 0 10px 15px -3px rgba(13, 148, 136, 0.4); 
+        }
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--bg-body); /* Subtle distinction */
+            color: var(--text-body);
+            box-shadow: none;
+        }
+        .btn-outline:hover {
+            color: var(--primary);
+            background: white;
+        }
+
+        /* NAVIGATION - Glassmorphism */
+        header {
+            padding: 16px 0;
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.85); /* Frost effect */
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        nav { display: flex; justify-content: space-between; align-items: center; }
+        
+        .logo { 
+            font-size: 1.25rem; 
+            font-weight: 800; 
+            display: flex; 
+            align-items: center; 
+            gap: 12px; 
+            color: var(--text-main); 
+        }
+        .logo i { color: var(--primary); font-size: 1.5rem; }
+        
+        .nav-links { display: flex; gap: 40px; }
+        .nav-links a { 
+            color: var(--text-body); 
+            text-decoration: none; 
+            font-size: 0.95rem; 
+            font-weight: 500;
+            transition: color 0.2s; 
+        }
+        .nav-links a:hover { color: var(--primary); }
+
+        /* HERO SECTION */
+        .hero { 
+            padding: 120px 0 80px; 
+            text-align: center; 
+            background: radial-gradient(50% 50% at 50% 50%, rgba(204, 251, 241, 0.5) 0%, rgba(248, 250, 252, 0) 100%);
+        }
+        .hero h1 { 
+            font-size: 4rem; 
+            line-height: 1.1; 
+            margin-bottom: 24px; 
+            font-weight: 800; 
+            color: var(--text-main);
+        }
+        .hero-highlight { color: var(--primary); position: relative; display: inline-block; }
+        /* Subtle underline for emphasis */
+        .hero-highlight::after {
+            content: '';
+            position: absolute;
+            bottom: 6px;
+            left: 0;
+            width: 100%;
+            height: 12px;
+            background: var(--primary-light);
+            z-index: -1;
+            opacity: 0.6;
+        }
+
+        .hero p { 
+            font-size: 1.25rem; 
+            color: var(--text-body); 
+            max-width: 680px; 
+            margin: 0 auto 48px; 
+        }
+
+        /* STATS CHIPS */
+        .stats-container {
+            display: inline-flex;
+            gap: 16px;
+            background: white;
+            padding: 12px;
+            border-radius: 20px;
+            box-shadow: var(--shadow-card);
+            border: 1px solid rgba(0,0,0,0.03);
+            margin-top: 40px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .stat-chip {
+            padding: 12px 24px;
+            text-align: left;
+            border-radius: 12px;
+            background: var(--bg-body);
+        }
+        .stat-value { font-size: 1.5rem; font-weight: 700; color: var(--primary); line-height: 1; margin-bottom: 4px; }
+        .stat-label { font-size: 0.8rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; }
+
+        /* PROBLEM SECTION */
+        .problem-section { padding: 100px 0; background: white; }
+        .problem-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
+        
+        .feature-card {
+            background: white;
+            padding: 40px 32px;
+            border-radius: var(--radius-lg);
+            border: 1px solid #f1f5f9;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .feature-card:hover { 
+            transform: translateY(-8px); 
+            box-shadow: var(--shadow-float); 
+            border-color: var(--primary-light);
+        }
+        
+        .icon-circle {
+            width: 56px;
+            height: 56px;
+            background: var(--primary-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+        
+        .feature-card h3 { font-size: 1.25rem; margin-bottom: 12px; }
+        .feature-card p { color: var(--text-body); font-size: 1rem; line-height: 1.7; }
+
+        /* DEEP DIVE (Solution) SECTIONS */
+        .solution-section { padding: 100px 0; background: white; border-bottom: 1px solid #f1f5f9; }
+        .solution-bg-alt { background: var(--bg-body); border-bottom: none; } /* Slight grey for contrast */
+        
+        .split-layout { display: flex; align-items: center; gap: 80px; }
+        .split-layout.reverse { flex-direction: row-reverse; }
+        
+        .solution-text { flex: 1; }
+        .solution-text h2 { font-size: 2.5rem; margin-bottom: 24px; line-height: 1.2; }
+        .solution-text p { color: var(--text-body); font-size: 1.1rem; margin-bottom: 32px; }
+        
+        .check-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 16px;
+            color: var(--text-main);
+            font-weight: 500;
+        }
+        .check-list i { 
+            color: var(--primary); 
+            margin-top: 4px; 
+            background: var(--primary-light);
+            border-radius: 50%;
+            padding: 4px;
+            font-size: 0.7rem;
+        }
+
+        /* MOCK UI WINDOWS - The Modern SaaS Look */
+        .mock-visual { flex: 1; }
+        
+        .app-window {
+            background: white;
+            border-radius: 16px;
+            box-shadow: var(--shadow-float);
+            border: 1px solid #e2e8f0;
+            overflow: hidden;
+        }
+        
+        .app-header {
+            padding: 16px 20px;
+            background: #f8fafc;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .window-dots { display: flex; gap: 6px; }
+        .dot { width: 10px; height: 10px; border-radius: 50%; }
+        .dot-r { background: #cbd5e1; } /* Neutral dots for pro look */
+        .dot-y { background: #cbd5e1; }
+        .dot-g { background: #cbd5e1; }
+        
+        .app-body { padding: 24px; }
+
+        /* Specific Mock UI Elements */
+        /* Report Classifier */
+        .finding-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        .finding-row:last-child { border-bottom: none; }
+        
+        .badge { 
+            padding: 6px 10px; 
+            border-radius: 6px; 
+            font-size: 0.7rem; 
+            font-weight: 700; 
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+        .badge.law { background: var(--status-law-bg); color: var(--status-law-text); }
+        .badge.guide { background: var(--status-warn-bg); color: var(--status-warn-text); }
+        .badge.ok { background: var(--status-ok-bg); color: var(--status-ok-text); }
+
+        /* Letter Generator */
+        .letter-preview {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Georgia', serif; /* Serif for "Document" feel */
+            font-size: 0.95rem;
+            color: #334155;
+            line-height: 1.8;
+            border-left: 3px solid var(--secondary);
+        }
+
+        /* TOOLS SECTION (Restored) */
+        .tools-section {
+            padding: 100px 0;
+            background: white;
+        }
+        
+        .tool-card {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            border: 1px solid #e2e8f0;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        .tool-card:hover {
+            border-color: var(--primary);
+            box-shadow: var(--shadow-card);
+            transform: translateY(-5px);
+        }
+        
+        .tool-icon {
+            font-size: 1.75rem;
+            color: var(--secondary);
+            margin-bottom: 20px;
+        }
+        
+        .tool-card h3 { font-size: 1.2rem; margin-bottom: 10px; }
+        .tool-card p { font-size: 0.95rem; color: var(--text-body); }
+
+
+        /* PRICING */
+        .pricing-section { padding: 100px 0; background: var(--bg-highlight); text-align: center; }
+        
+        .pricing-card {
+            background: white;
+            border-radius: 32px;
+            border: 1px solid #e2e8f0;
+            box-shadow: var(--shadow-float);
+            padding: 60px;
+            max-width: 500px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+        .pricing-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 8px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+        
+        .price-amount { font-size: 3.5rem; font-weight: 800; color: var(--text-main); margin: 20px 0 8px; }
+        .price-period { color: var(--text-muted); font-size: 1.1rem; }
+        
+        .benefits-grid {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-top: 32px;
+            flex-wrap: wrap;
+        }
+        .benefit-pill {
+            background: var(--bg-body);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-body);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* CONTACT */
+        .footer-cta {
+            background: #1e293b; /* Keep dark footer for contrast/grounding */
+            color: white;
+            padding: 80px 0 40px;
+            text-align: center;
+            border-top-left-radius: 40px;
+            border-top-right-radius: 40px;
+            margin-top: 40px;
+        }
+        
+        .footer-box {
+            background: rgba(255,255,255,0.05);
+            display: inline-block;
+            padding: 40px 60px;
+            border-radius: 24px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
+            .split-layout, .split-layout.reverse { flex-direction: column; }
+            .hero h1 { font-size: 2.5rem; }
+            .nav-links { display: none; }
+            .pricing-card { padding: 40px 24px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <i class="fa-solid fa-staff-snake"></i> Algo-Rythmn.ai
+                </div>
+                <div class="nav-links">
+                    <a href="#problem">The Problem</a>
+                    <a href="#solutions">Solutions</a>
+                    <a href="#tools">Additional Tools</a>
+                    <a href="#pricing">Pricing</a>
+                </div>
+                <a href="#contact" class="btn">Book Demo</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <span class="tagline">Compliance Intelligence Platform</span>
+            <h1>De-Risking <br>Pharmacy <span class="hero-highlight">Compliance</span></h1>
+            <p>Transform inspection anxiety into actionable intelligence. We use AI to classify findings, predict inspector patterns, and automate response letters.</p>
+            
+            <div style="display: flex; gap: 16px; justify-content: center; margin-bottom: 40px;">
+                <a href="#contact" class="btn">Join Waitlist</a>
+                <a href="#problem" class="btn btn-outline">Learn More</a>
+            </div>
+
+            <div class="stats-container">
+                <div class="stat-chip">
+                    <div class="stat-value">1,700</div>
+                    <div class="stat-label">Pharmacies in AB</div>
+                </div>
+                <div class="stat-chip">
+                    <div class="stat-value">3 Days</div>
+                    <div class="stat-label">Saved Per Audit</div>
+                </div>
+                <div class="stat-chip">
+                    <div class="stat-value">100%</div>
+                    <div class="stat-label">Response Accuracy</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="problem" class="problem-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>The Compliance Challenge</h2>
+                <p>Pharmacies are governed by Colleges but often face confusing, stressful inspections that take time away from patients.</p>
+            </div>
+            <div class="problem-grid">
+                <div class="feature-card">
+                    <div class="icon-circle"><i class="fa-solid fa-scale-unbalanced"></i></div>
+                    <h3>Inconsistent Standards</h3>
+                    <p>It is often unclear whether a finding is a mandatory Law, a suggested Guideline, or just an inspector's personal preference.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon-circle"><i class="fa-solid fa-file-invoice"></i></div>
+                    <h3>Report Overload</h3>
+                    <p>A single inspection generates a 15-page report that requires days of analysis to determine what actions are strictly required.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon-circle"><i class="fa-solid fa-user-clock"></i></div>
+                    <h3>Lost Patient Time</h3>
+                    <p>Writing response letters is high-stakes and tedious, taking pharmacists away from patient care for days at a time.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="solutions" class="solution-section solution-bg-alt">
+        <div class="container split-layout">
+            <div class="solution-text">
+                <span class="tagline" style="background: white; color: var(--text-muted);">01 // Clarity</span>
+                <h2>AI Report Classifier</h2>
+                <p>We ingest the inspector's report and instantly classify every finding, separating mandatory laws from optional suggestions. Stop wasting time on non-issues.</p>
+                
+                <ul class="check-list">
+                    <li><i class="fa-solid fa-check"></i> <strong>Instantly separates</strong> Law from Best Practice.</li>
+                    <li><i class="fa-solid fa-check"></i> <strong>Reduces anxiety</strong> by highlighting what matters.</li>
+                    <li><i class="fa-solid fa-check"></i> <strong>Actionable labels:</strong> Fix, Negotiate, or Monitor.</li>
+                </ul>
+            </div>
+            <div class="mock-visual">
+                <div class="app-window">
+                    <div class="app-header">
+                        <div class="window-dots"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div></div>
+                        <div style="font-size: 0.8rem; font-weight: 600; color: var(--text-muted);">Inspection_Analysis_v2.pdf</div>
+                    </div>
+                    <div class="app-body">
+                        <div class="finding-row">
+                            <div>
+                                <div style="font-weight: 600; font-size: 0.9rem;">#12: Narcotic Safe Log</div>
+                                <div style="font-size: 0.8rem; color: var(--text-muted);">Missing signatures on Dec 12...</div>
+                            </div>
+                            <span class="badge law">LAW</span>
+                        </div>
+                        <div class="finding-row">
+                            <div>
+                                <div style="font-weight: 600; font-size: 0.9rem;">#14: Dusty Shelving</div>
+                                <div style="font-size: 0.8rem; color: var(--text-muted);">Dust visible on top shelf...</div>
+                            </div>
+                            <span class="badge guide">OPTIONAL</span>
+                        </div>
+                        <div class="finding-row">
+                            <div>
+                                <div style="font-weight: 600; font-size: 0.9rem;">#18: Fridge Placement</div>
+                                <div style="font-size: 0.8rem; color: var(--text-muted);">Suggest moving away from wall...</div>
+                            </div>
+                            <span class="badge ok">BEST PRACTICE</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="solution-section">
+        <div class="container split-layout reverse">
+            <div class="solution-text">
+                <span class="tagline" style="background: var(--bg-body); color: var(--text-muted);">02 // Efficiency</span>
+                <h2>Auto-Response Generator</h2>
+                <p>Save 2-3 days of work per inspection. Our AI drafts a professional, compliant response letter using the correct regulatory terminology, ready for your review.</p>
+                
+                <ul class="check-list">
+                    <li><i class="fa-solid fa-check"></i> <strong>Drafts in seconds</strong>, not days.</li>
+                    <li><i class="fa-solid fa-check"></i> <strong>Defends your pharmacy</strong> using legal logic.</li>
+                    <li><i class="fa-solid fa-check"></i> <strong>Eliminates risk</strong> of saying the wrong thing.</li>
+                </ul>
+            </div>
+            <div class="mock-visual">
+                <div class="app-window">
+                    <div class="app-header">
+                        <div class="window-dots"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div></div>
+                        <div style="font-size: 0.8rem; font-weight: 600; color: var(--text-muted);">Draft_Response.docx</div>
+                    </div>
+                    <div class="app-body">
+                        <div class="letter-preview">
+                            <p><strong>RE: Finding #18 (Fridge Log Placement)</strong></p>
+                            <br>
+                            <p>We acknowledge the inspector's comment regarding fridge placement.</p>
+                            <p>However, we note that current Guidelines (Sec 4.2) do not mandate specific wall clearance distances provided airflow is maintained. We have verified airflow is sufficient and respectfully decline to relocate the unit at this time.</p>
+                        </div>
+                        <div style="margin-top: 15px; text-align: right;">
+                            <span class="btn" style="padding: 8px 16px; font-size: 0.8rem;">Download PDF</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="solution-section solution-bg-alt">
+        <div class="container split-layout">
+            <div class="solution-text">
+                <span class="tagline" style="background: white; color: var(--text-muted);">03 // Prediction</span>
+                <h2>Pre-Inspection Intelligence</h2>
+                <p>Inspectors are creatures of habit. Once we have enough data, we can predict what a specific inspector will look for before they even arrive.</p>
+                
+                <ul class="check-list">
+                    <li><i class="fa-solid fa-check"></i> <strong>Pattern Recognition:</strong> "Inspector Smith checks narcotics 90% of the time."</li>
+                    <li><i class="fa-solid fa-check"></i> <strong>Early Warning:</strong> Alerts before the inspection happens.</li>
+                    <li><i class="fa-solid fa-check"></i> <strong>Tailored Prep:</strong> Custom checklists for your specific inspector.</li>
+                </ul>
+            </div>
+            <div class="mock-visual">
+                <div class="app-window">
+                    <div class="app-header">
+                        <div class="window-dots"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div></div>
+                        <div style="font-size: 0.8rem; font-weight: 600; color: var(--primary);">INSPECTOR MATCH FOUND</div>
+                    </div>
+                    <div class="app-body">
+                        <div style="display: flex; gap: 15px; margin-bottom: 20px;">
+                            <div style="width: 50px; height: 50px; background: #e2e8f0; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #64748b;"><i class="fa-solid fa-user"></i></div>
+                            <div>
+                                <div style="font-weight: 700;">Inspector J. Smith</div>
+                                <div style="font-size: 0.8rem; color: var(--text-muted);">History: 45 Inspections Analyzed</div>
+                            </div>
+                        </div>
+                        
+                        <div style="background: #fff1f2; padding: 12px; border-radius: 8px; border-left: 4px solid #e11d48; margin-bottom: 10px;">
+                            <div style="font-size: 0.8rem; font-weight: 700; color: #be123c; margin-bottom: 4px;">⚠️ HIGH RISK AREA</div>
+                            <div style="font-size: 0.85rem; color: #881337;">Smith cites <strong>Narcotic Reconciliation</strong> in 82% of visits. Verify your counts today.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="tools" class="tools-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Continuous Compliance Tools</h2>
+                <p>Features that expand value beyond just inspection day.</p>
+            </div>
+            <div class="problem-grid">
+                <div class="tool-card">
+                    <i class="fa-solid fa-list-check tool-icon"></i>
+                    <h3>Major/Minor Checklist</h3>
+                    <p>A simple "Quick Win" tool. After the inspection, we give staff a simplified checklist to prioritize major law issues over minor guideline preferences.</p>
+                </div>
+                <div class="tool-card">
+                    <i class="fa-solid fa-book-medical tool-icon"></i>
+                    <h3>Best-Practice Library</h3>
+                    <p>A growing database of learned expectations from thousands of past reports. The more reports we ingest, the smarter the system gets.</p>
+                </div>
+                <div class="tool-card">
+                    <i class="fa-solid fa-boxes-stacked tool-icon"></i>
+                    <h3>Inventory Compliance Assistant</h3>
+                    <p>We automate logs and tracking to prevent inventory-related inspector comments before they happen.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing" class="pricing-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Simple, Transparent Pricing</h2>
+                <p>Tax deductible and designed for immediate ROI.</p>
+            </div>
+            <div class="pricing-card">
+                <div class="tagline">Annual Access</div>
+                <div class="price-amount">$1,000+</div>
+                <div class="price-period">Per Pharmacy / Year</div>
+                
+                <div class="benefits-grid">
+                    <div class="benefit-pill"><i class="fa-solid fa-check" style="color: var(--primary);"></i> Unlimited Reports</div>
+                    <div class="benefit-pill"><i class="fa-solid fa-check" style="color: var(--primary);"></i> AI Letters</div>
+                    <div class="benefit-pill"><i class="fa-solid fa-check" style="color: var(--primary);"></i> Inspector Alerts</div>
+                </div>
+                
+                <div style="margin-top: 40px;">
+                    <a href="#contact" class="btn" style="width: 100%;">Contact Sales</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact" class="footer-cta">
+        <div class="container">
+            <h2 style="color:#ffffff;font-size:2.2rem">Ready to modernize your pharmacy?</h2>
+            <p style="color: #94a3b8; margin: 20px 0 40px;">Join the waitlist for early access in Alberta.</p>
+            
+            <div class="footer-box">
+                <div style="margin-bottom: 20px; font-size: 1.25rem; font-weight: 600;">
+                    <i class="fa-solid fa-envelope" style="color: var(--primary); margin-right: 15px;"></i> 
+                    <a href="mailto:support@algo-rythmn.ai" style="color: white; text-decoration: none;">support@algo-rythmn.ai</a>
+                </div>
+                <div style="font-size: 1.1rem; color: #cbd5e1;">
+                    <i class="fa-solid fa-location-dot" style="color: var(--primary); margin-right: 15px;"></i> 
+                    Calgary, Alberta, Canada
+                </div>
+            </div>
+            <div style="margin-top: 60px; font-size: 0.85rem; color: #475569;">
+                &copy; 2026 Algo-Rythmn.ai. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
