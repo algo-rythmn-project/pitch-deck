@@ -25,15 +25,12 @@
             --gray-800: #1f2937;
             --gray-900: #111827;
             --white: #ffffff;
-            --anime-gradient: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 50%, #ec4899 100%);
             --travel-gradient: linear-gradient(135deg, #1a56db 0%, #4c8efa 100%);
-            --ai-gradient: linear-gradient(135deg, #10b981 0%, #3b82f6 100%);
-            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-            --border-radius: 12px;
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.02);
+            --shadow-md: 0 8px 16px rgba(0,0,0,0.04);
+            --shadow-lg: 0 16px 32px rgba(0,0,0,0.08);
+            --border-radius: 16px;
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
         
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -74,13 +71,195 @@
             box-shadow: 0 0 0 4px rgba(255, 237, 213, 0.5);
         }
 
-        /* Mockup UI Elements & Animations */
-        .ui-card { background: white; border-radius: 20px; box-shadow: var(--shadow-lg); border: 1px solid var(--gray-200); overflow: hidden; position: relative; }
+        /* Mockup UI Elements */
+        .ui-card { 
+            background: white; 
+            border-radius: 20px; 
+            box-shadow: var(--shadow-lg); 
+            border: 1px solid var(--gray-100); 
+            overflow: hidden; 
+            position: relative; 
+        }
+        
+        /* --- REDESIGNED SMART SEARCH MOCKUP --- */
+        .ui-smart-mockup {
+            max-width: 420px;
+            margin: 0 auto 24px; /* Added bottom margin for spacing between cards */
+            display: flex;
+            flex-direction: column;
+            background: #f8fafc;
+        }
+
+        .search-header {
+            background: white;
+            padding: 16px;
+            border-bottom: 1px solid var(--gray-200);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .search-input-fake {
+            flex-grow: 1;
+            background: var(--gray-50);
+            border: 1px solid var(--gray-200);
+            border-radius: 50px;
+            padding: 8px 16px;
+            font-size: 0.85rem;
+            color: var(--gray-600);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .search-btn {
+            background: #0ea5e9;
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 5px rgba(14, 165, 233, 0.3);
+        }
+
+        .ai-result-area {
+            padding: 20px;
+            position: relative;
+        }
+
+        .ai-bubble {
+            background: white;
+            border-radius: 12px;
+            padding: 16px;
+            border: 1px solid #e0f2fe; /* Light blue border */
+            box-shadow: 0 2px 8px rgba(14, 165, 233, 0.05);
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .ai-bubble::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 4px; height: 100%;
+            background: linear-gradient(to bottom, #0ea5e9, #6366f1);
+            border-radius: 12px 0 0 12px;
+        }
+
+        .ai-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #0284c7;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .ai-text {
+            font-size: 0.85rem;
+            color: var(--gray-600);
+            line-height: 1.5;
+        }
+
+        .timeline-visual {
+            position: relative;
+            padding-left: 20px;
+        }
+        
+        .timeline-line {
+            position: absolute;
+            left: 27px; /* Align with dots */
+            top: 10px;
+            bottom: 0;
+            width: 2px;
+            background: #e2e8f0;
+            z-index: 0;
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 15px;
+            position: relative;
+            z-index: 1;
+            margin-bottom: 12px;
+        }
+
+        .t-dot {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: white;
+            border: 3px solid #3b82f6;
+            margin-top: 12px;
+            flex-shrink: 0;
+        }
+
+        .t-card {
+            background: white;
+            border-radius: 10px;
+            padding: 10px 14px;
+            width: 100%;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+            border: 1px solid var(--gray-200);
+        }
+
+        .t-date { font-size: 0.7rem; color: var(--gray-400); font-weight: 600; margin-bottom: 2px; }
+        .t-name { font-size: 0.9rem; font-weight: 700; color: var(--gray-800); }
+        .t-tag { display: inline-block; font-size: 0.7rem; padding: 2px 6px; background: #f0f9ff; color: #0284c7; border-radius: 4px; margin-top: 4px; font-weight: 600; }
+
+        /* --- GOOGLE CALENDAR CARD --- */
+        .ui-calendar-card {
+            max-width: 420px;
+            margin: 0 auto;
+            border: none;
+        }
+        
+        .cal-header {
+            background: #4285F4;
+            color: white;
+            padding: 12px 20px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.9rem;
+        }
+
+        .cal-body {
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .cal-date {
+            text-align: center;
+            border-right: 1px solid var(--gray-200);
+            padding-right: 20px;
+            min-width: 80px;
+        }
+        
+        .cal-month { font-size: 0.8rem; color: var(--gray-500); text-transform: uppercase; font-weight: 700; letter-spacing: 0.05em; }
+        .cal-day { font-size: 2rem; font-weight: 800; color: var(--gray-900); line-height: 1; margin-top: 4px; }
+        
+        .cal-info { flex-grow: 1; }
+        .cal-title { font-weight: 700; color: var(--gray-900); font-size: 1rem; }
+        .cal-time { font-size: 0.85rem; color: var(--gray-600); margin-top: 4px; display: flex; align-items: center; gap: 6px; }
+        .cal-sync { font-size: 0.75rem; color: #059669; margin-top: 8px; font-weight: 700; display: flex; align-items: center; gap: 5px; background: #ecfdf5; padding: 4px 8px; border-radius: 4px; width: fit-content; }
+
+
+        /* Other UI Mocks */
         .profile-header { background: var(--gray-50); padding: 20px; border-bottom: 1px solid var(--gray-100); display: flex; align-items: center; gap: 15px; }
         .avatar { width: 50px; height: 50px; border-radius: 50%; background: var(--travel-gradient); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 1.2rem; }
         .activity-item { padding: 15px 20px; border-bottom: 1px solid var(--gray-100); display: flex; justify-content: space-between; align-items: center; }
         .liked-heart { color: var(--accent-pink); }
         .ui-mockup-booking { background: var(--gray-900); border-radius: 20px; padding: 20px; box-shadow: var(--shadow-xl); position: relative; max-width: 380px; margin: 0 auto; border: 4px solid var(--gray-800); color: white; }
+        
+        /* Wave Animation */
         .wave-animation { display: flex; justify-content: center; align-items: center; gap: 5px; height: 40px; margin: 20px 0; }
         .wave-bar { width: 4px; background: var(--accent-pink); border-radius: 2px; animation: wave 1s infinite ease-in-out; }
         .wave-bar:nth-child(2) { animation-delay: 0.1s; background: var(--secondary-blue); }
@@ -89,160 +268,138 @@
         .wave-bar:nth-child(5) { animation-delay: 0s; background: var(--accent-pink); }
         @keyframes wave { 0%, 100% { height: 10px; } 50% { height: 30px; } }
 
-        /* === NEW ROADMAP STYLES (GRID LAYOUT) === */
+        /* === TABBED ROADMAP SYSTEM === */
         .roadmap-section {
-            padding: 60px 0;
+            padding: 80px 0;
             background: #fafafa;
-            overflow: hidden;
-            position: relative;
         }
 
-        .roadmap-grid {
+        /* Tabs Navigation */
+        .tabs-nav {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 12px 30px;
+            border-radius: 50px;
+            border: 1px solid var(--gray-200);
+            background: white;
+            color: var(--gray-600);
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .tab-btn:hover {
+            border-color: var(--gray-400);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Active Tab States */
+        .tab-btn.active[data-target="phase-pre"] { background: var(--primary-blue); color: white; border-color: var(--primary-blue); box-shadow: 0 8px 20px -4px rgba(26, 86, 219, 0.4); }
+        .tab-btn.active[data-target="phase-in"] { background: var(--accent-pink); color: white; border-color: var(--accent-pink); box-shadow: 0 8px 20px -4px rgba(236, 72, 153, 0.4); }
+        .tab-btn.active[data-target="phase-post"] { background: var(--accent-purple); color: white; border-color: var(--accent-purple); box-shadow: 0 8px 20px -4px rgba(139, 92, 246, 0.4); }
+        .tab-btn.active[data-target="phase-core"] { background: var(--gray-800); color: white; border-color: var(--gray-800); box-shadow: 0 8px 20px -4px rgba(31, 41, 55, 0.4); }
+
+        .tab-content {
+            display: none;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .features-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-            position: relative;
-            padding: 0 20px;
+            gap: 24px;
         }
         
-        .roadmap-column {
-            position: relative;
-            padding-top: 20px;
+        @media (max-width: 1024px) { .features-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 640px) { .features-grid { grid-template-columns: 1fr; } }
+
+        /* === PRETTIER FEATURE CARDS === */
+        .feature-card {
+            background: white;
+            border-radius: 20px;
+            padding: 28px 24px;
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.06); 
+            transition: var(--transition);
             display: flex;
             flex-direction: column;
-            align-items: stretch;
-            padding-left: 10px;
-        }
-
-        /* Intro line: Label to 1st Marker */
-        .roadmap-column::before {
-            content: '';
-            position: absolute;
-            top: 55px; /* Start below label */
-            left: 35px;
-            width: 4px;
-            height: 100px; /* Connects label to first station marker */
-            background: var(--gray-200);
-            transform: translateX(-50%);
-            z-index: 0;
-            border-radius: 4px;
-        }
-        
-        /* Phase Indicators */
-        .phase-label {
+            height: 100%;
+            border: 1px solid rgba(255, 255, 255, 0.8);
             position: relative;
-            z-index: 2;
-            margin-bottom: 40px;
-            color: white;
-            padding: 8px 10px;
-            border-radius: 30px;
-            font-weight: 700;
-            text-transform: uppercase;
-            font-size: 0.8rem;
-            letter-spacing: 0.05em;
-            box-shadow: var(--shadow-md);
-            text-align: center;
-            width: 100%;
-            white-space: nowrap;
+            overflow: hidden;
         }
 
-        /* Roadmap Stations */
-        .roadmap-station {
-            position: relative;
-            z-index: 2;
-            margin-bottom: 20px;
-            width: 100%;
-            display: flex;
-            flex-direction: row;
-            align-items: flex-start;
-            gap: 15px;
+        .phase-pre .feature-card { border-top: 4px solid var(--primary-blue); }
+        .phase-in .feature-card { border-top: 4px solid var(--accent-pink); }
+        .phase-post .feature-card { border-top: 4px solid var(--accent-purple); }
+        .phase-core .feature-card { border-top: 4px solid var(--gray-800); }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.12);
         }
 
-        /* Connecting Line */
-        .roadmap-station:not(:last-child)::before {
-            content: '';
-            position: absolute;
-            left: 25px; /* Center of marker */
-            top: 25px; /* Center of marker */
-            width: 4px;
-            height: calc(100% + 20px); /* Reach next marker */
-            background: var(--gray-200);
-            transform: translateX(-50%);
-            z-index: 0;
-        }
-
-        .roadmap-station:last-child { margin-bottom: 0; }
-
-        .station-marker {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: white;
-            border: 4px solid var(--primary-blue);
+        .card-icon {
+            width: 54px;
+            height: 54px;
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--primary-blue);
-            font-size: 1.2rem;
-            box-shadow: var(--shadow-md);
-            z-index: 3;
-            flex-shrink: 0;
-            position: relative;
-        }
-        
-        .station-content {
-            width: 100%;
-            background: white;
-            padding: 20px;
-            border-radius: 16px;
-            box-shadow: var(--shadow-md);
-            position: relative;
-            transition: var(--transition);
-            border: 1px solid var(--gray-100);
-            text-align: left;
-            z-index: 1;
-        }
-        
-        .station-content:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-lg);
-            border-color: var(--secondary-blue);
-            z-index: 10;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: white;
+            box-shadow: 0 8px 16px -4px rgba(0,0,0,0.15);
         }
 
-        /* Feature Styling within Station */
-        .feature-title {
+        .phase-pre .card-icon { background: linear-gradient(135deg, #3b82f6, #1d4ed8); }
+        .phase-in .card-icon { background: linear-gradient(135deg, #f472b6, #db2777); }
+        .phase-post .card-icon { background: linear-gradient(135deg, #a78bfa, #7c3aed); }
+        .phase-core .card-icon { background: linear-gradient(135deg, #4b5563, #1f2937); }
+
+        .feature-title { font-weight: 800; font-size: 1.15rem; color: var(--gray-900); margin-bottom: 12px; line-height: 1.3; letter-spacing: -0.01em; }
+        .feature-description { font-size: 0.95rem; color: var(--gray-600); line-height: 1.6; flex-grow: 1; font-weight: 400; }
+
+        .feature-card .badge-pill {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            font-size: 0.75rem;
+            padding: 6px 14px;
+            margin: 0;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            border-radius: 9999px;
             font-weight: 700;
-            font-size: 1rem;
-            color: var(--gray-900);
-            margin-bottom: 8px;
-            display: block;
-            line-height: 1.3;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            z-index: 5;
         }
         
-        .feature-description {
-            font-size: 0.85rem;
-            color: var(--gray-600);
-            line-height: 1.5;
-        }
-
-        /* Phase Colors */
-        .marker-pre { border-color: var(--primary-blue); color: var(--primary-blue); }
-        .marker-in { border-color: var(--accent-pink); color: var(--accent-pink); }
-        .marker-post { border-color: var(--accent-purple); color: var(--accent-purple); }
-        .marker-core { border-color: var(--gray-800); color: var(--gray-800); }
-
-        /* === DYNAMIC STATUS BADGES === */
-        .badge-pill { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 50px; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; position: relative; margin-bottom: 10px; }
-        .badge-live { background: #ecfdf5; color: #059669; border: 1px solid #a7f3d0; }
-        .pulse-dot { width: 6px; height: 6px; background: #10b981; border-radius: 50%; margin-right: 6px; box-shadow: 0 0 0 rgba(16, 185, 129, 0.4); animation: pulse-green 2s infinite; }
-        .badge-new { background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%); color: #c2410c; border: 1px solid #fdba74; overflow: hidden; box-shadow: 0 2px 5px rgba(251, 146, 60, 0.2); }
-        .badge-new i { margin-right: 4px; }
-        .badge-new::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent); animation: shimmer 2s infinite; }
-        @keyframes pulse-green { 0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); transform: scale(0.95); } 70% { box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); transform: scale(1); } 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); transform: scale(0.95); } }
-        @keyframes shimmer { 0% { left: -100%; } 100% { left: 100%; } }
+        .badge-live { background: #f0fdf4; color: #15803d; border: 1px solid #86efac; }
+        .pulse-dot { width: 8px; height: 8px; background: #22c55e; border-radius: 50%; margin: 0; animation: pulse-green 2s infinite; }
+        .badge-new { background: #fff7ed; color: #c2410c; border: 1px solid #fed7aa; }
+        .badge-new i { color: #f97316; font-size: 0.75rem; }
+        @keyframes pulse-green { 0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); } 70% { box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); } 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); } }
 
         /* Navigation & General */
         header { background-color: rgba(255, 255, 255, 0.98); backdrop-filter: blur(10px); box-shadow: var(--shadow-sm); position: fixed; width: 100%; top: 0; z-index: 1000; }
@@ -278,18 +435,18 @@
             </div>
             <h1 class="jp-text" style="font-size: 3.5rem; font-weight: 800; margin-bottom: 24px; line-height: 1.2;">
                 進化する旅行体験<br>
-                <span class="text-gradient">3つの革新的な新機能</span>
+                <span class="text-gradient">5つの革新的な新機能</span>
             </h1>
             <h1 class="en-text" style="font-size: 3.5rem; font-weight: 800; margin-bottom: 24px; line-height: 1.2;">
                 Evolving the Journey<br>
-                <span class="text-gradient">3 Revolutionary Updates</span>
+                <span class="text-gradient">5 Revolutionary Updates</span>
             </h1>
             <p class="jp-text section-subtitle">
-                ソーシャル機能、友人のリコメンド連携、そして自律型AI予約エージェント。
+                ソーシャル機能、友人のリコメンド連携、スマート統合、そして自律型AI予約エージェント。
                 旅路・絆は「計画ツール」から「実行プラットフォーム」へ。
             </p>
             <p class="en-text section-subtitle">
-                Social connection, integrated friend recommendations, and autonomous AI booking agents.
+                Social connection, integrated friend recommendations, smart tools, and autonomous AI booking agents.
                 Tabiji Kizuna evolves from a planning tool to an execution platform.
             </p>
         </div>
@@ -300,7 +457,7 @@
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;">
                 <div class="fade-in">
                     <div class="new-badge" style="background: #f3e8ff; color: #7e22ce; border-color: #d8b4fe;">
-                        <i class="fas fa-users"></i> <span class="jp-text"> Update 1: つながる</span><span class="en-text"> Update 1: Connect</span>
+                        <i class="fas fa-users"></i> <span class="jp-text"> Update 1 & 2: つながる</span><span class="en-text"> Update 1 & 2: Connect</span>
                     </div>
                     <h2 class="jp-text">フレンドシステム &<br>プロフィール共有</h2>
                     <h2 class="en-text">Friends System &<br>Liked Activities</h2>
@@ -350,7 +507,7 @@
         </div>
     </section>
 
-    <section style="padding: 80px 0; background: var(--gray-50);">
+    <section style="padding: 80px 0; background: var(--gray-50); border-bottom: 1px solid var(--gray-200);">
         <div class="container">
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;">
                 <div class="fade-in" style="order: 2;"> <div style="background: white; border: 1px solid var(--gray-200); border-radius: 12px; padding: 20px; margin-bottom: 20px; display: flex; align-items: center; gap: 15px; box-shadow: var(--shadow-sm); opacity: 0.7;">
@@ -380,7 +537,7 @@
 
                 <div class="fade-in" style="order: 1;">
                     <div class="new-badge" style="background: #e0f2fe; color: #0369a1; border-color: #bae6fd;">
-                        <i class="fas fa-map-pin"></i> <span class="jp-text"> Update 2: 活用する</span><span class="en-text"> Update 2: Utilize</span>
+                        <i class="fas fa-map-pin"></i> <span class="jp-text"> Update 3: 活用する</span><span class="en-text"> Update 3: Utilize</span>
                     </div>
                     <h2 class="jp-text">フレンド・ピック挿入</h2>
                     <h2 class="en-text">Insert Friend's Pick</h2>
@@ -403,13 +560,122 @@
         </div>
     </section>
 
+    <section style="padding: 80px 0; background: white;">
+        <div class="container">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;">
+                <div class="fade-in">
+                    <div class="new-badge" style="background: #ecfdf5; color: #047857; border-color: #6ee7b7;">
+                        <i class="fas fa-sync"></i> <span class="jp-text"> Update 4: 統合する</span><span class="en-text"> Update 4: Integrate</span>
+                    </div>
+                    <h2 class="jp-text">スマート統合機能</h2>
+                    <h2 class="en-text">Smart Integration</h2>
+                    <p class="jp-text" style="color: var(--gray-600); font-size: 1.1rem; margin-bottom: 20px;">
+                        旅の思い出とスケジュール管理を、よりスマートに。
+                        AIアシスタントが過去の記憶を呼び起こし、確定した予定はカレンダーへ即座に反映します。
+                    </p>
+                    <p class="en-text" style="color: var(--gray-600); font-size: 1.1rem; margin-bottom: 20px;">
+                        Smarter memory recall and schedule management.
+                        Let AI find your past highlights, and instantly sync confirmed plans to your calendar.
+                    </p>
+                    
+                    <div style="margin-top: 30px;">
+                        <div style="display: flex; gap: 15px; margin-bottom: 20px;">
+                            <div style="width: 40px; height: 40px; background: #dbeafe; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #1e40af;"><i class="fas fa-search-location"></i></div>
+                            <div>
+                                <h4 class="jp-text" style="font-weight: 700; margin-bottom: 4px;">スマートメモリ検索 & タイムライン</h4>
+                                <h4 class="en-text" style="font-weight: 700; margin-bottom: 4px;">Smart Memory Search & Timeline</h4>
+                                <p class="jp-text" style="font-size: 0.9rem; color: var(--gray-600);">「去年の京都で食べたラーメン」のように曖昧な記憶から、過去のアクティビティを検索。</p>
+                                <p class="en-text" style="font-size: 0.9rem; color: var(--gray-600);">Search vague memories like "Ramen in Kyoto last year" to find past activities.</p>
+                            </div>
+                        </div>
+                        
+                        <div style="display: flex; gap: 15px;">
+                            <div style="width: 40px; height: 40px; background: #fae8ff; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #86198f;"><i class="fas fa-calendar-check"></i></div>
+                            <div>
+                                <h4 class="jp-text" style="font-weight: 700; margin-bottom: 4px;">予約カレンダー同期</h4>
+                                <h4 class="en-text" style="font-weight: 700; margin-bottom: 4px;">Booking Calendar Sync</h4>
+                                <p class="jp-text" style="font-size: 0.9rem; color: var(--gray-600);">アプリ内で確定した予約をGoogleカレンダーに自動同期。ダブルブッキングを防ぎます。</p>
+                                <p class="en-text" style="font-size: 0.9rem; color: var(--gray-600);">Auto-sync confirmed in-app bookings to Google Calendar. Prevent double bookings instantly.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="fade-in">
+                    
+                    <div class="ui-card ui-smart-mockup">
+                        <div class="search-header">
+                            <div class="search-input-fake">
+                                <i class="fas fa-search" style="color: #94a3b8;"></i>
+                                <span class="en-text">show me the sushi place i have visited</span>
+                                <span class="jp-text">過去に行った寿司屋を表示して</span>
+                            </div>
+                            <div class="search-btn"><i class="fas fa-magic"></i></div>
+                        </div>
+                        
+                        <div class="ai-result-area">
+                            <div class="ai-bubble">
+                                <div class="ai-title"><i class="fas fa-sparkles"></i> AI Answer</div>
+                                <div class="ai-text">
+                                    <span class="en-text">You've visited several sushi spots! On <strong style="color: #1e293b;">Dec 26</strong>, you had lunch at <strong>Numazu Uogashizushi</strong> in Gotemba. Later, you enjoyed <strong>Sushiro</strong> in Shinjuku during your "Anime Pilgrimage".</span>
+                                    <span class="jp-text">いくつかの寿司スポットが見つかりました！<strong style="color: #1e293b;">12月26日</strong>に御殿場の<strong>沼津魚がし鮨</strong>でランチをしています。その後、「聖地巡礼の旅」で新宿の<strong>スシロー</strong>を訪れています。</span>
+                                </div>
+                            </div>
+
+                            <div class="timeline-visual">
+                                <div class="timeline-line"></div>
+                                
+                                <div class="timeline-item">
+                                    <div class="t-dot"></div>
+                                    <div class="t-card">
+                                        <div class="t-date">2024.12.26</div>
+                                        <div class="t-name"><span class="jp-text">沼津魚がし鮨</span><span class="en-text">Numazu Uogashizushi</span></div>
+                                        <div class="t-tag"><i class="fas fa-utensils"></i> Lunch</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="timeline-item">
+                                    <div class="t-dot" style="border-color: #ec4899;"></div>
+                                    <div class="t-card">
+                                        <div class="t-date">2026.01.02</div>
+                                        <div class="t-name"><span class="jp-text">スシロー 新宿三丁目</span><span class="en-text">Sushiro Shinjuku</span></div>
+                                        <div class="t-tag" style="background: #fdf2f8; color: #db2777;"><i class="fas fa-map-marker-alt"></i> Pilgrimage</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ui-card ui-calendar-card">
+                        <div class="cal-header">
+                            <span>Google Calendar</span>
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="cal-body">
+                            <div class="cal-date">
+                                <div class="cal-month">FEB</div>
+                                <div class="cal-day">04</div>
+                            </div>
+                            <div class="cal-info">
+                                <div class="cal-title"><span class="jp-text">寿司 さいとう 夕食</span><span class="en-text">Sushi Saito Dinner</span></div>
+                                <div class="cal-time"><i class="far fa-clock"></i> 19:00 - 21:00</div>
+                                <div class="cal-sync"><i class="fas fa-sync"></i> Synced from Tabiji</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section style="padding: 100px 0; background: linear-gradient(135deg, #111827 0%, #1e3a8a 100%); color: white; position: relative; overflow: hidden;">
         <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.1; background-image: radial-gradient(circle at 20% 50%, #ffffff 0%, transparent 20%), radial-gradient(circle at 80% 80%, #ffffff 0%, transparent 20%);"></div>
 
         <div class="container" style="position: relative; z-index: 2;">
             <div style="text-align: center; margin-bottom: 60px;">
                 <div class="new-badge" style="background: rgba(16, 185, 129, 0.2); color: #34d399; border-color: #059669; box-shadow: 0 0 0 4px rgba(5, 150, 105, 0.2);">
-                    <i class="fas fa-robot"></i> <span class="jp-text"> Update 3: 自動化</span><span class="en-text"> Update 3: Automation</span>
+                    <i class="fas fa-robot"></i> <span class="jp-text"> Update 5: 自動化</span><span class="en-text"> Update 5: Automation</span>
                 </div>
                 <h2 class="jp-text">AI予約エージェント</h2>
                 <h2 class="en-text">AI Booking Agent</h2>
@@ -487,314 +753,280 @@
 
     <section class="roadmap-section">
         <div class="container">
-            <div class="section-header" style="text-align: center; margin-bottom: 80px;">
-                <h2 class="jp-text">旅の進化ロードマップ</h2>
-                <h2 class="en-text">Journey Evolution Roadmap</h2>
+            <div class="section-header fade-in" style="text-align: center; margin-bottom: 60px;">
+                <h2 class="jp-text">旅の全機能エコシステム</h2>
+                <h2 class="en-text">The Journey Ecosystem</h2>
                 <p class="section-subtitle jp-text">計画から思い出まで、あなたの旅を彩る全機能</p>
                 <p class="section-subtitle en-text">Every feature shaping your journey, from planning to memories.</p>
             </div>
 
-            <div class="roadmap-grid fade-in">
-                
-                <!-- Column 1: Pre-Trip -->
-                <div class="roadmap-column">
-                    <div class="phase-label" style="background: var(--primary-blue);">
-                        <span class="jp-text">旅行前: 計画</span><span class="en-text">Pre-Trip: Planning</span>
-                    </div>
-
-                    <div class="roadmap-station">
-                        <div class="station-marker marker-pre"><i class="fas fa-comments"></i></div>
-                        <div class="station-content">
-                            <div class="badge-pill badge-live"><div class="pulse-dot"></div><span class="jp-text">公開中</span><span class="en-text">Live</span></div>
-                            <h3 class="feature-title"><span class="jp-text">対話型AI旅程作成</span><span class="en-text">Interactive AI Itinerary Builder</span></h3>
-                            <p class="feature-description jp-text">AIに夢の旅行を伝えるだけで、あなただけのカスタムプランが完成します。</p>
-                            <p class="feature-description en-text">Just tell the AI your dream trip, and it builds a custom plan just for you.</p>
-                        </div>
-                    </div>
-
-                    <div class="roadmap-station">
-                        <div class="station-marker marker-pre"><i class="fas fa-image"></i></div>
-                        <div class="station-content">
-                            <div class="badge-pill badge-live"><div class="pulse-dot"></div><span class="jp-text">公開中</span><span class="en-text">Live</span></div>
-                            <h3 class="feature-title"><span class="jp-text">画像からのインスピレーション</span><span class="en-text">Image-Based Inspiration</span></h3>
-                            <p class="feature-description jp-text">気になる写真をアップロード。その雰囲気に合った旅程をAIが提案します。</p>
-                            <p class="feature-description en-text">Upload a photo that captures a vibe, and AI will generate a journey around it.</p>
-                        </div>
-                    </div>
-
-                    <div class="roadmap-station">
-                        <div class="station-marker marker-pre"><i class="fas fa-compass"></i></div>
-                        <div class="station-content">
-                            <div class="badge-pill badge-live"><div class="pulse-dot"></div><span class="jp-text">公開中</span><span class="en-text">Live</span></div>
-                            <h3 class="feature-title"><span class="jp-text">テーマ別旅程クリエイター</span><span class="en-text">Theme-Based Journey Creator</span></h3>
-                            <p class="feature-description jp-text">アニメ聖地巡礼、文化ツアー、ドライブ等の特化型旅程。</p>
-                            <p class="feature-description en-text">Specialized itineraries for anime pilgrimages, cultural tours, road trips, etc.</p>
-                        </div>
-                    </div>
-
-                    <div class="roadmap-station">
-                        <div class="station-marker marker-pre"><i class="fas fa-user-friends"></i></div>
-                        <div class="station-content">
-                            <div class="badge-pill badge-new"><i class="fas fa-star"></i> <span class="jp-text">新機能</span><span class="en-text">NEW</span></div>
-                            <h3 class="feature-title"><span class="jp-text">友人のリコメンド活用</span><span class="en-text">Friends' Recommendations</span></h3>
-                            <p class="feature-description jp-text">友人が「いいね」したスポットを、あなたの旅程に直接組み込めます。</p>
-                            <p class="feature-description en-text">See what your friends loved and add their favorite spots directly to your map.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Column 2: In-Trip -->
-                <div class="roadmap-column">
-                    <div class="phase-label" style="background: var(--accent-pink);">
-                        <span class="jp-text">旅行中: 体験</span><span class="en-text">In-Trip: Experience</span>
-                    </div>
-
-                    <div class="roadmap-station">
-                        <div class="station-marker marker-in"><i class="fas fa-wallet"></i></div>
-                        <div class="station-content">
-                            <div class="badge-pill badge-live"><div class="pulse-dot"></div><span class="jp-text">公開中</span><span class="en-text">Live</span></div>
-                            <h3 class="feature-title"><span class="jp-text">スマート予算管理</span><span class="en-text">Smart Budget Tracker</span></h3>
-                            <p class="feature-description jp-text">面倒な計算は不要。リアルタイムで支出を追跡し、予算オーバーを防ぎます。</p>
-                            <p class="feature-description en-text">Keep an eye on spending in real-time without the spreadsheet hassle.</p>
-                        </div>
-                    </div>
-
-                    <div class="roadmap-station">
-                        <div class="station-marker marker-in"><i class="fas fa-wand-magic-sparkles"></i></div>
-                        <div class="station-content">
-                            <div class="badge-pill badge-live"><div class="pulse-dot"></div><span class="jp-text">公開中</span><span class="en-text">Live</span></div>
-                            <h3 class="feature-title"><span class="jp-text">アーティスティック写真変換</span><span class="en-text">Artistic Photo Transformation</span></h3>
-                            <p class="feature-description jp-text">旅行写真をアニメ、水彩、スケッチ風に変換。</p>
-                            <p class="feature-description en-text">Transform travel photos into anime, watercolor, or sketch styles.</p>
-                        </div>
-                    </div>
-
-                    <div class="roadmap-station">
-                        <div class="station-marker marker-in"><i class="fas fa-sync-alt"></i></div>
-                        <div class="station-content">
-                            <div class="badge-pill badge-live"><div class="pulse-dot"></div><span class="jp-text">公開中</span><span class="en-text">Live</span></div>
-                            <h3 class="feature-title"><span class="jp-text">AIアクティビティ再提案</span><span class="en-text">Single Activity Customization</span></h3>
-                            <p class="feature-description jp-text">旅行中に特定のアクティビティをAI提案で再生成。</p>
-                            <p class="feature-description en-text">Regenerate specific activities with AI suggestions while traveling.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="roadmap-station">
-                        <div class="station-marker marker-in"><i class="fas fa-edit"></i></div>
-                        <div class="station-content">
-                            <div class="badge-pill badge-live"><div class="pulse-dot"></div><span class="jp-text">公開中</span><span class="en-text">Live</span></div>
-                            <h3 class="feature-title"><span class="jp-text">ライブ旅程エディター</span><span class="en-text">Live Itinerary Editor</span></h3>
-                            <p class="feature-description jp-text">急な予定変更も簡単。ドラッグ＆ドロップでスケジュールを即座に最適化。</p>
-                            <p class="feature-description en-text">Plans change. Drag, drop, and optimize your schedule on the go instantly.</p>
-                        </div>
-                    </div>
-
-                    <div class="roadmap-station">
-                        <div class="station-marker marker-in"><i class="fas fa-film"></i></div>
-                        <div class="station-content">
-                            <div class="badge-pill badge-live"><div class="pulse-dot"></div><span class="jp-text">公開中</span><span class="en-text">Live</span></div>
-                            <h3 class="feature-title"><span class="jp-text">AIトラベルダイアリー</span><span class="en-text">AI Travel Diary & Video</span></h3>
-                            <p class="feature-description jp-text">旅行写真から日次スライドショー動画を自動生成。</p>
-                            <p class="feature-description en-text">Auto-generate daily slideshow videos from trip photos.</p>
-                        </div>
-                    </div>
-
-                    <div class="roadmap-station">
-                        <div class="station-marker marker-in"><i class="fas fa-map-marked-alt"></i></div>
-                        <div class="station-content">
-                            <div class="badge-pill badge-live"><div class="pulse-dot"></div><span class="jp-text">公開中</span><span class="en-text">Live</span></div>
-                            <h3 class="feature-title"><span class="jp-text">リアルタイムナビゲーション</span><span class="en-text">Real-Time Navigation</span></h3>
-                            <p class="feature-description jp-text">公共交通機関の遅延も考慮した、正確なターンバイターン案内。</p>
-                            <p class="feature-description en-text">Never get lost with live, turn-by-turn guidance that adapts to transit delays.</p>
-                        </div>
-                    </div>
-
-                    <div class="roadmap-station">
-                        <div class="station-marker marker-in"><i class="fas fa-shoe-prints"></i></div>
-                        <div class="station-content">
-                            <div class="badge-pill badge-live"><div class="pulse-dot"></div><span class="jp-text">公開中</span><span class="en-text">Live</span></div>
-                            <h3 class="feature-title"><span class="jp-text">地図上の足跡</span><span class="en-text">Map Footprint Visualization</span></h3>
-                            <p class="feature-description jp-text">訪問場所を表示するインタラクティブマップ。</p>
-                            <p class="feature-description en-text">Interactive map showing visited locations.</p>
-                        </div>
-                    </div>
-
-                    <div class="roadmap-station">
-                        <div class="station-marker marker-in"><i class="fas fa-coins"></i></div>
-                        <div class="station-content">
-                            <div class="badge-pill badge-live"><div class="pulse-dot"></div><span class="jp-text">公開中</span><span class="en-text">Live</span></div>
-                            <h3 class="feature-title"><span class="jp-text">通貨コンバーター</span><span class="en-text">Currency Converter</span></h3>
-                            <p class="feature-description jp-text">リアルタイムJPY/USD為替レート。</p>
-                            <p class="feature-description en-text">Live JPY/USD exchange rates.</p>
-                        </div>
-                    </div>
-
-                    <div class="roadmap-station">
-                        <div class="station-marker marker-in"><i class="fab fa-google"></i></div>
-                        <div class="station-content">
-                            <div class="badge-pill badge-live"><div class="pulse-dot"></div><span class="jp-text">公開中</span><span class="en-text">Live</span></div>
-                            <h3 class="feature-title"><span class="jp-text">Google Places連携</span><span class="en-text">Google Places Integration</span></h3>
-                            <p class="feature-description jp-text">全アクティビティの営業時間、写真、レビュー。</p>
-                            <p class="feature-description en-text">Hours, photos, reviews for all activities.</p>
-                        </div>
-                    </div>
-
-                    <div class="roadmap-station">
-                        <div class="station-marker marker-in"><i class="fas fa-robot"></i></div>
-                        <div class="station-content">
-                            <div class="badge-pill badge-new"><i class="fas fa-star"></i> <span class="jp-text">新機能</span><span class="en-text">NEW</span></div>
-                            <h3 class="feature-title"><span class="jp-text">AIレストラン予約代行</span><span class="en-text">AI Booking Agent</span></h3>
-                            <p class="feature-description jp-text">あなたに代わってAIがお店に電話し、複雑な条件でも予約を確定します。</p>
-                            <p class="feature-description en-text">The AI calls restaurants and secures your reservation, even with complex requests.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Column 3: Post-Trip -->
-                <div class="roadmap-column">
-                    <div class="phase-label" style="background: var(--accent-purple);">
-                        <span class="jp-text">旅行後: 共有</span><span class="en-text">Post-Trip: Sharing</span>
-                    </div>
-
-                    <div class="roadmap-station">
-                        <div class="station-marker marker-post"><i class="fas fa-video"></i></div>
-                        <div class="station-content">
-                            <div class="badge-pill badge-live"><div class="pulse-dot"></div><span class="jp-text">公開中</span><span class="en-text">Live</span></div>
-                            <h3 class="feature-title"><span class="jp-text">Vlog自動生成</span><span class="en-text">Automated Vlog Export</span></h3>
-                            <p class="feature-description jp-text">旅の思い出の写真を、シェアしやすいショート動画にワンクリックで変換。</p>
-                            <p class="feature-description en-text">Turn your trip photos into a shareable video highlight reel with one click.</p>
-                        </div>
-                    </div>
-
-                    <div class="roadmap-station">
-                        <div class="station-marker marker-post"><i class="fas fa-images"></i></div>
-                        <div class="station-content">
-                            <div class="badge-pill badge-live"><div class="pulse-dot"></div><span class="jp-text">公開中</span><span class="en-text">Live</span></div>
-                            <h3 class="feature-title"><span class="jp-text">写真整理 & 共有</span><span class="en-text">Photo Organization</span></h3>
-                            <p class="feature-description jp-text">写真の保存、整理、コミュニティ共有。</p>
-                            <p class="feature-description en-text">Save, organize, and share photos with travel community.</p>
-                        </div>
-                    </div>
-
-                    <div class="roadmap-station">
-                        <div class="station-marker marker-post"><i class="fas fa-share-alt"></i></div>
-                        <div class="station-content">
-                            <div class="badge-pill badge-live"><div class="pulse-dot"></div><span class="jp-text">公開中</span><span class="en-text">Live</span></div>
-                            <h3 class="feature-title"><span class="jp-text">旅程シェアプラットフォーム</span><span class="en-text">Itinerary Sharing</span></h3>
-                            <p class="feature-description jp-text">あなたの完璧なプランを公開し、コミュニティのトラベルグルになりましょう。</p>
-                            <p class="feature-description en-text">Publish your complete journey and become a travel guru for the community.</p>
-                        </div>
-                    </div>
-
-                    <div class="roadmap-station">
-                        <div class="station-marker marker-post"><i class="fas fa-tasks"></i></div>
-                        <div class="station-content">
-                            <div class="badge-pill badge-live"><div class="pulse-dot"></div><span class="jp-text">公開中</span><span class="en-text">Live</span></div>
-                            <h3 class="feature-title"><span class="jp-text">旅のステータス管理</span><span class="en-text">Trip Status Tracker</span></h3>
-                            <p class="feature-description jp-text">旅程を計画中、進行中、完了として追跡。</p>
-                            <p class="feature-description en-text">Track trips as planned, ongoing, or completed.</p>
-                        </div>
-                    </div>
-
-                    <div class="roadmap-station">
-                        <div class="station-marker marker-post"><i class="fas fa-heart"></i></div>
-                        <div class="station-content">
-                            <div class="badge-pill badge-new"><i class="fas fa-star"></i> <span class="jp-text">新機能</span><span class="en-text">NEW</span></div>
-                            <h3 class="feature-title"><span class="jp-text">「いいね」＆プロフィール</span><span class="en-text">Liked Activities & Profile</span></h3>
-                            <p class="feature-description jp-text">お気に入りの場所を保存してプロフィールに公開。次の誰かの旅のヒントに。</p>
-                            <p class="feature-description en-text">Save your favorites to your profile to inspire your friends' next adventure.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Column 4: Foundation -->
-                <div class="roadmap-column">
-                    <div class="phase-label" style="background: var(--gray-800);">
-                        <span class="jp-text">基盤: コア機能</span><span class="en-text">Foundation: Core Info</span>
-                    </div>
-
-                    <div class="roadmap-station">
-                        <div class="station-marker marker-core"><i class="fas fa-user-cog"></i></div>
-                        <div class="station-content">
-                            <div class="badge-pill badge-live"><div class="pulse-dot"></div><span class="jp-text">公開中</span><span class="en-text">Live</span></div>
-                            <h3 class="feature-title"><span class="jp-text">旅行スタイルプロファイル</span><span class="en-text">Travel Style Profile</span></h3>
-                            <p class="feature-description jp-text">あなたの好みや条件を保存。次回の計画がよりスマートに、パーソナルに。</p>
-                            <p class="feature-description en-text">Your preferences, saved. Making every future trip plan smarter and more personal.</p>
-                        </div>
-                    </div>
-
-                    <div class="roadmap-station">
-                        <div class="station-marker marker-core"><i class="fas fa-users"></i></div>
-                        <div class="station-content">
-                            <div class="badge-pill badge-new"><i class="fas fa-star"></i> <span class="jp-text">新機能</span><span class="en-text">NEW</span></div>
-                            <h3 class="feature-title"><span class="jp-text">フレンドシステム</span><span class="en-text">Friends System</span></h3>
-                            <p class="feature-description jp-text">旅仲間とつながり、プロフィールや過去の旅の記録を共有できます。</p>
-                            <p class="feature-description en-text">Connect and build your circle of travel companions to share profiles and history.</p>
-                        </div>
-                    </div>
-
-                    <div class="roadmap-station">
-                        <div class="station-marker marker-core"><i class="fas fa-history"></i></div>
-                        <div class="station-content">
-                            <div class="badge-pill badge-live"><div class="pulse-dot"></div><span class="jp-text">公開中</span><span class="en-text">Live</span></div>
-                            <h3 class="feature-title"><span class="jp-text">旅程履歴</span><span class="en-text">Itinerary History</span></h3>
-                            <p class="feature-description jp-text">過去の旅行計画へのアクセスと再利用。</p>
-                            <p class="feature-description en-text">Access and reuse past travel plans.</p>
-                        </div>
-                    </div>
-
-                    <div class="roadmap-station">
-                        <div class="station-marker marker-core"><i class="fas fa-globe"></i></div>
-                        <div class="station-content">
-                            <div class="badge-pill badge-live"><div class="pulse-dot"></div><span class="jp-text">公開中</span><span class="en-text">Live</span></div>
-                            <h3 class="feature-title"><span class="jp-text">多言語対応 (EN/JP)</span><span class="en-text">Multi-Language (EN/JP)</span></h3>
-                            <p class="feature-description jp-text">英語および日本人旅行者への完全対応。</p>
-                            <p class="feature-description en-text">Full support for English and Japanese travelers.</p>
-                        </div>
-                    </div>
-
-                    <div class="roadmap-station">
-                        <div class="station-marker marker-core"><i class="fas fa-server"></i></div>
-                        <div class="station-content">
-                            <div class="badge-pill badge-live"><div class="pulse-dot"></div><span class="jp-text">公開中</span><span class="en-text">Live</span></div>
-                            <h3 class="feature-title"><span class="jp-text">地域別API設定</span><span class="en-text">Regional API Config</span></h3>
-                            <p class="feature-description jp-text">正確なローカル情報のための位置認識サービス。</p>
-                            <p class="feature-description en-text">Location-aware services for accurate local information.</p>
-                        </div>
-                    </div>
-
-                    <div class="roadmap-station">
-                        <div class="station-marker marker-core"><i class="fas fa-map"></i></div>
-                        <div class="station-content">
-                            <div class="badge-pill badge-live"><div class="pulse-dot"></div><span class="jp-text">公開中</span><span class="en-text">Live</span></div>
-                            <h3 class="feature-title"><span class="jp-text">インタラクティブマップ</span><span class="en-text">Interactive Map</span></h3>
-                            <p class="feature-description jp-text">マーカーとルートによる視覚的な旅程計画。</p>
-                            <p class="feature-description en-text">Visual journey planning with markers and routes.</p>
-                        </div>
-                    </div>
-
-                    <div class="roadmap-station">
-                        <div class="station-marker marker-core"><i class="fas fa-list-ol"></i></div>
-                        <div class="station-content">
-                            <div class="badge-pill badge-live"><div class="pulse-dot"></div><span class="jp-text">公開中</span><span class="en-text">Live</span></div>
-                            <h3 class="feature-title"><span class="jp-text">日次タイムライン</span><span class="en-text">Day-by-Day Timeline</span></h3>
-                            <p class="feature-description jp-text">タイムスロットと移動を含む視覚的スケジュール。</p>
-                            <p class="feature-description en-text">Visual schedule with time slots and transportation.</p>
-                        </div>
-                    </div>
-
-                    <div class="roadmap-station">
-                        <div class="station-marker marker-core"><i class="fas fa-info-circle"></i></div>
-                        <div class="station-content">
-                            <div class="badge-pill badge-live"><div class="pulse-dot"></div><span class="jp-text">公開中</span><span class="en-text">Live</span></div>
-                            <h3 class="feature-title"><span class="jp-text">旅程サマリー</span><span class="en-text">Itinerary Summary</span></h3>
-                            <p class="feature-description jp-text">旅のハイライト、ヒント、概要表示。</p>
-                            <p class="feature-description en-text">Trip highlights, tips, and overview display.</p>
-                        </div>
-                    </div>
-                </div>
-
+            <div class="tabs-nav fade-in">
+                <button class="tab-btn active" data-target="phase-pre">
+                    <i class="fas fa-map"></i>
+                    <span class="jp-text">旅行前: 計画</span><span class="en-text">Pre-Trip</span>
+                </button>
+                <button class="tab-btn" data-target="phase-in">
+                    <i class="fas fa-plane"></i>
+                    <span class="jp-text">旅行中: 体験</span><span class="en-text">In-Trip</span>
+                </button>
+                <button class="tab-btn" data-target="phase-post">
+                    <i class="fas fa-camera"></i>
+                    <span class="jp-text">旅行後: 共有</span><span class="en-text">Post-Trip</span>
+                </button>
+                <button class="tab-btn" data-target="phase-core">
+                    <i class="fas fa-layer-group"></i>
+                    <span class="jp-text">基盤機能</span><span class="en-text">Core Platform</span>
+                </button>
             </div>
+
+            <div id="phase-pre" class="tab-content active phase-pre">
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="badge-pill badge-live"><div class="pulse-dot"></div>Live</div>
+                        <div class="card-icon"><i class="fas fa-comments"></i></div>
+                        <h3 class="feature-title"><span class="jp-text">対話型AI旅程作成</span><span class="en-text">AI Itinerary Builder</span></h3>
+                        <p class="feature-description jp-text">AIに夢の旅行を伝えるだけで、あなただけのカスタムプランが完成します。</p>
+                        <p class="feature-description en-text">Tell AI your dream trip, and it builds a custom plan just for you.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="badge-pill badge-live"><div class="pulse-dot"></div>Live</div>
+                        <div class="card-icon"><i class="fas fa-image"></i></div>
+                        <h3 class="feature-title"><span class="jp-text">画像からのインスピレーション</span><span class="en-text">Image Inspiration</span></h3>
+                        <p class="feature-description jp-text">写真をアップロードして、その雰囲気に合った旅程をAIが提案。</p>
+                        <p class="feature-description en-text">Upload a vibe photo, AI generates a journey around it.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="badge-pill badge-live"><div class="pulse-dot"></div>Live</div>
+                        <div class="card-icon"><i class="fas fa-compass"></i></div>
+                        <h3 class="feature-title"><span class="jp-text">テーマ別旅程</span><span class="en-text">Theme Journeys</span></h3>
+                        <p class="feature-description jp-text">アニメ聖地巡礼、文化ツアー、ドライブ等の特化型旅程。</p>
+                        <p class="feature-description en-text">Specialized itineraries for anime pilgrimages, cultural tours, etc.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="badge-pill badge-new"><i class="fas fa-star"></i> NEW</div>
+                        <div class="card-icon"><i class="fas fa-user-friends"></i></div>
+                        <h3 class="feature-title"><span class="jp-text">友人のリコメンド活用</span><span class="en-text">Friends' Recs</span></h3>
+                        <p class="feature-description jp-text">友人が「いいね」したスポットを、あなたの旅程に直接組み込めます。</p>
+                        <p class="feature-description en-text">Add your friends' favorite spots directly to your itinerary.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="phase-in" class="tab-content phase-in">
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="badge-pill badge-live"><div class="pulse-dot"></div>Live</div>
+                        <div class="card-icon"><i class="fas fa-wallet"></i></div>
+                        <h3 class="feature-title"><span class="jp-text">スマート予算管理</span><span class="en-text">Smart Budget</span></h3>
+                        <p class="feature-description jp-text">リアルタイムで支出を追跡し、予算オーバーを防ぎます。</p>
+                        <p class="feature-description en-text">Real-time expense tracking and budget alerts.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="badge-pill badge-live"><div class="pulse-dot"></div>Live</div>
+                        <div class="card-icon"><i class="fas fa-wand-magic-sparkles"></i></div>
+                        <h3 class="feature-title"><span class="jp-text">写真変換</span><span class="en-text">Photo Transform</span></h3>
+                        <p class="feature-description jp-text">旅行写真をアニメ、水彩、スケッチ風に変換。</p>
+                        <p class="feature-description en-text">Transform photos into anime/watercolor styles.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="badge-pill badge-live"><div class="pulse-dot"></div>Live</div>
+                        <div class="card-icon"><i class="fas fa-sync-alt"></i></div>
+                        <h3 class="feature-title"><span class="jp-text">AI再提案</span><span class="en-text">Activity Remix</span></h3>
+                        <p class="feature-description jp-text">旅行中に特定のアクティビティをAI提案で再生成。</p>
+                        <p class="feature-description en-text">Regenerate specific activities on the go.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="badge-pill badge-live"><div class="pulse-dot"></div>Live</div>
+                        <div class="card-icon"><i class="fas fa-edit"></i></div>
+                        <h3 class="feature-title"><span class="jp-text">ライブエディター</span><span class="en-text">Live Editor</span></h3>
+                        <p class="feature-description jp-text">ドラッグ＆ドロップでスケジュールを即座に最適化。</p>
+                        <p class="feature-description en-text">Drag, drop, and optimize schedule instantly.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="badge-pill badge-live"><div class="pulse-dot"></div>Live</div>
+                        <div class="card-icon"><i class="fas fa-film"></i></div>
+                        <h3 class="feature-title"><span class="jp-text">AIトラベル日記</span><span class="en-text">AI Travel Diary</span></h3>
+                        <p class="feature-description jp-text">写真から日次スライドショー動画を自動生成。</p>
+                        <p class="feature-description en-text">Auto-generate daily slideshow videos.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="badge-pill badge-live"><div class="pulse-dot"></div>Live</div>
+                        <div class="card-icon"><i class="fas fa-map-marked-alt"></i></div>
+                        <h3 class="feature-title"><span class="jp-text">ナビゲーション</span><span class="en-text">Real-Time Nav</span></h3>
+                        <p class="feature-description jp-text">交通機関の遅延も考慮したターンバイターン案内。</p>
+                        <p class="feature-description en-text">Turn-by-turn guidance with transit updates.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="badge-pill badge-live"><div class="pulse-dot"></div>Live</div>
+                        <div class="card-icon"><i class="fas fa-shoe-prints"></i></div>
+                        <h3 class="feature-title"><span class="jp-text">足跡マップ</span><span class="en-text">Map Footprint</span></h3>
+                        <p class="feature-description jp-text">訪問場所を表示するインタラクティブマップ。</p>
+                        <p class="feature-description en-text">Interactive map showing visited locations.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="badge-pill badge-live"><div class="pulse-dot"></div>Live</div>
+                        <div class="card-icon"><i class="fas fa-coins"></i></div>
+                        <h3 class="feature-title"><span class="jp-text">通貨コンバーター</span><span class="en-text">Currency Rates</span></h3>
+                        <p class="feature-description jp-text">リアルタイムJPY/USD為替レート表示。</p>
+                        <p class="feature-description en-text">Live JPY/USD exchange rates.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="badge-pill badge-live"><div class="pulse-dot"></div>Live</div>
+                        <div class="card-icon"><i class="fab fa-google"></i></div>
+                        <h3 class="feature-title"><span class="jp-text">Google Places</span><span class="en-text">Google Places</span></h3>
+                        <p class="feature-description jp-text">全アクティビティの営業時間、写真、レビュー。</p>
+                        <p class="feature-description en-text">Hours, photos, reviews for all activities.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="badge-pill badge-new"><i class="fas fa-star"></i> NEW</div>
+                        <div class="card-icon"><i class="fas fa-calendar-check"></i></div>
+                        <h3 class="feature-title"><span class="jp-text">カレンダー同期</span><span class="en-text">Calendar Sync</span></h3>
+                        <p class="feature-description jp-text">確定した予約をGoogleカレンダーに自動同期。</p>
+                        <p class="feature-description en-text">Confirmed bookings auto-sync to Google Calendar.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="badge-pill badge-new"><i class="fas fa-star"></i> NEW</div>
+                        <div class="card-icon"><i class="fas fa-robot"></i></div>
+                        <h3 class="feature-title"><span class="jp-text">AI予約代行</span><span class="en-text">AI Booking Agent</span></h3>
+                        <p class="feature-description jp-text">AIがお店に電話し、複雑な条件でも予約を確定。</p>
+                        <p class="feature-description en-text">AI calls restaurants and secures reservations.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="phase-post" class="tab-content phase-post">
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="badge-pill badge-live"><div class="pulse-dot"></div>Live</div>
+                        <div class="card-icon"><i class="fas fa-video"></i></div>
+                        <h3 class="feature-title"><span class="jp-text">Vlog自動生成</span><span class="en-text">Vlog Export</span></h3>
+                        <p class="feature-description jp-text">思い出の写真をショート動画にワンクリック変換。</p>
+                        <p class="feature-description en-text">Turn trip photos into shareable video reels.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="badge-pill badge-live"><div class="pulse-dot"></div>Live</div>
+                        <div class="card-icon"><i class="fas fa-images"></i></div>
+                        <h3 class="feature-title"><span class="jp-text">写真整理</span><span class="en-text">Photo Org</span></h3>
+                        <p class="feature-description jp-text">写真の保存、整理、コミュニティ共有。</p>
+                        <p class="feature-description en-text">Save, organize, and share photos.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="badge-pill badge-live"><div class="pulse-dot"></div>Live</div>
+                        <div class="card-icon"><i class="fas fa-share-alt"></i></div>
+                        <h3 class="feature-title"><span class="jp-text">旅程シェア</span><span class="en-text">Itinerary Share</span></h3>
+                        <p class="feature-description jp-text">完璧なプランを公開し、コミュニティへ共有。</p>
+                        <p class="feature-description en-text">Publish your complete journey to others.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="badge-pill badge-live"><div class="pulse-dot"></div>Live</div>
+                        <div class="card-icon"><i class="fas fa-tasks"></i></div>
+                        <h3 class="feature-title"><span class="jp-text">ステータス管理</span><span class="en-text">Status Tracker</span></h3>
+                        <p class="feature-description jp-text">旅程を計画中、進行中、完了として追跡。</p>
+                        <p class="feature-description en-text">Track trips as planned, ongoing, or completed.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="badge-pill badge-new"><i class="fas fa-star"></i> NEW</div>
+                        <div class="card-icon"><i class="fas fa-search-location"></i></div>
+                        <h3 class="feature-title"><span class="jp-text">メモリ検索</span><span class="en-text">Memory Search</span></h3>
+                        <p class="feature-description jp-text">AIで過去のアクティビティを曖昧な記憶から検索。</p>
+                        <p class="feature-description en-text">Search historical activities with AI assistance.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="badge-pill badge-new"><i class="fas fa-star"></i> NEW</div>
+                        <div class="card-icon"><i class="fas fa-heart"></i></div>
+                        <h3 class="feature-title"><span class="jp-text">プロフィール</span><span class="en-text">Liked & Profile</span></h3>
+                        <p class="feature-description jp-text">お気に入りの場所を保存してプロフィールに公開。</p>
+                        <p class="feature-description en-text">Save favorites to your profile to inspire friends.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="phase-core" class="tab-content phase-core">
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="badge-pill badge-live"><div class="pulse-dot"></div>Live</div>
+                        <div class="card-icon"><i class="fas fa-user-cog"></i></div>
+                        <h3 class="feature-title"><span class="jp-text">スタイル設定</span><span class="en-text">Style Profile</span></h3>
+                        <p class="feature-description jp-text">好みや条件を保存。次回の計画をスマートに。</p>
+                        <p class="feature-description en-text">Store preferences for smarter future plans.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="badge-pill badge-new"><i class="fas fa-star"></i> NEW</div>
+                        <div class="card-icon"><i class="fas fa-users"></i></div>
+                        <h3 class="feature-title"><span class="jp-text">フレンド機能</span><span class="en-text">Friends System</span></h3>
+                        <p class="feature-description jp-text">旅仲間とつながり、プロフィールや記録を共有。</p>
+                        <p class="feature-description en-text">Connect and share profiles with travel buddies.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="badge-pill badge-live"><div class="pulse-dot"></div>Live</div>
+                        <div class="card-icon"><i class="fas fa-history"></i></div>
+                        <h3 class="feature-title"><span class="jp-text">旅程履歴</span><span class="en-text">Itinerary History</span></h3>
+                        <p class="feature-description jp-text">過去の旅行計画へのアクセスと再利用。</p>
+                        <p class="feature-description en-text">Access and reuse past travel plans.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="badge-pill badge-live"><div class="pulse-dot"></div>Live</div>
+                        <div class="card-icon"><i class="fas fa-globe"></i></div>
+                        <h3 class="feature-title"><span class="jp-text">多言語 (EN/JP)</span><span class="en-text">Multi-Language</span></h3>
+                        <p class="feature-description jp-text">世界中の旅行者への完全対応。</p>
+                        <p class="feature-description en-text">Full support for global travelers.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="badge-pill badge-live"><div class="pulse-dot"></div>Live</div>
+                        <div class="card-icon"><i class="fas fa-server"></i></div>
+                        <h3 class="feature-title"><span class="jp-text">地域API</span><span class="en-text">Regional API</span></h3>
+                        <p class="feature-description jp-text">正確なローカル情報のための位置認識サービス。</p>
+                        <p class="feature-description en-text">Location-aware services for accurate local info.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="badge-pill badge-live"><div class="pulse-dot"></div>Live</div>
+                        <div class="card-icon"><i class="fas fa-map"></i></div>
+                        <h3 class="feature-title"><span class="jp-text">マップ</span><span class="en-text">Interactive Map</span></h3>
+                        <p class="feature-description jp-text">マーカーとルートによる視覚的な旅程計画。</p>
+                        <p class="feature-description en-text">Visual journey planning with markers and routes.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="badge-pill badge-live"><div class="pulse-dot"></div>Live</div>
+                        <div class="card-icon"><i class="fas fa-list-ol"></i></div>
+                        <h3 class="feature-title"><span class="jp-text">タイムライン</span><span class="en-text">Timeline</span></h3>
+                        <p class="feature-description jp-text">タイムスロットと移動を含む視覚的スケジュール。</p>
+                        <p class="feature-description en-text">Visual schedule with time slots and transport.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="badge-pill badge-live"><div class="pulse-dot"></div>Live</div>
+                        <div class="card-icon"><i class="fas fa-info-circle"></i></div>
+                        <h3 class="feature-title"><span class="jp-text">旅程サマリー</span><span class="en-text">Summary</span></h3>
+                        <p class="feature-description jp-text">旅のハイライト、ヒント、概要表示。</p>
+                        <p class="feature-description en-text">Trip highlights, tips, and overview display.</p>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </section>
 
@@ -804,18 +1036,18 @@
                 <i class="fas fa-route"></i> Tabiji Kizuna
             </div>
             <p style="color: rgba(255,255,255,0.6); font-size: 0.9rem;">
-                <span class="jp-text">&copy; 2026 アルゴリズム株式会社 全著作権所有<br>社内製品機能ドキュメント v2026.02</span>
+                <span class="jp-text">&copy; 2026 Algo-Rythmn Corp. 全著作権所有<br>社内製品機能ドキュメント v2026.02</span>
                 <span class="en-text">&copy; 2026 Algo-Rythmn Corp. All rights reserved.<br>Internal Product Feature Document v2026.02</span>
             </p>
         </div>
     </footer>
 
     <script>
-        // Language Toggle Logic
         document.addEventListener('DOMContentLoaded', () => {
+            // Language Toggle
             const langButtons = document.querySelectorAll('.lang-btn');
             const body = document.body;
-            body.setAttribute('data-lang', 'ja'); // Default
+            body.setAttribute('data-lang', 'ja');
 
             langButtons.forEach(btn => {
                 btn.addEventListener('click', () => {
@@ -832,8 +1064,24 @@
                     if (entry.isIntersecting) entry.target.classList.add('visible');
                 });
             }, { threshold: 0.1 });
-
             document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+            // Tab Navigation Logic
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            tabButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Remove active from all
+                    tabButtons.forEach(b => b.classList.remove('active'));
+                    tabContents.forEach(c => c.classList.remove('active'));
+
+                    // Add active to clicked
+                    btn.classList.add('active');
+                    const target = btn.getAttribute('data-target');
+                    document.getElementById(target).classList.add('active');
+                });
+            });
         });
     </script>
 </body>
