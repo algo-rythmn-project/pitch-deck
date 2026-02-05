@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Soil Intelligence Platform | Demo</title>
+    <title>Soil Intelligence Platform | Enterprise Demo</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -498,7 +498,8 @@
         .data-table td {
             padding: 12px 15px;
             border-bottom: 1px solid #eee;
-            white-space: nowrap;
+            /* white-space: nowrap; - Removed to allow wrapping in detailed tables */
+            vertical-align: top;
         }
         
         .data-table tr:hover {
@@ -751,7 +752,6 @@
     </style>
 </head>
 <body>
-    <!-- Sidebar Navigation -->
     <div class="sidebar">
         <div class="logo">
             <h1><i class="fas fa-seedling"></i>Soil<span>Intel™</span></h1>
@@ -767,19 +767,7 @@
         </div>
 
         <div class="nav-section">
-            <h3>Crop Intelligence</h3>
-            <div class="nav-item" data-section="crop-recommendations">
-                <i class="fas fa-leaf"></i>
-                <span>Crop Recommendations</span>
-            </div>
-            <div class="nav-item" data-section="crop-rotation">
-                <i class="fas fa-retweet"></i>
-                <span>Crop Rotation Planning</span>
-            </div>
-        </div>
-        
-        <div class="nav-section">
-            <h3>Product Intelligence</h3>
+            <h3>Product</h3>
             <div class="nav-item" data-section="biologicals">
                 <i class="fas fa-flask"></i>
                 <span>Biologicals & Treatments</span>
@@ -793,24 +781,40 @@
                 <span>Fertility Management</span>
             </div>
         </div>
-        
+
         <div class="nav-section">
-            <h3>Market Intelligence</h3>
+            <h3>Crop & Soil</h3>
+            <div class="nav-item" data-section="crop-recommendations">
+                <i class="fas fa-leaf"></i>
+                <span>Crop Recommendations</span>
+            </div>
+            <div class="nav-item" data-section="crop-rotation">
+                <i class="fas fa-retweet"></i>
+                <span>Crop Rotation Planning</span>
+            </div>
+            <div class="nav-item" data-section="soil-health">
+                <i class="fas fa-heartbeat"></i>
+                <span>Soil Health & Resilience</span>
+            </div>
+        </div>
+
+        <div class="nav-section">
+            <h3>Market</h3>
             <div class="nav-item" data-section="supply-chain">
                 <i class="fas fa-link"></i>
-                <span>Supply Chain & Quality</span>
+                <span>Supply Chain Matching</span>
             </div>
             <div class="nav-item" data-section="data-analysis">
                 <i class="fas fa-chart-bar"></i>
-                <span>Data Analysis</span>
+                <span>Performance Analysis</span>
             </div>
         </div>
         
         <div class="nav-section">
-            <h3>Soil Health Intelligence</h3>
-            <div class="nav-item" data-section="soil-health">
-                <i class="fas fa-heartbeat"></i>
-                <span>Soil Health</span>
+            <h3>Collaboration</h3>
+            <div class="nav-item" data-section="partnership-proposal">
+                <i class="fas fa-handshake"></i>
+                <span>Partnership Proposal</span>
             </div>
         </div>
         
@@ -820,7 +824,6 @@
         </div>
     </div>
     
-    <!-- Main Content Area -->
     <div class="main-content">
         <div class="top-bar">
             <div class="page-title">
@@ -842,7 +845,6 @@
         </div>
         
         <div class="content-area">
-            <!-- Dashboard Overview Section -->
             <div id="dashboard" class="dashboard-section">
                 <div class="dashboard-grid">
                     <div class="card">
@@ -1034,7 +1036,6 @@
                 </div>
             </div>
             
-            <!-- Crop Recommendations Section -->
             <div id="crop-recommendations" class="dashboard-section hidden">
                 <div class="dashboard-grid single-column">
                     <div class="card">
@@ -1192,7 +1193,6 @@
                 </div>
             </div>
             
-            <!-- Crop Rotation Section -->
             <div id="crop-rotation" class="dashboard-section hidden">
                 <div class="dashboard-grid single-column">
                     <div class="card">
@@ -1366,7 +1366,6 @@
                 </div>
             </div>
             
-            <!-- Biologicals & Treatments Section -->
             <div id="biologicals" class="dashboard-section hidden">
                 <div class="dashboard-grid single-column">
                     <div class="card">
@@ -1572,7 +1571,6 @@
                 </div>
             </div>
             
-            <!-- Variety Selection Section -->
             <div id="variety-selection" class="dashboard-section hidden">
                 <div class="dashboard-grid single-column">
                     <div class="card">
@@ -1824,7 +1822,6 @@
                 </div>
             </div>
             
-            <!-- Fertility Management Section -->
             <div id="fertility" class="dashboard-section hidden">
                 <div class="dashboard-grid single-column">
                     <div class="card">
@@ -2040,7 +2037,6 @@
                 </div>
             </div>
             
-            <!-- Supply Chain & Quality Section -->
             <div id="supply-chain" class="dashboard-section hidden">
                 <div class="dashboard-grid single-column">
                     <div class="card">
@@ -2303,7 +2299,6 @@
                 </div>
             </div>
             
-            <!-- Data Analysis Section -->
             <div id="data-analysis" class="dashboard-section hidden">
                 <div class="dashboard-grid single-column">
                     <div class="card">
@@ -2622,7 +2617,6 @@
                 </div>
             </div>
             
-            <!-- Soil Health Section -->
             <div id="soil-health" class="dashboard-section hidden">
                 <div class="dashboard-grid single-column">
                     <div class="card">
@@ -2887,10 +2881,156 @@
                     </div>
                 </div>
             </div>
+
+            <div id="partnership-proposal" class="dashboard-section hidden">
+                <div class="dashboard-grid single-column">
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Executive Summary</div>
+                            <div class="card-badge">Partnership Discussion</div>
+                        </div>
+                        <div class="card-content">
+                            <p style="margin-bottom: 20px; color: #555;">
+                                This document outlines a partnership opportunity to integrate Algo-Rythmn's proprietary Soil Intelligence Platform with your existing agronomic infrastructure. We transform raw soil chemical data into actionable business logic for product sales, crop placement, and supply chain alignment.
+                            </p>
+
+                            <div style="background-color: #f0f7f3; border-left: 4px solid #1a3c2e; padding: 20px; margin-bottom: 25px;">
+                                <h4 style="color: #1a3c2e; margin-bottom: 10px; font-size: 18px;">Core Partnership Concept</h4>
+                                <p style="margin: 0;">
+                                    You provide the foundational customer network and soil sampling logistics. Algo-Rythmn adds the <strong>Intelligence Layer</strong> that converts this data into biological product recommendations, premium market matching, and predictive ROI modeling. Together, we move from "reporting data" to "selling outcomes."
+                                </p>
+                            </div>
+
+                            <h4 style="color: #1a3c2e; margin-bottom: 10px;">Market Opportunity</h4>
+                            <p style="margin-bottom: 20px;">
+                                Agribusinesses are drowning in data but starving for sales intelligence. By combining your established market presence with our logic engine, we create a solution that not only advises farmers but directly drives biological product sales and identifies premium grain contracting opportunities.
+                            </p>
+
+                            <h4 style="color: #1a3c2e; margin-bottom: 10px;">Value Creation</h4>
+                            <p>
+                                Our platform transforms static soil test reports into an interactive commercial ecosystem. Features include Product-to-Soil matching, Competitor Gap Analysis, and Sustainability verification. This partnership positions both organizations to capture high-margin biological/premium crop segments.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Deliverable Features & Resource Estimates</div>
+                            <div class="card-badge">Implementation Roadmap</div>
+                        </div>
+                        <div class="card-content">
+                            <div class="table-responsive">
+                                <table class="data-table">
+                                    <thead>
+                                        <tr style="background-color: #1a3c2e; color: white;">
+                                            <th style="background-color: #1a3c2e; color: white;">Tier / Module</th>
+                                            <th style="background-color: #1a3c2e; color: white;">Features</th>
+                                            <th style="background-color: #1a3c2e; color: white;">Target Customer</th>
+                                            <th style="background-color: #1a3c2e; color: white;">Primary Value</th>
+                                            <th style="background-color: #1a3c2e; color: white;">Est. Resource</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>Tier 1: Product Intelligence</strong><br><span style="font-size:12px; color:#666;">MVP Module 1</span></td>
+                                            <td>
+                                                <ul style="padding-left: 15px; font-size: 13px; margin: 0;">
+                                                    <li>Biological Product Matching</li>
+                                                    <li>ROI-Driven Recommendations</li>
+                                                    <li>Market Opportunity Heatmaps</li>
+                                                    <li>Sales Territory Optimization</li>
+                                                </ul>
+                                            </td>
+                                            <td>Biological Input Manufacturers & Retailers</td>
+                                            <td>Directly drives product sales by proving soil suitability; identifies competitor gaps.</td>
+                                            <td style="color: #27ae60; font-weight: 700;">4 Team-Months</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Tier 2: Premium Crop Access</strong><br><span style="font-size:12px; color:#666;">MVP Modules 2 & 5</span></td>
+                                            <td>
+                                                <ul style="padding-left: 15px; font-size: 13px; margin: 0;">
+                                                    <li>Market-Driven Variety Selection</li>
+                                                    <li>Processor Quality Matching</li>
+                                                    <li>Contract Specification Engine</li>
+                                                    <li>Breeder Collaboration Insights</li>
+                                                </ul>
+                                            </td>
+                                            <td>Food Processors & Seed Companies</td>
+                                            <td>Matches specific soil profiles to processor quality needs (e.g., Malt Barley, HO Canola).</td>
+                                            <td style="color: #27ae60; font-weight: 700;">5 Team-Months</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Tier 3: Economic Planning</strong><br><span style="font-size:12px; color:#666;">MVP Module 4</span></td>
+                                            <td>
+                                                <ul style="padding-left: 15px; font-size: 13px; margin: 0;">
+                                                    <li>5-Year Revenue Projection</li>
+                                                    <li>Protein & Carbon Optimization</li>
+                                                    <li>Real-time Market Price Integration</li>
+                                                    <li>Risk-Adjusted Planning</li>
+                                                </ul>
+                                            </td>
+                                            <td>Farm Management Firms & Lenders</td>
+                                            <td>Transforms agronomy into economics; maximizes long-term revenue over short-term yield.</td>
+                                            <td style="color: #27ae60; font-weight: 700;">3 Team-Months</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Tier 4: Soil Resilience</strong><br><span style="font-size:12px; color:#666;">MVP Module 3</span></td>
+                                            <td>
+                                                <ul style="padding-left: 15px; font-size: 13px; margin: 0;">
+                                                    <li>Fertilizer Impact Modeling</li>
+                                                    <li>Microbial Diversity Yield Correlation</li>
+                                                    <li>Urease Inhibitor Logic</li>
+                                                    <li>Legacy Effect Analysis</li>
+                                                </ul>
+                                            </td>
+                                            <td>Sustainability Officers & Carbon Markets</td>
+                                            <td>Predicts long-term biological impact of chemical inputs; supports sustainability claims.</td>
+                                            <td style="color: #27ae60; font-weight: 700;">3 Team-Months</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Tier 5: Research Core</strong><br><span style="font-size:12px; color:#666;">MVP Module 6</span></td>
+                                            <td>
+                                                <ul style="padding-left: 15px; font-size: 13px; margin: 0;">
+                                                    <li>Peer-Reviewed Data Integration</li>
+                                                    <li>Product Validation Database</li>
+                                                    <li>High-Yield Pattern Recognition</li>
+                                                    <li>Benchmarking</li>
+                                                </ul>
+                                            </td>
+                                            <td>R&D Departments & Agronomy Leads</td>
+                                            <td>Validates AI recommendations against 150+ academic studies and field trials.</td>
+                                            <td style="color: #27ae60; font-weight: 700;">4 Team-Months</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Tier 6: Enterprise Suite</strong><br><span style="font-size:12px; color:#666;">Full Platform</span></td>
+                                            <td>
+                                                <ul style="padding-left: 15px; font-size: 13px; margin: 0;">
+                                                    <li>White-Label Branding</li>
+                                                    <li>API Integration / SSO</li>
+                                                    <li>Custom Domain</li>
+                                                    <li>Embedded Widgets</li>
+                                                </ul>
+                                            </td>
+                                            <td>Enterprise Partners (Your Organization)</td>
+                                            <td>Seamless unified brand experience with enterprise-grade security and scale.</td>
+                                            <td style="color: #27ae60; font-weight: 700;">3 Team-Months</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="insight" style="margin-top: 20px;">
+                                <div class="insight-title">Resource Estimation Note</div>
+                                <p>Estimates assume a dedicated team of 3 developers and 1 agronomist/data scientist. "Team-Months" represents the time to reach MVP deployment for that specific tier, including QA and testing.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
     
-    <!-- AI Chatbot Panel -->
     <div class="chatbot-panel">
         <div class="chat-header">
             <div class="chat-title">
@@ -2964,6 +3104,22 @@
                 sampleConversation: [
                     { sender: "You", text: "What are the priority recommendations for Field 14?", isUser: true },
                     { sender: "AlgoMind Pro", text: "For Field 14, I recommend: 1) Apply phosphorus-solubilizing bacteria for 18-22% yield increase, 2) Consider Hard Red Spring Wheat for optimal ROI, and 3) Implement seed treatment for fusarium protection based on soil DNA analysis.", isUser: false }
+                ]
+            },
+            // Added Partnership Chat Logic
+            'partnership-proposal': {
+                initialMessage: "I can walk you through our partnership tiers and resource requirements. Which tier or deliverable are you interested in discussing?",
+                sampleQuestions: [
+                    { text: "Total estimated time", query: "What is the total estimated time for all tiers?" },
+                    { text: "Tier 1 deliverables", query: "What is included in Tier 1 Product Intelligence?" },
+                    { text: "Value proposition", query: "What is the core value proposition of this partnership?" },
+                    { text: "Resource definition", query: "How do you define a Team-Month?" }
+                ],
+                sampleConversation: [
+                    { sender: "You", text: "What is the total estimated time for all tiers?", isUser: true },
+                    { sender: "AlgoMind Pro", text: "The total cumulative development time is approximately 22 Team-Months if built sequentially. However, Tiers 1, 3, and 4 can be developed concurrently to reduce time-to-market to 6-8 months with a larger team.", isUser: false },
+                    { sender: "You", text: "What is included in Tier 1 Product Intelligence?", isUser: true },
+                    { sender: "AlgoMind Pro", text: "Tier 1 (4 Team-Months) focuses on driving biological sales. It includes the Biological Product Matching engine, ROI-driven recommendations, Market Opportunity Heatmaps, and Sales Territory Optimization tools.", isUser: false }
                 ]
             },
             'crop-recommendations': {
@@ -3145,7 +3301,10 @@
                 });
                 
                 // Show the selected section
-                document.getElementById(sectionId).classList.remove('hidden');
+                const targetSection = document.getElementById(sectionId);
+                if (targetSection) {
+                    targetSection.classList.remove('hidden');
+                }
                 
                 // Update page title
                 const pageTitleText = document.getElementById('page-title-text');
@@ -3205,7 +3364,18 @@
             // Check for keywords in the question
             const question = userQuestion.toLowerCase();
             
-            if (question.includes('top-performing') || question.includes('variety')) {
+            // Partnership Specific Responses
+            if (question.includes('team-month') || question.includes('resource')) {
+                return "A 'Team-Month' is defined as the output of a dedicated pod consisting of 3 developers and 1 agronomist/data scientist working for one month, including QA and testing cycles.";
+            } else if (question.includes('tier 1') || question.includes('product intelligence')) {
+                return "Tier 1 (4 Team-Months) delivers the Commercial Engine: Biological Product Matching, ROI Recommendations, and Market Opportunity Heatmaps designed to directly drive input sales.";
+            } else if (question.includes('total time') || question.includes('timeline')) {
+                return "The roadmap spans approximately 22 Team-Months total. Tier 1 (Biologicals) and Tier 3 (Revenue Planning) are typically the highest priority MVPs to launch first.";
+            } else if (question.includes('partnership') || question.includes('proposal') || question.includes('value proposition')) {
+                return "The partnership leverages your data infrastructure with our Intelligence Layer. We provide the logic to convert soil tests into product sales and premium grain contracts.";
+            } 
+            // Existing Responses
+            else if (question.includes('top-performing') || question.includes('variety')) {
                 return responses["top-performing variety"];
             } else if (question.includes('inoculant') || question.includes('pea')) {
                 return responses["inoculant needed"];
