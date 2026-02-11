@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Skating Mechanical Assessment — Scoring Methodology</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+  <style>
+    .sidebar-link.active {
+      background-color: #f1f5f9;
+      color: #0f172a;
+      font-weight: 500;
+    }
+
+    pre {
+      background-color: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 0.5rem;
+      padding: 1rem;
+      overflow-x: auto;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 0.875rem;
+      line-height: 1.25rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.875rem;
+    }
+
+    th {
+      background-color: #f8fafc;
+      text-align: left;
+      padding: 0.75rem 1rem;
+      font-weight: 600;
+      color: #64748b;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    td {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid #e2e8f0;
+      vertical-align: top;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-top: 2rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .grade-a {
+      color: #16a34a;
+      font-weight: bold;
+    }
+
+    .grade-b {
+      color: #22c55e;
+      font-weight: bold;
+    }
+
+    .grade-c {
+      color: #d97706;
+      font-weight: bold;
+    }
+
+    .grade-d {
+      color: #ea580c;
+      font-weight: bold;
+    }
+
+    .grade-e {
+      color: #dc2626;
+      font-weight: bold;
+    }
+
+    /* Print-specific optimizations */
+    @media print {
+      nav {
+        display: none !important;
+      }
+
+      main {
+        padding-left: 0 !important;
+        padding-top: 0 !important;
+      }
+
+      .max-w-7xl {
+        max-width: none !important;
+      }
+
+      header {
+        margin-bottom: 2rem !important;
+      }
+
+      h2 {
+        margin-top: 2rem !important;
+        page-break-after: avoid;
+      }
+
+      section {
+        page-break-inside: avoid;
+        margin-bottom: 2rem !important;
+      }
+
+      table {
+        page-break-inside: auto;
+      }
+
+      tr {
+        page-break-inside: avoid;
+        page-break-after: auto;
+      }
+    }
+  </style>
+</head>
+
+<body class="bg-white text-slate-900 font-sans">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex">
+    <!-- Sidebar -->
+    <nav class="hidden lg:block w-64 flex-shrink-0 sticky top-0 h-screen overflow-y-auto pt-12 pb-8 border-r border-slate-200 pr-6">
+      <p class="text-xs font-semibold text-slate-400 uppercase tracking-widest mb-4">Contents</p>
+      <ul class="space-y-1">
+        <li><a href="#what-does-this-app-do" class="sidebar-link block py-2 px-3 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors">1. What Does This App Do?</a></li>
+        <li><a href="#how-it-works" class="sidebar-link block py-2 px-3 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors">2. How It Works</a></li>
+        <li><a href="#skating-phases" class="sidebar-link block py-2 px-3 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors">3. The 5 Skating Phases</a></li>
+        <li><a href="#phase-metrics" class="sidebar-link block py-2 px-3 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors">3.1 Phase-Metric Comparison</a></li>
+        <li><a href="#what-gets-measured" class="sidebar-link block py-2 px-3 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors">4. What Gets Measured</a></li>
+        <li><a href="#grade-scale" class="sidebar-link block py-2 px-3 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors">5. Grade Scale (A–E)</a></li>
+        <li><a href="#grading-rules" class="sidebar-link block py-2 px-3 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors">6. Grading Rules</a></li>
+        <li><a href="#ability-categories" class="sidebar-link block py-2 px-3 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors">7. The 12 Ability Categories</a></li>
+        <li><a href="#scoring-matrices" class="sidebar-link block py-2 px-3 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors">8. Scoring Matrices</a></li>
+        <li><a href="#worked-example" class="sidebar-link block py-2 px-3 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors">9. Worked Example</a></li>
+        <li><a href="#multi-frame-averaging" class="sidebar-link block py-2 px-3 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors">10. Multi-Frame Averaging</a></li>
+        <li><a href="#tech-stack" class="sidebar-link block py-2 px-3 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors">11. Technology Stack</a></li>
+        <li><a href="#calibration" class="sidebar-link block py-2 px-3 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors">12. Calibration</a></li>
+        <li><a href="#limitations" class="sidebar-link block py-2 px-3 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors">13. Limitations</a></li>
+      </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-1 min-w-0 lg:pl-12 pt-12 pb-24">
+      <header class="mb-12">
+        <h1 class="text-4xl font-extrabold tracking-tight text-slate-900 mb-4">Skating Mechanical Assessment</h1>
+        <p class="text-xl text-slate-500">Scoring Methodology & Biomechanical Reference</p>
+        <div class="mt-6 flex gap-4">
+          <span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-blue-100 text-blue-800">Sales & Marketing Resource</span>
+          <span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-slate-100 text-slate-800">Version 1.0</span>
+        </div>
+      </header>
+
+      <section id="what-does-this-app-do" class="mb-16">
+        <h2>1. What Does This App Do?</h2>
+        <p class="mb-4 leading-relaxed text-slate-600">This application analyses <strong>ice hockey skating mechanics</strong> from video footage. You upload a video of a player skating, and the app performs the following:</p>
+        <ul class="list-disc pl-5 space-y-2 text-slate-600">
+          <li><strong>Detects</strong> all players in each frame.</li>
+          <li><strong>Tracks</strong> them across frames so you can select the target player.</li>
+          <li><strong>Estimates body pose</strong> (33 joint positions) using AI.</li>
+          <li><strong>Measures biomechanical angles</strong> such as knee bend, trunk lean, and stance width.</li>
+          <li><strong>Grades each posture criterion</strong> on an <strong>A–E scale</strong> (A = excellent, E = poor).</li>
+          <li><strong>Maps grades</strong> to <strong>12 on-ice ability scores</strong> (1–5 scale) like Agility, Speed, and Power.</li>
+          <li><strong>Exports</strong> results as CSV, professional PDF reports, or annotated videos.</li>
+        </ul>
+        <p class="mt-4 font-medium text-slate-900 italic">The output is a Score Card showing how well the player's skating mechanics support their on-ice performance.</p>
+      </section>
+
+      <section id="how-it-works" class="mb-16">
+        <h2>2. How It Works (High-Level Pipeline)</h2>
+        <div class="bg-slate-50 rounded-xl p-6 border border-slate-200">
+          <div class="space-y-8">
+            <div class="flex gap-6">
+              <div class="w-10 h-10 rounded-full bg-slate-900 text-white flex items-center justify-center font-bold shrink-0">1</div>
+              <div>
+                <h4 class="font-bold text-slate-900 mb-1">Player Detection & Tracking</h4>
+                <p class="text-slate-600 text-sm">YOLOv8 detects people. ByteTrack assigns stable IDs so the system follows the right player throughout the clip.</p>
+              </div>
+            </div>
+            <div class="flex gap-6">
+              <div class="w-10 h-10 rounded-full bg-slate-900 text-white flex items-center justify-center font-bold shrink-0">2</div>
+              <div>
+                <h4 class="font-bold text-slate-900 mb-1">Pose Estimation</h4>
+                <p class="text-slate-600 text-sm">MediaPipe detects 33 body landmarks in 3D (x, y, z coordinates) with visibility confidence scores.</p>
+              </div>
+            </div>
+            <div class="flex gap-6">
+              <div class="w-10 h-10 rounded-full bg-slate-900 text-white flex items-center justify-center font-bold shrink-0">3</div>
+              <div>
+                <h4 class="font-bold text-slate-900 mb-1">Angle Computation</h4>
+                <p class="text-slate-600 text-sm">Biomechanical angles (e.g., Spine vs Vertical) are calculated using high-precision vector math.</p>
+              </div>
+            </div>
+            <div class="flex gap-6">
+              <div class="w-10 h-10 rounded-full bg-slate-900 text-white flex items-center justify-center font-bold shrink-0">4</div>
+              <div>
+                <h4 class="font-bold text-slate-900 mb-1">Grading (A–E)</h4>
+                <p class="text-slate-600 text-sm">Measured angles are compared against professional coaching thresholds to assign intuitive letter grades.</p>
+              </div>
+            </div>
+            <div class="flex gap-6">
+              <div class="w-10 h-10 rounded-full bg-slate-900 text-white flex items-center justify-center font-bold shrink-0">5</div>
+              <div>
+                <h4 class="font-bold text-slate-900 mb-1">Ability Score Mapping</h4>
+                <p class="text-slate-600 text-sm">Grades are mapped to 12 ability scores via an expert-defined scoring matrix.</p>
+              </div>
+            </div>
+            <div class="flex gap-6">
+              <div class="w-10 h-10 rounded-full bg-slate-900 text-white flex items-center justify-center font-bold shrink-0">6</div>
+              <div>
+                <h4 class="font-bold text-slate-900 mb-1">Output & Visualization</h4>
+                <p class="text-slate-600 text-sm">A comprehensive Score Card with radar charts, per-frame analysis, and PDF export functionality.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="skating-phases" class="mb-16">
+        <h2>3. The 5 Skating Phases</h2>
+        <p class="mb-6 text-slate-600">The system evaluates technique based on the specific skating maneuver being performed.</p>
+        <div class="overflow-hidden border border-slate-200 rounded-xl mb-8">
+          <table>
+            <thead>
+              <tr>
+                <th>Skating Phase</th>
+                <th>What It Looks Like</th>
+                <th>When to Use</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="font-bold">Forward Glide</td>
+                <td class="text-slate-600">Player coasting on both skates, knees bent</td>
+                <td class="text-slate-600">Baseline posture check</td>
+              </tr>
+              <tr>
+                <td class="font-bold">Forward Gliding Turn</td>
+                <td class="text-slate-600">Player turning while gliding (wide arc)</td>
+                <td class="text-slate-600">Evaluating turn mechanics</td>
+              </tr>
+              <tr>
+                <td class="font-bold">Tight Turns</td>
+                <td class="text-slate-600">Player making sharp direction changes</td>
+                <td class="text-slate-600">Evaluating tight-space agility</td>
+              </tr>
+              <tr>
+                <td class="font-bold">Forward Stride</td>
+                <td class="text-slate-600">Player skating forward with full strides</td>
+                <td class="text-slate-600">Evaluating stride power & form</td>
+              </tr>
+              <tr>
+                <td class="font-bold">Forward Crossovers</td>
+                <td class="text-slate-600">Player crossing one foot over the other</td>
+                <td class="text-slate-600">Evaluating crossover technique</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div id="phase-metrics" class="bg-blue-50 rounded-xl p-6 border border-blue-100">
+          <h3 class="text-blue-900 mt-0">3.1 Phase-Metric Comparison Example</h3>
+          <p class="text-blue-800 text-sm mb-4">Different skating maneuvers require focus on different body parts. For example, a <strong>Forward Stride</strong> focuses on explosive leg drive, while a <strong>Gliding Turn</strong> focuses on stance stability.</p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="bg-white p-4 rounded-lg shadow-sm border border-blue-200">
+              <h4 class="font-bold text-slate-900 text-sm mb-2 flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-blue-500"></span>
+                Phase: Forward Stride
+              </h4>
+              <ul class="text-xs text-slate-600 space-y-1.5 list-disc pl-4">
+                <li><strong>Shoulders Ahead of Toes</strong> (Critical for drive)</li>
+                <li><strong>Leg Extension</strong> (Measures push-off force)</li>
+                <li><strong>Knee Inward</strong> (Check for stability faults)</li>
+              </ul>
+            </div>
+            <div class="bg-white p-4 rounded-lg shadow-sm border border-blue-200">
+              <h4 class="font-bold text-slate-900 text-sm mb-2 flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-indigo-500"></span>
+                Phase: Forward Gliding Turn
+              </h4>
+              <ul class="text-xs text-slate-600 space-y-1.5 list-disc pl-4">
+                <li><strong>Foot Width</strong> (Stance stability)</li>
+                <li><strong>Feet Past Midline</strong> (Turn commitment)</li>
+                <li><strong>Outside Leg Angle</strong> (Push during rotation)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="what-gets-measured" class="mb-16">
+        <h2>4. What Gets Measured</h2>
+        <p class="mb-6 text-slate-600">Key biomechanical metrics are extracted for every frame. Here is a selection of the core measurements:</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="p-4 bg-white border border-slate-200 rounded-lg shadow-sm">
+            <h4 class="font-bold text-slate-900 mb-1">Trunk Flexion Angle</h4>
+            <p class="text-sm text-slate-500">Angle of spine (mid-shoulder to mid-hip) vs vertical. Indicates forward lean/drive.</p>
+          </div>
+          <div class="p-4 bg-white border border-slate-200 rounded-lg shadow-sm">
+            <h4 class="font-bold text-slate-900 mb-1">Knee Angle</h4>
+            <p class="text-sm text-slate-500">The bend angle at the knee joint. 180° = straight, <90°=deep engagement.</p>
+          </div>
+          <div class="p-4 bg-white border border-slate-200 rounded-lg shadow-sm">
+            <h4 class="font-bold text-slate-900 mb-1">Leg Extension</h4>
+            <p class="text-sm text-slate-500">Angle of the hip-to-ankle vector behind the body during push-off.</p>
+          </div>
+          <div class="p-4 bg-white border border-slate-200 rounded-lg shadow-sm">
+            <h4 class="font-bold text-slate-900 mb-1">Stance Width Ratio</h4>
+            <p class="text-sm text-slate-500">Ankle-to-ankle distance divided by hip width. Evaluates stability.</p>
+          </div>
+          <div class="p-4 bg-white border border-slate-200 rounded-lg shadow-sm">
+            <h4 class="font-bold text-slate-900 mb-1">Shoulder Rotation</h4>
+            <p class="text-sm text-slate-500">Difference in depth between shoulders. Measures stability and core engagement.</p>
+          </div>
+          <div class="p-4 bg-white border border-slate-200 rounded-lg shadow-sm">
+            <h4 class="font-bold text-slate-900 mb-1">Knee Inward (Valgus)</h4>
+            <p class="text-sm text-slate-500">Tracks if knees collapse inward, a common biomechanical fault.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="grade-scale" class="mb-16">
+        <h2>5. Grade Scale (A–E)</h2>
+        <div class="overflow-hidden border border-slate-200 rounded-xl">
+          <table>
+            <thead>
+              <tr>
+                <th>Grade</th>
+                <th>Score</th>
+                <th>Meaning</th>
+                <th>UI Color</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="grade-a">A</td>
+                <td>5</td>
+                <td><strong>Excellent</strong> — optimal technique</td>
+                <td><span class="inline-block w-3 h-3 rounded-full bg-green-600 mr-2"></span> Green</td>
+              </tr>
+              <tr>
+                <td class="grade-b">B</td>
+                <td>4</td>
+                <td><strong>Good</strong> — above average mechanics</td>
+                <td><span class="inline-block w-3 h-3 rounded-full bg-green-400 mr-2"></span> Light Green</td>
+              </tr>
+              <tr>
+                <td class="grade-c">C</td>
+                <td>3</td>
+                <td><strong>Average</strong> — acceptable form</td>
+                <td><span class="inline-block w-3 h-3 rounded-full bg-amber-500 mr-2"></span> Yellow</td>
+              </tr>
+              <tr>
+                <td class="grade-d">D</td>
+                <td>2</td>
+                <td><strong>Below Average</strong> — noticeable issue</td>
+                <td><span class="inline-block w-3 h-3 rounded-full bg-orange-500 mr-2"></span> Orange</td>
+              </tr>
+              <tr>
+                <td class="grade-e">E</td>
+                <td>1</td>
+                <td><strong>Poor</strong> — significant biomechanical fault</td>
+                <td><span class="inline-block w-3 h-3 rounded-full bg-red-600 mr-2"></span> Red</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="grading-rules" class="mb-16">
+        <h2>6. Grading Rules (Examples)</h2>
+        <p class="mb-6 text-slate-600">The system uses precise quantitative thresholds to assign grades. Here are two examples:</p>
+        <div class="space-y-8">
+          <div>
+            <h4 class="font-bold text-slate-900 mb-3">Trunk Flexion (Forward Lean)</h4>
+            <div class="overflow-hidden border border-slate-200 rounded-xl">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Measured Angle</th>
+                    <th>Grade</th>
+                    <th>Interpretation</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>43°–55°</td>
+                    <td class="grade-a">A</td>
+                    <td>Optimal forward lean</td>
+                  </tr>
+                  <tr>
+                    <td>31°–42°</td>
+                    <td class="grade-b">B</td>
+                    <td>Solid flexion</td>
+                  </tr>
+                  <tr>
+                    <td>16°–30°</td>
+                    <td class="grade-c">C</td>
+                    <td>Moderate lean</td>
+                  </tr>
+                  <tr>
+                    <td>&gt; 55°</td>
+                    <td class="grade-d">D</td>
+                    <td>Over-bent (balance risk)</td>
+                  </tr>
+                  <tr>
+                    <td>&le; 15°</td>
+                    <td class="grade-e">E</td>
+                    <td>Too upright (no drive)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="ability-categories" class="mb-16">
+        <h2>7. The 12 Ability Categories</h2>
+        <p class="mb-6 text-slate-600">Skating mechanics are directly mapped to 12 distinct on-ice abilities:</p>
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          <div class="p-3 border border-slate-100 rounded bg-slate-50 text-center">
+            <p class="font-bold">Agility</p>
+          </div>
+          <div class="p-3 border border-slate-100 rounded bg-slate-50 text-center">
+            <p class="font-bold">Explosiveness</p>
+          </div>
+          <div class="p-3 border border-slate-100 rounded bg-slate-50 text-center">
+            <p class="font-bold">Quickness</p>
+          </div>
+          <div class="p-3 border border-slate-100 rounded bg-slate-50 text-center">
+            <p class="font-bold">Deceleration</p>
+          </div>
+          <div class="p-3 border border-slate-100 rounded bg-slate-50 text-center">
+            <p class="font-bold">Acceleration</p>
+          </div>
+          <div class="p-3 border border-slate-100 rounded bg-slate-50 text-center">
+            <p class="font-bold">Power</p>
+          </div>
+          <div class="p-3 border border-slate-100 rounded bg-slate-50 text-center">
+            <p class="font-bold">Speed</p>
+          </div>
+          <div class="p-3 border border-slate-100 rounded bg-slate-50 text-center">
+            <p class="font-bold">Deception</p>
+          </div>
+          <div class="p-3 border border-slate-100 rounded bg-slate-50 text-center">
+            <p class="font-bold">Evasion</p>
+          </div>
+          <div class="p-3 border border-slate-100 rounded bg-slate-50 text-center">
+            <p class="font-bold">Reactiveness</p>
+          </div>
+          <div class="p-3 border border-slate-100 rounded bg-slate-50 text-center">
+            <p class="font-bold">Puck Protection</p>
+          </div>
+          <div class="p-3 border border-slate-100 rounded bg-slate-50 text-center">
+            <p class="font-bold">Drive</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="scoring-matrices" class="mb-16">
+        <h2>8. Scoring Matrices</h2>
+        <p class="mb-4 text-slate-600">The core of the system is the <strong>Scoring Matrix</strong>. Every criterion (like Knee Bend) has different weights for each of the 12 abilities. For example, a deep knee bend contributes heavily to all 12 categories, whereas shoulder stability matters most for Puck Protection and Drive.</p>
+        <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6">
+          <p class="text-sm text-blue-700"><strong>Note:</strong> We apply a <em>multiplier</em> based on the grade to the base score defined at Grade C (Average).</p>
+        </div>
+        <div class="overflow-hidden border border-slate-200 rounded-xl">
+          <table>
+            <thead>
+              <tr>
+                <th>Grade</th>
+                <th>Multiplier</th>
+                <th>Effect</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="grade-a">A</td>
+                <td>&times; 1.67</td>
+                <td>Base scores increased ~67%</td>
+              </tr>
+              <tr>
+                <td class="grade-b">B</td>
+                <td>&times; 1.33</td>
+                <td>Base scores increased ~33%</td>
+              </tr>
+              <tr>
+                <td class="grade-c">C</td>
+                <td>&times; 1.00</td>
+                <td>Baseline (no change)</td>
+              </tr>
+              <tr>
+                <td class="grade-d">D</td>
+                <td>&times; 0.67</td>
+                <td>Base scores reduced ~33%</td>
+              </tr>
+              <tr>
+                <td class="grade-e">E</td>
+                <td>&times; 0.33</td>
+                <td>Base scores reduced ~67%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="worked-example" class="mb-16">
+        <h2>9. Worked Example: End-to-End Calculation</h2>
+        <div class="p-6 bg-slate-50 border border-slate-200 rounded-xl">
+          <h4 class="text-lg font-bold mb-4 text-slate-900">Scenario: Forward Stride</h4>
+          <p class="text-sm mb-4 text-slate-600">A player is evaluated for a Forward Stride. Their measurements come back as follows:</p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+            <div class="bg-white border border-slate-200 p-3 rounded shadow-sm">
+              <p class="text-xs text-slate-500 font-semibold uppercase tracking-wider">Measurement</p>
+              <p class="font-bold text-slate-900">Trunk Flexion: 35°</p>
+              <p class="text-xs text-green-600 font-bold">Result: Grade B (Multiplier 1.33)</p>
+            </div>
+            <div class="bg-white border border-slate-200 p-3 rounded shadow-sm">
+              <p class="text-xs text-slate-500 font-semibold uppercase tracking-wider">Measurement</p>
+              <p class="font-bold text-slate-900">Leg Extension: 25°</p>
+              <p class="text-xs text-orange-600 font-bold">Result: Grade D (Multiplier 0.67)</p>
+            </div>
+          </div>
+          <p class="text-sm leading-relaxed text-slate-600">The system takes the baseline scores for "Agility" and "Power" and applies these multipliers. Even though the grades appear similar, <strong>Power remains higher (3.2 vs 2.6)</strong> because the Forward Stride phase puts more weight on Trunk Flexion and Leg Extension for Power than it does for Agility.</p>
+        </div>
+      </section>
+
+      <section id="multi-frame-averaging" class="mb-16">
+        <h2>10. Multi-Frame Averaging</h2>
+        <p class="mb-4 text-slate-600">A athlete's score isn't just a snapshot. We analyze every single frame where a pose is detected and average the results for consistent technique assessment.</p>
+        <div class="p-6 bg-slate-50 border border-slate-200 rounded-xl text-center">
+          <p class="text-xl font-serif">
+            $$\text{Final Score}_{ability} = \frac{1}{N} \sum_{i=1}^{N} \text{score}_{ability,\text{frame}_i}$$
+          </p>
+          <p class="mt-4 text-sm text-slate-500">Where $N$ is the number of valid frames analyzed.</p>
+        </div>
+      </section>
+
+      <section id="tech-stack" class="mb-16">
+        <h2>11. Technology Stack</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="flex items-start gap-3">
+            <div class="w-2 h-2 rounded-full bg-slate-400 mt-2"></div>
+            <div>
+              <p class="font-bold">YOLOv8 & ByteTrack</p>
+              <p class="text-sm text-slate-500">State-of-the-art player detection and tracking.</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <div class="w-2 h-2 rounded-full bg-slate-400 mt-2"></div>
+            <div>
+              <p class="font-bold">MediaPipe Pose</p>
+              <p class="text-sm text-slate-500">Sub-millimeter accurate body landmark detection.</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <div class="w-2 h-2 rounded-full bg-slate-400 mt-2"></div>
+            <div>
+              <p class="font-bold">NumPy & OpenCV</p>
+              <p class="text-sm text-slate-500">Advanced vector mathematics for angle computation.</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <div class="w-2 h-2 rounded-full bg-slate-400 mt-2"></div>
+            <div>
+              <p class="font-bold">ReportLab</p>
+              <p class="text-sm text-slate-500">Professional PDF generation for on-ice reports.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="mt-24 pt-8 border-t border-slate-200 text-center text-slate-400 text-sm">
+        &copy; 2026 Skating Mechanical Assessment Tool. All rights reserved.
+      </footer>
+    </main>
+  </div>
+
+  <script>
+    // Simple active link tracking
+    const navLinks = document.querySelectorAll('.sidebar-link');
+    const sections = document.querySelectorAll('section');
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        if (pageYOffset >= sectionTop - 100) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href').includes(current)) {
+          link.classList.add('active');
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>
