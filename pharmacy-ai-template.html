@@ -292,7 +292,7 @@
         .tag-best-practice { background: #E0F2F1; color: #00695C; }
 
         /* === SEARCH / KNOWLEDGE BASE VIEW === */
-        .search-results { max-width: 800px; margin: 0 auto; padding-top: 40px; }
+        .search-results { max-width: 800px; margin: 0 auto; padding-top: 0px; }
         .result-card {
             background: var(--bg-surface); padding: 24px; border-radius: var(--radius-lg);
             margin-bottom: 24px; border: 1px solid var(--border-subtle);
@@ -808,6 +808,45 @@
             background: var(--primary-dark);
         }
 
+        /* AI Evaluation Banner */
+        .evaluation-banner {
+            background: linear-gradient(90deg, #E0F2F1 0%, #FFFFFF 100%);
+            border: 1px solid var(--border-subtle);
+            border-left: 4px solid var(--primary);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            margin-bottom: 32px;
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            animation: slideDown 0.5s ease-out;
+        }
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .eval-status-icon {
+            width: 56px; height: 56px;
+            background: var(--primary);
+            color: white;
+            border-radius: 16px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+            box-shadow: 0 4px 12px rgba(0, 105, 92, 0.2);
+        }
+        .eval-content { flex: 1; }
+        .eval-title { font-weight: 700; font-size: 1.1rem; margin-bottom: 4px; display: flex; align-items: center; gap: 8px; }
+        .eval-tag { font-size: 0.7rem; background: var(--accent-orange); color: white; padding: 2px 8px; border-radius: 4px; text-transform: uppercase; font-weight: 800; }
+        .eval-desc { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 12px; }
+        
+        .eval-metrics { display: flex; align-items: center; gap: 24px; }
+        .eval-metric { display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 0.85rem; }
+        .eval-metric i { color: var(--primary); }
+        .eval-progress-container { flex: 1; max-width: 300px; }
+        .eval-progress-bar { height: 8px; background: #E5E7EB; border-radius: 4px; overflow: hidden; position: relative; margin-top: 4px; }
+        .eval-progress-fill { height: 100%; background: var(--primary); border-radius: 4px; width: 0%; transition: width 2s cubic-bezier(0.1, 0, 0.2, 1); }
+        .eval-action-btn { background: var(--text-main); color: white; padding: 10px 20px; border-radius: var(--radius-pill); border: none; font-weight: 600; font-size: 0.85rem; cursor: pointer; transition: 0.2s; }
+        .eval-action-btn:hover { background: #000; transform: scale(1.05); }
+
     </style>
 </head>
 <body>
@@ -818,25 +857,25 @@
         </div>
         
         <div class="nav-item active" onclick="switchView('home', this)" data-tooltip="Home">
-            <i class="fas fa-home"></i>
+            <i class="fas fa-house-chimney"></i>
         </div>
-        <div class="nav-item" onclick="switchView('search', this)" data-tooltip="Regulatory Search">
-            <i class="fas fa-search"></i>
+        <div class="nav-item" onclick="switchView('search', this)" data-tooltip="Proactive Regulatory Intelligence">
+            <i class="fas fa-magnifying-glass"></i>
         </div>
         <div class="nav-item" onclick="switchView('monitoring', this)" data-tooltip="Inspection Report Intelligence">
-            <i class="fas fa-chart-line"></i>
+            <i class="fas fa-file-waveform"></i>
         </div>
         <div class="nav-item" onclick="switchView('inspector', this)" data-tooltip="Pre-Inspection Intelligence">
-            <i class="fas fa-user-secret"></i>
+            <i class="fas fa-user-shield"></i>
         </div>
         <div class="nav-item" onclick="switchView('usecases', this)" data-tooltip="Use Cases">
-            <i class="fas fa-lightbulb"></i>
+            <i class="fas fa-book-open"></i>
         </div>
         <div class="nav-item" onclick="switchView('partnership', this)" data-tooltip="Partnership Proposal">
             <i class="fas fa-handshake"></i>
         </div>
         <div class="nav-item" onclick="switchView('settings', this)" style="margin-top: auto;" data-tooltip="Settings">
-            <i class="fas fa-cog"></i>
+            <i class="fas fa-sliders"></i>
         </div>
     </nav>
 
@@ -875,28 +914,43 @@
 
                 <div class="widget-grid">
                     
-                    <div class="widget-card" onclick="switchView('search', document.querySelectorAll('.nav-item')[2])">
+                    <div class="widget-card" onclick="switchView('search', document.querySelectorAll('.nav-item')[1])">
                         <div class="widget-title">
-                            <i class="fas fa-bell"></i> Regulatory Updates
+                            <i class="fas fa-magnifying-glass"></i> Proactive Regulatory Intelligence
                         </div>
-                        <div class="feed-item">
-                            <span class="feed-tag tag-law">Law / Standard - Jan 7, 2026</span>
-                            <div style="font-weight: 700; font-size: 0.9rem; color: var(--text-main);">Health Professions Act (Alberta)</div>
-                            <div style="font-size: 0.8rem; color: var(--text-muted); line-height: 1.4;">Provincial legislation defining restricted activities</div>
+                        <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 16px; font-weight: 500;">
+                            Live AI monitoring across latest pharmacy regulations and standards.
                         </div>
-                        <div class="feed-item">
-                            <span class="feed-tag tag-law">Law / Standard - Dec 29, 2025</span>
-                            <div style="font-weight: 700; font-size: 0.9rem; color: var(--text-main);">Food and Drugs Act (Canada)</div>
-                            <div style="font-size: 0.8rem; color: var(--text-muted); line-height: 1.4;">Federal legislation, last amended Mar 27, 2025</div>
+                        
+                        <div style="background: #F0FDFA; border: 1px solid #CCFBF1; border-radius:12px; padding: 16px; margin-bottom: 16px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                                <span style="font-size: 0.85rem; font-weight: 700; color: #134E4A;">Compliance Score</span>
+                                <span style="font-size: 1.1rem; font-weight: 800; color: var(--accent-green);">94%</span>
+                            </div>
+                            <div style="width: 100%; height: 6px; background: #E2E8F0; border-radius: 3px; overflow: hidden;">
+                                <div style="width: 94%; height: 100%; background: var(--accent-green); border-radius: 3px;"></div>
+                            </div>
                         </div>
-                        <div style="display: flex; justify-content: space-between; align-items: center;margin-top:10px;">
-                            <span style="color: var(--text-muted); font-size: 0.75rem;">7 updates • Last checked 2h ago</span>
-                            <span style="color: var(--primary); font-weight: 700; font-size: 0.85rem;">View All →</span>
+
+                        <div style="display: flex; gap: 10px; margin-bottom: 12px;">
+                            <div style="flex: 1; background: #FFF1F2; padding: 10px; border-radius: 8px; border-left: 3px solid #F43F5E;">
+                                <div style="font-size: 0.7rem; color: #9F1239; font-weight: 700; text-transform: uppercase;">Gaps Identified</div>
+                                <div style="font-size: 1rem; font-weight: 800; color: #9F1239;">2 Priority</div>
+                            </div>
+                            <div style="flex: 1; background: #F8FAFC; padding: 10px; border-radius: 8px; border: 1px solid #E2E8F0;">
+                                <div style="font-size: 0.7rem; color: #64748B; font-weight: 700; text-transform: uppercase;">Regulations</div>
+                                <div style="font-size: 1rem; font-weight: 800; color: #1E293B;">7 Active</div>
+                            </div>
+                        </div>
+                        
+                        <div style="display: flex; justify-content: space-between; align-items: center;margin-top:auto; padding-top: 10px; border-top: 1px solid var(--border-subtle);">
+                            <span style="color: var(--text-muted); font-size: 0.75rem;"><i class="fas fa-robot"></i> Proactive scan active</span>
+                            <span style="color: var(--primary); font-weight: 700; font-size: 0.85rem;">View Analysis →</span>
                         </div>
                     </div>
-                    <div class="widget-card" onclick="switchView('monitoring', document.querySelectorAll('.nav-item')[4])">
+                    <div class="widget-card" onclick="switchView('monitoring', document.querySelectorAll('.nav-item')[2])">
                         <div class="widget-title">
-                            <i class="fas fa-chart-line"></i> Inspection Report Intelligence
+                            <i class="fas fa-file-waveform"></i> Inspection Report Intelligence
                         </div>
                         <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 16px; font-weight: 500;">
                             Separate mandatory laws from optional suggestions instantly
@@ -931,7 +985,7 @@
                     </div>
                     <div class="widget-card" onclick="switchView('inspector', document.querySelectorAll('.nav-item')[3])">
                         <div class="widget-title">
-                            <i class="fas fa-user-secret"></i> Pre-Inspection Intelligence
+                            <i class="fas fa-user-shield"></i> Pre-Inspection Intelligence
                         </div>
                         <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 16px; font-weight: 500;">
                             Predict what your inspector will look for based on 45+ past audits
@@ -939,7 +993,7 @@
                         <div style="display: flex; gap: 12px; align-items: center; margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid var(--border-subtle);">
                             <div style="width: 44px; height: 44px; background: linear-gradient(135deg, #E0F2F1 0%, #B2DFDB 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--primary); font-weight: 700; font-size: 0.95rem; border: 2px solid white; box-shadow: 0 2px 8px rgba(0, 105, 92, 0.15);">IG</div>
                             <div style="flex: 1;">
-                                <div style="font-weight: 700; font-size: 0.9rem; color: var(--text-main);">Inspector G.</div>
+                                <div style="font-weight: 700; font-size: 0.9rem; color: var(--text-main);">Inspector J. Smith</div>
                                 <div style="font-size: 0.75rem; color: var(--text-muted);">Next Audit: Feb 21</div>
                             </div>
                         </div>
@@ -962,11 +1016,42 @@
         <section id="view-search" class="view-section">
             <div class="gen-ai-container" style="padding-top: 40px;">
                 <div class="prompt-bar-container" style="max-width: 800px;">
-                    <input type="text" class="prompt-input" id="searchInput" placeholder="Search laws, guidelines, and best practices..." onkeypress="handleSearch(event)">
-                    <button class="prompt-submit" onclick="performSearch()"><i class="fas fa-search"></i></button>
+                    <input type="text" class="prompt-input" id="searchInput" placeholder="Search laws, guidelines, and best practices..." onkeypress="handleSearch(event)" style="padding: 18px 60px 18px 24px; border-radius: var(--radius-pill);">
+                    <button class="prompt-submit" onclick="performSearch()" style="top: 8px;"><i class="fas fa-search"></i></button>
                 </div>
 
                 <div class="search-results" id="searchResults">
+                    <!-- AI Proactive Evaluation Banner -->
+                    <div class="evaluation-banner" id="evalBanner">
+                        <div class="eval-status-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="eval-content">
+                            <div class="eval-title">
+                                Proactive AI Compliance Scan
+                            </div>
+                            <p class="eval-desc">AI has scanned new updated regulations and detected <b>2 priority gaps</b> in your Compounding and Training protocols.</p>
+                            <div class="eval-metrics">
+                                <div class="eval-metric">
+                                    <i class="fas fa-shield-alt"></i>
+                                    <span>94% Compliance Score</span>
+                                </div>
+                                <div class="eval-progress-container">
+                                    <div class="eval-progress-bar">
+                                        <div class="eval-progress-fill" id="evalProgress" style="width: 0%;"></div>
+                                    </div>
+                                </div>
+                                <div class="eval-metric" style="color: var(--accent-orange);">
+                                    <i class="fas fa-tasks" style="color:var(--accent-orange)"></i>
+                                    <span>2 Actions Needed</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="eval-action-btn" onclick="showGapAnalysis()">
+                            View Gap Analysis
+                        </button>
+                    </div>
+
                     <!-- Latest Regulations -->
                     <div style="margin-bottom: 24px;">
                         <h3 style="font-size: 1.2rem; margin-bottom: 16px; color: var(--text-main);">
@@ -1035,36 +1120,6 @@
                         </div>
                     </div>
 
-                    <div class="result-card" onclick="showRegulationDetail('nsc-standards')">
-                        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 12px;">
-                            <h3 style="margin: 0; flex: 1;">Model Standards for Non-Sterile Compounding</h3>
-                            <span class="feed-tag tag-law" style="margin-left: 12px;">Law / Standard</span>
-                        </div>
-                        <p style="line-height: 1.6; color: var(--text-main); margin-bottom: 12px;">
-                            NAPRA Model Standards defining requirements for Level A, B, and C non-sterile preparations including beyond-use dating, stability data, and quality assurance processes. Published March 2018, clarified January 2022.
-                        </p>
-                        <div style="margin-top: 16px; display: flex; gap: 8px; flex-wrap: wrap;">
-                            <span class="source-pill"><i class="fas fa-building"></i> NAPRA</span>
-                            <span class="source-pill"><i class="fas fa-file-alt"></i> Model Standards</span>
-                            <span class="source-pill"><i class="fas fa-calendar"></i> Clarified: Jan 2022</span>
-                        </div>
-                    </div>
-
-                    <div class="result-card" onclick="showRegulationDetail('haz-sterile')">
-                        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 12px;">
-                            <h3 style="margin: 0; flex: 1;">Model Standards for Hazardous Sterile Preparations</h3>
-                            <span class="feed-tag tag-law" style="margin-left: 12px;">Law / Standard</span>
-                        </div>
-                        <p style="line-height: 1.6; color: var(--text-main); margin-bottom: 12px;">
-                            Standards for handling cytotoxic drugs requiring dedicated negative pressure rooms and strict transport protocols (NAPRA 6.9). Personnel must have specific hazardous drug training. Published September 2016, revised November 2016.
-                        </p>
-                        <div style="margin-top: 16px; display: flex; gap: 8px; flex-wrap: wrap;">
-                            <span class="source-pill"><i class="fas fa-building"></i> NAPRA</span>
-                            <span class="source-pill"><i class="fas fa-file-alt"></i> Hazardous Standards</span>
-                            <span class="source-pill"><i class="fas fa-calendar"></i> Revised: Nov 2016</span>
-                        </div>
-                    </div>
-
                     <div class="result-card" onclick="showRegulationDetail('nonhaz-sterile')">
                         <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 12px;">
                             <h3 style="margin: 0; flex: 1;">Model Standards for Non-Hazardous Sterile Preparations</h3>
@@ -1087,24 +1142,24 @@
             <div style="max-width: 1200px; margin: 0 auto; padding: 40px; width: 100%;">
                 <div class="inspector-header" style="margin-bottom: 48px;">
                     <div>
-                        <h2 style="font-size: 2.5rem; margin-bottom: 8px;">How It Works</h2>
-                        <p style="color: var(--text-muted); font-size: 1.1rem;">See our three core solutions in action</p>
+                        <h2 style="font-size: 2.5rem; margin-bottom: 8px;"><i class="fas fa-book-open" style="color: var(--primary); margin-right: 16px;"></i>How It Works</h2>
+                        <p style="color: var(--text-muted); font-size: 1.1rem; margin-left: 56px;">See our three core solutions in action</p>
                     </div>
                 </div>
 
-                <!-- Use Case 1: Regulatory Search -->
+                <!-- Use Case 1: Proactive Regulatory Intelligence -->
                 <div style="background: white; border: 2px solid var(--primary-light); border-radius: var(--radius-lg); padding: 40px; margin-bottom: 32px;">
                     <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 24px;">
                         <div style="width: 64px; height: 64px; background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem;">
-                            <i class="fas fa-search" style="color: #92400E;"></i>
+                            <i class="fas fa-magnifying-glass" style="color: #92400E;"></i>
                         </div>
                         <div>
                             <span style="background: #FEF3C7; color: #92400E; padding: 4px 12px; border-radius: 6px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase;">Solution 01 // Knowledge</span>
-                            <h3 style="font-size: 1.8rem; margin-top: 8px; font-weight: 700;">Regulatory Search</h3>
+                            <h3 style="font-size: 1.8rem; margin-top: 8px; font-weight: 700;">Proactive Regulatory Intelligence</h3>
                         </div>
                     </div>
                     
-                    <p style="font-size: 1.05rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 32px;">Instantly search through thousands of Canadian pharmacy laws, guidelines, and best practices. Find the exact regulation you need in seconds instead of hours of manual research.</p>
+                    <p style="font-size: 1.05rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 32px;">Stay ahead of regulatory changes with continuous AI monitoring. Instantly search thousands of Canadian pharmacy laws while our system proactively identifies compliance gaps and operational risks in real-time.</p>
                     
                     <div style="background: #F9FAFB; border-radius: 12px; padding: 24px; margin-bottom: 24px;">
                         <h4 style="font-size: 1rem; font-weight: 700; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
@@ -1113,18 +1168,18 @@
                         <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
                             <div>
                                 <div style="width: 40px; height: 40px; background: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; margin-bottom: 12px;">1</div>
-                                <div style="font-weight: 600; margin-bottom: 4px;">Search Query</div>
-                                <div style="font-size: 0.9rem; color: var(--text-muted);">Type your question in natural language</div>
+                                <div style="font-weight: 600; margin-bottom: 4px;">Unified Search</div>
+                                <div style="font-size: 0.9rem; color: var(--text-muted);">Natural language query across all regulatory sources</div>
                             </div>
                             <div>
                                 <div style="width: 40px; height: 40px; background: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; margin-bottom: 12px;">2</div>
-                                <div style="font-weight: 600; margin-bottom: 4px;">AI Analysis</div>
-                                <div style="font-size: 0.9rem; color: var(--text-muted);">System searches across all regulatory sources</div>
+                                <div style="font-weight: 600; margin-bottom: 4px;">Proactive Scanning</div>
+                                <div style="font-size: 0.9rem; color: var(--text-muted);">AI continuously monitors for new updates and changes</div>
                             </div>
                             <div>
                                 <div style="width: 40px; height: 40px; background: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; margin-bottom: 12px;">3</div>
-                                <div style="font-weight: 600; margin-bottom: 4px;">Instant Results</div>
-                                <div style="font-size: 0.9rem; color: var(--text-muted);">Get relevant laws with source citations</div>
+                                <div style="font-weight: 600; margin-bottom: 4px;">Gap Intelligence</div>
+                                <div style="font-size: 0.9rem; color: var(--text-muted);">Receive immediate alerts on how changes impact you</div>
                             </div>
                         </div>
                     </div>
@@ -1168,8 +1223,8 @@
                     </div>
 
                     <div style="display: flex; gap: 12px;">
-                        <button class="btn-primary" onclick="switchView('search', document.querySelectorAll('.nav-item')[2])" style="display: flex; align-items: center; gap: 8px;">
-                            <i class="fas fa-search"></i> Try Regulatory Search
+                        <button class="btn-primary" onclick="switchView('search', document.querySelectorAll('.nav-item')[1])" style="display: flex; align-items: center; gap: 8px;">
+                            <i class="fas fa-search"></i> Try Proactive Regulatory Intelligence
                         </button>
                     </div>
                 </div>
@@ -1178,7 +1233,7 @@
                 <div style="background: white; border: 2px solid var(--primary-light); border-radius: var(--radius-lg); padding: 40px; margin-bottom: 32px;">
                     <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 24px;">
                         <div style="width: 64px; height: 64px; background: linear-gradient(135deg, #FEE2E2 0%, #FECACA 100%); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem;">
-                            <i class="fas fa-chart-line" style="color: #991B1B;"></i>
+                            <i class="fas fa-file-waveform" style="color: #991B1B;"></i>
                         </div>
                         <div>
                             <span style="background: #FEE2E2; color: #991B1B; padding: 4px 12px; border-radius: 6px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase;">Solution 02 // Clarity + Efficiency</span>
@@ -1278,8 +1333,8 @@
                     </div>
 
                     <div style="display: flex; gap: 12px;">
-                        <button class="btn-primary" onclick="switchView('monitoring', document.querySelectorAll('.nav-item')[4])" style="display: flex; align-items: center; gap: 8px;">
-                            <i class="fas fa-chart-line"></i> Try Inspection Report Intelligence
+                        <button class="btn-primary" onclick="switchView('monitoring', document.querySelectorAll('.nav-item')[2])" style="display: flex; align-items: center; gap: 8px;">
+                            <i class="fas fa-file-waveform"></i> Try Inspection Report Intelligence
                         </button>
                     </div>
                 </div>
@@ -1288,7 +1343,7 @@
                 <div style="background: white; border: 2px solid var(--primary-light); border-radius: var(--radius-lg); padding: 40px; margin-bottom: 32px;">
                     <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 24px;">
                         <div style="width: 64px; height: 64px; background: linear-gradient(135deg, #E0F2F1 0%, #B2DFDB 100%); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem;">
-                            <i class="fas fa-user-secret" style="color: #00695C;"></i>
+                            <i class="fas fa-user-shield" style="color: #00695C;"></i>
                         </div>
                         <div>
                             <span style="background: #E0F2F1; color: #00695C; padding: 4px 12px; border-radius: 6px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase;">Solution 03 // Prediction</span>
@@ -1368,7 +1423,7 @@
 
                     <div style="display: flex; gap: 12px;">
                         <button class="btn-primary" onclick="switchView('inspector', document.querySelectorAll('.nav-item')[3])" style="display: flex; align-items: center; gap: 8px;">
-                            <i class="fas fa-user-secret"></i> View Pre-Inspection Intelligence
+                            <i class="fas fa-user-shield"></i> View Pre-Inspection Intelligence
                         </button>
                     </div>
                 </div>
@@ -1382,8 +1437,8 @@
             <div style="max-width: 1400px; margin: 0 auto; padding: 48px; width: 100%;">
                 <div class="inspector-header" style="margin-bottom: 40px;">
                     <div>
-                        <h2 style="font-size: 2.25rem; margin-bottom: 8px; font-weight: 800; letter-spacing: -0.5px; color: var(--text-main);">Pre-Inspection Intelligence</h2>
-                        <p style="color: var(--text-muted); font-size: 1.05rem;">Predictive insights powered by AI for your next audit</p>
+                        <h2 style="font-size: 2.25rem; margin-bottom: 8px; font-weight: 800; letter-spacing: -0.5px; color: var(--text-main);"><i class="fas fa-user-shield" style="color: var(--primary); margin-right: 12px;"></i>Pre-Inspection Intelligence</h2>
+                        <p style="color: var(--text-muted); font-size: 1.05rem; margin-left: 48px;">Predictive insights powered by AI for your next audit</p>
                     </div>
                     <div style="display: flex; gap: 12px; align-items: center;">
                         <button style="display: flex; align-items: center; gap: 8px; background: white; box-shadow: 0 2px 8px rgba(0,0,0,0.06); padding: 10px 20px; font-weight: 600; border: 1px solid var(--border-subtle); border-radius: var(--radius-pill); font-size: 0.9rem; color: var(--text-main); cursor: default; transition: all 0.2s; white-space: nowrap;">
@@ -1464,7 +1519,7 @@
                             <div style="font-size: 0.85rem;">• Hazardous Transport Labeling</div>
                         </div>
 
-                        <button class="btn-primary" style="width: 100%; margin-top: 20px; background: white; color: var(--primary); border: 1px solid var(--border-subtle);" onclick="openModal('inspectorModal')">
+                        <button class="btn-primary" style="width: 100%; margin-top: 20px; background: white; color: var(--primary); border: 1px solid var(--border-subtle);" onclick="openModal('inspectorProfileModal')">
                             View Full Profile
                         </button>
                     </div>
@@ -1488,7 +1543,7 @@
                         <!-- Audit History Trend -->
                         <div style="background: white; border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 28px; box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06); transition: all 0.3s; flex: 1; display: flex; flex-direction: column;" onmouseover="this.style.boxShadow='0 12px 32px rgba(0, 0, 0, 0.1)'" onmouseout="this.style.boxShadow='0 4px 24px rgba(0, 0, 0, 0.06)'">
                             <h3 style="font-size: 1.2rem; margin-bottom: 8px; font-weight: 800; letter-spacing: -0.3px;">Your Audit Performance Trend</h3>
-                            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 24px; font-weight: 500;">Last 4 inspections with Inspector G.</p>
+                            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 24px; font-weight: 500;">Last 4 inspections with Inspector J. Smith</p>
                             
                             <div style="position: relative; display: flex; gap: 16px; align-items: flex-end; height: 200px; padding-top: 20px;">
                                 <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px; height: 180px; justify-content: flex-end; position: relative; z-index: 2;">
@@ -1787,8 +1842,8 @@
         <section id="view-monitoring" class="view-section">
             <div style="max-width: 1400px; margin: 0 auto; padding: 40px; width: 100%;">
                 <div style="margin-bottom: 32px;">
-                    <h2 style="font-size: 2rem; margin-bottom: 8px;">Inspection Report Intelligence</h2>
-                    <p style="color: var(--text-muted);">Upload reports, track findings, and generate compliant responses</p>
+                    <h2 style="font-size: 2rem; margin-bottom: 8px;"><i class="fas fa-file-waveform" style="color: var(--primary); margin-right: 12px;"></i>Inspection Report Intelligence</h2>
+                    <p style="color: var(--text-muted); margin-left: 44px;">Upload reports, track findings, and generate compliant responses</p>
                 </div>
 
                 <!-- Upload State - Shows initially -->
@@ -1967,13 +2022,13 @@
                     <div style="background: white; border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 24px;">
                         <h4 style="margin: 0 0 16px 0; font-size: 1rem; font-weight: 700;">Quick Actions</h4>
                         <div style="display: flex; flex-direction: column; gap: 12px;">
-                            <button class="btn-primary" style="width: 100%; padding: 12px; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                            <button class="btn-primary" style="width: 100%; padding: 12px; display: flex; align-items: center; justify-content: center; gap: 8px; transition: var(--transition);" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 15px rgba(0, 105, 92, 0.2)'; this.style.background='var(--primary-dark)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.background='var(--primary)'" onclick="viewOriginalReport()">
                                 <i class="fas fa-file-alt"></i> View Original Report
                             </button>
-                            <button class="btn-primary" style="width: 100%; background: white; color: var(--primary); border: 2px solid var(--primary); padding: 12px; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                            <button class="btn-primary" style="width: 100%; background: white; color: var(--primary); border: 2px solid var(--primary); padding: 12px; display: flex; align-items: center; justify-content: center; gap: 8px; transition: var(--transition);" onmouseover="this.style.background='var(--primary-light)'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 15px rgba(0, 105, 92, 0.1)'" onmouseout="this.style.background='white'; this.style.transform='translateY(0)'; this.style.boxShadow='none'" onclick="downloadReport()">
                                 <i class="fas fa-download"></i> Download Analysis Report
                             </button>
-                            <button class="btn-primary" style="width: 100%; background: var(--accent-green); padding: 12px; display: flex; align-items: center; justify-content: center; gap: 8px;" onclick="showAllConfirmedResponses()">
+                            <button class="btn-primary" style="width: 100%; background: var(--accent-green); padding: 12px; display: flex; align-items: center; justify-content: center; gap: 8px; transition: var(--transition); border: none;" onclick="showAllConfirmedResponses()" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 15px rgba(16, 185, 129, 0.2)'; this.style.filter='brightness(1.1)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.filter='brightness(1)'">
                                 <i class="fas fa-clipboard-check"></i> Review All Responses
                             </button>
                         </div>
@@ -2018,8 +2073,16 @@
                                     <span style="background: #F3F4F6; color: #4B5563; padding: 4px 10px; border-radius: 6px; font-size: 0.7rem; font-weight: 600;">NAPRA 5.1.2.2</span>
                                 </div>
                                 <h4 style="font-size: 1.1rem; margin-bottom: 8px; font-weight: 700;">Missing Initial Training - Cleaning Personnel</h4>
-                                <p style="color: var(--text-muted); line-height: 1.6; font-style: italic; border-left: 3px solid #D1D5DB; padding-left: 12px; margin-bottom: 12px;">"No record of initial training and assessment program for cleaning and disinfecting personnel (pharmacy technicians). NAPRA 5.1.2.2 and 5.1.2.3 requires established programs."</p>
+                                <p style="color: var(--text-muted); line-height: 1.6; font-style: italic; border-left: 3px solid #D1D5DB; padding-left: 12px; margin-bottom: 16px;">"No record of initial training and assessment program for cleaning and disinfecting personnel (pharmacy technicians). NAPRA 5.1.2.2 and 5.1.2.3 requires established programs."</p>
                                 
+                                <!-- Original Log -->
+                                <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px; margin-bottom: 16px; font-family: 'Courier New', Courier, monospace; font-size: 0.85rem; color: #475569;">
+                                    <div style="font-family: var(--font-main); font-weight: 800; font-size: 0.7rem; color: #64748B; text-transform: uppercase; margin-bottom: 8px; display: flex; align-items: center; gap: 4px;">
+                                        <i class="fas fa-file-alt"></i> Original log from report
+                                    </div>
+                                    "OFFICIAL AUDIT [Page 4, Section 5]: Evaluated training records for ancillary personnel. Technicians responsible for ISO 5/7 environment decontamination (Staff IDs: 104, 109) lack documented aseptic technique verification and initial gowning qualification for the 2024 period. This contradicts NAPRA 5.1.2.2 requirements."
+                                </div>
+
                                 <!-- Rule Explanation -->
                                 <div style="background: #FEF2F2; border: 1px solid #FECACA; border-radius: 8px; padding: 12px; margin-bottom: 12px;">
                                     <div style="font-weight: 700; font-size: 0.85rem; margin-bottom: 6px; color: #991B1B;"><i class="fas fa-info-circle"></i> Explanations</div>
@@ -2086,8 +2149,16 @@
                                     <span style="background: #F3F4F6; color: #4B5563; padding: 4px 10px; border-radius: 6px; font-size: 0.7rem; font-weight: 600;">Staffing</span>
                                 </div>
                                     <h4 style="font-size: 1.1rem; margin-bottom: 8px; font-weight: 700;">Unregulated Staff Criminal Record Checks</h4>
-                                    <p style="color: var(--text-muted); line-height: 1.6; font-style: italic; border-left: 3px solid #D1D5DB; padding-left: 12px; margin-bottom: 12px;">"Missing plan for criminal record checks for unregulated personnel involved in restricted activities or delivery. Amendments to Pharmacy and Drug Regulation require this."</p>
+                                    <p style="color: var(--text-muted); line-height: 1.6; font-style: italic; border-left: 3px solid #D1D5DB; padding-left: 12px; margin-bottom: 16px;">"Missing plan for criminal record checks for unregulated personnel involved in restricted activities or delivery. Amendments to Pharmacy and Drug Regulation require this."</p>
                                     
+                                    <!-- Original Log -->
+                                    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px; margin-bottom: 16px; font-family: 'Courier New', Courier, monospace; font-size: 0.85rem; color: #475569;">
+                                        <div style="font-family: var(--font-main); font-weight: 800; font-size: 0.7rem; color: #64748B; text-transform: uppercase; margin-bottom: 8px; display: flex; align-items: center; gap: 4px;">
+                                            <i class="fas fa-file-alt"></i> Original log from report
+                                        </div>
+                                        "PERSONNEL COMPLIANCE REVIEW: Pharmacy technician A. Miller and driver R. Singh (unregulated) have not undergone the required criminal record screening for 2025/2026. Under the amended Pharmacy and Drug Regulation, all staff handling or delivering medications must submit cleared background checks."
+                                    </div>
+
                                     <!-- Rule Explanation -->
                                     <div style="background: #FEF2F2; border: 1px solid #FECACA; border-radius: 8px; padding: 12px; margin-bottom: 12px;">
                                         <div style="font-weight: 700; font-size: 0.85rem; margin-bottom: 6px; color: #991B1B;"><i class="fas fa-info-circle"></i> Explanations</div>
@@ -2154,8 +2225,16 @@
                                     <span style="background: #F3F4F6; color: #4B5563; padding: 4px 10px; border-radius: 6px; font-size: 0.7rem; font-weight: 600;">Page 13, Para 1</span>
                                 </div>
                                     <h4 style="font-size: 1.1rem; margin-bottom: 8px; font-weight: 700;">Pharmacy Layout Privacy Concern</h4>
-                                    <p style="color: var(--text-muted); line-height: 1.6; font-style: italic; border-left: 3px solid #D1D5DB; padding-left: 12px; margin-bottom: 12px;">"Counselling area lacks visual privacy barrier. NAPRA Model Standards 6.3 recommend semi-private consultation space for sensitive health discussions."</p>
+                                    <p style="color: var(--text-muted); line-height: 1.6; font-style: italic; border-left: 3px solid #D1D5DB; padding-left: 12px; margin-bottom: 16px;">"Counselling area lacks visual privacy barrier. NAPRA Model Standards 6.3 recommend semi-private consultation space for sensitive health discussions."</p>
                                     
+                                    <!-- Original Log -->
+                                    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px; margin-bottom: 16px; font-family: 'Courier New', Courier, monospace; font-size: 0.85rem; color: #475569;">
+                                        <div style="font-family: var(--font-main); font-weight: 800; font-size: 0.7rem; color: #64748B; text-transform: uppercase; margin-bottom: 8px; display: flex; align-items: center; gap: 4px;">
+                                            <i class="fas fa-file-alt"></i> Original log from report
+                                        </div>
+                                        "FACILITY OBSERVATION: The consult counter located at the front-right of the dispensary is open-air and lacks sound or visual masking. During the audit, a bystander was able to overhear a sensitive consultation. Refer to NAPRA Model Standards Section 6.3 regarding patient confidentiality and semi-private consultation spaces."
+                                    </div>
+
                                     <!-- Rule Explanation -->
                                     <div style="background: #FEF9E7; border: 1px solid #FDE68A; border-radius: 8px; padding: 12px; margin-bottom: 12px;">
                                         <div style="font-weight: 700; font-size: 0.85rem; margin-bottom: 6px; color: #D97706;"><i class="fas fa-info-circle"></i> Explanations</div>
@@ -2222,8 +2301,16 @@
                                     <span style="background: #F3F4F6; color: #4B5563; padding: 4px 10px; border-radius: 6px; font-size: 0.7rem; font-weight: 600;">Page 14, Para 3</span>
                                 </div>
                                     <h4 style="font-size: 1.1rem; margin-bottom: 8px; font-weight: 700;">Digital Backup System Recommended</h4>
-                                    <p style="color: var(--text-muted); line-height: 1.6; font-style: italic; border-left: 3px solid #D1D5DB; padding-left: 12px; margin-bottom: 12px;">"Manual log system in use. While compliant, professional associations recommend cloud-based backup systems for improved disaster recovery and audit efficiency."</p>
+                                    <p style="color: var(--text-muted); line-height: 1.6; font-style: italic; border-left: 3px solid #D1D5DB; padding-left: 12px; margin-bottom: 16px;">"Manual log system in use. While compliant, professional associations recommend cloud-based backup systems for improved disaster recovery and audit efficiency."</p>
                                     
+                                    <!-- Original Log -->
+                                    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px; margin-bottom: 16px; font-family: 'Courier New', Courier, monospace; font-size: 0.85rem; color: #475569;">
+                                        <div style="font-family: var(--font-main); font-weight: 800; font-size: 0.7rem; color: #64748B; text-transform: uppercase; margin-bottom: 8px; display: flex; align-items: center; gap: 4px;">
+                                            <i class="fas fa-file-alt"></i> Original log from report
+                                        </div>
+                                        "RECORDS ASSESSMENT: All temperature and inventory logs are presently maintained in physical binders. While entries are current and accurate, the lack of a secondary digital backup or cloud-based recovery protocol increases the risk of documentation loss in the event of site damage. Industry best practices favor digital redundancy."
+                                    </div>
+
                                     <!-- Rule Explanation -->
                                     <div style="background: #F0F9FF; border: 1px solid #BAE6FD; border-radius: 8px; padding: 12px; margin-bottom: 12px;">
                                         <div style="font-weight: 700; font-size: 0.85rem; margin-bottom: 6px; color: #0369A1;"><i class="fas fa-info-circle"></i> Explanations</div>
@@ -2280,7 +2367,7 @@
                 <!-- Header -->
                 <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 32px;">
                     <div style="display: flex; align-items: center; gap: 16px;">
-                        <i class="fas fa-globe" style="font-size: 2rem; color: var(--primary);"></i>
+                        <i class="fas fa-handshake" style="font-size: 2rem; color: var(--primary);"></i>
                         <h1 style="font-size: 2rem; font-weight: 700; margin: 0;">Partnership Proposal</h1>
                     </div>
                 </div>
@@ -2347,16 +2434,16 @@
                             <tbody>
                                 <tr style="border-bottom: 1px solid var(--border-subtle);">
                                     <td style="padding: 20px; vertical-align: top; background: var(--bg-subtle);">
-                                        <div style="font-weight: 700; font-size: 1rem; margin-bottom: 8px;">Tier 1: Regulatory Search Intelligence</div>
+                                        <div style="font-weight: 700; font-size: 1rem; margin-bottom: 8px;">Tier 1: Proactive Regulatory Intelligence</div>
                                         <div style="font-size: 0.85rem; color: var(--text-muted); font-style: italic;">Foundation Module</div>
                                     </td>
                                     <td style="padding: 20px; vertical-align: top;">
                                         <ul style="margin: 0; padding-left: 20px; line-height: 1.8;">
-                                            <li>Natural Language Search Engine</li>
-                                            <li>Canadian Pharmacy Law Database</li>
-                                            <li>Real-time Regulatory Updates Feed</li>
-                                            <li>NAPRA, Health Canada, Provincial Sources</li>
-                                            <li>Citation & Source Management</li>
+                                            <li>Semantic Search Intelligence (NLP)</li>
+                                            <li>Canadian Regulatory Knowledge Base</li>
+                                            <li>Real-time Compliance Monitoring</li>
+                                            <li>Automated Source Attribution</li>
+                                            <li>ACP & NAPRA Coverage Integration</li>
                                         </ul>
                                     </td>
                                     <td style="padding: 20px; vertical-align: top;">
@@ -2366,7 +2453,7 @@
                                         Instant access to accurate regulations; reduces research time from hours to seconds.
                                     </td>
                                     <td style="padding: 20px; vertical-align: top; font-weight: 700; color: var(--accent-green); font-size: 1.1rem;">
-                                        5 Team-Months
+                                        2 Team-Months
                                     </td>
                                 </tr>
                                 <tr style="border-bottom: 1px solid var(--border-subtle);">
@@ -2376,11 +2463,11 @@
                                     </td>
                                     <td style="padding: 20px; vertical-align: top;">
                                         <ul style="margin: 0; padding-left: 20px; line-height: 1.8;">
-                                            <li>PDF Upload & OCR Processing</li>
-                                            <li>AI Classification (Law/Guideline/Best Practice)</li>
-                                            <li>Legal Consequence Analysis</li>
-                                            <li>Auto-Response Letter Generation</li>
-                                            <li>Compliance Priority Scoring</li>
+                                            <li>Smart Document Ingestion (OCR)</li>
+                                            <li>AI Finding Classification (Law/Guide)</li>
+                                            <li>Regulatory Impact Analysis</li>
+                                            <li>Automated Response Drafting</li>
+                                            <li>Critical Risk Prioritization</li>
                                         </ul>
                                     </td>
                                     <td style="padding: 20px; vertical-align: top;">
@@ -2390,7 +2477,7 @@
                                         Saves 2-3 days per inspection; eliminates legal risk with proper citations and defensible language.
                                     </td>
                                     <td style="padding: 20px; vertical-align: top; font-weight: 700; color: var(--accent-green); font-size: 1.1rem;">
-                                        6 Team-Months
+                                        3 Team-Months
                                     </td>
                                 </tr>
                                 <tr style="border-bottom: 1px solid var(--border-subtle);">
@@ -2400,11 +2487,11 @@
                                     </td>
                                     <td style="padding: 20px; vertical-align: top;">
                                         <ul style="margin: 0; padding-left: 20px; line-height: 1.8;">
-                                            <li>Inspector Profile Database</li>
-                                            <li>Historical Pattern Analysis (45+ audits)</li>
-                                            <li>Focus Area Prediction Algorithm</li>
-                                            <li>Custom Preparation Checklists</li>
-                                            <li>Readiness Scoring System</li>
+                                            <li>Inspector Behavioral Profiling</li>
+                                            <li>Audit Pattern Recognition (45+ scans)</li>
+                                            <li>Predictive Focus Modeling</li>
+                                            <li>Interactive Readiness Checklists</li>
+                                            <li>Compliance Performance Forecasting</li>
                                         </ul>
                                     </td>
                                     <td style="padding: 20px; vertical-align: top;">
@@ -2414,7 +2501,7 @@
                                         Predicts inspector behaviour with 92% confidence; enables targeted prep to reduce findings.
                                     </td>
                                     <td style="padding: 20px; vertical-align: top; font-weight: 700; color: var(--accent-green); font-size: 1.1rem;">
-                                        5 Team-Months
+                                        3 Team-Months
                                     </td>
                                 </tr>
                                 <tr style="border-bottom: 1px solid var(--border-subtle);">
@@ -2424,11 +2511,11 @@
                                     </td>
                                     <td style="padding: 20px; vertical-align: top;">
                                         <ul style="margin: 0; padding-left: 20px; line-height: 1.8;">
-                                            <li>Compliance Evidence Repository</li>
-                                            <li>Document Verification & Tracking</li>
-                                            <li>Performance Trend Visualization</li>
-                                            <li>Peer Benchmarking Analytics</li>
-                                            <li>Audit Trail & History</li>
+                                            <li>Digital Evidence Vault</li>
+                                            <li>Regulation-to-Practice Mapping</li>
+                                            <li>Operational Performance Metrics</li>
+                                            <li>Peer Compliance Benchmarking</li>
+                                            <li>Comprehensive Audit Trails</li>
                                         </ul>
                                     </td>
                                     <td style="padding: 20px; vertical-align: top;">
@@ -2438,7 +2525,7 @@
                                         Centralizes evidence management; provides data-driven insights for continuous improvement.
                                     </td>
                                     <td style="padding: 20px; vertical-align: top; font-weight: 700; color: var(--accent-green); font-size: 1.1rem;">
-                                        4 Team-Months
+                                        2 Team-Months
                                     </td>
                                 </tr>
                                 <tr>
@@ -2448,11 +2535,11 @@
                                     </td>
                                     <td style="padding: 20px; vertical-align: top;">
                                         <ul style="margin: 0; padding-left: 20px; line-height: 1.8;">
-                                            <li>Multi-Year Trend Forecasting</li>
-                                            <li>Competitive Gap Analysis</li>
+                                            <li>Strategic Risk Forecasting</li>
+                                            <li>Market-Wide Gap Analysis</li>
                                             <li>Regulatory Change Impact Modeling</li>
-                                            <li>Cost-Benefit Optimization</li>
-                                            <li>Strategic Planning Dashboards</li>
+                                            <li>Operational Efficiency Scoring</li>
+                                            <li>Executive Strategy Dashboard</li>
                                         </ul>
                                     </td>
                                     <td style="padding: 20px; vertical-align: top;">
@@ -2462,7 +2549,7 @@
                                         Transforms compliance from cost center to competitive advantage; enables proactive strategy.
                                     </td>
                                     <td style="padding: 20px; vertical-align: top; font-weight: 700; color: var(--accent-green); font-size: 1.1rem;">
-                                        4 Team-Months
+                                        2 Team-Months
                                     </td>
                                 </tr>
                             </tbody>
@@ -2477,15 +2564,15 @@
                                 <p style="margin: 0; color: var(--text-main);">Comprehensive pharmacy compliance intelligence platform</p>
                             </div>
                             <div style="text-align: right;">
-                                <div style="font-size: 2.5rem; font-weight: 800; color: var(--primary);">24 Team-Months</div>
-                                <div style="font-size: 0.9rem; color: var(--text-muted); margin-top: 4px;">Phased deployment over 15-18 months</div>
+                                <div style="font-size: 2.5rem; font-weight: 800; color: var(--primary);">12 Team-Months</div>
+                                <div style="font-size: 0.9rem; color: var(--text-muted); margin-top: 4px;">Phased deployment over 8-12 months</div>
                             </div>
                         </div>
                     </div>
 
                     <!-- Call to Action -->
                     <div style="margin-top: 32px; text-align: center;">
-                        <button class="btn-primary" style="padding: 16px 48px; font-size: 1.1rem;" onclick="showToast('Partnership inquiry sent to business development team')">
+                        <button class="btn-primary" style="padding: 16px 48px; font-size: 1.1rem;" onclick="window.location.href='mailto:support@algo-rythmn.ai?subject=Partnership Proposal Discussion'">
                             <i class="fas fa-paper-plane" style="margin-right: 8px;"></i>
                             Schedule Partnership Discussion
                         </button>
@@ -2498,8 +2585,8 @@
         <section id="view-settings" class="view-section">
             <div style="max-width: 1200px; margin: 0 auto; padding: 40px; width: 100%;">
                 <div class="studio-header">
-                     <h2>Settings & Configuration</h2>
-                     <p>Manage your pharmacy profile, notifications, and AI preferences.</p>
+                     <h2><i class="fas fa-sliders" style="color: var(--primary); margin-right: 12px;"></i>Settings & Configuration</h2>
+                     <p style="margin-left: 48px;">Manage your pharmacy profile, notifications, and AI preferences.</p>
                 </div>
 
                 <div style="display: grid; grid-template-columns: 240px 1fr; gap: 40px;">
@@ -2765,6 +2852,104 @@
         </div>
     </div>
 
+    <div class="modal-overlay" id="inspectorProfileModal">
+        <div class="modal-box" style="width: 900px; max-width: 95%;">
+            <i class="fas fa-times modal-close" onclick="closeModal('inspectorProfileModal')"></i>
+            
+            <div style="display: grid; grid-template-columns: 280px 1fr; gap: 40px;">
+                <!-- Sidebar -->
+                <div style="border-right: 1px solid var(--border-subtle); padding-right: 40px;">
+                    <div style="text-align: center; margin-bottom: 32px;">
+                        <div style="width: 120px; height: 120px; background: linear-gradient(135deg, #E0F2F1 0%, #B2DFDB 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--primary); font-size: 2.5rem; font-weight: 800; margin: 0 auto 20px; box-shadow: 0 8px 24px rgba(0, 105, 92, 0.15); border: 4px solid white;">JS</div>
+                        <h2 style="margin: 0 0 8px 0; font-size: 1.6rem; font-weight: 800; letter-spacing: -0.5px;">J. Smith</h2>
+                        <div style="display: inline-block; padding: 4px 12px; background: var(--primary-light); color: var(--primary); border-radius: 100px; font-size: 0.85rem; font-weight: 700; margin-bottom: 8px;">Lead Inspector</div>
+                        <p style="color: var(--text-muted); font-size: 0.9rem; margin: 0; font-weight: 500;">Alberta College of Pharmacy</p>
+                    </div>
+
+                    <div style="display: flex; flex-direction: column; gap: 16px;">
+                        <div style="background: var(--bg-body); padding: 16px; border-radius: 12px;">
+                            <div style="font-size: 0.75rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; margin-bottom: 4px;">Region</div>
+                            <div style="font-weight: 600;">Calgary & North</div>
+                        </div>
+                        <div style="background: var(--bg-body); padding: 16px; border-radius: 12px;">
+                            <div style="font-size: 0.75rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; margin-bottom: 4px;">Audits with You</div>
+                            <div style="font-weight: 600;">8 Inspections since 2021</div>
+                        </div>
+                        <div style="background: var(--bg-body); padding: 16px; border-radius: 12px;">
+                            <div style="font-size: 0.75rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; margin-bottom: 4px;">Typical Style</div>
+                            <div style="font-weight: 600;">Documentation-Heavy</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Content -->
+                <div>
+                    <h3 style="font-size: 1.25rem; font-weight: 800; margin-bottom: 24px; letter-spacing: -0.3px;">Inspector Intelligence Profile</h3>
+
+                    <div style="margin-bottom: 32px;">
+                        <h4 style="font-size: 0.95rem; font-weight: 700; color: var(--text-muted); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.5px;">Behavioral Pattern Analysis</h4>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                            <div style="background: white; border: 1px solid var(--border-subtle); border-radius: 16px; padding: 20px;">
+                                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                                    <div style="width: 32px; height: 32px; background: #FEE2E2; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #EF4444;">
+                                        <i class="fas fa-magnifying-glass"></i>
+                                    </div>
+                                    <div style="font-weight: 800; font-size: 0.95rem;">Documentation Focus</div>
+                                </div>
+                                <p style="font-size: 0.85rem; color: var(--text-muted); margin: 0; line-height: 1.5;">Smith consistently spends 65% of an audit reviewing paper trails, specifically signatures and dates on narcotic logs.</p>
+                            </div>
+                            <div style="background: white; border: 1px solid var(--border-subtle); border-radius: 16px; padding: 20px;">
+                                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                                    <div style="width: 32px; height: 32px; background: #DBEAFE; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #3B82F6;">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                    <div style="font-weight: 800; font-size: 0.95rem;">Audit Pacing</div>
+                                </div>
+                                <p style="font-size: 0.85rem; color: var(--text-muted); margin: 0; line-height: 1.5;">Relatively fast audits (avg 2.5 hours). Tendency to follow a strict sequential checklist from pharmacy entrance to dispensary.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 32px;">
+                        <h4 style="font-size: 0.95rem; font-weight: 700; color: var(--text-muted); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.5px;">Frequent Citation Areas (Overall)</h4>
+                        <div style="display: flex; flex-direction: column; gap: 12px;">
+                            <div style="display: flex; align-items: center; gap: 16px;">
+                                <div style="width: 120px; font-size: 0.85rem; font-weight: 600;">Narcotic Logs</div>
+                                <div style="flex: 1; height: 8px; background: var(--bg-subtle); border-radius: 4px; overflow: hidden;">
+                                    <div style="width: 85%; height: 100%; background: #EF4444; border-radius: 4px;"></div>
+                                </div>
+                                <div style="width: 40px; font-size: 0.85rem; font-weight: 700; color: #EF4444;">85%</div>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 16px;">
+                                <div style="width: 120px; font-size: 0.85rem; font-weight: 600;">Cold Chain</div>
+                                <div style="flex: 1; height: 8px; background: var(--bg-subtle); border-radius: 4px; overflow: hidden;">
+                                    <div style="width: 72%; height: 100%; background: #F59E0B; border-radius: 4px;"></div>
+                                </div>
+                                <div style="width: 40px; font-size: 0.85rem; font-weight: 700; color: #F59E0B;">72%</div>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 16px;">
+                                <div style="width: 120px; font-size: 0.85rem; font-weight: 600;">Technician Duties</div>
+                                <div style="flex: 1; height: 8px; background: var(--bg-subtle); border-radius: 4px; overflow: hidden;">
+                                    <div style="width: 45%; height: 100%; background: #3B82F6; border-radius: 4px;"></div>
+                                </div>
+                                <div style="width: 40px; font-size: 0.85rem; font-weight: 700; color: #3B82F6;">45%</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="background: var(--primary-light); border-radius: 16px; padding: 24px;">
+                        <h4 style="font-size: 1rem; font-weight: 800; color: var(--primary-dark); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+                            <i class="fas fa-brain"></i> AI Predictive Insight
+                        </h4>
+                        <p style="font-size: 0.9rem; color: #00695C; margin: 0; line-height: 1.6; font-weight: 500;">
+                            Inspector Smith's last audit at your location was a "Conditional Pass" due to sterile training record gaps. <strong style="font-weight: 800;">High probability (92%)</strong> that they will start the audit by verifying the specific corrective actions you submitted last month. Ensure your ShareFile uploads are organized and accessible.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="modal-overlay" id="monitoringModal">
         <div class="modal-box" style="width: 900px; max-width: 95%;">
             <i class="fas fa-times modal-close" onclick="closeModal('monitoringModal')"></i>
@@ -2821,7 +3006,16 @@
                                 <span style="font-size: 0.75rem; color: var(--text-muted);">Page 4, Para 2</span>
                             </div>
                             <div style="font-weight: 700; font-size: 1.05rem; margin-bottom: 6px; color: var(--text-main);">Narcotic Log Signature Missing</div>
-                            <div style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 10px;">"Logbook on Dec 12 lacks pharmacist initial. Entry shows 'JD' but no licensed pharmacist signature per Section 56(1) Narcotic Control Regulations."</div>
+                            <div style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 12px;">"Logbook on Dec 12 lacks pharmacist initial. Entry shows 'JD' but no licensed pharmacist signature per Section 56(1) Narcotic Control Regulations."</div>
+                            
+                            <!-- Original Log -->
+                            <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px; margin-bottom: 12px; font-family: 'Courier New', Courier, monospace; font-size: 0.85rem; color: #475569;">
+                                <div style="font-family: var(--font-main); font-weight: 800; font-size: 0.7rem; color: #64748B; text-transform: uppercase; margin-bottom: 8px; display: flex; align-items: center; gap: 4px;">
+                                    <i class="fas fa-file-alt"></i> Original log from report
+                                </div>
+                                "Controlled Substance Audit: Dec 12, 2025. Narcotic register reviewed for Hydromorphone 2mg tablets. Entry lists Dispensed: '20', Initials: 'JD'. Missing mandated pharmacist confirmation signature. NCR 56(1)."
+                            </div>
+
                             <div style="display: flex; gap: 8px; flex-wrap: wrap;">
                                 <span style="font-size: 0.75rem; padding: 4px 8px; background: #F3F4F6; border-radius: 4px; color: var(--text-muted);"><i class="fas fa-scale-balanced" style="margin-right: 4px;"></i>NCR Section 56(1)</span>
                                 <span style="font-size: 0.75rem; padding: 4px 8px; background: #F3F4F6; border-radius: 4px; color: var(--text-muted);"><i class="fas fa-calendar" style="margin-right: 4px;"></i>Dec 12, 2025</span>
@@ -2848,7 +3042,16 @@
                                 <span style="font-size: 0.75rem; color: var(--text-muted);">Page 6, Para 1</span>
                             </div>
                             <div style="font-weight: 700; font-size: 1.05rem; margin-bottom: 6px; color: var(--text-main);">Temperature Log Gap</div>
-                            <div style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 10px;">"Missing evening temperature check for Jan 14. Fridge log shows only AM reading (4.2°C). Evening check required per Standard 3.4."</div>
+                            <div style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 12px;">"Missing evening temperature check for Jan 14. Fridge log shows only AM reading (4.2°C). Evening check required per Standard 3.4."</div>
+
+                            <!-- Original Log -->
+                            <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px; margin-bottom: 12px; font-family: 'Courier New', Courier, monospace; font-size: 0.85rem; color: #475569;">
+                                <div style="font-family: var(--font-main); font-weight: 800; font-size: 0.7rem; color: #64748B; text-transform: uppercase; margin-bottom: 8px; display: flex; align-items: center; gap: 4px;">
+                                    <i class="fas fa-file-alt"></i> Original log from report
+                                </div>
+                                "Fridge Temperature Log: Jan 14. Entry recorded at 08:35 (4.2C). No PM recording found for this date. Standard 3.4 requires twice-daily temperature verification for medication storage units."
+                            </div>
+
                             <div style="display: flex; gap: 8px; flex-wrap: wrap;">
                                 <span style="font-size: 0.75rem; padding: 4px 8px; background: #F3F4F6; border-radius: 4px; color: var(--text-muted);"><i class="fas fa-book" style="margin-right: 4px;"></i>Standard 3.4</span>
                                 <span style="font-size: 0.75rem; padding: 4px 8px; background: #F3F4F6; border-radius: 4px; color: var(--text-muted);"><i class="fas fa-calendar" style="margin-right: 4px;"></i>Jan 14, 2026</span>
@@ -2917,10 +3120,10 @@
 
             <!-- Action Buttons -->
             <div style="display: flex; gap: 12px; margin-top: 32px;">
-                <button onclick="showAllConfirmedResponses()" class="btn-primary" style="flex: 2; padding: 14px; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                <button onclick="showAllConfirmedResponses()" class="btn-primary" style="flex: 2; padding: 14px; display: flex; align-items: center; justify-content: center; gap: 8px; transition: var(--transition);" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 15px rgba(0, 105, 92, 0.2)'; this.style.background='var(--primary-dark)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.background='var(--primary)'">
                     <i class="fas fa-file-export"></i> Review & Download All Responses
                 </button>
-                <button onclick="downloadReport()" style="flex: 1; padding: 14px; background: white; border: 1px solid var(--border-subtle); border-radius: 12px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                <button onclick="downloadReport()" style="flex: 1; padding: 14px; background: white; border: 1px solid var(--border-subtle); border-radius: 12px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: var(--transition);" onmouseover="this.style.background='var(--primary-light)'; this.style.transform='translateY(-2px)'; this.style.borderColor='var(--primary)'" onmouseout="this.style.background='white'; this.style.transform='translateY(0)'; this.style.borderColor='var(--border-subtle)'">
                     <i class="fas fa-download"></i> Download Report
                 </button>
             </div>
@@ -3271,6 +3474,58 @@
         </div>
     </div>
 
+    <!-- AI Evaluation Gap Analysis Modal -->
+    <div class="modal-overlay" id="gapAnalysisModal">
+        <div class="modal-box" style="width: 800px; max-width: 95%;">
+            <i class="fas fa-times modal-close" onclick="closeModal('gapAnalysisModal')"></i>
+            <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 24px;">
+                <div style="width: 48px; height: 48px; background: var(--primary-light); color: var(--primary); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">
+                    <i class="fas fa-clipboard-check"></i>
+                </div>
+                <div>
+                    <h2 style="margin: 0;">AI Gap Analysis Results</h2>
+                    <p style="color: var(--text-muted); margin: 0;">Automated scan of 7 active regulatory documents</p>
+                </div>
+            </div>
+
+            <div style="background: #E0F2F1; border: 1px solid var(--primary-light); border-radius: 12px; padding: 16px; margin-bottom: 24px;">
+                <div style="display: flex; gap: 12px;">
+                    <i class="fas fa-check-circle" style="color: var(--primary); margin-top: 2px;"></i>
+                    <p style="margin: 0; font-size: 0.9rem; color: var(--primary-dark);">Our AI compared your uploaded SOPs against the latest <b>NAPRA</b> and <b>ACP</b> standards. We found your pharmacy is 94% compliant, with 2 priority gaps identified.</p>
+                </div>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 16px;">
+                <div style="border: 1px solid var(--border-subtle); border-radius: 12px; padding: 20px;">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+                        <h4 style="margin: 0;">Compounding Cleaning Assessments</h4>
+                        <span class="feed-tag tag-law" style="background: #FEE2E2; color: #991B1B;">Standard 5.1 & 5.2</span>
+                    </div>
+                    <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 16px;">NAPRA Model Standards for Non-Hazardous Sterile Preparations (Section 5.1.2) mandate documented practical assessments for cleaning personnel. Your current SOP only mentions theoretical signatures.</p>
+                    <button class="btn-primary" style="padding: 8px 16px; font-size: 0.8rem;" onclick="showToast('AI is drafting practical assessment rubric...')">
+                        <i class="fas fa-magic"></i> Generate Assessment Form
+                    </button>
+                </div>
+
+                <div style="border: 1px solid var(--border-subtle); border-radius: 12px; padding: 20px;">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+                        <h4 style="margin: 0;">Prescribing Rationale Logging</h4>
+                        <span class="feed-tag tag-guideline">ACP Standard 11</span>
+                    </div>
+                    <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 16px;">ACP Standards of Practice (Standard 11.10) requires specific documentation of clinical rationale. We detected your 'Clinical Notes' template lacks a mandatory 'Best Practice Reference' field.</p>
+                    <button class="btn-primary" style="padding: 8px 16px; font-size: 0.8rem;" onclick="showToast('Template update requested for IT')">
+                        <i class="fas fa-edit"></i> Update Clinical Template
+                    </button>
+                </div>
+            </div>
+
+            <div style="margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--border-subtle); display: flex; justify-content: flex-end; gap: 12px;">
+                <button class="btn-primary" style="background: var(--bg-subtle); color: var(--text-main);" onclick="closeModal('gapAnalysisModal')">Close Analysis</button>
+                <button class="btn-primary" onclick="showToast('Compliance plan generated and added to management dashboard.'); closeModal('gapAnalysisModal');">Acknowledge All Gaps</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         // === MOCK DATA FOR SEARCH ===
         const knowledgeBase = [
@@ -3379,6 +3634,19 @@
                 document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
                 el.classList.add('active');
             }
+
+            // Auto-trigger intelligence animation
+            if (viewName === 'search') {
+                setTimeout(() => {
+                    const bar = document.getElementById('evalProgress');
+                    if (bar) bar.style.width = '94%';
+                }, 500);
+            }
+        }
+
+        // === GAP ANALYSIS ===
+        function showGapAnalysis() {
+            openModal('gapAnalysisModal');
         }
 
         // === SEARCH LOGIC ===
@@ -3388,7 +3656,7 @@
                 if(query) {
                     showToast("Analyzing query...", "info");
                     setTimeout(() => {
-                        switchView('search', document.querySelectorAll('.nav-item')[2]);
+                        switchView('search', document.querySelectorAll('.nav-item')[1]);
                         const searchInput = document.getElementById('searchInput');
                         searchInput.value = query;
                         performSearch();
@@ -5186,6 +5454,14 @@ ${notes ? 'Additional Context: ' + notes + '\\n\\n' : ''}As per NAPRA Standards 
             setTimeout(() => {
                 showToast('✅ Report downloaded successfully!');
             }, 1000);
+        }
+
+        function viewOriginalReport() {
+            showToast('📄 Opening original Inspection_Feb05.pdf...');
+            // In a real application, this could open the PDF in a new tab or a modal viewer
+            setTimeout(() => {
+                showToast('✅ Scanned document viewer active');
+            }, 800);
         }
         
         // Drag and drop support
