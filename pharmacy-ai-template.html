@@ -109,6 +109,87 @@
             background: var(--bg-surface); padding: 6px 12px;
             border-radius: var(--radius-pill); border: 1px solid var(--border-subtle);
             font-size: 0.85rem; font-weight: 500; cursor: pointer;
+            position: relative; /* Added for dropdown positioning context if needed, though dropdown will be absolute to body/main */
+        }
+        
+        /* NOTIFICATIONS */
+        .notification-badge {
+            background: var(--accent-red); color: white;
+            font-size: 0.7rem; padding: 2px 6px; border-radius: 10px;
+            margin-left: 4px; font-weight: 700;
+            box-shadow: 0 2px 4px rgba(239, 68, 68, 0.3);
+            animation: pulse-badge 2s infinite;
+        }
+        @keyframes pulse-badge {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); box-shadow: 0 0 8px rgba(239, 68, 68, 0.5); }
+            100% { transform: scale(1); }
+        }
+        
+        .notification-dropdown {
+            position: absolute; top: 70px; right: 32px; width: 380px;
+            background: var(--bg-surface); border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg); box-shadow: var(--shadow-float);
+            z-index: 1001; display: none; overflow: hidden;
+            animation: slideDown 0.2s ease-out;
+        }
+        .notification-dropdown.show { display: block; }
+        
+        .notification-header {
+            padding: 16px; border-bottom: 1px solid var(--border-subtle);
+            display: flex; justify-content: space-between; align-items: center;
+            background: var(--bg-subtle);
+        }
+        .notification-header h3 { font-size: 0.95rem; font-weight: 700; margin: 0; }
+        .mark-read-btn { font-size: 0.75rem; color: var(--primary); cursor: pointer; font-weight: 600; }
+        .mark-read-btn:hover { text-decoration: underline; }
+        
+        .notification-list { 
+            max-height: 500px; overflow-y: auto; 
+            padding: 0; background: white; 
+            display: block;
+        }
+        
+        .notification-item {
+            padding: 16px; 
+            background: white; 
+            border-bottom: 1px solid var(--border-subtle);
+            cursor: pointer; transition: var(--transition); 
+            display: flex; gap: 16px;
+            position: relative; 
+        }
+        .notification-item:hover { 
+            background: var(--bg-subtle);
+        }
+        .notification-item:last-child { border-bottom: none; }
+        
+        .notification-item.unread { 
+            background: #F0FDF4;
+        }
+        .notification-item.unread::before {
+            content: '';
+            position: absolute; left: 0; top: 0; bottom: 0;
+            width: 4px; background: var(--accent-red);
+        }
+        
+        .notif-icon {
+            width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0; font-size: 1.1rem;
+        }
+        .notif-content { flex: 1; min-width: 0; }
+        .notif-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 4px; }
+        .notif-title { font-weight: 700; font-size: 0.9rem; color: var(--text-main); }
+        .notif-desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 8px; }
+        .notif-meta { display: flex; gap: 8px; align-items: center; font-size: 0.75rem; color: var(--text-muted); }
+        
+        /* Mini Widget Styles inside Notifs */
+        .notif-widget { 
+            background: #F8FAFC; border-radius: 8px; padding: 10px; 
+            border: 1px solid var(--border-subtle); margin-top: 8px;
+        }
+        .notif-badge {
+            font-size: 0.7rem; padding: 2px 8px; border-radius: 4px; font-weight: 700;
+            display: inline-block;
         }
 
         /* VIEWS */
@@ -882,8 +963,32 @@
     <main class="main-content">
         
         <div class="top-bar">
-            <div class="user-pill">
+            <div class="user-pill" onclick="toggleNotifications(event)">
                 <i class="fas fa-user-circle"></i> Peter Sloan, PharmD
+                <span class="notification-badge" id="notifBadge">1</span>
+            </div>
+            
+            <!-- Notification Dropdown -->
+            <div class="notification-dropdown" id="notificationDropdown">
+                <div class="notification-header">
+                    <h3>Alerts</h3>
+                    <span class="mark-read-btn" onclick="markAllRead()">Mark all read</span>
+                </div>
+                <div class="notification-list">
+                    <!-- Regulatory Alert -->
+                    <div class="notification-item unread" onclick="handleNotificationClick('search', 'New NAPRA Guidance on Sterile Compounding released')">
+                        <div class="notif-icon" style="background: #ffffff; color: #134E4A;">
+                            <i class="fas fa-magnifying-glass"></i>
+                        </div>
+                        <div class="notif-content">
+                            <div class="notif-header">
+                                <span class="notif-title">Regulatory Update</span>
+                                <span class="notif-time">2h ago</span>
+                            </div>
+                            <div class="notif-desc">New NAPRA Guidance on Sterile Compounding released. <span style="color: #b63329; font-weight: 700;">2 Gaps Identified</span></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -2405,7 +2510,7 @@
                     <div>
                         <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 16px; color: var(--text-main);">Value Creation</h3>
                         <p style="line-height: 1.7; color: var(--text-main);">
-                            Our platform transforms static compliance checklists into an interactive operational ecosystem. Features include Inspector Profiling, Regulation-to-Practice matching, Competitor Gap Analysis, and Historical Pattern Recognition. This partnership positions both organizations to capture the high-value pharmacy compliance and operational excellence market segments.
+                            Our platform transforms static compliance checklists into an interactive operational ecosystem. Features include Inspector Profiling, Semantic Search Intelligence, AI Finding Classification, Auto‑Generated Response and Historical Pattern Recognition. This partnership positions both organizations to capture the high-value pharmacy compliance and operational excellence market segments.
                         </p>
                     </div>
                 </div>
@@ -2504,54 +2609,7 @@
                                         3 Team-Months
                                     </td>
                                 </tr>
-                                <tr style="border-bottom: 1px solid var(--border-subtle);">
-                                    <td style="padding: 20px; vertical-align: top; background: var(--bg-subtle);">
-                                        <div style="font-weight: 700; font-size: 1rem; margin-bottom: 8px;">Tier 4: Evidence & Analytics</div>
-                                        <div style="font-size: 0.85rem; color: var(--text-muted); font-style: italic;">Operational Module</div>
-                                    </td>
-                                    <td style="padding: 20px; vertical-align: top;">
-                                        <ul style="margin: 0; padding-left: 20px; line-height: 1.8;">
-                                            <li>Digital Evidence Vault</li>
-                                            <li>Regulation-to-Practice Mapping</li>
-                                            <li>Operational Performance Metrics</li>
-                                            <li>Peer Compliance Benchmarking</li>
-                                            <li>Comprehensive Audit Trails</li>
-                                        </ul>
-                                    </td>
-                                    <td style="padding: 20px; vertical-align: top;">
-                                        Corporate Compliance & Operations Teams
-                                    </td>
-                                    <td style="padding: 20px; vertical-align: top;">
-                                        Centralizes evidence management; provides data-driven insights for continuous improvement.
-                                    </td>
-                                    <td style="padding: 20px; vertical-align: top; font-weight: 700; color: var(--accent-green); font-size: 1.1rem;">
-                                        2 Team-Months
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="padding: 20px; vertical-align: top; background: var(--bg-subtle);">
-                                        <div style="font-weight: 700; font-size: 1rem; margin-bottom: 8px;">Tier 5: Strategic Intelligence</div>
-                                        <div style="font-size: 0.85rem; color: var(--text-muted); font-style: italic;">Advanced Module</div>
-                                    </td>
-                                    <td style="padding: 20px; vertical-align: top;">
-                                        <ul style="margin: 0; padding-left: 20px; line-height: 1.8;">
-                                            <li>Strategic Risk Forecasting</li>
-                                            <li>Market-Wide Gap Analysis</li>
-                                            <li>Regulatory Change Impact Modeling</li>
-                                            <li>Operational Efficiency Scoring</li>
-                                            <li>Executive Strategy Dashboard</li>
-                                        </ul>
-                                    </td>
-                                    <td style="padding: 20px; vertical-align: top;">
-                                        Executive Leadership & Strategy Teams
-                                    </td>
-                                    <td style="padding: 20px; vertical-align: top;">
-                                        Transforms compliance from cost center to competitive advantage; enables proactive strategy.
-                                    </td>
-                                    <td style="padding: 20px; vertical-align: top; font-weight: 700; color: var(--accent-green); font-size: 1.1rem;">
-                                        2 Team-Months
-                                    </td>
-                                </tr>
+
                             </tbody>
                         </table>
                     </div>
@@ -2564,7 +2622,7 @@
                                 <p style="margin: 0; color: var(--text-main);">Comprehensive pharmacy compliance intelligence platform</p>
                             </div>
                             <div style="text-align: right;">
-                                <div style="font-size: 2.5rem; font-weight: 800; color: var(--primary);">12 Team-Months</div>
+                                <div style="font-size: 2.5rem; font-weight: 800; color: var(--primary);">8 Team-Months</div>
                                 <div style="font-size: 0.9rem; color: var(--text-muted); margin-top: 4px;">Phased deployment over 8-12 months</div>
                             </div>
                         </div>
@@ -4134,9 +4192,14 @@
             const btn = document.getElementById('reportsDropdownBtn');
             const menu = document.getElementById('reportsDropdownMenu');
             
-            btn.classList.toggle('open');
-            menu.classList.toggle('open');
+            if (btn && menu) {
+                btn.classList.toggle('open');
+                menu.classList.toggle('open');
+            }
         }
+
+        // Make functions globally accessible
+        window.toggleReportsDropdown = toggleReportsDropdown;
 
         // Close dropdown when clicking outside
         document.addEventListener('click', function(e) {
@@ -4151,7 +4214,16 @@
             selectedReport = { title, verdict, date };
             
             // Update dropdown button text
-            document.getElementById('reportsDropdownBtn').textContent = title;
+            const dropdownBtn = document.getElementById('reportsDropdownBtn');
+            if (dropdownBtn) {
+                const icon = dropdownBtn.querySelector('i');
+                const span = dropdownBtn.querySelector('span');
+                if (span) {
+                    span.textContent = title;
+                } else {
+                    dropdownBtn.innerHTML = `<i class="fas fa-folder-open" style="color: var(--primary); font-size: 0.95rem;"></i><span>${title}</span>`;
+                }
+            }
             
             // Close dropdown
             toggleReportsDropdown();
@@ -4161,25 +4233,46 @@
         }
 
         function openReportQueryModal() {
-            if (!selectedReport) return;
+            if (!selectedReport) {
+                console.error('No report selected');
+                return;
+            }
             
             // Update modal title
-            document.getElementById('selectedReportTitle').textContent = `Report: ${selectedReport.title}`;
+            const titleElement = document.getElementById('selectedReportTitle');
+            if (titleElement) {
+                titleElement.textContent = `Report: ${selectedReport.title}`;
+            } else {
+                console.error('selectedReportTitle element not found');
+                return;
+            }
             
             // Clear previous messages
             const messagesContainer = document.getElementById('queryMessages');
-            messagesContainer.innerHTML = `
-                <div style="text-align: center; padding: 40px 20px; color: var(--text-muted);">
-                    <i class="fas fa-comments" style="font-size: 3rem; margin-bottom: 16px; opacity: 0.3;"></i>
-                    <p style="font-size: 0.95rem;">Ask any question about this inspection report.<br>I'll help you understand findings, citations, and recommendations.</p>
-                </div>
-            `;
+            if (messagesContainer) {
+                messagesContainer.innerHTML = `
+                    <div style="text-align: center; padding: 40px 20px; color: var(--text-muted);">
+                        <i class="fas fa-comments" style="font-size: 3rem; margin-bottom: 16px; opacity: 0.3;"></i>
+                        <p style="font-size: 0.95rem;">Ask any question about this inspection report.<br>I'll help you understand findings, citations, and recommendations.</p>
+                    </div>
+                `;
+            } else {
+                console.error('queryMessages element not found');
+            }
             
             // Clear input
-            document.getElementById('queryInput').value = '';
+            const queryInput = document.getElementById('queryInput');
+            if (queryInput) {
+                queryInput.value = '';
+            }
             
             // Open modal
-            openModal('reportQueryModal');
+            const modal = document.getElementById('reportQueryModal');
+            if (modal) {
+                openModal('reportQueryModal');
+            } else {
+                console.error('reportQueryModal not found in DOM');
+            }
         }
 
         function handleQueryInput(e) {
@@ -4187,6 +4280,78 @@
                 sendQuery();
             }
         }
+
+        // === NOTIFICATIONS ===
+        function toggleNotifications(event) {
+            /* event.stopPropagation(); is handled inline or bubbling up */
+            if(event) event.stopPropagation();
+            const dropdown = document.getElementById('notificationDropdown');
+            dropdown.classList.toggle('show');
+            
+            // Close reports dropdown if open
+            const reportsMenu = document.getElementById('reportsMenu');
+            const reportsBtn = document.querySelector('.reports-dropdown-btn');
+            if (reportsMenu) reportsMenu.classList.remove('open');
+            if (reportsBtn && reportsBtn.classList) reportsBtn.classList.remove('open');
+        }
+        
+        function markAllRead() {
+            if(window.event) window.event.stopPropagation();
+            const items = document.querySelectorAll('.notification-item');
+            items.forEach(item => {
+                item.classList.remove('unread');
+                const dot = item.querySelector('.notif-dot');
+                if (dot) dot.remove();
+            });
+            
+            const badge = document.getElementById('notifBadge');
+            if (badge) badge.style.display = 'none';
+            
+            showToast('✓ All notifications marked as read');
+        }
+        
+        function handleNotificationClick(viewId, message) {
+            // Find the nav item
+            const navItems = document.querySelectorAll('.nav-item');
+            let targetNav;
+            
+            if (viewId === 'search') targetNav = navItems[1];
+            if (viewId === 'monitoring') targetNav = navItems[2];
+            if (viewId === 'inspector') targetNav = navItems[4]; // 2=Standard, 3=Report, 4=Inspector? Let me check checks later
+            // Actually let's use check:
+            // 0=Brand, 1=Home, 2=Search, 3=Monitoring, 4=Inspector...
+            // Let's rely on finding by data-tooltip
+            
+            navItems.forEach(item => {
+                 if(viewId === 'search' && item.getAttribute('data-tooltip').includes('Proactive')) targetNav = item;
+                 if(viewId === 'monitoring' && item.getAttribute('data-tooltip').includes('Report')) targetNav = item;
+                 if(viewId === 'inspector' && item.getAttribute('data-tooltip').includes('Pre-Inspection')) targetNav = item;
+            });
+
+            if(targetNav) switchView(viewId, targetNav);
+            showToast('🔔 ' + message);
+            
+            document.getElementById('notificationDropdown').classList.remove('show');
+        }
+        
+        // Add click listener to close notif dropdown
+        document.addEventListener('click', function(e) {
+            const notifDropdown = document.getElementById('notificationDropdown');
+            const userPill = document.querySelector('.user-pill');
+            
+            if (notifDropdown && notifDropdown.classList.contains('show')) {
+                if (userPill && !notifDropdown.contains(e.target) && !userPill.contains(e.target)) {
+                    notifDropdown.classList.remove('show');
+                }
+            }
+        });
+
+        // Expose functions globally for inline onclick handlers
+        window.selectReport = selectReport;
+        window.openModal = openModal;
+        window.closeModal = closeModal;
+        window.handleQueryInput = handleQueryInput;
+        window.sendQuery = sendQuery;
 
         function sendQuery() {
             const input = document.getElementById('queryInput');
@@ -4293,8 +4458,21 @@
             }, 3000);
         }
 
-        function openModal(id) { document.getElementById(id).classList.add('open'); }
-        function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+        function openModal(id) { 
+            const modal = document.getElementById(id);
+            if (modal) {
+                modal.classList.add('open'); 
+                console.log(`Modal ${id} opened successfully`);
+            } else {
+                console.error(`Modal with id '${id}' not found in DOM`);
+            }
+        }
+        function closeModal(id) { 
+            const modal = document.getElementById(id);
+            if (modal) {
+                modal.classList.remove('open'); 
+            }
+        }
 
         function selectTone(el) {
             // Only remove 'selected' from siblings in the same parent group
@@ -5491,6 +5669,34 @@ ${notes ? 'Additional Context: ' + notes + '\\n\\n' : ''}As per NAPRA Standards 
                         handleReportUpload({ target: { files: [file] } });
                     }
                 });
+            }
+        });
+
+        // === GLOBAL FUNCTION EXPOSURE FOR GITHUB PAGES ===
+        // Ensure all onclick handler functions are globally accessible
+        console.log('Initializing global functions...');
+        
+        // Verify critical functions exist
+        if (typeof selectReport !== 'undefined') {
+            window.selectReport = selectReport;
+            console.log('✓ selectReport exposed globally');
+        }
+        if (typeof openModal !== 'undefined') {
+            window.openModal = openModal;
+            console.log('✓ openModal exposed globally');
+        }
+        if (typeof closeModal !== 'undefined') {
+            window.closeModal = closeModal;
+            console.log('✓ closeModal exposed globally');
+        }
+        
+        // Verify modal exists in DOM
+        document.addEventListener('DOMContentLoaded', () => {
+            const modal = document.getElementById('reportQueryModal');
+            if (modal) {
+                console.log('✓ reportQueryModal found in DOM');
+            } else {
+                console.error('✗ reportQueryModal NOT found in DOM');
             }
         });
     </script>
