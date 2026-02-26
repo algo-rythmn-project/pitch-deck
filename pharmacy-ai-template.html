@@ -963,6 +963,18 @@
     <main class="main-content">
         
         <div class="top-bar">
+            <!-- Pharmacy Type Filter -->
+            <div class="user-pill" style="margin-right: auto; margin-left: 32px; border-color: var(--primary); background: var(--primary-light); color: var(--primary);">
+                <i class="fas fa-hospital"></i> 
+                <span style="margin: 0 8px; font-weight: 700;">Type:</span>
+                <select style="background: transparent; border: none; color: inherit; font-family: inherit; font-size: inherit; font-weight: 700; cursor: pointer; outline: none;">
+                    <option>Community Pharmacy</option>
+                    <option selected>Compounding Pharmacy (Sterile)</option>
+                    <option>Compounding Pharmacy (Non-Sterile)</option>
+                    <option>Hospital Pharmacy</option>
+                </select>
+            </div>
+
             <div class="user-pill" onclick="toggleNotifications(event)">
                 <i class="fas fa-user-circle"></i> Peter Sloan, PharmD
                 <span class="notification-badge" id="notifBadge">1</span>
@@ -1027,13 +1039,10 @@
                             Live AI monitoring across latest pharmacy regulations and standards.
                         </div>
                         
-                        <div style="background: #F0FDFA; border: 1px solid #CCFBF1; border-radius:12px; padding: 16px; margin-bottom: 16px;">
-                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                                <span style="font-size: 0.85rem; font-weight: 700; color: #134E4A;">Compliance Score</span>
-                                <span style="font-size: 1.1rem; font-weight: 800; color: var(--accent-green);">94%</span>
-                            </div>
-                            <div style="width: 100%; height: 6px; background: #E2E8F0; border-radius: 3px; overflow: hidden;">
-                                <div style="width: 94%; height: 100%; background: var(--accent-green); border-radius: 3px;"></div>
+                        <div style="background: #FFF1F2; border: 1px solid #FECACA; border-radius:12px; padding: 16px; margin-bottom: 16px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span style="font-size: 0.85rem; font-weight: 700; color: #991B1B;">Active Deficiencies</span>
+                                <span style="font-size: 1.1rem; font-weight: 800; color: #EF4444;">2 Gaps</span>
                             </div>
                         </div>
 
@@ -1137,18 +1146,13 @@
                             </div>
                             <p class="eval-desc">AI has scanned new updated regulations and detected <b>2 priority gaps</b> in your Compounding and Training protocols.</p>
                             <div class="eval-metrics">
-                                <div class="eval-metric">
-                                    <i class="fas fa-shield-alt"></i>
-                                    <span>94% Compliance Score</span>
+                                <div class="eval-metric" style="color: #991B1B;">
+                                    <i class="fas fa-exclamation-circle"></i>
+                                    <span>2 Priority Deficiencies Identified</span>
                                 </div>
-                                <div class="eval-progress-container">
-                                    <div class="eval-progress-bar">
-                                        <div class="eval-progress-fill" id="evalProgress" style="width: 0%;"></div>
-                                    </div>
-                                </div>
-                                <div class="eval-metric" style="color: var(--accent-orange);">
+                                <div class="eval-metric" style="color: var(--accent-orange); margin-left: 24px;">
                                     <i class="fas fa-tasks" style="color:var(--accent-orange)"></i>
-                                    <span>2 Actions Needed</span>
+                                    <span>Corrective Actions Needed</span>
                                 </div>
                             </div>
                         </div>
@@ -1559,13 +1563,13 @@
                                 <div style="padding: 12px 14px; border-bottom: 2px solid var(--border-subtle); background: var(--bg-subtle);">
                                     <div style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;">Select a Report</div>
                                 </div>
-                                <div class="report-dropdown-item" onclick="selectReport('Jun 13, 2024 Sterile', 'Conditional Pass', '2024-06-13')">
+                                <div class="report-dropdown-item" onclick="selectReport('Jun 13, 2024 Sterile', 'Conditional', '2024-06-13')">
                                     <div class="report-title">Jun 13, 2024 - Sterile Compounding</div>
-                                    <div class="report-meta">Verdict: Conditional Pass • 5 findings</div>
+                                    <div class="report-meta">Non-Compliant • 5 deficiencies</div>
                                 </div>
-                                <div class="report-dropdown-item" onclick="selectReport('Mar 22, 2024 Routine', 'Pass', '2024-03-22')">
+                                <div class="report-dropdown-item" onclick="selectReport('Mar 22, 2024 Routine', 'Compliant', '2024-03-22')">
                                     <div class="report-title">Mar 22, 2024 - Routine Operations</div>
-                                    <div class="report-meta">Verdict: Pass • 4 findings</div>
+                                    <div class="report-meta">Compliant • 0 deficiencies</div>
                                 </div>
                             </div>
                         </div>
@@ -1605,8 +1609,8 @@
                             <span class="detail-value">Jan 15, 2026</span>
                         </div>
                         <div class="detail-row">
-                            <span class="detail-label">Verdict</span>
-                            <span class="detail-value" style="color: #F59E0B;">Conditional Pass</span>
+                            <span class="detail-label">Status</span>
+                            <span class="detail-value" style="color: #EF4444;">Non-Compliant</span>
                         </div>
                         <div class="detail-row">
                             <span class="detail-label">Total Audits</span>
@@ -1637,49 +1641,49 @@
                             <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 24px; font-weight: 500;">Based on 20 recent audits by this inspector</p>
                             
                             <div class="chart-container" style="flex: 1; min-height: 200px; padding: 24px;">
-                                <div class="bar-group"><div class="bar" data-val="85%" style="height: 85%; background: var(--primary-dark);"></div><span style="font-size: 0.75rem; color: var(--text-muted); margin-top: 8px;">Documentation</span></div>
-                                <div class="bar-group"><div class="bar" data-val="75%" style="height: 75%; background: var(--primary);"></div><span style="font-size: 0.75rem; color: var(--text-muted); margin-top: 8px;">Sterile</span></div>
-                                <div class="bar-group"><div class="bar" data-val="60%" style="height: 60%; background: #26A69A;"></div><span style="font-size: 0.75rem; color: var(--text-muted); margin-top: 8px;">Staffing</span></div>
-                                <div class="bar-group"><div class="bar" data-val="45%" style="height: 45%; background: #80CBC4;"></div><span style="font-size: 0.75rem; color: var(--text-muted); margin-top: 8px;">Transport</span></div>
-                                <div class="bar-group"><div class="bar" data-val="30%" style="height: 30%; background: #B2DFDB;"></div><span style="font-size: 0.75rem; color: var(--text-muted); margin-top: 8px;">Clinical</span></div>
+                                <div class="bar-group"><div class="bar" data-val="Very High" style="height: 90%; background: var(--primary-dark);"></div><span style="font-size: 0.75rem; color: var(--text-muted); margin-top: 8px;">Documentation</span></div>
+                                <div class="bar-group"><div class="bar" data-val="High" style="height: 75%; background: var(--primary);"></div><span style="font-size: 0.75rem; color: var(--text-muted); margin-top: 8px;">Sterile</span></div>
+                                <div class="bar-group"><div class="bar" data-val="Moderate" style="height: 60%; background: #26A69A;"></div><span style="font-size: 0.75rem; color: var(--text-muted); margin-top: 8px;">Staffing</span></div>
+                                <div class="bar-group"><div class="bar" data-val="Moderate" style="height: 45%; background: #80CBC4;"></div><span style="font-size: 0.75rem; color: var(--text-muted); margin-top: 8px;">Transport</span></div>
+                                <div class="bar-group"><div class="bar" data-val="Low" style="height: 30%; background: #B2DFDB;"></div><span style="font-size: 0.75rem; color: var(--text-muted); margin-top: 8px;">Clinical</span></div>
                             </div>
                         </div>
 
                         <!-- Audit History Trend -->
                         <div style="background: white; border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 28px; box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06); transition: all 0.3s; flex: 1; display: flex; flex-direction: column;" onmouseover="this.style.boxShadow='0 12px 32px rgba(0, 0, 0, 0.1)'" onmouseout="this.style.boxShadow='0 4px 24px rgba(0, 0, 0, 0.06)'">
-                            <h3 style="font-size: 1.2rem; margin-bottom: 8px; font-weight: 800; letter-spacing: -0.3px;">Your Audit Performance Trend</h3>
-                            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 24px; font-weight: 500;">Last 4 inspections with Inspector J. Smith</p>
+                            <h3 style="font-size: 1.2rem; margin-bottom: 8px; font-weight: 800; letter-spacing: -0.3px;">Deficiency Trend Analysis</h3>
+                            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 24px; font-weight: 500;">Number of deficiencies identified per inspection</p>
                             
-                            <div style="position: relative; display: flex; gap: 16px; align-items: flex-end; height: 200px; padding-top: 20px;">
-                                <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px; height: 180px; justify-content: flex-end; position: relative; z-index: 2;">
-                                    <div style="width: 100%; height: 80%; background: linear-gradient(to top, #B2DFDB, #C7E9E6); border-radius: 8px 8px 0 0; position: relative; border: 1px solid #80CBC4; border-bottom: none;">
-                                        <span style="position: absolute; top: -22px; left: 50%; transform: translateX(-50%); font-size: 0.85rem; font-weight: 700; color: var(--primary-dark);">80%</span>
+                            <div style="position: relative; display: flex; gap: 16px; align-items: flex-end; height: 180px; padding-top: 20px;">
+                                <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px; height: 160px; justify-content: flex-end; position: relative; z-index: 2;">
+                                    <div style="width: 100%; height: 60%; background: #94A3B8; border-radius: 8px 8px 0 0; position: relative; border: 1px solid #64748B; border-bottom: none;">
+                                        <span style="position: absolute; top: -22px; left: 50%; transform: translateX(-50%); font-size: 0.85rem; font-weight: 700; color: #475569;">6</span>
                                     </div>
                                     <span style="font-size: 0.75rem; color: var(--text-muted);">Jan 2024</span>
                                 </div>
-                                <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px; height: 180px; justify-content: flex-end; position: relative; z-index: 2;">
-                                    <div style="width: 100%; height: 72%; background: linear-gradient(to top, #80CBC4, #9DD6CF); border-radius: 8px 8px 0 0; position: relative; border: 1px solid #4DB6AC; border-bottom: none;">
-                                        <span style="position: absolute; top: -22px; left: 50%; transform: translateX(-50%); font-size: 0.85rem; font-weight: 700; color: var(--primary-dark);">72%</span>
+                                <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px; height: 160px; justify-content: flex-end; position: relative; z-index: 2;">
+                                    <div style="width: 100%; height: 80%; background: #EF4444; border-radius: 8px 8px 0 0; position: relative; border: 1px solid #DC2626; border-bottom: none;">
+                                        <span style="position: absolute; top: -22px; left: 50%; transform: translateX(-50%); font-size: 0.85rem; font-weight: 700; color: #B91C1C;">8</span>
                                     </div>
                                     <span style="font-size: 0.75rem; color: var(--text-muted);">Jul 2024</span>
                                 </div>
-                                <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px; height: 180px; justify-content: flex-end; position: relative; z-index: 2;">
-                                    <div style="width: 100%; height: 93%; background: linear-gradient(to top, #4DB6AC, #6EC2B8); border-radius: 8px 8px 0 0; position: relative; border: 1px solid #26A69A; border-bottom: none;">
-                                        <span style="position: absolute; top: -22px; left: 50%; transform: translateX(-50%); font-size: 0.85rem; font-weight: 700; color: var(--primary-dark);">93%</span>
+                                <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px; height: 160px; justify-content: flex-end; position: relative; z-index: 2;">
+                                    <div style="width: 100%; height: 20%; background: #10B981; border-radius: 8px 8px 0 0; position: relative; border: 1px solid #059669; border-bottom: none;">
+                                        <span style="position: absolute; top: -22px; left: 50%; transform: translateX(-50%); font-size: 0.85rem; font-weight: 700; color: #065F46;">2</span>
                                     </div>
                                     <span style="font-size: 0.75rem; color: var(--text-muted);">Nov 2025</span>
                                 </div>
-                                <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px; height: 180px; justify-content: flex-end; position: relative; z-index: 2;">
-                                    <div style="width: 100%; height: 85%; background: linear-gradient(to top, var(--primary), #00897B); border-radius: 8px 8px 0 0; position: relative; border: 1px solid var(--primary-dark); border-bottom: none; box-shadow: 0 2px 8px rgba(0, 105, 92, 0.2);">
-                                        <span style="position: absolute; top: -22px; left: 50%; transform: translateX(-50%); font-size: 0.85rem; font-weight: 700; color: var(--primary-dark);">85%</span>
+                                <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px; height: 160px; justify-content: flex-end; position: relative; z-index: 2;">
+                                    <div style="width: 100%; height: 50%; background: #F59E0B; border-radius: 8px 8px 0 0; position: relative; border: 1px solid #D97706; border-bottom: none;">
+                                        <span style="position: absolute; top: -22px; left: 50%; transform: translateX(-50%); font-size: 0.85rem; font-weight: 700; color: #92400E;">5</span>
                                     </div>
                                     <span style="font-size: 0.75rem; color: var(--text-muted);">Jan 2026</span>
                                 </div>
                             </div>
                             
-                            <div style="margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border-subtle); display: flex; align-items: center; gap: 8px; color: var(--primary-dark);">
-                                <i class="fas fa-arrow-trend-up"></i>
-                                <span style="font-weight: 600; font-size: 0.9rem;">+17% improvement over 2 years</span>
+                            <div style="margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border-subtle); display: flex; align-items: center; gap: 8px; color: var(--text-muted);">
+                                <i class="fas fa-info-circle"></i>
+                                <span style="font-weight: 600; font-size: 0.9rem;">Target: 0 deficiencies (Compliant)</span>
                             </div>
                         </div>
                     </div>
@@ -1705,23 +1709,18 @@
                                 </div>
                             </div>
 
-                            <div style="margin-bottom: 16px;">
-                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                                    <span style="font-size: 0.85rem; color: var(--text-muted);">Readiness Score</span>
-                                    <span style="font-weight: 700; font-size: 1.2rem; color: var(--primary);">78%</span>
+                            <div style="margin-bottom: 20px; padding: 16px; background: #FFF1F2; border-radius: 12px; border: 1px solid #FECACA;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                                    <span style="font-size: 0.85rem; color: #991B1B; font-weight: 700;">Critical Readiness Gaps</span>
+                                    <span style="font-weight: 800; font-size: 1.2rem; color: #EF4444;">2</span>
                                 </div>
-                                <div class="progress-container">
-                                    <div class="progress-fill" style="width: 78%;"></div>
-                                </div>
+                                <div style="font-size: 0.75rem; color: #7F1D1D;">Immediate action required before audit</div>
                             </div>
 
-                            <div>
-                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                                    <span style="font-size: 0.85rem; color: var(--text-muted);">Documents Ready</span>
-                                    <span style="font-weight: 700; font-size: 1.2rem;">12/15</span>
-                                </div>
-                                <div class="progress-container">
-                                    <div class="progress-fill" style="width: 80%;"></div>
+                            <div style="padding: 16px; background: #F8FAFC; border-radius: 12px; border: 1px solid #E2E8F0;">
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <span style="font-size: 0.85rem; color: var(--text-muted); font-weight: 600;">Documentation Status</span>
+                                    <span style="font-weight: 700; font-size: 1.1rem; color: var(--text-main);">12 / 15 Ready</span>
                                 </div>
                             </div>
                         </div>
@@ -1754,35 +1753,34 @@
 
                         <!-- Peer Comparison -->
                         <div style="background: white; border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 24px; box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06); transition: all 0.3s;" onmouseover="this.style.boxShadow='0 12px 32px rgba(0, 0, 0, 0.1)'" onmouseout="this.style.boxShadow='0 4px 24px rgba(0, 0, 0, 0.06)'">
-                            <h4 style="font-size: 1rem; margin-bottom: 8px; font-weight: 800; letter-spacing: -0.3px;">Peer Comparison</h4>
+                            <h4 style="font-size: 1rem; margin-bottom: 8px; font-weight: 800; letter-spacing: -0.3px;">Global Benchmarking</h4>
                             <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 20px; font-weight: 500;">Similar pharmacies in your region</p>
                             
-                            <div style="margin-bottom: 12px;">
-                                <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
-                                    <span style="font-size: 0.85rem;">Your Score</span>
-                                    <span style="font-weight: 700; color: var(--primary);">85%</span>
+                            <div style="margin-bottom: 16px;">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                                    <span style="font-size: 0.85rem; font-weight: 600;">Your Deficiencies</span>
+                                    <span style="font-weight: 800; color: #F59E0B;">5</span>
                                 </div>
-                                <div class="progress-container" style="background: var(--primary-light);">
-                                    <div class="progress-fill" style="width: 85%;"></div>
-                                </div>
-                            </div>
-
-                            <div>
-                                <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
-                                    <span style="font-size: 0.85rem;">Peer Average</span>
-                                    <span style="font-weight: 700; color: #6B7280;">72%</span>
-                                </div>
-                                <div class="progress-container">
-                                    <div class="progress-fill" style="width: 72%; background: #9CA3AF;"></div>
+                                <div style="width: 100%; height: 8px; background: #FDE68A; border-radius: 4px; position: relative;">
+                                    <div style="width: 40%; height: 100%; background: #F59E0B; border-radius: 4px;"></div>
                                 </div>
                             </div>
 
-                            <div style="margin-top: 16px; padding: 10px; background: var(--primary-light); border-radius: 6px; text-align: center;">
-                                <i class="fas fa-trophy" style="color: var(--primary); margin-right: 6px;"></i>
-                                <span style="font-size: 0.85rem; font-weight: 600; color: var(--primary-dark);">Above Average</span>
+                            <div style="margin-bottom: 20px;">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                                    <span style="font-size: 0.85rem; font-weight: 600;">Peer Average Findings</span>
+                                    <span style="font-weight: 800; color: #94A3B8;">8.2</span>
+                                </div>
+                                <div style="width: 100%; height: 8px; background: #E2E8F0; border-radius: 4px; position: relative;">
+                                    <div style="width: 65%; height: 100%; background: #94A3B8; border-radius: 4px;"></div>
+                                </div>
+                            </div>
+
+                            <div style="padding: 12px; background: #ECFDF5; border-radius: 8px; border: 1px solid #D1FAE5; display: flex; align-items: center; gap: 10px;">
+                                <i class="fas fa-check-circle" style="color: #10B981;"></i>
+                                <span style="font-size: 0.85rem; font-weight: 700; color: #065F46;">Below Peer Average findings</span>
                             </div>
                         </div>
-
                     </div>
                 </div>
 
@@ -2781,7 +2779,7 @@
                         <div style="width: 32px; height: 32px; background: #FEE2E2; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #EF4444;">
                             <i class="fas fa-pills"></i>
                         </div>
-                        Narcotic Reconciliation (85% Priority)
+                        Narcotic Reconciliation (High Priority)
                     </h3>
                     
                     <div class="check-item" style="background: white; border: 1px solid var(--border-subtle); border-radius: 8px; padding: 12px 16px; margin-bottom: 8px; display: flex; align-items: center; gap: 12px;">
@@ -2808,7 +2806,7 @@
                         <div style="width: 32px; height: 32px; background: #FEF3C7; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #F59E0B;">
                             <i class="fas fa-temperature-half"></i>
                         </div>
-                        Temperature Monitoring (70% Priority)
+                        Temperature Monitoring (Medium-High Priority)
                     </h3>
                     
                     <div class="check-item" style="background: white; border: 1px solid var(--border-subtle); border-radius: 8px; padding: 12px 16px; margin-bottom: 8px; display: flex; align-items: center; gap: 12px;">
@@ -2835,7 +2833,7 @@
                         <div style="width: 32px; height: 32px; background: #DBEAFE; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #3B82F6;">
                             <i class="fas fa-flask"></i>
                         </div>
-                        Sterile Compounding (45% Priority)
+                        Sterile Compounding (Medium Priority)
                     </h3>
                     
                     <div class="check-item" style="background: white; border: 1px solid var(--border-subtle); border-radius: 8px; padding: 12px 16px; margin-bottom: 8px; display: flex; align-items: center; gap: 12px;">
@@ -3143,7 +3141,7 @@
                         <ul style="margin: 0; padding-left: 20px; font-size: 0.9rem; color: #0C4A6E; line-height: 1.8;">
                             <li><strong>Pattern Detection:</strong> Narcotic documentation issues appear 3x in past year. Consider implementing dual-check system.</li>
                             <li><strong>Risk Assessment:</strong> Temperature gaps could lead to product integrity concerns. Recommend digital monitoring solution.</li>
-                            <li><strong>Compliance Trend:</strong> Your score improved from 65% (last audit) to 70%. On track for 80%+ with these fixes.</li>
+                            <li><strong>Compliance Trend:</strong> Deficiency count reduced by 2 since last audit. On track for zero findings with these corrective actions.</li>
                         </ul>
                     </div>
                 </div>
@@ -4214,8 +4212,8 @@
             }
         });
 
-        function selectReport(title, verdict, date) {
-            selectedReport = { title, verdict, date };
+        function selectReport(title, status, date) {
+            selectedReport = { title, status, date };
             
             // Update dropdown button text
             const dropdownBtn = document.getElementById('reportsDropdownBtn');
@@ -4426,9 +4424,10 @@
                 return `Patient counselling documentation concerns:<br><br>
                     Five new prescriptions dispensed on January 10-12 lacked proper documentation of patient counselling as required by <strong>Standard 9.4</strong>.<br><br>
                     The inspector expects to see notes indicating what was discussed, including medication purpose, dosage instructions, and potential side effects.`;
-            } else if (q.includes('verdict') || q.includes('result') || q.includes('outcome')) {
-                return `The audit resulted in a <strong>${selectedReport.verdict}</strong>.<br><br>
-                    This means corrective actions are required, and a follow-up inspection will be scheduled within 60 days to verify compliance. All findings must be addressed and documented evidence of corrections must be prepared.`;
+            } else if (q.includes('verdict') || q.includes('result') || q.includes('outcome') || q.includes('status')) {
+                const statusText = selectedReport.status === 'Compliant' ? '<span style="color: var(--accent-green); font-weight: 700;">Compliant</span>' : '<span style="color: var(--accent-red); font-weight: 700;">Non-Compliant (Items Outstanding)</span>';
+                return `The audit status is: <strong>${statusText}</strong>.<br><br>
+                    ${selectedReport.status === 'Compliant' ? 'All standards were met at the time of inspection.' : 'Corrective actions are required to address identified deficiencies. A follow-up or documented evidence of correction is typically required to return to full compliance.'}`;
             } else if (q.includes('fix') || q.includes('solve') || q.includes('correct')) {
                 return `To address the findings:<br><br>
                     <strong>Immediate Actions:</strong><br>
