@@ -14,7 +14,7 @@
     
     <style>
         :root {
-            --sidebar-width: 260px;
+            --sidebar-width: 80px;
             --primary: #0f172a;
             --secondary: #334155;
             --accent: #3b82f6;
@@ -59,43 +59,50 @@
             margin-bottom: 2.5rem;
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 12px;
-            padding: 0 0.5rem;
+            padding: 0;
             letter-spacing: -0.02em;
         }
 
+        .brand span { display: none; }
+
         .brand i { 
             color: var(--accent);
-            font-size: 1.4rem;
+            font-size: 1.6rem;
         }
 
         .nav-section {
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
         }
 
         .nav-section-title {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: var(--accent);
-            margin-bottom: 0.75rem;
-            font-weight: 700;
-            padding-left: 0.75rem;
+            display: none;
+        }
+
+        .context-switcher {
+            display: none !important;
         }
 
         .nav-item {
-            padding: 10px 12px;
-            margin-bottom: 4px;
-            border-radius: 8px;
+            height: 48px;
+            width: 48px;
+            margin: 0 auto 8px auto;
+            border-radius: 12px;
             cursor: pointer;
             color: #94a3b8;
-            font-weight: 500;
-            font-size: 0.9rem;
             display: flex;
             align-items: center;
-            gap: 12px;
+            justify-content: center;
             transition: all 0.2s ease;
             border: 1px solid transparent;
+            position: relative;
+        }
+        
+        .nav-item span, .nav-item .badge { display: none; }
+
+        .nav-item i {
+            font-size: 1.2rem;
         }
 
         .nav-item:hover {
@@ -107,65 +114,57 @@
             background: var(--accent);
             color: white;
             box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25);
-            font-weight: 600;
         }
 
-        .nav-item .badge {
-            margin-left: auto;
-            background: rgba(255,255,255,0.15);
-            font-size: 0.65rem;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-weight: 600;
-        }
-
-        /* Context Switcher - Clean & Minimal */
+        /* Context Switcher - Minimal Icons */
         .context-switcher {
-            background: #1e293b;
-            padding: 4px; /* Pill shape container */
-            border-radius: 8px;
-            margin-bottom: 2rem;
             display: flex;
-            border: 1px solid #334155;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 2rem;
+            align-items: center;
         }
 
         .btn-context {
-            flex: 1;
-            background: transparent;
-            border: none;
+            width: 44px;
+            height: 44px;
+            background: #1e293b;
+            border: 1px solid #334155;
             color: #94a3b8;
-            padding: 8px;
-            border-radius: 6px;
-            font-size: 0.8rem;
-            font-weight: 500;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 6px;
             transition: all 0.2s;
         }
         
-        .btn-context:hover { color: white; }
+        .btn-context span { display: none; }
+        
+        .btn-context:hover { color: white; border-color: #475569; }
 
         .btn-context.active {
             background: #334155;
             color: white;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+            border-color: var(--accent);
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
         }
 
         .site-info {
-            margin-top: auto;
             padding-top: 1.5rem;
             border-top: 1px solid #1e293b;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
         }
+
+        .site-info div:not(.site-status), 
+        .site-info span { display: none; }
 
         .site-status {
             display: flex;
             align-items: center;
-            gap: 8px;
-            margin-bottom: 0.5rem;
-            font-size: 0.85rem;
-            color: #cbd5e1;
+            justify-content: center;
         }
 
         .status-indicator {
@@ -185,7 +184,7 @@
         .main-content {
             flex: 1;
             overflow-y: auto;
-            padding: 1.5rem 2rem 2rem 2rem;
+            padding: 1.5rem 3rem 2rem 3rem;
             background: var(--bg-light);
             scroll-behavior: smooth;
             /* Soft ambient background */
@@ -739,7 +738,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 1.25rem;
-            padding: 1.5rem;
+            padding: 1.5rem 2.5rem;
         }
 
         .question-section {
@@ -939,7 +938,239 @@
 
         .view-section {
             animation: fadeIn 0.5s ease;
+            padding: 0 1rem;
         }
+
+        /* Agentic Hub */
+        .hub-container {
+            display: flex;
+            flex-direction: column;
+            height: calc(100vh - 4.5rem);
+            max-width: 1100px;
+            margin: 0 auto;
+            position: relative;
+            padding: 2.5rem 2.5rem;
+            gap: 1.5rem;
+        }
+
+        .hub-welcome {
+            text-align: center;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+            animation: fadeIn 0.8s ease-out;
+            transition: opacity 0.3s;
+        }
+
+        .hub-welcome h1 {
+            font-size: 2.75rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            color: #0f172a;
+            letter-spacing: -0.025em;
+        }
+
+        .hub-welcome p {
+            color: #64748b;
+            font-size: 1.15rem;
+        }
+
+        .hub-container.chat-active .hub-welcome,
+        .hub-container.chat-active .hub-cards {
+            display: none !important;
+        }
+
+        .hub-cards {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1.25rem;
+            margin-bottom: 3rem;
+        }
+
+        .hub-card {
+            background: white;
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+
+        .hub-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.1);
+        }
+
+        .hub-card i {
+            font-size: 1.5rem;
+            color: var(--accent);
+        }
+
+        .hub-card .title {
+            font-weight: 700;
+            color: #1e293b;
+            font-size: 1rem;
+        }
+
+        .hub-card .description {
+            font-size: 0.875rem;
+            color: #64748b;
+            line-height: 1.5;
+        }
+
+        .hub-search-container {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            z-index: 100;
+            background: #f8fafc;
+            transition: all 0.3s ease;
+        }
+
+        .hub-container.chat-active .hub-search-container {
+            position: sticky;
+            bottom: 0;
+            padding: 1rem 0;
+            margin-top: auto;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .hub-input-wrapper {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 24px;
+            padding: 10px 12px 10px 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .hub-input-wrapper:focus-within {
+            border-color: var(--accent);
+            box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.15);
+        }
+
+        .hub-input {
+            flex: 1;
+            border: none;
+            outline: none;
+            font-size: 1.1rem;
+            padding: 8px 0;
+            background: transparent;
+        }
+
+        .hub-btn-send {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: #0f172a;
+            color: white;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .hub-btn-send:hover {
+            background: var(--accent);
+            transform: scale(1.05);
+        }
+
+        .hub-chat-history {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1rem 0;
+            display: none;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .hub-container.chat-active .hub-chat-history {
+            display: flex;
+        }
+
+        .sample-questions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .sample-topic-container {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            transition: all 0.3s ease;
+        }
+
+        .hub-container.chat-active .sample-topic-container {
+            position: sticky;
+            top: 0;
+            justify-content: flex-start;
+            padding: 1rem 0;
+            border-bottom: 1px solid #e2e8f0;
+            background: #f8fafc;
+            margin-bottom: 1.25rem;
+            z-index: 101;
+        }
+
+        .sample-topic {
+            background: white;
+            border: 1px solid #e2e8f0;
+            color: #64748b;
+            border-radius: 9999px;
+            padding: 8px 18px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .sample-topic:hover, .sample-topic.active {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: rgba(59, 130, 246, 0.05);
+        }
+
+        .sample-question {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 1rem;
+            font-size: 0.9rem;
+            color: #1e293b;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: left;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .sample-question:hover {
+            border-color: var(--accent);
+            background: #f8fafc;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Hide floating agent button as it's now the main UI */
+        .agent-toggle-btn { display: none !important; }
 
         /* proposal page */
         .proposal-tier {
@@ -1717,6 +1948,91 @@
             animation: pulse 2s infinite;
         }
 
+        /* User Auth Styles */
+        .user-auth-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-left: 12px;
+            padding-left: 12px;
+            border-left: 1px solid var(--card-border);
+        }
+
+        .btn-auth {
+            padding: 6px 16px;
+            border-radius: 9999px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .btn-signin {
+            background: var(--accent);
+            color: white;
+            border: none;
+        }
+
+        .btn-signin:hover {
+            background: #2563eb;
+            transform: translateY(-1px);
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            padding: 4px 8px;
+            border-radius: 9999px;
+            transition: background 0.2s;
+        }
+
+        .user-profile:hover {
+            background: rgba(0,0,0,0.05);
+        }
+
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--accent);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .auth-modal {
+            max-width: 460px !important;
+        }
+
+        .context-option {
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+        }
+
+        .context-option:hover {
+            border-color: var(--accent);
+            background: rgba(59, 130, 246, 0.05);
+        }
+
+        .context-option.selected {
+            border-color: var(--accent);
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        .context-option i {
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
+            color: var(--accent);
+        }
+
         /* Planning tab styles */
         .planning-tab-content {
             animation: fadeIn 0.3s ease;
@@ -1735,7 +2051,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        @media (max-width: 1200px) {
+        @media (max-width: 1000px) {
             .kpi-grid {
                 grid-template-columns: 1fr;
             }
@@ -1792,76 +2108,75 @@
         <!-- Improved context switcher: dual buttons -->
         <!-- Compact Context Switcher -->
         <div class="context-switcher">
-            <button id="ctxNitrogen" class="btn-context active" onclick="switchContext('nitrogen')">
+            <button id="ctxNitrogen" class="btn-context active" onclick="switchContext('nitrogen')" title="Nitrogen Context">
                 <i class="fas fa-industry"></i> <span>Nitrogen</span>
             </button>
-            <button id="ctxPotash" class="btn-context" onclick="switchContext('potash')">
+            <button id="ctxPotash" class="btn-context" onclick="switchContext('potash')" title="Potash Context">
                 <i class="fas fa-hard-hat"></i> <span>Potash</span>
             </button>
             <span id="contextBadge" style="display:none">Nitrogen</span>
         </div>
 
         <div class="nav-section">
+            <div class="nav-section-title">HOME</div>
+            <div class="nav-item active" onclick="navigate('hub')" title="Home">
+                <i class="fas fa-house"></i>
+                <span>Home</span>
+            </div>
             <div class="nav-section-title">OPERATIONS INTELLIGENCE</div>
-            <div class="nav-item active" onclick="navigate('dashboard')">
+            <div class="nav-item" onclick="navigate('dashboard')" title="Predictive Maintenance">
                 <i class="fas fa-tachometer-alt"></i>
                 <span>Predictive Maintenance</span>
                 <span class="badge">Live</span>
             </div>
-            <div class="nav-item" onclick="navigate('causal')">
+            <div class="nav-item" onclick="navigate('causal')" title="Root Cause AI">
                 <i class="fas fa-project-diagram"></i>
                 <span>Root Cause AI</span>
-                <span class="badge" id="causalAlertBadge">3 Alerts</span>
+                <span class="badge" id="causalAlertBadge">2 Alerts</span>
             </div>
-        </div>
-
-        <div class="nav-section">
             <div class="nav-section-title">PLANNING & COMPLIANCE</div>
-            <div class="nav-item" onclick="navigate('planning')">
+            <div class="nav-item" onclick="navigate('planning')" title="Planning & Optimization">
                 <i class="fas fa-chart-line"></i>
                 <span>Planning & Optimization</span>
                 <span class="badge" id="planningBadge">Q4 2026</span>
             </div>
-            <div class="nav-item" onclick="navigate('carbon')">
+            <div class="nav-item" onclick="navigate('carbon')" title="Carbon & Sustainability">
                 <i class="fas fa-leaf"></i>
                 <span>Carbon & Sustainability</span>
             </div>
-            <div class="nav-item" onclick="navigate('safety')">
+            <div class="nav-item" onclick="navigate('safety')" title="Safety & Compliance">
                 <i class="fas fa-shield-alt"></i>
                 <span>Safety & Compliance</span>
                 <span class="badge" id="safetyBadge">100%</span>
             </div>
         </div>
 
-        <!-- STRATEGIC -->
-        <div class="nav-section">
-            <div class="nav-section-title">STRATEGIC</div>
-            <div class="nav-item" onclick="navigate('proposal')">
-                <i class="fas fa-handshake"></i>
-                <span>Partnership Proposal</span>
+        <div class="mt-auto">
+            <div class="nav-section">
+                <div class="nav-section-title">STRATEGIC</div>
+                <div class="nav-item" onclick="navigate('proposal')" title="Partnership Proposal">
+                    <i class="fas fa-handshake"></i>
+                    <span>Partnership Proposal</span>
+                </div>
+                <div class="nav-section-title">SYSTEM</div>
+                <div class="nav-item" onclick="navigate('settings')" title="Configuration">
+                    <i class="fas fa-cog"></i>
+                    <span>Configuration</span>
+                </div>
             </div>
-        </div>
 
-        <!-- SYSTEM CONFIGURATION -->
-        <div class="nav-section">
-            <div class="nav-section-title">SYSTEM</div>
-            <div class="nav-item" onclick="navigate('settings')">
-                <i class="fas fa-cog"></i>
-                <span>Configuration</span>
-            </div>
-        </div>
-
-        <div class="site-info">
-            <div class="site-status">
-                <div class="status-indicator"></div>
-                <span>All Systems Operational</span>
-            </div>
-            <div style="font-size: 0.8rem; color: #94a3b8;">
-                Last updated: <span id="lastUpdated">Just now</span>
-            </div>
-            <div style="font-size: 0.75rem; color: #64748b; margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid #1e293b;">
-                Powered by <strong>AlgoMind</strong><br>
-                &copy; 2026 Algo-Rythmn.ai
+            <div class="site-info">
+                <div class="site-status">
+                    <div class="status-indicator"></div>
+                    <span>All Systems Operational</span>
+                </div>
+                <div style="font-size: 0.8rem; color: #94a3b8;">
+                    Last updated: <span id="lastUpdated">Just now</span>
+                </div>
+                <div style="font-size: 0.75rem; color: #64748b; margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid #1e293b;">
+                    Powered by <strong>AlgoMind</strong><br>
+                    &copy; 2026 Algo-Rythmn.ai
+                </div>
             </div>
         </div>
     </div>
@@ -1870,21 +2185,150 @@
     <div class="main-content" id="mainContainer">
         <div class="header">
             <div class="page-header">
-                <h1 id="pageTitle">Nitrogen Production Operations</h1>
+                <h1 id="pageTitle">OpsEdge™</h1>
             </div>
             <div class="action-bar">
-                <button class="btn btn-sm btn-outline-primary me-2" onclick="refreshDashboardData()" title="Refresh Data">
-                    <i class="fas fa-sync-alt"></i>
-                </button>
-                <div class="time-display">
-                    <i class="fas fa-clock me-2"></i>
-                    <span id="currentTime">Loading...</span>
+                <!-- User Auth Section -->
+                <div id="authSection" class="user-auth-section">
+                    <button class="btn btn-signin btn-auth" onclick="openAuthModal()">
+                        <i class="fas fa-sign-in-alt me-2"></i>Sign In
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- AGENTIC HUB VIEW -->
+        <div id="view-hub" class="view-section hub-container">
+            <div class="hub-welcome">
+                <h1 id="hubGreeting">Industrial Operations Intelligence</h1>
+                <p>How can I help you optimize your operations today?</p>
+            </div>
+
+            <div id="hub-interaction-area" class="d-flex flex-column gap-3">
+                <!-- 1. Chatbot Input -->
+                <div class="hub-search-container">
+                    <div class="hub-input-wrapper">
+                        <input type="text" id="hubInput" class="hub-input" placeholder="Ask AlgoMind anything about nitrogen or potash operations..." onkeypress="handleHubChat(event)">
+                        <button class="hub-btn-send" onclick="sendHubChat()">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Topic Container (Tabs in chat mode) -->
+                <div class="sample-topic-container" id="hubTopics">
+                    <button class="sample-topic" onclick="showSampleQuestions('reliability', this)">
+                        <i class="fas fa-tools"></i> Reliability
+                    </button>
+                    <button class="sample-topic" onclick="showSampleQuestions('safety', this)">
+                        <i class="fas fa-shield-alt"></i> Safety
+                    </button>
+                    <button class="sample-topic" onclick="showSampleQuestions('carbon', this)">
+                        <i class="fas fa-leaf"></i> Sustainability
+                    </button>
+                    <button class="sample-topic" onclick="showSampleQuestions('roi', this)">
+                        <i class="fas fa-dollar-sign"></i> ROI analysis
+                    </button>
+                </div>
+
+                <!-- Chat History (Hidden by default, shown in chat mode) -->
+                <div id="hub-chat" class="hub-chat-history"></div>
+
+                <!-- 2. Sample Questions (Visible after topic selection) -->
+                <div class="sample-questions d-none" id="sampleQuestionsList">
+                    <!-- Reliability Questions -->
+                    <button class="sample-question d-none" data-topic="reliability" onclick="sendHubQuickPrompt('What is the current health status of the primary reformers?')">
+                        <i class="fas fa-search me-2 text-primary" style="opacity: 0.5;"></i> What is the current health status of the primary reformers?
+                    </button>
+                    <button class="sample-question d-none" data-topic="reliability" onclick="sendHubQuickPrompt('List all critical assets with health scores below 80%.')">
+                        <i class="fas fa-search me-2 text-primary" style="opacity: 0.5;"></i> List all critical assets with health scores below 80%.
+                    </button>
+                    <button class="sample-question d-none" data-topic="reliability" onclick="sendHubQuickPrompt('When are the next major maintenance tasks for the synthetic gas compressors?')">
+                        <i class="fas fa-search me-2 text-primary" style="opacity: 0.5;"></i> When are the next major maintenance tasks for the synthetic gas compressors?
+                    </button>
+
+                    <!-- Safety Questions -->
+                    <button class="sample-question d-none" data-topic="safety" onclick="sendHubQuickPrompt('Are there any critical safety observations in Zone 4?')">
+                        <i class="fas fa-search me-2 text-primary" style="opacity: 0.5;"></i> Are there any critical safety observations in Zone 4?
+                    </button>
+                    <button class="sample-question d-none" data-topic="safety" onclick="sendHubQuickPrompt('Summarize recent safety alerts from Computer Vision sensors.')">
+                        <i class="fas fa-search me-2 text-primary" style="opacity: 0.5;"></i> Summarize recent safety alerts from Computer Vision sensors.
+                    </button>
+                    <button class="sample-question d-none" data-topic="safety" onclick="sendHubQuickPrompt('What is the current compliance status for high-risk work permits?')">
+                        <i class="fas fa-search me-2 text-primary" style="opacity: 0.5;"></i> What is the current compliance status for high-risk work permits?
+                    </button>
+
+                    <!-- Sustainability Questions -->
+                    <button class="sample-question d-none" data-topic="carbon" onclick="sendHubQuickPrompt('Show me the carbon intensity trend for the last quarter.')">
+                        <i class="fas fa-search me-2 text-primary" style="opacity: 0.5;"></i> Show me the carbon intensity trend for the last quarter.
+                    </button>
+                    <button class="sample-question d-none" data-topic="carbon" onclick="sendHubQuickPrompt('Analyze the impact of steam system optimization on total emissions.')">
+                        <i class="fas fa-search me-2 text-primary" style="opacity: 0.5;"></i> Analyze the impact of steam system optimization on total emissions.
+                    </button>
+                    <button class="sample-question d-none" data-topic="carbon" onclick="sendHubQuickPrompt('Which units are currently exceeding their carbon intensity targets?')">
+                        <i class="fas fa-search me-2 text-primary" style="opacity: 0.5;"></i> Which units are currently exceeding their carbon intensity targets?
+                    </button>
+
+                    <!-- ROI Questions -->
+                    <button class="sample-question d-none" data-topic="roi" onclick="sendHubQuickPrompt('Calculate the ROI for increasing steam-to-carbon ratio.')">
+                        <i class="fas fa-search me-2 text-primary" style="opacity: 0.5;"></i> Calculate the ROI for increasing steam-to-carbon ratio.
+                    </button>
+                    <button class="sample-question d-none" data-topic="roi" onclick="sendHubQuickPrompt('Estimate the potential savings from early bearing replacement in P-101.')">
+                        <i class="fas fa-search me-2 text-primary" style="opacity: 0.5;"></i> Estimate the potential savings from early bearing replacement in P-101.
+                    </button>
+                    <button class="sample-question d-none" data-topic="roi" onclick="sendHubQuickPrompt('Compare total cost of ownership for catalyst options in Reformer H-2.')">
+                        <i class="fas fa-search me-2 text-primary" style="opacity: 0.5;"></i> Compare total cost of ownership for catalyst options in Reformer H-2.
+                    </button>
+                </div>
+            </div>
+
+            <!-- 3. Navigation Cards (Bottom of Homepage) -->
+            <div class="hub-cards">
+                <div class="hub-card" onclick="navigate('dashboard')">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span class="badge bg-success bg-opacity-10 text-success border-0" style="font-size:0.6rem">Live</span>
+                    </div>
+                    <div class="title">Predictive Maintenance</div>
+                    <div class="description">Analyze equipment health and upcoming maintenance schedules.</div>
+                </div>
+                <div class="hub-card" onclick="navigate('causal')">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <i class="fas fa-project-diagram"></i>
+                        <span class="badge bg-danger bg-opacity-10 text-danger border-0" style="font-size:0.6rem">3 Alerts</span>
+                    </div>
+                    <div class="title">Root Cause AI</div>
+                    <div class="description">Investigate recent anomalies and identify causal factors.</div>
+                </div>
+                <div class="hub-card" onclick="navigate('planning')">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <i class="fas fa-chart-line"></i>
+                        <span class="badge bg-primary bg-opacity-10 text-primary border-0" style="font-size:0.6rem">Q4 2026</span>
+                    </div>
+                    <div class="title">Planning & Optimization</div>
+                    <div class="description">Review cost trends and turnaround optimizations.</div>
+                </div>
+                <div class="hub-card" onclick="navigate('carbon')">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <i class="fas fa-leaf"></i>
+                        <span class="badge bg-success bg-opacity-10 text-success border-0" style="font-size:0.6rem">A+</span>
+                    </div>
+                    <div class="title">Carbon & Sustainability</div>
+                    <div class="description">Monitor emissions trends and sustainability tracking.</div>
+                </div>
+                <div class="hub-card" onclick="navigate('safety')">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <i class="fas fa-shield-alt"></i>
+                        <span class="badge bg-info bg-opacity-10 text-info border-0" style="font-size:0.6rem">100%</span>
+                    </div>
+                    <div class="title">Safety & Compliance</div>
+                    <div class="description">Monitor site safety performance and compliance.</div>
                 </div>
             </div>
         </div>
 
         <!-- DASHBOARD VIEW (enriched) -->
-        <div id="view-dashboard" class="view-section">
+        <div id="view-dashboard" class="view-section d-none">
             <div class="row g-4 mb-4">
                 <div class="col-xl-3 col-lg-6">
                     <div class="card-custom">
@@ -3579,6 +4023,110 @@
 </div>
 
 
+<!-- Auth & Context Modal -->
+<div class="modal fade" id="authModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered auth-modal">
+        <div class="modal-content border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
+            <!-- Login Step -->
+            <div id="loginStep" class="modal-body p-0">
+                <div class="row g-0">
+                    <div class="col-12 p-5">
+                        <div class="text-center mb-5">
+                            <div class="brand-icon mb-3" style="font-size: 2.5rem; color: var(--accent);">
+                                <i class="fas fa-microchip"></i>
+                            </div>
+                            <h3 class="fw-bold text-dark">Welcome Back</h3>
+                            <p class="text-muted">Sign in to access OpsEdge™ Intelligence</p>
+                        </div>
+                        
+                        <form onsubmit="event.preventDefault(); showContextStep();">
+                            <div class="mb-3">
+                                <label class="form-label small fw-bold text-muted text-uppercase">Email Address</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light border-end-0"><i class="far fa-envelope text-muted"></i></span>
+                                    <input type="email" class="form-control bg-light border-start-0" placeholder="name@company.com" required>
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <div class="d-flex justify-content-between">
+                                    <label class="form-label small fw-bold text-muted text-uppercase">Password</label>
+                                    <a href="#" class="small text-decoration-none fw-semibold">Forgot?</a>
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light border-end-0"><i class="fas fa-lock text-muted"></i></span>
+                                    <input type="password" class="form-control bg-light border-start-0" placeholder="••••••••" required>
+                                </div>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary w-100 py-3 fw-bold shadow-sm" style="border-radius: 12px;">
+                                Sign In
+                            </button>
+                            
+                            <div class="text-center mt-4 mb-3">
+                                <span class="small text-muted">Or continue with</span>
+                            </div>
+                            
+                            <div class="d-flex gap-2">
+                                <button type="button" class="btn btn-outline-light border text-dark w-100 py-2 d-flex align-items-center justify-content-center gap-2" style="border-radius: 10px;">
+                                    <i class="fab fa-google" style="color: #4285F4;"></i>
+                                    <span class="small fw-semibold">Google</span>
+                                </button>
+                                <button type="button" class="btn btn-outline-light border text-dark w-100 py-2 d-flex align-items-center justify-content-center gap-2" style="border-radius: 10px;">
+                                    <i class="fab fa-microsoft text-primary"></i>
+                                    <span class="small fw-semibold">Microsoft</span>
+                                </button>
+                            </div>
+
+                            <div class="mt-5 border-top pt-4">
+                                <p class="small text-muted mb-3 fw-bold text-uppercase" style="letter-spacing: 0.5px;">Quick Access Divisions</p>
+                                <div class="d-flex gap-3">
+                                    <button type="button" class="btn btn-light flex-grow-1 py-2 px-3 d-flex align-items-center gap-2" style="border-radius: 10px; border: 1px solid #e2e8f0;" onclick="signInWithContext('nitrogen')">
+                                        <i class="fas fa-industry text-primary"></i>
+                                        <span class="small fw-bold">Nitrogen</span>
+                                    </button>
+                                    <button type="button" class="btn btn-light flex-grow-1 py-2 px-3 d-flex align-items-center gap-2" style="border-radius: 10px; border: 1px solid #e2e8f0;" onclick="signInWithContext('potash')">
+                                        <i class="fas fa-hard-hat text-primary"></i>
+                                        <span class="small fw-bold">Potash</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Context Step (Hidden initially) -->
+            <div id="contextStep" class="modal-body p-5 d-none">
+                <div class="text-center mb-4">
+                    <h4 class="fw-bold">Select Division</h4>
+                    <p class="text-muted">Choose an operational context to continue</p>
+                </div>
+                <div class="row g-3">
+                    <div class="col-6">
+                        <div class="context-option" onclick="signInWithContext('nitrogen')">
+                            <i class="fas fa-industry"></i>
+                            <div class="fw-bold">Nitrogen</div>
+                            <div class="small text-muted mt-1">Chemicals</div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="context-option" onclick="signInWithContext('potash')">
+                            <i class="fas fa-hard-hat"></i>
+                            <div class="fw-bold">Potash</div>
+                            <div class="small text-muted mt-1">Mining</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center mt-4">
+                    <button class="btn btn-link btn-sm text-muted text-decoration-none" onclick="showLoginStep()">
+                        <i class="fas fa-arrow-left me-1"></i> Back to login
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- ROI Calculator Modal -->
 <div class="modal fade" id="roiModal" tabindex="-1" aria-hidden="true" style="display: none;">
     <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -3673,16 +4221,16 @@
                         <div class="section-icon"><i class="fas fa-industry"></i></div>
                         Production Efficiency & Process Optimization
                     </div>
-                    <div class="question-item" onclick="sendQuickPrompt('How can we reduce energy consumption in nitrogen generation without compromising purity?')">
+                    <div class="question-item" onclick="sendAgentQuickPrompt('How can we reduce energy consumption in nitrogen generation without compromising purity?')">
                         How can we reduce energy consumption in nitrogen generation without compromising purity?
                     </div>
-                    <div class="question-item" onclick="sendQuickPrompt('What are the bottlenecks in our potash milling process, and how can they be eliminated?')">
+                    <div class="question-item" onclick="sendAgentQuickPrompt('What are the bottlenecks in our potash milling process, and how can they be eliminated?')">
                         What are the bottlenecks in our potash milling process, and how can they be eliminated?
                     </div>
-                    <div class="question-item" onclick="sendQuickPrompt('Which production line is currently underperforming compared to benchmarks?')">
+                    <div class="question-item" onclick="sendAgentQuickPrompt('Which production line is currently underperforming compared to benchmarks?')">
                         Which production line is currently underperforming compared to benchmarks?
                     </div>
-                    <div class="question-item" onclick="sendQuickPrompt('Can the system suggest optimal operating parameters for compressors and reactors?')">
+                    <div class="question-item" onclick="sendAgentQuickPrompt('Can the system suggest optimal operating parameters for compressors and reactors?')">
                         Can the system suggest optimal operating parameters for compressors and reactors?
                     </div>
                 </div>
@@ -3693,16 +4241,16 @@
                         <div class="section-icon"><i class="fas fa-tools"></i></div>
                         Predictive Maintenance & Equipment Reliability
                     </div>
-                    <div class="question-item" onclick="sendQuickPrompt('Which pumps or compressors are most at risk of failure in the next 30 days?')">
+                    <div class="question-item" onclick="sendAgentQuickPrompt('Which pumps or compressors are most at risk of failure in the next 30 days?')">
                         Which pumps or compressors are most at risk of failure in the next 30 days?
                     </div>
-                    <div class="question-item" onclick="sendQuickPrompt('What maintenance schedule would minimize downtime while reducing costs?')">
+                    <div class="question-item" onclick="sendAgentQuickPrompt('What maintenance schedule would minimize downtime while reducing costs?')">
                         What maintenance schedule would minimize downtime while reducing costs?
                     </div>
-                    <div class="question-item" onclick="sendQuickPrompt('Can you detect anomalies in vibration or temperature data from mining equipment?')">
+                    <div class="question-item" onclick="sendAgentQuickPrompt('Can you detect anomalies in vibration or temperature data from mining equipment?')">
                         Can you detect anomalies in vibration or temperature data from mining equipment?
                     </div>
-                    <div class="question-item" onclick="sendQuickPrompt('How much cost savings can predictive maintenance deliver compared to reactive repairs?')">
+                    <div class="question-item" onclick="sendAgentQuickPrompt('How much cost savings can predictive maintenance deliver compared to reactive repairs?')">
                         How much cost savings can predictive maintenance deliver compared to reactive repairs?
                     </div>
                 </div>
@@ -3713,16 +4261,16 @@
                         <div class="section-icon"><i class="fas fa-dollar-sign"></i></div>
                         Resource Allocation & Cost Control
                     </div>
-                    <div class="question-item" onclick="sendQuickPrompt('Where are we overspending on energy or raw materials in nitrogen production?')">
+                    <div class="question-item" onclick="sendAgentQuickPrompt('Where are we overspending on energy or raw materials in nitrogen production?')">
                         Where are we overspending on energy or raw materials in nitrogen production?
                     </div>
-                    <div class="question-item" onclick="sendQuickPrompt('What is the cost per ton of potash produced this week compared to last month?')">
+                    <div class="question-item" onclick="sendAgentQuickPrompt('What is the cost per ton of potash produced this week compared to last month?')">
                         What is the cost per ton of potash produced this week compared to last month?
                     </div>
-                    <div class="question-item" onclick="sendQuickPrompt('Can you recommend adjustments to shift scheduling to reduce overtime costs?')">
+                    <div class="question-item" onclick="sendAgentQuickPrompt('Can you recommend adjustments to shift scheduling to reduce overtime costs?')">
                         Can you recommend adjustments to shift scheduling to reduce overtime costs?
                     </div>
-                    <div class="question-item" onclick="sendQuickPrompt('How do current reagent usage levels compare to industry best practices?')">
+                    <div class="question-item" onclick="sendAgentQuickPrompt('How do current reagent usage levels compare to industry best practices?')">
                         How do current reagent usage levels compare to industry best practices?
                     </div>
                 </div>
@@ -3733,16 +4281,16 @@
                         <div class="section-icon"><i class="fas fa-shield-alt"></i></div>
                         Safety & Compliance
                     </div>
-                    <div class="question-item" onclick="sendQuickPrompt('Are there any safety alerts from sensors in the mining shafts today?')">
+                    <div class="question-item" onclick="sendAgentQuickPrompt('Are there any safety alerts from sensors in the mining shafts today?')">
                         Are there any safety alerts from sensors in the mining shafts today?
                     </div>
-                    <div class="question-item" onclick="sendQuickPrompt('What is the compliance status of our nitrogen plant with environmental regulations?')">
+                    <div class="question-item" onclick="sendAgentQuickPrompt('What is the compliance status of our nitrogen plant with environmental regulations?')">
                         What is the compliance status of our nitrogen plant with environmental regulations?
                     </div>
-                    <div class="question-item" onclick="sendQuickPrompt('Can you flag deviations in ammonia emissions beyond permitted thresholds?')">
+                    <div class="question-item" onclick="sendAgentQuickPrompt('Can you flag deviations in ammonia emissions beyond permitted thresholds?')">
                         Can you flag deviations in ammonia emissions beyond permitted thresholds?
                     </div>
-                    <div class="question-item" onclick="sendQuickPrompt('Which operational areas pose the highest safety risks right now?')">
+                    <div class="question-item" onclick="sendAgentQuickPrompt('Which operational areas pose the highest safety risks right now?')">
                         Which operational areas pose the highest safety risks right now?
                     </div>
                 </div>
@@ -3753,16 +4301,16 @@
                         <div class="section-icon"><i class="fas fa-leaf"></i></div>
                         Sustainability & Environmental Impact
                     </div>
-                    <div class="question-item" onclick="sendQuickPrompt('How can we reduce greenhouse gas emissions in nitrogen production?')">
+                    <div class="question-item" onclick="sendAgentQuickPrompt('How can we reduce greenhouse gas emissions in nitrogen production?')">
                         How can we reduce greenhouse gas emissions in nitrogen production?
                     </div>
-                    <div class="question-item" onclick="sendQuickPrompt('What is our current water usage in potash mining compared to last quarter?')">
+                    <div class="question-item" onclick="sendAgentQuickPrompt('What is our current water usage in potash mining compared to last quarter?')">
                         What is our current water usage in potash mining compared to last quarter?
                     </div>
-                    <div class="question-item" onclick="sendQuickPrompt('Can you simulate the impact of switching to renewable energy sources?')">
+                    <div class="question-item" onclick="sendAgentQuickPrompt('Can you simulate the impact of switching to renewable energy sources?')">
                         Can you simulate the impact of switching to renewable energy sources?
                     </div>
-                    <div class="question-item" onclick="sendQuickPrompt('What sustainability KPIs are trending positively or negatively?')">
+                    <div class="question-item" onclick="sendAgentQuickPrompt('What sustainability KPIs are trending positively or negatively?')">
                         What sustainability KPIs are trending positively or negatively?
                     </div>
                 </div>
@@ -3773,16 +4321,16 @@
                         <div class="section-icon"><i class="fas fa-chart-line"></i></div>
                         Market & Strategic Insights
                     </div>
-                    <div class="question-item" onclick="sendQuickPrompt('What is the current global demand forecast for nitrogen fertilizers?')">
+                    <div class="question-item" onclick="sendAgentQuickPrompt('What is the current global demand forecast for nitrogen fertilizers?')">
                         What is the current global demand forecast for nitrogen fertilizers?
                     </div>
-                    <div class="question-item" onclick="sendQuickPrompt('How do our potash production costs compare to competitors?')">
+                    <div class="question-item" onclick="sendAgentQuickPrompt('How do our potash production costs compare to competitors?')">
                         How do our potash production costs compare to competitors?
                     </div>
-                    <div class="question-item" onclick="sendQuickPrompt('Can you model profitability under different commodity price scenarios?')">
+                    <div class="question-item" onclick="sendAgentQuickPrompt('Can you model profitability under different commodity price scenarios?')">
                         Can you model profitability under different commodity price scenarios?
                     </div>
-                    <div class="question-item" onclick="sendQuickPrompt('Which operational improvements would yield the highest ROI in the next year?')">
+                    <div class="question-item" onclick="sendAgentQuickPrompt('Which operational improvements would yield the highest ROI in the next year?')">
                         Which operational improvements would yield the highest ROI in the next year?
                     </div>
                 </div>
@@ -3804,7 +4352,8 @@
     // ====================
     const state = {
         context: 'nitrogen',
-        currentView: 'dashboard',
+        currentView: 'hub',
+        isAuthenticated: false,
         agents: { predictive: { active: true, confidence: 92 }, causal: { active: true, confidence: 88 }, safety: { active: true, confidence: 95 }, maintenance: { active: true, confidence: 85 } }
     };
 
@@ -3962,8 +4511,7 @@
         initializeDashboard();
         startRealTimeUpdates();
         initializeCharts();
-        renderDashboardView();
-        initializeAgent();
+        navigate('hub');
     });
 
     function updateDateTime() {
@@ -3977,6 +4525,8 @@
     function switchContext(ctx) {
         state.context = ctx;
         document.getElementById('contextBadge').innerText = ctx === 'nitrogen' ? 'Nitrogen' : 'Potash';
+        document.getElementById('hubContextName').innerText = ctx === 'nitrogen' ? 'Nitrogen' : 'Potash';
+        
         if (ctx === 'nitrogen') {
             document.getElementById('ctxNitrogen').classList.add('active');
             document.getElementById('ctxPotash').classList.remove('active');
@@ -3984,14 +4534,86 @@
             document.getElementById('ctxPotash').classList.add('active');
             document.getElementById('ctxNitrogen').classList.remove('active');
         }
+
+        const input = document.getElementById('hubInput');
+        if (input) {
+            input.placeholder = `Ask AlgoMind anything about ${ctx === 'nitrogen' ? 'Nitrogen' : 'Potash'} operations...`;
+        }
+
         // re-render current view
-        if (state.currentView === 'dashboard') renderDashboardView();
+        if (state.currentView === 'hub') renderHubView();
+        else if (state.currentView === 'dashboard') renderDashboardView();
         else if (state.currentView === 'causal') renderCausalView();
         else if (state.currentView === 'planning') renderPlanningView();
         else if (state.currentView === 'safety') renderSafetyView();
         else if (state.currentView === 'carbon') renderCarbonView();
         
         updatePageHeader(state.currentView);
+    }
+
+    // ==================== AUTHENTICATION ====================
+    function showLoginStep() {
+        document.getElementById('loginStep').classList.remove('d-none');
+        document.getElementById('contextStep').classList.add('d-none');
+    }
+
+    function showContextStep() {
+        document.getElementById('loginStep').classList.add('d-none');
+        document.getElementById('contextStep').classList.remove('d-none');
+    }
+
+    function openAuthModal() {
+        showLoginStep();
+        const modal = new bootstrap.Modal(document.getElementById('authModal'));
+        modal.show();
+    }
+
+    function signInWithContext(ctx) {
+        state.isAuthenticated = true;
+        state.context = ctx;
+        
+        // Update UI state
+        const authSection = document.getElementById('authSection');
+        authSection.innerHTML = `
+            <div class="d-flex align-items-center gap-3">
+                <div class="user-profile d-flex align-items-center gap-2">
+                    <div class="avatar shadow-sm">JD</div>
+                    <div class="d-none d-md-block">
+                        <div class="fw-bold" style="font-size: 0.85rem; line-height: 1;">John Doe</div>
+                        <div class="text-muted" style="font-size: 0.7rem;">Senior Analyst</div>
+                    </div>
+                </div>
+                <button class="btn btn-auth" onclick="signOut()" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </div>
+        `;
+
+        // Update context-dependent parts of the UI
+        switchContext(ctx);
+        
+        // Navigate to hub
+        navigate('hub');
+
+        // Close modal
+        const modalEl = document.getElementById('authModal');
+        const modal = bootstrap.Modal.getInstance(modalEl);
+        if (modal) modal.hide();
+    }
+
+    function signOut() {
+        state.isAuthenticated = false;
+        
+        // Reset UI to Signed Out state
+        const authSection = document.getElementById('authSection');
+        authSection.innerHTML = `
+            <button class="btn btn-signin btn-auth" onclick="openAuthModal()">
+                <i class="fas fa-sign-in-alt me-2"></i>Sign In
+            </button>
+        `;
+
+        // Reset to initial hub state if needed
+        navigate('hub');
     }
 
     // ==================== NAVIGATION ====================
@@ -4002,31 +4624,204 @@
         const viewEl = document.getElementById(`view-${viewId}`);
         if(viewEl) viewEl.classList.remove('d-none');
         
-        document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
-        if(event && event.currentTarget) event.currentTarget.classList.add('active');
+        // Update sidebar active state
+        document.querySelectorAll('.nav-item').forEach(el => {
+            el.classList.remove('active');
+            // Check if this nav-item's onclick matches navigating to this viewId
+            if (el.getAttribute('onclick') && el.getAttribute('onclick').includes(`'${viewId}'`)) {
+                el.classList.add('active');
+            }
+        });
         
         updatePageHeader(viewId);
         
-        if (viewId === 'dashboard') renderDashboardView();
+        if (viewId === 'hub') renderHubView();
+        else if (viewId === 'dashboard') renderDashboardView();
         else if (viewId === 'causal') renderCausalView();
         else if (viewId === 'planning') renderPlanningView();
         else if (viewId === 'safety') renderSafetyView();
         else if (viewId === 'carbon') renderCarbonView();
-        else if (viewId === 'proposal') { /* static, no heavy render */ }
     }
 
     function updatePageHeader(viewId) {
         const data = enhancedDataConfig[state.context];
         const titles = {
-            dashboard: data.title, 
-            causal: 'Root Cause AI Analysis', 
-            planning: 'Planning & Optimization', 
-            safety: 'Safety & Compliance', 
-            carbon: 'Carbon & Sustainability', 
+            hub: 'OpsEdge™',
+            dashboard: (state.context === 'nitrogen' ? 'Predictive Maintenance' : 'Potash Asset Intelligence'),
+            causal: 'Root Cause AI Analysis',
+            planning: 'Strategic Planning',
+            safety: 'Safety & Compliance',
+            carbon: 'Sustainability Tracking',
             settings: 'System Configuration',
             proposal: 'Partnership Proposal'
         };
-        document.getElementById('pageTitle').textContent = titles[viewId] || 'OpsEdge™';
+        document.getElementById('pageTitle').textContent = titles[viewId] || 'Industrial Operations Intelligence';
+    }
+
+    function renderHubView() {
+        document.getElementById('hubContextName').innerText = state.context === 'nitrogen' ? 'Nitrogen' : 'Potash';
+        document.getElementById('hubGreeting').innerText = `Industrial Operations Intelligence`;
+        
+        // Restore initial hub state
+        document.querySelector('.hub-welcome').classList.remove('d-none');
+        document.querySelector('.sample-questions').classList.add('d-none'); // Hide questions by default
+        document.querySelector('.sample-topic-container').classList.remove('d-none');
+        document.querySelector('.hub-cards').classList.remove('d-none');
+        document.getElementById('hub-chat').style.display = 'none';
+        document.getElementById('hub-chat').innerHTML = '';
+        
+        // Reset topic container styles
+        const topicContainer = document.querySelector('.sample-topic-container');
+        topicContainer.style.marginBottom = '2rem';
+        topicContainer.style.justifyContent = 'center';
+        topicContainer.style.padding = '0';
+        topicContainer.style.borderBottom = 'none';
+
+        // Don't show any sample questions by default, remove active state from topics
+        document.querySelectorAll('.sample-topic').forEach(btn => btn.classList.remove('active'));
+        document.querySelectorAll('.sample-question').forEach(q => q.classList.add('d-none'));
+
+        const searchBox = document.querySelector('.hub-search-container');
+        if (searchBox) {
+            searchBox.style.marginTop = '0';
+            searchBox.style.marginBottom = '3rem';
+            searchBox.style.position = 'relative';
+            searchBox.style.bottom = 'auto';
+        }
+    }
+
+    function showSampleQuestions(topic, el) {
+        const list = document.getElementById('sampleQuestionsList');
+        if (list) {
+            list.classList.remove('d-none');
+        }
+
+        // Update active topic button
+        document.querySelectorAll('.sample-topic').forEach(btn => btn.classList.remove('active'));
+        if (el) el.classList.add('active');
+        
+        // Filter questions
+        const questions = document.querySelectorAll('.sample-question');
+        questions.forEach(q => {
+            if (q.dataset.topic === topic) {
+                q.classList.remove('d-none');
+            } else {
+                q.classList.add('d-none');
+            }
+        });
+        
+        // Add animation
+        if (list) {
+            list.style.animation = 'none';
+            void list.offsetWidth; // Trigger reflow
+            list.style.animation = 'fadeIn 0.5s ease';
+        }
+    }
+
+    // ==================== HUB CHAT LOGIC ====================
+    function handleHubChat(event) {
+        if (event.key === 'Enter') {
+            sendHubChat();
+        }
+    }
+
+    function sendHubChat() {
+        const input = document.getElementById('hubInput');
+        const text = input.value.trim();
+        if (!text) return;
+
+        // Transition from Home to Chat using CSS class
+        const container = document.querySelector('.hub-container');
+        if (container) container.classList.add('chat-active');
+        
+        // Ensure chat history is showing
+        const chatHistory = document.getElementById('hub-chat');
+        if (chatHistory) chatHistory.style.display = 'flex';
+
+        // Hide sample questions after sending
+        const list = document.getElementById('sampleQuestionsList');
+        if (list) list.classList.add('d-none');
+
+        addHubMessage(text, 'user');
+        input.value = '';
+        input.focus();
+
+        // Simulate Bot Response
+        setTimeout(() => {
+            const response = generateAIResponse(text);
+            addHubMessage(response, 'bot');
+        }, 800);
+    }
+
+    function addHubMessage(text, type) {
+        const container = document.getElementById('hub-chat');
+        if (!container) return;
+
+        const msg = document.createElement('div');
+        msg.className = `msg ${type}`;
+        
+        if (type === 'bot') {
+            msg.innerHTML = `<div class="d-flex gap-2">
+                <div class="flex-shrink-0">
+                    <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center" style="width: 32px; height: 32px;">
+                        <i class="fas fa-robot text-white" style="font-size: 0.8rem;"></i>
+                    </div>
+                </div>
+                <div>${text}</div>
+            </div>`;
+        } else {
+            msg.textContent = text;
+        }
+        
+        container.appendChild(msg);
+        container.scrollTop = container.scrollHeight;
+    }
+
+    function sendHubQuickPrompt(prompt) {
+        const input = document.getElementById('hubInput');
+        if (!input) {
+            navigate('hub');
+            setTimeout(() => sendHubQuickPrompt(prompt), 100);
+            return;
+        }
+
+        // Hide questions while typing
+        const list = document.getElementById('sampleQuestionsList');
+        if (list) list.classList.add('d-none');
+
+        // typing animation
+        input.value = '';
+        input.placeholder = '';
+        let i = 0;
+        const speed = 15;
+        
+        function type() {
+            if (i < prompt.length) {
+                input.value += prompt.charAt(i);
+                i++;
+                setTimeout(type, speed);
+            } else {
+                setTimeout(() => {
+                    sendHubChat();
+                    input.placeholder = "Ask AlgoMind anything about nitrogen or potash operations...";
+                }, 300);
+            }
+        }
+        type();
+    }
+
+    function generateAIResponse(query) {
+        query = query.toLowerCase();
+        if (query.includes('health') || query.includes('reformer')) {
+            return `Based on live telemetry, **Primary Reformer H-101** is showing a tube skin temperature deviation (Tube #42). Predictive algorithms estimate an 82% probability of catalyst fouling if current burner patterns persist. Recommend reviewing the [Predictive Maintenance dashboard](javascript:navigate('dashboard')).`;
+        } else if (query.includes('carbon') || query.includes('intensity')) {
+            return `The current carbon intensity for the ${state.context} unit is **${enhancedDataConfig[state.context].carbon.intensity}**. This is trending 1.5% below last quarter's average. Detailed breakdown is available in [Sustainability Tracking](javascript:navigate('carbon')).`;
+        } else if (query.includes('safety') || query.includes('zone 4')) {
+            return `Safety monitoring for Zone 4 reports **1 pending observation** regarding auxiliary lighting. No high-severity incidents recorded in the last 24 hours. Review full details in [Safety & Compliance](javascript:navigate('safety')).`;
+        } else if (query.includes('roi') || query.includes('calculate')) {
+            return `Analysis indicates that increasing the steam-to-carbon ratio from 3.0 to 3.2 could yield a **$45,000 monthly reduction** in methane slip, with an estimated ROI of 14.2% over 6 months. Details can be explored in [Planning & Optimization](javascript:navigate('planning')).`;
+        }
+        return `I've analyzed your query about "${query}". I recommend checking the specialized intelligence modules in the sidebar for deeper data integration, or I can run a cross-module correlation analysis for you. What would you like to prioritize?`;
     }
 
     // ========== PLANNING & OPTIMIZATION VIEW ==========
@@ -5683,7 +6478,7 @@
     // ========== AGENT ==========
     function toggleAgent() { document.getElementById('agentPanel').classList.toggle('open'); }
     function closeAgentOnBackdrop(event) { if (event.target.id === 'agentPanel') toggleAgent(); }
-    function sendQuickPrompt(p) { document.getElementById('chatInput').value = p; sendMessage(); }
+    function sendAgentQuickPrompt(p) { document.getElementById('chatInput').value = p; sendMessage(); }
     function sendMessage() {
         let msg = document.getElementById('chatInput').value.trim(); if(!msg) return;
         addUserMessage(msg); document.getElementById('chatInput').value='';
