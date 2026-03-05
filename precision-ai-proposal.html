@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algo-Rythmn.ai x Precision AI - Strategic Proposal</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap');
+        @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css');
+
+        :root {
+            /* High-Contrast NVIDIA/Ag-Tech Palette from Deck 2 */
+            --bg-color: #000000;
+            --text-main: #FFFFFF;
+            --text-muted: #A3A3A3;
+            --accent: #76B900; /* High-contrast tech green */
+            --accent-light: #94E300;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --card-border: rgba(255, 255, 255, 0.1);
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-sizing: border-box;
+            z-index: 100;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .brand-name {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-main);
+            letter-spacing: 0.5px;
+        }
+
+        .brand-name span { color: var(--accent); }
+
+        .contact-info {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .deck-container {
+            height: 100vh;
+            overflow-y: scroll;
+            overflow-x: hidden;
+            scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
+        }
+
+        .slide {
+            height: 100vh;
+            width: 100%;
+            scroll-snap-align: start;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 80px 10vw 0;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        .slide-content {
+            max-width: 1100px;
+            width: 100%;
+        }
+
+        h1 {
+            font-size: 5rem;
+            font-weight: 800;
+            margin: 0 0 1.5rem 0;
+            line-height: 1.05;
+            letter-spacing: -2px;
+        }
+
+        h2 {
+            font-size: 3.25rem;
+            font-weight: 800;
+            margin: 0 0 2rem 0;
+            color: var(--text-main);
+            letter-spacing: -1px;
+            line-height: 1.1;
+        }
+        
+        h2 span, h1 span { color: var(--accent); }
+
+        p {
+            font-size: 1.25rem;
+            line-height: 1.6;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+            margin-top: 1rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            padding: 2.5rem;
+            border-radius: 8px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            background: rgba(255, 255, 255, 0.07);
+        }
+
+        .card h3 {
+            color: var(--text-main);
+            margin: 0;
+            font-size: 1.6rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .card h3::before {
+            content: '';
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background: var(--accent);
+            border-radius: 2px;
+            flex-shrink: 0;
+        }
+
+        /* Workflow Styles */
+        .workflow-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 3rem;
+            gap: 1.5rem;
+            position: relative;
+        }
+
+        .workflow-step {
+            flex: 1;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            padding: 2rem 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        .workflow-step:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+        }
+
+        .workflow-icon {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .workflow-step h3 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            color: var(--text-main);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .workflow-step p {
+            font-size: 0.95rem;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        .workflow-arrow {
+            color: var(--card-border);
+            font-size: 1.5rem;
+            margin-top: -1rem;
+        }
+
+        .card p {
+            font-size: 1.15rem;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        .highlight-text {
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 0.5rem 1.25rem;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            margin-bottom: 2.5rem;
+            border-radius: 4px;
+        }
+
+        .citation {
+            font-size: 0.7rem;
+            color: #475569;
+            vertical-align: super;
+        }
+
+        /* Slide Specific Backgrounds from Deck 2 */
+        .slide-1 { background: radial-gradient(circle at 50% 30%, rgba(118, 185, 0, 0.15) 0%, #000000 70%); }
+        .slide-2 { background: linear-gradient(180deg, #000000 0%, #0a0a0a 100%); }
+        .slide-3 { background: radial-gradient(circle at 100% 100%, rgba(118, 185, 0, 0.1) 0%, #050505 80%); border-top: 1px solid var(--card-border); }
+        .slide-4 { background: linear-gradient(135deg, #050505 0%, #111111 100%); border-top: 1px solid var(--card-border); }
+        .slide-5 { background: radial-gradient(circle at 0% 0%, rgba(118, 185, 0, 0.08) 0%, #000000 80%); border-top: 1px solid var(--card-border); }
+        .slide-6 { background: radial-gradient(circle at 50% 100%, rgba(118, 185, 0, 0.2) 0%, #000000 70%); border-top: 2px solid var(--accent); }
+        
+        /* CTA Button Style */
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            background: var(--accent);
+            color: #000000;
+            padding: 1.25rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 800;
+            font-size: 1.25rem;
+            text-decoration: none;
+            margin-top: 2rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .cta-button:hover {
+            background: var(--accent-light);
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(118, 185, 0, 0.4);
+        }
+
+        .page-number {
+            position: absolute;
+            bottom: 2.5rem;
+            right: 4rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            opacity: 0.5;
+            letter-spacing: 2px;
+        }
+
+        .copyright {
+            position: absolute;
+            bottom: 2.5rem;
+            left: 4rem;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            opacity: 0.4;
+            letter-spacing: 0.5px;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="brand-name">Algo-Rythmn.ai <span>x</span> Precision AI</div>
+</nav>
+
+<div class="deck-container">
+
+    <section class="slide text-center slide-1" style="text-align: center;">
+        <div class="slide-content">
+            <div class="tag">STRATEGIC PARTNERSHIP PROPOSAL</div>
+            <h1>Unlocking the <br><span>"Decide"</span> Layer</h1>
+            <p style="font-size: 1.4rem; max-width: 700px; margin: 0 auto; color: var(--text-main);">
+                Transforming Precision AI's advanced spot-spraying execution into a fully intelligent, autonomous crop protection advisor.
+            </p>
+            <div class="copyright">&copy; 2026 Algo-Rythmn.ai & Precision AI. All Rights Reserved.</div>
+            <div class="page-number">01</div>
+        </div>
+    </section>
+
+    <section class="slide slide-2">
+        <div class="slide-content">
+            <h2>You Have Mastered <span>"See & Act"</span> </h2>
+            <p>We recognize Precision AI as the industry leader in real-time execution. You have built a world-class system that answers the questions: "Where are the weeds?" and "How do I precisely spray them?"</p>
+            <div class="grid-2">
+                <div class="card">
+                    <h3>High-Resolution Scouting ("See")</h3>
+                    <p>Capturing sub-millimeter images at up to 70 km/h, creating precise weed maps down to the two-leaf stage.</p>
+                </div>
+                <div class="card">
+                    <h3>Real-Time Spraying ("Act")</h3>
+                    <p>Differentiating crops from weeds dynamically, resulting in an unprecedented 83% reduction in pesticide use.</p>
+                </div>
+            </div>
+            <div class="page-number">02</div>
+            <div class="copyright">&copy; 2026 Algo-Rythmn.ai & Precision AI. All Rights Reserved.</div>
+        </div>
+    </section>
+
+    <section class="slide slide-3">
+        <div class="slide-content">
+            <h2>The Missing Link: <span>AI-Assisted Agronomic Decisions</span> </h2>
+            <p>While Precision AI has built an exceptional execution layer, a critical gap in the workflow lies in the prescriptive decision-making process. The massive opportunity lies in augmenting human expertise with automated scale: <span class="highlight-text">Human-in-the-Loop AI for surgical chemistry.</span></p>
+            <div class="card" style="margin-top: 2rem; border-left: 4px solid var(--accent);">
+                <h2 style="font-size:1.5rem">Empowering experts with AI insights.</h2>
+                <p style="margin: 0; color: var(--text-main);">We don't replace the agronomist; we provide them with high-fidelity, data-driven recommendations that they validate and refine. This elevates the system from a mechanical sprayer into a collaborative, intelligent crop protection advisor.</p>
+            </div>
+            <div class="page-number">03</div>
+            <div class="copyright">&copy; 2026 Algo-Rythmn.ai & Precision AI. All Rights Reserved.</div>
+        </div>
+    </section>
+
+    <section class="slide slide-4">
+        <div class="slide-content">
+            <h2>From Sprayer to Advisor: <span>Intelligence with Validation</span></h2>
+            <p>Algo-Rythmn.ai provides the intelligence layer that empowers experts. Our engine transforms real-time data into surgical recommendations for human validation.</p>
+            
+            <div class="workflow-container">
+                <div class="workflow-step">
+                    <i class="fas fa-microscope workflow-icon"></i>
+                    <h3>1. Scout</h3>
+                    <p>Identify weed species down to the two-leaf stage.</p>
+                </div>
+                
+                <i class="fas fa-plus workflow-arrow" style="font-size: 1rem; color: var(--accent);"></i>
+                
+                <div class="workflow-step" style="border-color: var(--accent); background: rgba(118, 185, 0, 0.05);">
+                    <i class="fas fa-brain workflow-icon"></i>
+                    <h3>2. Prescribe</h3>
+                    <p>AI suggests herbicides, tank mixes, and rates based on crop data.</p>
+                </div>
+                
+                <i class="fas fa-plus workflow-arrow" style="font-size: 1rem; color: var(--accent);"></i>
+
+                <div class="workflow-step" style="border-style: dashed; border-color: var(--accent);">
+                    <i class="fas fa-user-check workflow-icon"></i>
+                    <h3>3. Validate</h3>
+                    <p>Human-in-the-loop oversight confirms or adjusts the prescription.</p>
+                </div>
+                
+                <i class="fas fa-chevron-right workflow-arrow"></i>
+                
+                <div class="workflow-step">
+                    <i class="fas fa-crosshairs workflow-icon"></i>
+                    <h3>4. Execute</h3>
+                    <p>Precise, geo-located delivery of validated chemistry.</p>
+                </div>
+            </div>
+            <div class="page-number">04</div>
+            <div class="copyright">&copy; 2026 Algo-Rythmn.ai & Precision AI. All Rights Reserved.</div>
+        </div>
+    </section>
+
+    <section class="slide slide-5">
+        <div class="slide-content">
+            <h2>Exponential <span>Business Value</span></h2>
+            <div class="grid-2" style="grid-template-columns: repeat(3, 1fr); gap: 1.5rem;">
+                <div class="card" style="padding: 1.5rem;">
+                    <h3>Surgical Chemistry</h3>
+                    <p style="font-size: 1rem;">Targeting a six-inch area allows the safe, in-crop use of highly effective non-selective herbicides.</p>
+                </div>
+                <div class="card" style="padding: 1.5rem;">
+                    <h3>Resistance MGMT</h3>
+                    <p style="font-size: 1rem;">Automatically rotate modes of action and recommend tank mixes based on local data.</p>
+                </div>
+                <div class="card" style="padding: 1.5rem; border-color: var(--accent);">
+                    <h3>Projected ROI</h3>
+                    <p style="font-size: 1.1rem;"><span class="highlight-text">20-25% Margin Expansion</span> through waste reduction and premium AI-as-a-Service models.</p>
+                </div>
+                <div class="card" style="grid-column: 1 / -1; background: linear-gradient(90deg, rgba(118, 185, 0, 0.1) 0%, transparent 100%); padding: 2rem; flex-direction: row; align-items: center; gap: 2rem;">
+                    <div style="font-size: 3rem; color: var(--accent);"><i class="fas fa-database"></i></div>
+                    <div>
+                        <h3 style="margin-bottom: 0.5rem;">The Ultimate "Walled Garden" Data Moat</h3>
+                        <p style="margin: 0; font-size: 1.1rem;">Together, we create the world's most comprehensive dataset: exactly what weed was where, and what chemistry killed it. This is an invaluable asset for future models and chemical partnerships.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="page-number">05</div>
+            <div class="copyright">&copy; 2026 Algo-Rythmn.ai & Precision AI. All Rights Reserved.</div>
+        </div>
+    </section>
+
+    <section class="slide text-center slide-6" style="text-align: center;">
+        <div class="slide-content">
+            <h1 style="font-size: 4.3rem; color: var(--text-muted); opacity: 0.8;">You provide the Hands.</h1>
+            <h1 style="font-size: 4.3rem; margin-bottom: 2.5rem; letter-spacing: -3px;">We provide the <span style="color: var(--accent); text-shadow: 0 0 30px rgba(118, 185, 0, 0.4);">Brain</span>.</h1>
+            
+            <h2 style="font-size: 1.5rem; color: var(--text-main); margin-bottom: 3rem; max-width: 900px; margin-left: auto; margin-right: auto; line-height: 1.2;">
+                Together, we redefine crop protection—not just execution, but <span style="color: var(--accent);">intelligence at scale.</span>
+            </h2>
+
+            <div style="display: flex; justify-content: center; gap: 4rem; margin-bottom: 4rem;">
+                <div style="text-align: left; border-left: 2px solid var(--accent); padding-left: 1.5rem;">
+                    <p style="margin: 0; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; color: var(--accent);">Email Us</p>
+                    <p style="margin: 0.25rem 0 0 0; font-size: 1rem;">support@algo-rythmn.ai</p>
+                </div>
+                <div style="text-align: left; border-left: 2px solid var(--accent); padding-left: 1.5rem;">
+                    <p style="margin: 0; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; color: var(--accent);">Headquarters</p>
+                    <p style="margin: 0.25rem 0 0 0; font-size: 1rem;">Calgary, Canada</p>
+                </div>
+            </div>
+
+            <a href="mailto:support@algo-rythmn.ai" class="cta-button">
+                Schedule Strategic Session
+            </a>
+            <div class="page-number">06</div>
+            <div class="copyright">&copy; 2026 Algo-Rythmn.ai & Precision AI. All Rights Reserved.</div>
+        </div>
+    </section>
+
+</div>
+
+</body>
+</html>
