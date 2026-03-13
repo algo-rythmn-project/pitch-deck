@@ -2379,22 +2379,6 @@ function updateRowQty(inp){
   tr.classList.add('proc-highlight');
   setTimeout(()=>tr.classList.remove('proc-highlight'),1500);
 }
-  
-  td.dataset.qty=newQty;
-  const totalNum=newQty*unitPrice;
-  const totalStr=totalNum>0?'$'+totalNum.toLocaleString('en-CA',{minimumFractionDigits:0,maximumFractionDigits:0}):'';
-  
-  if(newQty>0){
-    td.innerHTML=`<div style="font-size:12px;font-weight:700;color:var(--ink)">${newQty} ${unit}</div>
-                  <div style="font-size:10px;color:var(--muted);font-family:var(--mono)">Est. ${totalStr}</div>`;
-  } else {
-    td.innerHTML=`<span style="color:var(--muted);font-size:11px">—</span>`;
-  }
-  
-  showToast('Quantity updated for '+vendor+' ✓','success');
-  // Optional: flash row
-  mainRow.classList.add('proc-highlight');
-  setTimeout(()=>mainRow.classList.remove('proc-highlight'),1500);
 
 
 // ── APPROVE REVIEW ROW ──
