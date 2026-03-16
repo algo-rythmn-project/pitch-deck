@@ -214,8 +214,50 @@ html,body{height:100%;background:var(--bg);color:var(--ink);font-family:var(--fo
 /* ── PROCUREMENT TAB ── */
 .proc-layout{display:grid;grid-template-columns:1fr 320px;gap:16px;padding:24px 28px 48px;max-width:1200px;margin:0 auto}
 
-/* ── OFFSET TAB ── */
-.offset-layout{padding:24px 28px 48px;max-width:1100px;margin:0 auto}
+/* ── OFFSET & COST TAB ── */
+.oc-layout{padding:24px 28px 48px;max-width:1200px;margin:0 auto}
+.oc-subnav{display:flex;gap:0;background:var(--bg2);border:1.5px solid var(--line2);border-radius:9px;padding:3px;margin-bottom:0}
+.oc-tab{font-size:11px;font-weight:600;color:var(--muted);padding:5px 16px;border-radius:6px;cursor:pointer;transition:all .15s;font-family:var(--font);white-space:nowrap;border:none;background:none}
+.oc-tab.active{background:var(--white);color:var(--ink);font-weight:700;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.oc-panel{display:none}.oc-panel.active{display:block}
+.src-chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.src-chip{display:flex;align-items:center;gap:7px;background:var(--white);border:1.5px solid var(--line);border-radius:9px;padding:7px 12px;font-size:11px;font-weight:600;color:var(--ink3)}
+.src-chip-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.oc-two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.trouble-flag{display:flex;align-items:flex-start;gap:8px;padding:9px 12px;background:var(--red-light);border:1px solid var(--red-border);border-radius:8px;font-size:11px;color:var(--red);margin-bottom:0}
+.trouble-flag.amber{background:var(--amber-bg);border-color:var(--amber-border);color:var(--amber)}
+.trouble-flag-icon{font-size:13px;flex-shrink:0;margin-top:1px}
+.gantt-wrap{background:var(--white);border:1.5px solid var(--line);border-radius:var(--radius);padding:20px;margin-bottom:16px}
+.dur-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+.dur-chip{background:var(--white);border:1.5px solid var(--line);border-radius:10px;padding:14px;text-align:center}
+.dur-chip-val{font-size:26px;font-weight:900;letter-spacing:-1px;line-height:1}
+.dur-chip-lbl{font-size:9px;color:var(--muted);font-family:var(--mono);text-transform:uppercase;letter-spacing:.8px;margin-top:4px}
+.dur-chip-sub{font-size:10px;color:var(--muted);margin-top:3px}
+.cost-curve-wrap{background:var(--white);border:1.5px solid var(--line);border-radius:var(--radius);padding:20px;margin-bottom:16px}
+.inflation-badge{display:inline-flex;align-items:center;gap:4px;font-size:9px;font-weight:700;font-family:var(--mono);padding:2px 7px;border-radius:4px;background:var(--amber-bg);color:var(--amber);border:1px solid var(--amber-border)}
+.scenario-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px}
+.scenario-card{background:var(--white);border:2px solid var(--line);border-radius:var(--radius);padding:18px;cursor:pointer;transition:all .18s;position:relative;overflow:hidden}
+.scenario-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.scenario-card.sc-best::before{background:var(--green)}.scenario-card.sc-expected::before{background:var(--red)}.scenario-card.sc-worst::before{background:var(--amber)}
+.scenario-card.active{border-color:var(--ink);box-shadow:var(--shadow-h)}
+.sc-card-label{font-size:9px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);font-family:var(--mono);margin-bottom:8px}
+.sc-card-afe{font-size:28px;font-weight:900;letter-spacing:-1.5px;line-height:1;margin-bottom:4px}
+.sc-card-days{font-size:13px;font-weight:700;color:var(--ink3);margin-bottom:10px}
+.sc-card-bullets{list-style:none;padding:0;margin:0}
+.sc-card-bullets li{font-size:11px;color:var(--muted);padding:3px 0;border-bottom:1px solid var(--line)}.sc-card-bullets li:last-child{border-bottom:none}
+.sc-card-bullets li::before{content:'· ';color:var(--muted2)}
+.kpi-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px}
+.kpi-box{background:var(--white);border:1.5px solid var(--line);border-radius:10px;padding:14px 16px}
+.kpi-val{font-size:22px;font-weight:900;letter-spacing:-1px;line-height:1;margin-bottom:2px}
+.kpi-lbl{font-size:9px;color:var(--muted);font-family:var(--mono);text-transform:uppercase;letter-spacing:.8px}
+.kpi-delta{font-size:10px;font-weight:700;font-family:var(--mono);margin-top:4px}
+.risk-row{display:flex;align-items:center;justify-content:space-between;padding:9px 12px;background:var(--bg2);border-radius:8px;margin-bottom:6px;gap:8px}
+.risk-name{font-size:11px;font-weight:600;color:var(--ink);flex:1}
+.risk-prob{font-size:11px;font-weight:700;font-family:var(--mono);white-space:nowrap}
+.risk-impact{font-size:11px;font-weight:700;font-family:var(--mono);color:var(--red);white-space:nowrap}
+.risk-bar-col{width:80px;flex-shrink:0}
+.risk-mini-bar{height:5px;background:var(--line2);border-radius:3px;overflow:hidden}
+.risk-mini-fill{height:100%;border-radius:3px}
 
 /* ── INVOICES TAB ── */
 .inv-layout{padding:24px 28px 48px;max-width:1100px;margin:0 auto}
@@ -784,93 +826,397 @@ html,body{height:100%;background:var(--bg);color:var(--ink);font-family:var(--fo
   TAB 3: OFFSET & COST ANALYSIS
 ═══════════════════════════════════════ -->
 <div class="page" id="page-offset">
-  <div class="offset-layout">
+  <div class="oc-layout">
 
-    <!-- Scenario Selector -->
-    <div class="scenario-tabs" style="margin-bottom:16px">
-      <div class="stab active" onclick="switchScenario(this,'base')">Base Case (PetroServ)</div>
-      <div class="stab" onclick="switchScenario(this,'alt')">Alt. Scenario (Basin)</div>
-      <div class="stab" onclick="switchScenario(this,'bestcase')">Best Case</div>
-    </div>
-    <div id="scenario-note-base" class="scenario-note">
-      <div class="warn-bar" style="margin-bottom:14px;border-color:var(--green-border);background:var(--green-bg);color:var(--green)">✓ Recommended scenario: PetroServ Canada KCl at $1,240/t. Saves $8,400 vs market average. Full safety compliance. Estimated AFE: <strong>$289,000</strong>.</div>
-    </div>
-    <div id="scenario-note-alt" class="scenario-note" style="display:none">
-      <div class="warn-bar" style="margin-bottom:14px">⚠ Alternative scenario: Basin Well Services at $1,180/t. Lower fluid cost by $4,800 but safety flag introduces estimated +2.1 day delay (~$16,000 rig time). <strong>Net impact: +$11,200 vs base case.</strong></div>
-    </div>
-    <div id="scenario-note-bestcase" class="scenario-note" style="display:none">
-      <div class="warn-bar" style="margin-bottom:14px;border-color:var(--blue-border);background:var(--blue-bg);color:var(--blue)">🔵 Best case: KCl from PetroServ + lubricant from RedLine + 1.2d ahead of P50 = estimated AFE <strong>$271,500</strong>. Requires current sourcing and no delays.</div>
-    </div>
-
-    <!-- Chemical cost feeds in from sourcing -->
-    <div class="ai-box" style="margin-bottom:20px">
-      <div class="ai-box-head"><div class="ai-gem">◆</div><div><div class="ai-box-title">Cost Estimate · Informed by Live Chemical Prices</div><div class="ai-box-sub">Chemical unit prices pulled automatically from Chemical Sourcing tab</div></div></div>
-      <div class="ai-text">AFE estimate of <span class="hl">$289,000</span> uses <strong>live KCl pricing at $1,240/t</strong> (PetroServ Canada, sourced today) and current CaCl₂ at $980/t. If Basin Well Services were selected instead, fluid costs would drop by <strong>$4,800</strong> but introduce safety review delays estimated at <strong>+2.1 days</strong> — adding ~$16,000 in rig time. <span class="hl">PetroServ Canada is the better total-cost decision.</span></div>
-    </div>
-
-    <div class="stat-grid">
-      <div class="stat-card"><div class="sc-val">14.2d</div><div class="sc-label">P50 duration</div></div>
-      <div class="stat-card"><div class="sc-val green">11.8d</div><div class="sc-label">Best case P10</div></div>
-      <div class="stat-card"><div class="sc-val amber">17.5d</div><div class="sc-label">Worst case P90</div></div>
-      <div class="stat-card"><div class="sc-val red">$289k</div><div class="sc-label">AFE estimate</div></div>
-    </div>
-
-    <div style="display:grid;grid-template-columns:1.5fr 1fr;gap:16px">
-      <div>
-        <div class="card" style="padding:0;overflow:hidden;margin-bottom:16px">
-          <table class="tbl">
-            <thead><tr><th>Phase</th><th>Est. Days</th><th>% Well</th><th>Offset Avg</th><th>Delta</th></tr></thead>
-            <tbody>
-              <tr><td class="strong">Spud → Surface Casing</td><td class="num">2.1</td><td><div class="score-cell"><div class="sbar"><div class="sbar-fill" style="width:15%;background:var(--red)"></div></div>15%</div></td><td class="mono">2.3d</td><td style="color:var(--green);font-weight:700;font-family:var(--mono)">−0.2d</td></tr>
-              <tr><td class="strong">Surface → Intermediate</td><td class="num">3.4</td><td><div class="score-cell"><div class="sbar"><div class="sbar-fill" style="width:24%;background:var(--red)"></div></div>24%</div></td><td class="mono">3.1d</td><td style="color:var(--red);font-weight:700;font-family:var(--mono)">+0.3d</td></tr>
-              <tr><td class="strong">Intermediate → TD</td><td class="num">5.8</td><td><div class="score-cell"><div class="sbar"><div class="sbar-fill" style="width:41%;background:var(--red)"></div></div>41%</div></td><td class="mono">6.0d</td><td style="color:var(--green);font-weight:700;font-family:var(--mono)">−0.2d</td></tr>
-              <tr><td class="strong">Completion / Logging</td><td class="num">2.9</td><td><div class="score-cell"><div class="sbar"><div class="sbar-fill" style="width:20%;background:var(--red)"></div></div>20%</div></td><td class="mono">2.8d</td><td style="color:var(--red);font-weight:700;font-family:var(--mono)">+0.1d</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="card" style="padding:0;overflow:hidden">
-          <table class="tbl">
-            <thead><tr><th>Cost Item</th><th>Estimate</th><th>Source</th><th>Note</th></tr></thead>
-            <tbody>
-              <tr><td class="strong">Rig Day Rate × 14.2d</td><td class="num">$128,400</td><td class="mono">Offset avg</td><td style="font-size:11px;color:var(--muted)">+3.2% inflation adj.</td></tr>
-              <tr><td class="strong" style="color:var(--red)">Drilling Fluid — KCl</td><td class="num">$47,200</td><td><span class="badge badge-green" style="font-size:8px">Live price</span></td><td style="font-size:11px;color:var(--green)">PetroServ $1,240/t ✓</td></tr>
-              <tr><td class="strong" style="color:var(--red)">Drilling Fluid — CaCl₂</td><td class="num">$19,600</td><td><span class="badge badge-green" style="font-size:8px">Live price</span></td><td style="font-size:11px;color:var(--green)">NorthStar $980/t ✓</td></tr>
-              <tr><td class="strong">Directional / MWD</td><td class="num">$32,100</td><td class="mono">Offset avg</td><td style="font-size:11px;color:var(--muted)">Standard lateral</td></tr>
-              <tr><td class="strong">Casing & Cement</td><td class="num">$61,500</td><td class="mono">Offset avg</td><td style="font-size:11px;color:var(--muted)">3-string program</td></tr>
-              <tr><td colspan="4" style="padding:10px 12px;background:var(--bg)"><div style="display:flex;justify-content:space-between;font-weight:800;font-size:14px"><span>Total AFE Estimate</span><span style="color:var(--red)">$289,000</span></div></td></tr>
-            </tbody>
-          </table>
+    <!-- Header + Sub-nav -->
+    <div class="sect-title" style="margin-bottom:18px">
+      Offset &amp; Cost Analysis
+      <div style="display:flex;align-items:center;gap:10px">
+        <div class="oc-subnav" id="oc-subnav">
+          <button class="oc-tab active" onclick="switchOCPanel('offset-analysis')">Offset Analysis</button>
+          <button class="oc-tab" onclick="switchOCPanel('time-analysis')">Time Analysis</button>
+          <button class="oc-tab" onclick="switchOCPanel('cost-estimation')">Cost Estimation</button>
+          <button class="oc-tab" onclick="switchOCPanel('integration')">Integration</button>
         </div>
       </div>
-      <div>
-        <!-- Depth vs time mini chart -->
-        <div class="card" style="margin-bottom:12px">
-          <div class="sect-title" style="font-size:12px;margin-bottom:10px">Depth vs Time · Planned</div>
-          <div class="chart-wrap">
-            <svg viewBox="0 0 300 140" width="100%" style="display:block">
-              <line x1="0" y1="35" x2="300" y2="35" stroke="#e6e3dc" stroke-width="1"/>
-              <line x1="0" y1="70" x2="300" y2="70" stroke="#e6e3dc" stroke-width="1"/>
-              <line x1="0" y1="105" x2="300" y2="105" stroke="#e6e3dc" stroke-width="1"/>
-              <!-- Planned -->
-              <polyline points="10,130 60,105 110,80 170,50 230,28 290,18" fill="none" stroke="#bbb9b5" stroke-width="1.5" stroke-dasharray="5,3"/>
-              <!-- P50 -->
-              <polyline points="10,130 65,108 115,85 175,55 220,35" fill="none" stroke="var(--red)" stroke-width="2.5"/>
-              <circle cx="220" cy="35" r="4" fill="var(--red)"/>
-              <text x="225" y="32" font-size="9" fill="var(--red)" font-family="var(--mono)">Day 8</text>
-            </svg>
-            <div style="display:flex;gap:14px;font-size:10px;color:var(--muted);margin-top:6px">
-              <span><span style="display:inline-block;width:14px;border-bottom:1.5px dashed #bbb9b5;margin-right:4px;vertical-align:middle"></span>Planned</span>
-              <span style="color:var(--red)"><span style="display:inline-block;width:14px;border-bottom:2px solid var(--red);margin-right:4px;vertical-align:middle"></span>P50 Actual</span>
+    </div>
+
+    <!-- ═══ PANEL 1: OFFSET ANALYSIS ═══ -->
+    <div class="oc-panel active" id="oc-panel-offset-analysis">
+
+      <!-- Data Sources -->
+      <div class="src-chips">
+        <div class="src-chip"><div class="src-chip-dot" style="background:var(--green)"></div>XI Trouble Reports<span style="font-size:9px;color:var(--muted);font-family:var(--mono);margin-left:5px">47 wells</span></div>
+        <div class="src-chip"><div class="src-chip-dot" style="background:var(--green)"></div>Geoscout<span style="font-size:9px;color:var(--muted);font-family:var(--mono);margin-left:5px">Connected</span></div>
+        <div class="src-chip"><div class="src-chip-dot" style="background:var(--green)"></div>AER Tour Sheets<span style="font-size:9px;color:var(--muted);font-family:var(--mono);margin-left:5px">12 wells</span></div>
+        <div class="src-chip"><div class="src-chip-dot" style="background:var(--amber)"></div>Petro Ninja<span style="font-size:9px;color:var(--muted);font-family:var(--mono);margin-left:5px">Partial sync</span></div>
+        <button class="btn btn-ghost" style="font-size:10px;padding:5px 12px;margin-left:auto">+ Add Source</button>
+      </div>
+
+      <div class="oc-two-col">
+        <!-- Comparable Offset Wells Table -->
+        <div class="card" style="padding:0;overflow:hidden">
+          <div style="padding:12px 16px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between">
+            <div style="font-size:12px;font-weight:700;color:var(--ink)">Comparable Offset Wells <span class="badge badge-blue" style="margin-left:6px">6 selected</span></div>
+            <button class="btn btn-ghost" style="font-size:10px;padding:4px 10px">Filter</button>
+          </div>
+          <table class="tbl">
+            <thead><tr><th>Well ID</th><th>Formation</th><th>Depth (m)</th><th>ROP m/h</th><th>NPT d</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td class="strong mono" style="font-size:11px">HZ-Cardium-14</td><td>Cardium</td><td class="num">2,840</td><td class="num">18.2</td><td class="num">0.4</td><td><span class="badge badge-green">✓ Good</span></td></tr>
+              <tr><td class="strong mono" style="font-size:11px">HZ-Cardium-21</td><td>Cardium</td><td class="num">2,910</td><td class="num">16.8</td><td class="num">0.8</td><td><span class="badge badge-green">✓ Good</span></td></tr>
+              <tr><td class="strong mono" style="font-size:11px">HZ-Cardium-08</td><td>Cardium</td><td class="num">2,755</td><td class="num">14.1</td><td class="num">2.3</td><td><span class="badge badge-amber">⚠ NPT</span></td></tr>
+              <tr><td class="strong mono" style="font-size:11px">HZ-Cardium-33</td><td>Cardium</td><td class="num">2,880</td><td class="num">19.5</td><td class="num">0.2</td><td><span class="badge badge-green">✓ Good</span></td></tr>
+              <tr><td class="strong mono" style="font-size:11px">HZ-Viking-05</td><td>Viking</td><td class="num">2,200</td><td class="num">21.0</td><td class="num">0.0</td><td><span class="badge badge-green">✓ Good</span></td></tr>
+              <tr><td class="strong mono" style="font-size:11px">HZ-Cardium-19</td><td>Cardium</td><td class="num">2,960</td><td class="num">12.4</td><td class="num">3.8</td><td><span class="badge badge-red">✕ Trouble</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Key Metrics + Casing Program -->
+        <div>
+          <div class="card" style="margin-bottom:12px">
+            <div style="font-size:11px;font-weight:700;color:var(--ink);margin-bottom:12px;display:flex;align-items:center;justify-content:space-between">
+              Offset-Derived Key Metrics
+              <span style="font-size:9px;font-weight:600;font-family:var(--mono);color:var(--muted)">Avg · 6 wells · P50</span>
+            </div>
+            <div class="sc-bar-row" style="margin-bottom:9px"><div style="font-size:11px;font-weight:600;color:var(--ink3)">Avg ROP</div><div class="bars"><div class="sc-mini-bar" style="width:72%;background:var(--red)"></div></div><div style="font-size:12px;font-weight:800;font-family:var(--mono)">17.2 m/h</div></div>
+            <div class="sc-bar-row" style="margin-bottom:9px"><div style="font-size:11px;font-weight:600;color:var(--ink3)">Trip Speed</div><div class="bars"><div class="sc-mini-bar" style="width:55%;background:var(--red)"></div></div><div style="font-size:12px;font-weight:800;font-family:var(--mono)">480 m/h</div></div>
+            <div class="sc-bar-row" style="margin-bottom:9px"><div style="font-size:11px;font-weight:600;color:var(--ink3)">Mud Weight</div><div class="bars"><div class="sc-mini-bar" style="width:60%;background:var(--blue)"></div></div><div style="font-size:12px;font-weight:800;font-family:var(--mono)">1.22 sg</div></div>
+            <div class="sc-bar-row" style="margin-bottom:9px"><div style="font-size:11px;font-weight:600;color:var(--ink3)">NPT Rate</div><div class="bars"><div class="sc-mini-bar" style="width:38%;background:var(--amber)"></div></div><div style="font-size:12px;font-weight:800;font-family:var(--mono)">8.3%</div></div>
+            <div class="sc-bar-row"><div style="font-size:11px;font-weight:600;color:var(--ink3)">Avg Well Days</div><div class="bars"><div class="sc-mini-bar" style="width:68%;background:var(--green)"></div></div><div style="font-size:12px;font-weight:800;font-family:var(--mono)">13.8 d</div></div>
+          </div>
+          <div class="card" style="padding:14px 16px">
+            <div style="font-size:11px;font-weight:700;color:var(--ink);margin-bottom:10px">Casing Program — Offset Average</div>
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;text-align:center">
+              <div style="background:var(--bg2);border-radius:8px;padding:10px 6px"><div style="font-size:17px;font-weight:900;letter-spacing:-0.5px">13⅜″</div><div style="font-size:9px;color:var(--muted);font-family:var(--mono);margin-top:2px">Surface</div></div>
+              <div style="background:var(--bg2);border-radius:8px;padding:10px 6px"><div style="font-size:17px;font-weight:900;letter-spacing:-0.5px">9⅝″</div><div style="font-size:9px;color:var(--muted);font-family:var(--mono);margin-top:2px">Intermediate</div></div>
+              <div style="background:var(--bg2);border-radius:8px;padding:10px 6px"><div style="font-size:17px;font-weight:900;letter-spacing:-0.5px">5½″</div><div style="font-size:9px;color:var(--muted);font-family:var(--mono);margin-top:2px">Production</div></div>
             </div>
           </div>
         </div>
-        <div class="ai-box">
-          <div class="ai-box-head"><div class="ai-gem">◆</div><div><div class="ai-box-title">Sourcing Impact</div></div></div>
-          <div class="ai-text" style="font-size:12px">Chemical costs make up <strong>23% of AFE</strong>. Sourcing KCl from PetroServ vs. market average saves <span class="hl">$8,400</span> on this well.</div>
-          <div class="ai-actions"><button class="btn btn-ghost" style="font-size:11px" onclick="switchTab('source')">Update chemical prices →</button></div>
+      </div>
+
+      <!-- Trouble Events -->
+      <div style="margin-bottom:16px">
+        <div style="font-size:12px;font-weight:700;color:var(--ink);margin-bottom:9px">Flagged Trouble Events · from XI Reports</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+          <div class="trouble-flag"><span class="trouble-flag-icon">⚠</span><div><div style="font-weight:700;margin-bottom:2px">Lost Circulation — HZ-Cardium-08</div><div style="font-size:10px;font-family:var(--mono)">Depth: 2,310 m · 14.2 hrs lost · Cavernous zone</div></div></div>
+          <div class="trouble-flag"><span class="trouble-flag-icon">⚠</span><div><div style="font-weight:700;margin-bottom:2px">Stuck Pipe — HZ-Cardium-19</div><div style="font-size:10px;font-family:var(--mono)">Depth: 2,740 m · 28.6 hrs lost · Key-seat</div></div></div>
+          <div class="trouble-flag amber"><span class="trouble-flag-icon">⚡</span><div><div style="font-weight:700;margin-bottom:2px">Tight Hole — HZ-Cardium-19</div><div style="font-size:10px;font-family:var(--mono)">Intermediate section · Shale reactivity</div></div></div>
+          <div class="trouble-flag amber"><span class="trouble-flag-icon">⚡</span><div><div style="font-weight:700;margin-bottom:2px">Shallow Gas — HZ-Cardium-08</div><div style="font-size:10px;font-family:var(--mono)">300–450 m TVD · Monitor mud weight</div></div></div>
+        </div>
+      </div>
+
+      <!-- Benchmark AI Box -->
+      <div class="ai-box">
+        <div class="ai-box-head"><div class="ai-gem">◆</div><div><div class="ai-box-title">Benchmark Analysis · Cutting Edge vs Offsets</div><div class="ai-box-sub">Based on 6 comparable Cardium wells from Geoscout &amp; XI</div></div></div>
+        <div class="ai-text">Cutting Edge's <strong>Horizon-7</strong> planned ROP of <span class="hl">18.4 m/h</span> is <strong>7% above</strong> offset average (17.2 m/h) — achievable on this pad but requires the KCl fluid system on-site before surface section spud. Two offset wells (HZ-Cardium-08, HZ-Cardium-19) encountered <span class="hl">lost circulation and stuck pipe</span> in the 2,300–2,450 m interval. Recommend a 5% NPT contingency on the intermediate section and pre-spotting LCM pills at 2,200 m. Overall, Horizon-7 is well-positioned in this play but carries one known risk zone.</div>
+        <div class="ai-actions">
+          <button class="btn btn-ghost" style="font-size:11px" onclick="switchOCPanel('time-analysis')">View Time Analysis →</button>
+          <button class="btn btn-ghost" style="font-size:11px" onclick="exportReport('Offset Well Report')">Export offset report</button>
         </div>
       </div>
     </div>
+
+    <!-- ═══ PANEL 2: TIME ANALYSIS ═══ -->
+    <div class="oc-panel" id="oc-panel-time-analysis">
+
+      <!-- Input chips -->
+      <div class="src-chips" style="margin-bottom:16px">
+        <div class="src-chip"><span style="color:var(--muted);margin-right:3px">ROP:</span>18.4 m/h</div>
+        <div class="src-chip"><span style="color:var(--muted);margin-right:3px">Trip speed:</span>480 m/h</div>
+        <div class="src-chip"><span style="color:var(--muted);margin-right:3px">Total depth:</span>4,820 m MD</div>
+        <div class="src-chip"><span style="color:var(--muted);margin-right:3px">Offset P50:</span>13.8 d</div>
+        <div class="src-chip"><div class="src-chip-dot" style="background:var(--amber)"></div>NPT contingency: 5%</div>
+        <button class="btn btn-ghost" style="font-size:10px;padding:5px 12px;margin-left:auto">Edit Inputs</button>
+      </div>
+
+      <!-- P10 / P50 / P90 duration summary -->
+      <div class="dur-strip">
+        <div class="dur-chip"><div class="dur-chip-val" style="color:var(--green)">11.8d</div><div class="dur-chip-lbl">Best Case · P10</div><div class="dur-chip-sub">No NPT · High ROP</div></div>
+        <div class="dur-chip" style="border-color:var(--red);border-width:2px"><div class="dur-chip-val" style="color:var(--red)">14.2d</div><div class="dur-chip-lbl">Expected · P50</div><div class="dur-chip-sub">Offset avg + 5% NPT</div></div>
+        <div class="dur-chip"><div class="dur-chip-val" style="color:var(--amber)">17.5d</div><div class="dur-chip-lbl">Worst Case · P90</div><div class="dur-chip-sub">Offset trouble events realized</div></div>
+      </div>
+
+      <!-- Gantt Chart SVG -->
+      <!-- Scale: x_start=120, 1 day = 28px, total 20 days. Timeline: x=120 to x=680 -->
+      <!-- Surface P50: x=120 w=58.8 | Intermediate P50: x=178.8 w=95.2 | Production P50: x=274 w=162.4 | Completion P50: x=436.4 w=81.2 -->
+      <!-- P10 end=11.8d x=450.4 | P50 end=14.2d x=517.6 | P90 end=17.5d x=610 -->
+      <div class="gantt-wrap">
+        <div style="font-size:12px;font-weight:700;color:var(--ink);margin-bottom:14px;display:flex;align-items:center;justify-content:space-between">
+          Drilling Schedule · Gantt with P10 / P50 / P90 Sensitivity
+          <span style="font-size:10px;font-weight:600;font-family:var(--mono);color:var(--muted)">Day 0 → Day 20</span>
+        </div>
+        <svg viewBox="0 0 700 210" width="100%" style="display:block;overflow:visible" font-family="var(--font)">
+          <!-- Vertical grid lines at days 0,3,6,9,12,15,18,20 -->
+          <line x1="120" y1="22" x2="120" y2="185" stroke="#e6e3dc" stroke-width="1"/>
+          <line x1="204" y1="22" x2="204" y2="185" stroke="#e6e3dc" stroke-width="1"/>
+          <line x1="288" y1="22" x2="288" y2="185" stroke="#e6e3dc" stroke-width="1"/>
+          <line x1="372" y1="22" x2="372" y2="185" stroke="#e6e3dc" stroke-width="1"/>
+          <line x1="456" y1="22" x2="456" y2="185" stroke="#e6e3dc" stroke-width="1"/>
+          <line x1="540" y1="22" x2="540" y2="185" stroke="#e6e3dc" stroke-width="1"/>
+          <line x1="624" y1="22" x2="624" y2="185" stroke="#e6e3dc" stroke-width="1"/>
+          <line x1="680" y1="22" x2="680" y2="185" stroke="#e6e3dc" stroke-width="1"/>
+          <!-- Day axis labels -->
+          <text x="120" y="16" text-anchor="middle" font-size="8" fill="#8a8783" font-family="var(--mono)">0</text>
+          <text x="204" y="16" text-anchor="middle" font-size="8" fill="#8a8783" font-family="var(--mono)">3</text>
+          <text x="288" y="16" text-anchor="middle" font-size="8" fill="#8a8783" font-family="var(--mono)">6</text>
+          <text x="372" y="16" text-anchor="middle" font-size="8" fill="#8a8783" font-family="var(--mono)">9</text>
+          <text x="456" y="16" text-anchor="middle" font-size="8" fill="#8a8783" font-family="var(--mono)">12</text>
+          <text x="540" y="16" text-anchor="middle" font-size="8" fill="#8a8783" font-family="var(--mono)">15</text>
+          <text x="624" y="16" text-anchor="middle" font-size="8" fill="#8a8783" font-family="var(--mono)">18</text>
+          <!-- Section labels (right-aligned at x=115) -->
+          <text x="115" y="43" text-anchor="end" font-size="10" fill="#4a4744" font-weight="600">Surface</text>
+          <text x="115" y="83" text-anchor="end" font-size="10" fill="#4a4744" font-weight="600">Intermediate</text>
+          <text x="115" y="123" text-anchor="end" font-size="10" fill="#4a4744" font-weight="600">Production/TD</text>
+          <text x="115" y="163" text-anchor="end" font-size="10" fill="#4a4744" font-weight="600">Completion</text>
+          <!-- ─ ROW 1: Surface Casing (P50: 2.1d, P90: 2.8d, P10 end: 1.9d) ─ -->
+          <rect x="120" y="28" width="78.4" height="28" rx="5" fill="#8a5e10" opacity="0.14"/>
+          <rect x="120" y="31" width="58.8" height="22" rx="4" fill="#c4321a"/>
+          <line x1="173.2" y1="28" x2="173.2" y2="56" stroke="#1a7a4a" stroke-width="2" stroke-dasharray="3,2"/>
+          <text x="149.4" y="46" text-anchor="middle" font-size="9" fill="#fff" font-weight="600">2.1d P50</text>
+          <!-- ─ ROW 2: Intermediate (P50: 3.4d start@2.1d, P90: 4.2d, P10 end@4.9d) ─ -->
+          <rect x="178.8" y="68" width="117.6" height="28" rx="5" fill="#8a5e10" opacity="0.14"/>
+          <rect x="178.8" y="71" width="95.2" height="22" rx="4" fill="#c4321a"/>
+          <line x1="257.2" y1="68" x2="257.2" y2="96" stroke="#1a7a4a" stroke-width="2" stroke-dasharray="3,2"/>
+          <text x="226.4" y="86" text-anchor="middle" font-size="9" fill="#fff" font-weight="600">3.4d P50</text>
+          <!-- ─ ROW 3: Production/TD (P50: 5.8d start@5.5d, P90: 7.1d, P10 end@10.3d) ─ -->
+          <rect x="274" y="108" width="198.8" height="28" rx="5" fill="#8a5e10" opacity="0.14"/>
+          <rect x="274" y="111" width="162.4" height="22" rx="4" fill="#c4321a"/>
+          <line x1="408.4" y1="108" x2="408.4" y2="136" stroke="#1a7a4a" stroke-width="2" stroke-dasharray="3,2"/>
+          <text x="355.2" y="126" text-anchor="middle" font-size="9" fill="#fff" font-weight="600">5.8d P50</text>
+          <!-- ─ ROW 4: Completion (P50: 2.9d start@11.3d, P90: 3.4d) ─ -->
+          <rect x="436.4" y="148" width="95.2" height="28" rx="5" fill="#8a5e10" opacity="0.14"/>
+          <rect x="436.4" y="151" width="81.2" height="22" rx="4" fill="#c4321a"/>
+          <line x1="517.6" y1="148" x2="517.6" y2="176" stroke="#1a7a4a" stroke-width="2" stroke-dasharray="3,2"/>
+          <text x="477" y="166" text-anchor="middle" font-size="9" fill="#fff" font-weight="600">2.9d P50</text>
+          <!-- ─ P10 total end line (Day 11.8, x=450.4) ─ -->
+          <line x1="450.4" y1="22" x2="450.4" y2="185" stroke="#1a7a4a" stroke-width="1.5" stroke-dasharray="6,3" opacity="0.7"/>
+          <text x="451" y="198" font-size="8" fill="#1a7a4a" font-family="var(--mono)" font-weight="700">P10 11.8d</text>
+          <!-- ─ P50 total end line (Day 14.2, x=517.6) ─ -->
+          <line x1="517.6" y1="22" x2="517.6" y2="185" stroke="#c4321a" stroke-width="2" stroke-dasharray="6,3" opacity="0.75"/>
+          <text x="518" y="198" font-size="8" fill="#c4321a" font-family="var(--mono)" font-weight="700">P50 14.2d</text>
+          <!-- ─ P90 total end line (Day 17.5, x=610) ─ -->
+          <line x1="610" y1="22" x2="610" y2="185" stroke="#8a5e10" stroke-width="1.5" stroke-dasharray="6,3" opacity="0.7"/>
+          <text x="611" y="198" font-size="8" fill="#8a5e10" font-family="var(--mono)" font-weight="700">P90 17.5d</text>
+        </svg>
+        <!-- Legend -->
+        <div style="display:flex;gap:18px;margin-top:10px;font-size:10px;color:var(--muted);flex-wrap:wrap">
+          <span style="display:flex;align-items:center;gap:5px"><span style="display:inline-block;width:20px;height:8px;background:#c4321a;border-radius:2px"></span>P50 planned bar</span>
+          <span style="display:flex;align-items:center;gap:5px"><span style="display:inline-block;width:20px;height:8px;background:#8a5e10;border-radius:2px;opacity:.4"></span>P90 sensitivity band</span>
+          <span style="display:flex;align-items:center;gap:5px"><svg width="16" height="10"><line x1="8" y1="0" x2="8" y2="10" stroke="#1a7a4a" stroke-width="2" stroke-dasharray="3,2"/></svg>P10 early-finish marker</span>
+        </div>
+      </div>
+
+      <!-- Section breakdown table -->
+      <div class="card" style="padding:0;overflow:hidden">
+        <table class="tbl">
+          <thead><tr><th>Section</th><th>From (m)</th><th>To (m)</th><th style="color:var(--green)">P10 days</th><th>P50 days</th><th style="color:var(--amber)">P90 days</th><th>ROP (m/h)</th><th>NPT Risk</th></tr></thead>
+          <tbody>
+            <tr><td class="strong">Surface Casing</td><td class="mono">0</td><td class="mono">420</td><td class="num" style="color:var(--green)">1.9</td><td class="num">2.1</td><td class="num" style="color:var(--amber)">2.8</td><td class="num">19.5</td><td><span class="badge badge-green">Low</span></td></tr>
+            <tr><td class="strong">Intermediate</td><td class="mono">420</td><td class="mono">1,850</td><td class="num" style="color:var(--green)">3.0</td><td class="num">3.4</td><td class="num" style="color:var(--amber)">4.2</td><td class="num">17.8</td><td><span class="badge badge-amber">Medium</span></td></tr>
+            <tr><td class="strong">Production / TD</td><td class="mono">1,850</td><td class="mono">4,820</td><td class="num" style="color:var(--green)">5.4</td><td class="num">5.8</td><td class="num" style="color:var(--amber)">7.1</td><td class="num">16.4</td><td><span class="badge badge-amber">Medium</span></td></tr>
+            <tr><td class="strong">Completion / Logging</td><td class="mono">—</td><td class="mono">—</td><td class="num" style="color:var(--green)">1.5</td><td class="num">2.9</td><td class="num" style="color:var(--amber)">3.4</td><td class="mono">—</td><td><span class="badge badge-green">Low</span></td></tr>
+            <tr style="background:var(--bg2)"><td class="strong">Total Well</td><td class="mono">—</td><td class="mono">—</td><td class="num" style="color:var(--green);font-weight:900">11.8</td><td class="num" style="font-weight:900;color:var(--red)">14.2</td><td class="num" style="color:var(--amber);font-weight:900">17.5</td><td class="mono">—</td><td>—</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ═══ PANEL 3: COST ESTIMATION ═══ -->
+    <div class="oc-panel" id="oc-panel-cost-estimation">
+      <!-- KPI Strip -->
+      <div class="kpi-strip">
+        <div class="kpi-box"><div class="kpi-val" style="color:var(--red)">$289k</div><div class="kpi-lbl">Base Case AFE</div><div class="kpi-delta" style="color:var(--muted)">14.2d P50 scenario</div></div>
+        <div class="kpi-box"><div class="kpi-val">$20.4k</div><div class="kpi-lbl">Cost per Day</div><div class="kpi-delta" style="color:var(--amber)">▲ +3.2% vs last year</div></div>
+        <div class="kpi-box"><div class="kpi-val">$59.90</div><div class="kpi-lbl">Cost per Meter</div><div class="kpi-delta" style="color:var(--green)">▼ −2.1% vs offset avg</div></div>
+        <div class="kpi-box"><div class="kpi-val" style="color:var(--amber)">$332k</div><div class="kpi-lbl">Risk-Adjusted P90</div><div class="kpi-delta" style="color:var(--amber)">Incl. NPT + inflation</div></div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1.5fr 1fr;gap:16px">
+        <div>
+          <!-- Cost breakdown table -->
+          <div class="card" style="padding:0;overflow:hidden;margin-bottom:14px">
+            <table class="tbl">
+              <thead><tr><th>Cost Category</th><th>Base Case</th><th>Inflation Adj.</th><th>Risk Adj.</th><th>Source</th></tr></thead>
+              <tbody>
+                <tr><td class="strong">Rig Day Rate × 14.2d</td><td class="num">$128,400</td><td><span class="inflation-badge">+3.2% / yr</span></td><td class="num">$132,500</td><td class="mono" style="font-size:10px">Offset avg</td></tr>
+                <tr><td class="strong" style="color:var(--red)">Drilling Fluid — KCl</td><td class="num">$47,200</td><td><span class="badge badge-green" style="font-size:8px">Live</span></td><td class="num">$47,200</td><td class="mono" style="font-size:10px;color:var(--green)">PetroServ</td></tr>
+                <tr><td class="strong" style="color:var(--red)">Drilling Fluid — CaCl₂</td><td class="num">$19,600</td><td><span class="badge badge-green" style="font-size:8px">Live</span></td><td class="num">$19,600</td><td class="mono" style="font-size:10px;color:var(--green)">NorthStar</td></tr>
+                <tr><td class="strong">Directional / MWD</td><td class="num">$32,100</td><td><span class="inflation-badge">+4.5% / yr</span></td><td class="num">$33,500</td><td class="mono" style="font-size:10px">Offset avg</td></tr>
+                <tr><td class="strong">Casing &amp; Cement</td><td class="num">$61,500</td><td><span class="inflation-badge">+3.0% / yr</span></td><td class="num">$63,400</td><td class="mono" style="font-size:10px">Offset avg</td></tr>
+                <tr><td class="strong">NPT Contingency (8.3%)</td><td class="num" style="color:var(--muted)">—</td><td style="font-size:11px;color:var(--muted)">From XI reports</td><td class="num" style="color:var(--amber)">$24,000</td><td class="mono" style="font-size:10px">XI reports</td></tr>
+                <tr style="background:var(--bg2)"><td class="strong" style="font-size:13px;font-weight:900">Total AFE</td><td class="num" style="font-weight:900;font-size:14px;color:var(--red)">$288,800</td><td>—</td><td class="num" style="font-weight:900;font-size:14px;color:var(--amber)">$320,200</td><td>—</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Risk premiums -->
+          <div class="card">
+            <div style="font-size:12px;font-weight:700;color:var(--ink);margin-bottom:12px">Risk Premiums · NPT Probability × Cost Impact</div>
+            <div class="risk-row">
+              <div class="risk-name">Lost Circulation (Intermediate)</div>
+              <div class="risk-bar-col"><div class="risk-mini-bar"><div class="risk-mini-fill" style="width:28%;background:var(--amber)"></div></div></div>
+              <div class="risk-prob" style="color:var(--amber)">28%</div>
+              <div class="risk-impact">+$8,400</div>
+            </div>
+            <div class="risk-row">
+              <div class="risk-name">Stuck Pipe (Production)</div>
+              <div class="risk-bar-col"><div class="risk-mini-bar"><div class="risk-mini-fill" style="width:15%;background:var(--red)"></div></div></div>
+              <div class="risk-prob" style="color:var(--red)">15%</div>
+              <div class="risk-impact">+$11,200</div>
+            </div>
+            <div class="risk-row">
+              <div class="risk-name">Well Control Incident</div>
+              <div class="risk-bar-col"><div class="risk-mini-bar"><div class="risk-mini-fill" style="width:5%;background:var(--red)"></div></div></div>
+              <div class="risk-prob" style="color:var(--muted)">5%</div>
+              <div class="risk-impact">+$22,000</div>
+            </div>
+            <div class="risk-row" style="margin-bottom:0">
+              <div class="risk-name">Shallow Gas Kick (Surface)</div>
+              <div class="risk-bar-col"><div class="risk-mini-bar"><div class="risk-mini-fill" style="width:22%;background:var(--amber)"></div></div></div>
+              <div class="risk-prob" style="color:var(--amber)">22%</div>
+              <div class="risk-impact">+$4,800</div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <!-- Cost curve bar chart -->
+          <!-- Scale: bottom=185, range $200k–$400k = 175px → 1k = 0.875px -->
+          <!-- $271.5k: top=185-(71.5*0.875)=122.5 h=62.5 | $289k: top=107.2 h=77.8 | $305k: top=93.1 h=91.9 | $332k: top=69.5 h=115.5 -->
+          <div class="cost-curve-wrap">
+            <div style="font-size:12px;font-weight:700;color:var(--ink);margin-bottom:10px">Cost Curve · Scenario Comparison</div>
+            <svg viewBox="0 0 280 215" width="100%" style="display:block">
+              <line x1="55" y1="10" x2="55" y2="185" stroke="#e6e3dc" stroke-width="1"/>
+              <line x1="55" y1="10" x2="270" y2="10" stroke="#e6e3dc" stroke-width="0.8"/>
+              <line x1="55" y1="53" x2="270" y2="53" stroke="#e6e3dc" stroke-width="0.8"/>
+              <line x1="55" y1="97" x2="270" y2="97" stroke="#e6e3dc" stroke-width="0.8"/>
+              <line x1="55" y1="141" x2="270" y2="141" stroke="#e6e3dc" stroke-width="0.8"/>
+              <line x1="55" y1="185" x2="270" y2="185" stroke="#e6e3dc" stroke-width="1"/>
+              <!-- Y labels -->
+              <text x="50" y="14" text-anchor="end" font-size="8" fill="#8a8783" font-family="var(--mono)">$400k</text>
+              <text x="50" y="57" text-anchor="end" font-size="8" fill="#8a8783" font-family="var(--mono)">$350k</text>
+              <text x="50" y="101" text-anchor="end" font-size="8" fill="#8a8783" font-family="var(--mono)">$300k</text>
+              <text x="50" y="145" text-anchor="end" font-size="8" fill="#8a8783" font-family="var(--mono)">$250k</text>
+              <text x="50" y="189" text-anchor="end" font-size="8" fill="#8a8783" font-family="var(--mono)">$200k</text>
+              <!-- Bar 1: Best Case $271.5k → top=122.5 h=62.5 -->
+              <rect x="65" y="123" width="38" height="62" rx="4" fill="#1a7a4a" opacity="0.85"/>
+              <text x="84" y="119" text-anchor="middle" font-size="9" fill="#1a7a4a" font-weight="700" font-family="var(--mono)">$271k</text>
+              <text x="84" y="200" text-anchor="middle" font-size="8" fill="#8a8783" font-family="var(--mono)">Best</text>
+              <!-- Bar 2: Base Case $289k → top=107.2 h=77.8 -->
+              <rect x="115" y="107" width="38" height="78" rx="4" fill="#c4321a" opacity="0.85"/>
+              <text x="134" y="103" text-anchor="middle" font-size="9" fill="#c4321a" font-weight="700" font-family="var(--mono)">$289k</text>
+              <text x="134" y="200" text-anchor="middle" font-size="8" fill="#8a8783" font-family="var(--mono)">Base</text>
+              <!-- Bar 3: Offset Adj + Inflation $305k → top=93.1 h=91.9 -->
+              <rect x="165" y="93" width="38" height="92" rx="4" fill="#1a4a8a" opacity="0.78"/>
+              <text x="184" y="89" text-anchor="middle" font-size="9" fill="#1a4a8a" font-weight="700" font-family="var(--mono)">$305k</text>
+              <text x="184" y="200" text-anchor="middle" font-size="8" fill="#8a8783" font-family="var(--mono)">Off+Infl</text>
+              <!-- Bar 4: Risk Adj P90 $332k → top=69.5 h=115.5 -->
+              <rect x="215" y="70" width="38" height="115" rx="4" fill="#8a5e10" opacity="0.78"/>
+              <text x="234" y="66" text-anchor="middle" font-size="9" fill="#8a5e10" font-weight="700" font-family="var(--mono)">$332k</text>
+              <text x="234" y="200" text-anchor="middle" font-size="8" fill="#8a8783" font-family="var(--mono)">P90</text>
+            </svg>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-top:2px">
+              <div style="display:flex;align-items:center;gap:5px;font-size:10px;color:var(--muted)"><div style="width:10px;height:10px;border-radius:2px;background:var(--green);flex-shrink:0"></div>Best case P10</div>
+              <div style="display:flex;align-items:center;gap:5px;font-size:10px;color:var(--muted)"><div style="width:10px;height:10px;border-radius:2px;background:var(--red);flex-shrink:0"></div>Base case P50</div>
+              <div style="display:flex;align-items:center;gap:5px;font-size:10px;color:var(--muted)"><div style="width:10px;height:10px;border-radius:2px;background:#1a4a8a;flex-shrink:0"></div>Offset adj. + inflation</div>
+              <div style="display:flex;align-items:center;gap:5px;font-size:10px;color:var(--muted)"><div style="width:10px;height:10px;border-radius:2px;background:var(--amber);flex-shrink:0"></div>Risk adj. P90</div>
+            </div>
+          </div>
+
+          <!-- Inflation assumptions -->
+          <div class="card" style="padding:14px 16px">
+            <div style="font-size:11px;font-weight:700;color:var(--ink);margin-bottom:10px">Inflation Assumptions</div>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <div style="display:flex;justify-content:space-between;align-items:center;font-size:11px"><span style="color:var(--ink3)">Rig &amp; Personnel</span><span class="inflation-badge">+3.2% / yr</span></div>
+              <div style="display:flex;justify-content:space-between;align-items:center;font-size:11px"><span style="color:var(--ink3)">Directional Services</span><span class="inflation-badge">+4.5% / yr</span></div>
+              <div style="display:flex;justify-content:space-between;align-items:center;font-size:11px"><span style="color:var(--ink3)">Tubulars &amp; Casing</span><span class="inflation-badge">+3.0% / yr</span></div>
+              <div style="display:flex;justify-content:space-between;align-items:center;font-size:11px"><span style="color:var(--ink3)">Drilling Chemicals</span><span style="font-size:9px;font-weight:700;font-family:var(--mono);padding:2px 7px;border-radius:4px;background:var(--green-bg);color:var(--green);border:1px solid var(--green-border)">Live pricing</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ PANEL 4: INTEGRATION ═══ -->
+    <div class="oc-panel" id="oc-panel-integration">
+
+      <!-- Master KPI strip -->
+      <div class="kpi-strip">
+        <div class="kpi-box"><div class="kpi-val" style="color:var(--red)">$20.4k</div><div class="kpi-lbl">Cost / Day</div><div class="kpi-delta" style="color:var(--green)">▼ vs $21.1k offset avg</div></div>
+        <div class="kpi-box"><div class="kpi-val">$59.90</div><div class="kpi-lbl">Cost / Meter</div><div class="kpi-delta" style="color:var(--green)">▼ −2.1% vs offsets</div></div>
+        <div class="kpi-box"><div class="kpi-val" style="color:var(--amber)">$320k</div><div class="kpi-lbl">Risk-Adj. AFE</div><div class="kpi-delta" style="color:var(--amber)">8.3% NPT contingency</div></div>
+        <div class="kpi-box"><div class="kpi-val" style="color:var(--green)">73%</div><div class="kpi-lbl">Confidence Level</div><div class="kpi-delta" style="color:var(--muted)">Based on 6 offset wells</div></div>
+      </div>
+
+      <!-- 3 Scenario Cards -->
+      <div class="scenario-grid">
+        <div class="scenario-card sc-best" onclick="selectScenarioCard(this,'best')">
+          <div class="sc-card-label">Best Case · P10</div>
+          <div class="sc-card-afe" style="color:var(--green)">$271,500</div>
+          <div class="sc-card-days">11.8 days · smooth drilling</div>
+          <ul class="sc-card-bullets">
+            <li>No major NPT events</li>
+            <li>ROP sustains 18.4+ m/h</li>
+            <li>KCl on-site before spud</li>
+            <li>No lost circ. or stuck pipe</li>
+          </ul>
+          <div style="margin-top:12px;padding-top:10px;border-top:1px solid var(--line);display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;color:var(--muted)">
+            <span>Cost/day <strong style="color:var(--ink)">$23.0k</strong></span>
+            <span>Cost/m <strong style="color:var(--ink)">$56.40</strong></span>
+          </div>
+        </div>
+
+        <div class="scenario-card sc-expected active" onclick="selectScenarioCard(this,'expected')">
+          <div class="sc-card-label" style="color:var(--red)">Expected · P50 &larr; Active</div>
+          <div class="sc-card-afe" style="color:var(--red)">$289,000</div>
+          <div class="sc-card-days">14.2 days · offset average</div>
+          <ul class="sc-card-bullets">
+            <li>Offset average performance</li>
+            <li>5% NPT contingency applied</li>
+            <li>PetroServ KCl confirmed</li>
+            <li>0.8d NPT in intermediate</li>
+          </ul>
+          <div style="margin-top:12px;padding-top:10px;border-top:1px solid var(--line);display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;color:var(--muted)">
+            <span>Cost/day <strong style="color:var(--ink)">$20.4k</strong></span>
+            <span>Cost/m <strong style="color:var(--ink)">$59.90</strong></span>
+          </div>
+        </div>
+
+        <div class="scenario-card sc-worst" onclick="selectScenarioCard(this,'worst')">
+          <div class="sc-card-label" style="color:var(--amber)">Worst Case · P90</div>
+          <div class="sc-card-afe" style="color:var(--amber)">$332,000</div>
+          <div class="sc-card-days">17.5 days · trouble events</div>
+          <ul class="sc-card-bullets">
+            <li>Lost circ. at 2,300–2,450 m</li>
+            <li>Stuck pipe contingency: 28 h</li>
+            <li>Full inflation on all services</li>
+            <li>Risk premiums fully realized</li>
+          </ul>
+          <div style="margin-top:12px;padding-top:10px;border-top:1px solid var(--line);display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;color:var(--muted)">
+            <span>Cost/day <strong style="color:var(--ink)">$19.0k</strong></span>
+            <span>Cost/m <strong style="color:var(--ink)">$68.80</strong></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Integration summary AI Box -->
+      <div class="ai-box">
+        <div class="ai-box-head"><div class="ai-gem">◆</div><div><div class="ai-box-title">Integrated Model Summary · Time + Cost + Offset</div><div class="ai-box-sub">Scenario analysis combining time schedule, cost estimate, and offset benchmarks</div></div></div>
+        <div class="ai-text"><strong>Expected Case (P50)</strong> is the recommended AFE basis at <span class="hl">$289,000 over 14.2 days</span>. Offset benchmarking from 6 comparable Cardium wells confirms this is <span class="hl">2.1% below</span> the offset-adjusted estimate ($305k), driven by live KCl pricing from PetroServ. Key risk: the 2,300–2,450 m interval carries a <strong>28% probability of lost circulation</strong> based on HZ-Cardium-08 and HZ-Cardium-19 XI trouble reports — a $24,000 NPT reserve should be held in the AFE. Cost/day of <span class="hl">$20.4k is 3.3% below the offset average</span>, indicating Cutting Edge is well-positioned for this well.</div>
+        <div class="ai-actions">
+          <button class="btn btn-primary" onclick="exportReport('Offset &amp; Cost Report')">
+            <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            Export Full Report
+          </button>
+          <button class="btn btn-ghost" style="font-size:11px" onclick="switchOCPanel('offset-analysis')">Review offset wells</button>
+          <button class="btn btn-ghost" style="font-size:11px" onclick="switchTab('source')">Update chemical prices →</button>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
 
@@ -1638,7 +1984,7 @@ function userMenuAction(action){
           </div>
           <div>
             <label style="font-size:11px;font-weight:700;color:var(--muted);display:block;margin-bottom:4px">Last Name</label>
-            <input id="prof-lname" value="C." style="width:100%;padding:8px 10px;border:1.5px solid var(--line2);border-radius:8px;font-family:var(--font);font-size:13px;color:var(--ink);background:var(--bg);box-sizing:border-box"/>
+            <input id="prof-lname" value="T." style="width:100%;padding:8px 10px;border:1.5px solid var(--line2);border-radius:8px;font-family:var(--font);font-size:13px;color:var(--ink);background:var(--bg);box-sizing:border-box"/>
           </div>
         </div>
         <div style="margin-bottom:12px">
@@ -1774,14 +2120,11 @@ function userMenuAction(action){
         " style="width:100%;padding:9px 12px;border:1.5px solid var(--line2);border-radius:8px;font-family:var(--font);font-size:13px;color:var(--ink);background:var(--bg);box-sizing:border-box;margin-bottom:16px"/>
         <ul id="help-items" style="list-style:none;margin:0;padding:0">
           ${[
-            ['Source Chemicals','Use the AI chat to search by chemical name, CAS number, or supplier (e.g. "KCl 40t Alberta"). Results are ranked by quality, price, safety, and logistics score. Click a supplier card to view full details, set a price alert, or send the bid directly to the Procurement tab.'],
-            ['Procurement & Bid Table','The Bid Table compares all active bids side-by-side. A vendor can appear multiple times — one row per chemical. Click the ✎ button on any vendor row to add notes and adjust the bid quantity. The Committed Spend summary and budget bar update automatically. Adjust scoring weights in the right-hand panel, then issue a PO from the status dropdown.'],
-            ['Sending to Procurement','From any supplier card click "→ Send to Procurement", enter a quantity, and confirm — the vendor is added to the Bid Table and the Activity Log is updated. If the same vendor and chemical already exist in the table, the row is highlighted instead of duplicated.'],
-            ['Offset & Cost Scenarios','Switch between Base Case, Alternative, and Best Case scenarios to model AFE impact. Chemical sourcing decisions feed directly into the cost estimates — the AI narrative and phase durations update automatically.'],
-            ['Invoice Approval','Review flagged line items, approve or return invoices with a reason note. The notification badge in the nav bar tracks all pending items across open invoices.'],
-            ['Compliance & Safety','The Safety Plan Bridge panel parses client HSE documents and auto-generates a compliance bridging checklist. The Regulatory Compliance panel scans your project plan against AER directives and IRPs, flagging any deviations. Resolve items in each panel to clear the compliance counter.'],
-            ['Price Alerts','Click "Set Alert" on any supplier result card to create email, SMS, or dashboard alerts when a price crosses your defined threshold.'],
-            ['Exporting Reports','Use the Export CSV button in the Procurement Activity Log to download a full bid history. A PDF Scorecard can be exported from the AI Recommendation panel in the Procurement tab.'],
+            ['1. Source Chemicals','A discovery and initial sourcing interface to find the best chemical suppliers. Search for chemicals using an AI-assisted chat, view live market pricing grids (daily percentage changes, available suppliers), and track price updates and procurement pipeline statuses via the sidebar.'],
+            ['2. Procurement','An analysis and bid-awarding dashboard meant for finalizing supplier selection. Offers stats on committed spend vs. budget, a Bid Table evaluating suppliers on Quality, Price, and Safety manually weighted by sliders, and an AI Recommendation engine to help decide.'],
+            ['3. Offset & Cost Analysis','A comprehensive well-planning and risk-adjustment module, divided into four sub-panels: Offset Analysis (historical comparable wells), Time Analysis (P10/P50/P90 Gantt schedule), Cost Estimation (day rates, chemical pricing, risk premiums), and Integration (integrated risk report).'],
+            ['4. Invoice Approval','An automated reconciliation module that compares incoming vendor invoices against issued POs. A dashboard categorizes items into Auto-approved, Needs review, or Discrepancy, focusing heavily on line-item comparisons where rates or volumes differ from the PO.'],
+            ['5. Compliance & Safety','Ensures supplier adherence to project-specific safety plans and regulatory compliance. The Safety Plan Bridge tracks supplier obligations and generates a Safety Bridging Document. Regulatory Compliance scans operational plans against directives to flag deviations and log remediation steps.']
           ].map(([t,d])=>`<li style="padding:11px 0;border-bottom:1px solid var(--line2)">
             <div style="font-size:13px;font-weight:700;color:var(--ink);margin-bottom:3px">${t}</div>
             <div style="font-size:12px;color:var(--ink3);line-height:1.6">${d}</div>
@@ -1789,7 +2132,7 @@ function userMenuAction(action){
         </ul>
         <div style="margin-top:16px;padding:14px;background:var(--bg);border-radius:10px;border:1px solid var(--line2)">
           <div style="font-size:12px;font-weight:700;color:var(--ink);margin-bottom:6px">Still need help?</div>
-          <div style="font-size:12px;color:var(--ink3)">Email <a href="mailto:support@algochem.ai" style="color:var(--red)">support@algochem.ai</a> or call <strong>1-800-256-2436</strong> (Mon–Fri, 7am–6pm MT)</div>
+          <div style="font-size:12px;color:var(--ink3)">Email <a href="mailto:support@algo-rythmn.ai" style="color:var(--red)">support@algo-rythmn.ai</a></div>
         </div>
       </div>
       <div style="padding:16px 28px;border-top:1px solid var(--line2)">
@@ -1852,6 +2195,37 @@ function showHome() {
   // switch back to the homepage view
   document.getElementById('src-home').style.display = '';
   document.getElementById('src-chat').style.display = 'none';
+
+  // reset chat layout
+  const chatLayout = document.querySelector('.chat-layout');
+  if (chatLayout) {
+    chatLayout.style.gridTemplateColumns = '1fr 264px';
+  }
+
+  // restore sidebar
+  const sidebar = document.querySelector('.chat-sidebar');
+  if (sidebar) {
+    sidebar.style.padding = '20px 16px';
+    sidebar.innerHTML = `
+        <div class="chat-sidebar-lbl">Market Pulse</div>
+        <div class="side-card" style="margin-bottom:14px">
+          <div class="side-head" style="font-size:10px">Live Prices <span onclick="switchTab('perf')">View perf →</span></div>
+          <div class="pulse-row"><div><div class="pr-name">KCl</div><div class="pr-sub">Granular 95%</div></div><div style="text-align:right"><div class="pr-price">$1,240/t</div><div class="pr-chg up">↑ 2.4%</div></div></div>
+          <div class="pulse-row"><div><div class="pr-name">CaCl₂</div><div class="pr-sub">Flake 94%</div></div><div style="text-align:right"><div class="pr-price">$980/t</div><div class="pr-chg dn">↓ 1.1%</div></div></div>
+          <div class="pulse-row"><div><div class="pr-name">NaCl</div><div class="pr-sub">Industrial</div></div><div style="text-align:right"><div class="pr-price">$74/t</div><div class="pr-chg up">↑ 0.8%</div></div></div>
+          <div class="pulse-row"><div><div class="pr-name">K-Formate</div><div class="pr-sub">50% solution</div></div><div style="text-align:right"><div class="pr-price">$1,580/t</div><div class="pr-chg dn">↓ 3.2%</div></div></div>
+        </div>
+        <div class="chat-sidebar-lbl">Procurement Pipeline</div>
+        <div class="side-card">
+          <div class="side-head" style="font-size:10px">Active <span onclick="switchTab('proc')">Open →</span></div>
+          <div style="font-size:11px;color:var(--muted);line-height:1.6;margin-bottom:8px">Sourced chemicals appear here when you send a supplier to procurement.</div>
+          <div id="src-active-list" style="display:flex;flex-direction:column;gap:7px">
+            <div style="background:var(--green-bg);border:1px solid var(--green-border);border-radius:7px;padding:9px 11px"><div style="font-size:11px;font-weight:700;color:var(--green)">✓ KCl · PetroServ Canada</div><div style="font-size:10px;color:var(--muted);font-family:var(--mono)">PO issued · $47,200</div></div>
+            <div style="background:var(--amber-bg);border:1px solid var(--amber-border);border-radius:7px;padding:9px 11px"><div style="font-size:11px;font-weight:700;color:var(--amber)">⏳ CaCl₂ · NorthStar</div><div style="font-size:10px;color:var(--muted);font-family:var(--mono)">Awaiting bid review</div></div>
+          </div>
+        </div>`;
+  }
+
   // clear the chat feed for next time
   feed.innerHTML = '';
   lastResults = [];
@@ -2806,7 +3180,7 @@ const DB={
     {id:'SC',name:'Sunchem Industries',origin:'🇺🇸 Midland, TX',price:'$3.60',unit:'/L',delta:'↓ $0.70 vs avg',q:85,p:94,l:72,s:89,tags:[['b','Cross-border shipping'],['a','5% customs duty'],['gr','7-day lead']],lead:'7 days',top:false,
      about:'Sunchem offers lower list price but cross-border logistics (7-day lead, 5% duty, customs brokerage) bring landed cost on par with RedLine.',
      certs:['API approved','ISO 9001:2015','SDS Current'],
-     grade:'Drilling-grade · Mineral base',cas:'Various',capacity:'250,000 L/month',minOrder:'1,000 L',terms:'Net 45',contact:{name:'Cody Walsh',title:'Export Sales',email:'c.walsh@sunchem.com',phone:'+1 432 555 0344'},
+     grade:'Drilling-grade · Mineral base',cas:'Various',capacity:'250,000 L/month',minOrder:'1,000 L',terms:'Net 45',contact:{name:'Cody Walsh',title:'Export Sales',email:'t.walsh@sunchem.com',phone:'+1 432 555 0344'},
      priceHist:[{mo:'Nov',v:4.20},{mo:'Dec',v:4.00},{mo:'Jan',v:3.85},{mo:'Feb',v:3.70},{mo:'Mar',v:3.60}]},
   ],
   default:[
@@ -2864,13 +3238,70 @@ const DB={
   ],
 };
 const VERDICTS={
-  kcl:`<strong>PetroServ Canada</strong> is the best choice for KCl — not just on price ($1,240/t, <span class="hl">↓ $110 below average</span>), but because it's the only supplier combining strong safety compliance (96/100), in-stock availability, and Alberta delivery. Basin Well Services is cheapest but fails CE safety requirements.`,
-  cacl:`<strong>NorthStar Directional</strong> offers the best value for CaCl₂ at $980/t — a <span class="hl">$70 discount to the 90-day average</span>, driven by current market oversupply. Quality score of 96 is highest in market. Consider securing a forward order before Q3 demand rebounds.`,
-  lub:`<strong>RedLine Chemical Co.</strong> is the standout for drilling lubricants — next-day Alberta delivery, AER approval, and drilling-grade certification. Sunchem is $0.25/L cheaper but cross-border shipping adds 5% duty and 7-day lead, making landed cost effectively higher.`,
-  bar:`<strong>Cimbar Performance Minerals</strong> is the top pick for API-grade baryte at $340/t — <span class="hl">↓ $28 below market average</span>, API 13A certified, and AER approved. Milbar China is $92/t cheaper but unqualified for AER and adds significant logistics risk and lead time. Halliburton offers the fastest 7-day delivery if timeline is critical.`,
-  nabr:`<strong>Albemarle Canada</strong> leads on both quality (96) and price at $1,780/t for Sodium Bromide — <span class="hl">$140 below market average</span>. Pharmaceutical-grade with full TDG Class 5.1 compliance. AkzoNobel is a solid European alternative for forward contracts but adds 32-day ocean lead time.`,
-  znbr:`<strong>Albemarle Canada</strong> is recommended for ZnBr₂ completion brine at $5,400/t — <span class="hl">$620 below the 6-month high</span>, with full AER approval and TDG Class 8 certification. Calfrac offers 3-day local delivery at a premium if urgent; consider splitting the order for critical volume.`,
-  default:`Based on current market data, <strong>PetroServ Canada</strong> appears as the top general supplier. Refine your search with a specific chemical name or grade for a more precise recommendation.`
+  kcl:`<div style="font-size:11px; font-family:var(--mono); color:var(--muted); margin-bottom:12px; padding-left:10px; border-left:2px solid var(--line2); line-height:1.6;">
+    <div style="color:var(--ink3); font-weight:700; margin-bottom:4px;">ANALYSIS PROCESS:</div>
+    &gt; Scanning 18 known KCl suppliers...<br>
+    &gt; Filtering for WCSB-ready / AER compliance... 6 suppliers remain.<br>
+    &gt; Filtering by HSE safety threshold &gt; 90... 3 suppliers remain.<br>
+    &gt; Evaluating landed cost (Price + Freight + Tariffs)...<br>
+    &gt; PetroServ: $1,240/t (In-stock, zero import fees)<br>
+    &gt; Basin Well: $1,180/t (Failed safety review)<br>
+    <span style="color:var(--green); font-weight:bold;">&gt; Conclusion matched: PetroServ is optimal.</span>
+  </div>
+  <strong>PetroServ Canada</strong> is the best choice for KCl — not just on price ($1,240/t, <span class="hl">↓ $110 below average</span>), but because it's the only supplier combining strong safety compliance (96/100), in-stock availability, and Alberta delivery.`,
+  cacl:`<div style="font-size:11px; font-family:var(--mono); color:var(--muted); margin-bottom:12px; padding-left:10px; border-left:2px solid var(--line2); line-height:1.6;">
+    <div style="color:var(--ink3); font-weight:700; margin-bottom:4px;">ANALYSIS PROCESS:</div>
+    &gt; Scanning 24 global CaCl₂ suppliers...<br>
+    &gt; Checking active market inventory... High oversupply detected.<br>
+    &gt; Price historical analysis: 90-day moving average is $1,050.<br>
+    &gt; Quality scoring: NorthStar (96/100), TerraChem (85/100).<br>
+    <span style="color:var(--green); font-weight:bold;">&gt; Conclusion matched: NorthStar presents maximum value.</span>
+  </div>
+  <strong>NorthStar Directional</strong> offers the best value for CaCl₂ at $980/t — a <span class="hl">$70 discount to the 90-day average</span>, driven by current market oversupply. Quality score of 96 is highest in market. Consider securing a forward order before Q3 demand rebounds.`,
+  lub:`<div style="font-size:11px; font-family:var(--mono); color:var(--muted); margin-bottom:12px; padding-left:10px; border-left:2px solid var(--line2); line-height:1.6;">
+    <div style="color:var(--ink3); font-weight:700; margin-bottom:4px;">ANALYSIS PROCESS:</div>
+    &gt; Scanning drilling lubricants (12 active variants)...<br>
+    &gt; Checking AER approval registry... 4 suppliers verified.<br>
+    &gt; Calculating final landed cost:<br>
+    &gt; RedLine: $3.80/L (Includes fast Alberta freight)<br>
+    &gt; Sunchem: $3.55/L + Freight + 5% Border Duty = $3.95/L landed.<br>
+    <span style="color:var(--green); font-weight:bold;">&gt; Conclusion matched: Local delivery yields lower total cost.</span>
+  </div>
+  <strong>RedLine Chemical Co.</strong> is the standout for drilling lubricants — next-day Alberta delivery, AER approval, and drilling-grade certification. Sunchem is $0.25/L cheaper but cross-border shipping adds 5% duty and 7-day lead, making landed cost effectively higher.`,
+  bar:`<div style="font-size:11px; font-family:var(--mono); color:var(--muted); margin-bottom:12px; padding-left:10px; border-left:2px solid var(--line2); line-height:1.6;">
+    <div style="color:var(--ink3); font-weight:700; margin-bottom:4px;">ANALYSIS PROCESS:</div>
+    &gt; Scanning API-grade Baryte (22 suppliers)...<br>
+    &gt; Eliminating uncertified origins... 8 reliable vendors left.<br>
+    &gt; Logistics risk check: Global shipping routes currently congested.<br>
+    &gt; Comparing onshore reserves vs offshore pricing...<br>
+    <span style="color:var(--green); font-weight:bold;">&gt; Conclusion matched: Cimbar hits sweet-spot for price and low risk.</span>
+  </div>
+  <strong>Cimbar Performance Minerals</strong> is the top pick for API-grade baryte at $340/t — <span class="hl">↓ $28 below market average</span>, API 13A certified, and AER approved. Milbar China is $92/t cheaper but unqualified for AER and adds logistics risk.`,
+  nabr:`<div style="font-size:11px; font-family:var(--mono); color:var(--muted); margin-bottom:12px; padding-left:10px; border-left:2px solid var(--line2); line-height:1.6;">
+    <div style="color:var(--ink3); font-weight:700; margin-bottom:4px;">ANALYSIS PROCESS:</div>
+    &gt; Scanning NaBr supply (8 suppliers)...<br>
+    &gt; Cross-referencing TDG Class 5.1 requirements...<br>
+    &gt; Price history check: Market average is $1,920/t.<br>
+    &gt; Lead time optimization: Albemarle offers local strategic reserve.<br>
+    <span style="color:var(--green); font-weight:bold;">&gt; Conclusion matched: Albemarle clears all criteria highest.</span>
+  </div>
+  <strong>Albemarle Canada</strong> leads on both quality (96) and price at $1,780/t for Sodium Bromide — <span class="hl">$140 below market average</span>. Pharmaceutical-grade with full TDG Class 5.1 compliance. AkzoNobel is a solid European alternative but adds 32-day ocean lead time.`,
+  znbr:`<div style="font-size:11px; font-family:var(--mono); color:var(--muted); margin-bottom:12px; padding-left:10px; border-left:2px solid var(--line2); line-height:1.6;">
+    <div style="color:var(--ink3); font-weight:700; margin-bottom:4px;">ANALYSIS PROCESS:</div>
+    &gt; Evaluating ZnBr₂ heavy completion brines...<br>
+    &gt; Density check constraints: 1.69–1.83 kg/L required...<br>
+    &gt; Pricing macro-trend: Trending downwards (6-month low).<br>
+    &gt; Evaluating time-to-site vs cost-to-site.<br>
+    <span style="color:var(--green); font-weight:bold;">&gt; Conclusion matched: Albemarle recommended due to price dip.</span>
+  </div>
+  <strong>Albemarle Canada</strong> is recommended for ZnBr₂ completion brine at $5,400/t — <span class="hl">$620 below the 6-month high</span>, with full AER approval and TDG Class 8 certification. Calfrac offers 3-day local delivery at a premium if urgent.`,
+  default:`<div style="font-size:11px; font-family:var(--mono); color:var(--muted); margin-bottom:12px; padding-left:10px; border-left:2px solid var(--line2); line-height:1.6;">
+    <div style="color:var(--ink3); font-weight:700; margin-bottom:4px;">ANALYSIS PROCESS:</div>
+    &gt; Executing generic chemical scan...<br>
+    &gt; Found baseline market profiles.<br>
+    &gt; Need narrower parameters to optimize scoring.<br>
+  </div>
+  Based on current market data, <strong>PetroServ Canada</strong> appears as the top general supplier. Refine your search with a specific chemical name or grade for a more precise recommendation.`
 };
 
 function getKey(q){const l=q.toLowerCase();if(l.includes('kcl')||l.includes('potassium chloride'))return'kcl';if(l.includes('cacl')||l.includes('calcium'))return'cacl';if(l.includes('lubric'))return'lub';if(l.includes('baryte')||l.includes('baso4')||l.includes('barite'))return'bar';if(l.includes('sodium brom')||l.includes('nabr'))return'nabr';if(l.includes('zinc brom')||l.includes('znbr'))return'znbr';return'default'}
@@ -2993,6 +3424,14 @@ function appendAIResponse(q) {
   activeBubbleId = bid;
   const cardsHtml = suppliers.map(s => renderCard(s, key)).join('');
   const feed = document.getElementById('chat-messages');
+
+  // Change layout to split the page into two parts
+  const chatLayout = document.querySelector('.chat-layout');
+  if (chatLayout) {
+    chatLayout.style.gridTemplateColumns = 'minmax(400px, 1fr) 1.2fr';
+  }
+
+  // Left part: Chat and AI summary
   const row = document.createElement('div');
   row.className = 'chat-row ai-row';
   row.innerHTML = `
@@ -3000,11 +3439,24 @@ function appendAIResponse(q) {
     <div class="ai-bubble">
       <span class="ai-resp-lbl">◆ AlgoChem Analysis · ${names[key] || q} · Scanned 200+ suppliers</span>
       <div class="ai-text" style="margin-bottom:12px">${VERDICTS[key] || VERDICTS.default}</div>
-      <div class="ai-actions" style="margin-bottom:14px">
-        <button class="btn btn-primary" onclick="sendToProcurement('${suppliers[0]&&suppliers[0].name||''}','${key}','${suppliers[0]&&suppliers[0].price||''}${suppliers[0]&&suppliers[0].unit||''}')">→ Send to Procurement</button>
+      <div class="ai-actions">
+        <button class="btn btn-primary" onclick="sendToProcurement('${suppliers[0]&&suppliers[0].name||''}','${key}','${suppliers[0]&&suppliers[0].price||''}${suppliers[0]&&suppliers[0].unit||''}')">→ Send Top Pick to Procurement</button>
         <button class="btn btn-ghost" onclick="setPriceAlert()">Set price alert</button>
       </div>
-      <div class="bubble-ctrl">
+    </div>`;
+  feed.appendChild(row);
+  scrollChat();
+
+  // Right part: Suppliers info
+  const sidebar = document.querySelector('.chat-sidebar');
+  if (sidebar) {
+    sidebar.style.padding = '24px 32px';
+    sidebar.innerHTML = `
+      <div style="font-size:14px; font-weight:800; color:var(--ink); margin-bottom:16px; display:flex; align-items:center; justify-content:space-between;">
+        <span>Supplier Rankings</span>
+        <span style="font-size:11px; font-weight:600; color:var(--muted); font-family:var(--mono);">${suppliers.length} results</span>
+      </div>
+      <div class="bubble-ctrl" style="margin-bottom:16px; padding-bottom:12px;">
         <button class="bfilt on" onclick="bubbleFilter(this,'all','${bid}')">All regions</button>
         <button class="bfilt" onclick="bubbleFilter(this,'ca','${bid}')">🇨🇦 Canada</button>
         <button class="bfilt" onclick="bubbleFilter(this,'us','${bid}')">🇺🇸 USA</button>
@@ -3013,10 +3465,11 @@ function appendAIResponse(q) {
           <option>Best match</option><option>Lowest price</option><option>Lead time</option><option>Quality score</option>
         </select>
       </div>
-      <div id="${bid}" style="display:flex;flex-direction:column;gap:11px">${cardsHtml}</div>
-    </div>`;
-  feed.appendChild(row);
-  scrollChat();
+      <div id="${bid}" style="display:flex;flex-direction:column;gap:12px; padding-right:4px;">
+        ${cardsHtml}
+      </div>
+    `;
+  }
 }
 
 function scrollChat() {
@@ -3260,90 +3713,24 @@ function rescoreBids(silent){
   setTimeout(()=>refreshScorecard(),80);
 }
 
-// ── SCENARIO TOGGLE ──
-const SCENARIO_DATA = {
-  base: {
-    p50:'14.2d', p10:'11.8d', p90:'17.5d', afe:'$289k',
-    afeExact:'$289,000',
-    rigLine:'Rig Day Rate × 14.2d', rigCost:'$128,400', rigNote:'+3.2% inflation adj.',
-    kclNote:'PetroServ $1,240/t ✓', kclCost:'$47,200',
-    caclNote:'NorthStar $980/t ✓', caclCost:'$19,600',
-    aiText:'AFE estimate of <span class="hl">$289,000</span> uses <strong>live KCl pricing at $1,240/t</strong> (PetroServ Canada, sourced today) and current CaCl₂ at $980/t. If Basin Well Services were selected instead, fluid costs would drop by <strong>$4,800</strong> but introduce safety review delays estimated at <strong>+2.1 days</strong> — adding ~$16,000 in rig time. <span class="hl">PetroServ Canada is the better total-cost decision.</span>',
-    sourcingImpact:'Chemical costs make up <strong>23% of AFE</strong>. Sourcing KCl from PetroServ vs. market average saves <span class="hl">$8,400</span> on this well.',
-    phases: [{d:'2.1',delta:'-0.2d',dc:'var(--green)'},{d:'3.4',delta:'+0.3d',dc:'var(--red)'},{d:'5.8',delta:'-0.2d',dc:'var(--green)'},{d:'2.9',delta:'+0.1d',dc:'var(--red)'}]
-  },
-  alt: {
-    p50:'16.3d', p10:'13.2d', p90:'19.8d', afe:'$300k',
-    afeExact:'$300,200',
-    rigLine:'Rig Day Rate × 16.3d (+2.1d delay)', rigCost:'$147,400', rigNote:'Safety review delay applied',
-    kclNote:'Basin $1,180/t ⚠ Safety flag', kclCost:'$42,400',
-    caclNote:'NorthStar $980/t ✓', caclCost:'$19,600',
-    aiText:'<span class="hl">Alternative scenario costs $11,200 more than Base Case.</span> Basin Well Services reduces KCl fluid spend by <strong>$4,800</strong>, but the active safety flag introduces an estimated <strong>+2.1 day delay</strong> (~$19,000 in rig time). Net AFE increases to <strong>$300,200</strong>. This scenario is not recommended.',
-    sourcingImpact:'Basin Well Services fluid savings of <strong>$4,800</strong> are outweighed by a ~$19,000 rig-time penalty from the safety review hold. Net cost vs. Base Case: <span class="hl">+$11,200</span>.',
-    phases: [{d:'2.4',delta:'+0.1d',dc:'var(--red)'},{d:'3.4',delta:'+0.3d',dc:'var(--red)'},{d:'7.9',delta:'+2.1d',dc:'var(--red)'},{d:'2.6',delta:'-0.2d',dc:'var(--green)'}]
-  },
-  bestcase: {
-    p50:'13.0d', p10:'10.8d', p90:'15.5d', afe:'$271k',
-    afeExact:'$271,500',
-    rigLine:'Rig Day Rate × 13.0d (P10 pace)', rigCost:'$117,400', rigNote:'Based on P10 scenario',
-    kclNote:'PetroServ $1,240/t ✓', kclCost:'$47,200',
-    caclNote:'NorthStar $980/t ✓', caclCost:'$19,600',
-    aiText:'Best-case AFE of <span class="hl">$271,500</span> assumes 1.2 days ahead of P50 (current trajectory), KCl from PetroServ, lubricant from RedLine, and no HSE delays. Requires maintaining current ROP and that the lubricant restock order is placed within 24 hours.',
-    sourcingImpact:'Best-case chemical costs unchanged. The $17,500 saving vs Base AFE comes entirely from drilling efficiency — confirming that <span class="hl">fast, safe sourcing decisions directly support the best-case timeline.</span>',
-    phases: [{d:'1.9',delta:'-0.4d',dc:'var(--green)'},{d:'3.0',delta:'-0.1d',dc:'var(--green)'},{d:'5.4',delta:'-0.6d',dc:'var(--green)'},{d:'2.7',delta:'-0.1d',dc:'var(--green)'}]
-  }
-};
-function switchScenario(btn, id){
-  btn.closest('.scenario-tabs').querySelectorAll('.stab').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  document.querySelectorAll('#page-offset .scenario-note').forEach(n=>n.style.display='none');
-  const note=document.getElementById('scenario-note-'+id);
-  if(note)note.style.display='';
-
-  const d=SCENARIO_DATA[id];
-  if(!d){showToast('Scenario: '+btn.textContent.trim());return;}
-
-  // Update stat cards
-  const statCards=document.querySelectorAll('#page-offset .stat-grid .sc-val');
-  if(statCards[0])statCards[0].textContent=d.p50;
-  if(statCards[1]){statCards[1].textContent=d.p10;statCards[1].className='sc-val green';}
-  if(statCards[2]){statCards[2].textContent=d.p90;statCards[2].className='sc-val amber';}
-  if(statCards[3]){statCards[3].textContent=d.afe;statCards[3].className='sc-val red';}
-
-  // Update AI cost estimate text
-  const aiText=document.querySelector('#page-offset .ai-box .ai-text');
-  if(aiText)aiText.innerHTML=d.aiText;
-
-  // Update sourcing impact AI box
-  const impactBoxes=document.querySelectorAll('#page-offset .ai-box');
-  if(impactBoxes[1]){
-    const impactText=impactBoxes[1].querySelector('.ai-text');
-    if(impactText)impactText.innerHTML=d.sourcingImpact;
-  }
-
-  // Update phase durations table
-  const phaseRows=document.querySelectorAll('#page-offset .tbl:first-of-type tbody tr');
-  d.phases.forEach((p,i)=>{
-    if(!phaseRows[i])return;
-    const numTd=phaseRows[i].querySelector('.num');
-    if(numTd)numTd.textContent=p.d;
-    const deltaTd=phaseRows[i].querySelectorAll('td')[4];
-    if(deltaTd){deltaTd.textContent=p.delta;deltaTd.style.color=p.dc;deltaTd.style.fontWeight='700';deltaTd.style.fontFamily='var(--mono)';}
+// ── OFFSET & COST PANEL SWITCHING ──
+function switchOCPanel(id){
+  const ids=['offset-analysis','time-analysis','cost-estimation','integration'];
+  document.querySelectorAll('#page-offset .oc-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('#page-offset .oc-tab').forEach((t,i)=>t.classList.toggle('active',ids[i]===id));
+  const panel=document.getElementById('oc-panel-'+id);
+  if(panel) panel.classList.add('active');
+}
+function selectScenarioCard(el,id){
+  document.querySelectorAll('#page-offset .scenario-card').forEach(c=>{
+    c.classList.remove('active');
+    const lbl=c.querySelector('.sc-card-label');
+    if(lbl) lbl.textContent=lbl.textContent.replace(' ← Active','');
   });
-
-  // Update cost breakdown table
-  const costRows=document.querySelectorAll('#page-offset .tbl:last-of-type tbody tr');
-  if(costRows[0]){costRows[0].querySelector('.num').textContent=d.rigCost;const noteTd=costRows[0].querySelector('td:last-child');if(noteTd)noteTd.textContent=d.rigNote;}
-  if(costRows[1]){costRows[1].querySelector('.num').textContent=d.kclCost;const nTd=costRows[1].querySelector('td:last-child');if(nTd)nTd.innerHTML=`<span style="font-size:11px;color:${d.kclNote.includes('⚠')?'var(--amber)':'var(--green)'}">${d.kclNote}</span>`;}
-  if(costRows[2]){costRows[2].querySelector('.num').textContent=d.caclCost;const nTd=costRows[2].querySelector('td:last-child');if(nTd)nTd.innerHTML=`<span style="font-size:11px;color:var(--green)">${d.caclNote}</span>`;}
-  // AFE total row
-  const lastCostRow=costRows[costRows.length-1];
-  if(lastCostRow){
-    const totalSpan=lastCostRow.querySelector('span[style*="color:var(--red)"]');
-    if(totalSpan)totalSpan.textContent=d.afeExact;
-  }
-
-  showToast('Scenario: '+btn.textContent.trim());
+  el.classList.add('active');
+  const lbl=el.querySelector('.sc-card-label');
+  if(lbl&&!lbl.textContent.includes('← Active')) lbl.textContent+=(' ← Active');
+  showToast('Scenario updated: '+el.querySelector('.sc-card-days').textContent);
 }
 
 // ── MARK GAP RESOLVED ──
