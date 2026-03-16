@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>AlgoChem — Collaboration Proposal for Cutting Edge</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,700;1,800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#1a1918;--ink2:#4a4845;--ink3:#7a7773;
+  --bg:#ffffff;--bg2:#fcfcfc;--bg3:#fcfcfc;--bg4:#fcfcfc;
+  --line:#dddbd8;--line2:#d0cecc;
+  --red:#0094d9;--red-glow:rgba(0,148,217,.18);--red-mid:rgba(0,148,217,.12);
+  --gold:#0094d9;--gold-bg:rgba(0,148,217,.12);
+  --green:#0094d9;--green-bg:rgba(0,148,217,.12);
+  --blue:#0094d9;--blue-bg:rgba(0,148,217,.12);
+  --font:'Epilogue','Helvetica Neue',sans-serif;
+  --mono:'JetBrains Mono',monospace;
+  --radius:16px;--radius-sm:10px;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--font);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+
+/* ══ NAV ══════════════════════════════════════════ */
+.deck-nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  background:rgba(12,11,9,.82);backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--line);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 48px;height:64px;
+}
+.nav-brand{display:flex;align-items:center;gap:10px}
+.brand-mark{width:32px;height:32px;background:var(--red);border-radius:8px;display:flex;align-items:center;justify-content:center;font-style:italic;font-weight:800;font-size:16px;color:#fff;font-family:Georgia,serif;flex-shrink:0}
+.brand-name{font-size:17px;font-weight:800;letter-spacing:-.4px;color:var(--ink)}
+.brand-tag{font-size:12px;color:var(--ink3);font-family:var(--mono);letter-spacing:.5px;margin-left:4px;border-left:1px solid var(--line2);padding-left:10px}
+.nav-links{display:flex;gap:4px}
+.nav-link{font-size:13px;font-weight:600;color:var(--ink3);padding:6px 14px;border-radius:6px;cursor:pointer;transition:all .15s;text-decoration:none;border:none;background:none;font-family:var(--font)}
+.nav-link:hover{color:var(--ink);background:var(--bg3)}
+.nav-link.active{color:var(--ink);background:var(--bg4)}
+.nav-cta{font-size:13px;font-weight:700;background:var(--red);color:#fff;padding:8px 18px;border-radius:8px;cursor:pointer;transition:all .15s;border:none;font-family:var(--font)}
+.nav-cta:hover{background:#007ab8}
+/* ── Nav dark-bg overrides (nav stays dark regardless of theme) ── */
+.deck-nav .brand-name{color:#f5f4f1}
+.deck-nav .brand-tag{color:#8a877f;border-left-color:#363430}
+.deck-nav .nav-link{color:#a0a09a}
+.deck-nav .nav-link:hover{color:#f5f4f1;background:rgba(255,255,255,.1)}
+.deck-nav .nav-link.active{color:#f5f4f1;background:rgba(255,255,255,.15)}
+
+/* ══ SLIDES ════════════════════════════════════════ */
+.slide{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:80px 48px 64px;position:relative;overflow:hidden}
+.slide.left-align{align-items:flex-start}
+
+/* ══ COVER ════════════════════════════════════════ */
+#slide-cover{
+  background:var(--bg);
+  background-image:radial-gradient(ellipse 80% 60% at 60% 40%, rgba(0,148,217,.07) 0%, transparent 70%),
+                   radial-gradient(ellipse 40% 40% at 20% 80%, rgba(21,101,192,.05) 0%, transparent 60%);
+}
+.cover-inner{max-width:950px;width:100%;text-align:center}
+.cover-eyebrow{font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--red);font-family:var(--mono);margin-bottom:28px;display:inline-flex;align-items:center;gap:8px}
+.cover-eyebrow::before,.cover-eyebrow::after{content:'';flex:1;height:1px;background:var(--red);opacity:.35;min-width:32px}
+.cover-h1{font-size:clamp(42px,6vw,76px);font-weight:900;letter-spacing:-2.5px;line-height:1.04;color:var(--ink);margin-bottom:28px}
+.cover-h1 em{font-style:italic;color:var(--red)}
+.cover-sub{font-size:20px;font-weight:400;color:var(--ink2);max-width:640px;margin:0 auto 48px;line-height:1.65}
+.cover-badges{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;margin-bottom:56px}
+.c-badge{display:flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:var(--ink3);padding:8px 16px;border:1px solid var(--line2);border-radius:30px;background:var(--bg2)}
+.c-badge .dot{width:7px;height:7px;border-radius:50%;background:var(--green);flex-shrink:0}
+.c-badge .dot.red{background:var(--red)}
+.c-badge .dot.gold{background:var(--gold)}
+.cover-logos{display:flex;align-items:center;justify-content:center;gap:32px;flex-wrap:wrap}
+.logo-pill{display:flex;align-items:center;gap:8px;padding:10px 20px;background:var(--bg3);border:1px solid var(--line2);border-radius:40px}
+.logo-pill .mark{width:26px;height:26px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:#fff;flex-shrink:0;font-style:italic;font-family:Georgia,serif}
+.logo-pill .mark.ar{background:var(--red)}
+.logo-pill .mark.ce{background:var(--blue)}
+.logo-pill .name{font-size:14px;font-weight:700;color:var(--ink)}
+.logo-connector{font-size:20px;color:var(--ink3);font-weight:300}
+.date-chip{font-size:12px;font-family:var(--mono);color:var(--ink3);margin-top:40px;letter-spacing:.5px}
+
+/* ══ SECTION DIVIDER ══════════════════════════════ */
+.section-label{font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;font-family:var(--mono);color:var(--red);margin-bottom:12px;display:block}
+.slide-title{font-size:clamp(32px,4.5vw,54px);font-weight:900;letter-spacing:-1.5px;line-height:1.1;color:var(--ink);margin-bottom:16px}
+.slide-title em{font-style:italic;color:var(--red)}
+.slide-sub{font-size:18px;color:var(--ink2);line-height:1.65;max-width:720px;margin-bottom:48px}
+
+/* ══ SLIDE 2: THE PROBLEM ═════════════════════════ */
+#slide-problem{background:var(--bg2);background-image:radial-gradient(ellipse 60% 70% at 90% 30%, rgba(0,148,217,.05) 0%, transparent 60%)}
+.problem-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1040px;width:100%}
+.prob-card{background:var(--bg3);border:1px solid var(--line2);border-radius:var(--radius);padding:32px 28px;position:relative;overflow:hidden;transition:transform .2s}
+.prob-card:hover{transform:translateY(-3px)}
+.prob-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px}
+.prob-card.p1::before{background:linear-gradient(90deg,var(--red),transparent)}
+.prob-card.p2::before{background:linear-gradient(90deg,var(--gold),transparent)}
+.prob-card.p3::before{background:linear-gradient(90deg,var(--blue),transparent)}
+.prob-icon{font-size:28px;margin-bottom:14px;display:block}
+.prob-title{font-size:18px;font-weight:800;color:var(--ink);margin-bottom:10px;letter-spacing:-.3px}
+.prob-desc{font-size:14px;color:var(--ink3);line-height:1.65}
+.prob-stat{margin-top:16px;font-size:24px;font-weight:900;letter-spacing:-.5px}
+.prob-stat.red{color:var(--red)}
+.prob-stat.gold{color:var(--gold)}
+.prob-stat.blue{color:var(--blue)}
+.prob-stat-label{font-size:10px;font-family:var(--mono);color:var(--ink3);letter-spacing:.5px;margin-top:2px}
+
+/* ══ SLIDE 3: WHAT WE OFFER ════════════════════════ */
+#slide-offer{background:var(--bg)}
+.offer-wrap{max-width:1040px;width:100%}
+.offer-header{margin-bottom:48px;text-align:center}
+.modules-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:32px}
+.module-card{background:var(--bg3);border:1px solid var(--line2);border-radius:14px;padding:22px 18px;text-align:center;cursor:pointer;transition:all .2s;position:relative}
+.module-card:hover,.module-card.active{border-color:var(--red);background:var(--bg4)}
+.module-card.active{box-shadow:0 0 0 1px var(--red),0 8px 24px var(--red-glow)}
+.module-card:not(.active){opacity:.48}
+.module-card:not(.active):hover{opacity:1}
+.module-num{font-size:11px;font-family:var(--mono);color:var(--red);letter-spacing:1px;margin-bottom:10px;font-weight:600}
+.module-icon{font-size:26px;margin-bottom:10px;display:block}
+.module-name{font-size:14px;font-weight:700;color:var(--ink);letter-spacing:-.2px;line-height:1.3}
+.module-detail{background:var(--bg3);border:1px solid var(--line2);border-radius:var(--radius);padding:40px 44px;display:none;animation:fadeUp .25s ease}
+.module-detail.active{display:grid;grid-template-columns:1.2fr 1fr;gap:48px}
+.md-left{}
+.md-title{font-size:26px;font-weight:900;letter-spacing:-.6px;color:var(--ink);margin-bottom:8px}
+.md-sub{font-size:16px;color:var(--ink3);margin-bottom:24px;line-height:1.5}
+.md-points{list-style:none;display:flex;flex-direction:column;gap:12px}
+.md-points li{display:flex;align-items:flex-start;gap:12px;font-size:15px;color:var(--ink2);line-height:1.5}
+.md-points li::before{content:'→';color:var(--red);font-weight:700;flex-shrink:0;margin-top:1px}
+.md-right{display:flex;flex-direction:column;gap:12px;justify-content:center}
+.md-kpi{background:var(--bg4);border:1px solid var(--line2);border-radius:10px;padding:20px 22px}
+.md-kpi-val{font-size:30px;font-weight:900;letter-spacing:-.8px;line-height:1;margin-bottom:5px}
+.md-kpi-val.red{color:var(--red)}
+.md-kpi-val.green{color:var(--green)}
+.md-kpi-val.gold{color:var(--gold)}
+.md-kpi-val.blue{color:var(--blue)}
+.md-kpi-label{font-size:12px;font-family:var(--mono);color:var(--ink3);letter-spacing:.5px}
+
+/* ══ SLIDE 4: HOW IT WORKS ═════════════════════════ */
+#slide-how{background:var(--bg2);background-image:radial-gradient(ellipse 60% 80% at 10% 50%, rgba(21,101,192,.05) 0%, transparent 55%)}
+.how-wrap{max-width:1040px;width:100%}
+.flow-steps{display:flex;flex-direction:column;gap:0}
+.flow-step{display:grid;grid-template-columns:64px 1fr;gap:24px;padding:32px 0;border-bottom:1px solid var(--line);position:relative}
+.flow-step:last-child{border-bottom:none}
+.flow-step-num-wrap{display:flex;flex-direction:column;align-items:center;gap:0}
+.flow-step-num{width:48px;height:48px;border-radius:50%;border:2px solid var(--red);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:900;color:var(--red);background:var(--bg3);flex-shrink:0;position:relative;z-index:1}
+.flow-step-line{width:2px;flex:1;background:var(--line);margin-top:4px}
+.flow-step:last-child .flow-step-line{display:none}
+.flow-step-body{padding-top:8px}
+.flow-step-title{font-size:20px;font-weight:800;color:var(--ink);letter-spacing:-.4px;margin-bottom:8px}
+.flow-step-desc{font-size:15px;color:var(--ink3);line-height:1.6;max-width:720px}
+.flow-step-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.fchip{font-size:12px;font-weight:600;font-family:var(--mono);color:var(--ink3);background:var(--bg4);border:1px solid var(--line2);border-radius:4px;padding:4px 12px}
+
+/* ══ SLIDE 5: BENEFITS ═════════════════════════════ */
+#slide-benefits{background:var(--bg2);background-image:radial-gradient(ellipse 60% 60% at 30% 70%, rgba(36,160,96,.04) 0%, transparent 60%)}
+.benefits-wrap{max-width:1100px;width:100%}
+.ben-header{text-align:center;margin-bottom:48px}
+.ben-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:32px}
+.ben-card{background:var(--bg3);border:1px solid var(--line2);border-radius:var(--radius);padding:32px 28px;transition:all .2s}
+.ben-card:hover{border-color:var(--line2);background:var(--bg4);transform:translateY(-2px)}
+.ben-icon{width:48px;height:48px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:20px}
+.ben-icon.red{background:var(--red-mid)}
+.ben-icon.gold{background:var(--gold-bg)}
+.ben-icon.green{background:var(--green-bg)}
+.ben-icon.blue{background:var(--blue-bg)}
+.ben-title{font-size:18px;font-weight:800;color:var(--ink);margin-bottom:10px;letter-spacing:-.3px}
+.ben-desc{font-size:14px;color:var(--ink3);line-height:1.7}
+.ben-metric{margin-top:20px;font-size:26px;font-weight:900;letter-spacing:-.5px}
+.ben-metric.red{color:var(--red)}
+.ben-metric.green{color:var(--green)}
+.ben-metric.gold{color:var(--gold)}
+.ben-metric.blue{color:var(--blue)}
+.ben-metric-label{font-size:10px;font-family:var(--mono);color:var(--ink3);letter-spacing:.5px;margin-top:2px}
+.ben-summary{background:linear-gradient(135deg,var(--bg3),var(--bg4));border:1px solid var(--line2);border-radius:var(--radius);padding:32px 36px;display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center}
+.ben-sum-title{font-size:22px;font-weight:800;letter-spacing:-.5px;color:var(--ink);margin-bottom:8px}
+.ben-sum-sub{font-size:15px;color:var(--ink3);line-height:1.55}
+.ben-sum-kpis{display:flex;gap:32px;flex-shrink:0}
+.bsk{text-align:center}
+.bsk-val{font-size:36px;font-weight:900;letter-spacing:-1px;line-height:1;color:var(--red)}
+.bsk-label{font-size:10px;font-family:var(--mono);color:var(--ink3);letter-spacing:.5px;margin-top:4px}
+
+/* ══ ROADMAP PHASES ════════════════════════════════ */
+.roadmap-phases{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:28px}
+.phase-card{background:var(--bg3);border:1px solid var(--line2);border-radius:var(--radius);padding:24px 20px;position:relative;overflow:hidden;transition:transform .2s}
+.phase-card:hover{transform:translateY(-2px)}
+.phase-card.p-done{opacity:.65}
+.phase-card.p-current{border-color:var(--red);box-shadow:0 0 0 1px var(--red),0 8px 24px var(--red-glow)}
+.phase-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--line2)}
+.phase-card.p-done::before{background:var(--green)}
+.phase-card.p-current::before{background:var(--red)}
+.phase-badge{display:inline-flex;align-items:center;gap:6px;font-size:10px;font-family:var(--mono);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:12px}
+.phase-badge.done{color:var(--green)}.phase-badge.current{color:var(--red)}.phase-badge.pending{color:var(--ink3)}
+.phase-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.phase-dot.done{background:var(--green)}.phase-dot.current{background:var(--red)}.phase-dot.pending{background:var(--line2)}
+.phase-title{font-size:15px;font-weight:800;color:var(--ink);letter-spacing:-.3px;margin-bottom:4px;line-height:1.3}
+.phase-timing{font-size:10px;font-family:var(--mono);color:var(--ink3);letter-spacing:.3px;margin-bottom:14px}
+.phase-items{list-style:none;display:flex;flex-direction:column;gap:8px}
+.phase-items li{font-size:12px;color:var(--ink2);line-height:1.4;display:flex;align-items:flex-start;gap:7px}
+.phase-items li::before{content:'→';color:var(--ink3);font-size:10px;flex-shrink:0;margin-top:2px}
+.phase-card.p-current .phase-items li::before{color:var(--red)}
+.phase-items li.p-done-item{color:var(--ink3)}
+.phase-items li.p-done-item::before{content:'✓';color:var(--green)}
+
+/* ══ SLIDE 6: COLLABORATION ════════════════════════ */
+#slide-collab{background:var(--bg);}
+.pilot-box{background:linear-gradient(135deg,rgba(0,148,217,.06),rgba(0,148,217,.02));border:1px solid rgba(0,148,217,.28);border-radius:var(--radius);padding:28px 36px;margin-bottom:28px;display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:start}
+.pilot-box-icon{width:44px;height:44px;border-radius:10px;background:var(--red-mid);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.pilot-box-icon svg{width:20px;height:20px;stroke:var(--red);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.pilot-box-label{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--red);font-family:var(--mono);margin-bottom:6px}
+.pilot-box-title{font-size:17px;font-weight:800;color:var(--ink);letter-spacing:-.3px;margin-bottom:6px}
+.pilot-box-body{font-size:14px;color:var(--ink2);line-height:1.65}
+.collab-wrap{max-width:1100px;width:100%}
+.collab-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-bottom:40px}
+.collab-card{background:var(--bg3);border:1px solid var(--line2);border-radius:var(--radius);padding:40px 36px}
+.collab-card-logo{display:flex;align-items:center;gap:12px;margin-bottom:24px}
+.collab-card-mark{width:40px;height:40px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;font-style:italic;color:#fff;font-family:Georgia,serif}
+.collab-card-mark.ar{background:var(--red)}
+.collab-card-mark.ce{background:var(--blue)}
+.collab-card-co{font-size:18px;font-weight:800;color:var(--ink)}
+.collab-title{font-size:12px;font-weight:700;color:var(--ink3);text-transform:uppercase;letter-spacing:1px;font-family:var(--mono);margin-bottom:18px}
+.collab-list{list-style:none;display:flex;flex-direction:column;gap:12px}
+.collab-list li{display:flex;align-items:flex-start;gap:12px;font-size:15px;color:var(--ink2);line-height:1.5}
+.collab-list li .icon{font-size:16px;flex-shrink:0;margin-top:1px}
+.model-timeline{background:var(--bg3);border:1px solid var(--line2);border-radius:var(--radius);padding:40px 36px}
+.model-title{font-size:14px;font-weight:700;color:var(--ink3);text-transform:uppercase;letter-spacing:1px;font-family:var(--mono);margin-bottom:24px}
+.timeline-steps{display:flex;gap:0;position:relative}
+.timeline-steps::before{content:'';position:absolute;top:24px;left:10px;right:10px;height:2px;background:var(--line2)}
+.tl-step{flex:1;display:flex;flex-direction:column;align-items:center;text-align:center;position:relative;z-index:1}
+.tl-dot{width:48px;height:48px;border-radius:50%;background:var(--bg4);border:2px solid var(--line2);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:var(--ink3);margin-bottom:16px;flex-shrink:0;transition:all .2s}
+.tl-step.done .tl-dot{background:var(--red);border-color:var(--red);color:#fff}
+.tl-step.current .tl-dot{background:var(--bg3);border-color:var(--red);color:var(--red);box-shadow:0 0 0 4px var(--red-glow)}
+.tl-label{font-size:13px;font-weight:700;color:var(--ink2);letter-spacing:-.2px;margin-bottom:5px}
+.tl-sub{font-size:11px;color:var(--ink3);font-family:var(--mono);letter-spacing:.3px}
+
+/* ══ SLIDE 7: CTA ══════════════════════════════════ */
+#slide-cta{
+  background:var(--bg2);
+  background-image:radial-gradient(ellipse 80% 70% at 50% 50%, rgba(0,148,217,.07) 0%, transparent 65%);
+}
+.cta-inner{max-width:860px;width:100%;text-align:center}
+.cta-h{font-size:clamp(40px,6vw,72px);font-weight:900;letter-spacing:-2px;line-height:1.06;color:var(--ink);margin-bottom:28px}
+.cta-h em{font-style:italic;color:var(--red)}
+.cta-sub{font-size:20px;color:var(--ink2);line-height:1.6;max-width:620px;margin:0 auto 48px}
+.cta-actions{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-bottom:64px}
+.btn-primary{display:inline-flex;align-items:center;gap:10px;font-size:15px;font-weight:700;background:var(--red);color:#fff;padding:15px 36px;border-radius:12px;cursor:pointer;transition:all .17s;border:none;font-family:var(--font);text-decoration:none}
+.btn-primary:hover{background:#007ab8;transform:translateY(-1px)}
+.btn-ghost{display:inline-flex;align-items:center;gap:10px;font-size:15px;font-weight:700;background:transparent;color:var(--ink2);padding:15px 36px;border-radius:12px;cursor:pointer;transition:all .17s;border:1px solid var(--line2);font-family:var(--font);text-decoration:none}
+.btn-ghost:hover{background:var(--bg3);color:var(--ink)}
+.cta-contacts{display:flex;gap:32px;justify-content:center;flex-wrap:wrap}
+.cta-contact{text-align:center}
+.cta-contact-name{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:4px}
+.cta-contact-role{font-size:12px;font-family:var(--mono);color:var(--ink3);letter-spacing:.5px;margin-bottom:6px}
+.cta-contact-email{font-size:14px;color:var(--red);text-decoration:none}
+.cta-contact-email:hover{text-decoration:underline}
+.cta-divider{width:1px;background:var(--line2);margin:0 12px;align-self:stretch}
+
+/* ══ FOOTER ════════════════════════════════════════ */
+.deck-footer{background:var(--bg2);border-top:1px solid var(--line);padding:32px 48px;display:flex;align-items:center;justify-content:space-between}
+.footer-brand{font-size:14px;font-weight:700;color:var(--ink3)}
+.footer-brand span{color:var(--red)}
+.footer-note{font-size:12px;color:var(--ink3);font-family:var(--mono);text-align:center}
+.footer-conf{font-size:12px;color:var(--ink3);font-family:var(--mono);text-align:right}
+
+/* ══ UTILS ══════════════════════════════════════════ */
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.fade-up{animation:fadeUp .35s ease both}
+.ta-c{text-align:center}
+.slide-inner{max-width:960px;width:100%}
+.slide-inner-lg{max-width:1100px;width:100%}
+.divider-line{height:1px;background:var(--line);margin:0 0 48px}
+
+/* ══ SCROLL PROGRESS ═══════════════════════════════ */
+.progress-bar{position:fixed;top:56px;left:0;height:2px;background:var(--red);z-index:300;transition:width .1s linear}
+
+/* ══ COVER CANVAS ══════════════════════════════════ */
+#cover-canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.55}
+
+/* ══ PROBLEM VISUAL ════════════════════════════════ */
+.prob-bar-wrap{margin-top:18px}
+.prob-bar-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.prob-bar-label{font-size:11px;font-family:var(--mono);color:var(--ink3);width:52px;flex-shrink:0;letter-spacing:.3px}
+.prob-bar-track{flex:1;height:6px;background:var(--line2);border-radius:3px;overflow:hidden}
+.prob-bar-fill{height:100%;border-radius:3px;transform-origin:left;transform:scaleX(0);transition:transform 1s cubic-bezier(.22,1,.36,1)}
+.prob-bar-fill.animated{transform:scaleX(1)}
+.prob-bar-val{font-size:10px;font-family:var(--mono);font-weight:700;width:36px;text-align:right;flex-shrink:0}
+
+/* ══ FLOW DIAGRAM ═══════════════════════════════════ */
+.how-layout{display:grid;grid-template-columns:1fr 380px;gap:48px;align-items:start}
+.flow-visual{position:sticky;top:96px}
+.flow-vis-card{background:var(--bg3);border:1px solid var(--line2);border-radius:var(--radius);overflow:hidden}
+.fv-header{background:var(--bg4);border-bottom:1px solid var(--line2);padding:12px 16px;display:flex;align-items:center;gap:8px}
+.fv-dots{display:flex;gap:5px}
+.fv-dot{width:9px;height:9px;border-radius:50%;background:var(--line2)}
+.fv-title{font-size:10px;font-family:var(--mono);color:var(--ink3);margin-left:4px;letter-spacing:.5px}
+.fv-body{padding:20px 16px}
+.fv-step{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:8px;margin-bottom:6px;transition:all .2s;border:1px solid transparent}
+.fv-step.fv-active{background:var(--bg4);border-color:var(--red)}
+.fv-step-num{width:24px;height:24px;border-radius:50%;background:var(--line2);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--ink3);flex-shrink:0}
+.fv-step.fv-active .fv-step-num{background:var(--red);color:#fff}
+.fv-step-label{font-size:12px;font-weight:600;color:var(--ink3);line-height:1.3}
+.fv-step.fv-active .fv-step-label{color:var(--ink)}
+.fv-step-tag{font-size:9px;font-family:var(--mono);color:var(--red);margin-top:1px}
+.fv-connector{width:2px;height:10px;background:var(--line);margin:0 0 0 23px}
+.fv-status-bar{border-top:1px solid var(--line2);padding:12px 16px;display:flex;align-items:center;gap:8px}
+.fv-status-dot{width:7px;height:7px;border-radius:50%;background:var(--green);animation:pulse-dot 2s ease infinite}
+@keyframes pulse-dot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+.fv-status-text{font-size:10px;font-family:var(--mono);color:var(--green);letter-spacing:.5px}
+
+/* ══ BENEFIT COUNTERS ══════════════════════════════ */
+.ben-summary-visual{background:linear-gradient(135deg,var(--bg3),var(--bg4));border:1px solid var(--line2);border-radius:var(--radius);padding:0;overflow:hidden;margin-top:32px}
+.bsv-top{padding:28px 32px 24px;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center}
+.bsv-bars{padding:0 32px 28px}
+.bsv-bar-row{display:grid;grid-template-columns:130px 1fr 56px;gap:12px;align-items:center;margin-bottom:14px}
+.bsv-bar-row:last-child{margin-bottom:0}
+.bsv-bar-label{font-size:11px;font-weight:600;color:var(--ink2)}
+.bsv-track{height:8px;background:var(--line2);border-radius:4px;overflow:hidden}
+.bsv-fill{height:100%;border-radius:4px;transform-origin:left;transform:scaleX(0);transition:transform 1.2s cubic-bezier(.22,1,.36,1)}
+.bsv-fill.animated{transform:scaleX(1)}
+.bsv-fill.red{background:linear-gradient(90deg,var(--red),rgba(0,148,217,.4))}
+.bsv-fill.gold{background:linear-gradient(90deg,var(--gold),rgba(200,144,42,.4))}
+.bsv-fill.green{background:linear-gradient(90deg,var(--green),rgba(36,160,96,.4))}
+.bsv-pct{font-size:11px;font-weight:700;font-family:var(--mono);text-align:right}
+.bsv-pct.red{color:var(--red)}.bsv-pct.gold{color:var(--gold)}.bsv-pct.green{color:var(--green)}
+
+/* ══ NORTH STAR BANNER ════════════════════════════ */
+.cover-north-star{display:flex;align-items:center;justify-content:center;gap:0;margin:0 auto 40px;max-width:780px;background:linear-gradient(135deg,var(--bg3),var(--bg4));border:1px solid var(--line2);border-radius:16px;overflow:hidden;position:relative}
+.cns-inner{display:flex;align-items:center;gap:32px;padding:22px 36px 22px 42px;width:100%;flex-wrap:wrap;justify-content:center}
+.cns-kpi{text-align:center;flex:1;min-width:140px}
+.cns-kpi-val{font-size:25px;font-weight:900;letter-spacing:-1px;line-height:1;margin-bottom:4px}
+.cns-kpi-val.red{color:var(--red)}.cns-kpi-val.green{color:var(--green)}.cns-kpi-val.gold{color:var(--gold)}
+.cns-kpi-label{font-size:10px;font-family:var(--mono);color:var(--ink3);letter-spacing:.8px;text-transform:uppercase}
+.cns-divider{width:1px;height:44px;background:var(--line2);flex-shrink:0}
+
+/* ══ COVER STAT PILLS ══════════════════════════════ */
+.cover-stat-row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:40px}
+.cover-stat{text-align:center;padding:16px 24px;background:var(--bg3);border:1px solid var(--line2);border-radius:12px;min-width:120px}
+.cover-stat-val{font-size:28px;font-weight:900;letter-spacing:-1px;line-height:1;margin-bottom:4px}
+.cover-stat-val.red{color:var(--red)}.cover-stat-val.gold{color:var(--gold)}.cover-stat-val.green{color:var(--green)}.cover-stat-val.blue{color:var(--blue)}
+.cover-stat-label{font-size:9px;font-family:var(--mono);color:var(--ink3);letter-spacing:.5px}
+
+/* ══ PIPELINE CHART (How It Works visual panel) ════ */
+.fv-pipeline{margin-top:12px}
+.fv-pipeline-label{font-size:9px;font-family:var(--mono);color:var(--ink3);letter-spacing:.8px;text-transform:uppercase;margin-bottom:8px;padding:0 16px}
+.fv-sparkline{padding:0 16px 16px}
+.fv-sparkline canvas{width:100%;height:64px;display:block}
+
+
+/* ══ SVG ICONS ══════════════════════════════════════ */
+.prob-icon{display:flex;align-items:center;margin-bottom:14px;font-size:0}
+.prob-icon svg{width:28px;height:28px;stroke:var(--ink3);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.module-icon{display:flex;align-items:center;justify-content:center;margin-bottom:10px;font-size:0}
+.module-icon svg{width:26px;height:26px;stroke:var(--ink2);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.module-card.active .module-icon svg,.module-card:hover .module-icon svg{stroke:var(--red)}
+.ben-icon svg{width:20px;height:20px;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.ben-icon.red svg{stroke:var(--red)}.ben-icon.gold svg{stroke:var(--gold)}.ben-icon.green svg{stroke:var(--green)}.ben-icon.blue svg{stroke:var(--blue)}
+.collab-list .icon{display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;font-size:0;width:16px}
+.collab-list .icon svg{width:14px;height:14px;stroke:var(--ink3);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="deck-nav">
+  <div class="nav-brand">
+    <span class="brand-name">Algo-Rythmn.ai</span>
+  </div>
+  <div class="nav-links">
+    <a class="nav-link" href="#slide-cover">Overview</a>
+    <a class="nav-link" href="#slide-problem">Problem</a>
+    <a class="nav-link" href="#slide-offer">Platform</a>
+    <a class="nav-link" href="#slide-benefits">Benefits</a>
+    <a class="nav-link" href="#slide-collab">Roadmap</a>
+  </div>
+  <a class="nav-cta" href="#slide-cta">Schedule a Demo</a>
+</nav>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- ══════════════════════════════════════════════════
+     SLIDE 1  ·  COVER
+══════════════════════════════════════════════════════ -->
+<section id="slide-cover" class="slide">
+  <canvas id="cover-canvas"></canvas>
+  <div class="cover-inner fade-up" style="position:relative;z-index:1">
+    <div class="cover-eyebrow">Confidential · Partnership Proposal</div>
+    <h1 class="cover-h1">Chemical Procurement,<br/><em>Reinvented for the Field.</em></h1>
+    <p class="cover-sub">Algo-Rythmn.ai proposes a collaboration with Cutting Edge to deploy <strong>AlgoChem</strong> — an AI platform that streamlines drilling chemical sourcing, procurement, compliance, and cost analysis.</p>
+    <div class="cover-north-star">
+      <div class="cns-inner">
+        <div class="cns-kpi">
+          <div class="cns-kpi-val red">15–25%</div>
+          <div class="cns-kpi-label">Procurement cost reduction</div>
+        </div>
+        <div class="cns-divider"></div>
+        <div class="cns-kpi">
+          <div class="cns-kpi-val gold">days → hours</div>
+          <div class="cns-kpi-label">Bid-to-PO cycle time</div>
+        </div>
+        <div class="cns-divider"></div>
+        <div class="cns-kpi">
+          <div class="cns-kpi-val green">Zero</div>
+          <div class="cns-kpi-label">Invoice leakage on every program</div>
+        </div>
+      </div>
+    </div>
+    <div class="cover-badges">
+      <div class="c-badge"><span class="dot"></span> AI-Powered Sourcing</div>
+      <div class="c-badge"><span class="dot gold"></span> Live Market Pricing</div>
+      <div class="c-badge"><span class="dot red"></span> AER / IRP Compliance</div>
+      <div class="c-badge"><span class="dot"></span> 200+ Verified Suppliers</div>
+    </div>
+    <div class="cover-logos">
+      <div class="logo-pill">
+        <span class="name">Algo-Rythmn.ai</span>
+      </div>
+      <span class="logo-connector">×</span>
+      <div class="logo-pill">
+        <span class="name">Cutting Edge</span>
+      </div>
+    </div>
+    <div class="date-chip">2026 · Private &amp; Confidential</div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     SLIDE 2  ·  THE PROBLEM
+══════════════════════════════════════════════════════ -->
+<section id="slide-problem" class="slide">
+  <div class="slide-inner">
+    <div class="ta-c" style="margin-bottom:48px">
+      <span class="section-label">The Challenge</span>
+      <h2 class="slide-title">End the <em>manual procurement era.</em></h2>
+      <p class="slide-sub" style="margin:0 auto">Most operators still source and bid drilling chemicals through disconnected spreadsheets and phone calls, leading to significant market lag and cost inefficiencies.</p>
+    </div>
+    <div class="problem-grid">
+      <div class="prob-card p1 fade-up">
+        <span class="prob-icon"><svg viewBox="0 0 24 24"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/><polyline points="17 18 23 18 23 12"/></svg></span>
+        <div class="prob-title">Price Opacity</div>
+        <p class="prob-desc">Disconnected data makes it difficult to track real-time pricing across suppliers. Manual comparisons often happen after market shifts, missing leverage opportunities.</p>
+        <div class="prob-bar-wrap">
+          <div class="prob-bar-row"><span class="prob-bar-label">Manual</span><div class="prob-bar-track"><div class="prob-bar-fill" style="background:var(--red);width:90%" data-w="90"></div></div><span class="prob-bar-val" style="color:var(--red)">+25%</span></div>
+          <div class="prob-bar-row"><span class="prob-bar-label">AlgoChem</span><div class="prob-bar-track"><div class="prob-bar-fill" style="background:var(--green);width:65%" data-w="65"></div></div><span class="prob-bar-val" style="color:var(--green)">Market</span></div>
+        </div>
+      </div>
+      <div class="prob-card p2 fade-up" style="animation-delay:.1s">
+        <span class="prob-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
+        <div class="prob-title">Slow Cycles</div>
+        <p class="prob-desc">Bid collection, scoring, and reconciliation are repetitive, manual tasks. These delays extend procurement timelines from days to weeks, increasing project risks.</p>
+        <div class="prob-bar-wrap">
+          <div class="prob-bar-row"><span class="prob-bar-label">Before</span><div class="prob-bar-track"><div class="prob-bar-fill" style="background:var(--gold);width:95%" data-w="95"></div></div><span class="prob-bar-val" style="color:var(--gold)">7 days</span></div>
+          <div class="prob-bar-row"><span class="prob-bar-label">After</span><div class="prob-bar-track"><div class="prob-bar-fill" style="background:var(--green);width:18%" data-w="18"></div></div><span class="prob-bar-val" style="color:var(--green)">Hours</span></div>
+        </div>
+      </div>
+      <div class="prob-card p3 fade-up" style="animation-delay:.2s">
+        <span class="prob-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+        <div class="prob-title">Compliance Risk</div>
+        <p class="prob-desc">Tracking evolving AER directives and safety audits is manually intensive. Reactive compliance monitoring often leads to operational delays and penalties.</p>
+        <div class="prob-bar-wrap">
+          <div class="prob-bar-row"><span class="prob-bar-label">Reactive</span><div class="prob-bar-track"><div class="prob-bar-fill" style="background:var(--blue);width:85%" data-w="85"></div></div><span class="prob-bar-val" style="color:var(--blue)">Audit-time</span></div>
+          <div class="prob-bar-row"><span class="prob-bar-label">Proactive</span><div class="prob-bar-track"><div class="prob-bar-fill" style="background:var(--green);width:10%" data-w="10"></div></div><span class="prob-bar-val" style="color:var(--green)">0 gaps</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     SLIDE 3  ·  WHAT WE OFFER
+══════════════════════════════════════════════════════ -->
+<section id="slide-offer" class="slide">
+  <div class="offer-wrap slide-inner-lg">
+    <div class="offer-header">
+      <span class="section-label">What We Offer</span>
+      <h2 class="slide-title ta-c">AlgoChem — <em>One integrated workflow.</em></h2>
+      <p class="slide-sub ta-c" style="margin:0 auto 32px">From search to final invoice — one connected flow. Click each module to explore what it does and the value it delivers to your operations.</p>
+    </div>
+    <div class="modules-grid">
+      <div class="module-card active" onclick="showModule(0)">
+        <div class="module-num">01</div>
+        <span class="module-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
+        <div class="module-name">Source Chemicals</div>
+      </div>
+      <div class="module-card" onclick="showModule(1)">
+        <div class="module-num">02</div>
+        <span class="module-icon"><svg viewBox="0 0 24 24"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg></span>
+        <div class="module-name">Procurement</div>
+      </div>
+      <div class="module-card" onclick="showModule(2)">
+        <div class="module-num">03</div>
+        <span class="module-icon"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></span>
+        <div class="module-name">Offset &amp; Cost Analysis</div>
+      </div>
+      <div class="module-card" onclick="showModule(3)">
+        <div class="module-num">04</div>
+        <span class="module-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></span>
+        <div class="module-name">Invoice Approval</div>
+      </div>
+      <div class="module-card" onclick="showModule(4)">
+        <div class="module-num">05</div>
+        <span class="module-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
+        <div class="module-name">Compliance &amp; Safety</div>
+      </div>
+    </div>
+    <div id="mod-0" class="module-detail active">
+      <div class="md-left">
+        <span class="section-label">How it Works</span>
+        <div class="md-title">Source Chemicals</div>
+        <div class="md-sub">Discover 200+ verified suppliers with live market pricing in a single search.</div>
+        <ul class="md-points">
+          <li>Search by chemical name, CAS number, or supplier with AI filters</li>
+          <li>Live market grid with real-time percentage change</li>
+          <li>Auto-flagged AER-approved lubricants and drilling fluids</li>
+          <li>One-click integration with procurement bid tables</li>
+          <li>Alert system for dashboard or SMS price threshold breaches</li>
+        </ul>
+        <div class="flow-step-chips" style="margin-top:24px">
+          <span class="fchip">AI Search</span>
+          <span class="fchip">Live Pricing</span>
+          <span class="fchip">Supplier Ranking</span>
+          <span class="fchip">CAS Search</span>
+        </div>
+      </div>
+      <div class="md-right">
+        <div class="md-kpi"><div class="md-kpi-val red">200+</div><div class="md-kpi-label">Verified global suppliers</div></div>
+        <div class="md-kpi"><div class="md-kpi-val green">Real-time</div><div class="md-kpi-label">Market pricing & tracking</div></div>
+        <div class="md-kpi"><div class="md-kpi-val gold">&lt; 10s</div><div class="md-kpi-label">Discovery time per item</div></div>
+      </div>
+    </div>
+    <div id="mod-1" class="module-detail">
+      <div class="md-left">
+        <span class="section-label">How it Works</span>
+        <div class="md-title">Procurement</div>
+        <div class="md-sub">Side-by-side bid comparison with AI scoring from received bids to issued PO.</div>
+        <ul class="md-points">
+          <li>Multi-vendor tables with Quality, Safety, and Price scoring</li>
+          <li>Dynamic weight sliders to prioritize safety vs. cost</li>
+          <li>Live AFE budget tracking with visual spend charts</li>
+          <li>AI-generated vendor selection recommendations</li>
+          <li>Streamlined PO issuance and status management</li>
+        </ul>
+        <div class="flow-step-chips" style="margin-top:24px">
+          <span class="fchip">Bid Scoring</span>
+          <span class="fchip">Weight Adjustment</span>
+          <span class="fchip">AI Recommendation</span>
+          <span class="fchip">PO Issuance</span>
+        </div>
+      </div>
+      <div class="md-right">
+        <div class="md-kpi"><div class="md-kpi-val red">3 → 1</div><div class="md-kpi-label">Day-to-hour award reduction</div></div>
+        <div class="md-kpi"><div class="md-kpi-val gold">100%</div><div class="md-kpi-label">Full digital audit trail</div></div>
+        <div class="md-kpi"><div class="md-kpi-val blue">AFE-linked</div><div class="md-kpi-label">Integrated budget guardrails</div></div>
+      </div>
+    </div>
+    <div id="mod-2" class="module-detail">
+      <div class="md-left">
+        <span class="section-label">How it Works</span>
+        <div class="md-title">Offset &amp; Cost Analysis</div>
+        <div class="md-sub">Historical well benchmarking with inflation-adjusted P10/P50/P90 cost models.</div>
+        <ul class="md-points">
+          <li>Automatic integration of AER and Petro Ninja offset data</li>
+          <li>Benchmarking for ROP, NPT, and lost circulation events</li>
+          <li>Visual day-duration bands and duration risk overlays</li>
+          <li>Cost engine applying live prices and rig day rates</li>
+          <li>Scenario cards showing cost/day and cost/meter KPIs</li>
+        </ul>
+        <div class="flow-step-chips" style="margin-top:24px">
+          <span class="fchip">Offset Library</span>
+          <span class="fchip">NPT Risk Model</span>
+          <span class="fchip">P10/P50/P90</span>
+          <span class="fchip">AFE Integration</span>
+        </div>
+      </div>
+      <div class="md-right">
+        <div class="md-kpi"><div class="md-kpi-val red">P10/50/90</div><div class="md-kpi-label">Integrated scenario planning</div></div>
+        <div class="md-kpi"><div class="md-kpi-val green">NPT-aware</div><div class="md-kpi-label">Risk-weighted event history</div></div>
+        <div class="md-kpi"><div class="md-kpi-val gold">Live-priced</div><div class="md-kpi-label">Chemical market synchronization</div></div>
+      </div>
+    </div>
+    <div id="mod-3" class="module-detail">
+      <div class="md-left">
+        <span class="section-label">How it Works</span>
+        <div class="md-title">Invoice Approval</div>
+        <div class="md-sub">Automated line-item reconciliation between vendor invoices and issued POs — discrepancies surface immediately so nothing slips through.</div>
+        <ul class="md-points">
+          <li>Automatic reconciliation of invoice quantities, rates, and terms vs. PO</li>
+          <li>Dashboard categorizes every invoice: Auto-approved, Needs Review, or Discrepancy</li>
+          <li>Flagged line items shown with exact delta (e.g., +$82/day over agreed rate)</li>
+          <li>One-click Approve, Escalate, or Return with mandatory reason note</li>
+          <li>Notification badge tracks all pending items across all open invoices</li>
+        </ul>
+        <div class="flow-step-chips" style="margin-top:24px">
+          <span class="fchip">Auto-Reconciliation</span>
+          <span class="fchip">PO Matching</span>
+          <span class="fchip">Wellman Integration</span>
+          <span class="fchip">Audit Trail</span>
+        </div>
+      </div>
+      <div class="md-right">
+        <div class="md-kpi"><div class="md-kpi-val green">Auto</div><div class="md-kpi-label">Automated matching for approved invoices</div></div>
+        <div class="md-kpi"><div class="md-kpi-val red">Zero</div><div class="md-kpi-label">Rate or volume discrepancy leakage</div></div>
+        <div class="md-kpi"><div class="md-kpi-val gold">Full log</div><div class="md-kpi-label">Decision recording for audit compliance</div></div>
+      </div>
+    </div>
+    <div id="mod-4" class="module-detail">
+      <div class="md-left">
+        <span class="section-label">How it Works</span>
+        <div class="md-title">Compliance &amp; Safety</div>
+        <div class="md-sub">Real-time monitoring against AER directives and IRPs with automated bridging documents.</div>
+        <ul class="md-points">
+          <li>Safety Plan Bridge generates requirements traceability matrices</li>
+          <li>Tracks supplier WHMIS, Safety Audits, and AER approvals</li>
+          <li>Compliance scanning against IRP-1 and AER DIR-071</li>
+          <li>Proactive alerts for containment or reporting protocol gaps</li>
+          <li>Auto-generates bridging documents and action item logs</li>
+        </ul>
+        <div class="flow-step-chips" style="margin-top:24px">
+          <span class="fchip">Continuous Monitoring</span>
+          <span class="fchip">AER DIR-071</span>
+          <span class="fchip">IRP-1</span>
+          <span class="fchip">WHMIS Tracking</span>
+          <span class="fchip">Safety Bridge Docs</span>
+        </div>
+      </div>
+      <div class="md-right">
+        <div class="md-kpi"><div class="md-kpi-val red">Continuous</div><div class="md-kpi-label">Real-time monitoring vs. periodic audits</div></div>
+        <div class="md-kpi"><div class="md-kpi-val blue">AER + IRP</div><div class="md-kpi-label">IRP-1 and DIR-071 frameworks built in</div></div>
+        <div class="md-kpi"><div class="md-kpi-val green">Auto-gen</div><div class="md-kpi-label">Bridging documents generated on demand</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     SLIDE 4  ·  BENEFITS FOR YOU
+══════════════════════════════════════════════════════ -->
+<section id="slide-benefits" class="slide">
+  <div class="benefits-wrap">
+    <div class="ben-header">
+      <span class="section-label">Benefits for Cutting Edge</span>
+      <h2 class="slide-title">What this means<br/><em>for your bottom line.</em></h2>
+      <p class="slide-sub" style="margin:0 auto">Measurable financial and operational gains across your entire drilling program.</p>
+    </div>
+    <div class="ben-grid">
+      <div class="ben-card fade-up">
+        <div class="ben-icon red"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+        <div class="ben-title">Reduce Overspend</div>
+        <div class="ben-metric red">15–25%</div>
+        <div class="ben-metric-label">Potential savings vs. manual methods</div>
+      </div>
+      <div class="ben-card fade-up" style="animation-delay:.08s">
+        <div class="ben-icon gold"><svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+        <div class="ben-title">Accelerate Procurement</div>
+        <div class="ben-metric gold">3 days → hours</div>
+        <div class="ben-metric-label">Typical bid-to-PO cycle reduction</div>
+      </div>
+      <div class="ben-card fade-up" style="animation-delay:.16s">
+        <div class="ben-icon green"><svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
+        <div class="ben-title">Data-Driven AFE Accuracy</div>
+        <div class="ben-metric green">Accurate</div>
+        <div class="ben-metric-label">AFE estimates grounded in offset history</div>
+      </div>
+      <div class="ben-card fade-up" style="animation-delay:.24s">
+        <div class="ben-icon blue"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div class="ben-title">Proactive Compliance</div>
+        <div class="ben-metric blue">Automated</div>
+        <div class="ben-metric-label">Compliance posture vs. reactive discovery</div>
+      </div>
+      <div class="ben-card fade-up" style="animation-delay:.32s">
+        <div class="ben-icon red"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+        <div class="ben-title">Eliminate Leakage</div>
+        <div class="ben-metric red">Zero leakage</div>
+        <div class="ben-metric-label">Discrepancy detection on every line item</div>
+      </div>
+      <div class="ben-card fade-up" style="animation-delay:.4s">
+        <div class="ben-icon gold"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+        <div class="ben-title">Complete Audit Trail</div>
+        <div class="ben-metric gold">Audit-Ready</div>
+        <div class="ben-metric-label">Full audit log available on demand</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     SLIDE 5  ·  COLLABORATION
+══════════════════════════════════════════════════════ -->
+<section id="slide-collab" class="slide">
+  <div class="collab-wrap">
+    <div style="margin-bottom:40px">
+      <span class="section-label">The Roadmap</span>
+      <h2 class="slide-title">How we move<br/><em>forward together.</em></h2>
+      <p class="slide-sub" style="max-width:600px">Five stages from first conversation to full deployment — each with a clear deliverable and a shared commitment. Here's exactly what the path looks like.</p>
+    </div>
+    <div class="roadmap-phases">
+      <div class="phase-card p-current">
+        <div class="phase-badge current"><span class="phase-dot current"></span> You are here</div>
+        <div class="phase-title">Discovery</div>
+        <div class="phase-timing">In progress</div>
+        <ul class="phase-items">
+          <li>Alignment call held</li>
+          <li>Pain points identified</li>
+          <li>Stakeholders mapped</li>
+        </ul>
+      </div>
+      <div class="phase-card">
+        <div class="phase-badge pending"><span class="phase-dot pending"></span> Next</div>
+        <div class="phase-title">Demo &amp; Scope</div>
+        <div class="phase-timing">Week 1–2</div>
+        <ul class="phase-items">
+          <li>Live demo on your well data</li>
+          <li>Integration scope agreed</li>
+          <li>Data access plan signed</li>
+        </ul>
+      </div>
+      <div class="phase-card">
+        <div class="phase-badge pending"><span class="phase-dot pending"></span> Next</div>
+        <div class="phase-title">Pilot Deploy</div>
+        <div class="phase-timing">Weeks 3–6</div>
+        <ul class="phase-items">
+          <li>Single well program live</li>
+          <li>Full platform access granted</li>
+          <li>Supplier data calibration</li>
+        </ul>
+      </div>
+      <div class="phase-card">
+        <div class="phase-badge pending"><span class="phase-dot pending"></span> Phase 4</div>
+        <div class="phase-title">Calibrate &amp; Tune</div>
+        <div class="phase-timing">Weeks 7–10</div>
+        <ul class="phase-items">
+          <li>Field team feedback sessions</li>
+          <li>AFE benchmark refinement</li>
+          <li>Compliance rules verified</li>
+        </ul>
+      </div>
+      <div class="phase-card">
+        <div class="phase-badge pending"><span class="phase-dot pending"></span> Phase 5</div>
+        <div class="phase-title">Full Rollout</div>
+        <div class="phase-timing">Week 11+</div>
+        <ul class="phase-items">
+          <li>All drilling programs active</li>
+          <li>Ongoing AER monitoring live</li>
+          <li>Co-development rights active</li>
+        </ul>
+      </div>
+    </div>
+    <div class="pilot-box">
+      <div class="pilot-box-icon"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+      <div>
+        <div class="pilot-box-label">Proposed First Step</div>
+        <div class="pilot-box-title">A 4-week pilot on a single drilling program.</div>
+        <div class="pilot-box-body">Full platform access granted in exchange for field team feedback and data calibration. No long-term commitment required — just enough to show what AlgoChem surfaces on <em>your</em> operations.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     SLIDE 6  ·  CTA
+══════════════════════════════════════════════════════ -->
+<section id="slide-cta" class="slide">
+  <div class="cta-inner fade-up">
+    <span class="section-label" style="display:block;text-align:center;margin-bottom:20px">Next Step</span>
+    <h2 class="cta-h">Ready to see it<br/><em>live on your data?</em></h2>
+    <p class="cta-sub">We'd like to run a 45-minute live demo using a sample of your well program data — so you see exactly what AlgoChem would surface for Cutting Edge's operations, not a generic use case.</p>
+    <div class="cta-actions">
+      <a class="btn-primary" href="mailto:support@algo-rythmn.ai?subject=AlgoChem Demo Request — Cutting Edge">
+        Schedule a Live Demo →
+      </a>
+      <a class="btn-ghost" href="mailto:support@algo-rythmn.ai?subject=AlgoChem Partnership Inquiry">
+        Discuss Partnership
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="deck-footer">
+  <div class="footer-brand"><span>Algo-Rythmn.ai</span> · AlgoChem Platform</div>
+  <div class="footer-note">This document is confidential and prepared exclusively for Cutting Edge</div>
+  <div class="footer-conf">© 2026 Algo-Rythmn.ai · All rights reserved</div>
+</footer>
+
+<script>
+// Module switcher
+function showModule(idx){
+  document.querySelectorAll('.module-card').forEach((c,i)=>c.classList.toggle('active',i===idx));
+  document.querySelectorAll('.module-detail').forEach((d,i)=>d.classList.toggle('active',i===idx));
+}
+
+// Scroll progress bar
+window.addEventListener('scroll',()=>{
+  const doc=document.documentElement;
+  const scrollTop=doc.scrollTop||document.body.scrollTop;
+  const scrollHeight=doc.scrollHeight-doc.clientHeight;
+  const pct=scrollHeight>0?(scrollTop/scrollHeight)*100:0;
+  document.getElementById('progressBar').style.width=pct+'%';
+});
+
+// Active nav link highlight
+const navLinks=document.querySelectorAll('.nav-link');
+const slides=document.querySelectorAll('.slide');
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const id=e.target.id;
+      navLinks.forEach(a=>{
+        a.classList.toggle('active',a.getAttribute('href')==='#'+id);
+      });
+    }
+  });
+},{threshold:0.45});
+slides.forEach(s=>observer.observe(s));
+
+// Fade-up on scroll
+const fuObserver=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting)e.target.style.opacity='1';
+  });
+},{threshold:0.1});
+document.querySelectorAll('.fade-up').forEach(el=>{
+  el.style.opacity='0';
+  fuObserver.observe(el);
+});
+// Cover starts visible
+document.querySelector('#slide-cover .fade-up').style.opacity='1';
+
+// ── Animated particle canvas on cover ──────────────
+(function(){
+  const canvas=document.getElementById('cover-canvas');
+  if(!canvas)return;
+  const ctx=canvas.getContext('2d');
+  let W,H,pts;
+  function resize(){W=canvas.width=canvas.offsetWidth;H=canvas.height=canvas.offsetHeight;init();}
+  function init(){
+    pts=Array.from({length:55},()=>({
+      x:Math.random()*W,y:Math.random()*H,
+      vx:(Math.random()-.5)*.35,vy:(Math.random()-.5)*.35,
+      r:Math.random()*1.5+.5
+    }));
+  }
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    for(let i=0;i<pts.length;i++){
+      const p=pts[i];
+      p.x+=p.vx;p.y+=p.vy;
+      if(p.x<0||p.x>W)p.vx*=-1;
+      if(p.y<0||p.y>H)p.vy*=-1;
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle='rgba(0,148,217,.45)';ctx.fill();
+      for(let j=i+1;j<pts.length;j++){
+        const q=pts[j],dx=p.x-q.x,dy=p.y-q.y,d=Math.sqrt(dx*dx+dy*dy);
+        if(d<130){
+          ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);
+          ctx.strokeStyle=`rgba(0,148,217,${.18*(1-d/130)})`;ctx.lineWidth=.7;ctx.stroke();
+        }
+      }
+    }
+    requestAnimationFrame(draw);
+  }
+  window.addEventListener('resize',resize);
+  resize();draw();
+})();
+
+// ── Animate problem bars when in view ──────────────
+const barObserver=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.querySelectorAll('.prob-bar-fill').forEach(b=>b.classList.add('animated'));
+      barObserver.unobserve(e.target);
+    }
+  });
+},{threshold:0.3});
+document.querySelectorAll('.prob-card').forEach(c=>barObserver.observe(c));
+
+// ── Animate benefit summary bars ───────────────────
+const bsvObserver=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.querySelectorAll('.bsv-fill').forEach(b=>b.classList.add('animated'));
+      // animate counters
+      e.target.querySelectorAll('[data-target]').forEach(el=>{
+        const target=+el.dataset.target;
+        const prefix=el.dataset.prefix||'';
+        const suffix=el.dataset.suffix||'';
+        let current=0;
+        const step=Math.ceil(target/40);
+        const timer=setInterval(()=>{
+          current=Math.min(current+step,target);
+          el.textContent=prefix+current+suffix;
+          if(current>=target)clearInterval(timer);
+        },30);
+      });
+      bsvObserver.unobserve(e.target);
+    }
+  });
+},{threshold:0.4});
+document.querySelectorAll('.ben-summary-visual').forEach(el=>bsvObserver.observe(el));
+
+// ── Animate cover stat counters ────────────────────
+const coverObserver=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.querySelectorAll('[data-target]').forEach(el=>{
+        const target=+el.dataset.target;
+        const suffix=el.dataset.suffix||'';
+        let current=0;
+        const step=Math.max(1,Math.ceil(target/40));
+        const timer=setInterval(()=>{
+          current=Math.min(current+step,target);
+          el.textContent=current+suffix;
+          if(current>=target)clearInterval(timer);
+        },28);
+      });
+      coverObserver.unobserve(e.target);
+    }
+  });
+},{threshold:0.5});
+document.querySelectorAll('.cover-stat-row').forEach(el=>coverObserver.observe(el));
+
+// ── Sparkline canvas in flow panel ─────────────────
+(function(){
+  const c=document.getElementById('sparkline-canvas');
+  if(!c)return;
+  const ctx=c.getContext('2d');
+  const dpr=window.devicePixelRatio||1;
+  function draw(){
+    const W=c.parentElement.offsetWidth;
+    c.width=W*dpr;c.height=64*dpr;
+    c.style.width=W+'px';c.style.height='64px';
+    ctx.scale(dpr,dpr);
+    const data=[12,18,14,22,19,28,24,32,27,38,34,42,38,45,44,52,48,56,52,60];
+    const max=Math.max(...data),min=Math.min(...data);
+    const pad=8,cw=W-pad*2,ch=64-pad*2;
+    // gradient fill
+    const grad=ctx.createLinearGradient(0,pad,0,64-pad);
+    grad.addColorStop(0,'rgba(0,148,217,.3)');grad.addColorStop(1,'rgba(0,148,217,0)');
+    ctx.beginPath();
+    data.forEach((v,i)=>{
+      const x=pad+i*(cw/(data.length-1));
+      const y=pad+ch-(((v-min)/(max-min))*ch);
+      i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+    });
+    ctx.lineTo(pad+cw,64-pad);ctx.lineTo(pad,64-pad);ctx.closePath();
+    ctx.fillStyle=grad;ctx.fill();
+    // line
+    ctx.beginPath();
+    data.forEach((v,i)=>{
+      const x=pad+i*(cw/(data.length-1));
+      const y=pad+ch-(((v-min)/(max-min))*ch);
+      i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+    });
+    ctx.strokeStyle='rgba(0,148,217,.9)';ctx.lineWidth=1.5;ctx.stroke();
+  }
+  draw();
+  window.addEventListener('resize',draw);
+})();
+
+</script>
+</body>
+</html>
