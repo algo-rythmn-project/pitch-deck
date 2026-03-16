@@ -13,8 +13,8 @@
             --bg-color: #000000;
             --text-main: #FFFFFF;
             --text-muted: #A3A3A3;
-            --accent: #76B900; /* High-contrast tech green */
-            --accent-light: #94E300;
+            --accent: #00b98b; /* High-contrast tech green */
+            --accent-light: #00e3bd;
             --card-bg: rgba(255, 255, 255, 0.05);
             --card-border: rgba(255, 255, 255, 0.1);
         }
@@ -25,8 +25,7 @@
             font-family: 'Inter', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-main);
-            height: 100%;
-            overflow: hidden;
+            scroll-behavior: smooth;
         }
 
         .navbar {
@@ -61,22 +60,17 @@
         }
 
         .deck-container {
-            height: 100vh;
-            overflow-y: scroll;
             overflow-x: hidden;
-            scroll-snap-type: y mandatory;
-            scroll-behavior: smooth;
         }
 
         .slide {
-            height: 100vh;
+            min-height: 100vh;
             width: 100%;
-            scroll-snap-align: start;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 80px 10vw 0;
+            padding: 80px 10vw 60px;
             box-sizing: border-box;
             position: relative;
         }
@@ -241,13 +235,14 @@
         }
 
         /* Slide Specific Backgrounds from Deck 2 */
-        .slide-1 { background: radial-gradient(circle at 50% 30%, rgba(118, 185, 0, 0.15) 0%, #000000 70%); }
-        .slide-2 { background: linear-gradient(180deg, #000000 0%, #0a0a0a 100%); }
-        .slide-3 { background: radial-gradient(circle at 100% 100%, rgba(118, 185, 0, 0.1) 0%, #050505 80%); border-top: 1px solid var(--card-border); }
-        .slide-4 { background: linear-gradient(135deg, #050505 0%, #0d1a00 100%); border-top: 1px solid var(--card-border); }
+        .slide-1 { background: radial-gradient(circle at 50% 30%, rgba(0, 185, 145, 0.15) 0%, #000000 70%); }
+        .slide-2 { background: linear-gradient(180deg, #000000 0%, #0a0a0a 100%); border-top: 1px solid var(--card-border);}
+        .slide-3 { background: radial-gradient(circle at 100% 100%, rgba(0, 185, 139, 0.1) 0%, #050505 80%); border-top: 1px solid var(--card-border); }
+        .slide-4 { background: linear-gradient(135deg, #050505 0%, #001a16 100%); border-top: 1px solid var(--card-border); }
         .slide-5 { background: linear-gradient(135deg, #050505 0%, #111111 100%); border-top: 1px solid var(--card-border); }
-        .slide-6 { background: radial-gradient(circle at 0% 0%, rgba(118, 185, 0, 0.08) 0%, #000000 80%); border-top: 1px solid var(--card-border); }
-        .slide-7 { background: radial-gradient(circle at 50% 100%, rgba(118, 185, 0, 0.2) 0%, #000000 70%); border-top: 2px solid var(--accent); }
+        .slide-6 { background: linear-gradient(160deg, #050505 0%, #001410 100%); border-top: 1px solid var(--card-border); }
+        .slide-7 { background: radial-gradient(circle at 0% 0%, rgba(0, 185, 154, 0.08) 0%, #000000 80%); border-top: 1px solid var(--card-border); }
+        .slide-8 { background: radial-gradient(circle at 50% 100%, rgba(0, 185, 129, 0.2) 0%, #000000 70%); border-top: 2px solid var(--accent); }
 
         .feature-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 1rem; }
         .feature-list li { display: flex; align-items: flex-start; gap: 1rem; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 8px; padding: 1rem 1.25rem; transition: border-color 0.3s; }
@@ -257,7 +252,7 @@
         .feature-list li span { font-size: 0.85rem; color: var(--text-muted); line-height: 1.4; }
 
         .use-case-box { background: #0a0a0a; border: 1px solid var(--card-border); border-radius: 12px; overflow: hidden; height: 100%; }
-        .use-case-box .ucb-header { background: rgba(118, 185, 0, 0.08); border-bottom: 1px solid var(--card-border); padding: 0.85rem 1.5rem; display: flex; align-items: center; gap: 0.6rem; }
+        .use-case-box .ucb-header { background: rgba(0, 185, 139, 0.08); border-bottom: 1px solid var(--card-border); padding: 0.85rem 1.5rem; display: flex; align-items: center; gap: 0.6rem; }
         .use-case-box .ucb-header span { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; color: var(--accent); font-weight: 700; }
         .use-case-box .ucb-body { padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem; }
         .uc-row { display: flex; flex-direction: column; gap: 0.3rem; }
@@ -266,7 +261,7 @@
         .uc-value.green { color: var(--accent); font-weight: 600; }
         .uc-value.warn { color: #f59e0b; font-weight: 600; }
         .uc-divider { height: 1px; background: var(--card-border); margin: 0.25rem 0; }
-        .uc-badge { display: inline-block; background: rgba(118, 185, 0, 0.12); border: 1px solid rgba(118, 185, 0, 0.3); color: var(--accent); font-size: 0.75rem; font-weight: 700; letter-spacing: 1px; padding: 0.3rem 0.75rem; border-radius: 4px; text-transform: uppercase; margin-top: 0.25rem; }
+        .uc-badge { display: inline-block; background: rgba(0, 185, 145, 0.12); border: 1px solid rgba(0, 185, 160, 0.3); color: var(--accent); font-size: 0.75rem; font-weight: 700; letter-spacing: 1px; padding: 0.3rem 0.75rem; border-radius: 4px; text-transform: uppercase; margin-top: 0.25rem; }
         .uc-badge.warn { background: rgba(245, 158, 11, 0.1); border-color: rgba(245, 158, 11, 0.3); color: #f59e0b; }
         
         /* CTA Button Style */
@@ -290,7 +285,7 @@
         .cta-button:hover {
             background: var(--accent-light);
             transform: scale(1.05);
-            box-shadow: 0 0 30px rgba(118, 185, 0, 0.4);
+            box-shadow: 0 0 30px rgba(0, 185, 145, 0.4);
         }
 
         .page-number {
@@ -326,11 +321,10 @@
     <section class="slide text-center slide-1" style="text-align: center;">
         <div class="slide-content">
             <div class="tag">STRATEGIC PARTNERSHIP PROPOSAL</div>
-            <h1>Unlocking the <br><span>"Decide"</span> Layer</h1>
+            <h1>Unlocking Your Data<br>via a<span> Decision Intelligence</span> Layer</h1>
             <p style="font-size: 1.4rem; max-width: 700px; margin: 0 auto; color: var(--text-main);">
                 Transforming Precision AI's advanced spot-spraying execution into a fully intelligent, autonomous crop protection advisor.
             </p>
-            <div class="copyright">&copy; 2026 Algo-Rythmn.ai. All Rights Reserved.</div>
             <div class="page-number">01</div>
         </div>
     </section>
@@ -350,188 +344,265 @@
                 </div>
             </div>
             <div class="page-number">02</div>
-            <div class="copyright">&copy; 2026 Algo-Rythmn.ai. All Rights Reserved.</div>
         </div>
     </section>
 
     <section class="slide slide-3">
         <div class="slide-content">
             <h2>The Missing Link: <span>AI-Assisted Agronomic Decisions</span> </h2>
-            <p>While Precision AI has built an exceptional execution layer, a critical gap in the workflow lies in the prescriptive decision-making process. The massive opportunity lies in augmenting human expertise with automated scale: <span class="highlight-text">Human-in-the-Loop AI for surgical chemistry.</span></p>
+            <p>Precision AI has built a world-class detection and execution platform. The next evolution is the intelligence layer that makes it truly <strong style="color: var(--text-main);">whole</strong> — a hyper-specialized AI engine that transforms weed-detection data into precise, decision-ready prescriptions at scale: <span class="highlight-text">AI-First, Human-Confirmed agronomic intelligence.</span></p>
             <div class="card" style="margin-top: 2rem; border-left: 4px solid var(--accent);">
-                <h2 style="font-size:1.5rem">Empowering experts with AI insights.</h2>
-                <p style="margin: 0; color: var(--text-main);">We don't replace the agronomist; we provide them with high-fidelity, data-driven recommendations that they validate and refine. This elevates the system from a mechanical sprayer into a collaborative, intelligent crop protection advisor.</p>
+                <h2 style="font-size:1.5rem">Not an add-on. The intelligence core that makes it whole.</h2>
+                <p style="margin: 0; color: var(--text-main);">We purpose-built the AI decision engine that Precision AI's platform was always destined to have. This is what activates the full value of their detection data — transforming every weed sighting into a validated, actionable prescription. Not a layer on top, but the brain within.</p>
             </div>
             <div class="page-number">03</div>
-            <div class="copyright">&copy; 2026 Algo-Rythmn.ai. All Rights Reserved.</div>
         </div>
     </section>
 
     <section class="slide slide-4">
         <div class="slide-content">
             <h2>The Intelligence Layer, <span>Demystified</span></h2>
-            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:1.5rem; flex-wrap:wrap; gap:1rem;">
-                <p style="margin:0; max-width:580px;">Four core capabilities transform raw weed-detection data into precise, validated agronomic prescriptions.</p>
-            </div>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: start;">
-                <ul class="feature-list">
-                    <li>
-                        <i class="fas fa-seedling fi"></i>
-                        <div style="flex:1;">
-                            <div style="display:flex; align-items:center; justify-content:space-between; gap:0.5rem; flex-wrap:wrap;">
-                                <strong>Species-to-Chemistry Matching</strong>
-                            </div>
-                            <span>Maps identified weed species and growth stage to a ranked list of registered herbicide options, rates, and application windows — instantly.</span>
-                        </div>
-                    </li>
-                    <li>
-                        <i class="fas fa-shield-alt fi"></i>
-                        <div style="flex:1;">
-                            <div style="display:flex; align-items:center; justify-content:space-between; gap:0.5rem; flex-wrap:wrap;">
-                                <strong>Resistance Risk Scoring</strong>
-                            </div>
-                            <span>Pulls county- and field-level resistance history to flag high-risk populations and automatically deprioritize compromised modes of action.</span>
-                        </div>
-                    </li>
-                    <li>
-                        <i class="fas fa-random fi"></i>
-                        <div style="flex:1;">
-                            <div style="display:flex; align-items:center; justify-content:space-between; gap:0.5rem; flex-wrap:wrap;">
-                                <strong>Mode-of-Action Rotation Engine</strong>
-                            </div>
-                            <span>Enforces HRAC group diversification across passes and seasons, ensuring no single MOA is over-relied upon — preventing resistance development.</span>
-                        </div>
-                    </li>
-                    <li>
-                        <i class="fas fa-flask fi"></i>
-                        <div style="flex:1;">
-                            <div style="display:flex; align-items:center; justify-content:space-between; gap:0.5rem; flex-wrap:wrap;">
-                                <strong>Tank Mix Compatibility Checker</strong>
-                            </div>
-                            <span>Validates proposed mixes against antagonism databases, pH sensitivity, and crop safety windows before any recommendation reaches the operator.</span>
-                        </div>
-                    </li>
-                </ul>
+            <p style="margin:0 0 2rem 0; max-width:1100px;">Five decision-layer capabilities paired with field intelligence modules — purpose-built to activate the full value of Precision AI's detection data.</p>
 
-                <!-- Web App Mockup -->
-                <div style="display:flex; flex-direction:column; gap:0.6rem;">
-                <div style="display:flex; align-items:center; gap:0.5rem; padding:0.4rem 0.75rem; background:rgba(118,185,0,0.07); border:1px solid rgba(118,185,0,0.2); border-radius:6px;">
-                    <i class="fas fa-arrow-left" style="color:var(--accent); font-size:0.65rem;"></i>
-                    <span style="font-size:0.7rem; color:var(--accent); font-weight:600; letter-spacing:0.5px;">Features 1 &amp; 3 in action — live field scenario</span>
-                </div>
-                <div style="border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.15); box-shadow: 0 25px 60px rgba(0,0,0,0.6); display: flex; flex-direction: column; background: #111;">
+            <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 0rem; align-items: center;">
 
-                    <!-- Browser Chrome -->
-                    <div style="background: #1a1a1a; padding: 0.6rem 1rem; display: flex; align-items: center; gap: 0.75rem; border-bottom: 1px solid rgba(255,255,255,0.08);">
-                        <div style="display: flex; gap: 0.4rem;">
-                            <span style="width:10px;height:10px;border-radius:50%;background:#ff5f57;display:inline-block;"></span>
-                            <span style="width:10px;height:10px;border-radius:50%;background:#ffbc2e;display:inline-block;"></span>
-                            <span style="width:10px;height:10px;border-radius:50%;background:#28c840;display:inline-block;"></span>
-                        </div>
-                        <div style="flex:1; background:#0d0d0d; border-radius:6px; padding:0.3rem 0.75rem; display:flex; align-items:center; gap:0.5rem;">
-                            <i class="fas fa-lock" style="font-size:0.6rem; color:#555;"></i>
-                            <span style="font-size:0.7rem; color:#555; letter-spacing:0.3px;">app.algo-rythmn.ai / field-advisory</span>
+                <!-- LEFT COLUMN: Capabilities + Field Intelligence -->
+                <div style="display: flex; flex-direction: column; gap: 2rem;">
+
+                    <!-- Core Capabilities -->
+                    <div>
+                        <div style="font-size:0.65rem; text-transform:uppercase; letter-spacing:2px; color:var(--accent); font-weight:700; padding-bottom:0.6rem; margin-bottom:1rem; border-bottom:1px solid rgba(0, 185, 139, 0.25);">&#9632;&nbsp; Core Capabilities</div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
+                            <div style="background:var(--card-bg); border:1px solid var(--card-border); border-radius:10px; padding:1rem 1.1rem; display:flex; align-items:flex-start; gap:0.75rem; transition: border-color 0.3s;">
+                                <i class="fas fa-seedling" style="color:var(--accent); font-size:1rem; margin-top:3px; flex-shrink:0;"></i>
+                                <div>
+                                    <strong style="display:block; color:var(--text-main); font-size:0.88rem; margin-bottom:0.25rem; line-height:1.3;">Species-to-Chemistry Matching</strong>
+                                    <span style="font-size:0.78rem; color:var(--text-muted); line-height:1.4;">Weed species + growth stage → ranked herbicide list with rates and windows.</span>
+                                </div>
+                            </div>
+                            <div style="background:var(--card-bg); border:1px solid var(--card-border); border-radius:10px; padding:1rem 1.1rem; display:flex; align-items:flex-start; gap:0.75rem; transition: border-color 0.3s;">
+                                <i class="fas fa-shield-alt" style="color:var(--accent); font-size:1rem; margin-top:3px; flex-shrink:0;"></i>
+                                <div>
+                                    <strong style="display:block; color:var(--text-main); font-size:0.88rem; margin-bottom:0.25rem; line-height:1.3;">Resistance Risk Scoring</strong>
+                                    <span style="font-size:0.78rem; color:var(--text-muted); line-height:1.4;">County-level resistance history flags high-risk populations and compromised MOAs.</span>
+                                </div>
+                            </div>
+                            <div style="background:var(--card-bg); border:1px solid var(--card-border); border-radius:10px; padding:1rem 1.1rem; display:flex; align-items:flex-start; gap:0.75rem; transition: border-color 0.3s;">
+                                <i class="fas fa-random" style="color:var(--accent); font-size:1rem; margin-top:3px; flex-shrink:0;"></i>
+                                <div>
+                                    <strong style="display:block; color:var(--text-main); font-size:0.88rem; margin-bottom:0.25rem; line-height:1.3;">MOA Rotation Engine</strong>
+                                    <span style="font-size:0.78rem; color:var(--text-muted); line-height:1.4;">Enforces HRAC group diversification across passes and seasons.</span>
+                                </div>
+                            </div>
+                            <div style="background:var(--card-bg); border:1px solid var(--card-border); border-radius:10px; padding:1rem 1.1rem; display:flex; align-items:flex-start; gap:0.75rem; transition: border-color 0.3s;">
+                                <i class="fas fa-flask" style="color:var(--accent); font-size:1rem; margin-top:3px; flex-shrink:0;"></i>
+                                <div>
+                                    <strong style="display:block; color:var(--text-main); font-size:0.88rem; margin-bottom:0.25rem; line-height:1.3;">Tank Mix Compatibility</strong>
+                                    <span style="font-size:0.78rem; color:var(--text-muted); line-height:1.4;">Validates mixes against antagonism databases before any recommendation.</span>
+                                </div>
+                            </div>
+                            <div style="background:var(--card-bg); border:1px solid var(--card-border); border-radius:10px; padding:1rem 1.1rem; display:flex; align-items:flex-start; gap:0.75rem; grid-column: 1 / -1; transition: border-color 0.3s;">
+                                <i class="fas fa-layer-group" style="color:var(--accent); font-size:1rem; margin-top:3px; flex-shrink:0;"></i>
+                                <div>
+                                    <strong style="display:block; color:var(--text-main); font-size:0.88rem; margin-bottom:0.25rem; line-height:1.3;">Pixel-Level Image Segmentation</strong>
+                                    <span style="font-size:0.78rem; color:var(--text-muted); line-height:1.4;">Delineates exact weed boundaries, quantifies density per zone, and flags visual anomalies from Precision AI imagery.</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- App Top Bar -->
-                    <div style="background:#161616; padding:0.65rem 1rem; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid rgba(255,255,255,0.06);">
-                        <div style="display:flex; align-items:center; gap:0.5rem;">
-                            <i class="fas fa-brain" style="color:var(--accent); font-size:0.85rem;"></i>
-                            <span style="font-size:0.8rem; font-weight:700; color:var(--text-main); letter-spacing:0.5px;">AI Assistant</span>
-                        </div>
-                        <div style="display:flex; gap:0.4rem; align-items:center;">
-                            <span style="background:rgba(118,185,0,0.15); border:1px solid rgba(118,185,0,0.3); color:var(--accent); font-size:0.6rem; font-weight:700; padding:0.2rem 0.5rem; border-radius:20px; text-transform:uppercase; letter-spacing:1px;">● Live</span>
-                            <span style="font-size:0.7rem; color:#555;">Section 14-W · Lethbridge Co.</span>
-                        </div>
-                    </div>
-
-                    <!-- Chat Body -->
-                    <div style="flex:1; overflow-y:auto; padding:1rem; display:flex; flex-direction:column; gap:0.85rem; background:#0f0f0f; min-height:0;">
-
-                        <!-- System context pill -->
-                        <div style="text-align:center;">
-                            <span style="font-size:0.65rem; color:#444; background:#1a1a1a; border:1px solid #222; padding:0.25rem 0.75rem; border-radius:20px; letter-spacing:0.5px;">
-                                <i class="fas fa-satellite-dish" style="margin-right:0.35rem; color:var(--accent); opacity:0.7;"></i><span style="color:var(--accent); opacity:0.8; font-weight:600;">Precision AI</span> scouting data ingested — 09:14 AM
-                            </span>
-                        </div>
-
-                        <!-- User message -->
-                        <div style="display:flex; justify-content:flex-end;">
-                            <div style="max-width:80%;">
-                                <div style="background:#1e2a0e; border:1px solid rgba(118,185,0,0.25); border-radius:12px 12px 2px 12px; padding:0.65rem 0.9rem;">
-                                    <p style="margin:0; font-size:0.8rem; color:#d4e8a8; line-height:1.4;">Palmer Amaranth detected, 2-leaf stage. What's the best prescription for this field?</p>
+                    <!-- Field Intelligence -->
+                    <div>
+                        <div style="font-size:0.65rem; text-transform:uppercase; letter-spacing:2px; color:var(--accent); font-weight:700; padding-bottom:0.6rem; margin-bottom:1rem; border-bottom:1px solid rgba(0, 185, 145, 0.25);">&#9632;&nbsp; Field Intelligence</div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
+                            <div style="background:var(--card-bg); border:1px solid var(--card-border); border-radius:10px; padding:1rem 1.1rem; display:flex; align-items:flex-start; gap:0.75rem; transition: border-color 0.3s;">
+                                <i class="fas fa-chart-line" style="color:var(--accent); font-size:1rem; margin-top:3px; flex-shrink:0;"></i>
+                                <div>
+                                    <strong style="display:block; color:var(--text-main); font-size:0.88rem; margin-bottom:0.25rem; line-height:1.3;">Anomaly Detection</strong>
                                 </div>
-                                <div style="text-align:right; margin-top:0.2rem;">
-                                    <span style="font-size:0.6rem; color:#444;">J. Kowalski · Agronomist</span>
+                            </div>
+                            <div style="background:var(--card-bg); border:1px solid var(--card-border); border-radius:10px; padding:1rem 1.1rem; display:flex; align-items:flex-start; gap:0.75rem; transition: border-color 0.3s;">
+                                <i class="fas fa-map" style="color:var(--accent); font-size:1rem; margin-top:3px; flex-shrink:0;"></i>
+                                <div>
+                                    <strong style="display:block; color:var(--text-main); font-size:0.88rem; margin-bottom:0.25rem; line-height:1.3;">Image Segmentation</strong>
+                                </div>
+                            </div>
+                            <div style="background:var(--card-bg); border:1px solid var(--card-border); border-radius:10px; padding:1rem 1.1rem; display:flex; align-items:flex-start; gap:0.75rem; transition: border-color 0.3s;">
+                                <i class="fas fa-compass" style="color:var(--accent); font-size:1rem; margin-top:3px; flex-shrink:0;"></i>
+                                <div>
+                                    <strong style="display:block; color:var(--text-main); font-size:0.88rem; margin-bottom:0.25rem; line-height:1.3;">Crop Protection Advisor</strong>
+                                </div>
+                            </div>
+                            <div style="background:linear-gradient(135deg, rgba(0, 185, 129, 0.1) 0%, rgba(0, 185, 129, 0.04) 100%); border:1px solid rgba(0, 185, 129, 0.35); border-radius:10px; padding:1rem 1.1rem; display:flex; align-items:flex-start; gap:0.75rem;">
+                                <i class="fas fa-bullseye" style="color:var(--accent); font-size:1rem; margin-top:3px; flex-shrink:0;"></i>
+                                <div>
+                                    <strong style="display:block; color:var(--text-main); font-size:0.88rem; margin-bottom:0.25rem; line-height:1.3;">Hyper-specialized AI</strong>
                                 </div>
                             </div>
                         </div>
-
-                        <!-- AI response -->
-                        <div style="display:flex; align-items:flex-start; gap:0.6rem;">
-                            <div style="width:26px; height:26px; border-radius:50%; background:linear-gradient(135deg, #76B900, #3d6100); display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:2px;">
-                                <i class="fas fa-brain" style="font-size:0.6rem; color:#000;"></i>
-                            </div>
-                            <div style="flex:1;">
-                                <div style="background:#161616; border:1px solid rgba(255,255,255,0.08); border-radius:2px 12px 12px 12px; padding:0.8rem 1rem; display:flex; flex-direction:column; gap:0.6rem;">
-
-                                    <!-- Resistance warning -->
-                                    <div style="background:rgba(245,158,11,0.08); border:1px solid rgba(245,158,11,0.25); border-radius:6px; padding:0.5rem 0.75rem; display:flex; align-items:flex-start; gap:0.5rem;">
-                                        <i class="fas fa-exclamation-triangle" style="color:#f59e0b; font-size:0.75rem; margin-top:2px; flex-shrink:0;"></i>
-                                        <span style="font-size:0.75rem; color:#f59e0b; line-height:1.4;"><strong>Resistance Alert:</strong> Glyphosate (Group 9) resistance confirmed in this county. Deprioritized.</span>
-                                    </div>
-
-                                    <!-- Recommendation -->
-                                    <div style="background:rgba(118,185,0,0.07); border:1px solid rgba(118,185,0,0.2); border-radius:6px; padding:0.6rem 0.75rem;">
-                                        <div style="font-size:0.65rem; text-transform:uppercase; letter-spacing:1.5px; color:var(--accent); font-weight:700; margin-bottom:0.4rem;">Recommended Prescription</div>
-                                        <div style="font-size:0.82rem; color:#e2f5b0; font-weight:600; margin-bottom:0.15rem;">Liberty 280 SL — <span style="color:var(--accent);">655 mL / ac</span></div>
-                                        <div style="font-size:0.72rem; color:#888;">HRAC Group 10 (Glutamine Synthetase Inhibitor)</div>
-                                        <div style="font-size:0.72rem; color:#888; margin-top:0.25rem;">+ Merge adjuvant @ 0.5% v/v &nbsp;·&nbsp; Apply at 2–4 leaf stage window</div>
-                                    </div>
-
-                                    <!-- MOA check -->
-                                    <div style="display:flex; align-items:center; gap:0.5rem;">
-                                        <i class="fas fa-check-circle" style="color:var(--accent); font-size:0.75rem; flex-shrink:0;"></i>
-                                        <span style="font-size:0.72rem; color:#888;">MOA Rotation: Group 10 not applied in prior 2 passes — <strong style="color:var(--accent);">Cleared</strong></span>
-                                    </div>
-                                    <div style="display:flex; align-items:center; gap:0.5rem;">
-                                        <i class="fas fa-check-circle" style="color:var(--accent); font-size:0.75rem; flex-shrink:0;"></i>
-                                        <span style="font-size:0.72rem; color:#888;">Tank mix compatibility: <strong style="color:var(--accent);">No antagonism detected</strong></span>
-                                    </div>
-
-                                </div>
-                                <div style="margin-top:0.25rem; display:flex; align-items:center; gap:0.5rem;">
-                                    <span style="font-size:0.6rem; color:#444;">Algo-Rythmn AI · just now</span>
-                                    <span style="background:rgba(245,158,11,0.1); border:1px solid rgba(245,158,11,0.3); color:#f59e0b; font-size:0.6rem; font-weight:700; padding:0.15rem 0.5rem; border-radius:20px; text-transform:uppercase; letter-spacing:0.8px;">Pending Validation</span>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <!-- Input Bar -->
-                    <div style="background:#161616; border-top:1px solid rgba(255,255,255,0.07); padding:0.65rem 1rem; display:flex; align-items:center; gap:0.75rem;">
-                        <div style="flex:1; background:#0d0d0d; border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:0.5rem 0.85rem; font-size:0.75rem; color:#444;">
-                            Approve, adjust, or ask a follow-up…
-                        </div>
-                        <button style="background:var(--accent); border:none; border-radius:8px; width:30px; height:30px; display:flex; align-items:center; justify-content:center; cursor:pointer;">
-                            <i class="fas fa-paper-plane" style="color:#000; font-size:0.7rem;"></i>
-                        </button>
                     </div>
 
                 </div>
+
+                <!-- RIGHT COLUMN: iPhone Mockup -->
+                <div style="display:flex; flex-direction:column; align-items:center; gap:0.75rem;">
+
+                    <!-- iPhone Outer Frame -->
+                    <div style="position:relative; width:300px; flex-shrink:0;">
+
+                        <!-- Side buttons: volume up/down -->
+                        <div style="position:absolute; left:-3px; top:90px; width:3px; height:28px; background:#2a2a2a; border-radius:2px 0 0 2px;"></div>
+                        <div style="position:absolute; left:-3px; top:128px; width:3px; height:28px; background:#2a2a2a; border-radius:2px 0 0 2px;"></div>
+                        <!-- Side button: power -->
+                        <div style="position:absolute; right:-3px; top:112px; width:3px; height:44px; background:#2a2a2a; border-radius:0 2px 2px 0;"></div>
+
+                        <!-- Phone shell -->
+                        <div style="background: linear-gradient(145deg, #2c2c2e, #1c1c1e); border-radius:44px; padding:10px; box-shadow: 0 40px 80px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,255,255,0.08), 0 0 0 1px rgba(255,255,255,0.06), 0 0 40px rgba(0,185,139,0.08);">
+
+                            <!-- Screen -->
+                            <div style="border-radius:36px; overflow:hidden; background:#0f0f0f; display:flex; flex-direction:column; height:620px;">
+
+                                <!-- Status Bar -->
+                                <div style="background:#0f0f0f; padding:10px 20px 4px; display:flex; align-items:center; justify-content:space-between; flex-shrink:0;">
+                                    <span style="font-size:0.72rem; font-weight:700; color:#fff; letter-spacing:-0.3px;">9:41</span>
+                                    <!-- Dynamic Island -->
+                                    <div style="position:absolute; left:50%; transform:translateX(-50%); top:10px; width:90px; height:26px; background:#000; border-radius:20px; display:flex; align-items:center; justify-content:center; gap:6px;">
+                                        <div style="width:10px; height:10px; border-radius:50%; background:#1a1a1a; border:1px solid #333;"></div>
+                                        <div style="width:4px; height:4px; border-radius:50%; background:#222;"></div>
+                                    </div>
+                                    <div style="display:flex; align-items:center; gap:5px;">
+                                        <!-- Signal dots -->
+                                        <div style="display:flex; align-items:flex-end; gap:1.5px; height:10px;">
+                                            <div style="width:2.5px; height:4px; background:#fff; border-radius:1px;"></div>
+                                            <div style="width:2.5px; height:6px; background:#fff; border-radius:1px;"></div>
+                                            <div style="width:2.5px; height:8px; background:#fff; border-radius:1px;"></div>
+                                            <div style="width:2.5px; height:10px; background:#fff; border-radius:1px;"></div>
+                                        </div>
+                                        <!-- Wifi -->
+                                        <i class="fas fa-wifi" style="font-size:0.62rem; color:#fff;"></i>
+                                        <!-- Battery -->
+                                        <div style="display:flex; align-items:center; gap:1px;">
+                                            <div style="width:20px; height:10px; border:1.5px solid rgba(255,255,255,0.6); border-radius:3px; position:relative; overflow:hidden;">
+                                                <div style="position:absolute; left:1px; top:1px; bottom:1px; width:70%; background:#fff; border-radius:1.5px;"></div>
+                                            </div>
+                                            <div style="width:2px; height:5px; background:rgba(255,255,255,0.5); border-radius:0 1px 1px 0;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- App Top Bar -->
+                                <div style="background:#161616; padding:0.55rem 0.9rem; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid rgba(255,255,255,0.06); flex-shrink:0;">
+                                    <div style="display:flex; align-items:center; gap:0.45rem;">
+                                        <i class="fas fa-brain" style="color:var(--accent); font-size:0.8rem;"></i>
+                                        <span style="font-size:0.76rem; font-weight:700; color:var(--text-main); letter-spacing:0.3px;">AlgoMind</span>
+                                    </div>
+                                    <div style="display:flex; gap:0.35rem; align-items:center;">
+                                        <span style="background:rgba(0, 185, 123, 0.15); border:1px solid rgba(0, 185, 145, 0.3); color:var(--accent); font-size:0.55rem; font-weight:700; padding:0.18rem 0.45rem; border-radius:20px; text-transform:uppercase; letter-spacing:0.8px;">● Live</span>
+                                        <span style="font-size:0.6rem; color:#555;">Sec. 14-W · Lethbridge</span>
+                                    </div>
+                                </div>
+
+                                <!-- Chat Body -->
+                                <div style="flex:1; padding:0.75rem; display:flex; flex-direction:column; gap:0.75rem; background:#0f0f0f; overflow:hidden;">
+                                    <div style="text-align:center;">
+                                        <span style="font-size:0.58rem; color:#444; background:#1a1a1a; border:1px solid #222; padding:0.2rem 0.6rem; border-radius:20px; letter-spacing:0.3px; display:inline-block;">
+                                            <i class="fas fa-satellite-dish" style="margin-right:0.3rem; color:var(--accent); opacity:0.7;"></i><span style="color:var(--accent); opacity:0.8; font-weight:600;">Precision AI</span> scan complete · 847 detections · 3.2 ac mapped
+                                        </span>
+                                    </div>
+                                    <div style="display:flex; justify-content:flex-end;">
+                                        <div style="max-width:85%;">
+                                            <div style="background:#0e2a21; border:1px solid rgba(0, 185, 139, 0.25); border-radius:12px 12px 2px 12px; padding:0.55rem 0.75rem;">
+                                                <p style="margin:0; font-size:0.75rem; color:#a8e8c8; line-height:1.4;">Palmer Amaranth, 2-leaf stage detected. Best prescription?</p>
+                                            </div>
+                                            <div style="text-align:right; margin-top:0.15rem;">
+                                                <span style="font-size:0.55rem; color:#444;">J. Kowalski · Agronomist</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div style="display:flex; align-items:flex-start; gap:0.5rem;">
+                                        <div style="width:22px; height:22px; border-radius:50%; background:linear-gradient(135deg, #00b972, #006149); display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:2px;">
+                                            <i class="fas fa-brain" style="font-size:0.55rem; color:#000;"></i>
+                                        </div>
+                                        <div style="flex:1;">
+                                            <div style="background:#161616; border:1px solid rgba(255,255,255,0.08); border-radius:2px 10px 10px 10px; padding:0.65rem 0.75rem; display:flex; flex-direction:column; gap:0.45rem;">
+
+                                                <!-- Segmentation + Anomaly Detection -->
+                                                <div style="background:rgba(0,185,139,0.06); border:1px solid rgba(0,185,139,0.2); border-radius:6px; padding:0.45rem 0.6rem; display:flex; flex-direction:column; gap:0.2rem;">
+                                                    <div style="font-size:0.57rem; text-transform:uppercase; letter-spacing:1px; color:var(--accent); font-weight:700; display:flex; align-items:center; gap:0.3rem;"><i class="fas fa-layer-group" style="font-size:0.6rem;"></i> Segmentation</div>
+                                                    <span style="font-size:0.67rem; color:#ccc; line-height:1.35;">Density: <strong style="color:var(--accent);">18 plants/m²</strong> · Hot zone: NE quadrant · boundary mapped</span>
+                                                    <span style="font-size:0.62rem; color:#f59e0b; display:flex; align-items:center; gap:0.3rem;"><i class="fas fa-chart-line" style="font-size:0.6rem;"></i> <strong>Anomaly:</strong> density spike +340% vs. seasonal baseline</span>
+                                                </div>
+
+                                                <!-- Resistance Risk -->
+                                                <div style="background:rgba(245,158,11,0.08); border:1px solid rgba(245,158,11,0.25); border-radius:6px; padding:0.45rem 0.6rem; display:flex; align-items:flex-start; gap:0.4rem;">
+                                                    <i class="fas fa-shield-alt" style="color:#f59e0b; font-size:0.68rem; margin-top:2px; flex-shrink:0;"></i>
+                                                    <span style="font-size:0.67rem; color:#f59e0b; line-height:1.35;"><strong>Resistance Risk:</strong> Glyphosate (Group 9) — Lethbridge Co. confirmed. Deprioritized.</span>
+                                                </div>
+
+                                                <!-- Ranked Prescriptions (Species-to-Chemistry Matching) -->
+                                                <div style="background:rgba(0,185,114,0.07); border:1px solid rgba(0,185,129,0.2); border-radius:6px; padding:0.5rem 0.65rem;">
+                                                    <div style="font-size:0.57rem; text-transform:uppercase; letter-spacing:1.2px; color:var(--accent); font-weight:700; margin-bottom:0.3rem; display:flex; align-items:center; gap:0.3rem;"><i class="fas fa-seedling" style="font-size:0.6rem;"></i> Ranked Prescriptions</div>
+                                                    <div style="display:flex; align-items:baseline; justify-content:space-between; margin-bottom:0.1rem;">
+                                                        <span style="font-size:0.73rem; color:#e2f5b0; font-weight:700;">#1 Liberty 280 SL</span>
+                                                        <span style="font-size:0.65rem; color:var(--accent); font-weight:600;">655 mL/ac</span>
+                                                    </div>
+                                                    <div style="font-size:0.62rem; color:#666; margin-bottom:0.25rem;">HRAC Group 10 · optimal 2-leaf window</div>
+                                                    <div style="display:flex; align-items:baseline; justify-content:space-between;">
+                                                        <span style="font-size:0.67rem; color:#888;">#2 Engenia</span>
+                                                        <span style="font-size:0.62rem; color:#555;">560 mL/ac · Group 4</span>
+                                                    </div>
+                                                </div>
+
+                                                <!-- MOA Rotation + Tank Mix -->
+                                                <div style="display:flex; flex-direction:column; gap:0.2rem;">
+                                                    <div style="display:flex; align-items:center; gap:0.35rem;">
+                                                        <i class="fas fa-random" style="color:var(--accent); font-size:0.6rem; flex-shrink:0;"></i>
+                                                        <span style="font-size:0.62rem; color:#888;">MOA rotation: Group 9 last season → <strong style="color:var(--accent);">Group 10 cleared</strong></span>
+                                                    </div>
+                                                    <div style="display:flex; align-items:center; gap:0.35rem;">
+                                                        <i class="fas fa-flask" style="color:var(--accent); font-size:0.6rem; flex-shrink:0;"></i>
+                                                        <span style="font-size:0.62rem; color:#888;">Merge adjuvant 0.5% v/v · <strong style="color:var(--accent);">No antagonism</strong></span>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div style="margin-top:0.25rem; display:flex; align-items:center; gap:0.4rem; flex-wrap:wrap;">
+                                                <span style="font-size:0.55rem; color:#444;">Algo-Rythmn AI · just now</span>
+                                                <span style="background:rgba(245,158,11,0.1); border:1px solid rgba(245,158,11,0.3); color:#f59e0b; font-size:0.55rem; font-weight:700; padding:0.1rem 0.4rem; border-radius:20px; text-transform:uppercase; letter-spacing:0.6px;">Pending Approval</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Input Bar -->
+                                <div style="background:#161616; border-top:1px solid rgba(255,255,255,0.07); padding:0.55rem 0.75rem; display:flex; align-items:center; gap:0.6rem; flex-shrink:0;">
+                                    <div style="flex:1; background:#0d0d0d; border:1px solid rgba(255,255,255,0.1); border-radius:20px; padding:0.45rem 0.8rem; font-size:0.68rem; color:#444;">
+                                        Approve, adjust, or follow-up…
+                                    </div>
+                                    <button style="background:var(--accent); border:none; border-radius:50%; width:28px; height:28px; display:flex; align-items:center; justify-content:center; cursor:pointer; flex-shrink:0;">
+                                        <i class="fas fa-paper-plane" style="color:#000; font-size:0.62rem;"></i>
+                                    </button>
+                                </div>
+
+                                <!-- Home Indicator -->
+                                <div style="background:#0f0f0f; padding:6px 0 10px; display:flex; justify-content:center; flex-shrink:0;">
+                                    <div style="width:100px; height:4px; background:rgba(255,255,255,0.25); border-radius:4px;"></div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
             </div>
             <div class="page-number">04</div>
-            <div class="copyright">&copy; 2026 Algo-Rythmn.ai. All Rights Reserved.</div>
         </div>
     </section>
 
     <section class="slide slide-5">
         <div class="slide-content">
             <h2>From Sprayer to Advisor: <span>Intelligence with Validation</span></h2>
-            <p>Algo-Rythmn.ai provides the entire <strong style="color:var(--text-main);">Decide layer</strong> — not just the AI prescription, but the platform where experts review, validate, and refine it. Every correction feeds back into our models, compounding accuracy over time.</p>
+            <p>Algo-Rythmn.ai provides the entire <strong style="color:var(--text-main);">Decide layer</strong> — the AI prescribes and auto-validates, so the human expert only needs a quick glance to confirm. Every approval feeds back into our models, compounding accuracy over time.</p>
             
             <div class="workflow-container">
                 <div class="workflow-step">
@@ -546,26 +617,26 @@
                 <!-- Algo-Rythmn.ai Platform bracket: owns both Prescribe + Validate -->
                 <div style="flex: 2; display: flex; flex-direction: column; gap: 0;">
                     <!-- Platform ownership banner -->
-                    <div style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; background: rgba(118,185,0,0.12); border: 1px solid rgba(118,185,0,0.4); border-bottom: none; border-radius: 10px 10px 0 0; padding: 0.4rem 1rem;">
+                    <div style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; background: rgba(0, 185, 145, 0.12); border: 1px solid rgba(0, 185, 129, 0.4); border-bottom: none; border-radius: 10px 10px 0 0; padding: 0.4rem 1rem;">
                         <i class="fas fa-brain" style="color: var(--accent); font-size: 0.7rem;"></i>
                         <span style="font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--accent);">Algo-Rythmn.ai Platform</span>
                     </div>
                     <!-- Steps row inside bracket -->
-                    <div style="display: flex; align-items: center; gap: 0.75rem; border: 1px solid rgba(118,185,0,0.4); border-radius: 0 0 10px 10px; padding: 0.75rem; background: rgba(118,185,0,0.03);">
-                        <div class="workflow-step" style="border-color: var(--accent); background: rgba(118, 185, 0, 0.05); flex: 1; margin: 0;">
+                    <div style="display: flex; align-items: center; gap: 0.75rem; border: 1px solid rgba(0, 185, 145, 0.4); border-radius: 0 0 10px 10px; padding: 0.75rem; background: rgba(118,185,0,0.03);">
+                        <div class="workflow-step" style="border-color: var(--accent); background: rgba(0, 185, 129, 0.05); flex: 1; margin: 0;">
                             <i class="fas fa-brain workflow-icon"></i>
                             <h3>2. Prescribe</h3>
                             <p>AI suggests herbicides, tank mixes, and rates based on crop data.</p>
-                            <p style="margin-top: 1rem; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.5px; color: var(--accent); font-weight: 700; border-top: 1px solid rgba(118, 185, 0, 0.3); padding-top: 0.75rem;">AI Engine</p>
+                            <p style="margin-top: 1rem; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.5px; color: var(--accent); font-weight: 700; border-top: 1px solid rgba(0, 185, 114, 0.3); padding-top: 0.75rem;">AI Engine</p>
                         </div>
                         <i class="fas fa-plus" style="font-size: 0.85rem; color: var(--accent); flex-shrink: 0;"></i>
                         <div class="workflow-step" style="border-style: dashed; border-color: var(--accent); flex: 1; margin: 0;">
-                            <i class="fas fa-user-check workflow-icon"></i>
+                            <i class="fas fa-robot workflow-icon"></i>
                             <h3>3. Validate</h3>
-                            <p>Experts review, approve or refine the prescription via AI platform.</p>
-                            <div style="margin-top: 1rem; border-top: 1px solid rgba(118,185,0,0.3); padding-top: 0.75rem;">
-                                <p style="margin: 0; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.5px; color: var(--accent); font-weight: 700;">Platform Interface</p>
-                                <p style="margin: 0.2rem 0 0 0; font-size: 0.65rem; color: #666; letter-spacing: 0.5px;">Used by Farmers &amp; Agronomists</p>
+                            <p>AI auto-validates safety, MOA rotation, and compatibility. The human expert just takes a quick look and approves in seconds.</p>
+                            <div style="margin-top: 1rem; border-top: 1px solid rgba(0, 185, 139, 0.3); padding-top: 0.75rem;">
+                                <p style="margin: 0; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.5px; color: var(--accent); font-weight: 700;">AI-First Validation</p>
+                                <p style="margin: 0.2rem 0 0 0; font-size: 0.65rem; color: #888; letter-spacing: 0.5px; line-height: 1.5;">AI handles 95%+ of checks &nbsp;&middot;&nbsp; Human confirms in one click</p>
                             </div>
                         </div>
                     </div>
@@ -581,11 +652,10 @@
                 </div>
             </div>
             <div class="page-number">05</div>
-            <div class="copyright">&copy; 2026 Algo-Rythmn.ai. All Rights Reserved.</div>
         </div>
     </section>
 
-    <section class="slide slide-6">
+    <section class="slide slide-7">
         <div class="slide-content">
             <h2>Exponential <span>Business Value</span></h2>
             <div class="grid-2" style="grid-template-columns: repeat(3, 1fr); gap: 1.5rem;">
@@ -601,23 +671,22 @@
                     <h3>Projected ROI</h3>
                     <p style="font-size: 1.1rem;"><span class="highlight-text">20-25% Margin Expansion</span> through waste reduction and premium AI-as-a-Service models.</p>
                 </div>
-                <div class="card" style="grid-column: 1 / -1; background: linear-gradient(90deg, rgba(118, 185, 0, 0.1) 0%, transparent 100%); padding: 2rem; flex-direction: row; align-items: center; gap: 2rem;">
+                <div class="card" style="grid-column: 1 / -1; background: linear-gradient(90deg, rgba(0, 185, 114, 0.1) 0%, transparent 100%); padding: 2rem; flex-direction: row; align-items: center; gap: 2rem;">
                     <div style="font-size: 3rem; color: var(--accent);"><i class="fas fa-database"></i></div>
                     <div>
                         <h3 style="margin-bottom: 0.5rem;">The Ultimate "Walled Garden" Data Moat</h3>
-                        <p style="margin: 0; font-size: 1.1rem;">Together, we create the world's most comprehensive dataset: exactly what weed was where, and what chemistry killed it. This is an invaluable asset for future models and chemical partnerships.</p>
+                        <p style="margin: 0; font-size: 1.1rem;">Together, we create the world's most comprehensive precision agriculture dataset: what weed was where, what chemistry was applied, and what outcome followed. Our AI mines this continuously — surfacing anomalies, refining prescriptions, and building a self-improving digital crop advisor. A defensible, compounding strategic asset.</p>
                     </div>
                 </div>
             </div>
             <div class="page-number">06</div>
-            <div class="copyright">&copy; 2026 Algo-Rythmn.ai. All Rights Reserved.</div>
         </div>
     </section>
 
-    <section class="slide text-center slide-7" style="text-align: center;">
+    <section class="slide text-center slide-8" style="text-align: center;">
         <div class="slide-content">
             <h1 style="font-size: 4.3rem; color: var(--text-muted); opacity: 0.8;">You provide the Hands.</h1>
-            <h1 style="font-size: 4.3rem; margin-bottom: 2.5rem; letter-spacing: -3px;">We provide the <span style="color: var(--accent); text-shadow: 0 0 30px rgba(118, 185, 0, 0.4);">Brain</span>.</h1>
+            <h1 style="font-size: 4.3rem; margin-bottom: 2.5rem; letter-spacing: -3px;">We provide the <span style="color: var(--accent); text-shadow: 0 0 30px rgba(0, 185, 139, 0.4);">Brain</span>.</h1>
             
             <h2 style="font-size: 1.5rem; color: var(--text-main); margin-bottom: 3rem; max-width: 900px; margin-left: auto; margin-right: auto; line-height: 1.2;">
                 Together, we redefine crop protection—not just execution, but <span style="color: var(--accent);">intelligence at scale.</span>
