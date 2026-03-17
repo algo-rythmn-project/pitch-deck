@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ATB Advisor Co-Pilot — Algo-Rythmn</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#08111C; --ink2:#152232; --ink3:#243545;
+  --teal:#029B8F; --teal2:#05D4C0; --teal3:#DCF5F2;
+  --gold:#C49A16; --gold2:#F2C84B; --gold3:#FEF8E1;
+  --coral:#CC4D30; --coral2:#FEF0EB;
+  --slate:#607D93; --slate2:#96B2C4;
+  --cream:#F8F5EF; --cream2:#F0EBE1; --white:#FFFFFF;
+  --border:rgba(8,17,28,.09);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);overflow-x:hidden}
+
+/* ─── PROGRESS ──────────────────────────────────── */
+#prog{position:fixed;top:0;left:0;height:2px;width:0;background:linear-gradient(90deg,var(--teal),var(--teal2));z-index:500}
+
+/* ─── NAV ───────────────────────────────────────── */
+#nav{position:fixed;top:0;left:0;right:0;z-index:400;display:flex;align-items:center;justify-content:space-between;padding:16px 64px;background:rgba(248,245,239,.94);backdrop-filter:blur(20px);border-bottom:1px solid transparent;transition:all .3s}
+#nav.up{border-color:var(--border);box-shadow:0 1px 24px rgba(8,17,28,.05)}
+.nlogo{font-family:'DM Mono',monospace;font-size:12px;color:var(--teal);letter-spacing:.1em;text-decoration:none;font-weight:500}
+.nlogo b{color:var(--slate2);font-weight:400}
+.nlinks{display:flex;gap:24px;list-style:none}
+.nlinks a{font-size:11px;color:var(--slate);letter-spacing:.07em;text-decoration:none;text-transform:uppercase;font-weight:500;transition:color .2s;padding-bottom:1px;border-bottom:1px solid transparent}
+.nlinks a.on,.nlinks a:hover{color:var(--teal);border-color:var(--teal)}
+.ncta{font-size:11px;font-weight:600;color:#fff;background:var(--ink);padding:8px 18px;border-radius:2px;text-decoration:none;letter-spacing:.07em;text-transform:uppercase;transition:background .2s}
+.ncta:hover{background:var(--teal)}
+
+/* ─── SCROLL REVEAL ─────────────────────────────── */
+.r{opacity:0;transform:translateY(20px);transition:opacity .65s cubic-bezier(.4,0,.2,1),transform .65s cubic-bezier(.4,0,.2,1)}
+.r.on{opacity:1;transform:none}
+.r.d1{transition-delay:.1s}.r.d2{transition-delay:.2s}.r.d3{transition-delay:.3s}
+.r.d4{transition-delay:.4s}.r.d5{transition-delay:.5s}
+
+/* ─── SHARED ────────────────────────────────────── */
+.wrap{max-width:1140px;margin:0 auto;padding:0 0px}
+.eyebrow{font-family:'DM Mono',monospace;font-size:10.5px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;display:block;margin-bottom:14px}
+h1,h2{font-family:'Cormorant Garamond',serif;font-weight:600;line-height:1.08}
+h1{font-size:clamp(54px,6.5vw,92px)}
+h2{font-size:clamp(36px,4vw,58px)}
+h3{font-size:15px;font-weight:500;color:var(--ink2);margin-bottom:6px}
+.lead{font-size:17px;font-weight:300;line-height:1.8;color:var(--ink3)}
+.sm{font-size:13.5px;font-weight:300;line-height:1.75;color:var(--ink3)}
+
+/* ════════════════════════════════════════════════ */
+/*  HERO                                            */
+/* ════════════════════════════════════════════════ */
+#hero{min-height:100vh;background:var(--ink);display:flex;align-items:flex-end;padding-bottom:80px;overflow:hidden;position:relative}
+.hbg{position:absolute;inset:0;background:radial-gradient(ellipse 90% 60% at 65% 35%,rgba(2,155,143,.15),transparent 55%),radial-gradient(ellipse 50% 50% at 15% 85%,rgba(196,154,22,.09),transparent 50%)}
+.hgrid{position:absolute;inset:0;background-image:linear-gradient(rgba(5,212,192,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(5,212,192,.045) 1px,transparent 1px);background-size:72px 72px}
+.hinner{position:relative;z-index:2;width:100%}
+.hey{font-family:'DM Mono',monospace;font-size:11px;color:var(--teal2);letter-spacing:.22em;text-transform:uppercase;margin-bottom:32px;display:flex;align-items:center;gap:14px}
+.hey::before{content:'';width:36px;height:1px;background:var(--teal2)}
+#hero h1{color:#fff;letter-spacing:-.01em}
+#hero h1 em{color:var(--teal2);font-style:normal}
+#hero h1 small{display:block;font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:.55em;color:var(--teal2);margin-top:8px;letter-spacing:.01em}
+.hdesc{font-size:16.5px;font-weight:300;color:rgba(255,255,255,.45);line-height:1.82;max-width:500px;margin:28px 0 52px}
+.hbar{display:flex;gap:44px;border-top:1px solid rgba(255,255,255,.08);padding-top:28px;flex-wrap:wrap}
+.hbar-item .hl{font-family:'DM Mono',monospace;font-size:9.5px;color:var(--slate2);letter-spacing:.15em;text-transform:uppercase;margin-bottom:3px}
+.hbar-item .hv{font-size:13px;color:rgba(255,255,255,.65)}
+.scroll-cue{position:absolute;bottom:30px;right:64px;display:flex;align-items:center;gap:8px;font-family:'DM Mono',monospace;font-size:9.5px;color:rgba(255,255,255,.2);letter-spacing:.12em;text-transform:uppercase}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(4px)}}
+.scroll-cue svg{animation:bob 2.2s ease-in-out infinite}
+
+/* ════════════════════════════════════════════════ */
+/*  ACT 1 — THE BURNING PROBLEM                     */
+/* ════════════════════════════════════════════════ */
+#problem{background:var(--cream);padding:128px 0 100px}
+.prob-split{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;margin-top:64px}
+
+/* Cost-of-inaction visual */
+.coi{background:var(--white);border:1px solid var(--border);border-radius:6px;overflow:hidden}
+.coi-header{background:var(--ink);padding:20px 24px;display:flex;align-items:center;gap:10px}
+.coi-dot{width:10px;height:10px;border-radius:50%}
+.coi-title{font-family:'DM Mono',monospace;font-size:11px;color:rgba(255,255,255,.4);letter-spacing:.1em}
+.coi-body{padding:28px 24px;display:flex;flex-direction:column;gap:18px}
+.coi-row{display:flex;align-items:flex-start;gap:14px}
+.coi-icon{width:36px;height:36px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;margin-top:2px}
+.coi-text h4{font-size:13px;font-weight:500;color:var(--ink);margin-bottom:3px}
+.coi-text p{font-size:12px;font-weight:300;color:var(--slate);line-height:1.6}
+.coi-bar-wrap{margin-top:4px}
+.coi-bar-label{display:flex;justify-content:space-between;font-family:'DM Mono',monospace;font-size:10px;color:var(--slate2);letter-spacing:.08em;margin-bottom:5px}
+.coi-bar{height:6px;background:var(--cream2);border-radius:3px;overflow:hidden}
+.coi-bar-fill{height:100%;border-radius:3px;width:0;transition:width 1.4s cubic-bezier(.4,0,.2,1)}
+
+/* right: 4 pain cards */
+.pain-list{display:flex;flex-direction:column;gap:16px}
+.pain{display:flex;gap:18px;align-items:flex-start;padding:20px 22px;background:var(--white);border:1px solid var(--border);border-radius:6px;transition:transform .2s,box-shadow .2s;position:relative;overflow:hidden}
+.pain::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px}
+.pain.p1::before{background:var(--teal)}.pain.p2::before{background:var(--gold)}.pain.p3::before{background:var(--coral)}.pain.p4::before{background:var(--slate2)}
+.pain:hover{transform:translateX(3px);box-shadow:0 4px 20px rgba(8,17,28,.06)}
+.pain-num{font-family:'DM Mono',monospace;font-size:18px;font-weight:500;color:var(--cream2);line-height:1;flex-shrink:0;width:28px}
+.pain h4{font-size:13.5px;font-weight:500;color:var(--ink);margin-bottom:3px}
+.pain p{font-size:12.5px;font-weight:300;color:var(--slate);line-height:1.6}
+
+/* ════════════════════════════════════════════════ */
+/*  ACT 2 — THE "AHA" MOMENT (MOCK UI)              */
+/* ════════════════════════════════════════════════ */
+#aha{background:var(--ink2);padding:120px 0;overflow:hidden}
+.aha-head{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:end;margin-bottom:64px}
+#aha h2{color:#fff}
+.aha-tag{color:rgba(5,212,192,.6)}
+#aha .lead{color:rgba(255,255,255,.42)}
+.bigquote{font-family:'Cormorant Garamond',serif;font-size:clamp(22px,2.6vw,32px);font-style:italic;font-weight:300;color:rgba(255,255,255,.75);line-height:1.55;border-left:2px solid var(--teal2);padding-left:20px}
+
+/* Mock UI */
+.mockui{background:#0D1B2A;border-radius:10px;overflow:hidden;border:1px solid rgba(255,255,255,.06);box-shadow:0 40px 80px rgba(0,0,0,.5)}
+.mui-topbar{background:#091422;padding:12px 18px;display:flex;align-items:center;gap:10px;border-bottom:1px solid rgba(255,255,255,.05)}
+.mui-dots{display:flex;gap:6px}
+.mui-dots span{width:10px;height:10px;border-radius:50%;display:block}
+.mui-title{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.2);letter-spacing:.08em;flex:1;text-align:center}
+.mui-body{display:grid;grid-template-columns:220px 1fr;min-height:440px}
+.mui-sidebar{background:#0A1520;border-right:1px solid rgba(255,255,255,.05);padding:20px 0}
+.mui-nav-item{display:flex;align-items:center;gap:10px;padding:10px 18px;font-size:12px;color:rgba(255,255,255,.3);cursor:default;transition:all .2s}
+.mui-nav-item.active{background:rgba(2,155,143,.12);color:var(--teal2);border-right:2px solid var(--teal2)}
+.mui-nav-item svg{width:14px;height:14px;flex-shrink:0}
+.mui-main{padding:24px;display:flex;flex-direction:column;gap:18px;overflow:hidden}
+.mui-search{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:6px;padding:10px 14px;display:flex;align-items:center;gap:10px;color:rgba(255,255,255,.25);font-size:12.5px}
+.mui-search svg{width:14px;height:14px;flex-shrink:0;opacity:.4}
+.mui-greeting{font-size:13px;color:rgba(255,255,255,.55)}
+.mui-greeting strong{color:rgba(255,255,255,.85);font-weight:500}
+
+/* Alert cards in mock UI */
+.mui-alerts-label{font-family:'DM Mono',monospace;font-size:9.5px;color:rgba(255,255,255,.25);letter-spacing:.14em;text-transform:uppercase;margin-bottom:8px}
+.mui-alerts{display:flex;flex-direction:column;gap:8px}
+.mui-alert{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:6px;padding:12px 14px;display:flex;align-items:flex-start;gap:12px;cursor:default;transition:all .25s}
+.mui-alert:hover{background:rgba(5,212,192,.06);border-color:rgba(5,212,192,.2)}
+.mui-alert-dot{width:8px;height:8px;border-radius:50%;margin-top:3px;flex-shrink:0}
+.mui-alert-body{flex:1}
+.mui-alert-name{font-size:12.5px;font-weight:500;color:rgba(255,255,255,.8);margin-bottom:2px}
+.mui-alert-desc{font-size:11.5px;color:rgba(255,255,255,.35);line-height:1.5}
+.mui-alert-action{font-family:'DM Mono',monospace;font-size:10px;padding:4px 10px;border-radius:3px;font-weight:500;flex-shrink:0;margin-top:1px}
+.a-green{background:rgba(2,155,143,.15);color:var(--teal2)}
+.a-amber{background:rgba(196,154,22,.15);color:var(--gold2)}
+.a-red{background:rgba(204,77,48,.15);color:#F4906A}
+
+/* 360 profile card in mock UI */
+.mui-profile{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:6px;padding:16px}
+.mui-profile-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px}
+.mui-profile-name{font-size:13.5px;font-weight:500;color:rgba(255,255,255,.8)}
+.mui-profile-sub{font-size:11px;color:rgba(255,255,255,.3);margin-top:2px}
+.mui-profile-score{text-align:right}
+.mui-profile-score-num{font-family:'DM Mono',monospace;font-size:22px;font-weight:500;color:var(--teal2);line-height:1}
+.mui-profile-score-label{font-size:10px;color:rgba(255,255,255,.25);font-family:'DM Mono',monospace;letter-spacing:.08em}
+.mui-products{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.mui-prod{background:rgba(255,255,255,.04);border-radius:4px;padding:8px 6px;text-align:center}
+.mui-prod-name{font-size:10px;color:rgba(255,255,255,.4);margin-bottom:3px}
+.mui-prod-dot{width:6px;height:6px;border-radius:50%;margin:0 auto}
+.mui-prod.has .mui-prod-dot{background:var(--teal2)}.mui-prod.no .mui-prod-dot{background:rgba(255,255,255,.12)}
+.mui-prod.no .mui-prod-name{color:rgba(255,255,255,.18)}
+
+/* ════════════════════════════════════════════════ */
+/*  ACT 3 — HOW IT WORKS (simplified)               */
+/* ════════════════════════════════════════════════ */
+#how{background:var(--cream);padding:120px 0}
+.how-intro{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:end;margin-bottom:72px}
+/* Flow diagram — horizontal */
+.flow{display:flex;align-items:stretch;gap:0;margin-top:0;border:1px solid var(--border);border-radius:8px;overflow:hidden;background:var(--white)}
+.flow-node{flex:1;padding:32px 24px;position:relative;border-right:1px solid var(--border)}
+.flow-node:last-child{border-right:none}
+.fn-num{font-family:'DM Mono',monospace;font-size:32px;font-weight:500;color:var(--cream2);line-height:1;margin-bottom:14px}
+.fn-icon{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+.fn-label{font-size:12px;font-weight:600;color:var(--ink);letter-spacing:.03em;margin-bottom:6px;text-transform:uppercase}
+.fn-desc{font-size:12.5px;font-weight:300;color:var(--slate);line-height:1.65}
+.fn-arrow{position:absolute;right:-14px;top:50%;transform:translateY(-50%);width:26px;height:26px;background:var(--cream);border:1px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:2;font-size:11px;color:var(--slate2)}
+/* human-in-loop callout */
+.hitl{margin-top:28px;background:var(--gold3);border:1px solid rgba(196,154,22,.25);border-radius:6px;padding:20px 26px;display:flex;align-items:center;gap:16px}
+.hitl-icon{width:40px;height:40px;border-radius:50%;background:rgba(196,154,22,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.hitl strong{font-size:14px;color:var(--ink);display:block;margin-bottom:3px}
+.hitl p{font-size:13px;color:var(--slate);font-weight:300;line-height:1.6}
+
+/* ════════════════════════════════════════════════ */
+/*  ACT 4 — ROADMAP                                 */
+/* ════════════════════════════════════════════════ */
+#roadmap{background:var(--ink);padding:120px 0;overflow:hidden}
+#roadmap h2{color:#fff}
+.rm-eyebrow{color:rgba(5,212,192,.55)}
+.rm-lead{color:rgba(255,255,255,.38);margin-top:12px;max-width:520px}
+/* Horizontal timeline */
+.tml{margin-top:64px;position:relative}
+.tml-track{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative;align-items:stretch}
+.tml-track::before{content:'';position:absolute;top:36px;left:36px;right:36px;height:1px;background:rgba(255,255,255,.08)}
+.tml-phase{padding:0 16px 0 0;display:flex;flex-direction:column}
+.tml-dot-wrap{display:flex;align-items:center;margin-bottom:28px}
+.tml-dot{width:72px;height:72px;border-radius:50%;background:var(--ink2);border:2px solid var(--teal);display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0;position:relative;z-index:1}
+.tml-phase:last-child .tml-dot{border-color:var(--gold)}
+.tml-n{font-family:'DM Mono',monospace;font-size:18px;font-weight:500;color:var(--teal);line-height:1}
+.tml-phase:last-child .tml-n{color:var(--gold)}
+.tml-w{font-family:'DM Mono',monospace;font-size:9px;color:var(--slate2);letter-spacing:.07em}
+.tml-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:6px;padding:22px 20px;flex:1;display:flex;flex-direction:column}
+.tml-phase:last-child .tml-card{background:rgba(196,154,22,.06);border-color:rgba(196,154,22,.18)}
+.tml-tag{font-family:'DM Mono',monospace;font-size:9.5px;color:var(--teal);letter-spacing:.14em;text-transform:uppercase;margin-bottom:8px}
+.tml-phase:last-child .tml-tag{color:var(--gold2)}
+.tml-card h3{color:rgba(255,255,255,.75);font-size:14px;margin-bottom:8px}
+.tml-card .sm{color:rgba(255,255,255,.32);font-size:12.5px}
+.tml-delivs{list-style:none;margin-top:14px;display:flex;flex-direction:column;gap:5px}
+.tml-delivs li{font-size:12px;font-weight:300;color:rgba(255,255,255,.28);padding-left:14px;position:relative}
+.tml-delivs li::before{content:'✓';position:absolute;left:0;color:var(--teal);font-size:10px}
+.tml-phase:last-child .tml-delivs li::before{color:var(--gold2)}
+
+/* ════════════════════════════════════════════════ */
+/*  ACT 5 — WHY US + CTA                            */
+/* ════════════════════════════════════════════════ */
+#cta{background:var(--cream);padding:120px 0 100px}
+.cta-split{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;margin-top:64px}
+/* Left: credibility signals */
+.cred-list{display:flex;flex-direction:column;gap:14px}
+.cred{display:flex;gap:20px;align-items:flex-start;padding:20px 22px;background:var(--white);border:1px solid var(--border);border-radius:6px}
+.cred-stat{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:700;color:var(--teal);line-height:1;flex-shrink:0;width:80px;text-align:center}
+.cred-text h4{font-size:13.5px;font-weight:500;color:var(--ink);margin-bottom:4px}
+.cred-text p{font-size:12.5px;font-weight:300;color:var(--slate);line-height:1.6}
+/* Right: 3 next steps */
+.steps{display:flex;flex-direction:column;gap:0;border:1px solid var(--border);border-radius:6px;overflow:hidden}
+.step{display:flex;gap:20px;align-items:flex-start;padding:26px 26px;border-bottom:1px solid var(--border);background:var(--white);transition:background .2s}
+.step:last-child{border-bottom:none}
+.step:hover{background:var(--teal3)}
+.step-n{font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:700;color:var(--teal3);line-height:1;flex-shrink:0;width:36px}
+.step h4{font-size:14px;font-weight:500;color:var(--ink);margin-bottom:5px}
+.step p{font-size:13px;font-weight:300;color:var(--slate);line-height:1.65}
+/* footer */
+.foot{margin-top:64px;padding-top:32px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px}
+.foot-contacts{display:flex;gap:36px;flex-wrap:wrap}
+.fc .fl{font-family:'DM Mono',monospace;font-size:9.5px;color:var(--slate2);letter-spacing:.13em;text-transform:uppercase;margin-bottom:3px}
+.fc .fv{font-size:13px;color:var(--ink3)}
+.foot-logo{font-family:'DM Mono',monospace;font-size:13px;color:var(--teal);letter-spacing:.1em}
+.foot-logo span{color:var(--slate2)}
+
+@media (max-width: 850px) {
+  #nav { padding: 16px 24px; }
+  .nlinks { display: none; }
+  .hbar { flex-direction: column; gap: 16px; }
+  .prob-split, .aha-head, .how-intro, .cta-split, .mui-body, .aha-split { grid-template-columns: 1fr !important; gap: 40px !important; }
+  .benefits-grid { grid-template-columns: 1fr !important; gap: 24px !important; margin-top: 40px !important; }
+  .flow { flex-direction: column; }
+  .flow-node { border-right: none; border-bottom: 1px solid var(--border); }
+  .flow-node:last-child { border-bottom: none; }
+  .fn-arrow { right: 50%; top: auto; bottom: -14px; transform: translateX(50%) rotate(90deg); }
+  .tml-track { grid-template-columns: 1fr; gap: 40px; }
+  .tml-track::before { display: none; }
+  .mockui { margin-top: 0 !important; }
+}
+</style>
+</head>
+<body>
+
+<div id="prog"></div>
+
+<!-- ─── NAV ──────────────────────────────────────── -->
+<nav id="nav">
+  <a class="nlogo" href="#">Algo<b>—</b>Rythmn <span style="color:#08111C">x</span> ATB Financial</a>
+  <ul class="nlinks">
+    <li><a href="#problem">The Problem</a></li>
+    <li><a href="#aha">The Product</a></li>
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#benefits">Benefits</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+  </ul>
+  <a class="ncta" href="#cta">Get Started</a>
+</nav>
+
+<!-- ════════════════════════════════════════════════ -->
+<!--  HERO                                            -->
+<!-- ════════════════════════════════════════════════ -->
+<section id="hero">
+  <div class="hbg"></div><div class="hgrid"></div>
+  <div class="wrap hinner" style="padding-bottom:80px">
+    <div class="hey">MVP Proposal · Confidential · March 2026</div>
+    <h1>ATB Financial<br><em>Advisor Co-Pilot</em><small>AI-powered unified client intelligence</small></h1>
+    <p class="hdesc">Your advisors are sitting on a goldmine of client data — spread across a dozen siloed systems they can't query. We fix that in 16 weeks.</p>
+    <div class="hbar">
+      <div class="hbar-item"><div class="hl">Prepared for</div><div class="hv">ATB Financial</div></div>
+      <div class="hbar-item"><div class="hl">By</div><div class="hv">Algo-Rythmn.ai</div></div>
+      <div class="hbar-item"><div class="hl">Pilot</div><div class="hv">16 weeks · Mortgage renewals</div></div>
+      <div class="hbar-item"><div class="hl">Model</div><div class="hv">Agentic Orchestration</div></div>
+    </div>
+  </div>
+  <div class="scroll-cue">Scroll<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1v9M2 7l4 4 4-4" stroke="rgba(255,255,255,.3)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+</section>
+
+<!-- ════════════════════════════════════════════════ -->
+<!--  ACT 1 — THE BURNING PROBLEM                     -->
+<!-- ════════════════════════════════════════════════ -->
+<section id="problem">
+  <div class="wrap">
+    <span class="eyebrow r" style="color:var(--teal)">01 — The Problem</span>
+    <h2 class="r d1">Every day without this,<br>ATB is leaving money on the table.</h2>
+
+    <div class="prob-split">
+      <!-- Left: 4 pain points -->
+      <div class="r d1">
+        <div class="pain-list">
+          <div class="pain p1">
+            <div class="pain-num">01</div>
+            <div><h4>Fragmented client data</h4><p>Data stuck in silos. Advisors can't see the full client picture.</p></div>
+          </div>
+          <div class="pain p2">
+            <div class="pain-num">02</div>
+            <div><h4>Advisor dependency risk</h4><p>Relationships live in advisors' heads. If they leave, clients follow.</p></div>
+          </div>
+          <div class="pain p3">
+            <div class="pain-num">03</div>
+            <div><h4>RPA hits a coordination ceiling</h4><p>Standard RPA is maxed out. Bots can't orchestrate multi-system workflows.</p></div>
+          </div>
+          <div class="pain p4">
+            <div class="pain-num">04</div>
+            <div><h4>Regulatory fog on AI advice</h4><p>Direct-to-client AI fails compliance. Human-in-the-loop is mandatory.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Cost-of-inaction visual -->
+      <div class="r d2">
+        <div class="coi">
+          <div class="coi-header">
+            <span class="coi-title" style="margin-left:8px;color:white">Cost of Inaction — ATB Financial</span>
+          </div>
+          <div class="coi-body">
+
+            <div class="coi-row">
+              <div class="coi-icon" style="background:#E8F5F3">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#029B8F" stroke-width="1.4" stroke-linecap="round"><circle cx="9" cy="6" r="3.5"/><path d="M2 16c0-3.5 3.1-6 7-6s7 2.5 7 6"/></svg>
+              </div>
+              <div class="coi-text" style="flex:1">
+                <h4>Advisors flying blind</h4>
+                <p>Advisors see only ≈30% of their clients' full relationship.</p>
+                <div class="coi-bar-wrap" style="margin-top:10px">
+                  <div class="coi-bar-label"><span>Visible to advisor</span><span class="bar-val-1">—</span></div>
+                  <div class="coi-bar"><div class="coi-bar-fill" data-w="30" style="background:var(--teal)"></div></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="coi-row">
+              <div class="coi-icon" style="background:#FEF8E1">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#C49A16" stroke-width="1.4" stroke-linecap="round"><path d="M9 1l2 6h6L12 11l2 6-5-3.5L4 17l2-6L1 7h6z"/></svg>
+              </div>
+              <div class="coi-text" style="flex:1">
+                <h4>Cross-sell opportunities missed</h4>
+                <p>Siloed data hides cross-sell potential (e.g., GIC renewals ignored by Wealth).</p>
+                <div class="coi-bar-wrap" style="margin-top:10px">
+                  <div class="coi-bar-label"><span>Cross-sell rate (industry avg 38%)</span><span class="bar-val-2">—</span></div>
+                  <div class="coi-bar"><div class="coi-bar-fill" data-w="22" style="background:var(--gold)"></div></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="coi-row">
+              <div class="coi-icon" style="background:#FEF0EB">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#CC4D30" stroke-width="1.4" stroke-linecap="round"><path d="M9 2v8M9 14v1"/><circle cx="9" cy="9" r="7.5" stroke-width="1"/></svg>
+              </div>
+              <div class="coi-text" style="flex:1">
+                <h4>Advisor churn = client churn</h4>
+                <p>At-risk acquisitions: lost advisors mean lost books of business.</p>
+                <div class="coi-bar-wrap" style="margin-top:10px">
+                  <div class="coi-bar-label"><span>Client retention tied to advisor</span><span class="bar-val-3">—</span></div>
+                  <div class="coi-bar"><div class="coi-bar-fill" data-w="78" style="background:var(--coral)"></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════ -->
+<!--  ACT 2 — THE PRODUCT: AGENTIC COORDINATION       -->
+<!-- ════════════════════════════════════════════════ -->
+<section id="aha">
+  <div class="wrap">
+    <div class="aha-head">
+      <div>
+        <span class="eyebrow r aha-tag">02 — The Product</span>
+        <h2 class="r d1">Agentic Orchestrator.<br>Your AI-Powered Advisor Co-Pilot.</h2>
+      </div>
+      <div class="r d2">
+        <p class="bigquote">"Empowering the advisor with a complete picture and actionable insights — keeping humans accountable and regulators satisfied."</p>
+      </div>
+    </div>
+
+    <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 60px;" class="aha-split">
+      
+      <!-- Left: Core MVP Features (Vertical) -->
+      <div class="r d3">
+        <h3 style="color:var(--teal2); font-family:'DM Mono',monospace; letter-spacing:0.1em; text-transform:uppercase; margin-bottom: 24px; font-size:13px;">Core MVP Features</h3>
+        <div style="display:flex; flex-direction:column; gap:20px;">
+          
+          <!-- Core Feature 1 -->
+          <div style="background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08); border-radius:8px; padding:28px;">
+            <div style="display:flex; align-items:center; gap:14px; margin-bottom:12px;">
+              <div style="width:36px; height:36px; background:rgba(2,155,143,.15); border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--teal2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>
+              </div>
+              <h4 style="color:#fff; font-size:17px; margin:0; font-family:'Cormorant Garamond',serif;">Unified Client Ingestion</h4>
+            </div>
+            <p style="color:rgba(255,255,255,.6); font-size:13.5px; line-height:1.6; font-weight:300;">Unifies data from silos (mortgage, investments, banking) into one real-time client view.</p>
+          </div>
+          
+          <!-- Core Feature 2 -->
+          <div style="background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08); border-radius:8px; padding:28px;">
+            <div style="display:flex; align-items:center; gap:14px; margin-bottom:12px;">
+              <div style="width:36px; height:36px; background:rgba(242,200,75,.15); border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--gold2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+              </div>
+              <h4 style="color:#fff; font-size:17px; margin:0; font-family:'Cormorant Garamond',serif;">RAG-Based Query Interface</h4>
+            </div>
+            <p style="color:rgba(255,255,255,.6); font-size:13.5px; line-height:1.6; font-weight:300;">Natural language queries. Advisors get instant answers to <em style="color:rgba(255,255,255,.8)">"What does this client own?"</em></p>
+          </div>
+
+          <!-- Core Feature 3 -->
+          <div style="background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08); border-radius:8px; padding:28px;">
+            <div style="display:flex; align-items:center; gap:14px; margin-bottom:12px;">
+              <div style="width:36px; height:36px; background:rgba(204,77,48,.15); border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F4906A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+              </div>
+              <h4 style="color:#fff; font-size:17px; margin:0; font-family:'Cormorant Garamond',serif;">Proactive Alerting Engine</h4>
+            </div>
+            <p style="color:rgba(255,255,255,.6); font-size:13.5px; line-height:1.6; font-weight:300;">Automated triggers flag actionable events like GIC maturities or upcoming renewals.</p>
+          </div>
+
+          <!-- Core Feature 4 -->
+          <div style="background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08); border-radius:8px; padding:28px;">
+            <div style="display:flex; align-items:center; gap:14px; margin-bottom:12px;">
+              <div style="width:36px; height:36px; background:rgba(150,178,196,.15); border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--slate2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 13 18 19 22 19"></polyline><line x1="18" y1="19" x2="14" y2="15"></line><path d="M22 13V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8"></path></svg>
+              </div>
+              <h4 style="color:#fff; font-size:17px; margin:0; font-family:'Cormorant Garamond',serif;">Cross-Sell Recommendation Layer</h4>
+            </div>
+            <p style="color:rgba(255,255,255,.6); font-size:13.5px; line-height:1.6; font-weight:300;">Data-driven product suggestions. Advisors make the final call to ensure compliance.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Mock UI + Out of Scope -->
+      <div class="r d4" style="display:flex; flex-direction:column; gap:20px;">
+        
+        <!-- MOCK AGENT UI -->
+        <div class="mockui" style="background:#0D1B2A; border:1px solid rgba(255,255,255,.06); border-radius:10px; overflow:hidden;margin-top:30px">
+          <div style="padding:32px; display:flex; flex-direction:column; gap:20px;">
+            <div style="font-family:'DM Mono',monospace;color:var(--teal2);font-size:11px;letter-spacing:0.1em;margin-bottom:4px">01 / THE ADVISOR INTERFACE IN ACTION</div>
+            
+            <div style="background:rgba(255,255,255,.05);padding:16px;border-radius:12px 12px 12px 0;width:85%;align-self:flex-start">
+              <p style="font-size:13px;color:rgba(255,255,255,.8);margin-bottom:0"><strong>Advisor:</strong> What does David Kowalski own with us, and what's his risk profile?</p>
+            </div>
+            
+            <div style="background:rgba(5,212,192,.1);border:1px solid rgba(5,212,192,.2);padding:16px;border-radius:12px 12px 0 12px;width:95%;align-self:flex-end">
+              <p style="font-size:13px;color:rgba(255,255,255,.9);line-height:1.6;margin-bottom:14px;"><strong>AI Agent:</strong> David has a Chequing Account and a $220K GIC maturing in 14 days. He currently has no investment accounts with us.<br><br><strong>Risk Profile:</strong> Moderate-High (inferred via external transfers).<br><br><strong>Cross-Sell Alert:</strong> Highly recommend a wealth intro for his renewing GIC. Would you like me to draft an email or log a follow-up task?</p>
+              <div style="display:flex;gap:8px">
+                <span style="background:rgba(5,212,192,.15);color:var(--teal2);padding:6px 12px;font-size:11px;font-family:'DM Mono',monospace;border-radius:4px;cursor:pointer">Draft Email</span>
+                <span style="background:rgba(255,255,255,.1);color:rgba(255,255,255,.6);padding:6px 12px;font-size:11px;font-family:'DM Mono',monospace;border-radius:4px;cursor:pointer">Log Task</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- OUT OF SCOPE -->
+        <div style="background:#091422; border:1px solid rgba(255,255,255,.06); border-radius:10px; padding:32px; flex:1;">
+          <div style="font-family:'DM Mono',monospace;color:#F4906A;font-size:11px;letter-spacing:0.1em;margin-bottom:20px">OUT OF SCOPE FOR MVP</div>
+          
+          <ul style="list-style:none; padding:0; display:flex; flex-direction:column; gap:16px;">
+            <li style="display:flex; gap:14px; align-items:flex-start;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:2px"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+              <div>
+                <div style="color:rgba(255,255,255,.7); font-size:13.5px; font-weight:500;">Open Banking Integrations</div>
+                <div style="color:rgba(255,255,255,.35); font-size:12px; margin-top:2px; line-height:1.5;">Focus is strictly on internal ATB core silos.</div>
+              </div>
+            </li>
+            <li style="display:flex; gap:14px; align-items:flex-start;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:2px"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+              <div>
+                <div style="color:rgba(255,255,255,.7); font-size:13.5px; font-weight:500;">Fully Autonomous AI Advice</div>
+                <div style="color:rgba(255,255,255,.35); font-size:12px; margin-top:2px; line-height:1.5;">Human-in-the-loop is required. The advisor makes the final call.</div>
+              </div>
+            </li>
+            <li style="display:flex; gap:14px; align-items:flex-start;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:2px"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+              <div>
+                <div style="color:rgba(255,255,255,.7); font-size:13.5px; font-weight:500;">Client-Facing Interface</div>
+                <div style="color:rgba(255,255,255,.35); font-size:12px; margin-top:2px; line-height:1.5;">This is an internal tool built exclusively to empower advisors.</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════ -->
+<!--  ACT 3 — HOW IT WORKS                            -->
+<!-- ════════════════════════════════════════════════ -->
+<section id="how">
+  <div class="wrap">
+    <div class="how-intro">
+      <div>
+        <span class="eyebrow r" style="color:var(--teal)">03 — How It Works</span>
+        <h2 class="r d1">Five layers.<br>One advisor interface.</h2>
+      </div>
+      <p class="lead r d2">Tested across millions of acres and highly regulated industries. The domain changes — the architecture doesn't.</p>
+    </div>
+
+    <!-- Horizontal flow -->
+    <div class="flow r d1">
+      <div class="flow-node">
+        <div class="fn-num">01</div>
+        <div class="fn-icon" style="background:var(--cream2)">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#607D93" stroke-width="1.4" stroke-linecap="round"><rect x="2" y="3" width="4" height="12" rx="1"/><rect x="7" y="6" width="4" height="9" rx="1"/><rect x="12" y="9" width="4" height="6" rx="1"/></svg>
+        </div>
+        <div class="fn-label">Your data</div>
+        <div class="fn-desc">Connected via existing APIs. No new infrastructure needed.</div>
+        <div class="fn-arrow">→</div>
+      </div>
+      <div class="flow-node">
+        <div class="fn-num">02</div>
+        <div class="fn-icon" style="background:var(--teal3)">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#029B8F" stroke-width="1.4" stroke-linecap="round"><circle cx="9" cy="9" r="7"/><path d="M9 5v4l3 2"/></svg>
+        </div>
+        <div class="fn-label">Unify + RAG</div>
+        <div class="fn-desc">Profiles, rules, and products queryable in plain language.</div>
+        <div class="fn-arrow">→</div>
+      </div>
+      <div class="flow-node">
+        <div class="fn-num">03</div>
+        <div class="fn-icon" style="background:var(--gold3)">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#C49A16" stroke-width="1.4" stroke-linecap="round"><path d="M9 2l1.5 4.5H15l-3.9 2.8 1.5 4.5L9 11.3l-3.6 2.5 1.5-4.5L3 6.5h4.5z"/></svg>
+        </div>
+        <div class="fn-label">Agentic Core</div>
+        <div class="fn-desc">Hybrid LLM routes queries securely. Responses are fully cited.</div>
+        <div class="fn-arrow">→</div>
+      </div>
+      <div class="flow-node">
+        <div class="fn-num">04</div>
+        <div class="fn-icon" style="background:#EEF3FF">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#5B7BE8" stroke-width="1.4" stroke-linecap="round"><path d="M3 9h12M9 3l5 6-5 6"/></svg>
+        </div>
+        <div class="fn-label">Alerts + Recs</div>
+        <div class="fn-desc">Auto-generated alerts and ranked recommendations based on triggers.</div>
+        <div class="fn-arrow">→</div>
+      </div>
+      <div class="flow-node" style="background:var(--teal3)">
+        <div class="fn-num" style="color:rgba(2,155,143,.3)">05</div>
+        <div class="fn-icon" style="background:rgba(2,155,143,.15)">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#029B8F" stroke-width="1.4" stroke-linecap="round"><circle cx="9" cy="6" r="3"/><path d="M3 16c0-3.3 2.7-5 6-5s6 1.7 6 5"/><path d="M13 9l1.5 1.5L16 9"/></svg>
+        </div>
+        <div class="fn-label" style="color:var(--teal)">Advisor decides</div>
+        <div class="fn-desc" style="color:var(--ink3)">Advisor reviews insights and acts. Decisions remain 100% human.</div>
+      </div>
+    </div>
+
+    <!-- HITL callout -->
+    <div class="hitl r d2">
+      <div class="hitl-icon">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#C49A16" stroke-width="1.5" stroke-linecap="round"><path d="M10 1l2 6h6L13 11l2 6-5-3.5L5 17l2-6L2 7h6z"/></svg>
+      </div>
+      <div>
+        <strong>Human-in-the-loop — by design, not compromise.</strong>
+        <p>AI surfaces every insight. The advisor approves every action. This isn't a limitation — it's the compliance strategy. It's also why ATB's advisors will trust it from day one.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════ -->
+<!--  ACT 4 — BENEFITS FOR ATB                        -->
+<!-- ════════════════════════════════════════════════ -->
+<section id="benefits" style="background:var(--ink2);padding:120px 0;">
+  <div class="wrap">
+    <span class="eyebrow r" style="color:var(--teal)">04 — Why It Matters</span>
+    <h2 class="r d1" style="color:#fff">The value to ATB Financial.</h2>
+    <p class="lead r d2" style="color:rgba(255,255,255,.5);margin-top:16px;max-width:600px">Connecting your data through an agentic layer creates immediate operational and financial leverage.</p>
+
+    <div style="display:grid;grid-template-columns:repeat(3, 1fr);gap:40px;margin-top:64px" class="benefits-grid r d3">
+      <!-- Benefit 1 -->
+      <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);padding:32px 28px;border-radius:8px">
+        <div style="width:48px;height:48px;border-radius:50%;background:rgba(204,77,48,.15);display:flex;align-items:center;justify-content:center;margin-bottom:20px">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F4906A" stroke-width="1.5"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </div>
+        <h4 style="color:#fff;font-size:16px;font-weight:500;margin-bottom:10px">Unlock Hidden Revenue</h4>
+        <p style="color:rgba(255,255,255,.6);font-size:14px;line-height:1.6">Boost cross-sell ratios by uncovering hidden opportunities across your entire client base.</p>
+      </div>
+
+      <!-- Benefit 2 -->
+      <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);padding:32px 28px;border-radius:8px">
+        <div style="width:48px;height:48px;border-radius:50%;background:rgba(196,154,22,.15);display:flex;align-items:center;justify-content:center;margin-bottom:20px">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--gold2)" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        </div>
+        <h4 style="color:#fff;font-size:16px;font-weight:500;margin-bottom:10px">Double Your Advisors' Bandwidth</h4>
+        <p style="color:rgba(255,255,255,.6);font-size:14px;line-height:1.6">Eliminate manual data gathering. Advisors spend more time advising and less time digging.</p>
+      </div>
+
+      <!-- Benefit 3 -->
+      <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);padding:32px 28px;border-radius:8px">
+        <div style="width:48px;height:48px;border-radius:50%;background:rgba(2,155,143,.15);display:flex;align-items:center;justify-content:center;margin-bottom:20px">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--teal2)" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h4 style="color:#fff;font-size:16px;font-weight:500;margin-bottom:10px">Retain Knowledge, Even When Advisors Leave</h4>
+        <p style="color:rgba(255,255,255,.6);font-size:14px;line-height:1.6">Client history becomes an organizational asset, surviving unexpected advisor transitions.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════ -->
+<!--  ACT 5 — ROADMAP                                 -->
+<!-- ════════════════════════════════════════════════ -->
+<section id="roadmap">
+  <div class="wrap">
+    <span class="eyebrow r rm-eyebrow">05 — Roadmap</span>
+    <h2 class="r d1">From first call to<br>live advisors in 16 weeks.</h2>
+    <p class="lead rm-lead r d2">Scoped to one measurable use case — mortgage renewal alerts — with a hard readout at week 16.</p>
+
+    <div class="tml r d1">
+      <div class="tml-track">
+
+        <div class="tml-phase">
+          <div class="tml-dot-wrap"><div class="tml-dot"><div class="tml-n">1</div><div class="tml-w">wk 1–4</div></div></div>
+          <div class="tml-card">
+            <div class="tml-tag">Discovery & Sec</div>
+            <h3>Workshop</h3>
+            <p class="sm">Map sources, clear InfoSec, and define success metrics.</p>
+            <ul class="tml-delivs"><li>API inventory</li><li>InfoSec approval</li><li>Success metrics doc</li></ul>
+          </div>
+        </div>
+
+        <div class="tml-phase">
+          <div class="tml-dot-wrap"><div class="tml-dot"><div class="tml-n">2</div><div class="tml-w">wk 5–10</div></div></div>
+          <div class="tml-card">
+            <div class="tml-tag">Build</div>
+            <h3>Connect &amp; Deploy</h3>
+            <p class="sm">Integrate core systems, build unified profiles &amp; alert engine.</p>
+            <ul class="tml-delivs"><li>Live integrations</li><li>Unified profile layer</li><li>Alert engine v1</li></ul>
+          </div>
+        </div>
+
+        <div class="tml-phase">
+          <div class="tml-dot-wrap"><div class="tml-dot"><div class="tml-n">3</div><div class="tml-w">wk 11–14</div></div></div>
+          <div class="tml-card">
+            <div class="tml-tag">Pilot</div>
+            <h3>Live with Advisors</h3>
+            <p class="sm">Daily advisor usage, feedback loops, and performance tracking.</p>
+            <ul class="tml-delivs"><li>Weekly sessions</li><li>Quality metrics</li><li>Iteration cycles</li></ul>
+          </div>
+        </div>
+
+        <div class="tml-phase">
+          <div class="tml-dot-wrap"><div class="tml-dot"><div class="tml-n">4</div><div class="tml-w">wk 15–16</div></div></div>
+          <div class="tml-card">
+            <div class="tml-tag">Readout</div>
+            <h3>Results + Scale Plan</h3>
+            <p class="sm">Final presentation, ROI analysis, and Phase 2 planning.</p>
+            <ul class="tml-delivs"><li>Results deck</li><li>ROI analysis</li><li>Phase 2 proposal</li></ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Horizontal timeline bar -->
+    <svg width="100%" viewBox="0 0 900 52" fill="none" style="margin-top:36px" class="r d2">
+      <rect x="60" y="22" width="220" height="8" rx="4" fill="rgba(2,155,143,.3)"/>
+      <rect x="280" y="22" width="220" height="8" rx="4" fill="rgba(2,155,143,.2)"/>
+      <rect x="500" y="22" width="220" height="8" rx="4" fill="rgba(2,155,143,.13)"/>
+      <rect x="720" y="22" width="120" height="8" rx="4" fill="rgba(196,154,22,.35)"/>
+      <circle cx="60" cy="26" r="5" fill="#029B8F"/>
+      <circle cx="280" cy="26" r="5" fill="#029B8F" opacity=".7"/>
+      <circle cx="500" cy="26" r="5" fill="#029B8F" opacity=".5"/>
+      <circle cx="720" cy="26" r="5" fill="#C49A16" opacity=".85"/>
+      <circle cx="840" cy="26" r="5" fill="#C49A16"/>
+      <text x="60" y="14" text-anchor="middle" font-size="9" fill="rgba(255,255,255,.3)" font-family="DM Mono,monospace">Wk 1</text>
+      <text x="280" y="14" text-anchor="middle" font-size="9" fill="rgba(255,255,255,.3)" font-family="DM Mono,monospace">Wk 5</text>
+      <text x="500" y="14" text-anchor="middle" font-size="9" fill="rgba(255,255,255,.3)" font-family="DM Mono,monospace">Wk 11</text>
+      <text x="720" y="14" text-anchor="middle" font-size="9" fill="rgba(255,255,255,.3)" font-family="DM Mono,monospace">Wk 15</text>
+      <text x="840" y="14" text-anchor="middle" font-size="9" fill="rgba(255,255,255,.3)" font-family="DM Mono,monospace">Wk 16</text>
+      <text x="170" y="48" text-anchor="middle" font-size="10" fill="#05D4C0" font-family="DM Sans,sans-serif">Discovery</text>
+      <text x="390" y="48" text-anchor="middle" font-size="10" fill="#05D4C0" font-family="DM Sans,sans-serif">Build &amp; Integrate</text>
+      <text x="610" y="48" text-anchor="middle" font-size="10" fill="#05D4C0" font-family="DM Sans,sans-serif">Advisor Pilot</text>
+      <text x="780" y="48" text-anchor="middle" font-size="10" fill="#F2C84B" font-family="DM Sans,sans-serif">Readout</text>
+    </svg>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════ -->
+<!--  ACT 6 — WHY US + NEXT STEPS                     -->
+<!-- ════════════════════════════════════════════════ -->
+<section id="cta">
+  <div class="wrap">
+    <span class="eyebrow r" style="color:var(--teal)">06 — Why Algo-Rythmn &amp; Next Steps</span>
+    <h2 class="r d1">We've already built this.<br>Just for a different field.</h2>
+
+    <div class="cta-split">
+      <!-- Credibility signals -->
+      <div class="cred-list r d1" style="margin-top:20px;">
+        <h3 style="font-size:18px;margin-bottom:10px;color:var(--ink)">Why partner with Algo-Rythmn?</h3>
+        <div class="cred">
+          <div class="cred-text"><h3 style="color:var(--teal)">10M+ Acres on the same stack</h3><p>Our agentic architecture is battle-tested, powering insights across 10-million+ acres in agriculture. We build robust systems that scale seamlessly.</p></div>
+        </div>
+        <div class="cred">
+          <div class="cred-text"><h3 style="color:var(--teal)">3+ Regulated domains, live</h3><p>We have extensive experience deploying AI in highly regulated, data-sensitive industries including mining safety, healthcare, and professional sports.</p></div>
+        </div>
+        <div class="cred">
+          <div class="cred-text"><h3 style="color:var(--teal)">Zero New infrastructure</h3><p>We integrate directly with your existing APIs. Zero rip-and-replace, no new databases, and no massive IT infrastructure overhauls required.</p></div>
+        </div>
+      </div>
+
+      <!-- Next steps -->
+      <div class="r d2">
+        <h3 style="font-size:18px;margin-bottom:20px;color:var(--ink)">Three things we need from ATB.</h3>
+        <div class="steps">
+          <div class="step">
+            <div class="step-n">1</div>
+            <div><h4>Intro to stakeholders</h4><p>A focused 30-minute discovery call with your wealth and data infrastructure leaders to understand your current technical landscape before we scope the pilot.</p></div>
+          </div>
+          <div class="step">
+            <div class="step-n">2</div>
+            <div><h4>Data source inventory</h4><p>A lightweight mapping of which internal systems hold critical client data and their current capabilities for API access or data export.</p></div>
+          </div>
+          <div class="step">
+            <div class="step-n">3</div>
+            <div><h4>Confirm use case</h4><p>We recommend starting with mortgage renewal alerts as a contained, measurable MVP. We'll work with you to validate this or pivot to your highest priority.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="foot r d2">
+      <div style="display:flex; flex-direction:column; gap:24px; width:100%; padding-top:20px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:32px;">
+          <div>
+            <h3 style="font-family:'Cormorant Garamond',serif; font-size:24px; margin-bottom:8px;">Ready to explore a partnership?</h3>
+            <p style="font-size:14px; color:var(--slate); font-weight:300;">Let's discuss how we can build this co-pilot together for ATB's advisors.</p>
+          </div>
+          <a href="mailto:support@algo-rythmn.ai?subject=ATB%20Advisor%20Co-Pilot%20Collaboration" style="display:inline-block; background:var(--teal); color:#fff; text-decoration:none; padding:16px 32px; border-radius:4px; font-weight:600; font-size:13px; text-transform:uppercase; letter-spacing:0.1em; transition:all 0.3s ease; box-shadow:0 10px 20px rgba(2,155,143,0.15);">
+            Schedule a Demo
+          </a>
+        </div>
+        <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--border); padding-top:24px; margin-top:16px;">
+          <div class="foot-logo" style="margin:0;">Algo<span>—</span>Rythmn</div>
+          <div style="font-family:'DM Mono',monospace; font-size:10px; color:var(--slate2); letter-spacing:0.05em;">&copy; 2026 Algo-Rythmn AI. All rights reserved. Confidential.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+// Reveal
+const obs = new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on')})},{threshold:.1});
+document.querySelectorAll('.r').forEach(el=>obs.observe(el));
+
+// Progress + nav
+const pb=document.getElementById('prog'),nav=document.getElementById('nav');
+const secs=document.querySelectorAll('section[id]'),nls=document.querySelectorAll('.nlinks a');
+window.addEventListener('scroll',()=>{
+  const s=window.scrollY,t=document.body.scrollHeight-window.innerHeight;
+  pb.style.width=(s/t*100)+'%';
+  nav.classList.toggle('up',s>40);
+  let c='';secs.forEach(sec=>{if(s>=sec.offsetTop-110)c=sec.id;});
+  nls.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+c));
+},{passive:true});
+
+// Animate bars when visible
+const barObs = new IntersectionObserver(es=>{
+  es.forEach(e=>{
+    if(!e.isIntersecting) return;
+    const fills = e.target.querySelectorAll('.coi-bar-fill');
+    const vals = e.target.querySelectorAll('.bar-val-1,.bar-val-2,.bar-val-3');
+    fills.forEach((f,i)=>{
+      const w = parseInt(f.dataset.w);
+      setTimeout(()=>{
+        f.style.width = w+'%';
+        // animate number
+        const valEl = e.target.querySelector('.bar-val-'+(i+1));
+        if(valEl){
+          let start=0,dur=1400,s0=null;
+          const step=ts=>{
+            if(!s0)s0=ts;
+            const p=Math.min((ts-s0)/dur,1),ease=1-Math.pow(1-p,3);
+            valEl.textContent=Math.round(ease*w)+'%';
+            if(p<1)requestAnimationFrame(step);
+          };
+          requestAnimationFrame(step);
+        }
+      },i*200);
+    });
+    barObs.unobserve(e.target);
+  });
+},{threshold:.4});
+const coiBody = document.querySelector('.coi-body');
+if(coiBody) barObs.observe(coiBody);
+</script>
+</body>
+</html>
