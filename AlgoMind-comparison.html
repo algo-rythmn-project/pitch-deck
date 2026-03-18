@@ -51,9 +51,59 @@
             margin: 0 auto;
             padding: 0 var(--spacing-md);
         }
+
+        /* ===== TOP NAVIGATION HEADER ===== */
+        .top-nav {
+            background-color: white;
+            border-bottom: 1px solid var(--neutral-200);
+            padding: var(--spacing-sm) 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-text {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--neutral-900);
+            letter-spacing: -0.5px;
+        }
         
-        /* ===== HEADER ===== */
-        header {
+        .logo-text span {
+            color: var(--primary-blue);
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--blue-gradient);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0, 122, 255, 0.2);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 122, 255, 0.3);
+        }
+        
+        /* ===== PAGE TITLE & INTRO ===== */
+        .page-header {
             padding: var(--spacing-xl) 0 var(--spacing-lg);
             text-align: center;
         }
@@ -73,6 +123,15 @@
             font-weight: 700;
             color: var(--neutral-900);
             letter-spacing: -0.02em;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .intro-text {
+            max-width: 800px;
+            margin: 0 auto var(--spacing-lg);
+            font-size: 1.125rem;
+            color: var(--neutral-500);
+            line-height: 1.6;
         }
         
         /* ===== COMPARISON TABLE ===== */
@@ -222,8 +281,8 @@
         .col-algomind .stars { color: var(--primary-blue); }
         .col-algomind .rating-score { color: var(--primary-blue-dark); }
         
-        .col-competitor .stars { color: #CBD5E1; } /* Lighter gray for empty stars */
-        .col-competitor .stars .fas { color: var(--neutral-700); } /* Dark gray for filled stars */
+        .col-competitor .stars { color: #CBD5E1; }
+        .col-competitor .stars .fas { color: var(--neutral-700); }
         .col-competitor .rating-score { color: var(--neutral-900); }
         
         /* Overall Row */
@@ -240,7 +299,7 @@
         }
 
         .row-overall td.col-algomind {
-            background-color: white; /* Keep highlight column white */
+            background-color: white;
         }
 
         .row-overall .rating-score {
@@ -276,10 +335,23 @@
 </head>
 <body>
 
-    <header>
+    <nav class="top-nav">
+        <div class="container nav-container">
+            <div class="logo-text">Algo-Rythmn.ai | <span>AlgoMind&trade;</span></div>
+            <a href="mailto:support@algo-rythmn.ai" class="btn-primary" style="padding: 8px 16px; font-size: 0.875rem; box-shadow: none;">
+                <i class="fas fa-envelope"></i> Contact Team
+            </a>
+        </div>
+    </nav>
+
+    <header class="page-header">
         <div class="container">
             <span class="section-subtitle">Executive Decision Matrix</span>
             <h1>Strategic Platform Comparison</h1>
+            
+            <p class="intro-text">
+                AlgoMind&trade; delivers enterprise-grade, multi-agent orchestration that transforms data silos into integrated workflows. Built for operational efficiency, it reduces technical complexity and accelerates digital transformation without the heavy overhead of traditional AI builds.
+            </p>
         </div>
     </header>
     
@@ -519,13 +591,18 @@
                 </table>
             </div>
         </div>
+        <div style="text-align: center;">
+            <a href="https://deck.algo-rythmn.ai/AlgoMind-general" target="_blank" class="btn-primary" style="padding: 12px 28px; font-size: 1rem; margin-top: 50px;margin-bottom: 0px;">
+                View AlgoMind Specs
+            </a>
+        </div>
     </section>
     
     <footer>
         <div class="container">
             <div class="copyright">
                 <p>&copy; 2026 Algo-Rythmn Corp. All rights reserved.</p>
-                <p class="trademark-notice">AlgoMind&trade; is a registered trademark of Algo-Rythmn Corp. Confidential &ndash; Enterprise Executive Review.</p>
+                <p class="trademark-notice">AlgoMind&trade; is a trademark of Algo-Rythmn Corp. Confidential &ndash; Enterprise Executive Review.</p>
             </div>
         </div>
     </footer>
