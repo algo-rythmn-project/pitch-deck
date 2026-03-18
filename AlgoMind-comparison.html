@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlgoMind | Competitive Analysis Deck</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ===== PROFESSIONAL DESIGN SYSTEM (From AlgoMind-general) ===== */
+        :root {
+            /* Unified Blue Theme */
+            --primary-blue: #007AFF;
+            --primary-blue-dark: #0056CC;
+            --primary-blue-light: #4DA6FF;
+            --blue-gradient: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-dark) 100%);
+            
+            /* Neutrals */
+            --neutral-100: #F5F7FA;
+            --neutral-200: #E8EAED;
+            --neutral-500: #5F6368;
+            --neutral-700: #3C4043;
+            --neutral-900: #202124;
+            
+            /* Typography */
+            --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            
+            /* Spacing & Shadows */
+            --spacing-xs: 8px;
+            --spacing-sm: 16px;
+            --spacing-md: 24px;
+            --spacing-lg: 40px;
+            --spacing-xl: 64px;
+            --spacing-xxl: 80px;
+            
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+            
+            --border-radius-md: 12px;
+            --transition-fast: 0.2s cubic-bezier(0.2, 0, 0, 1);
+        }
+        
+        /* ===== BASE STYLES ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-primary);
+            background-color: var(--neutral-100);
+            color: var(--neutral-900);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-md);
+        }
+        
+        /* ===== HEADER / DECK TITLE ===== */
+        header {
+            background: white;
+            border-bottom: 1px solid var(--neutral-200);
+            padding: var(--spacing-lg) 0;
+            text-align: center;
+        }
+
+        .section-subtitle {
+            font-size: 0.875rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--primary-blue);
+            margin-bottom: var(--spacing-sm);
+            display: inline-block;
+            padding: 6px 12px;
+            background: rgba(0, 122, 255, 0.08);
+            border-radius: 20px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--neutral-900);
+            letter-spacing: -0.01em;
+        }
+        
+        /* ===== COMPARISON TABLE (DECK SLIDE) ===== */
+        .slide-container {
+            padding: var(--spacing-xl) 0;
+        }
+
+        .table-wrapper {
+            background: white;
+            border-radius: var(--border-radius-md);
+            padding: var(--spacing-lg);
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--neutral-200);
+            overflow-x: auto;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 1000px;
+        }
+        
+        .comparison-table th {
+            padding: var(--spacing-md);
+            text-align: left;
+            border-bottom: 2px solid var(--neutral-200);
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--neutral-900);
+            vertical-align: bottom;
+        }
+
+        .comparison-table th.algomind-header {
+            color: var(--primary-blue);
+            font-size: 1.5rem;
+        }
+        
+        .comparison-table td {
+            padding: var(--spacing-md);
+            border-bottom: 1px solid var(--neutral-200);
+            font-size: 0.9375rem;
+            vertical-align: top;
+            transition: var(--transition-fast);
+        }
+        
+        .comparison-table tr:hover td {
+            background-color: rgba(0, 0, 0, 0.01);
+        }
+        
+        .col-criteria {
+            width: 20%;
+            font-weight: 600;
+            color: var(--neutral-900);
+            border-right: 1px solid var(--neutral-200);
+        }
+
+        .criteria-sub {
+            display: block;
+            font-weight: 400;
+            color: var(--neutral-500);
+            font-size: 0.875rem;
+            margin-top: 4px;
+        }
+        
+        .col-algomind {
+            width: 28%;
+            background-color: rgba(0, 122, 255, 0.03);
+            border-left: 2px solid var(--primary-blue);
+            border-right: 2px solid var(--primary-blue);
+            color: var(--primary-blue-dark);
+            font-weight: 500;
+        }
+
+        .comparison-table tr:last-child td.col-algomind {
+            border-bottom: 2px solid var(--primary-blue);
+        }
+        .comparison-table th.col-algomind {
+            border-top: 2px solid var(--primary-blue);
+            background-color: rgba(0, 122, 255, 0.05);
+            text-align: center;
+        }
+        
+        .col-competitor {
+            width: 26%;
+            color: var(--neutral-700);
+            border-right: 1px solid var(--neutral-200);
+        }
+
+        /* Star Rating Styles */
+        .rating {
+            display: block;
+            margin-bottom: var(--spacing-xs);
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .rating i {
+            margin-right: 2px;
+            font-size: 0.875rem;
+        }
+
+        .col-algomind .rating {
+            color: var(--primary-blue);
+        }
+
+        .col-competitor .rating {
+            color: var(--neutral-700);
+        }
+        
+        /* Overall Row Highlighting */
+        .row-overall td {
+            font-size: 1.25rem;
+            font-weight: 700;
+            padding-top: var(--spacing-lg);
+            padding-bottom: var(--spacing-lg);
+            border-bottom: none;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background-color: var(--neutral-900);
+            color: white;
+            padding: var(--spacing-lg) 0;
+            margin-top: var(--spacing-xl);
+        }
+        
+        .copyright {
+            text-align: center;
+            color: #9AA0A6;
+            font-size: 0.875rem;
+            line-height: 1.8;
+        }
+
+        .trademark-notice {
+            font-size: 0.75rem;
+            color: #5F6368;
+            margin-top: var(--spacing-xs);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <span class="section-subtitle">Competitive Landscape</span>
+            <h1>Strategic Platform Comparison</h1>
+        </div>
+    </header>
+    
+    <section class="slide-container">
+        <div class="container">
+            <div class="table-wrapper">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th class="col-criteria"></th>
+                            <th class="col-algomind algomind-header">AlgoMind&trade;</th>
+                            <th class="col-competitor" style="text-align: center;">Off-the-Shelf Enterprise<br>License</th>
+                            <th class="col-competitor" style="text-align: center; border-right: none;">In-House Build</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="col-criteria">
+                                Core Value
+                                <span class="criteria-sub">(Capability & Alignment)</span>
+                            </td>
+                            <td class="col-algomind">
+                                <span class="rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i> 5.0
+                                </span>
+                                High-impact multi-agent orchestration providing an "AI Executive Team" tailored to operations.
+                            </td>
+                            <td class="col-competitor">
+                                <span class="rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i> 4.0
+                                </span>
+                                Solid platform for basic AI features across standard operations.
+                            </td>
+                            <td class="col-competitor" style="border-right: none;">
+                                <span class="rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i> 3.0
+                                </span>
+                                Potentially powerful, but heavily dependent on execution quality.
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="col-criteria">
+                                Time to Impact
+                                <span class="criteria-sub">(Speed to Value)</span>
+                            </td>
+                            <td class="col-algomind">
+                                <span class="rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i> 5.0
+                                </span>
+                                Fastest route to production-grade workflows.
+                            </td>
+                            <td class="col-competitor">
+                                <span class="rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i> 4.0
+                                </span>
+                                Quick wins for basic tasks, but very slow for deep integration.
+                            </td>
+                            <td class="col-competitor" style="border-right: none;">
+                                <span class="rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i> 2.0
+                                </span>
+                                Long lead time before stable, visible impact is achieved.
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="col-criteria">
+                                Risk Profile
+                                <span class="criteria-sub">(Safety & Compliance)</span>
+                            </td>
+                            <td class="col-algomind">
+                                <span class="rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i> 4.0
+                                </span>
+                                Low risk; layered safety checks, human-in-the-loop workflows, and explainability. Mitigation of enterprise level risks.
+                            </td>
+                            <td class="col-competitor">
+                                <span class="rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i> 3.5
+                                </span>
+                                Medium risk; data confidentiality breaches, IP infringement, buried in lengthy EULA docs.
+                            </td>
+                            <td class="col-competitor" style="border-right: none;">
+                                <span class="rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i> 2.0
+                                </span>
+                                High risk; rogue agents can directly affect live systems and data.
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="col-criteria">
+                                Cost Efficiency
+                                <span class="criteria-sub">(ROI)</span>
+                            </td>
+                            <td class="col-algomind">
+                                <span class="rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i> 4.0
+                                </span>
+                                Predictable spend, faster ROI: avoids license lock-in and heavy engineering overhead.
+                            </td>
+                            <td class="col-competitor">
+                                <span class="rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i> 3.0
+                                </span>
+                                Predictable license fees, but requires modest new headcount.
+                            </td>
+                            <td class="col-competitor" style="border-right: none;">
+                                <span class="rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i> 2.0
+                                </span>
+                                High upfront and ongoing engineering and infrastructure costs.
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="col-criteria">
+                                Control & Flexibility
+                                <span class="criteria-sub">(Customization)</span>
+                            </td>
+                            <td class="col-algomind">
+                                <span class="rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i> 4.5
+                                </span>
+                                Balanced; custom agents specialized on your data using standard platforms.
+                            </td>
+                            <td class="col-competitor">
+                                <span class="rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i> 3.0
+                                </span>
+                                Good governance, but constrained by the vendor's product roadmap.
+                            </td>
+                            <td class="col-competitor" style="border-right: none;">
+                                <span class="rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i> 4.0
+                                </span>
+                                Maximum control and customization. Risk for scope creep leading to delays and exceeding budget.
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="col-criteria">
+                                Talent Burden
+                                <span class="criteria-sub">(Internal Resourcing)</span>
+                            </td>
+                            <td class="col-algomind">
+                                <span class="rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i> 4.5
+                                </span>
+                                Light: Requires only a small internal steering group collaborating with our experts.
+                            </td>
+                            <td class="col-competitor">
+                                <span class="rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i> 4.0
+                                </span>
+                                Moderate: Requires modest hire to optimize resources for LLM
+                            </td>
+                            <td class="col-competitor" style="border-right: none;">
+                                <span class="rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i> 2.0
+                                </span>
+                                Heavy: Requires highly-paid senior architects and AI engineers.
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="col-criteria">
+                                Best-Fit Situation
+                            </td>
+                            <td class="col-algomind">
+                                <span class="rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i> 5.0
+                                </span>
+                                When you want differentiated automation quickly without a large AI team.
+                            </td>
+                            <td class="col-competitor">
+                                <span class="rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i> 4.0
+                                </span>
+                                When you need basic, generalized AI but IT is bandwidth-constrained.
+                            </td>
+                            <td class="col-competitor" style="border-right: none;">
+                                <span class="rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i> 3.0
+                                </span>
+                                When you need agentic AI as your core business and have massive capital.
+                            </td>
+                        </tr>
+
+                        <tr class="row-overall">
+                            <td class="col-criteria" style="font-size: 1.25rem;">Overall</td>
+                            <td class="col-algomind">
+                                <span class="rating" style="font-size: 1.25rem;">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i> 4.5
+                                </span>
+                            </td>
+                            <td class="col-competitor">
+                                <span class="rating" style="font-size: 1.25rem;">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i> 4.0
+                                </span>
+                            </td>
+                            <td class="col-competitor" style="border-right: none;">
+                                <span class="rating" style="font-size: 1.25rem;">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i> 3.0
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <div class="copyright">
+                <p>&copy; 2026 Algo-Rythmn Corp. All rights reserved.</p>
+                <p class="trademark-notice">AlgoMind&trade; is a trademark of Algo-Rythmn Corp. Confidential &ndash; Enterprise Executive Review.</p>
+            </div>
+        </div>
+    </footer>
+    
+</body>
+</html>
