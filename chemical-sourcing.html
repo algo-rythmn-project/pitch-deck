@@ -9,16 +9,18 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --ink:#1a1918;--ink2:#4a4845;--ink3:#7a7773;
-  --bg:#ffffff;--bg2:#fcfcfc;--bg3:#fcfcfc;--bg4:#fcfcfc;
-  --line:#dddbd8;--line2:#d0cecc;
-  --red:#0094d9;--red-glow:rgba(0,148,217,.18);--red-mid:rgba(0,148,217,.12);
-  --gold:#0094d9;--gold-bg:rgba(0,148,217,.12);
-  --green:#0094d9;--green-bg:rgba(0,148,217,.12);
-  --blue:#0094d9;--blue-bg:rgba(0,148,217,.12);
+  --bg:#f7f6f2;--bg2:#f0ede7;--white:#fff;
+  --ink:#0f0e0c;--ink2:#2a2825;--ink3:#4a4744;
+  --muted:#8a8783;--muted2:#bbb9b5;--line:#e6e3dc;--line2:#d4d0c8;
+  --red:#c4321a;--red-light:#fdf1ee;--red-mid:rgba(196,50,26,.12);--red-border:rgba(196,50,26,.22);
+  --green:#1a7a4a;--green-bg:#edf7f2;--green-border:rgba(26,122,74,.2);
+  --amber:#8a5e10;--amber-bg:#fef8ec;--amber-border:rgba(138,94,16,.2);
+  --blue:#8a7f1a;--blue-bg:#edf2fd;--blue-border:rgba(26,74,138,.18);
   --font:'Epilogue','Helvetica Neue',sans-serif;
   --mono:'JetBrains Mono',monospace;
-  --radius:16px;--radius-sm:10px;
+  --radius:14px;--radius-sm:8px;
+  --shadow:0 1px 4px rgba(0,0,0,.06),0 4px 16px rgba(0,0,0,.06);
+  --shadow-h:0 4px 8px rgba(0,0,0,.08),0 12px 32px rgba(0,0,0,.10);
 }
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--ink);font-family:var(--font);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
@@ -40,7 +42,7 @@ body{background:var(--bg);color:var(--ink);font-family:var(--font);font-size:17p
 .nav-link:hover{color:var(--ink);background:var(--bg3)}
 .nav-link.active{color:var(--ink);background:var(--bg4)}
 .nav-cta{font-size:13px;font-weight:700;background:var(--red);color:#fff;padding:8px 18px;border-radius:8px;cursor:pointer;transition:all .15s;border:none;font-family:var(--font)}
-.nav-cta:hover{background:#007ab8}
+.nav-cta:hover{background:#b88d00}
 /* ── Nav dark-bg overrides (nav stays dark regardless of theme) ── */
 .deck-nav .brand-name{color:#f5f4f1}
 .deck-nav .brand-tag{color:#8a877f;border-left-color:#363430}
@@ -55,8 +57,8 @@ body{background:var(--bg);color:var(--ink);font-family:var(--font);font-size:17p
 /* ══ COVER ════════════════════════════════════════ */
 #slide-cover{
   background:var(--bg);
-  background-image:radial-gradient(ellipse 80% 60% at 60% 40%, rgba(0,148,217,.07) 0%, transparent 70%),
-                   radial-gradient(ellipse 40% 40% at 20% 80%, rgba(21,101,192,.05) 0%, transparent 60%);
+  background-image:radial-gradient(ellipse 80% 60% at 60% 40%, rgba(217, 69, 0, 0.07) 0%, transparent 70%),
+                   radial-gradient(ellipse 40% 40% at 20% 80%, rgba(192, 75, 21, 0.05) 0%, transparent 60%);
 }
 .cover-inner{max-width:950px;width:100%;text-align:center}
 .cover-eyebrow{font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--red);font-family:var(--mono);margin-bottom:28px;display:inline-flex;align-items:center;gap:8px}
@@ -200,7 +202,7 @@ body{background:var(--bg);color:var(--ink);font-family:var(--font);font-size:17p
 
 /* ══ SLIDE 6: COLLABORATION ════════════════════════ */
 #slide-collab{background:var(--bg);}
-.pilot-box{background:linear-gradient(135deg,rgba(0,148,217,.06),rgba(0,148,217,.02));border:1px solid rgba(0,148,217,.28);border-radius:var(--radius);padding:28px 36px;margin-bottom:28px;display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:start}
+.pilot-box{background:linear-gradient(135deg,rgba(217, 25, 0, 0.06),rgba(217, 69, 0, 0.02));border:1px solid rgba(217, 43, 0, 0.28);border-radius:var(--radius);padding:28px 36px;margin-bottom:28px;display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:start}
 .pilot-box-icon{width:44px;height:44px;border-radius:10px;background:var(--red-mid);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
 .pilot-box-icon svg{width:20px;height:20px;stroke:var(--red);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .pilot-box-label{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--red);font-family:var(--mono);margin-bottom:6px}
@@ -232,7 +234,7 @@ body{background:var(--bg);color:var(--ink);font-family:var(--font);font-size:17p
 /* ══ SLIDE 7: CTA ══════════════════════════════════ */
 #slide-cta{
   background:var(--bg2);
-  background-image:radial-gradient(ellipse 80% 70% at 50% 50%, rgba(0,148,217,.07) 0%, transparent 65%);
+  background-image:radial-gradient(ellipse 80% 70% at 50% 50%, rgba(217, 166, 0, 0.07) 0%, transparent 65%);
 }
 .cta-inner{max-width:860px;width:100%;text-align:center}
 .cta-h{font-size:clamp(40px,6vw,72px);font-weight:900;letter-spacing:-2px;line-height:1.06;color:var(--ink);margin-bottom:28px}
