@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tactical Hockey Assistant | Executive Vision</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;800&display=swap');
+
+        :root {
+            --bg-dark: #070e17;
+            --bg-panel: #111e30;
+            --ui-bg: #1c2b42;
+            --ui-border: #2a3f5a;
+            --accent-cyan: #00e5ff;
+            --accent-gold: #f5c518;
+            --text-main: #ffffff;
+            --text-muted: #94a3b8;
+            --text-dark: #cbd5e1;
+        }
+
+        body, html {
+            margin: 0; padding: 0; width: 100%; height: 100%;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Hide Scrollbar */
+        body::-webkit-scrollbar { display: none; }
+        body { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* Hide Citations to keep UI clean */
+        .cite { display: none; }
+
+        /* Deck & Slides */
+        .deck { position: relative; width: 100vw; display: flex; flex-direction: column; align-items: center; }
+        .slide {
+            position: relative; width: 100%; min-height: auto;
+            opacity: 1; transform: translateY(0);
+            display: flex; flex-direction: column; justify-content: center;
+            align-items: center;
+            padding: 100px 0;
+            box-sizing: border-box;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .slide:nth-child(even) { background-color: #0c1624; }
+        .slide:nth-child(odd) { background-color: var(--bg-dark); }
+        .slide.active .anim-slide { opacity: 1; transform: translateY(0); }
+        /* Keep visuals visible once revealed */
+        .anim-slide.revealed { opacity: 1; transform: translateY(0); }
+        .anim-slide { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+
+        /* Header */
+        .site-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 70px;
+            background: rgba(7, 14, 23, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+            box-sizing: border-box;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .header-logo {
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        .header-logo span {
+            color: var(--accent-cyan);
+        }
+        .header-contact {
+            margin-left: auto;
+            font-size: 0.85rem;
+            color: #000;
+            background: var(--accent-cyan);
+            padding: 8px 18px;
+            border-radius: 6px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .header-contact:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 229, 255, 0.3);
+            filter: brightness(1.1);
+        }
+
+        /* Layouts */
+        .slide-content { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 80px; 
+            align-items: center; 
+            height: 100%; 
+            max-width: 1250px; 
+            width: 90%; 
+        }
+        .intro-slide, .outro-slide { text-align: center; display: flex; flex-direction: column; align-items: center; max-width: 1000px; width: 90%; }
+
+        /* Typography */
+        h1 {
+            font-size: 3.5rem; font-weight: 800; margin-bottom: 15px; letter-spacing: -1px;
+            background: linear-gradient(135deg, #fff 40%, var(--accent-cyan));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        h2 { font-size: 2.2rem; color: var(--text-main); margin-bottom: 10px; font-weight: 600; }
+        .badge { display: inline-block; background: rgba(0, 229, 255, 0.1); color: var(--accent-cyan); padding: 6px 14px; border-radius: 20px; font-size: 0.9rem; font-weight: 600; margin-bottom: 25px; border: 1px solid rgba(0, 229, 255, 0.3); }
+        h3 { font-size: 1.2rem; color: var(--text-main); margin: 0 0 8px 0; font-weight: 600; }
+        p { font-size: 1.05rem; line-height: 1.6; color: var(--text-muted); margin-bottom: 0; }
+        
+        .feature-block { background: var(--bg-panel); border: 1px solid var(--ui-border); padding: 25px; border-radius: 12px; margin-bottom: 20px; transition: transform 0.3s; }
+        .feature-block:hover { transform: translateX(5px); border-color: var(--accent-cyan); }
+        
+        .value-prop { color: var(--accent-gold); font-weight: 500; font-size: 0.95rem; margin-top: 10px; display: block; }
+
+        /* UI Mockup Container */
+        .mockup-container {
+            width: 100%; height: 550px; display: flex; align-items: center; justify-content: center; position: relative;
+        }
+        .glow-bg {
+            position: absolute; width: 300px; height: 300px; background: var(--accent-cyan);
+            filter: blur(120px); opacity: 0.15; border-radius: 50%; z-index: 0;
+        }
+
+        /* Generic UI Elements */
+        .ui-mockup { position: relative; z-index: 1; background: var(--ui-bg); border: 1px solid var(--ui-border); box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); overflow: hidden; }
+        .ui-header { height: 40px; background: rgba(255,255,255,0.03); border-bottom: 1px solid var(--ui-border); display: flex; align-items: center; padding: 0 15px; gap: 6px; }
+        .ui-dot { width: 10px; height: 10px; border-radius: 50%; background: #475569; }
+        
+        /* Specific Mockups */
+        .mockup-mobile { width: 280px; height: 550px; border-radius: 35px; border: 10px solid #0f172a; display: flex; flex-direction: column; }
+        .mockup-tablet { width: 480px; height: 360px; border-radius: 20px; border: 12px solid #0f172a; }
+        .mockup-browser { width: 600px; height: 400px; border-radius: 12px; }
+
+        /* Chat UI (Stream 1) */
+        .chat-area { padding: 20px; display: flex; flex-direction: column; gap: 15px; }
+        .chat-bubble { padding: 12px 16px; border-radius: 18px; font-size: 0.85rem; max-width: 80%; line-height: 1.4; }
+        .chat-user { background: var(--accent-cyan); color: #000; align-self: flex-end; border-bottom-right-radius: 4px; font-weight: 500; }
+        .chat-ai { background: var(--bg-panel); color: var(--text-dark); align-self: flex-start; border-bottom-left-radius: 4px; border: 1px solid var(--ui-border); }
+
+        /* Dashboard UI (Stream 2) */
+        .dash-layout { display: flex; height: calc(100% - 40px); }
+        .dash-sidebar { width: 120px; border-right: 1px solid var(--ui-border); padding: 15px; display: flex; flex-direction: column; gap: 10px; }
+        .dash-menu-item { height: 8px; border-radius: 4px; background: rgba(255,255,255,0.1); width: 100%; }
+        .dash-main { padding: 25px; flex: 1; display: flex; flex-direction: column; gap: 20px; }
+        .dash-card { background: rgba(255,255,255,0.02); border: 1px solid var(--ui-border); border-radius: 8px; padding: 15px; }
+        .tactical-board { width: 100%; height: 140px; border: 1px dashed var(--ui-border); border-radius: 8px; display: flex; justify-content: center; align-items: center; position: relative; }
+        .tactic-node { position: absolute; width: 12px; height: 12px; border-radius: 50%; background: var(--accent-gold); box-shadow: 0 0 10px var(--accent-gold); }
+
+        /* Media UI (Stream 6 & 7) */
+        .media-player { background: #000; height: 200px; border-radius: 8px; position: relative; display: flex; align-items: center; justify-content: center; }
+        .play-btn { width: 50px; height: 50px; background: var(--accent-cyan); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        .play-triangle { border-left: 15px solid #000; border-top: 10px solid transparent; border-bottom: 10px solid transparent; margin-left: 5px; }
+        .audio-wave { display: flex; gap: 4px; height: 60px; align-items: center; justify-content: center; margin-top: 30px; }
+        .wave-bar { width: 6px; background: var(--accent-cyan); border-radius: 3px; animation: soundWave 1.2s infinite ease-in-out; }
+
+        @keyframes soundWave { 0%, 100% { height: 10px; } 50% { height: 40px; } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes pulseGlow { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; filter: drop-shadow(0 0 5px var(--accent-cyan)); } }
+        
+        .active .anim-slide { animation: slideUp 0.6s ease forwards; }
+        .active .anim-pulse { animation: pulseGlow 2s infinite ease-in-out; }
+        
+        /* Navigation (indicator only) */
+        .controls { position: fixed; right: 20px; top: 50%; transform: translateY(-50%); width: auto; flex-direction: column; padding: 0; gap: 15px; z-index: 100; }
+        .dots { display: flex; flex-direction: column; gap: 8px; align-items: center; }
+        .dot { width: 4px; height: 30px; background: var(--ui-border); border-radius: 2px; transition: 0.3s; cursor: pointer; }
+        .dot.active { background: var(--accent-cyan); height: 45px; }
+        #prevBtn, #nextBtn { display: none; }
+    </style>
+</head>
+<body>
+
+<header class="site-header">
+    <div class="header-logo">Algo-Rythmn.ai <span>×</span> Ron Johnson</div>
+    <a href="mailto:support@algo-rythmn.ai" class="header-contact">Contact Us</a>
+</header>
+
+<div class="deck" id="presentation">
+
+    <div class="slide">
+        <div class="outro-slide">
+            <h1 style="font-size: 4rem;">TACTICAL HOCKEY ASSISTANT</h1>
+            <p style="font-size: 1.5rem; color: var(--accent-cyan); font-weight: 300; margin-bottom: 40px;">A Commercial Product Vision for Ron Johnson</p>
+            
+            <div style="max-width: 800px; margin: 0 auto;">
+                <p style="font-size: 1.3rem; color: var(--text-dark); margin-bottom: 30px;">
+                    Hockey is a craft. Coaching is an art.<span class="cite"></span> What if your tactical insights could scale to reach every registered player in Canada, operating 24/7?<span class="cite"></span>
+                </p>
+                <div style="display: flex; gap: 30px; justify-content: center; margin-top: 40px;">
+                    <div class="feature-block" style="text-align: center; min-width: 150px;">
+                        <h2 style="font-size: 2.5rem; color: var(--accent-gold); margin: 0;">7</h2>
+                        <p style="font-size: 0.9rem;">Product Streams</p>
+                    </div>
+                    <div class="feature-block" style="text-align: center; min-width: 150px;">
+                        <h2 style="font-size: 2.5rem; color: var(--accent-gold); margin: 0;">18K+</h2>
+                        <p style="font-size: 0.9rem;">Proj. Subscribers Y3</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide">
+        <div class="slide-content">
+            <div>
+                <h2>Conversational Book AI</h2>
+                <span class="badge">STREAM 01 • Low Friction Entry</span>
+                
+                <div class="feature-block">
+                    <h3>What we Offer</h3>
+                    <p>An interactive AI interface that turns your existing written philosophy into a living, searchable resource.</p>
+                </div>
+                <div class="feature-block">
+                    <h3>How it Works</h3>
+                    <p>Players ask plain-language tactical questions. The AI answers instantly, drawing <strong>strictly from your written content</strong>.<span class="cite"></span> Nothing is fabricated.<span class="cite"></span></p>
+                </div>
+                <div class="feature-block">
+                    <h3>Commercial Value</h3>
+                    <p>Monetizes work you have already completed at zero additional effort.<span class="cite"></span> Creates an accessible $5/mo entry point that builds massive brand trust.</p>
+                </div>
+            </div>
+            
+            <div class="mockup-container">
+                <div class="glow-bg"></div>
+                <div class="ui-mockup mockup-mobile anim-slide">
+                    <div style="height: 60px; border-bottom: 1px solid var(--ui-border); display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 0.9rem;">Tactical Assistant</div>
+                    <div class="chat-area">
+                        <div class="chat-bubble chat-user">How do I break a 1-3-1 forecheck?</div>
+                        <div class="chat-bubble chat-ai">
+                            <div style="width: 20px; height: 20px; background: rgba(0, 229, 255, 0.2); border-radius: 4px; margin-bottom: 8px;"></div>
+                            Based on Ron's framework: Focus on puck movement speed. The key is pulling the middle forward out of position by reversing the flow behind the net.
+                        </div>
+                        <div class="chat-bubble chat-user" style="opacity: 0.5;">What about neutral zone gaps?</div>
+                    </div>
+                    <div style="margin-top: auto; padding: 15px; border-top: 1px solid var(--ui-border);">
+                        <div style="height: 35px; background: rgba(255,255,255,0.05); border-radius: 20px; border: 1px solid var(--ui-border); display: flex; align-items: center; padding: 0 15px;"><span style="color: #475569; font-size: 0.8rem;">Ask a tactical question...</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide">
+        <div class="slide-content">
+            <div class="mockup-container">
+                <div class="glow-bg" style="background: var(--accent-gold);"></div>
+                <div class="ui-mockup mockup-tablet anim-slide">
+                    <div class="ui-header">
+                        <div class="ui-dot" style="background: #ef4444;"></div><div class="ui-dot" style="background: #f59e0b;"></div><div class="ui-dot" style="background: #10b981;"></div>
+                    </div>
+                    <div class="dash-layout">
+                        <div class="dash-sidebar">
+                            <div class="dash-menu-item" style="background: var(--accent-gold); opacity: 0.8;"></div>
+                            <div class="dash-menu-item"></div>
+                            <div class="dash-menu-item"></div>
+                        </div>
+                        <div class="dash-main">
+                            <div style="font-weight: 600; font-size: 1.1rem;">Game Situation Breakdown</div>
+                            <div class="tactical-board">
+                                <div class="tactic-node" style="top: 30%; left: 20%;"></div>
+                                <div class="tactic-node" style="top: 60%; left: 40%;"></div>
+                                <div class="tactic-node" style="top: 45%; left: 70%; background: var(--accent-cyan); box-shadow: 0 0 10px var(--accent-cyan);"></div>
+                                <svg width="100%" height="100%" style="position: absolute; top:0; left:0;"><path d="M 60 85 L 340 65" stroke="rgba(255,255,255,0.2)" stroke-dasharray="5 5" fill="none"/></svg>
+                            </div>
+                            <div style="display: flex; gap: 15px;">
+                                <div class="dash-card" style="flex: 1;"><div style="height: 8px; width: 40%; background: var(--text-muted); margin-bottom: 8px; border-radius: 4px;"></div><div style="height: 6px; width: 80%; background: #334155; border-radius: 3px;"></div></div>
+                                <div class="dash-card" style="flex: 1;"><div style="height: 8px; width: 60%; background: var(--accent-gold); margin-bottom: 8px; border-radius: 4px;"></div><div style="height: 6px; width: 90%; background: #334155; border-radius: 3px;"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <h2>Advanced Tactical AI Mentor</h2>
+                <span class="badge">STREAM 02 • External AI Training</span>
+                
+                <div class="feature-block">
+                    <h3>What we Offer</h3>
+                    <p>The full AI coaching experience. Access to dynamic scenario-based Q&A, game-situation breakdowns, and positional analysis that goes beyond the book.</p>
+                </div>
+                <div class="feature-block">
+                    <h3>How it Works</h3>
+                    <p>Integrates <strong>External AI Training</strong>—combining your proprietary principles with advanced tactical intelligence to handle complex, real-time game strategy.<span class="cite"></span></p>
+                </div>
+                <div class="feature-block">
+                    <h3>Commercial Value</h3>
+                    <p>A $10/month tier targeting 10,800 users. Premium pricing is justified by deep, active personalization and comprehensive tactical coverage.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide">
+        <div class="slide-content">
+            <div>
+                <h2>AI Virtual Video Coaching</h2>
+                <span class="badge">STREAM 03 • Advanced Kinematics</span>
+                
+                <div class="feature-block">
+                    <h3>What we Offer</h3>
+                    <p>Virtual coaching powered by computer vision. AI tracks player movements and generates instant biomechanical analysis reports based on uploaded videos.</p>
+                </div>
+                <div class="feature-block">
+                    <h3>How it Works</h3>
+                    <p>Players upload practice or game footage. The AI maps skeletal movements, tracks puck trajectory, and compares their kinematics instantly against your ideal tactical frameworks.</p>
+                </div>
+                <div class="feature-block">
+                    <h3>Commercial Value</h3>
+                    <p>Drives high-margin recurring subscription revenue (Avg $35/mo) by delivering elite-level, personalized video breakdown at scale—without requiring you to watch a single frame.</p>
+                </div>
+            </div>
+
+            <div class="mockup-container">
+                <div class="glow-bg"></div>
+                <div class="ui-mockup mockup-browser anim-slide" style="display: flex; flex-direction: column;">
+                    <div class="ui-header">
+                        <div class="ui-dot" style="background: #ef4444;"></div><div class="ui-dot" style="background: #f59e0b;"></div><div class="ui-dot" style="background: #10b981;"></div>
+                        <div style="margin-left: 20px; width: 200px; height: 16px; background: rgba(0,0,0,0.2); border-radius: 4px;"></div>
+                    </div>
+                    <div style="display: flex; flex: 1; padding: 15px; gap: 15px; background: #0f172a;">
+                        
+                        <div style="flex: 2; background: #000; border-radius: 8px; position: relative; overflow: hidden; border: 1px solid var(--ui-border);">
+                            <svg width="100%" height="100%" viewBox="0 0 200 150">
+                                <line x1="100" y1="40" x2="90" y2="80" stroke="#334155" stroke-width="6" stroke-linecap="round"/>
+                                <line x1="90" y1="80" x2="70" y2="120" stroke="#334155" stroke-width="6" stroke-linecap="round"/>
+                                <line x1="90" y1="80" x2="110" y2="120" stroke="#334155" stroke-width="6" stroke-linecap="round"/>
+                                <line x1="95" y1="50" x2="60" y2="70" stroke="#334155" stroke-width="6" stroke-linecap="round"/>
+                                <line x1="95" y1="50" x2="120" y2="70" stroke="#334155" stroke-width="6" stroke-linecap="round"/>
+                                <line x1="60" y1="70" x2="140" y2="130" stroke="#f8fafc" stroke-width="3" stroke-linecap="round"/> <line x1="100" y1="40" x2="90" y2="80" stroke="var(--accent-cyan)" stroke-width="1.5" stroke-dasharray="2 2" class="anim-pulse"/>
+                                <line x1="90" y1="80" x2="70" y2="120" stroke="var(--accent-cyan)" stroke-width="1.5" stroke-dasharray="2 2" class="anim-pulse"/>
+                                <line x1="90" y1="80" x2="110" y2="120" stroke="var(--accent-cyan)" stroke-width="1.5" stroke-dasharray="2 2" class="anim-pulse"/>
+                                <line x1="95" y1="50" x2="60" y2="70" stroke="var(--accent-cyan)" stroke-width="1.5" stroke-dasharray="2 2" class="anim-pulse"/>
+                                <line x1="95" y1="50" x2="120" y2="70" stroke="var(--accent-cyan)" stroke-width="1.5" stroke-dasharray="2 2" class="anim-pulse"/>
+                                
+                                <circle cx="100" cy="40" r="3" fill="var(--accent-cyan)"/>
+                                <circle cx="90" cy="80" r="3" fill="var(--accent-cyan)"/>
+                                <circle cx="70" cy="120" r="3" fill="var(--accent-cyan)"/>
+                                <circle cx="110" cy="120" r="3" fill="var(--accent-cyan)"/>
+                                <circle cx="60" cy="70" r="3" fill="var(--accent-cyan)"/>
+                                <circle cx="120" cy="70" r="3" fill="var(--accent-cyan)"/>
+
+                                <path d="M 120 70 Q 110 85 90 80" fill="none" stroke="var(--accent-gold)" stroke-width="1.5"/>
+                                <text x="125" y="65" fill="var(--accent-gold)" font-size="8" font-family="sans-serif">42°</text>
+                            </svg>
+                            <div style="position: absolute; bottom: 0; width: 100%; height: 35px; background: rgba(0,0,0,0.8); display: flex; align-items: center; padding: 0 10px; box-sizing: border-box; gap: 10px;">
+                                <div style="width: 10px; height: 10px; background: #fff; clip-path: polygon(0 0, 0 100%, 100% 50%);"></div>
+                                <div style="flex: 1; height: 3px; background: rgba(255,255,255,0.2); border-radius: 2px; position: relative;">
+                                    <div style="width: 65%; height: 100%; background: var(--accent-cyan); border-radius: 2px;"></div>
+                                    <div style="position: absolute; left: 65%; top: -3px; width: 8px; height: 8px; background: #fff; border-radius: 50%;"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="flex: 1.2; display: flex; flex-direction: column; gap: 10px;">
+                            <div style="font-size: 0.8rem; font-weight: 600; color: var(--text-main); border-bottom: 1px solid var(--ui-border); padding-bottom: 8px;">AI KINEMATIC REPORT</div>
+                            
+                            <div class="dash-card" style="padding: 12px;">
+                                <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-muted); margin-bottom: 6px;">
+                                    <span>Knee Flexion</span><span style="color: #ef4444;">Sub-optimal</span>
+                                </div>
+                                <div style="height: 4px; background: #334155; border-radius: 2px;"><div style="width: 45%; height: 100%; background: #ef4444; border-radius: 2px;"></div></div>
+                            </div>
+                            
+                            <div class="dash-card" style="padding: 12px;">
+                                <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-muted); margin-bottom: 6px;">
+                                    <span>Release Angle</span><span style="color: var(--accent-cyan);">Optimal</span>
+                                </div>
+                                <div style="height: 4px; background: #334155; border-radius: 2px;"><div style="width: 95%; height: 100%; background: var(--accent-cyan); border-radius: 2px;"></div></div>
+                            </div>
+                            
+                            <div class="dash-card" style="border-left: 3px solid var(--accent-gold); padding: 12px; flex: 1; background: rgba(245, 197, 24, 0.05);">
+                                <div style="font-size: 0.7rem; color: var(--accent-gold); margin-bottom: 6px; font-weight: 600; letter-spacing: 0.5px;">COACH'S INSIGHT</div>
+                                <div style="font-size: 0.8rem; color: var(--text-dark); line-height: 1.5;">Your bottom hand is too high on the shaft during the release phase. Drop it 3 inches to increase stick flex.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide">
+        <div class="slide-content">
+            <div class="mockup-container">
+                <div class="glow-bg" style="background: var(--accent-gold);"></div>
+                <div class="ui-mockup mockup-mobile anim-slide" style="height: 450px;">
+                    <div style="padding: 30px 20px; text-align: center; border-bottom: 1px solid var(--ui-border);">
+                        <div style="width: 80px; height: 80px; border-radius: 50%; background: #334155; margin: 0 auto 15px auto; display: flex; align-items: center; justify-content: center; border: 2px solid var(--accent-gold);">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--accent-gold)" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                        </div>
+                        <h3 style="font-size: 1.2rem; margin: 0;">Ron Johnson</h3>
+                        <p style="font-size: 0.85rem; color: var(--accent-gold);">Elite Tactical Mentorship</p>
+                    </div>
+                    <div style="padding: 20px;">
+                        <div style="font-size: 0.85rem; margin-bottom: 15px; color: var(--text-muted);">Select Available Session:</div>
+                        <div class="dash-card" style="margin-bottom: 10px; border-color: var(--accent-gold); display: flex; justify-content: space-between; align-items: center;">
+                            <div><div style="font-weight: 600; font-size: 0.9rem;">Thurs, Oct 12</div><div style="font-size: 0.8rem; color: var(--text-muted);">8:00 AM EST</div></div>
+                            <div style="background: var(--accent-gold); color: #000; padding: 4px 10px; border-radius: 4px; font-size: 0.8rem; font-weight: 600;">Book</div>
+                        </div>
+                        <div class="dash-card" style="opacity: 0.5;">
+                            <div><div style="font-weight: 600; font-size: 0.9rem;">Fri, Oct 13</div><div style="font-size: 0.8rem; color: #ef4444;">Fully Booked</div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <h2>Premium 1-on-1 Mentorship</h2>
+                <span class="badge" style="color: var(--accent-gold); border-color: var(--accent-gold); background: rgba(245, 197, 24, 0.1);">STREAM 04 • The Gold Standard</span>
+                
+                <div class="feature-block">
+                    <h3>What we Offer</h3>
+                    <p>Direct, private coaching sessions.<span class="cite"></span> At the top of the ecosystem sits what no AI can replicate: Ron himself.</p>
+                </div>
+                <div class="feature-block">
+                    <h3>How it Works</h3>
+                    <p>The platform's digital presence naturally funnels the most serious, committed players directly toward this boutique offering.</p>
+                </div>
+                <div class="feature-block">
+                    <h3>Commercial Value</h3>
+                    <p>Limited availability combined with premium pricing ($200-$300/hr).<span class="cite"></span> Scarcity drives value.<span class="cite"></span> As your digital footprint expands, your personal time becomes significantly more valuable.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide">
+        <div class="slide-content">
+            <div>
+                <h2>Exclusive Merchandising</h2>
+                <span class="badge">STREAM 05 • Tangible Brand Culture</span>
+                
+                <div class="feature-block">
+                    <h3>What we Offer</h3>
+                    <p>Premium jerseys, training apparel, and branded gear.<span class="cite"></span> Wear the brand. Carry the culture.</p>
+                </div>
+                <div class="feature-block">
+                    <h3>How it Works</h3>
+                    <p>Leverages the digital audience of subscribers as a built-in, pre-warmed customer base. Limited drops create massive collector appeal and demand spikes.</p>
+                </div>
+                <div class="feature-block">
+                    <h3>Commercial Value</h3>
+                    <p>The Canadian hockey merchandise market is already a CAD $1.6B industry.<span class="cite"></span> You capture first-mover advantage, because every jersey worn at a rink is a billboard.<span class="cite"></span></p>
+                </div>
+            </div>
+
+            <div class="mockup-container">
+                <div class="glow-bg"></div>
+                <div class="ui-mockup mockup-browser anim-slide" style="display: flex; flex-direction: column;">
+                    <div class="ui-header">
+                        <div class="ui-dot" style="background: #ef4444;"></div><div class="ui-dot" style="background: #f59e0b;"></div><div class="ui-dot" style="background: #10b981;"></div>
+                        <div style="margin-left: auto; font-size: 0.8rem; font-weight: 600;">TACTICAL STORE</div>
+                    </div>
+                    <div style="padding: 30px; display: flex; gap: 30px; height: 100%; box-sizing: border-box;">
+                        <div style="flex: 1; background: #0f172a; border-radius: 8px; display: flex; align-items: center; justify-content: center; position: relative;">
+                            <svg width="120" height="120" viewBox="0 0 100 100" fill="none">
+                                <path d="M25 25 L35 15 L65 15 L75 25 L95 45 L80 60 L70 50 V90 H30 V50 L20 60 L5 45 Z" fill="#1e293b" stroke="#334155" stroke-width="3" stroke-linejoin="round"/>
+                                <path d="M35 15 L50 30 L65 15" stroke="#00e5ff" stroke-width="3" stroke-linecap="round"/>
+                                <text x="50" y="55" fill="#f8fafc" font-size="16" font-weight="bold" font-family="sans-serif" text-anchor="middle">RJ</text>
+                            </svg>
+                        </div>
+                        <div style="flex: 1; display: flex; flex-direction: column; justify-content: center;">
+                            <div style="font-size: 0.8rem; color: var(--accent-cyan); font-weight: 600; margin-bottom: 5px;">LIMITED EDITION</div>
+                            <h3 style="font-size: 1.5rem; margin-bottom: 10px;">Pro Tactical Hoodie</h3>
+                            <div style="font-size: 1.4rem; font-weight: 300; margin-bottom: 20px;">$85.00</div>
+                            <div style="background: var(--text-main); color: #000; text-align: center; padding: 12px; border-radius: 6px; font-weight: 600; font-size: 0.9rem;">Add to Cart</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide">
+        <div class="slide-content">
+            <div class="mockup-container">
+                <div class="glow-bg" style="background: #ef4444;"></div>
+                <div class="ui-mockup mockup-browser anim-slide">
+                    <div class="media-player">
+                        <div style="position: absolute; width: 100%; height: 100%; background: linear-gradient(45deg, #0f172a, #1e293b); opacity: 0.5;"></div>
+                        <div class="play-btn"><div class="play-triangle"></div></div>
+                        <div style="position: absolute; bottom: 10px; left: 15px; right: 15px; height: 4px; background: rgba(255,255,255,0.2); border-radius: 2px;">
+                            <div style="width: 35%; height: 100%; background: #ef4444; border-radius: 2px;"></div>
+                        </div>
+                    </div>
+                    <div style="padding: 20px;">
+                        <h3 style="font-size: 1.2rem;">Post-Game Tactical Breakdown: Zone Entries</h3>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px;">
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--ui-border);"></div>
+                                <div><div style="font-size: 0.9rem; font-weight: 600;">Ron Johnson Hockey</div><div style="font-size: 0.8rem; color: var(--text-muted);">125K Subscribers</div></div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.1); padding: 8px 16px; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">Subscribe</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <h2>Broadcast & Media Empire</h2>
+                <span class="badge">STREAM 06 • Massive Audience Scaling</span>
+                
+                <div class="feature-block">
+                    <h3>What we Offer</h3>
+                    <p>A dominant YouTube and Podcast presence featuring live tactical analysis, player development deep-dives, and post-game breakdowns.<span class="cite"></span></p>
+                </div>
+                <div class="feature-block">
+                    <h3>How it Works</h3>
+                    <p>Turns your intellect into appointment viewing. We handle the production; you provide the authoritative voice.</p>
+                </div>
+                <div class="feature-block">
+                    <h3>Commercial Value</h3>
+                    <p>Builds your public profile exponentially faster than any other stream.<span class="cite"></span> Highly specific tactical content commands premium CPM rates and attracts six-figure sponsorship deals.<span class="cite"></span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide">
+        <div class="slide-content">
+            <div>
+                <h2>Automated Audio Intelligence</h2>
+                <span class="badge">STREAM 07 • Frictionless Scale</span>
+                
+                <div class="feature-block">
+                    <h3>What we Offer</h3>
+                    <p>Daily or weekly tactical audio episodes running entirely on autopilot.<span class="cite"></span> Content that scales while you sleep.</p>
+                </div>
+                <div class="feature-block">
+                    <h3>How it Works</h3>
+                    <p>An AI model is trained on your exact voice and content library to generate highly accurate, bite-sized strategic breakdowns.<span class="cite"></span></p>
+                </div>
+                <div class="feature-block">
+                    <h3>Commercial Value</h3>
+                    <p>Fully automated passive income after initial content setup.<span class="cite"></span> Multiplies your brand presence and sponsor ad inventory without requiring a single minute of recording time.</p>
+                </div>
+            </div>
+
+            <div class="mockup-container">
+                <div class="glow-bg"></div>
+                <div class="ui-mockup mockup-mobile anim-slide" style="height: 480px; justify-content: center; align-items: center; text-align: center; padding: 20px;">
+                    <div style="width: 150px; height: 150px; border-radius: 16px; background: linear-gradient(135deg, var(--ui-border), var(--bg-panel)); margin-bottom: 30px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--accent-cyan);">
+                        <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
+                    </div>
+                    <h3 style="font-size: 1.3rem;">Daily AI Tactical Tip</h3>
+                    <p style="font-size: 0.9rem; color: var(--accent-cyan); margin-bottom: 20px;">Automated by Ron Johnson AI</p>
+                    
+                    <div class="audio-wave">
+                        <div class="wave-bar" style="animation-delay: 0.1s;"></div><div class="wave-bar" style="animation-delay: 0.3s;"></div>
+                        <div class="wave-bar" style="animation-delay: 0.6s;"></div><div class="wave-bar" style="animation-delay: 0.2s;"></div>
+                        <div class="wave-bar" style="animation-delay: 0.5s;"></div><div class="wave-bar" style="animation-delay: 0.4s;"></div>
+                    </div>
+                    
+                    <div style="width: 100%; display: flex; justify-content: space-between; margin-top: 30px; font-size: 0.8rem; color: var(--text-muted);">
+                        <span>1:15</span><span>3:30</span>
+                    </div>
+                    <div style="width: 100%; height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px; margin-top: 5px;">
+                        <div style="width: 30%; height: 100%; background: var(--text-main); border-radius: 2px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide">
+        <div class="outro-slide">
+            <h2 style="font-size: 3rem; margin-bottom: 20px;">The Flywheel Effect</h2>
+            <p style="font-size: 1.3rem; max-width: 850px; color: var(--text-dark); margin-bottom: 40px;">
+                Seven streams. One brand.<span class="cite"></span> Together, they create a self-reinforcing ecosystem.<span class="cite"></span> AI builds trust. Trust sells coaching plans. Coaching plans create 1-on-1 clients. The podcast grows the audience, and the audience buys the merch.
+            </p>
+            
+            <div style="display: flex; gap: 40px; margin-bottom: 50px;">
+                <div class="feature-block" style="text-align: center; border-color: var(--accent-cyan);">
+                    <h3 style="color: var(--accent-cyan);">Phased Rollout</h3>
+                    <p style="font-size: 0.9rem;">Move at your pace. See results at each stage before committing to the next.<span class="cite"></span></p>
+                </div>
+                <div class="feature-block" style="text-align: center; border-color: var(--accent-gold);">
+                    <h3 style="color: var(--accent-gold);">Zero Friction</h3>
+                    <p style="font-size: 0.9rem;">Not a signature. Not a revenue commitment.<span class="cite"></span></p>
+                </div>
+            </div>
+
+            <p style="font-size: 1.6rem; font-weight: 600; color: var(--text-main); border-top: 1px solid var(--ui-border); padding-top: 30px; width: 100%; max-width: 800px;">
+                We are simply asking for a shared belief that this platform deserves to exist.<span class="cite"></span>
+            </p>
+
+            <div style="margin-top: 60px; color: var(--text-muted); font-size: 0.9rem; opacity: 0.6; text-align: center;">
+                <p>&copy; 2026 Algo-Rythmn.ai • All Rights Reserved</p>
+                <p style="margin-top: 5px;"><a href="mailto:support@algo-rythmn.ai" style="color: inherit; text-decoration: none;">support@algo-rythmn.ai</a></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="controls">
+        <button id="prevBtn" onclick="changeSlide(-1)">&#8592; Previous</button>
+        <div class="dots" id="dots"></div>
+        <button id="nextBtn" onclick="changeSlide(1)">Next &#8594;</button>
+    </div>
+
+</div>
+
+<script>
+    const slides = document.querySelectorAll('.slide');
+    const dotsContainer = document.getElementById('dots');
+
+    // Create progress dots
+    slides.forEach((_, index) => {
+        const dot = document.createElement('div');
+        dot.classList.add('dot');
+        dot.addEventListener('click', () => {
+            slides[index].scrollIntoView({ behavior: 'smooth' });
+        });
+        dotsContainer.appendChild(dot);
+    });
+    const dots = document.querySelectorAll('.dot');
+
+    const observerOptions = {
+        threshold: 0.2,
+        rootMargin: "-10% 0px -10% 0px"
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const index = Array.from(slides).indexOf(entry.target);
+                
+                slides.forEach(s => s.classList.remove('active'));
+                entry.target.classList.add('active');
+
+                // Add revealed class to keep visuals visible
+                entry.target.querySelectorAll('.anim-slide').forEach(anim => {
+                    anim.classList.add('revealed');
+                });
+                
+                dots.forEach(d => d.classList.remove('active'));
+                dots[index].classList.add('active');
+            }
+        });
+    }, observerOptions);
+
+    slides.forEach(slide => observer.observe(slide));
+</script>
+
+</body>
+</html>
