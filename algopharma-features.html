@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AlgoPharma v1.0 — Feature Freeze Document</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --teal-900: #0d3d38;
+    --teal-800: #12534c;
+    --teal-700: #1a6b62;
+    --teal-600: #2a8a7e;
+    --teal-500: #3aab9c;
+    --teal-400: #5ec4b7;
+    --teal-200: #b2e4de;
+    --teal-100: #d8f3f0;
+    --teal-50:  #f0faf9;
+    --amber:    #e8a020;
+    --amber-lt: #fef3dc;
+    --red:      #c0392b;
+    --red-lt:   #fde8e6;
+    --green:    #1e7d5a;
+    --green-lt: #e3f5ed;
+    --slate:    #1c2b2a;
+    --slate-mid:#3d5250;
+    --muted:    #7a9693;
+    --border:   #cde8e4;
+    --bg:       #f5faf9;
+    --white:    #ffffff;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Instrument Sans', sans-serif;
+    background: var(--bg);
+    color: var(--slate);
+    font-size: 15px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── COVER ── */
+  .cover {
+    background: var(--teal-900);
+    color: var(--white);
+    padding: 72px 80px 64px;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 70% at 90% 20%, rgba(58,171,156,.18) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 50% at 10% 90%, rgba(26,107,98,.25) 0%, transparent 55%);
+  }
+  .cover-inner { position: relative; max-width: 960px; margin: 0 auto; }
+
+  .cover-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.15);
+    border-radius: 100px;
+    padding: 5px 14px 5px 10px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--teal-200);
+    margin-bottom: 32px;
+  }
+  .cover-badge .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--teal-400);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%,100% { opacity: 1; transform: scale(1); }
+    50%      { opacity: .5; transform: scale(.85); }
+  }
+
+  .cover h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(36px, 5vw, 58px);
+    line-height: 1.08;
+    letter-spacing: -.02em;
+    margin-bottom: 10px;
+  }
+  .cover h1 em {
+    font-style: italic;
+    color: var(--teal-400);
+  }
+  .cover-sub {
+    font-size: 17px;
+    color: rgba(255,255,255,.6);
+    margin-bottom: 48px;
+    max-width: 600px;
+  }
+
+  .cover-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+  }
+  .cover-meta-item label {
+    display: block;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+  .cover-meta-item value {
+    display: block;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--white);
+  }
+  .cover-meta-item value.freeze {
+    color: var(--amber);
+  }
+
+  .freeze-banner {
+    margin-top: 48px;
+    background: rgba(232,160,32,.1);
+    border: 1px solid rgba(232,160,32,.3);
+    border-left: 3px solid var(--amber);
+    border-radius: 8px;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    color: var(--amber-lt);
+    font-size: 14px;
+  }
+  .freeze-banner strong { color: var(--amber); }
+
+  /* ── LAYOUT ── */
+  .page { max-width: 960px; margin: 0 auto; padding: 0 40px 80px; }
+
+  /* ── SECTION ── */
+  .section { margin-top: 60px; }
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 26px;
+    letter-spacing: -.015em;
+    color: var(--teal-900);
+    margin-bottom: 6px;
+  }
+  .section-desc {
+    color: var(--slate-mid);
+    font-size: 14.5px;
+    margin-bottom: 28px;
+    max-width: 900px;
+  }
+
+  /* ── SUMMARY CARDS ── */
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 0;
+  }
+  @media (max-width: 720px) {
+    .summary-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  .summary-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 18px;
+  }
+  .summary-card .num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 36px;
+    line-height: 1;
+    color: var(--teal-700);
+    margin-bottom: 4px;
+  }
+  .summary-card .lbl {
+    font-size: 12.5px;
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+  /* ── PRINCIPLE BOX ── */
+  .principle-box {
+    background: var(--teal-50);
+    border: 1px solid var(--teal-200);
+    border-left: 3px solid var(--teal-600);
+    border-radius: 10px;
+    padding: 20px 22px;
+    margin-bottom: 14px;
+  }
+  .principle-box strong {
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--teal-900);
+    display: block;
+    margin-bottom: 3px;
+  }
+  .principle-box p {
+    font-size: 13.5px;
+    color: var(--slate-mid);
+  }
+
+  /* ── FEATURE TABLES ── */
+  .module-block {
+    margin-bottom: 36px;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    background: var(--white);
+  }
+  .module-header {
+    background: var(--teal-900);
+    color: var(--white);
+    padding: 16px 22px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .module-header-left {
+    display: flex;
+    align-items: center;
+  }
+  .module-header .icon { display: none; }
+  .module-header h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 17px;
+    letter-spacing: -.01em;
+    color: var(--white);
+  }
+  .module-header .route {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--teal-400);
+    background: rgba(255,255,255,.08);
+    padding: 3px 9px;
+    border-radius: 6px;
+  }
+  .module-header .count-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    background: rgba(255,255,255,.12);
+    padding: 3px 9px;
+    border-radius: 100px;
+    color: var(--teal-200);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  thead tr {
+    background: var(--teal-50);
+    border-bottom: 1px solid var(--border);
+  }
+  thead th {
+    padding: 10px 16px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: left;
+    font-weight: 500;
+  }
+  tbody tr {
+    border-bottom: 1px solid #edf5f4;
+    transition: background .15s;
+  }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: var(--teal-50); }
+  td {
+    padding: 12px 16px;
+    font-size: 13.5px;
+    color: var(--slate);
+    vertical-align: top;
+  }
+  td.feature-name {
+    font-weight: 500;
+    color: var(--teal-900);
+  }
+  td.feature-desc {
+    color: var(--slate-mid);
+    font-size: 13px;
+  }
+
+  /* ── BADGES ── */
+  .badge {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    font-weight: 500;
+    padding: 3px 8px;
+    border-radius: 5px;
+    white-space: nowrap;
+  }
+
+  .badge-done   { background: var(--green-lt); color: var(--green); }
+  .badge-scope  { background: #e8e8f4; color: #3a3a6e; }
+  .badge-future  { background: #f2f2f2; color: #888; }
+
+  /* ── STATUS ROW ── */
+  .status-dot {
+    display: inline-block;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+  .dot-green  { background: var(--green); }
+  .dot-amber  { background: var(--amber); }
+  .dot-grey   { background: #bbb; }
+
+  /* ── FUTURE ROADMAP TABLE ── */
+  .deferred-block {
+    border: 1px solid #e0d8d0;
+    border-radius: 14px;
+    overflow: hidden;
+    background: var(--white);
+    margin-bottom: 20px;
+  }
+  .deferred-header {
+    background: #f7f3ee;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid #e0d8d0;
+  }
+  .deferred-header h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 16px;
+    color: #5a4a38;
+  }
+  .deferred-header .ver-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    background: #f0e8dd;
+    color: #8a6a4a;
+    padding: 2px 8px;
+    border-radius: 4px;
+  }
+
+  /* ── TEAM TABLE ── */
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  @media (max-width: 600px) { .team-grid { grid-template-columns: 1fr; } }
+  .team-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+  }
+  .team-card .team-name {
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--teal-800);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+  }
+  .team-card ul {
+    list-style: none;
+  }
+  .team-card ul li {
+    font-size: 13px;
+    color: var(--slate-mid);
+    padding: 5px 0;
+    border-bottom: 1px solid #f0f7f6;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .team-card ul li::before {
+    content: '→';
+    color: var(--teal-500);
+    flex-shrink: 0;
+    font-size: 11px;
+    margin-top: 2px;
+  }
+  .team-card ul li:last-child { border-bottom: none; }
+
+  /* ── ROADMAP ── */
+  .roadmap-timeline {
+    position: relative;
+    padding-left: 28px;
+  }
+  .roadmap-timeline::before {
+    content: '';
+    position: absolute;
+    left: 7px;
+    top: 8px;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--teal-500), var(--border));
+  }
+  .roadmap-item {
+    position: relative;
+    margin-bottom: 28px;
+  }
+  .roadmap-item::before {
+    content: '';
+    position: absolute;
+    left: -24px;
+    top: 7px;
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: var(--teal-500);
+    border: 2px solid var(--white);
+    box-shadow: 0 0 0 2px var(--teal-500);
+  }
+  .roadmap-item.future::before {
+    background: var(--white);
+    border-color: var(--border);
+    box-shadow: 0 0 0 2px var(--border);
+  }
+  .roadmap-item .ver {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--teal-600);
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+  .roadmap-item.future .ver { color: var(--muted); }
+  .roadmap-item h4 {
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--teal-900);
+    margin-bottom: 5px;
+  }
+  .roadmap-item.future h4 { color: var(--slate-mid); }
+  .roadmap-item p {
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .roadmap-item .tags {
+    margin-top: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .roadmap-item .tag {
+    font-size: 11.5px;
+    background: var(--teal-50);
+    color: var(--teal-700);
+    border: 1px solid var(--teal-200);
+    padding: 2px 9px;
+    border-radius: 100px;
+  }
+  .roadmap-item.future .tag {
+    background: #f5f5f5;
+    color: #999;
+    border-color: #e0e0e0;
+  }
+
+  /* ── SIGN-OFF ── */
+  .signoff-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+  }
+  @media (max-width: 640px) { .signoff-grid { grid-template-columns: repeat(2, 1fr); } }
+  .signoff-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    text-align: center;
+  }
+  .signoff-card .role {
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    font-family: 'DM Mono', monospace;
+    margin-bottom: 10px;
+  }
+  .signoff-card .sig-line {
+    height: 1px;
+    background: var(--border);
+    margin: 16px 0 6px;
+  }
+  .signoff-card .name {
+    font-size: 12px;
+    color: var(--slate-mid);
+    font-weight: 500;
+  }
+
+  /* ── FOOTER ── */
+  .doc-footer {
+    margin-top: 64px;
+    padding: 28px 40px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    max-width: 960px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* ── PRINT ── */
+  @media print {
+    .cover { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .module-header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-inner">
+    <div class="cover-badge">
+      <span class="dot"></span>
+      Internal Document · Confidential
+    </div>
+    <h1>AlgoPharma<br><em>V1.0 · Feature Freeze Document</em></h1>
+    <p class="cover-sub">Minimum Sellable Product scope definition and team alignment guide.</p>
+
+    <div class="cover-meta">
+      <div class="cover-meta-item">
+        <label>Product</label>
+        <value>AlgoPharma</value>
+      </div>
+      <div class="cover-meta-item">
+        <label>Version</label>
+        <value>1.0</value>
+      </div>
+      <div class="cover-meta-item">
+        <label>Feature Freeze Date</label>
+        <value class="freeze">2026 · 03 · 30</value>
+      </div>
+      <div class="cover-meta-item">
+        <label>Document Owner</label>
+        <value>Product &amp; Engineering</value>
+      </div>
+      <div class="cover-meta-item">
+        <label>Audience</label>
+        <value>Dev · QA · Marketing · Sales</value>
+      </div>
+    </div>
+
+    <div class="freeze-banner">
+
+      <span><strong>Feature Freeze Active as of 2026-03-30.</strong> After this date, only bug fixes, security patches, and UX polish are permitted in v1.0. All new feature requests must be triaged to the post-launch backlog.</span>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE BODY -->
+<div class="page">
+
+  <!-- 1. PURPOSE & PRINCIPLES -->
+  <div class="section">
+    <div class="section-label">01 · Purpose &amp; Principles</div>
+    <h2>Why We Freeze</h2>
+    <p class="section-desc">v1.0 is AlgoPharma's <strong>Minimum Sellable Product</strong> — not a prototype, but a polished, chargeable product that solves the core compliance workflow for Canadian pharmacy operators. Freezing features is how we actually ship.</p>
+    <div class="summary-grid">
+      <div class="principle-box">
+        <div>
+          <strong>Ship, Sell, Learn</strong>
+          <p>The discipline of freezing features ensures we can launch, generate revenue, and collect real-world feedback — instead of endlessly chasing "just one more feature."</p>
+        </div>
+      </div>
+      <div class="principle-box">
+        <div>
+          <strong>MSP, Not MVP</strong>
+          <p>v1.0 is polished enough to charge for. Every shipped feature must be complete, tested, and production-ready — no rough edges, no "we'll fix it post-launch."</p>
+        </div>
+      </div>
+      <div class="principle-box">
+        <div>
+          <strong>Freeze = Stability</strong>
+          <p>After 2026-03-30, the only permitted changes are bug fixes, accessibility improvements, copy corrections, and security patches. Any new feature request goes directly to the backlog.</p>
+        </div>
+      </div>
+      <div class="principle-box">
+        <div>
+          <strong>Future Roadmap</strong>
+          <p>v1.0 establishes the compliance foundation. Future releases will scale AlgoPharma into a comprehensive platform — always guided by customer feedback and strategic priorities.</p>
+        </div>
+      </div>
+    </div>
+
+    <h2 style="margin-top: 40px;">Product Scope, Users, and Guardrails</h2>
+    <p class="section-desc">To ensure clear alignment across all teams, the following defines exactly who our product serves and the central problems we are solving.</p>
+
+    <div class="principle-box">
+      <div>
+        <strong>Target Audience</strong>
+        <p>The primary users of AlgoPharma are Canadian pharmacy owners, Designated Managers (DMs), and compliance officers who are responsible for ensuring operations meet provincial college standards (e.g., OCP, ACP) and overriding federal guidelines (Health Canada, NAPRA).</p>
+      </div>
+    </div>
+    <div class="principle-box">
+      <div>
+        <strong>Core Value Proposition (What We Solve)</strong>
+        <p>AlgoPharma reduces the administrative burden of operating a compliant pharmacy. By centralizing regulatory intelligence, it accelerates the drafting of SOPs, simplifies incident reporting (CPhIR), and actively guides pharmacies through preparing for—or responding to—regulatory inspections.</p>
+      </div>
+    </div>
+    <div class="principle-box" style="background: var(--amber-lt); border-color: var(--amber); border-left-color: var(--amber);">
+      <div>
+        <strong>Out of Scope (What We Are NOT Building)</strong>
+        <p>AlgoPharma is purpose-built as an operational compliance platform, not a clinical or patient-facing system. It excludes medical properties such as prescription handling, theranostics, and patient records, as well as pharmacy dispensing, EMR, point-of-sale, and advanced inventory tracking. This deliberate scope ensures we stay focused on compliance workflows.</p>
+      </div>
+    </div>
+    <div class="principle-box" style="background: var(--amber-lt); border-color: var(--amber); border-left-color: var(--amber);">
+      <div>
+        <strong>Human Oversight & AI Fallibility</strong>
+        <p>The platform augments administrative workflows but does not replace the professional judgment of a licensed pharmacist. It cannot fully eliminate human error, and accountability for compliance adherence remains with the pharmacy’s designated manager. AI‑generated documents, chat responses, and regulatory interpretations may contain inaccuracies; all outputs must be critically reviewed and independently verified by a qualified compliance officer before adoption.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. IN-SCOPE FEATURES -->
+  <div class="section">
+    <div class="section-label">02 · In-Scope Features (v1.0)</div>
+    <h2>Launch Scope</h2>
+    <p class="section-desc">v1.0 ships <strong>7 modules</strong> covering the full compliance workflow for Canadian pharmacy operators. All 34 features are in scope, tested, and complete.</p>
+
+    <!-- Module 1: Home / AI Chat -->
+    <div class="module-block">
+      <div class="module-header">
+        <div class="module-header-left">
+          <h3>1. AI Compliance Chat</h3>
+          <span class="route">/home</span>
+        </div>
+        <span class="count-badge">4 features</span>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th style="width:30%">Feature</th>
+            <th style="width:48%">Description</th>
+            <th style="width:22%">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="feature-name">Compliance Q&amp;A Chat</td>
+            <td class="feature-desc">Natural language chat interface to query pharmacy regulations (NAPRA, Health Canada, provincial bodies).</td>
+            <td><span class="status-dot dot-green"></span>Complete</td>
+          </tr>
+          <tr>
+            <td class="feature-name">Deep Thinking Mode</td>
+            <td class="feature-desc">Extended reasoning for complex regulatory questions requiring multi-source analysis.</td>
+            <td><span class="status-dot dot-green"></span>Complete</td>
+          </tr>
+          <tr>
+            <td class="feature-name">Generate Compliance Docs</td>
+            <td class="feature-desc">One-click generation of compliance documents from chat responses.</td>
+            <td><span class="status-dot dot-green"></span>Complete</td>
+          </tr>
+          <tr>
+            <td class="feature-name">Suggested Prompts</td>
+            <td class="feature-desc">Pre-built prompts covering GMP, NAPRA compounding, and Health Canada enforcement.</td>
+            <td><span class="status-dot dot-green"></span>Complete</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Module 2: SOP -->
+    <div class="module-block">
+      <div class="module-header">
+        <div class="module-header-left">
+          <h3>2. SOP Management</h3>
+          <span class="route">/sop</span>
+        </div>
+        <span class="count-badge">5 features</span>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th style="width:30%">Feature</th>
+            <th style="width:48%">Description</th>
+            <th style="width:22%">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="feature-name">AI Compliance Scan</td>
+            <td class="feature-desc">Upload a PDF SOP; AI identifies non-compliant clauses and missing regulatory requirements via section-level analysis.</td>
+            <td><span class="status-dot dot-green"></span>Complete</td>
+          </tr>
+          <tr>
+            <td class="feature-name">AI SOP Generator</td>
+            <td class="feature-desc">Generate full SOPs from regulatory knowledge base in Script Pharmacy format, with citations.</td>
+            <td><span class="status-dot dot-green"></span>Complete</td>
+          </tr>
+          <tr>
+            <td class="feature-name">SOP Topic Categories</td>
+            <td class="feature-desc">Dropdown of pharmacy-specific SOP categories tied to the regulatory knowledge base.</td>
+            <td><span class="status-dot dot-green"></span>Complete</td>
+          </tr>
+          <tr>
+            <td class="feature-name">Edited SOP Panel</td>
+            <td class="feature-desc">In-app editor to review and modify generated SOPs before saving.</td>
+            <td><span class="status-dot dot-green"></span>Complete</td>
+          </tr>
+          <tr>
+            <td class="feature-name">Auto Review Mode</td>
+            <td class="feature-desc">Automated re-scan of an edited SOP to verify compliance after changes.</td>
+            <td><span class="status-dot dot-green"></span>Complete</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Module 3: Inspection Report Intelligence -->
+    <div class="module-block">
+      <div class="module-header">
+        <div class="module-header-left">
+          <h3>3. Inspection Report Intelligence</h3>
+          <span class="route">/inspection</span>
+        </div>
+        <span class="count-badge">10 features</span>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th style="width:30%">Feature</th>
+            <th style="width:48%">Description</th>
+            <th style="width:22%">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="feature-name">PDF Inspection Upload</td>
+            <td class="feature-desc">Drag-and-drop upload of ACP inspection reports (PDF, DOCX, scanned images).</td>
+            <td><span class="status-dot dot-green"></span>Complete</td>
+          </tr>
+          <tr>
+            <td class="feature-name">AI Findings Analysis</td>
+            <td class="feature-desc">Automatically parse and categorise findings into Statutory, Regulatory, and Guidance tiers with severity tagging.</td>
+            <td><span class="status-dot dot-green"></span>Complete</td>
+          </tr>
+          <tr>
+            <td class="feature-name">AI Insights &amp; Recommendations</td>
+            <td class="feature-desc">Summary dashboard with key critical findings, priority breakdown, and estimated resolution timeframe.</td>
+            <td><span class="status-dot dot-green"></span>Complete</td>
+          </tr>
+          <tr>
+            <td class="feature-name">Issue Tracker</td>
+            <td class="feature-desc">Persistent issue tracker with status management across all detected findings.</td>
+            <td><span class="status-dot dot-green"></span>Complete</td>
+          </tr>
+          <tr>
+            <td class="feature-name">AI-Generated Subtasks</td>
+            <td class="feature-desc">Per-finding actionable subtask lists with HIGH/MEDIUM/LOW priority labels.</td>
+            <td><span class="status-dot dot-green"></span>Complete</td>
+          </tr>
+          <tr>
+            <td class="feature-name">Response Drafting</td>
+            <td class="feature-desc">AI-generated formal response drafts for each inspection finding, editable in-app.</td>
+            <td><span class="status-dot dot-green"></span>Complete</td>
+          </tr>
+          <tr>
+            <td class="feature-name">Inspection Finding Export (PDF)</td>
+            <td class="feature-desc">Formatted PDF export of the full action report.</td>
+            <td><span class="status-dot dot-green"></span>Complete</td>
+          </tr>
+          <tr>
+            <td class="feature-name">Reference Sources Panel</td>
+            <td class="feature-desc">Cited NAPRA/USP source documents linked per finding with page-level preview.</td>
+            <td><span class="status-dot dot-green"></span>Complete</td>
+          </tr>
+          <tr>
+            <td class="feature-name">Q&amp;A Chat on Report</td>
+            <td class="feature-desc">Natural language chat interface to query the uploaded inspection report directly for specific findings and clarifications.</td>
+            <td><span class="status-dot dot-green"></span>Complete</td>
+          </tr>
+          <tr>
+            <td class="feature-name">Consolidated Response Generator</td>
+            <td class="feature-desc">Generate a single consolidated formal response document across all findings with configurable tone and format selection.</td>
+            <td><span class="status-dot dot-green"></span>Complete</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Module 4: Pre-Inspection Intelligence -->
+    <div class="module-block">
+      <div class="module-header">
+        <div class="module-header-left">
+          <h3>4. Pre-Inspection Intelligence</h3>
+          <span class="route">/pre-inspection</span>
+        </div>
+        <span class="count-badge">3 features</span>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th style="width:30%">Feature</th>
+            <th style="width:48%">Description</th>
+            <th style="width:22%">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="feature-name">Inspector Intelligence Profiles</td>
+            <td class="feature-desc">Behavioural pattern profiles for auditors: audit pacing tendencies, frequently cited regulations, and focus areas.</td>
+            <td><span class="status-dot dot-green"></span>Complete</td>
+          </tr>
+          <tr>
+            <td class="feature-name">AI Predictive Insights</td>
+            <td class="feature-desc">AI-generated predictions of likely findings based on the assigned inspector profile and pharmacy's historical data.</td>
+            <td><span class="status-dot dot-green"></span>Complete</td>
+          </tr>
+          <tr>
+            <td class="feature-name">Pre-Inspection Prep Checklists</td>
+            <td class="feature-desc">Dynamically generated preparation checklists tailored to upcoming auditor profiles and known compliance gaps.</td>
+            <td><span class="status-dot dot-green"></span>Complete</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Module 5: ISMP CPhIR -->
+    <div class="module-block">
+      <div class="module-header">
+        <div class="module-header-left">
+          <h3>5. ISMP CPhIR Medication Incident Reports</h3>
+          <span class="route">/ismp</span>
+        </div>
+        <span class="count-badge">4 features</span>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th style="width:30%">Feature</th>
+            <th style="width:48%">Description</th>
+            <th style="width:22%">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="feature-name">Incident Report Form</td>
+            <td class="feature-desc">ISMP-compliant structured form (date, time, discovered-by, age range, gender, prescriber, pharmacy, province).</td>
+            <td><span class="status-dot dot-green"></span>Complete</td>
+          </tr>
+          <tr>
+            <td class="feature-name">Telus Kroll CSV Import</td>
+            <td class="feature-desc">Upload Patient List CSV + Rx History CSV to auto-populate incident forms; PII stripped immediately.</td>
+            <td><span class="status-dot dot-green"></span>Complete</td>
+          </tr>
+          <tr>
+            <td class="feature-name">Demo Data Load</td>
+            <td class="feature-desc">One-click demo session for onboarding and sales demonstrations.</td>
+            <td><span class="status-dot dot-green"></span>Complete</td>
+          </tr>
+          <tr>
+            <td class="feature-name">AI Report Generation</td>
+            <td class="feature-desc">Generate a formatted ISMP-compliant incident report from form data with AI assistance.</td>
+            <td><span class="status-dot dot-green"></span>Complete</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+
+    <!-- Module 6: Library -->
+    <div class="module-block">
+      <div class="module-header">
+        <div class="module-header-left">
+          <h3>6. My Library</h3>
+          <span class="route">/library</span>
+        </div>
+        <span class="count-badge">2 features</span>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th style="width:30%">Feature</th>
+            <th style="width:48%">Description</th>
+            <th style="width:22%">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="feature-name">Private Document Upload</td>
+            <td class="feature-desc">Upload private PDF SOPs and regulation documents (max 100 MB) to augment the AI knowledge base with automatic indexing.</td>
+            <td><span class="status-dot dot-green"></span>Complete</td>
+          </tr>
+          <tr>
+            <td class="feature-name">Library &amp; Semantic Search</td>
+            <td class="feature-desc">Centralized repository for management of all uploaded documents with full-text and context-aware semantic search.</td>
+            <td><span class="status-dot dot-green"></span>Complete</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Module 7: Platform Settings -->
+    <div class="module-block">
+      <div class="module-header">
+        <div class="module-header-left">
+          <h3>7. Platform &amp; Core Infrastructure</h3>
+          <span class="route">/settings</span>
+        </div>
+        <span class="count-badge">6 features</span>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th style="width:30%">Feature</th>
+            <th style="width:48%">Description</th>
+            <th style="width:22%">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="feature-name">Authentication System</td>
+            <td class="feature-desc">Secure Login, Sign-out, and Sign-up workflows for individual pharmacy users.</td>
+            <td><span class="status-dot dot-green"></span>Complete</td>
+          </tr>
+          <tr>
+            <td class="feature-name">Multi-user Team Accounts</td>
+            <td class="feature-desc">Role-based access control, multi-user pharmacy accounts, and team activity feeds.</td>
+            <td><span class="status-dot dot-green"></span>Complete</td>
+          </tr>
+          <tr>
+            <td class="feature-name">Account &amp; Profile</td>
+            <td class="feature-desc">Management of personal credentials, email preferences, and account metadata.</td>
+            <td><span class="status-dot dot-green"></span>Complete</td>
+          </tr>
+          <tr>
+            <td class="feature-name">Pharmacy Identity</td>
+            <td class="feature-desc">Selection and setup of pharmacy location, province, and regulatory context.</td>
+            <td><span class="status-dot dot-green"></span>Complete</td>
+          </tr>
+          <tr>
+            <td class="feature-name">Integrated Feedback Tool</td>
+            <td class="feature-desc">In-app widget for bugs and feature requests directly from the live platform.</td>
+            <td><span class="status-dot dot-green"></span>Complete</td>
+          </tr>
+          <tr>
+            <td class="feature-name">Automated Regulatory Change Alerts</td>
+            <td class="feature-desc">Push notifications when NAPRA/Health Canada publish regulation updates affecting the user's knowledge base.</td>
+            <td><span class="status-dot dot-green"></span>Complete</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 4. TEAM ALIGNMENT -->
+  <div class="section">
+    <div class="section-label">03 · Team Alignment</div>
+    <h2>Responsibilities Post-Freeze</h2>
+    <p class="section-desc">Every team works from this document as the single source of truth. No verbal scope changes are binding — all changes must be logged as a formal backlog item.</p>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-name">Engineering</div>
+        <ul>
+          <li>Only bug fixes and approved polish changes after 2026-03-30</li>
+          <li>All new feature PRs must be tagged "post-v1.0" and not merged to main</li>
+          <li>Complete remaining QA items and load testing before target launch date</li>
+          <li>Freeze branch "release/v1.0" — no feature merges permitted</li>
+        </ul>
+      </div>
+      <div class="team-card">
+        <div class="team-name">QA</div>
+        <ul>
+          <li>Test all 34 in-scope features against acceptance criteria</li>
+          <li>Regression test after every bug-fix commit to release/v1.0</li>
+          <li>Document known limitations (not bugs) so Sales can position correctly</li>
+          <li>Sign-off required before public launch is authorised</li>
+        </ul>
+      </div>
+      <div class="team-card">
+        <div class="team-name">Marketing</div>
+        <ul>
+          <li>All landing page copy and feature lists must reflect v1.0 scope only</li>
+          <li>Do not advertise unshipped features</li>
+          <li>Prepare launch materials: demo video, case study (Strathcona Compounding), and email sequence</li>
+          <li>Coordinate launch date with Product for coordinated go-live</li>
+        </ul>
+      </div>
+      <div class="team-card">
+        <div class="team-name">Sales</div>
+        <ul>
+          <li>Be transparent about product limitations and deferred features when managing prospect expectations</li>
+          <li>All demos must use the demo data loader; do not promise custom integrations in v1.0</li>
+          <li>Feature requests from prospects → log in backlog; never promise timelines unilaterally</li>
+          <li>ISMP CPhIR direct submission is NOT in v1.0 — communicate clearly</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. SIGN-OFF -->
+  <div class="section">
+    <div class="section-label">04 · Sign-Off</div>
+    <h2>Team Acknowledgement</h2>
+    <p class="section-desc">Each team lead must sign off on this document to confirm they have read, understood, and agreed to work within the defined v1.0 scope. Signatures confirm alignment — not approval to ship.</p>
+    <div class="signoff-grid">
+      <div class="signoff-card">
+        <div class="role">Product</div>
+        <div class="sig-line"></div>
+        <div class="name">Product Lead</div>
+      </div>
+      <div class="signoff-card">
+        <div class="role">Engineering</div>
+        <div class="sig-line"></div>
+        <div class="name">Engineering Lead</div>
+      </div>
+      <div class="signoff-card">
+        <div class="role">QA</div>
+        <div class="sig-line"></div>
+        <div class="name">QA Lead</div>
+      </div>
+      <div class="signoff-card">
+        <div class="role">Marketing</div>
+        <div class="sig-line"></div>
+        <div class="name">Marketing Lead</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="doc-footer">
+  <span>AlgoPharma · v1.0 Feature Freeze Document</span>
+  <span>Confidential · Internal Use Only · © 2026 Algo-Rythmn Corp</span>
+  <span>Feature Freeze: 2026-03-30</span>
+</div>
+
+</body>
+</html>
