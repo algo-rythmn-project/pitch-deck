@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algo-Rythmn.ai × ICE — Intelligence Layer MVP</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --ice-navy:   #0A1628;
+            --ice-dark:   #0D1F3C;
+            --ice-blue:   #0050FF;
+            --ice-cyan:   #00C2E0;
+            --ice-gold:   #F5A623;
+            --ice-green:  #00D68F;
+            --ice-red:    #FF4D4D;
+            --surface:    #FFFFFF;
+            --surface2:   #F4F7FB;
+            --text:       #0D1F3C;
+            --muted:      #5A6B85;
+            --border:     #DDE4EF;
+            --r-xl: 28px;
+            --r-lg: 20px;
+            --r-md: 14px;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.05);
+            --shadow-md: 0 8px 24px rgba(0,18,60,0.08);
+            --shadow-lg: 0 20px 48px rgba(0,18,60,0.12);
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Sora', sans-serif;
+            background: var(--surface2);
+            color: var(--text);
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+
+        /* ── TICKER ── */
+        .ticker-wrap {
+            background: var(--ice-navy);
+            overflow: hidden;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        .ticker {
+            display: flex;
+            gap: 48px;
+            animation: ticker 30s linear infinite;
+            white-space: nowrap;
+        }
+        .ticker span {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.45);
+            letter-spacing: 0.08em;
+        }
+        .ticker span.up   { color: #00D68F; }
+        .ticker span.down { color: #FF4D4D; }
+        @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+        /* ── NAV ── */
+        nav {
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            position: sticky; top: 0; z-index: 100;
+            box-shadow: 0 1px 0 var(--border);
+        }
+        .nav-inner {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 18px 0;
+        }
+        .nav-logo {
+            display: flex; align-items: center; gap: 14px;
+        }
+        .logo-mark {
+            width: 38px; height: 38px; border-radius: 10px;
+            background: var(--ice-navy);
+            display: flex; align-items: center; justify-content: center;
+        }
+        .logo-mark svg { width: 20px; height: 20px; }
+        .logo-name { font-size: 1.1rem; font-weight: 700; color: var(--ice-navy); letter-spacing: -0.02em; }
+        .logo-sep { width: 1px; height: 20px; background: var(--border); }
+        .logo-target { font-size: 0.85rem; font-weight: 600; color: var(--muted); }
+
+        .nav-cta {
+            display: flex; align-items: center; gap: 12px;
+        }
+        .btn-ghost {
+            padding: 9px 20px; border-radius: 8px; font-size: 0.875rem; font-weight: 600;
+            color: var(--muted); text-decoration: none; transition: color 0.2s;
+        }
+        .btn-ghost:hover { color: var(--ice-navy); }
+        .btn-primary {
+            padding: 9px 22px; border-radius: 8px; font-size: 0.875rem; font-weight: 700;
+            background: var(--ice-blue); color: white; text-decoration: none;
+            display: flex; align-items: center; gap: 8px;
+            box-shadow: 0 4px 12px rgba(0,80,255,0.3);
+            transition: all 0.2s;
+        }
+        .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(0,80,255,0.4); }
+
+        /* ── HERO ── */
+        .hero {
+            background: var(--ice-navy);
+            overflow: hidden;
+            position: relative;
+            padding: 100px 0 80px;
+        }
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+        .hero-eyebrow {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 40px; padding: 6px 16px;
+            font-size: 0.78rem; font-weight: 600;
+            color: var(--ice-cyan); letter-spacing: 0.06em; text-transform: uppercase;
+            margin-bottom: 28px;
+        }
+        .hero-eyebrow span { width: 6px; height: 6px; background: var(--ice-cyan); border-radius: 50%; display: inline-block; animation: pulse 2s infinite; }
+        @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
+
+        .hero h1 {
+            font-size: 3.4rem; font-weight: 800; line-height: 1.08;
+            letter-spacing: -0.04em; color: white; margin-bottom: 24px;
+        }
+        .hero h1 .grad {
+            background: linear-gradient(90deg, var(--ice-cyan), var(--ice-blue));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .hero-sub { font-size: 1.1rem; color: rgba(255,255,255,0.55); line-height: 1.7; margin-bottom: 40px; }
+
+        .hero-pills { display: flex; flex-wrap: wrap; gap: 10px; }
+        .h-pill {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 40px; padding: 8px 16px;
+            font-size: 0.82rem; font-weight: 500; color: rgba(255,255,255,0.7);
+        }
+        .h-pill i { color: var(--ice-cyan); font-size: 0.75rem; }
+
+        /* Hero right: terminal mock */
+        .hero-terminal {
+            background: #0B1622;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: var(--r-xl);
+            overflow: hidden;
+            box-shadow: 0 32px 64px rgba(0,0,0,0.4);
+        }
+        .terminal-bar {
+            background: #141F2E;
+            padding: 12px 20px;
+            display: flex; align-items: center; gap: 8px;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        .dot { width: 10px; height: 10px; border-radius: 50%; }
+        .dot-r { background: #FF5F57; }
+        .dot-y { background: #FFBD2E; }
+        .dot-g { background: #28C840; }
+        .terminal-title { font-family: 'DM Mono', monospace; font-size: 0.72rem; color: rgba(255,255,255,0.3); margin-left: 8px; }
+        .terminal-body { padding: 24px; }
+        .t-line { font-family: 'DM Mono', monospace; font-size: 0.78rem; line-height: 1.8; }
+        .t-prompt { color: var(--ice-cyan); }
+        .t-cmd    { color: rgba(255,255,255,0.9); }
+        .t-out    { color: rgba(255,255,255,0.45); padding-left: 14px; }
+        .t-green  { color: var(--ice-green); }
+        .t-gold   { color: var(--ice-gold); }
+        .t-red    { color: var(--ice-red); }
+        .t-blue   { color: #79B4FF; }
+        .t-gap    { height: 10px; }
+
+        /* Hero BG decoration */
+        .hero-bg-grid {
+            position: absolute; inset: 0; pointer-events: none;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+        .hero-glow {
+            position: absolute; top: -200px; right: -200px;
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(0,80,255,0.15) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        /* ── SECTION WRAPPERS ── */
+        section { padding: 80px 0; }
+        .sec-label {
+            display: inline-flex; align-items: center; gap: 8px;
+            font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+            color: var(--ice-blue); margin-bottom: 16px;
+        }
+        .sec-label::before {
+            content: ''; display: block; width: 20px; height: 2px; background: var(--ice-blue);
+        }
+        .sec-title { font-size: 2.4rem; font-weight: 800; letter-spacing: -0.03em; color: var(--ice-navy); line-height: 1.15; margin-bottom: 16px; }
+        .sec-desc { font-size: 1.05rem; color: var(--muted); max-width: 580px; line-height: 1.7; }
+
+        /* ── PROBLEM ── */
+        .problem-section { background: var(--surface); }
+        .problem-layout { display: grid; grid-template-columns: 1fr 2fr; gap: 80px; align-items: start; }
+        .problem-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .p-card {
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            border-radius: var(--r-lg);
+            padding: 28px 24px;
+            transition: all 0.25s;
+        }
+        .p-card:hover { border-color: #b0bfd6; box-shadow: var(--shadow-md); transform: translateY(-3px); }
+        .p-icon { 
+            width: 48px; height: 48px; border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            background: rgba(0, 80, 255, 0.08); color: var(--ice-blue);
+            font-size: 1.35rem; margin-bottom: 20px; 
+        }
+        .p-card h4 { font-size: 1rem; font-weight: 700; color: var(--ice-navy); margin-bottom: 8px; }
+        .p-card p { font-size: 0.875rem; color: var(--muted); line-height: 1.6; }
+
+        /* ICE Opportunity quote bar */
+        .ice-quote {
+            background: linear-gradient(135deg, #EBF3FF 0%, #F0FBFD 100%);
+            border: 1px solid #C8DFFF;
+            border-left: 4px solid var(--ice-blue);
+            border-radius: var(--r-lg);
+            padding: 28px 32px;
+            margin: 48px 0 0;
+        }
+        .ice-quote p { font-size: 1rem; color: var(--text); line-height: 1.7; font-style: italic; }
+        .ice-quote cite { display: block; margin-top: 12px; font-size: 0.8rem; font-weight: 700; color: var(--ice-blue); font-style: normal; letter-spacing: 0.04em; text-transform: uppercase; }
+
+        /* ── MVP DELIVERABLES ── */
+        .mvp-section { background: var(--ice-navy); position: relative; overflow: hidden; }
+        .mvp-section .hero-bg-grid { opacity: 0.5; }
+        .mvp-section .sec-label { color: var(--ice-cyan); }
+        .mvp-section .sec-label::before { background: var(--ice-cyan); }
+        .mvp-section .sec-title { color: white; }
+        .mvp-section .sec-desc { color: rgba(255,255,255,0.5); }
+
+        .mvp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 56px; }
+        .mvp-card {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.09);
+            border-radius: var(--r-xl);
+            padding: 36px 30px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .mvp-card::after {
+            content: attr(data-num);
+            position: absolute; top: -16px; right: 20px;
+            font-size: 6rem; font-weight: 800;
+            color: rgba(255,255,255,0.03);
+            line-height: 1; font-family: 'DM Mono', monospace;
+        }
+        .mvp-card:hover { background: rgba(255,255,255,0.07); border-color: rgba(255,255,255,0.18); transform: translateY(-4px); }
+        .mvp-num { font-family: 'DM Mono', monospace; font-size: 0.72rem; color: rgba(255,255,255,0.3); margin-bottom: 16px; letter-spacing: 0.12em; }
+        .mvp-icon {
+            width: 52px; height: 52px; border-radius: 14px;
+            display: flex; align-items: center; justify-content: center;
+            margin-bottom: 24px; font-size: 1.3rem;
+        }
+        .mvp-icon.blue  { background: rgba(0,80,255,0.2); color: #79B4FF; }
+        .mvp-icon.cyan  { background: rgba(0,194,224,0.2); color: var(--ice-cyan); }
+        .mvp-icon.green { background: rgba(0,214,143,0.15); color: var(--ice-green); }
+        .mvp-card h3 { font-size: 1.2rem; font-weight: 700; color: white; margin-bottom: 12px; line-height: 1.3; }
+        .mvp-card p { font-size: 0.88rem; color: rgba(255,255,255,0.5); line-height: 1.7; margin-bottom: 24px; }
+        .mvp-bullets { list-style: none; }
+        .mvp-bullets li {
+            display: flex; align-items: flex-start; gap: 10px;
+            font-size: 0.82rem; color: rgba(255,255,255,0.6);
+            margin-bottom: 10px; line-height: 1.5;
+        }
+        .mvp-bullets li i { color: var(--ice-cyan); margin-top: 3px; flex-shrink: 0; font-size: 0.65rem; }
+
+        /* Example query blocks inside cards */
+        .example-query {
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 10px;
+            padding: 14px 16px;
+            margin-top: 20px;
+        }
+        .eq-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.25); margin-bottom: 8px; }
+        .eq-text { font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--ice-cyan); line-height: 1.5; }
+
+        /* ── PROOF (AgEinstein) ── */
+        .proof-section { background: var(--surface); }
+        .proof-layout { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 60px; align-items: center; }
+        .proof-partner {
+            background: linear-gradient(135deg, var(--ice-navy) 0%, #0D2B56 100%);
+            border-radius: var(--r-xl);
+            padding: 48px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        .proof-partner::before {
+            content: '';
+            position: absolute; top: 0; left: 0; right: 0; height: 3px;
+            background: linear-gradient(90deg, var(--ice-blue), var(--ice-cyan));
+        }
+        .proof-partner h3 { font-size: 1.6rem; font-weight: 800; margin-bottom: 16px; line-height: 1.25; }
+        .proof-partner p { font-size: 0.95rem; color: rgba(255,255,255,0.55); line-height: 1.7; margin-bottom: 28px; }
+        .proof-list { list-style: none; margin-bottom: 32px; }
+        .proof-list li { display: flex; align-items: flex-start; gap: 12px; font-size: 0.88rem; color: rgba(255,255,255,0.7); margin-bottom: 12px; line-height: 1.5; }
+        .proof-list li i { color: var(--ice-green); flex-shrink: 0; margin-top: 3px; }
+        .proof-link {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: white; color: var(--ice-navy);
+            padding: 11px 22px; border-radius: 40px; text-decoration: none;
+            font-weight: 700; font-size: 0.875rem;
+            transition: all 0.2s;
+        }
+        .proof-link:hover { background: var(--ice-cyan); color: var(--ice-navy); }
+
+        .partner-cards { display: flex; flex-direction: column; gap: 16px; }
+        .pt-card {
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            border-radius: var(--r-lg);
+            padding: 24px;
+        }
+        .pt-card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+        .pt-card-icon { width: 40px; height: 40px; border-radius: 10px; background: var(--ice-navy); display: flex; align-items: center; justify-content: center; color: white; font-size: 1rem; flex-shrink: 0; }
+        .pt-card-title { font-weight: 700; font-size: 0.95rem; color: var(--ice-navy); }
+        .pt-card-sub { font-size: 0.78rem; color: var(--muted); }
+        .pt-card p { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
+
+        /* ── PILOT PLAN ── */
+        .pilot-section { background: var(--surface2); }
+        .pilot-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 56px; }
+
+        .phase-card {
+            border-radius: var(--r-xl); padding: 40px;
+            position: relative; overflow: hidden;
+        }
+        .phase-card.active {
+            background: var(--ice-navy); color: white;
+            box-shadow: 0 24px 48px rgba(10,22,40,0.25);
+        }
+        .phase-card.future {
+            background: var(--surface); border: 2px dashed var(--border); color: var(--text);
+        }
+        .phase-tag {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 6px 14px; border-radius: 40px;
+            font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+            margin-bottom: 28px;
+        }
+        .phase-tag.active-tag { background: rgba(0,198,224,0.2); color: var(--ice-cyan); border: 1px solid rgba(0,198,224,0.3); }
+        .phase-tag.future-tag { background: var(--surface2); color: var(--muted); border: 1px solid var(--border); }
+        .phase-card h3 { font-size: 1.5rem; font-weight: 800; margin-bottom: 10px; line-height: 1.25; }
+        .phase-card.active h3 { color: white; }
+        .phase-card.future h3 { color: var(--ice-navy); }
+        .phase-card .phase-sub { font-size: 0.9rem; margin-bottom: 28px; opacity: 0.6; }
+        .phase-items { list-style: none; }
+        .phase-items li {
+            display: flex; align-items: flex-start; gap: 12px;
+            font-size: 0.875rem; margin-bottom: 14px; line-height: 1.55;
+        }
+        .phase-card.active .phase-items li { color: rgba(255,255,255,0.75); }
+        .phase-card.future .phase-items li { color: var(--muted); }
+        .phase-items li i { flex-shrink: 0; margin-top: 3px; font-size: 0.7rem; }
+        .phase-card.active .phase-items li i { color: var(--ice-cyan); }
+        .phase-card.future .phase-items li i { color: var(--muted); }
+
+        /* Pilot metrics bar */
+        .metrics-bar {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--r-xl);
+            padding: 36px 40px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+            margin-top: 32px;
+        }
+        .metric { text-align: center; }
+        .metric-val { font-size: 2.2rem; font-weight: 800; color: var(--ice-blue); letter-spacing: -0.04em; margin-bottom: 6px; }
+        .metric-label { font-size: 0.8rem; color: var(--muted); font-weight: 500; line-height: 1.4; }
+
+        /* ── WHY AR ── */
+        .why-section { background: var(--surface); }
+        .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 56px; }
+        .why-card {
+            padding: 32px 28px;
+            border: 1px solid var(--border);
+            border-radius: var(--r-xl);
+            transition: all 0.25s;
+        }
+        .why-card:hover { border-color: #b0c7e8; box-shadow: var(--shadow-lg); transform: translateY(-4px); }
+        .why-num { font-family: 'DM Mono', monospace; font-size: 2.5rem; font-weight: 500; color: var(--ice-blue); opacity: 0.2; margin-bottom: 8px; line-height: 1; }
+        .why-card h4 { font-size: 1.05rem; font-weight: 700; color: var(--ice-navy); margin-bottom: 10px; }
+        .why-card p { font-size: 0.875rem; color: var(--muted); line-height: 1.7; }
+
+        /* Partnership value table */
+        .value-table {
+            background: linear-gradient(135deg, #EBF3FF, #F0FBFD);
+            border: 1px solid #C8DFFF;
+            border-radius: var(--r-xl);
+            overflow: hidden;
+            margin-top: 48px;
+        }
+        .vt-header {
+            display: grid; grid-template-columns: 1fr 1fr;
+            background: var(--ice-navy); color: white;
+            padding: 16px 32px;
+            font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+        }
+        .vt-row {
+            display: grid; grid-template-columns: 1fr 1fr;
+            padding: 18px 32px; border-bottom: 1px solid #C8DFFF;
+            font-size: 0.875rem;
+        }
+        .vt-row:last-child { border-bottom: none; }
+        .vt-row:nth-child(even) { background: rgba(255,255,255,0.5); }
+        .vt-row .col-a { color: var(--muted); font-weight: 500; }
+        .vt-row .col-b { color: var(--text); font-weight: 600; display: flex; align-items: center; gap: 8px; }
+        .vt-row .col-b i { color: var(--ice-green); font-size: 0.75rem; }
+
+        /* ── TEAM ── */
+        .team-section { background: var(--surface2); }
+        .team-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 56px; }
+        .tm-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--r-xl);
+            padding: 36px 32px;
+            transition: all 0.25s;
+        }
+        .tm-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-3px); }
+        .tm-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 20px; }
+        .tm-role-badge {
+            display: inline-block;
+            padding: 5px 12px; border-radius: 40px;
+            font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+            background: #EBF3FF; color: var(--ice-blue); border: 1px solid #C8DFFF;
+        }
+        .tm-mvp-badge {
+            font-size: 0.7rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+            color: var(--ice-green); background: rgba(0,214,143,0.1); border: 1px solid rgba(0,214,143,0.25);
+            padding: 4px 10px; border-radius: 40px;
+        }
+        .tm-name { font-size: 1.4rem; font-weight: 800; color: var(--ice-navy); margin-bottom: 16px; letter-spacing: -0.02em; }
+        .tm-points { list-style: none; }
+        .tm-points li { display: flex; align-items: flex-start; gap: 10px; font-size: 0.875rem; color: var(--muted); margin-bottom: 10px; line-height: 1.55; }
+        .tm-points li i { color: var(--ice-blue); flex-shrink: 0; margin-top: 3px; font-size: 0.7rem; }
+        .tm-mvp-line {
+            margin-top: 20px; padding-top: 20px;
+            border-top: 1px solid var(--border);
+            font-size: 0.8rem; font-weight: 600; color: var(--ice-blue);
+            display: flex; align-items: center; gap: 8px;
+        }
+        .tm-mvp-line i { font-size: 0.7rem; }
+
+        /* ── FOOTER ── */
+        footer {
+            background: var(--ice-navy);
+            padding: 60px 0 32px;
+        }
+        .footer-top {
+            display: flex; justify-content: space-between; align-items: flex-start;
+            padding-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,0.07);
+            margin-bottom: 32px;
+        }
+        .f-brand { font-size: 1.4rem; font-weight: 800; color: white; letter-spacing: -0.02em; margin-bottom: 8px; }
+        .f-tagline { font-size: 0.85rem; color: rgba(255,255,255,0.3); }
+        .f-links { display: flex; flex-direction: column; gap: 10px; text-align: right; }
+        .f-link { color: rgba(255,255,255,0.4); text-decoration: none; font-size: 0.88rem; display: flex; align-items: center; gap: 8px; transition: color 0.2s; justify-content: flex-end; }
+        .f-link:hover { color: var(--ice-cyan); }
+        .footer-bottom { display: flex; justify-content: space-between; color: rgba(255,255,255,0.2); font-size: 0.8rem; }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 1024px) {
+            .hero h1 { font-size: 2.6rem; }
+            .hero-grid { gap: 48px; }
+            .mvp-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 900px) {
+            .hero-grid, .proof-layout, .problem-layout { grid-template-columns: 1fr; }
+            .hero-terminal { display: none; }
+            .pilot-layout { grid-template-columns: 1fr; }
+            .why-grid { grid-template-columns: 1fr 1fr; }
+            .metrics-bar { grid-template-columns: 1fr 1fr; gap: 24px; }
+        }
+        @media (max-width: 640px) {
+            .container { padding: 0 20px; }
+            .hero h1 { font-size: 2.2rem; }
+            .sec-title { font-size: 1.9rem; }
+            .mvp-grid, .team-grid, .why-grid, .problem-cards { grid-template-columns: 1fr; }
+            .vt-header, .vt-row { grid-template-columns: 1fr; gap: 4px; }
+            .vt-header .col-b { display: none; }
+            .metrics-bar { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Ticker -->
+<div class="ticker-wrap">
+    <div class="ticker">
+        <span>ICE DATA SERVICES</span>
+        <span class="up">▲ FIXED INCOME AI LAYER &nbsp;+2.4%</span>
+        <span>SANCTIONS MONITOR · LIVE</span>
+        <span class="up">▲ COMPLIANCE ALERTS · REAL-TIME</span>
+        <span>SENTIMENT SIGNALS · 50 ENTITIES</span>
+        <span class="down">▼ MANUAL REVIEW HOURS &nbsp;–68%</span>
+        <span>NLP REGULATORY SCANNING · ACTIVE</span>
+        <span class="up">▲ PILOT PRECISION RATE · 85%+</span>
+        <span>ALGO-RYTHMN.AI × ICE · MVP PROPOSAL</span>
+        <!-- duplicate for seamless loop -->
+        <span>ICE DATA SERVICES</span>
+        <span class="up">▲ FIXED INCOME AI LAYER &nbsp;+2.4%</span>
+        <span>SANCTIONS MONITOR · LIVE</span>
+        <span class="up">▲ COMPLIANCE ALERTS · REAL-TIME</span>
+        <span>SENTIMENT SIGNALS · 50 ENTITIES</span>
+        <span class="down">▼ MANUAL REVIEW HOURS &nbsp;–68%</span>
+        <span>NLP REGULATORY SCANNING · ACTIVE</span>
+        <span class="up">▲ PILOT PRECISION RATE · 85%+</span>
+        <span>ALGO-RYTHMN.AI × ICE · MVP PROPOSAL</span>
+    </div>
+</div>
+
+<!-- Nav -->
+<nav>
+    <div class="container">
+        <div class="nav-inner">
+            <div class="nav-logo">
+                <span class="logo-name">Algo-Rythmn.ai</span>
+                <div class="logo-sep"></div>
+                <span class="logo-target">ICE Partnership Proposal</span>
+            </div>
+            <div class="nav-cta">
+                <a href="mailto:clientservices@algo-rythmn.ai" class="btn-primary"><i class="fas fa-envelope"></i> Request Pilot</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+    <div class="hero-bg-grid"></div>
+    <div class="hero-glow"></div>
+    <div class="container">
+        <div class="hero-grid">
+            <div>
+                <div class="hero-eyebrow"><span></span> ICE Intelligence Layer — MVP Proposal 2026</div>
+                <h1>Accelerate ICE:<br>From Data Moat to <span class="grad">Decision Engine</span></h1>
+                <p class="hero-sub">Algo-Rythmn.ai embeds a compliance-ready, proprietary AI layer directly into ICE's ecosystem — turning raw data feeds into explainable risk alerts, regulatory intelligence, and natural language insights.</p>
+                <div class="hero-pills">
+                    <div class="h-pill"><i class="fas fa-database"></i> ICE API Integration</div>
+                    <div class="h-pill"><i class="fas fa-shield-alt"></i> No Public LLM Exposure</div>
+                    <div class="h-pill"><i class="fas fa-search-dollar"></i> Sanctions + Compliance Coverage</div>
+                    <div class="h-pill"><i class="fas fa-comment-dots"></i> Conversational Query Interface</div>
+                    <div class="h-pill"><i class="fas fa-bolt"></i> Real-Time Sentiment Signals</div>
+                </div>
+            </div>
+            <div>
+                <div class="hero-terminal">
+                    <div class="terminal-bar">
+                        <div class="dot dot-r"></div>
+                        <div class="dot dot-y"></div>
+                        <div class="dot dot-g"></div>
+                        <span class="terminal-title">algo-rythmn :: ICE Intelligence Layer</span>
+                    </div>
+                    <div class="terminal-body">
+                        <div class="t-line"><span class="t-prompt">▶ </span><span class="t-cmd">query</span> <span class="t-blue">"Summarize sanctions exposure in EM bond universe"</span></div>
+                        <div class="t-gap"></div>
+                        <div class="t-line"><span class="t-out">↳ Scanning 50 monitored entities...</span></div>
+                        <div class="t-line"><span class="t-out">↳ Cross-referencing OFAC, UN, EU lists...</span></div>
+                        <div class="t-line"><span class="t-out">↳ Ingesting latest ICE reference data...</span></div>
+                        <div class="t-gap"></div>
+                        <div class="t-line"><span class="t-green">✓ Alert: </span><span class="t-cmd">Entity "XYZ Corp" status changed</span></div>
+                        <div class="t-line"><span class="t-out">  3 linked securities flagged in universe</span></div>
+                        <div class="t-line"><span class="t-out">  ISIN: XS0123456789, XS0987654321 (+1)</span></div>
+                        <div class="t-gap"></div>
+                        <div class="t-line"><span class="t-gold">⚠ Sentiment: </span><span class="t-cmd">Issuer "ABC Sovereign" –40%</span></div>
+                        <div class="t-line"><span class="t-out">  3 regulatory filings + 12 news articles</span></div>
+                        <div class="t-line"><span class="t-out">  Signal: liquidity concern, MiFID II trigger</span></div>
+                        <div class="t-gap"></div>
+                        <div class="t-line"><span class="t-green">✓ Report ready</span> <span class="t-out">· explainable · audit-logged</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Problem -->
+<section class="problem-section">
+    <div class="container">
+        <div class="problem-layout">
+            <div>
+                <div class="sec-label">The Problem</div>
+                <h2 class="sec-title">Internal AI development is slow. Operationalizing data safely is complex.</h2>
+                <p class="sec-desc">While ICE has an internal LLM team, the pace of delivering an enterprise-ready, compliance-safe AI interpretation layer is challenging, leaving clients struggling to operationalize the massive data they ingest.</p>
+            </div>
+            <div class="problem-cards">
+                <div class="p-card">
+                    <div class="p-icon"><i class="fas fa-exclamation-triangle"></i></div>
+                    <h4>Generic AI Hallucinates</h4>
+                    <p>Off-the-shelf LLMs cannot be trusted for sanctions screening, FRTB compliance, or MiFID II obligations where precision is non-negotiable.</p>
+                </div>
+                <div class="p-card">
+                    <div class="p-icon"><i class="fas fa-lock"></i></div>
+                    <h4>Data Residency Risk</h4>
+                    <p>Banks and regulated institutions cannot route proprietary queries through public API endpoints (OpenAI, Anthropic) due to regulatory obligations.</p>
+                </div>
+                <div class="p-card">
+                    <div class="p-icon"><i class="fas fa-server"></i></div>
+                    <h4>Information Overload</h4>
+                    <p>ICE subscribers ingest immense data volume — but synthesizing news, filings, pricing, and sentiment into action remains largely manual.</p>
+                </div>
+                <div class="p-card">
+                    <div class="p-icon"><i class="fas fa-stopwatch"></i></div>
+                    <h4>In-House LLM Bottlenecks</h4>
+                    <p>Internal LLM efforts are often constrained by the complexities of building safe, conversational interfaces for financial data, slowing down time-to-market.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- MVP Deliverables -->
+<section class="mvp-section">
+    <div class="hero-bg-grid"></div>
+    <div class="container" style="position:relative; z-index:1;">
+        <div class="sec-label">The MVP: 3 Deliverables · 90-Day Pilot</div>
+        <h2 class="sec-title">What We Build Together</h2>
+        <p class="sec-desc">Three tightly scoped, high-impact deliverables that create immediate value for ICE's compliance and data teams — and a clear path to a client-facing product.</p>
+
+        <div class="mvp-grid">
+            <!-- D1 -->
+            <div class="mvp-card" data-num="01">
+                <div class="mvp-num">DELIVERABLE 01</div>
+                <div class="mvp-icon blue"><i class="fas fa-radar"></i><i class="fas fa-satellite-dish"></i></div>
+                <h3>Real-Time Regulatory &amp; Sanctions Monitor</h3>
+                <p>An always-on AI agent that ingests ICE data feeds and public sources, surfacing sanctions exposure and compliance triggers with plain-language explanations.</p>
+                <ul class="mvp-bullets">
+                    <li><i class="fas fa-circle"></i> Ingest ICE reference data + sanctions feeds via existing API</li>
+                    <li><i class="fas fa-circle"></i> Scan for OFAC, UN, EU sanctions list changes in real time</li>
+                    <li><i class="fas fa-circle"></i> Flag FATCA, MiFID II, FRTB, and ESG compliance triggers</li>
+                    <li><i class="fas fa-circle"></i> Explainable alert: <em>what changed, why it matters, linked source</em></li>
+                </ul>
+                <div class="example-query">
+                    <div class="eq-label">Example Alert Output</div>
+                    <div class="eq-text">"Entity XYZ Corp sanctions status changed → 3 linked securities in monitored universe now flagged. ISIN: XS012... [source: OFAC update 2026-04-09]"</div>
+                </div>
+            </div>
+
+            <!-- D2 -->
+            <div class="mvp-card" data-num="02">
+                <div class="mvp-num">DELIVERABLE 02</div>
+                <div class="mvp-icon cyan"><i class="fas fa-comment-dots"></i></div>
+                <h3>Conversational AI Query Interface ("Ask ICE")</h3>
+                <p>A natural language chatbot embedded in ICE's desktop/web platform or delivered via API — letting analysts query the full data universe without writing code.</p>
+                <ul class="mvp-bullets">
+                    <li><i class="fas fa-circle"></i> Proprietary LLM fine-tuned on financial &amp; regulatory language</li>
+                    <li><i class="fas fa-circle"></i> Plugs into ICE's existing widget &amp; API delivery infrastructure</li>
+                    <li><i class="fas fa-circle"></i> Full audit trail: every answer linked to source data</li>
+                    <li><i class="fas fa-circle"></i> Deployed on-prem / VPC — zero data leaves ICE environment</li>
+                </ul>
+                <div class="example-query">
+                    <div class="eq-label">Example User Query</div>
+                    <div class="eq-text">"What regulatory events affected our top 20 IG holdings in the last 48 hours?"</div>
+                </div>
+            </div>
+
+            <!-- D3 -->
+            <div class="mvp-card" data-num="03">
+                <div class="mvp-num">DELIVERABLE 03</div>
+                <div class="mvp-icon green"><i class="fas fa-chart-line"></i></div>
+                <h3>Sentiment &amp; Risk Intelligence</h3>
+                <p>A live scoring monitoring 50–100 entities/securities across news, social media, and filings — with AI-generated narrative context for every signal.</p>
+                <ul class="mvp-bullets">
+                    <li><i class="fas fa-circle"></i> Aggregate signals from news, social, filings, ICE price data</li>
+                    <li><i class="fas fa-circle"></i> Composite risk/sentiment score per entity, updated near real-time</li>
+                    <li><i class="fas fa-circle"></i> Anomaly detection: flag unusual spikes with narrative explanation</li>
+                    <li><i class="fas fa-circle"></i> Builds on ICE's existing Reddit/Dow Jones/Polymarket signal infra</li>
+                </ul>
+                <div class="example-query">
+                    <div class="eq-label">Example Insight Generated</div>
+                    <div class="eq-text">"Negative sentiment on ABC Sovereign ↓40% — driven by 3 regulatory filings + 12 news articles flagging liquidity concerns."</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Proof -->
+<section class="proof-section">
+    <div class="container">
+        <div class="sec-label">Proven Architecture</div>
+        <h2 class="sec-title">Already live in complex markets.<br>Now scaling to finance.</h2>
+        <div class="proof-layout" style="margin-top:48px;">
+            <div class="proof-partner">
+                <h3>AgEinstein Platform — Live Proof of Concept</h3>
+                <p>Our agricultural intelligence platform integrates real-time news, commodity prices, company data, risk analysis, and multi-market feeds into a single AI-powered interface — the same architecture we're bringing to ICE's fixed income and compliance universe.</p>
+                <ul class="proof-list">
+                    <li><i class="fas fa-check-circle"></i> Multi-source, high-velocity data ingestion (news + prices + filings)</li>
+                    <li><i class="fas fa-check-circle"></i> Proprietary risk ontologies and entity linking</li>
+                    <li><i class="fas fa-check-circle"></i> AI chatbot: natural language Q&amp;A over live market data</li>
+                    <li><i class="fas fa-check-circle"></i> Explainable outputs with full source attribution</li>
+                    <li><i class="fas fa-check-circle"></i> Production-grade, multi-market deployment</li>
+                </ul>
+                <a href="https://ageinstein.algo-rythmn.ai/" target="_blank" class="proof-link"><i class="fas fa-external-link-alt"></i> View AgEinstein Live</a>
+            </div>
+            <div class="partner-cards">
+                <div class="pt-card">
+                    <div class="pt-card-header">
+                        <div class="pt-card-icon"><i class="fas fa-seedling"></i></div>
+                        <div>
+                            <div class="pt-card-title">IntelinAir — AGMRI Platform</div>
+                            <div class="pt-card-sub">Conversational AI Partnership</div>
+                        </div>
+                    </div>
+                    <p>We integrated a conversational AI layer into IntelinAir's agricultural data platform (AGMRI) — enabling users to retrieve, analyze, and act on complex sensor and market data through natural language. This is the exact model we propose for ICE.</p>
+                </div>
+                <div class="pt-card">
+                    <div class="pt-card-header">
+                        <div class="pt-card-icon" style="background:#0050FF;"><i class="fas fa-exchange-alt"></i></div>
+                        <div>
+                            <div class="pt-card-title">ICE Strategic Alliances</div>
+                            <div class="pt-card-sub">Positioned as an official partner category</div>
+                        </div>
+                    </div>
+                    <p>ICE maintains a formal Strategic Alliances program within Fixed Income &amp; Data Services. Algo-Rythmn's AI intelligence layer is designed to augment — not compete with — ICE's data delivery infrastructure, making a partnership agreement the natural commercialization path.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Pilot Plan -->
+<section class="pilot-section">
+    <div class="container">
+        <div class="sec-label">Deployment Path</div>
+        <h2 class="sec-title">Rapid path to value —<br>and a scalable product.</h2>
+        <div class="pilot-layout">
+            <div class="phase-card active">
+                <div class="phase-tag active-tag"><i class="fas fa-circle" style="font-size:0.5rem;"></i> Phase 1 · 90-Day Pilot</div>
+                <h3>MVP: Compliance Intelligence Layer</h3>
+                <p class="phase-sub">Internal pilot with ICE compliance and data teams. Zero client exposure. Fast integration via existing ICE APIs.</p>
+                <ul class="phase-items">
+                    <li><i class="fas fa-check"></i> Define 50–100 entities/securities from ICE's existing universe</li>
+                    <li><i class="fas fa-check"></i> Deploy 3 MVP deliverables in staged 6-week sprints</li>
+                    <li><i class="fas fa-check"></i> Integrations: Regulatory Monitor, Ask ICE, Risk Intelligence</li>
+                    <li><i class="fas fa-check"></i> Internal beta: ICE compliance and data teams as primary users</li>
+                    <li><i class="fas fa-check"></i> Isolated, fine-tuned LLM — on-prem or ICE VPC deployment</li>
+                    <li><i class="fas fa-check"></i> Weekly accuracy audits, refinement cycles, and escalation workflow testing</li>
+                </ul>
+            </div>
+            <div class="phase-card future">
+                <div class="phase-tag future-tag"><i class="fas fa-circle" style="font-size:0.5rem;"></i> Phase 2 · Post-Pilot Scale</div>
+                <h3>White-Label ICE Intelligence Product</h3>
+                <p class="phase-sub">Extend the validated intelligence layer outward as a premium, client-facing product for ICE subscribers.</p>
+                <ul class="phase-items">
+                    <li><i class="fas fa-arrow-right"></i> API-first integration for ICE developer ecosystem</li>
+                    <li><i class="fas fa-arrow-right"></i> "Ask ICE" natural language product for subscriber tier</li>
+                    <li><i class="fas fa-arrow-right"></i> Custom alert templates per client risk criteria</li>
+                    <li><i class="fas fa-arrow-right"></i> Expand entity coverage beyond pilot universe</li>
+                    <li><i class="fas fa-arrow-right"></i> Tiered white-label licensing model with ICE</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Pilot success metrics -->
+        <div class="metrics-bar">
+            <div class="metric">
+                <div class="metric-val">50–100</div>
+                <div class="metric-label">Entities in pilot<br>universe</div>
+            </div>
+            <div class="metric">
+                <div class="metric-val">90</div>
+                <div class="metric-label">Day pilot<br>duration</div>
+            </div>
+            <div class="metric">
+                <div class="metric-val">&gt;85%</div>
+                <div class="metric-label">Target alert<br>precision rate</div>
+            </div>
+            <div class="metric">
+                <div class="metric-val">3</div>
+                <div class="metric-label">MVP deliverables<br>in scope</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Why Algo-Rythmn -->
+<section class="why-section">
+    <div class="container">
+        <div class="sec-label">Our Differentiation</div>
+        <h2 class="sec-title">Why Algo-Rythmn, not an in-house build.</h2>
+        <div class="why-grid">
+            <div class="why-card">
+                <div class="why-num">01</div>
+                <h4>Speed to Market</h4>
+                <p>AgEinstein is already live. This is an adaptation of a proven, production-grade multi-source AI platform — not a greenfield build. Pilot-ready in weeks, not quarters.</p>
+            </div>
+            <div class="why-card">
+                <div class="why-num">02</div>
+                <h4>Accelerating Your Internal LLM Team</h4>
+                <p>We understand ICE has an internal LLM team, but development is moving slowly. We provide the help needed to accelerate your roadmap and rapidly deploy a client-facing conversational layer.</p>
+            </div>
+            <div class="why-card">
+                <div class="why-num">03</div>
+                <h4>Explainability by Design</h4>
+                <p>Every alert and answer surfaces <em>why</em> a signal appeared and links to the source — not just a black-box output. Essential for regulated workflows and audit trails.</p>
+            </div>
+            <div class="why-card">
+                <div class="why-num">04</div>
+                <h4>Proprietary LLM — No Data Leakage</h4>
+                <p>Fine-tuned on financial and regulatory language, deployed on-premise or in ICE's VPC. No query ever touches a public LLM API — a hard requirement for financial institutions.</p>
+            </div>
+            <div class="why-card">
+                <div class="why-num">05</div>
+                <h4>Deep Domain Expertise</h4>
+                <p>Our team combines 45+ years of engineering, energy market operations, NLP research, and enterprise product delivery — not generic AI consulting.</p>
+            </div>
+            <div class="why-card">
+                <div class="why-num">06</div>
+                <h4>Strategic Fit, Not Competition</h4>
+                <p>We augment ICE's existing data delivery infrastructure. Algo-Rythmn is positioned as a Strategic Alliances partner — adding interpretation and automation on top of ICE's data foundation.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Team -->
+<section class="team-section">
+    <div class="container">
+        <div class="sec-label">The Team</div>
+        <h2 class="sec-title">Built by practitioners,<br>not generalists.</h2>
+        <div class="team-grid">
+            <div class="tm-card">
+                <div class="tm-header">
+                    <span class="tm-role-badge">Founder</span>
+                </div>
+                <div class="tm-name">Kenny Cheung</div>
+                <ul class="tm-points">
+                    <li><i class="fas fa-circle"></i> 20+ years in the energy industry with deep operational and market expertise</li>
+                    <li><i class="fas fa-circle"></i> Founded music and investment management companies prior to tech</li>
+                    <li><i class="fas fa-circle"></i> Launched Algo-Rythmn Corp. in 2019 to drive enterprise AI adoption and technology integration</li>
+                </ul>
+            </div>
+            <div class="tm-card">
+                <div class="tm-header">
+                    <span class="tm-role-badge">Head of Research</span>
+                </div>
+                <div class="tm-name">Dr. Albert Cheung</div>
+                <ul class="tm-points">
+                    <li><i class="fas fa-circle"></i> B.S. Stanford, M.A. &amp; Ph.D. UC Berkeley — 45+ years academic &amp; industrial experience (US &amp; Hong Kong)</li>
+                    <li><i class="fas fa-circle"></i> Naval Research Lab, UC Davis, TeleSecura Corp. (encryption &amp; secure data), PreCoad Inc. (algorithmic image processing)</li>
+                    <li><i class="fas fa-circle"></i> Professor HKUST: AI for building &amp; civil engineering. Fellow IET (UK) &amp; HKIE (HK). Chartered Engineer.</li>
+                </ul>
+            </div>
+            <div class="tm-card">
+                <div class="tm-header">
+                    <span class="tm-role-badge">Scientist</span>
+                </div>
+                <div class="tm-name">Dr. Kevin Siu</div>
+                <ul class="tm-points">
+                    <li><i class="fas fa-circle"></i> Specializes in efficient tensor completion for computer vision, signal processing, and data mining</li>
+                    <li><i class="fas fa-circle"></i> Deep learning architectures for image and speech recognition</li>
+                    <li><i class="fas fa-circle"></i> NLP expertise: text analysis, language modeling, and semantic understanding — directly applicable to regulatory document scanning</li>
+                </ul>
+            </div>
+            <div class="tm-card">
+                <div class="tm-header">
+                    <span class="tm-role-badge">Director of Operations</span>
+                </div>
+                <div class="tm-name">Scott Bruzenak</div>
+                <ul class="tm-points">
+                    <li><i class="fas fa-circle"></i> Audio engineer specializing in audio branding and sonic identity — with 15+ years composing for radio, brands, film, TV, and video games</li>
+                    <li><i class="fas fa-circle"></i> Produced Daya's gold album "Sit Still Look Pretty" and composed the Fox series "Name That Tune" theme</li>
+                    <li><i class="fas fa-circle"></i> Brings rigorous production management and cross-disciplinary execution to complex deliverables</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="footer-top">
+            <div>
+                <div class="f-brand">Algo-Rythmn.ai</div>
+                <div class="f-tagline">Proprietary AI for institutional-grade intelligence.</div>
+            </div>
+            <div class="f-links">
+                <div class="f-brand">Contact Us</div>
+                <a href="mailto:clientservices@algo-rythmn.ai" class="f-link"><i class="fas fa-envelope"></i>  clientservices@algo-rythmn.ai</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© 2026 Algo-Rythmn.ai. All rights reserved.</span>
+            <span>Confidential — ICE Partnership Proposal</span>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
