@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Algo-Rythmn AI × Cutting Edge Energy — Prospect Intelligence Platform</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+  :root {
+    --ink: #0a0c0f;
+    --paper: #f5f2eb;
+    --amber: #e8a330;
+    --amber-dim: #c4872a;
+    --oil: #1a1f2e;
+    --oil-mid: #2c3347;
+    --steel: #8a9ab5;
+    --steel-light: #c8d4e8;
+    --red: #c94040;
+    --green: #2e7d4f;
+    --slide-h: auto;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; font-size: 16px; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--ink);
+    color: var(--paper);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 3rem;
+    background: rgba(10,12,15,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(232,163,48,0.15);
+  }
+
+  .nav-logo {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 800;
+    font-size: 1rem;
+    color: var(--amber);
+    letter-spacing: 0.05em;
+  }
+
+  .nav-dots {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  .nav-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--oil-mid);
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+    border: 1px solid var(--steel);
+  }
+
+  .nav-dot.active, .nav-dot:hover {
+    background: var(--amber);
+    transform: scale(1.4);
+    border-color: var(--amber);
+  }
+
+  /* ── SLIDES ── */
+  .slide {
+    min-height: var(--slide-h);
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding: 8rem 3rem;
+  }
+
+  .slide-inner {
+    max-width: 1100px;
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* ── SLIDE 1: HERO ── */
+  #s1 {
+    background: var(--oil);
+    min-height: 100vh;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 70% 50%, rgba(232,163,48,0.07) 0%, transparent 70%),
+      repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(138,154,181,0.05) 40px),
+      repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(138,154,181,0.05) 40px);
+    z-index: 1;
+  }
+
+  .hero-eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    color: var(--amber);
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s forwards;
+  }
+
+  .hero-title {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2.8rem, 6vw, 5.5rem);
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    color: var(--paper);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.4s forwards;
+  }
+
+  .hero-title em {
+    font-style: normal;
+    color: var(--amber);
+  }
+
+  .hero-sub {
+    font-family: 'Inter', sans-serif;
+    font-style: italic;
+    font-size: clamp(1.1rem, 2vw, 1.5rem);
+    color: var(--steel-light);
+    max-width: 600px;
+    line-height: 1.6;
+    margin-bottom: 3rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.6s forwards;
+  }
+
+  .hero-from-to {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.8s forwards;
+  }
+
+  .brand-pill {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+  }
+
+  .brand-pill span:first-child {
+    font-size: 0.6rem;
+    color: var(--steel);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  .brand-pill strong {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--paper);
+  }
+
+  .hero-arrow {
+    color: var(--amber);
+    font-size: 1.5rem;
+  }
+
+  .hero-date {
+    margin-top: 5rem;
+    font-size: 0.65rem;
+    color: var(--steel);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    opacity: 0;
+    animation: fadeUp 0.8s 1s forwards;
+  }
+
+  /* ── SLIDE 2: PROBLEM ── */
+  #s2 { background: var(--paper); color: var(--ink); }
+
+  .section-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--amber-dim);
+    margin-bottom: 1.2rem;
+    font-weight: 500;
+  }
+
+  .slide-title {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 2.5rem;
+  }
+
+  .problem-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5px;
+    background: var(--steel-light);
+    border: 1.5px solid var(--steel-light);
+    margin-bottom: 2.5rem;
+  }
+
+  .problem-card {
+    background: var(--paper);
+    padding: 2rem 1.5rem;
+    position: relative;
+  }
+
+  .problem-card::before {
+    content: '';
+    display: block;
+    width: 2.5rem;
+    height: 3px;
+    background: var(--red);
+    margin-bottom: 1rem;
+  }
+
+  .problem-card h3 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 0.6rem;
+    color: var(--ink);
+  }
+
+  .problem-card p {
+    font-size: 0.8rem;
+    line-height: 1.7;
+    color: #4a4a4a;
+  }
+
+  .problem-stat {
+    display: flex;
+    gap: 3rem;
+    flex-wrap: wrap;
+  }
+
+  .stat-item { display: flex; flex-direction: column; gap: 0.2rem; }
+  .stat-num {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 800;
+    font-size: 2.5rem;
+    color: var(--red);
+    line-height: 1;
+  }
+  .stat-label { font-size: 0.7rem; color: #666; letter-spacing: 0.1em; text-transform: uppercase; }
+
+  /* ── SLIDE 3: SOLUTION ── */
+  #s3 { background: var(--oil); color: var(--paper); }
+
+  .solution-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .solution-left .slide-title { color: var(--paper); }
+
+  .solution-desc {
+    font-size: 0.85rem;
+    line-height: 1.8;
+    color: var(--steel-light);
+    margin-bottom: 2rem;
+  }
+
+  .pipeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .pipe-step {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    position: relative;
+    padding-bottom: 1.5rem;
+  }
+
+  .pipe-step:last-child { padding-bottom: 0; }
+
+  .pipe-step:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 1.1rem;
+    top: 2.2rem;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--amber), rgba(232,163,48,0.1));
+  }
+
+  .pipe-num {
+    flex-shrink: 0;
+    width: 2.2rem; height: 2.2rem;
+    border-radius: 50%;
+    background: var(--amber);
+    color: var(--ink);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 800;
+    font-size: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .pipe-content h4 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--paper);
+    margin-bottom: 0.25rem;
+  }
+
+  .pipe-content p {
+    font-size: 0.75rem;
+    color: var(--steel);
+    line-height: 1.6;
+  }
+
+  /* ── SLIDE 4: WORKFLOW MAP ── */
+  #s4 { background: var(--oil-mid); color: var(--paper); }
+
+  .workflow-title { color: var(--paper); }
+
+  .workflow-diagram {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0;
+    margin-top: 2.5rem;
+    background: rgba(138,154,181,0.08);
+    border: 1px solid rgba(138,154,181,0.15);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .wf-col {
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid rgba(138,154,181,0.1);
+  }
+
+  .wf-col:last-child { border-right: none; }
+
+  .wf-header {
+    padding: 0.8rem 1rem;
+    background: rgba(232,163,48,0.1);
+    border-bottom: 1px solid rgba(232,163,48,0.2);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--amber);
+    text-align: center;
+  }
+
+  .wf-items {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    flex: 1;
+  }
+
+  .wf-item {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(138,154,181,0.12);
+    border-radius: 3px;
+    padding: 0.6rem 0.7rem;
+    font-size: 0.67rem;
+    color: var(--steel-light);
+    line-height: 1.45;
+    position: relative;
+  }
+
+  .wf-item.manual {
+    border-color: rgba(201,64,64,0.25);
+    background: rgba(201,64,64,0.05);
+  }
+
+  .wf-item.ai {
+    border-color: rgba(46,125,79,0.35);
+    background: rgba(46,125,79,0.08);
+    color: #8fd4aa;
+  }
+
+  .wf-badge {
+    display: inline-block;
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.1rem 0.35rem;
+    border-radius: 2px;
+    margin-bottom: 0.3rem;
+    font-weight: 500;
+  }
+
+  .wf-badge.old { background: rgba(201,64,64,0.2); color: #e08080; }
+  .wf-badge.new { background: rgba(46,125,79,0.25); color: #7dca9e; }
+
+  /* ── SLIDE 5: VALUE PROPS ── */
+  #s5 { background: var(--paper); color: var(--ink); }
+
+  .value-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5px;
+    background: #ccc;
+    border: 1.5px solid #ccc;
+    margin-top: 2rem;
+  }
+
+  .value-card {
+    background: var(--paper);
+    padding: 2rem;
+  }
+
+  .value-icon {
+    font-size: 1.5rem;
+    margin-bottom: 0.8rem;
+    display: block;
+    color: var(--amber);
+  }
+
+  .value-icon svg {
+    width: 2.2rem;
+    height: 2.2rem;
+  }
+
+  .value-card h3 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    color: var(--ink);
+  }
+
+  .value-card p {
+    font-size: 0.78rem;
+    line-height: 1.7;
+    color: #4a4a4a;
+  }
+
+  .value-card .value-metric {
+    margin-top: 0.8rem;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 800;
+    font-size: 1.6rem;
+    color: var(--green);
+  }
+
+  /* ── SLIDE 6: TECH STACK ── */
+  #s6 { background: #0d1117; color: var(--paper); }
+
+  .tech-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2rem;
+    margin-top: 2.5rem;
+  }
+
+  .tech-col h3 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(232,163,48,0.2);
+  }
+
+  .tech-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .tech-dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--amber);
+    flex-shrink: 0;
+    margin-top: 0.45rem;
+  }
+
+  .tech-item p {
+    font-size: 0.75rem;
+    color: var(--steel-light);
+    line-height: 1.5;
+  }
+
+  .tech-item strong {
+    color: var(--paper);
+    font-weight: 500;
+  }
+
+  /* ── SLIDE 7: ENGAGEMENT ── */
+  #s7 { background: var(--paper); color: var(--ink); }
+
+  .phases {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5px;
+    background: #ccc;
+    border: 1.5px solid #ccc;
+    margin-top: 2rem;
+  }
+
+  .phase {
+    background: var(--paper);
+    padding: 2rem;
+  }
+
+  .phase-num {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 800;
+    font-size: 3rem;
+    color: rgba(0,0,0,0.06);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .phase h3 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 0.4rem;
+    color: var(--ink);
+  }
+
+  .phase .phase-dur {
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--amber-dim);
+    margin-bottom: 0.8rem;
+  }
+
+  .phase ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .phase ul li {
+    font-size: 0.75rem;
+    color: #4a4a4a;
+    padding-left: 1rem;
+    position: relative;
+    line-height: 1.5;
+  }
+
+  .phase ul li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--amber-dim);
+    font-size: 0.7rem;
+  }
+
+  /* ── SLIDE 8: CTA ── */
+  #s8 {
+    background: var(--oil);
+    min-height: 100vh;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+
+  #s8 .slide-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .cta-eyebrow {
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 1.5rem;
+  }
+
+  .cta-title {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    line-height: 1.05;
+    margin-bottom: 1.5rem;
+    max-width: 750px;
+    letter-spacing: -0.02em;
+  }
+
+  .cta-title em {
+    font-style: normal;
+    color: var(--amber);
+  }
+
+  .cta-sub {
+    font-family: 'Inter', sans-serif;
+    font-style: italic;
+    font-size: 1.2rem;
+    color: var(--steel-light);
+    max-width: 520px;
+    line-height: 1.6;
+    margin-bottom: 3rem;
+  }
+
+  .cta-contact {
+    display: flex;
+    gap: 3rem;
+    margin-bottom: 4rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .cta-detail { display: flex; flex-direction: column; gap: 0.15rem; text-align: left; }
+  .cta-detail span:first-child { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--steel); }
+  .cta-detail span:last-child { font-size: 0.9rem; color: var(--paper); }
+
+  .cta-divider {
+    width: 100%;
+    max-width: 600px;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(232,163,48,0.3), transparent);
+    margin-bottom: 2rem;
+  }
+
+  .cta-footer {
+    font-size: 0.65rem;
+    color: var(--steel);
+    letter-spacing: 0.1em;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Slide-in on scroll */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  /* Slide number */
+  .slide-num {
+    position: absolute;
+    bottom: 2rem;
+    right: 3rem;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    z-index: 2;
+  }
+
+  /* Dark slide number */
+  .slide-num-dark { color: rgba(138,154,181,0.4); }
+  .slide-num-light { color: rgba(245,242,235,0.25); }
+
+  /* Amber rule */
+  .amber-rule {
+    width: 3rem;
+    height: 3px;
+    background: var(--amber);
+    margin-bottom: 1.2rem;
+  }
+
+  @media (max-width: 1024px) {
+    .phases { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 768px) {
+    .problem-grid, .solution-layout, .tech-cols, .phases { grid-template-columns: 1fr; }
+    .workflow-diagram { grid-template-columns: 1fr 1fr; }
+    .value-grid { grid-template-columns: 1fr; }
+    nav { padding: 1rem 1.5rem; }
+    .slide { padding: 5rem 1.5rem 3rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">ALGO-RYTHMN.AI</div>
+  <div class="nav-dots" id="navDots">
+    <div class="nav-dot active" onclick="scrollTo(0)" title="Cover"></div>
+    <div class="nav-dot" onclick="scrollToSlide('s2')" title="Problem"></div>
+    <div class="nav-dot" onclick="scrollToSlide('s3')" title="Solution"></div>
+    <div class="nav-dot" onclick="scrollToSlide('s6')" title="Before & After"></div>
+    <div class="nav-dot" onclick="scrollToSlide('s4')" title="How it Works"></div>
+    <div class="nav-dot" onclick="scrollToSlide('s7')" title="Value"></div>
+    <div class="nav-dot" onclick="scrollToSlide('s5')" title="Deliverables"></div>
+    <div class="nav-dot" onclick="scrollToSlide('s8')" title="CTA"></div>
+  </div>
+</nav>
+
+<!-- ── SLIDE 1: HERO ── -->
+<section class="slide" id="s1">
+  <div class="hero-bg"></div>
+  <div class="slide-inner">
+    <div class="hero-eyebrow">Confidential Proposal · April 2026</div>
+    <h1 class="hero-title">
+      Full‑Stack<br>
+      <em>Automation</em> of<br>
+      Prospecting
+    </h1>
+    <p class="hero-sub">
+      A Subsurface Intelligence Layer that automates 70–90% of your workflow—ingesting, interpreting, and synthesizing all subsurface data into a unified, decision‑ready prospect package.
+    </p>
+    <div class="hero-from-to">
+      <div class="brand-pill">
+        <span>Prepared by</span>
+        <strong>Algo-Rythmn.ai</strong>
+      </div>
+      <div class="hero-arrow">→</div>
+      <div class="brand-pill">
+        <span>Prepared for</span>
+        <strong>Cutting Edge Energy</strong>
+      </div>
+    </div>
+    <div class="hero-date">Prospect Intelligence Platform · Proposal v1.0</div>
+  </div>
+  <span class="slide-num slide-num-light">01 / 08</span>
+</section>
+
+<!-- ── SLIDE 2: PROBLEM ── -->
+<section class="slide" id="s2">
+  <div class="slide-inner">
+    <p class="section-label reveal">The Challenge</p>
+    <div class="amber-rule reveal reveal-delay-1"></div>
+    <h2 class="slide-title reveal reveal-delay-1">Highly manual, document‑heavy,<br>and disconnected systems.</h2>
+
+    <div class="problem-grid reveal reveal-delay-2">
+      <div class="problem-card">
+        <h3>Multi‑Source Data Retrieval</h3>
+        <p>Pulling data from GeoScout, IRIS, PetroNinja, and 40+ PDFs per well (well tickets, core, DSTs, reports). Everything is spread across disconnected systems, creating friction and long cycle times.</p>
+      </div>
+      <div class="problem-card">
+        <h3>Manual Interpretation</h3>
+        <p>Labor-intensive manual reading of logs (induction, sonic), extracting core porosity/perm, interpreting DST flow periods, and visually assessing production decline and seismic maps.</p>
+      </div>
+      <div class="problem-card">
+        <h3>Cumbersome Prospect Screening</h3>
+        <p>Filtering by Frobisher, Alida, Tilston, and Midale plays, identifying analogs, cross-checking historical production, and ranking prospects relies heavily on manual collation.</p>
+      </div>
+    </div>
+
+    <div class="problem-stat reveal reveal-delay-3">
+      <div class="stat-item">
+        <span class="stat-num">70-90%</span>
+        <span class="stat-label">of workflow automated</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">40+</span>
+        <span class="stat-label">documents per well ingested instantly</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">1</span>
+        <span class="stat-label">unified prospect package generated</span>
+      </div>
+    </div>
+  </div>
+  <span class="slide-num slide-num-dark">02 / 08</span>
+</section>
+
+<!-- ── SLIDE 3: SOLUTION ── -->
+<section class="slide" id="s3">
+  <div class="slide-inner">
+    <div class="solution-layout">
+      <div class="solution-left">
+        <p class="section-label reveal" style="color:var(--amber)">The Solution</p>
+        <div class="amber-rule reveal reveal-delay-1"></div>
+        <h2 class="slide-title reveal reveal-delay-1" style="color:var(--paper)">A Subsurface Intelligence Layer</h2>
+        <p class="solution-desc reveal reveal-delay-2">
+          We propose an AI-driven Subsurface Intelligence Layer that automates the entire workflow from data ingestion to prospect ranking—accelerating prospecting, reducing manual interpretation time, and improving consistency.
+        </p>
+      </div>
+      <div class="solution-right reveal reveal-delay-2">
+        <div class="pipeline">
+          <div class="pipe-step">
+            <div class="pipe-num">1</div>
+            <div class="pipe-content">
+              <h4>Automated Data Ingestion</h4>
+              <p>Retrieves and normalizes well logs, core analysis, DSTs, geological reports, production history, and seismic outlines across 40+ documents per well seamlessly.</p>
+            </div>
+          </div>
+          <div class="pipe-step">
+            <div class="pipe-num">2</div>
+            <div class="pipe-content">
+              <h4>Automated Interpretation</h4>
+              <p>Extracts formation tops, porosity curves, DST flow periods, and core sweet spots directly from PDFs and LAS files, replacing manual log reading.</p>
+            </div>
+          </div>
+          <div class="pipe-step">
+            <div class="pipe-num">3</div>
+            <div class="pipe-content">
+              <h4>Automated Production & Seismic Mapping</h4>
+              <p>Computes decline curves, identifies analog wells, estimates EUR, and digitizes seismic metadata to uncover coverage gaps and recommend acquisition.</p>
+            </div>
+          </div>
+          <div class="pipe-step">
+            <div class="pipe-num">4</div>
+            <div class="pipe-content">
+              <h4>Prospect Ranking Engine</h4>
+              <p>Scores prospects utilizing reservoir quality, DST results, production analogs, seismic coverage, and structural position to yield reliable confidence scores.</p>
+            </div>
+          </div>
+          <div class="pipe-step">
+            <div class="pipe-num">5</div>
+            <div class="pipe-content">
+              <h4>Prospect Package Generation</h4>
+              <p>Outputs complete prospect reports integrating maps, logs, cross-plots, analog matches, risk analysis, and economic indicators—replacing days of tedious compilation.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <span class="slide-num slide-num-light">03 / 08</span>
+</section>
+
+<!-- ── SLIDE 4: WORKFLOW MAP ── -->
+<section class="slide" id="s6">
+  <div class="slide-inner">
+    <p class="section-label reveal" style="color:var(--amber)">Before & After</p>
+    <div class="amber-rule reveal reveal-delay-1"></div>
+    <h2 class="slide-title workflow-title reveal reveal-delay-1">Your workflow, transformed at every stage.</h2>
+
+    <div class="workflow-diagram reveal reveal-delay-2">
+      <div class="wf-col">
+        <div class="wf-header">Data Collection</div>
+        <div class="wf-items">
+          <div class="wf-item manual">
+            <span class="wf-badge old">Today</span><br>
+            Manual search across GeoScout, IRIS, PetroNinja. Download PDFs one by one.
+          </div>
+          <div class="wf-item ai">
+            <span class="wf-badge new">AI</span><br>
+            Automated API connectors ingest all sources nightly into a unified data lake.
+          </div>
+        </div>
+      </div>
+      <div class="wf-col">
+        <div class="wf-header">Area Screening</div>
+        <div class="wf-items">
+          <div class="wf-item manual">
+            <span class="wf-badge old">Today</span><br>
+            Geologist manually excludes non-interest areas on mapping software.
+          </div>
+          <div class="wf-item ai">
+            <span class="wf-badge new">AI</span><br>
+            Configurable spatial filters apply exclusion zones and formation targets instantly across all wells.
+          </div>
+        </div>
+      </div>
+      <div class="wf-col">
+        <div class="wf-header">Log & Core Analysis</div>
+        <div class="wf-items">
+          <div class="wf-item manual">
+            <span class="wf-badge old">Today</span><br>
+            Visual scan of well logs for porosity/permeability. Core data reviewed in tabular PDFs.
+          </div>
+          <div class="wf-item ai">
+            <span class="wf-badge new">AI</span><br>
+            Automated LAS interpretation. Core data extracted and cross-plotted. Zones flagged by ML.
+          </div>
+        </div>
+      </div>
+      <div class="wf-col">
+        <div class="wf-header">Analog Matching</div>
+        <div class="wf-items">
+          <div class="wf-item manual">
+            <span class="wf-badge old">Today</span><br>
+            Relies on geologist's memory of historical plays and analogous production.
+          </div>
+          <div class="wf-item ai">
+            <span class="wf-badge new">AI</span><br>
+            Similarity model scores each prospect against a vetted library of known plays (e.g., Frobisher Scepter/Alameda).
+          </div>
+        </div>
+      </div>
+      <div class="wf-col">
+        <div class="wf-header">Prospect Ranking</div>
+        <div class="wf-items">
+          <div class="wf-item manual">
+            <span class="wf-badge old">Today</span><br>
+            Informal shortlist maintained in the geologist's head or in spreadsheets.
+          </div>
+          <div class="wf-item ai">
+            <span class="wf-badge new">AI</span><br>
+            Live ranked dashboard. Each prospect scored, explained, and tied to supporting evidence.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <span class="slide-num slide-num-light">04 / 08</span>
+</section>
+
+<!-- ── SLIDE 5: TECH ── -->
+<section class="slide" id="s4">
+  <div class="slide-inner">
+    <p class="section-label reveal" style="color:var(--amber)">How it Works</p>
+    <div class="amber-rule reveal reveal-delay-1"></div>
+    <h2 class="slide-title reveal reveal-delay-1" style="color:var(--paper)">Built for oil & gas data,<br>not generic enterprise.</h2>
+
+    <div class="tech-cols reveal reveal-delay-2">
+      <div class="tech-col">
+        <h3>Data Layer</h3>
+        <div class="tech-item">
+          <div class="tech-dot"></div>
+          <p><strong>GeoScout & IRIS API Connectors</strong> — Automated well data ingestion with incremental updates</p>
+        </div>
+        <div class="tech-item">
+          <div class="tech-dot"></div>
+          <p><strong>LAS File Parser</strong> — Standardized well log curve extraction (GR, ILD, NPHI, RHOB, DT)</p>
+        </div>
+        <div class="tech-item">
+          <div class="tech-dot"></div>
+          <p><strong>PDF Intelligence</strong> — LLM-powered extraction from geological reports, tour reports, and DST summaries</p>
+        </div>
+        <div class="tech-item">
+          <div class="tech-dot"></div>
+          <p><strong>Spatial DB</strong> — PostGIS-backed well and seismic location store with DLS/NTS grid support</p>
+        </div>
+      </div>
+      <div class="tech-col">
+        <h3>AI / ML Models</h3>
+        <div class="tech-item">
+          <div class="tech-dot"></div>
+          <p><strong>Petrophysical Interpreter</strong> — Automated zone picking for Mississippian formations (Alida, Frobisher, Tilston, Midale)</p>
+        </div>
+        <div class="tech-item">
+          <div class="tech-dot"></div>
+          <p><strong>Analog Similarity Engine</strong> — Vector embeddings of play characteristics matched against your historical production database</p>
+        </div>
+        <div class="tech-item">
+          <div class="tech-dot"></div>
+          <p><strong>Prospect Ranking Model</strong> — Gradient-boosted ensemble combining log, core, production, and spatial features</p>
+        </div>
+        <div class="tech-item">
+          <div class="tech-dot"></div>
+          <p><strong>Explainability Layer</strong> — SHAP values on every score so your geologist understands and can override AI recommendations</p>
+        </div>
+      </div>
+      <div class="tech-col">
+        <h3>Interface & Delivery</h3>
+        <div class="tech-item">
+          <div class="tech-dot"></div>
+          <p><strong>Interactive Prospect Map</strong> — Web-based, GeoScout-like UX with ranked prospects overlaid on DLS grid</p>
+        </div>
+        <div class="tech-item">
+          <div class="tech-dot"></div>
+          <p><strong>One-Click Drill-Down</strong> — From map marker to full well profile: logs, core plot, production curve, analog comps</p>
+        </div>
+        <div class="tech-item">
+          <div class="tech-dot"></div>
+          <p><strong>Configurable Filters</strong> — Your exclusion criteria (SW Heavy Oil, Bakken, Souris Valley) as toggle controls, adjustable without code changes</p>
+        </div>
+        <div class="tech-item">
+          <div class="tech-dot"></div>
+          <p><strong>Export-Ready</strong> — Prospect packages export to PDF for partner presentations or internal review</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <span class="slide-num slide-num-light">05 / 08</span>
+</section>
+
+<!-- ── SLIDE 6: VALUE PROPS ── -->
+<section class="slide" id="s7">
+  <div class="slide-inner">
+    <p class="section-label reveal">Why It Matters</p>
+    <div class="amber-rule reveal reveal-delay-1"></div>
+    <h2 class="slide-title reveal reveal-delay-1">Measurable outcomes,<br>not just automation.</h2>
+
+    <div class="value-grid reveal reveal-delay-2">
+      <div class="value-card">
+        <span class="value-icon"><i data-lucide="zap"></i></span>
+        <h3>10× Faster Prospect Generation</h3>
+        <p>What takes days of manual GeoScout queries and log reviews is completed in minutes. Your geologist's time shifts from data wrangling to high-value interpretation.</p>
+        <div class="value-metric">Days → Hours</div>
+      </div>
+      <div class="value-card">
+        <span class="value-icon"><i data-lucide="target"></i></span>
+        <h3>Systematic, Repeatable Screening</h3>
+        <p>Encode your geological knowledge once. Every future prospect is screened against the same consistent criteria — eliminating variability from analyst to analyst.</p>
+        <div class="value-metric">100% Coverage</div>
+      </div>
+      <div class="value-card">
+        <span class="value-icon"><i data-lucide="bar-chart-2"></i></span>
+        <h3>Quantified Prospect Confidence</h3>
+        <p>Replace gut feel with scored probabilities. Each prospect comes with an explainable risk score tied to petrophysical, production, and analog evidence — defensible to partners and investors.</p>
+        <div class="value-metric">Ranked & Scored</div>
+      </div>
+      <div class="value-card">
+        <span class="value-icon"><i data-lucide="link"></i></span>
+        <h3>No GeoScout Licence Dependency</h3>
+        <p>IRIS is already in your workflow. Our platform integrates with both, plus adds NLP extraction from PDF geological reports — freeing you from manual document review entirely.</p>
+        <div class="value-metric">IRIS + GeoScout</div>
+      </div>
+    </div>
+  </div>
+  <span class="slide-num slide-num-dark">06 / 08</span>
+</section>
+
+<!-- ── SLIDE 7: ENGAGEMENT ── -->
+<section class="slide" id="s5">
+  <div class="slide-inner">
+    <p class="section-label reveal">Deliverables</p>
+    <div class="amber-rule reveal reveal-delay-1"></div>
+    <h2 class="slide-title reveal reveal-delay-1">Four phases of deliverables.<br>From raw data to ready packages.</h2>
+
+    <div class="phases reveal reveal-delay-2">
+      <div class="phase">
+        <div class="phase-num">01</div>
+        <h3>Data Automation</h3>
+        <ul>
+          <li>IRIS + GeoScout integration</li>
+          <li>PDF extraction (logs, cores, DSTs, reports)</li>
+          <li>Unified well database establishment</li>
+        </ul>
+      </div>
+      <div class="phase">
+        <div class="phase-num">02</div>
+        <h3>Interpretation Automation</h3>
+        <ul>
+          <li>Auto-read well logs and tops</li>
+          <li>Core analysis extraction & cross-plots</li>
+          <li>DST report interpretation</li>
+          <li>Production decline analysis</li>
+        </ul>
+      </div>
+      <div class="phase">
+        <div class="phase-num">03</div>
+        <h3>Prospect Intelligence</h3>
+        <ul>
+          <li>Seismic availability mapping</li>
+          <li>Analog well matching and EURs</li>
+          <li>Comprehensive prospect ranking engine</li>
+        </ul>
+      </div>
+      <div class="phase">
+        <div class="phase-num">04</div>
+        <h3>Package Generator</h3>
+        <ul>
+          <li>Auto‑generated full prospect reports</li>
+          <li>Maps, logs, cross‑plots, summaries</li>
+          <li>Direct export to PDF or internal systems</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <span class="slide-num slide-num-dark">07 / 08</span>
+</section>
+
+<!-- ── SLIDE 8: CTA ── -->
+<section class="slide" id="s8">
+  <div class="slide-inner">
+    <div class="cta-eyebrow">Next Steps</div>
+    <h2 class="cta-title">
+      Let's find your next<br>
+      <em>Frobisher Scepter</em><br>
+      together.
+    </h2>
+    <p class="cta-sub">
+      We'd like to arrange a 45-minute working session with your geologist to map the workflow in detail and scope a proof-of-concept over your Saskatchewan licence area.
+    </p>
+
+    <div class="cta-contact">
+      <div class="cta-detail">
+        <span>Company</span>
+        <span>Algo-Rythmn.ai</span>
+      </div>
+      <div class="cta-detail">
+        <span>Email</span>
+        <span>support@algo-rythmn.ai</span>
+      </div>
+      <div class="cta-detail">
+        <span>Proposal Date</span>
+        <span>April 2026</span>
+      </div>
+    </div>
+
+    <div class="cta-divider"></div>
+    <p class="cta-footer">Confidential · Prepared exclusively for Cutting Edge Energy · Not for distribution</p>
+  </div>
+  <span class="slide-num slide-num-light">08 / 08</span>
+</section>
+
+<script>
+  function scrollToSlide(id) {
+    document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+  }
+
+  // Reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) e.target.classList.add('visible');
+    });
+  }, { threshold: 0.15 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Active nav dot
+  const slides = document.querySelectorAll('section.slide');
+  const dots = document.querySelectorAll('.nav-dot');
+  const dotObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const idx = Array.from(slides).indexOf(e.target);
+        dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+      }
+    });
+  }, { threshold: 0.5 });
+  slides.forEach(s => dotObserver.observe(s));
+
+  // Initialize Lucide icons
+  lucide.createIcons();
+</script>
+</body>
+</html>
