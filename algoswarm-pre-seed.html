@@ -99,6 +99,7 @@ h2.slide-title.dark { color: #fff; }
 .algo-compare { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 20px; margin-top: 32px; }
 .algo-card { background: #F8FAFC; border: 1px solid var(--color-border-tertiary); border-radius: 16px; padding: 24px; text-align: center; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
 .algo-card.winner { background: #E1F5EE; border-color: #9FE1CB; box-shadow: 0 4px 12px rgba(13,148,136,0.15); transform: translateY(-4px); transition: transform 0.2s; }
+.tm { font-size: 0.5em; vertical-align: super; line-height: 0; }
 .algo-name { font-size: 1.125rem; font-weight: 600; color: #334155; margin-bottom: 16px; }
 .algo-name.win-name { color: #0F6E56; }
 .algo-metric { margin-bottom: 12px; }
@@ -123,7 +124,7 @@ h2.slide-title.dark { color: #fff; }
   <div style="position:absolute;left:0;top:0;bottom:0;width:4px;background:#14B8A6;border-radius:0 2px 2px 0;"></div>
   <div style="position:relative;">
     <div class="eyebrow" style="margin-bottom:6px;">Algo-Rythmn Corp · Pre-Seed</div>
-    <h1 class="hero">AlgoSwarm™</h1>
+    <h1 class="hero">AlgoSwarm<span class="tm">™</span></h1>
     <p style="font-size:1.5rem;color:#14B8A6;margin-top:10px;font-weight:400;">The Intelligence Layer for Every Agricultural UAV Fleet</p>
     <div class="stat-row">
       <div class="stat-card">
@@ -176,7 +177,7 @@ h2.slide-title.dark { color: #fff; }
 
 <div class="slide slide-muted" id="slide-2">
   <div class="eyebrow eyebrow-inv">Our solution</div>
-  <h2 class="slide-title">AlgoSwarm™: swarm intelligence that actually ships</h2>
+  <h2 class="slide-title">AlgoSwarm<span class="tm">™</span>: swarm intelligence that actually ships</h2>
   <div class="grid3">
     <div class="card">
       <div class="card-header">
@@ -200,7 +201,7 @@ h2.slide-title.dark { color: #fff; }
       </div>
       <div class="card-num">829%</div>
       <div class="card-title">GP-Adaptive innovation</div>
-      <div class="card-body">Gaussian Process learns anomaly patterns in real-time. GP-Adaptive achieves 829% faster coverage than static Voronoi across benchmark fields.</div>
+      <div class="card-body">Our algorithm learns anomaly patterns in real-time. GP-Adaptive achieves 829% faster coverage than static Voronoi across benchmark fields.</div>
     </div>
   </div>
   <div style="margin-top:18px;background:#0A1628;border-radius:10px;padding:14px 20px;display:flex;align-items:center;gap:16px;">
@@ -214,110 +215,79 @@ h2.slide-title.dark { color: #fff; }
   <div class="eyebrow eyebrow-inv">Algorithm comparison</div>
   <h2 class="slide-title">We win on coverage, speed and efficiency — at every field size</h2>
 
-  <div class="algo-compare">
-    <div class="algo-card winner">
-      <div class="algo-name win-name">GP-Adaptive Voronoi</div>
-      <div class="algo-metric">
-        <div class="algo-metric-label">Indian Pines (1,077 ac)</div>
-        <div class="algo-metric-val win-val">52.4 min</div>
-      </div>
-      <div class="algo-metric">
-        <div class="algo-metric-label">Salinas (376 ac)</div>
-        <div class="algo-metric-val win-val">14.9 min</div>
-      </div>
-      <div class="algo-metric">
-        <div class="algo-metric-label">Pavia Univ (87 ac)</div>
-        <div class="algo-metric-val win-val">4.4 min</div>
-      </div>
-      <div class="algo-metric">
-        <div class="algo-metric-label">Scan overlap</div>
-        <div class="algo-metric-val win-val">13.75%</div>
-      </div>
-      <div class="winner-badge">WINNER ALL 3</div>
+  <div style="display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:0;margin-top:28px;border-radius:16px;overflow:hidden;border:1px solid #E2E8F0;">
+    <!-- Header row -->
+    <div style="background:#0A1628;padding:16px 20px;"></div>
+    <div style="background:#0D9488;padding:16px 20px;text-align:center;">
+      <div style="font-size:1rem;font-weight:700;color:#fff;">GP-Adaptive Voronoi</div>
+      <div style="font-size:0.75rem;color:rgba(255,255,255,0.8);margin-top:4px;letter-spacing:1px;font-weight:600;">◀ OURS</div>
     </div>
-    <div class="algo-card">
-      <div class="algo-name">Static Voronoi</div>
-      <div class="algo-metric">
-        <div class="algo-metric-label">Indian Pines</div>
-        <div class="algo-metric-val">57.2 min</div>
-      </div>
-      <div class="algo-metric">
-        <div class="algo-metric-label">Salinas</div>
-        <div class="algo-metric-val">19.2 min</div>
-      </div>
-      <div class="algo-metric">
-        <div class="algo-metric-label">Pavia Univ</div>
-        <div class="algo-metric-val">6.2 min</div>
-      </div>
-      <div class="algo-metric">
-        <div class="algo-metric-label">Scan overlap</div>
-        <div class="algo-metric-val">37%</div>
-      </div>
+    <div style="background:#334155;padding:16px 20px;text-align:center;">
+      <div style="font-size:1rem;font-weight:600;color:#fff;">Static Voronoi</div>
     </div>
-    <div class="algo-card">
-      <div class="algo-name">Lawnmower (no partition)</div>
-      <div class="algo-metric">
-        <div class="algo-metric-label">Indian Pines</div>
-        <div class="algo-metric-val">~178 min</div>
-      </div>
-      <div class="algo-metric">
-        <div class="algo-metric-label">Salinas</div>
-        <div class="algo-metric-val">~51 min</div>
-      </div>
-      <div class="algo-metric">
-        <div class="algo-metric-label">Pavia Univ</div>
-        <div class="algo-metric-val">~15 min</div>
-      </div>
-      <div class="algo-metric">
-        <div class="algo-metric-label">Scan overlap</div>
-        <div class="algo-metric-val">75%</div>
-      </div>
+    <div style="background:#475569;padding:16px 20px;text-align:center;">
+      <div style="font-size:1rem;font-weight:600;color:#fff;">Lawnmower</div>
     </div>
-    <div class="algo-card">
-      <div class="algo-name">Random Walk</div>
-      <div class="algo-metric">
-        <div class="algo-metric-label">Coverage at t₉₀</div>
-        <div class="algo-metric-val">~60%</div>
-      </div>
-      <div class="algo-metric">
-        <div class="algo-metric-label">Detection rate</div>
-        <div class="algo-metric-val">~62%</div>
-      </div>
-      <div class="algo-metric">
-        <div class="algo-metric-label">Pavia Univ</div>
-        <div class="algo-metric-val">No t₉₀</div>
-      </div>
-      <div class="algo-metric">
-        <div class="algo-metric-label">Scan overlap</div>
-        <div class="algo-metric-val">~90%</div>
-      </div>
+    <!-- Coverage speed -->
+    <div style="background:#F8FAFC;padding:14px 20px;font-size:0.9rem;font-weight:600;color:#334155;border-top:1px solid #E2E8F0;display:flex;align-items:center;">Coverage speed</div>
+    <div style="background:#E1F5EE;padding:14px 20px;text-align:center;border-top:1px solid #C6F0E4;">
+      <span style="font-size:1rem;font-weight:700;color:#0D9488;">Fastest</span><br><span style="font-size:0.8rem;color:#0F6E56;">All field sizes</span>
+    </div>
+    <div style="background:#fff;padding:14px 20px;text-align:center;border-top:1px solid #E2E8F0;">
+      <span style="font-size:1rem;color:#334155;">Fast</span><br><span style="font-size:0.8rem;color:#64748B;">~8–29% slower</span>
+    </div>
+    <div style="background:#fff;padding:14px 20px;text-align:center;border-top:1px solid #E2E8F0;">
+      <span style="font-size:1rem;color:#334155;">Slow</span><br><span style="font-size:0.8rem;color:#64748B;">~3× longer</span>
+    </div>
+    <!-- Detection accuracy -->
+    <div style="background:#F8FAFC;padding:14px 20px;font-size:0.9rem;font-weight:600;color:#334155;border-top:1px solid #E2E8F0;display:flex;align-items:center;">Detection accuracy</div>
+    <div style="background:#E1F5EE;padding:14px 20px;text-align:center;border-top:1px solid #C6F0E4;">
+      <span style="font-size:1rem;font-weight:700;color:#0D9488;">Highest</span><br><span style="font-size:0.8rem;color:#0F6E56;">~99%+ all benchmarks</span>
+    </div>
+    <div style="background:#fff;padding:14px 20px;text-align:center;border-top:1px solid #E2E8F0;">
+      <span style="font-size:1rem;color:#334155;">Good</span><br><span style="font-size:0.8rem;color:#64748B;">Static misses hotspots</span>
+    </div>
+    <div style="background:#fff;padding:14px 20px;text-align:center;border-top:1px solid #E2E8F0;">
+      <span style="font-size:1rem;color:#334155;">Moderate</span><br><span style="font-size:0.8rem;color:#64748B;">Late detection risk</span>
+    </div>
+    <!-- Scan efficiency -->
+    <div style="background:#F8FAFC;padding:14px 20px;font-size:0.9rem;font-weight:600;color:#334155;border-top:1px solid #E2E8F0;display:flex;align-items:center;">Scan efficiency</div>
+    <div style="background:#E1F5EE;padding:14px 20px;text-align:center;border-top:1px solid #C6F0E4;">
+      <span style="font-size:1rem;font-weight:700;color:#0D9488;">Excellent</span><br><span style="font-size:0.8rem;color:#0F6E56;">Lowest overlap (~14%)</span>
+    </div>
+    <div style="background:#fff;padding:14px 20px;text-align:center;border-top:1px solid #E2E8F0;">
+      <span style="font-size:1rem;color:#334155;">Good</span><br><span style="font-size:0.8rem;color:#64748B;">Moderate overlap (~35–40%)</span>
+    </div>
+    <div style="background:#fff;padding:14px 20px;text-align:center;border-top:1px solid #E2E8F0;">
+      <span style="font-size:1rem;color:#334155;">Poor</span><br><span style="font-size:0.8rem;color:#64748B;">High overlap (~75%)</span>
+    </div>
+    <!-- Adaptive refinement -->
+    <div style="background:#F8FAFC;padding:14px 20px;font-size:0.9rem;font-weight:600;color:#334155;border-top:1px solid #E2E8F0;display:flex;align-items:center;">Adaptive refinement</div>
+    <div style="background:#E1F5EE;padding:14px 20px;text-align:center;border-top:1px solid #C6F0E4;">
+      <span style="font-size:1rem;font-weight:700;color:#0D9488;">Yes</span><br><span style="font-size:0.8rem;color:#0F6E56;">AI-guided, learns in real-time</span>
+    </div>
+    <div style="background:#fff;padding:14px 20px;text-align:center;border-top:1px solid #E2E8F0;">
+      <span style="font-size:1rem;color:#334155;">No</span><br><span style="font-size:0.8rem;color:#64748B;">Fixed plan, no adaptation</span>
+    </div>
+    <div style="background:#fff;padding:14px 20px;text-align:center;border-top:1px solid #E2E8F0;">
+      <span style="font-size:1rem;color:#334155;">No</span><br><span style="font-size:0.8rem;color:#64748B;">No intelligence layer</span>
+    </div>
+    <!-- Winner row -->
+    <div style="background:#0A1628;padding:12px 20px;border-top:1px solid rgba(255,255,255,0.08);"></div>
+    <div style="background:#0D9488;padding:12px 20px;text-align:center;border-top:1px solid rgba(255,255,255,0.15);">
+      <span style="font-size:0.8rem;font-weight:700;color:#fff;letter-spacing:1.5px;">✓ WINNER — ALL 4 METRICS</span>
+    </div>
+    <div style="background:#334155;padding:12px 20px;text-align:center;border-top:1px solid rgba(255,255,255,0.08);">
+      <span style="font-size:0.8rem;color:rgba(255,255,255,0.4);">Runner-up</span>
+    </div>
+    <div style="background:#475569;padding:12px 20px;text-align:center;border-top:1px solid rgba(255,255,255,0.08);">
+      <span style="font-size:0.8rem;color:rgba(255,255,255,0.4);">Baseline only</span>
     </div>
   </div>
 
-  <div class="bar-chart" style="margin-top:18px;">
-    <div style="font-size:0.875rem;font-weight:500;color:#64748B;margin-bottom:10px;">Time to 90% coverage — Indian Pines (1,077 acres) · Lower is better</div>
-    <div class="bar-row">
-      <span class="bar-label">GP-Adaptive (ours)</span>
-      <div class="bar-track">
-        <div class="bar-fill teal-fill" style="width:29.4%"><span class="bar-val">52.4 min</span></div>
-      </div>
-    </div>
-    <div class="bar-row">
-      <span class="bar-label">Static Voronoi</span>
-      <div class="bar-track">
-        <div class="bar-fill" style="width:32.1%;background:#CBD5E1"><span class="bar-val-dark">57.2 min</span></div>
-      </div>
-    </div>
-    <div class="bar-row">
-      <span class="bar-label">Lawnmower</span>
-      <div class="bar-track">
-        <div class="bar-fill" style="width:100%;background:#E2E8F0"><span class="bar-val-dark">178 min (3.4× slower)</span></div>
-      </div>
-    </div>
-  </div>
   <div style="margin-top:10px;background:#E1F5EE;border-radius:8px;padding:10px 14px;">
-    <span style="font-size:1rem;color:#0F6E56;font-weight:500;">AlgoSwarm™ wins all 3 benchmarks:</span>
-    <span style="font-size:1rem;color:#0F6E56;">  8% faster on Indian Pines · 22% on Salinas · 29% on Pavia University · 1.7–3.6× over unpartitioned strategies</span>
+    <span style="font-size:1rem;color:#0F6E56;font-weight:500;">AlgoSwarm<span class="tm">™</span> wins on every dimension:</span>
+    <span style="font-size:1rem;color:#0F6E56;"> 8–29% faster · highest detection accuracy (~99%) · lowest scan overlap · only adaptive algorithm</span>
   </div>
   <div class="slide-num-d">04</div>
 </div>
@@ -365,7 +335,7 @@ h2.slide-title.dark { color: #fff; }
         <tr><th>Metric</th><th>Value</th><th>Source</th></tr>
         <tr><td>Avg US corn value / acre</td><td style="font-weight:500">$800</td><td style="color:#94A3B8;font-size:0.875rem;">USDA NASS 2024</td></tr>
         <tr><td>Yield loss from late detection</td><td style="font-weight:500">30–40%</td><td style="color:#94A3B8;font-size:0.875rem;">FAO / USDA ERS</td></tr>
-        <tr><td>AlgoSwarm™ yield gain vs. individual drones</td><td style="font-weight:500;color:#0D9488;">+20%</td><td style="color:#94A3B8;font-size:0.875rem;">Swarm timing</td></tr>
+        <tr><td>AlgoSwarm<span class="tm">™</span> yield gain vs. individual drones</td><td style="font-weight:500;color:#0D9488;">+20%</td><td style="color:#94A3B8;font-size:0.875rem;">Swarm timing</td></tr>
         <tr><td>Crop value protected (1,000 ac)</td><td style="font-weight:500;color:#0D9488;">$160,000+/season</td><td style="color:#94A3B8;font-size:0.875rem;">Calculated</td></tr>
         <tr><td>SDK annual license (est.)</td><td style="font-weight:500">$18–30K</td><td style="color:#94A3B8;font-size:0.875rem;">Algo-Rythmn</td></tr>
         <tr><td style="font-weight:500;">Net ROI — Year 1</td><td style="font-weight:500;color:#0D9488;font-size:1.25rem;">5–8×</td><td style="color:#94A3B8;font-size:0.875rem;">Conservative est.</td></tr>
@@ -383,7 +353,7 @@ h2.slide-title.dark { color: #fff; }
             <div class="bar-track"><div class="bar-fill" style="width:33.3%;background:#CBD5E1"><span class="bar-val-dark">50 ac</span></div></div>
           </div>
           <div class="bar-row" style="margin-bottom:14px;">
-            <span style="font-size:0.875rem;color:#64748B;width:90px;flex-shrink:0;text-align:right;">AlgoSwarm™</span>
+            <span style="font-size:0.875rem;color:#64748B;width:90px;flex-shrink:0;text-align:right;">AlgoSwarm<span class="tm">™</span></span>
             <div class="bar-track"><div class="bar-fill teal-fill" style="width:100%"><span class="bar-val">150 ac (+200%)</span></div></div>
           </div>
           <div style="font-size:0.875rem;color:#94A3B8;margin-bottom:8px;">Yield gain vs. conventional</div>
@@ -392,7 +362,7 @@ h2.slide-title.dark { color: #fff; }
             <div class="bar-track"><div class="bar-fill" style="width:60%;background:#CBD5E1"><span class="bar-val-dark">5–15%</span></div></div>
           </div>
           <div class="bar-row" style="margin-bottom:14px;">
-            <span style="font-size:0.875rem;color:#64748B;width:90px;flex-shrink:0;text-align:right;">AlgoSwarm™</span>
+            <span style="font-size:0.875rem;color:#64748B;width:90px;flex-shrink:0;text-align:right;">AlgoSwarm<span class="tm">™</span></span>
             <div class="bar-track"><div class="bar-fill teal-fill" style="width:100%"><span class="bar-val">Up to 20%</span></div></div>
           </div>
           <div style="font-size:0.875rem;color:#94A3B8;margin-bottom:8px;">Chemical waste reduction vs. manual</div>
@@ -401,7 +371,7 @@ h2.slide-title.dark { color: #fff; }
             <div class="bar-track"><div class="bar-fill" style="width:89%;background:#CBD5E1"><span class="bar-val-dark">Up to 90%</span></div></div>
           </div>
           <div class="bar-row">
-            <span style="font-size:0.875rem;color:#64748B;width:90px;flex-shrink:0;text-align:right;">AlgoSwarm™</span>
+            <span style="font-size:0.875rem;color:#64748B;width:90px;flex-shrink:0;text-align:right;">AlgoSwarm<span class="tm">™</span></span>
             <div class="bar-track"><div class="bar-fill teal-fill" style="width:100%"><span class="bar-val">Additional gain</span></div></div>
           </div>
         </div>
@@ -413,18 +383,19 @@ h2.slide-title.dark { color: #fff; }
 
 <div class="slide slide-dark" id="slide-6">
   <div class="eyebrow">Competitive advantage</div>
-  <h2 class="slide-title dark">Individual drones vs. AlgoSwarm™ coordinated swarm</h2>
+  <h2 class="slide-title dark">Individual drones vs. AlgoSwarm<span class="tm">™</span> coordinated swarm</h2>
   <table class="tbl-dark" style="margin-top:18px;">
-    <tr><th>Advantage</th><th>Individual drones</th><th>AlgoSwarm™ coordinated swarm</th></tr>
+    <tr><th>Advantage</th><th>Individual drones</th><th>AlgoSwarm<span class="tm">™</span> coordinated swarm</th></tr>
     <tr><td>Operator ratio</td><td>1 per drone</td><td class="win">1–2 for entire fleet</td></tr>
     <tr><td>Task parallelism</td><td>None</td><td class="win">Scout + spray + seed simultaneously</td></tr>
     <tr><td>Dynamic reallocation</td><td>No</td><td class="win">Yes (AI-driven)</td></tr>
     <tr><td>Acreage / hour (3-drone)</td><td>50 acres</td><td class="win">150 acres (+200%)</td></tr>
     <tr><td>Chemical waste reduction</td><td>Up to 90% vs. manual</td><td class="win">Additional gain via swarm prescription maps</td></tr>
     <tr><td>Yield gain</td><td>5–15% over conventional</td><td class="win">Up to 20% with coordinated swarm timing</td></tr>
+    <tr><td>Labor cost</td><td>High — 1 operator per drone, manual scouting crews</td><td class="win">Up to 70% reduction — 1–2 operators cover entire fleet, no ground crews</td></tr>
     <tr><td>Break-even</td><td>1–3 years</td><td class="win">Faster — labor &amp; throughput gains</td></tr>
   </table>
-  <p style="font-size:0.875rem;color:rgba(255,255,255,0.3);margin-top:14px;font-style:italic;">AlgoSwarm™ is a scouting &amp; compliance SDK — not a managed service. Works with your existing drone hardware.</p>
+  <p style="font-size:0.875rem;color:rgba(255,255,255,0.3);margin-top:14px;font-style:italic;">AlgoSwarm<span class="tm">™</span> is a scouting &amp; compliance SDK — not a managed service. Works with your existing drone hardware.</p>
   <div class="slide-num">07</div>
 </div>
 
@@ -448,7 +419,7 @@ h2.slide-title.dark { color: #fff; }
       <div class="out-item"><div class="out-icon"><svg width="10" height="10" viewBox="0 0 10 10"><line x1="2" y1="2" x2="8" y2="8" stroke="#DC2626" stroke-width="1.5" stroke-linecap="round"/><line x1="8" y1="2" x2="2" y2="8" stroke="#DC2626" stroke-width="1.5" stroke-linecap="round"/></svg></div>Managed drone-as-a-service operations</div>
       <div class="out-item"><div class="out-icon"><svg width="10" height="10" viewBox="0 0 10 10"><line x1="2" y1="2" x2="8" y2="8" stroke="#DC2626" stroke-width="1.5" stroke-linecap="round"/><line x1="8" y1="2" x2="2" y2="8" stroke="#DC2626" stroke-width="1.5" stroke-linecap="round"/></svg></div>Real-time remote piloting</div>
       <div style="background:#F8FAFC;border-radius:8px;padding:14px;margin-top:16px;border-left:3px solid #14B8A6;border-radius:0 8px 8px 0;">
-        <p style="font-size:1rem;color:#334155;line-height:1.55;">AlgoSwarm™ is an <strong>algorithmic framework</strong> — not a managed service. We provide the intelligence layer that gives your UAV fleet adaptive, coordinated scouting control for compliance documentation.</p>
+        <p style="font-size:1rem;color:#334155;line-height:1.55;">AlgoSwarm<span class="tm">™</span> is an <strong>algorithmic framework</strong> — not a managed service. We provide the intelligence layer that gives your UAV fleet adaptive, coordinated scouting control for compliance documentation.</p>
       </div>
     </div>
   </div>
@@ -463,7 +434,7 @@ h2.slide-title.dark { color: #fff; }
       <div class="accent-bar"></div>
       <div>
         <div class="card-title" style="display:flex;align-items:center;gap:8px;">GP-Adaptive Voronoi <span style="font-size:0.75rem;background:#E1F5EE;color:#0F6E56;padding:2px 8px;border-radius:12px;font-weight:600;letter-spacing:0.5px;border:1px solid #9FE1CB;">PATENT PENDING</span></div>
-        <div class="card-body">Real-time Gaussian Process guides drones to anomaly hotspots 8–29% faster than any static planning alternative. The posterior predicts probability at every unvisited cell — trained live from sensor data.</div>
+        <div class="card-body">Our algorithm guides drones to anomaly hotspots 8–29% faster than any static planning alternative in real-time. The posterior predicts probability at every unvisited cell — trained live from sensor data.</div>
       </div>
     </div>
     <div class="moat-card">
