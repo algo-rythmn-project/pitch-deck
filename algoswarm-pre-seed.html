@@ -383,16 +383,63 @@ h2.slide-title.dark { color: #fff; }
 <div class="slide slide-dark" id="slide-6">
   <div class="eyebrow">Competitive advantage</div>
   <h2 class="slide-title dark">Individual drones vs. AlgoSwarm<span class="tm">™</span> coordinated swarm</h2>
-  <table class="tbl-dark" style="margin-top:18px;">
-    <tr><th>Advantage</th><th>Individual drones</th><th>AlgoSwarm<span class="tm">™</span> coordinated swarm</th></tr>
-    <tr><td>Operator ratio</td><td>1 per drone</td><td class="win">1–2 for entire fleet</td></tr>
-    <tr><td>Task parallelism</td><td>None</td><td class="win">Scout + spray + seed simultaneously</td></tr>
-    <tr><td>Dynamic reallocation</td><td>No</td><td class="win">Yes (AI-driven)</td></tr>
-    <tr><td>Acreage / hour (3-drone)</td><td>50 acres</td><td class="win">150 acres (+200%)</td></tr>
-    <tr><td>Chemical waste reduction</td><td>Up to 90% vs. manual</td><td class="win">Additional gain via swarm prescription maps</td></tr>
-    <tr><td>Yield gain</td><td>5–15% over conventional</td><td class="win">Up to 20% with coordinated swarm timing</td></tr>
-    <tr><td>Labor cost</td><td>High — 1 operator per drone, manual scouting crews</td><td class="win">Up to 70% reduction — 1–2 operators cover entire fleet, no ground crews</td></tr>
-    <tr><td>Break-even</td><td>1–3 years</td><td class="win">Faster — labor &amp; throughput gains</td></tr>
+  <table class="tbl-dark" style="margin-top:18px; font-size:0.95rem;">
+    <tr>
+      <th style="width:20%; line-height:1.4;">Metric<br><span style="font-size:0.75rem; color:rgba(255, 255, 255, 0.911); font-weight:400; letter-spacing:0.5px;">Individual Drones vs. AlgoSwarm<span class="tm">™</span></span></th>
+      <th style="width:20%;">1 Drone</th>
+      <th style="width:20%;">2 Drones</th>
+      <th style="width:20%;">3 Drones</th>
+      <th style="width:20%;">4 Drones</th>
+    </tr>
+    <tr>
+      <td style="font-weight:500;">Acreage / hour</td>
+      <td><span style="color:rgba(255,255,255,0.5);font-size:0.875rem;">40 ac</span><br><span class="win">50 ac (+25%)</span></td>
+      <td><span style="color:rgba(255,255,255,0.5);font-size:0.875rem;">45 ac</span><br><span class="win">100 ac (+122%)</span></td>
+      <td><span style="color:rgba(255,255,255,0.5);font-size:0.875rem;">50 ac</span><br><span class="win">150 ac (+200%)</span></td>
+      <td><span style="color:rgba(255,255,255,0.5);font-size:0.875rem;">55 ac</span><br><span class="win">200 ac (+263%)</span></td>
+    </tr>
+    <tr>
+      <td style="font-weight:500;">Operator ratio</td>
+      <td><span style="color:rgba(255,255,255,0.5);font-size:0.875rem;">1 op : 1 uav</span><br><span class="win">1 op : 1 uav</span></td>
+      <td><span style="color:rgba(255,255,255,0.5);font-size:0.875rem;">2 ops : 2 uavs</span><br><span class="win">1 op : 2 uavs</span></td>
+      <td><span style="color:rgba(255,255,255,0.5);font-size:0.875rem;">3 ops : 3 uavs</span><br><span class="win">1 op : 3 uavs</span></td>
+      <td><span style="color:rgba(255,255,255,0.5);font-size:0.875rem;">4 ops : 4 uavs</span><br><span class="win">1–2 ops : 4 uavs</span></td>
+    </tr>
+    <tr>
+      <td style="font-weight:500;">Labor cost scale</td>
+      <td><span style="color:rgba(255,255,255,0.5);font-size:0.875rem;">1× Baseline</span><br><span class="win">1× Baseline</span></td>
+      <td><span style="color:rgba(255,255,255,0.5);font-size:0.875rem;">2× High</span><br><span class="win">−50% vs Indiv</span></td>
+      <td><span style="color:rgba(255,255,255,0.5);font-size:0.875rem;">3× High</span><br><span class="win">−66% vs Indiv</span></td>
+      <td><span style="color:rgba(255,255,255,0.5);font-size:0.875rem;">4× High</span><br><span class="win">−70% vs Indiv</span></td>
+    </tr>
+    <tr>
+      <td style="font-weight:500;">Task parallelism</td>
+      <td><span style="color:rgba(255,255,255,0.5);font-size:0.875rem;">None</span><br><span class="win">Single zone map</span></td>
+      <td><span style="color:rgba(255,255,255,0.5);font-size:0.875rem;">None</span><br><span class="win">Dual-zone sync</span></td>
+      <td><span style="color:rgba(255,255,255,0.5);font-size:0.875rem;">None</span><br><span class="win">Multi-zone routing</span></td>
+      <td><span style="color:rgba(255,255,255,0.5);font-size:0.875rem;">None</span><br><span class="win">Full swarm sync</span></td>
+    </tr>
+    <tr>
+      <td style="font-weight:500;">Dynamic re-routing</td>
+      <td><span style="color:rgba(255,255,255,0.5);font-size:0.875rem;">No</span><br><span class="win">No</span></td>
+      <td><span style="color:rgba(255,255,255,0.5);font-size:0.875rem;">No</span><br><span class="win">Yes (AI-driven)</span></td>
+      <td><span style="color:rgba(255,255,255,0.5);font-size:0.875rem;">No</span><br><span class="win">Yes (AI-driven)</span></td>
+      <td><span style="color:rgba(255,255,255,0.5);font-size:0.875rem;">No</span><br><span class="win">Yes (AI-driven)</span></td>
+    </tr>
+    <tr>
+      <td style="font-weight:500;">Yield gain</td>
+      <td><span style="color:rgba(255,255,255,0.5);font-size:0.875rem;">5–15% over conv.</span><br><span class="win">5–15% over conv.</span></td>
+      <td><span style="color:rgba(255,255,255,0.5);font-size:0.875rem;">5–15% over conv.</span><br><span class="win">~16%</span></td>
+      <td><span style="color:rgba(255,255,255,0.5);font-size:0.875rem;">5–15% over conv.</span><br><span class="win">~18%</span></td>
+      <td><span style="color:rgba(255,255,255,0.5);font-size:0.875rem;">5–15% over conv.</span><br><span class="win">Up to 20%</span></td>
+    </tr>
+    <tr>
+      <td style="font-weight:500;">Break-even</td>
+      <td><span style="color:rgba(255,255,255,0.5);font-size:0.875rem;">1–3 years</span><br><span class="win">~2 years</span></td>
+      <td><span style="color:rgba(255,255,255,0.5);font-size:0.875rem;">1–3 years</span><br><span class="win">~1.5 years</span></td>
+      <td><span style="color:rgba(255,255,255,0.5);font-size:0.875rem;">1–3 years</span><br><span class="win">~1 year</span></td>
+      <td><span style="color:rgba(255,255,255,0.5);font-size:0.875rem;">1–3 years</span><br><span class="win">&lt;1 season</span></td>
+    </tr>
   </table>
   <p style="font-size:0.875rem;color:rgba(255,255,255,0.3);margin-top:14px;font-style:italic;">AlgoSwarm<span class="tm">™</span> is a scouting &amp; compliance SDK — not a managed service. Works with your existing drone hardware.</p>
   <div class="slide-num">07</div>
