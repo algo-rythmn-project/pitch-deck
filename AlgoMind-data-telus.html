@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AlgoMind Data — Cheat Sheet for the Telus Call</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #FBF8F2;
+    --paper-shadow: #E8E3D6;
+    --ink: #1A1915;
+    --ink-soft: #4B4943;
+    --ink-faint: #8A8778;
+    --rule: #D6D1C2;
+
+    --client: #1D4E8C;       /* Source 1 — blue */
+    --client-wash: #E6EEF8;
+    --external: #2F6B3D;     /* Source 2 — green */
+    --external-wash: #E8F1EA;
+    --synthetic: #6B2F8C;    /* Source 3 — purple */
+    --synthetic-wash: #F0E8F5;
+
+    --warn: #9A5A00;
+    --warn-wash: #FBF1DC;
+
+    --serif: 'Fraunces', Georgia, serif;
+    --sans: 'IBM Plex Sans', -apple-system, sans-serif;
+    --mono: 'JetBrains Mono', 'Menlo', monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: #E8E3D6;
+    font-family: var(--sans);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  /* Paper surface */
+  .sheet {
+    max-width: 860px;
+    margin: 24px auto;
+    background: var(--paper);
+    padding: 24px 32px 20px;
+    box-shadow:
+      0 1px 0 rgba(0,0,0,0.04),
+      0 8px 24px rgba(0,0,0,0.08),
+      0 32px 64px rgba(0,0,0,0.06);
+    position: relative;
+  }
+
+  /* Edge marker — like the color tab on a laminated reference card */
+  .sheet::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg,
+      var(--client) 0% 33.3%,
+      var(--external) 33.3% 66.6%,
+      var(--synthetic) 66.6% 100%);
+  }
+
+  /* ---------- Top bar ---------- */
+  .topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 6px;
+    margin-bottom: 10px;
+  }
+  .topbar .slug {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+  .topbar .for {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.08em;
+    color: var(--ink-faint);
+  }
+  .topbar .for b { color: var(--ink); font-weight: 600; }
+
+  h1 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    margin-bottom: 2px;
+  }
+  h1 em {
+    font-style: italic;
+    font-weight: 500;
+    color: var(--ink-soft);
+  }
+  .subtitle {
+    font-size: 12px;
+    color: var(--ink-soft);
+    margin-bottom: 12px;
+  }
+
+  /* ---------- The answer (front and center) ---------- */
+  .answer {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--ink);
+    padding: 10px 14px 10px 16px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: stretch;
+    gap: 12px;
+  }
+  .answer .label {
+    font-family: var(--mono);
+    font-size: 8px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    white-space: nowrap;
+    border-right: 1px solid var(--rule);
+    padding-right: 8px;
+    flex-shrink: 0;
+  }
+  .answer .body {
+    font-family: var(--serif);
+    font-size: 14px;
+    line-height: 1.4;
+    color: var(--ink);
+    flex: 1;
+  }
+  .answer .body .lead {
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+  .answer .body .follow {
+    font-size: 12px;
+    font-family: var(--sans);
+    color: var(--ink-soft);
+    line-height: 1.45;
+  }
+
+  /* ---------- Three sources ---------- */
+  .sources-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 6px;
+  }
+  .section-title {
+    font-family: var(--serif);
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: -0.005em;
+  }
+  .section-title .num {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--ink-faint);
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+  .section-hint {
+    font-size: 10px;
+    color: var(--ink-faint);
+    font-style: italic;
+  }
+
+  .sources {
+    display: table;
+    width: 100%;
+    border-spacing: 4px 0;
+    margin: 0 -4px 12px;
+    table-layout: fixed;
+  }
+  .sources-row { display: table-row; }
+  .source {
+    display: table-cell;
+    width: 33.33%;
+    border: 1px solid var(--rule);
+    padding: 8px 10px 10px;
+    border-top-width: 3px;
+    background: var(--paper);
+    vertical-align: top;
+  }
+  .source.s1 { border-top-color: var(--client); background: var(--client-wash); }
+  .source.s2 { border-top-color: var(--external); background: var(--external-wash); }
+  .source.s3 { border-top-color: var(--synthetic); background: var(--synthetic-wash); }
+
+  .source .tag {
+    font-family: var(--mono);
+    font-size: 8px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 3px;
+  }
+  .source.s1 .tag { color: var(--client); }
+  .source.s2 .tag { color: var(--external); }
+  .source.s3 .tag { color: var(--synthetic); }
+
+  .source .name {
+    font-family: var(--serif);
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.1;
+    margin-bottom: 4px;
+  }
+  .source .what {
+    font-size: 11px;
+    color: var(--ink-soft);
+    margin-bottom: 6px;
+    line-height: 1.35;
+  }
+  .source .uses {
+    font-size: 10px;
+    color: var(--ink);
+    margin-top: auto;
+  }
+  .source .uses strong {
+    font-family: var(--mono);
+    font-size: 8px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    display: block;
+    margin-bottom: 2px;
+    font-weight: 500;
+  }
+
+  /* ---------- The boundary (critical) ---------- */
+  .boundary {
+    background: var(--warn-wash);
+    border: 1px solid #E8D4A8;
+    padding: 8px 12px;
+    margin-bottom: 12px;
+    font-size: 11.5px;
+    color: var(--ink);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .boundary .icon {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--warn);
+    line-height: 1;
+    flex-shrink: 0;
+  }
+  .boundary b {
+    color: var(--warn);
+    font-weight: 600;
+  }
+
+  /* ---------- Two columns: features and data ---------- */
+  .two-col {
+    display: table;
+    width: 100%;
+    border-spacing: 10px 0;
+    margin: 0 -10px 12px;
+    table-layout: fixed;
+  }
+  .col {
+    display: table-cell;
+    width: 50%;
+    vertical-align: top;
+  }
+
+  .col h2 {
+    font-family: var(--serif);
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 5px;
+    padding-bottom: 3px;
+    border-bottom: 1px solid var(--rule);
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+  }
+  .col h2 .num {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--ink-faint);
+  }
+
+  .feat {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px;
+    padding: 3px 0;
+    border-bottom: 1px dotted var(--rule);
+    font-size: 11px;
+  }
+  .feat:last-child { border-bottom: none; }
+  .feat .name { font-weight: 600; color: var(--ink); }
+  .feat .need {
+    color: var(--ink-soft);
+    font-size: 10px;
+    text-align: right;
+    font-family: var(--mono);
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .feat.s3 .need { color: var(--synthetic); }
+
+  /* Ask list — what we need from Telus */
+  .asks {
+    list-style: none;
+    padding: 0;
+  }
+  .asks li {
+    display: flex;
+    gap: 6px;
+    padding: 3px 0;
+    font-size: 11px;
+    border-bottom: 1px dotted var(--rule);
+  }
+  .asks li:last-child { border-bottom: none; }
+  .asks li::before {
+    content: "";
+    width: 5px; height: 5px;
+    background: var(--ink);
+    margin-top: 6px;
+    flex-shrink: 0;
+  }
+  .asks li > div { flex: 1; }
+  .asks li b {
+    font-weight: 600;
+    color: var(--ink);
+    display: block;
+  }
+  .asks li span {
+    color: var(--ink-soft);
+    display: block;
+    font-size: 10px;
+    margin-top: 1px;
+    line-height: 1.35;
+  }
+
+  /* ---------- Talk track (the thing Kenny actually reads aloud) ---------- */
+  .talk {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 12px 16px;
+    margin: 4px 0 12px;
+    position: relative;
+  }
+  .talk::before {
+    content: "SAY THIS";
+    position: absolute;
+    top: -6px;
+    left: 16px;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--mono);
+    font-size: 8px;
+    letter-spacing: 0.15em;
+    padding: 0 6px;
+    border: 1px solid var(--ink);
+  }
+  .talk p {
+    font-family: var(--serif);
+    font-size: 12.5px;
+    line-height: 1.5;
+    margin-bottom: 6px;
+    font-weight: 500;
+  }
+  .talk p:last-child { margin-bottom: 0; }
+  .talk p em {
+    font-style: italic;
+    color: #E8E0C8;
+  }
+  .talk .cue {
+    font-family: var(--mono);
+    font-size: 8px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #A8A48C;
+    margin-bottom: 4px;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  /* ---------- Escape hatches ---------- */
+  .escape {
+    background: var(--paper);
+    border: 1px dashed var(--ink-faint);
+    padding: 8px 12px;
+    margin-bottom: 10px;
+  }
+  .escape .hed {
+    font-family: var(--mono);
+    font-size: 8px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 4px;
+  }
+  .escape-lines {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 16px;
+    font-size: 11px;
+  }
+  .escape-row {
+    display: flex;
+    gap: 8px;
+    flex: 1 1 45%;
+    align-items: baseline;
+    padding: 1px 0;
+  }
+  .escape-row .when {
+    color: var(--ink-soft);
+    font-style: italic;
+    white-space: nowrap;
+    flex-shrink: 0;
+    font-size: 10px;
+  }
+  .escape-row .say {
+    color: var(--ink);
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 11px;
+  }
+  .escape-row .say::before {
+    content: "→ ";
+    color: var(--ink-faint);
+    font-family: var(--sans);
+    font-style: normal;
+  }
+
+  /* ---------- Footer ---------- */
+  footer {
+    border-top: 1px solid var(--rule);
+    padding-top: 6px;
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--mono);
+    font-size: 8px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  /* ---------- Print ---------- */
+  @media print {
+    html, body {
+      background: white;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .sheet {
+      margin: 0;
+      box-shadow: none;
+      max-width: none;
+      padding: 12px 18px;
+    }
+    @page { size: letter; margin: 0.3in; }
+  }
+
+  /* ---------- Mobile ---------- */
+  @media (max-width: 640px) {
+    html, body { font-size: 12px; }
+    .sheet { padding: 16px 14px; margin: 8px; }
+    h1 { font-size: 22px; }
+    .sources, .two-col { flex-direction: column; }
+    .escape-row { flex: 1 1 100%; }
+    .answer { flex-direction: column; }
+    .answer .label {
+      writing-mode: horizontal-tb;
+      transform: none;
+      border-right: none;
+      border-bottom: 1px solid var(--rule);
+      padding-right: 0;
+      padding-bottom: 4px;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="topbar">
+    <span class="slug">AlgoMind™ · Data Cheat Sheet · v1</span>
+    <span class="for">FOR: Telus Agriculture & Consumer Goods</span>
+  </div>
+
+  <h1>Where the data<br><em>actually comes from.</em></h1>
+  <p class="subtitle">A one-page answer to the question Telus will ask first. Read the black box aloud if you freeze.</p>
+
+  <!-- The answer -->
+  <div class="answer">
+    <div class="label">The answer</div>
+    <div class="body">
+      <div class="lead">Three sources — your proprietary data, external authoritative data, and synthetic data for simulations only.</div>
+      <div class="follow">Real recommendations are grounded in the first two. Synthetic data is used only for "what-if" scenarios and pre-connection demos — never for live advice. Every output carries a trace showing which source each data point came from.</div>
+    </div>
+  </div>
+
+  <!-- Three sources -->
+  <div class="sources-header">
+    <h2 class="section-title"><span class="num">01</span>The three sources</h2>
+    <span class="section-hint">If they want detail, walk them through these.</span>
+  </div>
+  <div class="sources">
+    <div class="sources-row">
+    <div class="source s1">
+      <div class="tag">Source 1 · Client</div>
+      <div class="name">Proprietary data</div>
+      <div class="what">Your own databases, ERP, IoT telemetry, and historical records. The ground truth about your operations.</div>
+      <div class="uses"><strong>Used for</strong>The "what is" in every recommendation. Historical outcomes. Current state.</div>
+    </div>
+    <div class="source s2">
+      <div class="tag">Source 2 · External</div>
+      <div class="name">Public authoritative</div>
+      <div class="what">Weather &amp; satellite imagery, government regulations &amp; label rules, commodity markets, peer-reviewed research.</div>
+      <div class="uses"><strong>Used for</strong>Context the client doesn't own. Compliance checks. Market signals.</div>
+    </div>
+    <div class="source s3">
+      <div class="tag">Source 3 · Synthetic</div>
+      <div class="name">Simulation data</div>
+      <div class="what">LLM-generated scenarios built on top of real baselines. Always labeled as simulation output.</div>
+      <div class="uses"><strong>Used for</strong>"What-if" planning. Pre-connection demos. Never live recommendations.</div>
+    </div>
+    </div>
+  </div>
+
+  <!-- The boundary -->
+  <div class="boundary">
+    <div class="icon">!</div>
+    <div>
+      <b>The hard line.</b> Synthetic data never grounds a real-world recommendation. If Telus asks whether our outputs are "made up by AI" — no, recommendations are grounded in Sources 1 &amp; 2 only, and every output shows its sources.
+    </div>
+  </div>
+
+  <!-- Two columns: features and asks -->
+  <div class="two-col">
+    <div class="col">
+      <h2>What each feature needs <span class="num">02</span></h2>
+      <div class="feat"><span class="name">Recommendations &amp; advisory</span><span class="need">Client + External</span></div>
+      <div class="feat"><span class="name">Data normalization</span><span class="need">Client + External</span></div>
+      <div class="feat"><span class="name">Multi-step planning</span><span class="need">Client + External</span></div>
+      <div class="feat"><span class="name">Compliance / label checks</span><span class="need">External only</span></div>
+      <div class="feat s3"><span class="name">Scenario simulations</span><span class="need">Client + Ext + Synth</span></div>
+      <div class="feat s3"><span class="name">Demo mode (pre-pilot)</span><span class="need">Synthetic only</span></div>
+      <div class="feat"><span class="name">Reasoning trace / audit</span><span class="need">No new data</span></div>
+      <div class="feat"><span class="name">Governance &amp; access control</span><span class="need">No new data</span></div>
+    </div>
+    <div class="col">
+      <h2>What we need from Telus <span class="num">03</span></h2>
+      <ul class="asks">
+        <li><div><b>Read access to 2–3 platforms</b><span>Via API. Their Agronomy, Label DB, or Supply Chain platforms are all good candidates.</span></div></li>
+        <li><div><b>One representative dataset</b><span>One region, one product, one season. Anonymized is fine.</span></div></li>
+        <li><div><b>One specific decision to optimize</b><span>Not a wish list. One measurable decision their customers make today.</span></div></li>
+        <li><div><b>One domain expert, ~2 hrs/week</b><span>An agronomist or product lead who can validate outputs.</span></div></li>
+        <li><div><b>Two or three KPIs</b><span>How we'll measure success at day 60. Agreed up front.</span></div></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- The talk track -->
+  <div class="talk">
+    <div class="cue">If they ask "where does the data come from?" — read this</div>
+    <p>"The data comes from <em>them</em>. AlgoMind doesn't bring or invent data — it connects to the systems their customers already run and reads on demand."</p>
+    <p>"It pulls from three places: the client's own data, public authoritative sources like weather and regulatory databases, and — only for what-if simulations — synthetic data that's always labeled as such."</p>
+    <p>"The reason the demo looks surprising is that no single source could produce that answer. The product is the orchestration — knowing which source to call for which part of the question, and composing the answer with a full reasoning trace."</p>
+  </div>
+
+  <!-- Escape hatches -->
+  <div class="escape">
+    <div class="hed">If you don't know the answer — use these</div>
+    <div class="escape-lines">
+      <div class="escape-row">
+        <span class="when">Architecture specifics</span>
+        <span class="say">"Good question — our technical lead can walk through that on a follow-up."</span>
+      </div>
+      <div class="escape-row">
+        <span class="when">Exact data volumes</span>
+        <span class="say">"Depends on the use case — let's scope in a working session."</span>
+      </div>
+      <div class="escape-row">
+        <span class="when">Security &amp; compliance</span>
+        <span class="say">"We have a compliance brief — happy to send it ahead."</span>
+      </div>
+      <div class="escape-row">
+        <span class="when">Pricing or contract</span>
+        <span class="say">"Let's focus on fit first, commercial next conversation."</span>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <span>Algo-Rythmn · Confidential · Internal cheat sheet</span>
+    <span>Telus Agriculture & Consumer Goods</span>
+  </footer>
+
+</div>
+</body>
+</html>
