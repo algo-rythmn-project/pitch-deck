@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AlgoPharma™ — Pricing & Plans</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1a2330;
+    --ink2:#3d4a5c;
+    --ink3:#6b7a8f;
+    --ink4:#a3b0c2;
+    --ink5:#d5dce5;
+    --bg-start:#f2faf8;
+    --bg-mid:#eaf6f3;
+    --bg-end:#e3f1ee;
+    --card:#ffffff;
+    --rule:#e8edf2;
+    --rule2:#f0f4f7;
+    --brand:#0d8a72;
+    --brand-dark:#086a58;
+    --brand-soft:#d6efe8;
+    --brand-soft2:#eaf7f3;
+    --brand-tint:#f4faf8;
+    --warn:#b87333;
+    --danger:#c0392b;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{background:var(--bg-mid);}
+  body{
+    color:var(--ink);
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    font-size:14.5px;
+    line-height:1.6;
+    background:linear-gradient(180deg,var(--bg-start) 0%,var(--bg-mid) 50%,var(--bg-end) 100%);
+    background-attachment:fixed;
+    min-height:100vh;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .page{max-width:1180px;margin:0 auto;padding:56px 32px 48px;}
+
+  @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+  /* ───── HEADER ───── */
+  .header{text-align:center;margin-bottom:48px;animation:fadeUp .6s ease both;}
+  .wordmark{font-size:42px;font-weight:700;letter-spacing:-.02em;margin-bottom:8px;}
+  .wordmark .algo{color:var(--ink);}
+  .wordmark .pharma{color:var(--brand);}
+  .wordmark .tm{font-size:16px;vertical-align:super;font-weight:500;color:var(--brand);margin-left:1px;}
+  .badge-beta{display:inline-block;font-size:11px;color:var(--ink3);background:var(--card);padding:4px 10px;border-radius:999px;margin-left:6px;vertical-align:middle;font-weight:500;border:1px solid var(--rule);}
+  .header-title{font-size:32px;font-weight:600;color:var(--ink);letter-spacing:-.02em;margin-bottom:10px;line-height:1.2;}
+  .header-title .accent{color:var(--brand);}
+  .header-sub{font-size:15px;color:var(--ink3);max-width:620px;margin:0 auto;line-height:1.55;}
+
+  /* ───── SECTION LABEL ───── */
+  .section-label{
+    display:flex;align-items:center;justify-content:center;gap:10px;
+    font-size:11.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--ink3);margin-bottom:24px;
+  }
+  .section-label::before,.section-label::after{
+    content:'';flex:0 0 40px;height:1px;background:var(--ink5);
+  }
+
+  /* ───── PILL TABS (billing toggle) ───── */
+  .billing-toggle{display:flex;justify-content:center;margin-bottom:32px;animation:fadeUp .6s ease .05s both;}
+  .toggle-wrap{background:var(--card);border-radius:999px;padding:5px;display:inline-flex;gap:4px;border:1px solid var(--rule);box-shadow:0 1px 2px rgba(13,138,114,.04);}
+  .toggle-btn{
+    border:none;background:transparent;cursor:pointer;
+    padding:9px 22px;border-radius:999px;
+    font-size:13px;font-weight:500;color:var(--ink2);
+    font-family:inherit;transition:all .2s;display:inline-flex;align-items:center;gap:8px;
+  }
+  .toggle-btn .save-tag{font-size:10.5px;background:var(--brand-soft);color:var(--brand);padding:2px 7px;border-radius:999px;font-weight:600;}
+  .toggle-btn:hover{color:var(--ink);}
+  .toggle-btn.active{background:var(--brand);color:#fff;box-shadow:0 2px 8px rgba(13,138,114,.25);}
+  .toggle-btn.active .save-tag{background:rgba(255,255,255,.22);color:#fff;}
+
+  /* ───── TIER CARDS ───── */
+  .tiers{display:grid;grid-template-columns:1fr 1.08fr 1fr;gap:20px;margin-bottom:64px;animation:fadeUp .6s ease .1s both;}
+  .tier{
+    background:var(--card);border-radius:18px;padding:30px 26px 28px;
+    border:1px solid var(--rule);
+    display:flex;flex-direction:column;
+    transition:transform .25s,box-shadow .25s;
+    position:relative;
+  }
+  .tier:hover{transform:translateY(-2px);box-shadow:0 12px 32px -16px rgba(13,138,114,.14);}
+  .tier.featured{
+    border:2px solid var(--brand);
+    box-shadow:0 12px 36px -12px rgba(13,138,114,.22);
+    transform:translateY(-4px);
+  }
+  .tier.featured:hover{transform:translateY(-6px);}
+  .tier.featured::before{
+    content:'Recommended';
+    position:absolute;top:-13px;left:50%;transform:translateX(-50%);
+    background:var(--brand);color:#fff;
+    font-size:10.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+    padding:5px 14px;border-radius:999px;
+    box-shadow:0 4px 12px rgba(13,138,114,.3);
+  }
+
+  .tier-name{font-size:13px;font-weight:600;color:var(--ink3);letter-spacing:.04em;text-transform:uppercase;margin-bottom:8px;}
+  .tier.featured .tier-name{color:var(--brand);}
+  .tier-headline{font-size:21px;font-weight:600;color:var(--ink);line-height:1.25;margin-bottom:6px;letter-spacing:-.01em;}
+  .tier-tagline{font-size:13.5px;color:var(--ink3);line-height:1.5;margin-bottom:20px;}
+
+  .price-block{padding:16px 0 14px;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);margin-bottom:18px;}
+  .price-row{display:flex;align-items:baseline;gap:6px;}
+  .price-num{font-size:38px;font-weight:700;color:var(--ink);letter-spacing:-.02em;line-height:1;}
+  .tier.featured .price-num{color:var(--brand);}
+  .price-unit{font-size:13px;color:var(--ink3);font-weight:500;}
+  .price-alt{font-size:12px;color:var(--ink3);margin-top:6px;}
+  .price-alt.highlight{color:var(--brand);font-weight:500;}
+
+  .tier-list{list-style:none;flex:1;margin-bottom:22px;}
+  .tier-list li{
+    font-size:13px;color:var(--ink2);line-height:1.55;
+    padding:7px 0 7px 26px;position:relative;
+  }
+  .tier-list li::before{
+    content:'';position:absolute;left:0;top:11px;
+    width:16px;height:16px;border-radius:50%;
+    background:var(--brand-soft);
+  }
+  .tier-list li::after{
+    content:'';position:absolute;left:5px;top:14.5px;
+    width:6px;height:3px;
+    border-left:1.8px solid var(--brand);border-bottom:1.8px solid var(--brand);
+    transform:rotate(-45deg);
+  }
+  .tier-list li.muted{color:var(--ink4);}
+  .tier-list li.muted::before{background:var(--rule);}
+  .tier-list li.muted::after{
+    content:'✕';
+    border:none;transform:none;
+    left:0;top:11px;
+    width:16px;height:16px;
+    display:flex;align-items:center;justify-content:center;
+    font-size:9px;color:var(--ink4);
+    line-height:1;
+  }
+  .tier-list li strong{color:var(--ink);font-weight:600;}
+
+  .tier-cta{
+    display:block;text-align:center;
+    padding:13px 18px;border-radius:999px;
+    font-size:13.5px;font-weight:600;letter-spacing:.01em;
+    text-decoration:none;
+    transition:all .2s;
+    font-family:inherit;border:none;cursor:pointer;
+    width:100%;
+  }
+  .tier-cta.secondary{background:var(--brand-tint);color:var(--brand);border:1px solid var(--brand-soft);}
+  .tier-cta.secondary:hover{background:var(--brand-soft);}
+  .tier-cta.primary{background:var(--brand);color:#fff;box-shadow:0 4px 14px -4px rgba(13,138,114,.4);}
+  .tier-cta.primary:hover{background:var(--brand-dark);box-shadow:0 6px 18px -4px rgba(13,138,114,.5);}
+
+  @media(max-width:980px){.tiers{grid-template-columns:1fr;gap:24px;}.tier.featured{transform:none;}.tier.featured:hover{transform:translateY(-2px);}}
+
+  /* ───── FEATURE COMPARISON BOX ───── */
+  .compare-section{margin-bottom:64px;animation:fadeUp .6s ease .15s both;}
+  .compare-card{background:var(--card);border:1px solid var(--rule);border-radius:18px;overflow:hidden;}
+  .compare-table{width:100%;border-collapse:collapse;}
+  .compare-table th,.compare-table td{padding:14px 18px;font-size:13px;text-align:left;border-bottom:1px solid var(--rule2);}
+  .compare-table th{background:var(--brand-tint);color:var(--ink);font-weight:600;font-size:12.5px;letter-spacing:.02em;}
+  .compare-table th:not(:first-child),.compare-table td:not(:first-child){text-align:center;}
+  .compare-table th.featured-col{color:var(--brand);background:var(--brand-soft2);}
+  .compare-table td.featured-col{background:var(--brand-tint);color:var(--ink);font-weight:500;}
+  .compare-table tr:last-child td{border-bottom:none;}
+  .compare-table .feat-name{font-weight:500;color:var(--ink);}
+  .compare-table .feat-name .feat-desc{display:block;font-weight:400;font-size:11.5px;color:var(--ink3);margin-top:2px;}
+  .compare-table .check{color:var(--brand);font-weight:600;}
+  .compare-table .dash{color:var(--ink4);}
+  @media(max-width:760px){.compare-card{overflow-x:auto;}.compare-table{min-width:640px;}}
+
+  /* ───── CREDITS ───── */
+  .credits-section{margin-bottom:64px;animation:fadeUp .6s ease .2s both;}
+  .credits-card{background:var(--card);border:1px solid var(--rule);border-radius:18px;padding:28px 30px;}
+  .credits-headline{font-size:22px;font-weight:600;color:var(--ink);margin-bottom:8px;letter-spacing:-.01em;}
+  .credits-headline .accent{color:var(--brand);}
+  .credits-sub{font-size:13.5px;color:var(--ink3);line-height:1.6;margin-bottom:22px;max-width:760px;}
+  .credits-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:18px;}
+  .credit-pack{
+    background:var(--brand-tint);border:1px solid var(--rule);border-radius:14px;
+    padding:18px 20px;transition:all .2s;cursor:default;
+  }
+  .credit-pack:hover{border-color:var(--brand-soft);background:var(--brand-soft2);}
+  .credit-pack.best{border:2px solid var(--brand);background:var(--brand-soft2);}
+  .cp-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
+  .cp-name{font-size:12.5px;font-weight:600;color:var(--ink);}
+  .cp-tag{font-size:10.5px;color:var(--brand);background:var(--card);padding:3px 9px;border-radius:999px;font-weight:600;border:1px solid var(--brand-soft);}
+  .cp-price{font-size:28px;font-weight:700;color:var(--ink);line-height:1;margin-bottom:5px;letter-spacing:-.01em;}
+  .credit-pack.best .cp-price{color:var(--brand);}
+  .cp-rate{font-size:12px;color:var(--ink3);}
+  .credit-translate{
+    background:var(--brand-soft2);border-radius:12px;padding:14px 18px;
+    font-size:12.5px;color:var(--ink2);line-height:1.6;
+    display:flex;gap:10px;align-items:flex-start;
+  }
+  .credit-translate .icon{
+    flex:0 0 22px;height:22px;border-radius:50%;background:var(--brand);color:#fff;
+    display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;
+  }
+  .credit-translate strong{color:var(--ink);font-weight:600;}
+  @media(max-width:680px){.credits-grid{grid-template-columns:1fr;}}
+
+  /* ───── CREDIT SCENARIO ───── */
+  .scenario-block{margin-bottom:22px;border-bottom:1px solid var(--rule);padding-bottom:22px;}
+  .scenario-title{font-size:15px;font-weight:600;color:var(--ink);margin-bottom:4px;letter-spacing:-.01em;}
+  .scenario-subtitle{font-size:12.5px;color:var(--ink3);margin-bottom:18px;}
+  .scenario-rows{display:flex;flex-direction:column;gap:10px;}
+  .sc-row{display:grid;grid-template-columns:220px 1fr 90px;align-items:center;gap:14px;}
+  .sc-activity{font-size:13px;font-weight:500;color:var(--ink);}
+  .sc-detail{font-size:11.5px;color:var(--ink3);margin-top:1px;}
+  .sc-bar-wrap{height:8px;background:var(--rule);border-radius:999px;overflow:hidden;}
+  .sc-bar{height:100%;width:var(--pct);background:var(--brand);border-radius:999px;transition:width .4s ease;}
+  .sc-right{text-align:right;}
+  .sc-credits{font-size:13px;font-weight:600;color:var(--ink);}
+  .sc-tokens{font-size:11px;color:var(--ink3);}
+  .sc-total-row .sc-activity{color:var(--brand);font-weight:600;}
+  .sc-bar-total{background:var(--brand);}
+  .sc-credits-total{color:var(--brand);}
+  .scenario-footer{margin-top:16px;font-size:12.5px;color:var(--ink3);line-height:1.6;background:var(--brand-soft2);border-radius:10px;padding:12px 16px;}
+  @media(max-width:680px){.sc-row{grid-template-columns:1fr 80px;}.sc-bar-wrap{display:none;}}
+
+  /* ───── VALUE / SELLING POINTS ───── */
+  .value-section{margin-bottom:64px;animation:fadeUp .6s ease .25s both;}
+  .value-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+  .vp{
+    background:var(--card);border:1px solid var(--rule);border-radius:16px;
+    padding:22px 22px 24px;transition:all .25s;
+  }
+  .vp:hover{transform:translateY(-2px);box-shadow:0 8px 22px -12px rgba(13,138,114,.14);border-color:var(--brand-soft);}
+  .vp-icon{
+    width:38px;height:38px;border-radius:10px;
+    background:var(--brand-soft2);color:var(--brand);
+    display:flex;align-items:center;justify-content:center;
+    margin-bottom:14px;
+  }
+  .vp-icon svg{width:20px;height:20px;}
+  .vp-title{font-size:15.5px;font-weight:600;color:var(--ink);margin-bottom:8px;line-height:1.35;letter-spacing:-.01em;}
+  .vp-body{font-size:13px;color:var(--ink3);line-height:1.6;}
+  .vp-body strong{color:var(--ink2);font-weight:600;}
+  @media(max-width:880px){.value-grid{grid-template-columns:1fr 1fr;}}
+  @media(max-width:600px){.value-grid{grid-template-columns:1fr;}}
+
+  /* ───── OBJECTIONS ───── */
+  .obj-section{margin-bottom:64px;animation:fadeUp .6s ease .3s both;}
+  .obj-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  .obj{
+    background:var(--card);border:1px solid var(--rule);border-radius:14px;
+    padding:18px 20px;
+  }
+  .oq{
+    font-size:14px;font-weight:600;color:var(--ink);line-height:1.4;
+    margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid var(--rule);
+    display:flex;gap:10px;align-items:flex-start;
+  }
+  .oq-icon{
+    flex:0 0 24px;height:24px;border-radius:50%;background:var(--brand-soft2);color:var(--brand);
+    display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;font-style:normal;
+  }
+  .oa{font-size:13px;color:var(--ink2);line-height:1.65;}
+  .oa strong{color:var(--ink);font-weight:600;}
+  @media(max-width:680px){.obj-grid{grid-template-columns:1fr;}}
+
+  /* ───── FAQ ───── */
+  .faq-section{margin-bottom:48px;animation:fadeUp .6s ease .35s both;}
+  .faq-card{background:var(--card);border:1px solid var(--rule);border-radius:18px;overflow:hidden;}
+  .faq{padding:18px 24px;border-bottom:1px solid var(--rule2);}
+  .faq:last-child{border-bottom:none;}
+  .fq{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:6px;}
+  .fa{font-size:13px;color:var(--ink3);line-height:1.6;}
+  .fa strong{color:var(--ink2);font-weight:600;}
+
+  /* ───── CTA BANNER ───── */
+  .cta-banner{
+    background:linear-gradient(135deg,var(--brand) 0%,var(--brand-dark) 100%);
+    border-radius:20px;padding:36px 36px;
+    text-align:center;color:#fff;
+    margin-bottom:48px;
+    animation:fadeUp .6s ease .4s both;
+    position:relative;overflow:hidden;
+  }
+  .cta-banner::before{
+    content:'';position:absolute;inset:0;
+    background:radial-gradient(circle at 80% 20%,rgba(255,255,255,.12) 0%,transparent 50%);
+    pointer-events:none;
+  }
+  .cta-title{font-size:26px;font-weight:600;margin-bottom:8px;letter-spacing:-.01em;line-height:1.25;position:relative;}
+  .cta-sub{font-size:14.5px;color:rgba(255,255,255,.85);margin-bottom:22px;position:relative;}
+  .cta-buttons{display:inline-flex;gap:10px;flex-wrap:wrap;justify-content:center;position:relative;}
+  .cta-btn{
+    padding:13px 26px;border-radius:999px;
+    font-size:14px;font-weight:600;text-decoration:none;
+    transition:all .2s;display:inline-block;
+  }
+  .cta-btn.white{background:#fff;color:var(--brand);}
+  .cta-btn.white:hover{background:rgba(255,255,255,.92);transform:translateY(-1px);}
+  .cta-btn.outline{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.45);}
+  .cta-btn.outline:hover{border-color:#fff;background:rgba(255,255,255,.08);}
+
+  /* ───── ANNUAL-ONLY BADGE ───── */
+  .annual-tag{
+    display:inline-flex;align-items:center;gap:3px;
+    font-size:10.5px;font-weight:600;letter-spacing:.02em;
+    background:var(--brand-soft);color:var(--brand);
+    padding:2px 8px;border-radius:999px;
+    margin-left:5px;vertical-align:middle;
+    white-space:nowrap;
+  }
+  .annual-tag::before{content:'★';font-size:9px;}
+  li.muted .annual-tag{display:none;}
+
+  /* ───── DISCLAIMER FOOTER (matches platform) ───── */
+  .disclaimer{
+    border-top:1px solid var(--rule);
+    padding-top:24px;margin-top:24px;
+    font-size:12px;color:var(--ink3);line-height:1.7;
+    animation:fadeUp .6s ease .45s both;
+  }
+  .disclaimer p{margin-bottom:10px;}
+  .disclaimer strong{color:var(--ink2);font-weight:600;}
+  .disclaimer .brand{color:var(--brand);font-weight:600;}
+
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ───── HEADER ───── -->
+  <div class="header">
+    <div class="wordmark">
+      <span class="algo">Algo</span><span class="pharma">Pharma</span><span class="tm">™</span>
+      <span class="badge-beta">Pricing</span>
+    </div>
+    <h1 class="header-title">Plans built for <span class="accent">Alberta pharmacists.</span></h1>
+    <p class="header-sub">Compliance that answers in 30 seconds — when the inspector is in the room and the question is yours alone.</p>
+  </div>
+
+  <!-- ───── BILLING TOGGLE ───── -->
+  <div class="billing-toggle">
+    <div class="toggle-wrap" role="tablist">
+      <button class="toggle-btn" data-billing="monthly">Monthly</button>
+      <button class="toggle-btn active" data-billing="annual">Annual <span class="save-tag">Save 17%</span></button>
+    </div>
+  </div>
+
+  <!-- ───── TIER CARDS ───── -->
+  <div class="tiers">
+
+    <!-- BASIC -->
+    <div class="tier">
+      <div class="tier-name">Basic</div>
+      <div class="tier-headline">Get the lay of the land</div>
+      <div class="tier-tagline">For pharmacists exploring AlgoPharma™ before their next inspection.</div>
+      <div class="price-block">
+        <div class="price-row">
+          <span class="price-num">$500</span>
+          <span class="price-unit">CAD / year</span>
+        </div>
+        <div class="price-alt">Annual subscription only</div>
+      </div>
+      <ul class="tier-list">
+        <li><strong>Public Pre-Inspection Intelligence</strong> — see what ACP inspectors typically focus on, drawn from anonymized data</li>
+        <li><strong>AI Q&A</strong> — 100 queries / month on the Public Pre-Inspection page</li>
+        <li><strong>Email support</strong> — 48-hour response</li>
+        <li class="muted">Your own SOPs &amp; uploads — not included</li>
+        <li class="muted">SOP / CQI+ / Inspection Report tools — not included</li>
+      </ul>
+      <a href="#" class="tier-cta secondary">Start with Basic</a>
+    </div>
+
+    <!-- PROFESSIONAL -->
+    <div class="tier featured">
+      <div class="tier-name">Professional</div>
+      <div class="tier-headline">The everyday compliance partner</div>
+      <div class="tier-tagline">For independent pharmacists running compliance for themselves.</div>
+      <div class="price-block">
+        <div class="price-row" data-monthly="$100" data-annual="$1,000">
+          <span class="price-num" id="pro-price">$1,000</span>
+          <span class="price-unit" id="pro-unit">CAD / year</span>
+        </div>
+        <div class="price-alt highlight" id="pro-alt">Save $200 vs. monthly</div>
+      </div>
+      <ul class="tier-list">
+        <li><strong>15 credits / month</strong> — 1 credit = 100,000 tokens; roll credits across everything with no per-tool query caps</li>
+        <li><strong>AI Q&amp;A</strong> — across public ACP data, regulations, your inspection reports, and uploaded SOPs</li>
+        <li><strong>SOP Intelligence</strong> — generate new SOPs and update existing ones against current ACP standards</li>
+        <li><strong>CQI+ Documentation</strong> — copy-ready PhIX submissions with narrative, root-cause, and SMART action plan</li>
+        <li id="insp-li"><strong><span id="insp-title">Inspection Report Intelligence</span></strong> — upload inspection reports and get compliant draft responses <span class="annual-tag">Annual only</span></li>
+        <li><strong>Private Pre-Inspection</strong> — your own inspection patterns, not just anonymized public data</li>
+        <li><strong>My Library</strong> — upload your SOPs, regulations, and past records; AI answers come from your documents</li>
+        <li><strong>Email + chat support</strong> — 24-hour response</li>
+      </ul>
+      <a href="#" class="tier-cta primary">Choose Professional</a>
+    </div>
+
+    <!-- ENTERPRISE -->
+    <div class="tier">
+      <div class="tier-name">Enterprise</div>
+      <div class="tier-headline">Built for chains &amp; banner groups</div>
+      <div class="tier-tagline">For multi-location operators and corporate compliance teams.</div>
+      <div class="price-block">
+        <div class="price-row">
+          <span class="price-num">Custom</span>
+        </div>
+        <div class="price-alt">Volume-based quote</div>
+      </div>
+      <ul class="tier-list">
+        <li><strong>Custom usage</strong> across all sections under a pre-paid credit pool</li>
+        <li><strong>Multi-location namespaces</strong> — each site isolated, with optional cross-site rollups</li>
+        <li><strong>Cross-site benchmarks</strong> — compare compliance posture across locations</li>
+        <li><strong>Dedicated Customer Success Manager</strong> + structured onboarding</li>
+        <li>Phone-based SLA · priority response</li>
+        <li>Add-ons: SOLP gap analysis, OCR for scanned reports, REST API integration</li>
+      </ul>
+      <a href="#" class="tier-cta secondary">Talk to sales</a>
+    </div>
+
+  </div>
+
+  <!-- ───── FEATURE COMPARISON ───── -->
+  <div class="compare-section">
+    <div class="section-label">What's in each plan</div>
+    <div class="compare-card">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Basic</th>
+            <th class="featured-col">Professional</th>
+            <th>Enterprise</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="feat-name">Included credits
+              <span class="feat-desc">1 credit = 100,000 tokens</span>
+            </td>
+            <td><span class="dash">—</span></td>
+            <td class="featured-col">15 / mo · top up at $3.50</td>
+            <td>Customized</td>
+          </tr>
+          <tr>
+            <td class="feat-name">Home — AI chatbot
+              <span class="feat-desc">Ask compliance questions in plain language</span>
+            </td>
+            <td>Public page · 100 queries / mo</td>
+            <td class="featured-col">Public + Private</td>
+            <td>Public + Private</td>
+          </tr>
+          <tr>
+            <td class="feat-name">SOP Intelligence
+              <span class="feat-desc">Scan, update, generate SOPs</span>
+            </td>
+            <td><span class="dash">—</span></td>
+            <td class="featured-col"><span class="check">✓</span></td>
+            <td><span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td class="feat-name">CQI+ Documentation
+              <span class="feat-desc">PhIX submission documents</span>
+            </td>
+            <td><span class="dash">—</span></td>
+            <td class="featured-col"><span class="check">✓</span></td>
+            <td><span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td class="feat-name">Inspection Report Intelligence
+              <span class="feat-desc">Compliant response drafts</span>
+            </td>
+            <td><span class="dash">—</span></td>
+            <td class="featured-col"><span class="annual-tag">Annual only</span></td>
+            <td><span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td class="feat-name">Pre-Inspection Intelligence
+              <span class="feat-desc">Public + private patterns</span>
+            </td>
+            <td>Public only</td>
+            <td class="featured-col">Public + Private</td>
+            <td>+ Cross-site benchmarks</td>
+          </tr>
+          <tr>
+            <td class="feat-name">My Library
+              <span class="feat-desc">Upload your SOPs &amp; records</span>
+            </td>
+            <td><span class="dash">—</span></td>
+            <td class="featured-col"><span class="check">✓</span></td>
+            <td>Shared across locations</td>
+          </tr>
+          <tr>
+            <td class="feat-name">Support</td>
+            <td>Email · 48-hr</td>
+            <td class="featured-col">Email + chat · NBD</td>
+            <td>Dedicated CSM · Phone SLA</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ───── CREDITS ───── -->
+  <div class="credits-section">
+    <div class="section-label">Need more in a busy month?</div>
+    <div class="credits-card">
+      <!-- SCENARIO -->
+      <div class="scenario-block">
+        <div class="credits-headline">What <span class="accent">15 credits</span> looks like in practice</div>
+        <div class="scenario-subtitle">15 credits = 1,500,000 tokens.</div>
+        <div class="scenario-rows">
+          <div class="sc-row">
+            <div class="sc-left">
+              <div class="sc-activity">AI Q&amp;A queries</div>
+              <div class="sc-detail">100 questions × 3,500 tokens</div>
+            </div>
+            <div class="sc-bar-wrap">
+              <div class="sc-bar" style="--pct:22.3%"></div>
+            </div>
+            <div class="sc-right">
+              <div class="sc-credits">3.5 cr</div>
+              <div class="sc-tokens">350,000 tokens</div>
+            </div>
+          </div>
+          <div class="sc-row">
+            <div class="sc-left">
+              <div class="sc-activity">SOP scan &amp; update</div>
+              <div class="sc-detail">10 SOPs × 90,000 tokens</div>
+            </div>
+            <div class="sc-bar-wrap">
+              <div class="sc-bar" style="--pct:57.4%"></div>
+            </div>
+            <div class="sc-right">
+              <div class="sc-credits">9.0 cr</div>
+              <div class="sc-tokens">900,000 tokens</div>
+            </div>
+          </div>
+          <div class="sc-row">
+            <div class="sc-left">
+              <div class="sc-activity">New SOPs generated</div>
+              <div class="sc-detail">8 SOPs × 6,000 tokens</div>
+            </div>
+            <div class="sc-bar-wrap">
+              <div class="sc-bar" style="--pct:3.1%"></div>
+            </div>
+            <div class="sc-right">
+              <div class="sc-credits">0.48 cr</div>
+              <div class="sc-tokens">48,000 tokens</div>
+            </div>
+          </div>
+          <div class="sc-row">
+            <div class="sc-left">
+              <div class="sc-activity">CQI+ documentation</div>
+              <div class="sc-detail">15 submissions × 5,000 tokens</div>
+            </div>
+            <div class="sc-bar-wrap">
+              <div class="sc-bar" style="--pct:4.8%"></div>
+            </div>
+            <div class="sc-right">
+              <div class="sc-credits">0.75 cr</div>
+              <div class="sc-tokens">75,000 tokens</div>
+            </div>
+          </div>
+          <div class="sc-row">
+            <div class="sc-left">
+              <div class="sc-activity">Inspection report drafts</div>
+              <div class="sc-detail">1 report × 15,000 tokens</div>
+            </div>
+            <div class="sc-bar-wrap">
+              <div class="sc-bar" style="--pct:1%"></div>
+            </div>
+            <div class="sc-right">
+              <div class="sc-credits">0.15 cr</div>
+              <div class="sc-tokens">15,000 tokens</div>
+            </div>
+          </div>
+          <div class="sc-row">
+            <div class="sc-left">
+              <div class="sc-activity">My Library searches</div>
+              <div class="sc-detail">20 searches × 6,000 tokens</div>
+            </div>
+            <div class="sc-bar-wrap">
+              <div class="sc-bar" style="--pct:8%"></div>
+            </div>
+            <div class="sc-right">
+              <div class="sc-credits">1.2 cr</div>
+              <div class="sc-tokens">120,000 tokens</div>
+            </div>
+          </div>
+          <div class="sc-row sc-total-row">
+            <div class="sc-left">
+              <div class="sc-activity">Total used</div>
+              <div class="sc-detail">Very busy compliance month</div>
+            </div>
+            <div class="sc-bar-wrap">
+              <div class="sc-bar sc-bar-total" style="--pct:100%"></div>
+            </div>
+            <div class="sc-right">
+              <div class="sc-credits sc-credits-total">~15.1 cr</div>
+              <div class="sc-tokens">1,508,000 tokens</div>
+            </div>
+          </div>
+        </div>
+        <div class="scenario-footer">This is a genuine worst-case month — 10 full SOP scans, 100 Q&amp;A, 15 CQI+ submissions, 1 inspection report draft, and 20 library searches all in one month. It comes in just over 15 credits; a single 10-credit top-up ($35) covers the overage with room to spare.</div>
+      </div>
+      <div class="credits-headline">Top-up credits, <span class="accent">only when you need them.</span></div>
+      <p class="credits-sub">Most months, the Professional plan covers everything. When a deficiency response, audit prep, or a wave of SOP updates lands in the same week, top up at the rate that suits you. Credits never expire while your subscription is active.</p>
+      <div class="credits-grid">
+        <div class="credit-pack">
+          <div class="cp-header">
+            <div class="cp-name">10 credits</div>
+          </div>
+          <div class="cp-price">$35</div>
+          <div class="cp-rate">$3.50 per credit</div>
+        </div>
+        <div class="credit-pack">
+          <div class="cp-header">
+            <div class="cp-name">50 credits</div>
+            <div class="cp-tag">9% off</div>
+          </div>
+          <div class="cp-price">$160</div>
+          <div class="cp-rate">$3.20 per credit</div>
+        </div>
+        <div class="credit-pack best">
+          <div class="cp-header">
+            <div class="cp-name">150 credits</div>
+            <div class="cp-tag">Best value · 14% off</div>
+          </div>
+          <div class="cp-price">$450</div>
+          <div class="cp-rate">$3.00 per credit</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ───── VALUE / SELLING POINTS ───── -->
+  <div class="value-section">
+    <div class="section-label">Why AlgoPharma™ pays for itself</div>
+    <div class="value-grid">
+
+      <div class="vp">
+        <div class="vp-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <div class="vp-title">Designed for one pharmacist, not a compliance department</div>
+        <div class="vp-body">Most compliance software is sold by the seat to hospitals and chains. AlgoPharma™ is priced and built for the independent pharmacist who is also the licence holder. <strong>$100 / month is the entire cost</strong> — not per seat, not plus consulting hours.</div>
+      </div>
+
+      <div class="vp">
+        <div class="vp-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+        </div>
+        <div class="vp-title">Trained on your documents — and on Alberta</div>
+        <div class="vp-body">Generic AI answers from the public internet. AlgoPharma™ answers from your uploaded SOPs, your inspection history, and the actual ACP regulations — with citations to the exact source. <strong>Every answer is traceable</strong> to a verifiable document.</div>
+      </div>
+
+      <div class="vp">
+        <div class="vp-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="vp-title">Your data stays in Canada</div>
+        <div class="vp-body">Documents are stored in AWS Canada-region infrastructure, aligned to HIA data residency expectations. Patient information stays inside Canadian borders. <strong>You control what's uploaded and what's deleted.</strong></div>
+      </div>
+
+      <div class="vp">
+        <div class="vp-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </div>
+        <div class="vp-title">One avoided deficiency covers the year</div>
+        <div class="vp-body">ACP hearing processes start at $28,640 in legal cost, borne by the pharmacist personally. Re-inspections cost $250–$500 in fees plus days of preparation. <strong>$1,000 / year is roughly 0.27% of an average pharmacy's gross profit</strong> — and one good response makes the math obvious.</div>
+      </div>
+
+      <div class="vp">
+        <div class="vp-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        </div>
+        <div class="vp-title">Aware of the new SOLP framework</div>
+        <div class="vp-body">February 2025 brought a new outcomes-based standards framework. Most independents are still working off pre-2025 SOPs. AlgoPharma™ scans your documents, flags gaps, and drafts compliant updates — <strong>so the next inspection isn't the moment you find out you were behind.</strong></div>
+      </div>
+
+      <div class="vp">
+        <div class="vp-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <div class="vp-title">Limits, not lockouts</div>
+        <div class="vp-body">The 15 included credits per month flow freely across Q&amp;A, SOP Intelligence, CQI+, and Inspection Report responses — no per-tool caps. When something unusual happens, top-up credits are there. <strong>You're never forced into a more expensive plan to handle one busy month.</strong></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ───── OBJECTIONS ───── -->
+  <div class="obj-section">
+    <div class="section-label">Common questions, answered honestly</div>
+    <div class="obj-grid">
+
+      <div class="obj">
+        <div class="oq"><span class="oq-icon">?</span><span>$100 a month is a lot for a small pharmacy.</span></div>
+        <div class="oa">It's about $3 a day. <strong>One avoided re-inspection</strong> ($250–$500 in fees plus days of preparation) covers months of subscription. <strong>One avoided deficiency response error</strong> covers years. AlgoPharma™ is priced below the cost of a single hour of pharmacy consulting per month.</div>
+      </div>
+
+      <div class="obj">
+        <div class="oq"><span class="oq-icon">?</span><span>We already have a compliance consultant.</span></div>
+        <div class="oa">A consultant is invaluable for novel legal questions — AlgoPharma™ doesn't replace that. But a consultant isn't in the room when a PPC walks in unannounced at 9am on a Tuesday. <strong>Different problems, different tools.</strong> Most pharmacists keep both.</div>
+      </div>
+
+      <div class="obj">
+        <div class="oq"><span class="oq-icon">?</span><span>Our SOPs are already in SharePoint or Google Drive.</span></div>
+        <div class="oa">SharePoint stores files. AlgoPharma™ <strong>answers questions from them</strong> — by SOLP standard number, in plain language, with cited sources — in seconds. SharePoint can't tell an inspector which SOP maps to Standard 12.</div>
+      </div>
+
+      <div class="obj">
+        <div class="oq"><span class="oq-icon">?</span><span>We haven't had problems in past inspections.</span></div>
+        <div class="oa">A clean history is worth protecting. <strong>Were your SOPs written before February 2025?</strong> The new SOLP framework took effect then. A clean record under the old standards isn't a guarantee under the new ones. Basic ($500) lets you check before committing further.</div>
+      </div>
+
+      <div class="obj">
+        <div class="oq"><span class="oq-icon">?</span><span>Will my data be safe? Where is it stored?</span></div>
+        <div class="oa">Documents are stored in <strong>AWS Canada-region infrastructure</strong>, aligned to HIA expectations. Each Professional account has its own isolated namespace. Query audit logs are exportable. <strong>You can delete uploaded documents at any time.</strong></div>
+      </div>
+
+      <div class="obj">
+        <div class="oq"><span class="oq-icon">?</span><span>What if I run out of monthly limits?</span></div>
+        <div class="oa">Most months you won't. When you do, buy a top-up bundle of credits. <strong>You don't have to upgrade your plan</strong> to handle one busy month. The 50- and 150-credit packs offer a discount for stocking up.</div>
+      </div>
+
+      <div class="obj">
+        <div class="oq"><span class="oq-icon">?</span><span>Can I cancel? Do I get locked in?</span></div>
+        <div class="oa">Monthly Professional cancels any time, end of billing period. Annual plans run for the term you paid for; we don't pro-rate refunds, but you keep full access until the term ends. <strong>No multi-year contracts. No exit fees.</strong></div>
+      </div>
+
+      <div class="obj">
+        <div class="oq"><span class="oq-icon">?</span><span>How is this different from ChatGPT?</span></div>
+        <div class="oa">ChatGPT answers from the public internet. AlgoPharma™ answers from <strong>your documents and ACP-specific data</strong>, with cited sources, version-controlled SOPs, and a regulator-aware metadata layer. <strong>An inspector can verify every answer.</strong></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ───── FAQ ───── -->
+  <div class="faq-section">
+    <div class="section-label">Quick answers</div>
+    <div class="faq-card">
+      <div class="faq">
+        <div class="fq">What's the difference between monthly and annual on Professional?</div>
+        <div class="fa">Same features, same limits. Annual is $1,000 vs. $1,200 paid monthly — a $200 saving. Most pharmacists on an inspection cycle pick annual.</div>
+      </div>
+      <div class="faq">
+        <div class="fq">Can I switch tiers later?</div>
+        <div class="fa">Yes. Upgrade at any time — billed pro-rata. Downgrade at the next renewal.</div>
+      </div>
+      <div class="faq">
+        <div class="fq">Is there a free trial?</div>
+        <div class="fa">Basic ($500 / year) is the starter tier. Pharmacists upgrading from Basic to Professional within 30 days receive 50% off their first Pro month.</div>
+      </div>
+      <div class="faq">
+        <div class="fq">Do I need to be a tech expert to use this?</div>
+        <div class="fa">No. Upload your SOPs, ask questions in plain language, get cited answers. <strong>The interface is built for pharmacists, not developers.</strong></div>
+      </div>
+      <div class="faq">
+        <div class="fq">What happens to my data if I cancel?</div>
+        <div class="fa">You can export everything. After 30 days following cancellation, uploaded documents are permanently deleted from the platform.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ───── CTA BANNER ───── -->
+  <div class="cta-banner">
+    <div class="cta-title">Ready to make the next inspection a non-event?</div>
+    <div class="cta-sub">Start with Basic to explore, or jump straight to Professional. Cancel any time.</div>
+    <div class="cta-buttons">
+      <a href="#" class="cta-btn white">Choose Professional</a>
+      <a href="#" class="cta-btn outline">Talk to sales</a>
+    </div>
+  </div>
+
+  <!-- ───── DISCLAIMER (matches platform language) ───── -->
+  <div class="disclaimer">
+    <p><strong>Disclaimer:</strong> Algo-Rythmn.ai provides informational and analytical tools to support pharmacy compliance efforts. The platform does not guarantee specific inspection outcomes, regulatory approval, or legal compliance. Users remain solely responsible for adhering to all applicable laws, regulations, and professional standards. No content on this site constitutes legal advice.</p>
+  </div>
+
+</div>
+
+<script>
+  // Billing toggle — switches Pro tier price between monthly and annual
+  const buttons = document.querySelectorAll('.toggle-btn');
+  const proPrice = document.getElementById('pro-price');
+  const proUnit = document.getElementById('pro-unit');
+  const proAlt = document.getElementById('pro-alt');
+  const inspLi = document.getElementById('insp-li');
+  const inspAvail = document.getElementById('insp-avail');
+  const compareInspPro = document.getElementById('compare-insp-pro');
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const mode = btn.dataset.billing;
+      if (mode === 'monthly') {
+        proPrice.textContent = '$100';
+        proUnit.textContent = 'CAD / month';
+        proAlt.textContent = 'or $1,000 / year — save $200';
+        // Inspection Report Intelligence: annual plan only
+        inspLi.classList.add('muted');
+        document.getElementById('insp-title').style.color = 'var(--ink4)';
+        inspAvail.textContent = 'not included on monthly plan';
+        compareInspPro.innerHTML = '<span class="dash">—</span> <small style="color:var(--ink3);font-size:11px">Annual plan only</small>';
+      } else {
+        proPrice.textContent = '$1,000';
+        proUnit.textContent = 'CAD / year';
+        proAlt.textContent = 'Save $200 vs. monthly';
+        // Inspection Report Intelligence: included
+        inspLi.classList.remove('muted');
+        document.getElementById('insp-title').style.color = '';
+        inspAvail.textContent = 'annual plan only';
+        compareInspPro.innerHTML = 'Customized · from credit pool <span class="annual-tag">Annual only</span>';
+      }
+    });
+  });
+</script>
+</body>
+</html>
