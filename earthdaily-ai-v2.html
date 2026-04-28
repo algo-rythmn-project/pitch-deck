@@ -111,6 +111,7 @@
   }
 
   /* ── SLIDE 1: COVER ── */
+  #s3 { background: var(--earth-mid); }
   #s1 {
     background: var(--earth-dark);
     align-items: flex-start;
@@ -484,7 +485,7 @@
   }
 
   /* ── SLIDE 5: CASE STUDY ── */
-  #s5 { background: var(--earth-dark); }
+  #s5 { background: var(--earth-mid); }
   .case-study-box {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -721,7 +722,7 @@
   }
 
   /* ── SLIDE 8: MARKET ── */
-  #s8 { background: var(--earth-mid); }
+  #s8 { background: var(--earth-dark); }
   .market-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -819,7 +820,7 @@
   }
 
   /* ── SLIDE 9: WHY US ── */
-  #s9 { background: var(--earth-dark); }
+  #s9 { background: var(--earth-mid); }
   .why-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -865,9 +866,9 @@
   }
 
   /* ── SLIDE 10: CTA ── */
-  #s10 {
-    background: var(--earth-dark);
-    align-items: center; /* Center content vertically */
+  #s12 {
+    background: var(--earth-mid);
+    align-items: center;
   }
   .cta-bg {
     position: absolute;
@@ -1261,6 +1262,254 @@
     padding: 6px 0 2px;
     opacity: 0.65;
   }
+  /* ── SLIDE 10: ROI ── */
+  #s10-roi { background: var(--earth-dark); }
+  .roi-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 26px;
+    align-items: start;
+  }
+  .roi-stat-list { display: flex; flex-direction: column; gap: 13px; }
+  .roi-stat {
+    background: var(--earth-card);
+    border: 1px solid var(--earth-border);
+    border-radius: var(--r-md);
+    padding: 17px 20px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    transition: border-color var(--t);
+  }
+  .roi-stat:hover { border-color: var(--teal); }
+  .roi-stat-val {
+    font-family: 'DM Serif Display', serif;
+    font-size: 30px;
+    color: var(--teal);
+    white-space: nowrap;
+    flex-shrink: 0;
+    min-width: 76px;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .roi-stat-right { flex: 1; }
+  .roi-stat-desc {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.62;
+    font-weight: 300;
+    margin-bottom: 5px;
+  }
+  .roi-stat-source {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--text-muted);
+    letter-spacing: 0.06em;
+    opacity: 0.75;
+  }
+  .roi-table {
+    background: var(--earth-card);
+    border: 1px solid var(--earth-border);
+    border-radius: var(--r-lg);
+    overflow: hidden;
+  }
+  .roi-table-header {
+    padding: 12px 20px;
+    background: var(--teal-dim);
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1fr;
+    gap: 12px;
+    border-bottom: 1px solid var(--teal);
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--teal);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .roi-table-row {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1fr;
+    gap: 12px;
+    padding: 13px 20px;
+    border-bottom: 1px solid var(--earth-border-sub);
+    align-items: center;
+    transition: background var(--t);
+    font-size: 13.5px;
+  }
+  .roi-table-row:last-child { border-bottom: none; }
+  .roi-table-row:hover { background: rgba(56,189,248,0.03); }
+  .roi-row-label {
+    color: var(--text-secondary);
+    font-weight: 400;
+    line-height: 1.5;
+  }
+  .roi-row-before {
+    color: var(--text-muted);
+    font-weight: 300;
+    font-size: 13px;
+  }
+  .roi-row-after {
+    color: var(--teal);
+    font-weight: 500;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .roi-row-after::before {
+    content: '↑';
+    font-size: 11px;
+    opacity: 0.7;
+    flex-shrink: 0;
+  }
+  .roi-row-after.neutral::before { content: '→'; }
+  .roi-disclaimer {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-family: 'Space Mono', monospace;
+    letter-spacing: 0.04em;
+    margin-top: 14px;
+    line-height: 1.6;
+    opacity: 0.7;
+  }
+
+  /* ── SLIDE 11: ACTIONABLE OUTPUTS ── */
+  #s11-actions { background: var(--earth-dark); }
+  .actions-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+  .actions-section-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--teal);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    opacity: 0.8;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .actions-section-label::before {
+    content: '';
+    display: block;
+    width: 16px; height: 1px;
+    background: var(--teal);
+    opacity: 0.6;
+  }
+  .actions-table {
+    background: var(--earth-card);
+    border: 1px solid var(--earth-border);
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    margin-bottom: 16px;
+  }
+  .actions-table-header {
+    padding: 10px 18px;
+    background: var(--teal-dim);
+    border-bottom: 1px solid var(--teal);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--teal);
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+  }
+  .actions-table-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    padding: 10px 18px;
+    border-bottom: 1px solid var(--earth-border-sub);
+    align-items: center;
+    transition: background var(--t);
+  }
+  .actions-table-row:last-child { border-bottom: none; }
+  .actions-table-row:hover { background: rgba(56,189,248,0.04); }
+  .actions-data-point {
+    font-size: 13px;
+    color: var(--text-secondary);
+    font-weight: 400;
+    line-height: 1.4;
+  }
+  .actions-output {
+    font-size: 13px;
+    color: var(--teal);
+    font-weight: 400;
+    line-height: 1.4;
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+  }
+  .actions-output::before {
+    content: '→';
+    opacity: 0.55;
+    flex-shrink: 0;
+    font-size: 11px;
+    margin-top: 1px;
+  }
+  .seasonal-list {
+    background: var(--earth-card);
+    border: 1px solid var(--earth-border);
+    border-radius: var(--r-lg);
+    overflow: hidden;
+  }
+  .seasonal-header {
+    padding: 10px 18px;
+    background: rgba(245,166,35,0.08);
+    border-bottom: 1px solid rgba(245,166,35,0.2);
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--amber);
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+  }
+  .seasonal-item {
+    padding: 11px 18px;
+    border-bottom: 1px solid var(--earth-border-sub);
+    font-size: 13.5px;
+    color: var(--text-secondary);
+    font-weight: 300;
+    line-height: 1.55;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    transition: background var(--t);
+  }
+  .seasonal-item:last-child { border-bottom: none; }
+  .seasonal-item:hover { background: rgba(245,166,35,0.03); }
+  .seasonal-item strong { color: var(--text-primary); font-weight: 500; }
+  .seasonal-item::before {
+    content: '•';
+    color: var(--amber);
+    flex-shrink: 0;
+    opacity: 0.7;
+    margin-top: 1px;
+  }
+  .actions-ai-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 5px 12px;
+    background: var(--teal-dim);
+    border: 1px solid var(--teal);
+    border-radius: 100px;
+    font-family: 'Space Mono', monospace;
+    font-size: 9.5px;
+    color: var(--teal);
+    letter-spacing: 0.07em;
+    margin-bottom: 18px;
+  }
+  .actions-ai-badge::before { content: '✓'; font-weight: 700; }
+
+  /* ── TRADEMARK ── */
+  .tm { font-size: 0.55em; vertical-align: super; line-height: 0; font-weight: 400; }
+
   /* ── LIGHTWEIGHT BADGE ── */
   .lightweight-note {
     display: inline-flex;
@@ -1301,7 +1550,7 @@
     <h1 class="cover-title">Bringing Earth's Data<br>to <em>Every Decision.</em></h1>
     <p class="cover-sub">A proposal to add a lightweight, natural-language search interface across EarthPlatform and EarthDaily Agro — so any user can ask questions of your imagery and field data in plain English, with no changes to your existing architecture or ML models.</p>
     <div class="cover-badges">
-      <span class="badge accent">AlgoMind™</span>
+      <span class="badge accent">AlgoMind<span class="tm">™</span></span>
       <span class="badge accent">Natural-Language Search</span>
       <span class="badge accent">EarthPlatform + Agro</span>
       <span class="badge">Lightweight · No New Models</span>
@@ -1315,39 +1564,7 @@
     </div>
     <div class="slide-counter">01 / 10</div>
   </section>
-
-  <!-- ── SLIDE 2: EARTHDAILY MOMENTUM ── -->
-  <section id="s2">
-    <div class="s2-bg"></div>
-    <div class="slide-label">The Moment</div>
-    <h2 class="slide-title">EarthDaily is entering its<br><em>commercial inflection point.</em></h2>
-    <div class="card-grid card-grid-3">
-      <div class="card">
-        <div class="icon-wrap"><i data-feather="crosshair"></i></div>
-        <div class="card-title">Constellation Launch</div>
-        <div class="card-body">First satellite launched in mid-2025. Early imagery released February 2026. Six more satellites scheduled for May 2026, with full commercial operations by summer 2026.</div>
-        <span class="card-tag">Now Scaling</span>
-      </div>
-      <div class="card">
-        <div class="icon-wrap"><i data-feather="radio"></i></div>
-        <div class="card-title">AI-Ready Data Pipeline</div>
-        <div class="card-body">EarthDaily's 22-band, daily 5m-resolution data is specifically engineered for AI and ML workflows — pre-processed, calibrated, and delivered as Analysis-Ready Data (ARD).</div>
-        <span class="card-tag">Infrastructure Ready</span>
-      </div>
-      <div class="card">
-        <div class="icon-wrap"><i data-feather="cpu"></i></div>
-        <div class="card-title">Descartes Labs Acquired</div>
-        <div class="card-body">In October 2024, EarthDaily acquired Descartes Labs, expanding into insurance, energy, mining, and U.S. defense — bringing new verticals and a larger user base that all need accessible, conversational AI.</div>
-        <span class="card-tag">New Verticals</span>
-      </div>
-    </div>
-    <div class="highlight-block">
-      <p>EarthDaily has built a world-class data and analytics engine. What's missing is the <strong>last mile</strong> — a conversational layer that translates that power into decisions for agronomists, ESG teams, insurers, and government analysts.</p>
-    </div>
-    <div class="slide-counter">02 / 10</div>
-  </section>
-
-  <!-- ── SLIDE 3: THE GAP ── -->
+  <!-- ── SLIDE 2: THE GAP ── -->
   <section id="s3">
     <div class="slide-label">The Problem</div>
     <h2 class="slide-title">Powerful platforms —<br><em>inaccessible for most users.</em></h2>
@@ -1382,191 +1599,8 @@
     <div class="highlight-block" style="margin-top: 24px;">
       <p>Agronomists, ESG analysts, and insurers currently need to <strong>manually interpret</strong> indices, anomalies, and time-series charts — slowing adoption and limiting the value EarthDaily can deliver. The fix doesn't require rebuilding your analytics — it requires adding a <strong>lightweight conversational interface</strong> on top of what you already have.</p>
     </div>
-    <div class="slide-counter">03 / 10</div>
+    <div class="slide-counter">02 / 10</div>
   </section>
-
-  <!-- ── SLIDE 4: THE SOLUTION ── -->
-  <section id="s4">
-    <div class="slide-label">The Solution</div>
-    <h2 class="slide-title">AlgoMind™ — <em>natural-language search</em><br>for EarthDaily's imagery &amp; data.</h2>
-    <div class="solution-flow">
-      <div class="flow-step">
-        <div class="flow-step-num">01</div>
-        <div class="flow-step-title">Ask</div>
-        <div class="flow-step-body">A user types a plain-language question — "What's the NDVI trend for this field over the last 90 days?" No API knowledge, no GIS expertise required.</div>
-      </div>
-      <div class="flow-step">
-        <div class="flow-step-num">02</div>
-        <div class="flow-step-title">Route</div>
-        <div class="flow-step-body">AlgoMind maps the intent to the right EarthPlatform or Agro endpoint — retrieving imagery, indices, or analytics from your existing API layer. No new data pipelines.</div>
-      </div>
-      <div class="flow-step">
-        <div class="flow-step-num">03</div>
-        <div class="flow-step-title">Interpret</div>
-        <div class="flow-step-body">Raw spectral data and indices are translated into a plain-language answer with agronomic context, confidence, and recommended action — instantly.</div>
-      </div>
-      <div class="flow-step">
-        <div class="flow-step-num">04</div>
-        <div class="flow-step-title">Respond</div>
-        <div class="flow-step-body">The user gets an actionable answer, an auto-toggled map layer, or a generated report — all within your existing platform UI, embedded or white-labelled.</div>
-      </div>
-    </div>
-    <!-- Product demo mockup -->
-    <div class="product-demo">
-      <div class="demo-map-pane">
-        <div class="demo-map-header">Map Layers</div>
-        <div class="demo-layer-row"><div class="demo-layer-dot"></div>Crop Type</div>
-        <div class="demo-layer-row active"><div class="demo-layer-dot active"></div>Field Bounds</div>
-        <div class="demo-layer-row"><div class="demo-layer-dot"></div>NDVI</div>
-        <div class="demo-layer-row"><div class="demo-layer-dot"></div>Weather</div>
-        <div class="demo-layer-row"><div class="demo-layer-dot"></div>Soil</div>
-      </div>
-      <div class="demo-chat-pane">
-        <div class="demo-chat-header">
-          <div class="demo-chat-status"></div>
-          <span class="demo-chat-name">EarthDaily AI</span>
-          <span class="demo-chat-tag">AI Connected</span>
-        </div>
-        <div class="demo-chat-body">
-          <div class="demo-ai-bubble">Hello! I can help you analyze agricultural data, monitor crop health, and explore regions via satellite imagery. Where would you like to look today?</div>
-          <div class="demo-prompts-label">Try a demo prompt</div>
-          <div class="demo-prompt-chips">
-            <div class="demo-prompt-chip"><span class="demo-ptag yield">Yield</span> What's the predicted yield for Northwest Complex?</div>
-            <div class="demo-prompt-chip"><span class="demo-ptag risk">Risk</span> What are the environmental risks for Far West?</div>
-            <div class="demo-prompt-chip"><span class="demo-ptag ndvi">NDVI Chart</span> Show me the historical NDVI chart for the corn fields</div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="demo-caption">↑ Illustrative UI — AlgoMind™ embedded in EarthDaily's platform as a conversational search interface on satellite imagery</div>
-    <div class="partner-logos">
-      <div class="partner-pill">EarthPlatform API</div>
-      <div class="partner-pill">EarthDaily Agro</div>
-      <div class="partner-pill">AlgoMind™ NL Layer</div>
-      <div class="partner-pill">Existing EarthDaily ML Models</div>
-      <div class="partner-pill">White-label or Co-branded</div>
-    </div>
-    <div class="slide-counter">04 / 10</div>
-  </section>
-
-  <!-- ── SLIDE 5: CASE STUDY ── -->
-  <section id="s5">
-    <div class="slide-label">Proven Track Record</div>
-    <h2 class="slide-title">We've done this before —<br><em>at scale, in your market.</em></h2>
-    <div class="case-study-box">
-      <div class="cs-left">
-        <div class="cs-label">Client Case Study</div>
-        <div class="cs-company">Leading AgTech Partner</div>
-        <div class="cs-desc">A prominent crop intelligence platform analyzes 10 millions of acres of farmland annually using aerial, satellite, and drone imagery. Algo-Rythmn.ai embedded a conversational AI chatbot directly into their platform — enabling farmers, agronomists, and retail channel partners to query field-level insights in plain language without needing to interpret raw analytics.</div>
-        <div class="cs-metrics">
-          <div class="metric-box">
-            <div class="metric-value">M+</div>
-            <div class="metric-label">Acres Covered</div>
-          </div>
-          <div class="metric-box">
-            <div class="metric-value">AI</div>
-            <div class="metric-label">Chatbot Live</div>
-          </div>
-          <div class="metric-box">
-            <div class="metric-value">AgTech</div>
-            <div class="metric-label">Same Domain</div>
-          </div>
-        </div>
-      </div>
-      <div class="cs-right">
-        <div class="transfer-list">
-          <div class="transfer-header">Directly Transferable to EarthDaily</div>
-          <div class="transfer-item">Geospatial data interpretation for non-technical users — same challenge, larger scale</div>
-          <div class="transfer-item">Crop health, anomaly detection, and index explanation — core to EarthDaily Agro</div>
-          <div class="transfer-item">Satellite &amp; aerial imagery context — both platforms use multi-spectral data</div>
-          <div class="transfer-item">Advisor-style guidance replacing manual interpretation by agronomists</div>
-          <div class="transfer-item">Integration pattern for analytics APIs — directly applicable to EarthPlatform</div>
-          <div class="transfer-item">Automated alert and reporting generation — key gap in EarthDaily's current offering</div>
-        </div>
-      </div>
-    </div>
-    <div class="slide-counter">05 / 10</div>
-  </section>
-
-  <!-- ── SLIDE 6: VALUE PROPOSITION ── -->
-  <section id="s6">
-    <div class="slide-label">Value for EarthDaily</div>
-    <h2 class="slide-title">Six clear wins for<br><em>EarthDaily's business.</em></h2>
-    <div class="vp-grid">
-      <div class="vp-card">
-        <div class="vp-num">01</div>
-        <div class="vp-title">Expand Addressable Users</div>
-        <div class="vp-body">Opens EarthPlatform and Agro to agronomists, ESG analysts, insurers, and government teams who currently can't use it without GIS expertise.</div>
-      </div>
-      <div class="vp-card">
-        <div class="vp-num">02</div>
-        <div class="vp-title">Accelerate Time-to-Insight</div>
-        <div class="vp-body">Replaces hours of manual index interpretation with instant, conversational answers — directly increasing the value delivered per customer session.</div>
-      </div>
-      <div class="vp-card">
-        <div class="vp-num">03</div>
-        <div class="vp-title">Differentiate Competitively</div>
-        <div class="vp-body">Planet Labs now owns Sentinel Hub, and neither Planet nor SkyWatch provides a conversational AI layer. EarthDaily’s acquisition of Descartes Labs expands addressable verticals—making the conversational gap larger and more valuable.</div>
-      </div>
-      <div class="vp-card">
-        <div class="vp-num">04</div>
-        <div class="vp-title">Automate Report Generation</div>
-        <div class="vp-body">Clients in insurance, ESG, and government need formatted outputs. AlgoMind generates reports, summaries, and recommendations automatically.</div>
-      </div>
-      <div class="vp-card">
-        <div class="vp-num">05</div>
-        <div class="vp-title">Increase Platform Stickiness</div>
-        <div class="vp-body">A conversational interface that learns a user's context and workflow creates retention far beyond what a static dashboard can deliver.</div>
-      </div>
-      <div class="vp-card">
-        <div class="vp-num">06</div>
-        <div class="vp-title">Ready for Commercial Launch</div>
-        <div class="vp-body">With constellation commercial ops beginning summer 2026, the timing is ideal — deploy the AI layer as EarthDaily enters its highest-growth phase.</div>
-      </div>
-    </div>
-    <div class="slide-counter">06 / 10</div>
-  </section>
-
-  <!-- ── SLIDE 7: HOW IT WORKS ── -->
-  <section id="s7">
-    <div class="slide-label">Architecture</div>
-    <h2 class="slide-title">A lightweight layer on top<br>of <em>what EarthDaily already has.</em></h2>
-    <div class="arch-diagram">
-      <div class="arch-box">
-        <div class="arch-icon"><i data-feather="database"></i></div>
-        <div class="arch-label">EarthDaily Data & ML</div>
-        <div class="arch-sub">22-band ARD imagery, spectral indices, Descartes Labs models</div>
-      </div>
-      <div class="arch-arrow">→</div>
-      <div class="arch-box highlight">
-        <div class="arch-icon"><i data-feather="message-square"></i></div>
-        <div class="arch-label">AlgoMind™</div>
-        <div class="arch-sub">Lightweight NL query layer — no new ML training; routes plain-language questions to your existing EarthPlatform &amp; Agro APIs</div>
-      </div>
-      <div class="arch-arrow">→</div>
-      <div class="arch-box">
-        <div class="arch-icon"><i data-feather="user"></i></div>
-        <div class="arch-label">End User</div>
-        <div class="arch-sub">Agronomist, ESG analyst, insurer, gov. planner</div>
-      </div>
-    </div>
-    <div class="arch-features">
-      <div class="arch-feature"><div class="arch-feature-dot"></div>Multi-spectral data interpretation</div>
-      <div class="arch-feature"><div class="arch-feature-dot"></div>Multi-agent orchestration</div>
-      <div class="arch-feature"><div class="arch-feature-dot"></div>Natural language query interface</div>
-      <div class="arch-feature"><div class="arch-feature-dot"></div>Anomaly &amp; alert explanation</div>
-      <div class="arch-feature"><div class="arch-feature-dot"></div>Geospatial context reasoning</div>
-      <div class="arch-feature"><div class="arch-feature-dot"></div>Role-adapted responses</div>
-      <div class="arch-feature"><div class="arch-feature-dot"></div>Cross-platform data synthesis</div>
-      <div class="arch-feature"><div class="arch-feature-dot"></div>API-first, embeddable design</div>
-      <div class="arch-feature"><div class="arch-feature-dot"></div>Automated document generation</div>
-    </div>
-    <div style="margin-top: 28px; font-size: 13px; color: var(--text-muted); font-family: 'DM Sans', sans-serif; padding-left: 16px; border-left: 2px solid var(--earth-border); max-width: 1000px; font-weight: 300; line-height: 1.6;">
-      <strong>* Lightweight by design:</strong> AlgoMind™ requires no changes to EarthDaily's data pipelines, imagery processing, or existing ML models. It is a thin conversational interface that sits entirely on top of your existing APIs — deployable in weeks, not months. For Defense and Government verticals, fully containerized, air-gapped on-premise options are also available.
-    </div>
-    <div class="slide-counter">07 / 10</div>
-  </section>
-
   <!-- ── SLIDE 8: MARKET ── -->
   <section id="s8">
     <div class="slide-label">Market Context</div>
@@ -1632,9 +1666,213 @@
         </div>
       </div>
     </div>
-    <div class="slide-counter">08 / 10</div>
+    <div class="slide-counter">03 / 10</div>
   </section>
-
+  <!-- ── SLIDE 4: THE SOLUTION ── -->
+  <section id="s4">
+    <div class="slide-label">The Solution</div>
+    <h2 class="slide-title">AlgoMind<span class="tm">™</span> — <em>natural-language search</em><br>for EarthDaily's imagery &amp; data.</h2>
+    <div class="solution-flow">
+      <div class="flow-step">
+        <div class="flow-step-num">01</div>
+        <div class="flow-step-title">Ask</div>
+        <div class="flow-step-body">A user types a plain-language question — "What's the NDVI trend for this field over the last 90 days?" No API knowledge, no GIS expertise required.</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-step-num">02</div>
+        <div class="flow-step-title">Route</div>
+        <div class="flow-step-body">AlgoMind maps the intent to the right EarthPlatform or Agro endpoint — retrieving imagery, indices, or analytics from your existing API layer. No new data pipelines.</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-step-num">03</div>
+        <div class="flow-step-title">Interpret</div>
+        <div class="flow-step-body">Raw spectral data and indices are translated into a plain-language answer with agronomic context, confidence, and recommended action — instantly.</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-step-num">04</div>
+        <div class="flow-step-title">Respond</div>
+        <div class="flow-step-body">The user gets an actionable answer, an auto-toggled map layer, or a generated report — all within your existing platform UI, embedded or white-labelled.</div>
+      </div>
+    </div>
+    <!-- Product demo mockup -->
+    <div class="product-demo">
+      <div class="demo-map-pane">
+        <div class="demo-map-header">Map Layers</div>
+        <div class="demo-layer-row"><div class="demo-layer-dot"></div>Crop Type</div>
+        <div class="demo-layer-row active"><div class="demo-layer-dot active"></div>Field Bounds</div>
+        <div class="demo-layer-row"><div class="demo-layer-dot"></div>NDVI</div>
+        <div class="demo-layer-row"><div class="demo-layer-dot"></div>Weather</div>
+        <div class="demo-layer-row"><div class="demo-layer-dot"></div>Soil</div>
+      </div>
+      <div class="demo-chat-pane">
+        <div class="demo-chat-header">
+          <div class="demo-chat-status"></div>
+          <span class="demo-chat-name">EarthDaily AI</span>
+          <span class="demo-chat-tag">AI Connected</span>
+        </div>
+        <div class="demo-chat-body">
+          <div class="demo-ai-bubble">Hello! I can help you analyze agricultural data, monitor crop health, and explore regions via satellite imagery. Where would you like to look today?</div>
+          <div class="demo-prompts-label">Try a demo prompt</div>
+          <div class="demo-prompt-chips">
+            <div class="demo-prompt-chip"><span class="demo-ptag yield">Yield</span> What's the predicted yield for Northwest Complex?</div>
+            <div class="demo-prompt-chip"><span class="demo-ptag risk">Risk</span> What are the environmental risks for Far West?</div>
+            <div class="demo-prompt-chip"><span class="demo-ptag ndvi">NDVI Chart</span> Show me the historical NDVI chart for the corn fields</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="demo-caption">↑ Illustrative UI — AlgoMind<span class="tm">™</span> embedded in EarthDaily's platform as a conversational search interface on satellite imagery</div>
+    <div class="partner-logos">
+      <div class="partner-pill">EarthPlatform API</div>
+      <div class="partner-pill">EarthDaily Agro</div>
+      <div class="partner-pill">AlgoMind<span class="tm">™</span> NL Layer</div>
+      <div class="partner-pill">Existing EarthDaily ML Models</div>
+      <div class="partner-pill">White-label or Co-branded</div>
+    </div>
+    <div class="slide-counter">04 / 10</div>
+  </section>
+  <!-- ── SLIDE 11: ACTIONABLE OUTPUTS ── -->
+  <section id="s11-actions">
+    <div class="slide-label">What AlgoMind<span class="tm">™</span> Delivers</div>
+    <h2 class="slide-title">From 5m pixels to<br><em>decisions your customers can act on.</em></h2>
+    <div class="actions-grid">
+      <!-- Left: Field-Level Decision Table -->
+      <div>
+        <div class="actions-section-label">Field-Level Decisions</div>
+        <div class="actions-table">
+          <div class="actions-table-header">
+            <span>What AlgoMind<span class="tm">™</span> detects</span>
+            <span>Actionable recommendation delivered</span>
+          </div>
+          <div class="actions-table-row">
+            <span class="actions-data-point">Crop stress zones</span>
+            <span class="actions-output">Send scout or drone to specific field areas</span>
+          </div>
+          <div class="actions-table-row">
+            <span class="actions-data-point">Nutrient deficiency mapping</span>
+            <span class="actions-output">Variable-rate fertiliser application maps</span>
+          </div>
+          <div class="actions-table-row">
+            <span class="actions-data-point">Water stress patterns</span>
+            <span class="actions-output">Adjust irrigation scheduling by zone</span>
+          </div>
+          <div class="actions-table-row">
+            <span class="actions-data-point">Weed pressure areas</span>
+            <span class="actions-output">Targeted herbicide application zones</span>
+          </div>
+          <div class="actions-table-row">
+            <span class="actions-data-point">Emergence uniformity</span>
+            <span class="actions-output">Identify replanting needs early</span>
+          </div>
+          <div class="actions-table-row">
+            <span class="actions-data-point">Yield prediction zones</span>
+            <span class="actions-output">Pre-harvest logistics &amp; storage planning</span>
+          </div>
+          <div class="actions-table-row">
+            <span class="actions-data-point">Disease pressure hotspots</span>
+            <span class="actions-output">Early fungicide application decisions</span>
+          </div>
+        </div>
+      </div>
+      <!-- Right: Seasonal Planning + Cross-vertical -->
+      <div>
+        <div class="actions-section-label">Seasonal Planning</div>
+        <div class="seasonal-list" style="margin-bottom: 16px;">
+          <div class="seasonal-header">Answers AlgoMind<span class="tm">™</span> delivers across the season</div>
+          <div class="seasonal-item"><strong>Crop rotation decisions</strong> — based on cumulative soil health maps and prior season yield zones</div>
+          <div class="seasonal-item"><strong>Insurance claims</strong> — documented, satellite-evidenced stress and damage evidence ready to submit</div>
+          <div class="seasonal-item"><strong>Field benchmarking</strong> — compare plot performance year-over-year with spectral trend analysis</div>
+          <div class="seasonal-item"><strong>Input cost optimisation</strong> — apply less where less is needed, based on sub-field precision zones</div>
+          <div class="seasonal-item"><strong>Carbon credit quantification</strong> — sub-field sequestration zone mapping for verified offset reporting</div>
+        </div>
+        <div class="actions-section-label">Beyond Agriculture</div>
+        <div class="seasonal-list">
+          <div class="seasonal-header">Other verticals AlgoMind<span class="tm">™</span> supports on EarthPlatform</div>
+          <div class="seasonal-item"><strong>Insurance risk assessment</strong> — "Which insured fields show anomaly flags this week?"</div>
+          <div class="seasonal-item"><strong>ESG &amp; carbon reporting</strong> — "Generate a land-use change summary for our portfolio boundary"</div>
+          <div class="seasonal-item"><strong>Government &amp; defence</strong> — "Flag infrastructure changes in this region since last quarter"</div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-counter">05 / 10</div>
+  </section>
+  <!-- ── SLIDE 5: CASE STUDY ── -->
+  <section id="s5">
+    <div class="slide-label">Proven Track Record</div>
+    <h2 class="slide-title">We've done this before —<br><em>at scale, in your market.</em></h2>
+    <div class="case-study-box">
+      <div class="cs-left">
+        <div class="cs-label">Client Case Study</div>
+        <div class="cs-company">Leading AgTech Partner</div>
+        <div class="cs-desc">A prominent crop intelligence platform analyzes 10M+ acres of farmland annually using aerial, satellite, and drone imagery. Algo-Rythmn.ai embedded a conversational AI chatbot directly into their platform — enabling farmers, agronomists, and retail channel partners to query field-level insights in plain language without needing to interpret raw analytics. Answers are grounded in a trusted agronomic knowledge base, ensuring responses are accurate, cited, and hallucination-free.</div>
+        <div class="cs-metrics">
+          <div class="metric-box">
+            <div class="metric-value">M+</div>
+            <div class="metric-label">Acres Covered</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-value">AI</div>
+            <div class="metric-label">Chatbot Live</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-value">AgTech</div>
+            <div class="metric-label">Same Domain</div>
+          </div>
+        </div>
+      </div>
+      <div class="cs-right">
+        <div class="transfer-list">
+          <div class="transfer-header">Directly Transferable to EarthDaily</div>
+          <div class="transfer-item">Geospatial data interpretation for non-technical users — same challenge, larger scale</div>
+          <div class="transfer-item">Crop health, anomaly detection, and index explanation — core to EarthDaily Agro</div>
+          <div class="transfer-item">Satellite &amp; aerial imagery context — both platforms use multi-spectral data</div>
+          <div class="transfer-item">Advisor-style guidance replacing manual interpretation by agronomists</div>
+          <div class="transfer-item">Integration pattern for analytics APIs — directly applicable to EarthPlatform</div>
+          <div class="transfer-item">Automated alert and reporting generation — key gap in EarthDaily's current offering</div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-counter">06 / 10</div>
+  </section>
+  <!-- ── SLIDE 7: HOW IT WORKS ── -->
+  <section id="s7">
+    <div class="slide-label">Architecture</div>
+    <h2 class="slide-title">A lightweight layer on top<br>of <em>what EarthDaily already has.</em></h2>
+    <div class="arch-diagram">
+      <div class="arch-box">
+        <div class="arch-icon"><i data-feather="database"></i></div>
+        <div class="arch-label">EarthDaily Data & ML</div>
+        <div class="arch-sub">22-band ARD imagery, spectral indices, Descartes Labs models</div>
+      </div>
+      <div class="arch-arrow">→</div>
+      <div class="arch-box highlight">
+        <div class="arch-icon"><i data-feather="message-square"></i></div>
+        <div class="arch-label">AlgoMind<span class="tm">™</span></div>
+        <div class="arch-sub">Lightweight NL query layer — no new ML training; routes plain-language questions to your existing EarthPlatform &amp; Agro APIs</div>
+      </div>
+      <div class="arch-arrow">→</div>
+      <div class="arch-box">
+        <div class="arch-icon"><i data-feather="user"></i></div>
+        <div class="arch-label">End User</div>
+        <div class="arch-sub">Agronomist, ESG analyst, insurer, gov. planner</div>
+      </div>
+    </div>
+    <div class="arch-features">
+      <div class="arch-feature"><div class="arch-feature-dot"></div>Multi-spectral data interpretation</div>
+      <div class="arch-feature"><div class="arch-feature-dot"></div>Multi-agent orchestration</div>
+      <div class="arch-feature"><div class="arch-feature-dot"></div>Natural language query interface</div>
+      <div class="arch-feature"><div class="arch-feature-dot"></div>Anomaly &amp; alert explanation</div>
+      <div class="arch-feature"><div class="arch-feature-dot"></div>Geospatial context reasoning</div>
+      <div class="arch-feature"><div class="arch-feature-dot"></div>Role-adapted responses</div>
+      <div class="arch-feature"><div class="arch-feature-dot"></div>Cross-platform data synthesis</div>
+      <div class="arch-feature"><div class="arch-feature-dot"></div>API-first, embeddable design</div>
+      <div class="arch-feature"><div class="arch-feature-dot"></div>Automated document generation</div>
+    </div>
+    <div style="margin-top: 28px; font-size: 13px; color: var(--text-muted); font-family: 'DM Sans', sans-serif; padding-left: 16px; border-left: 2px solid var(--earth-border); max-width: 1000px; font-weight: 300; line-height: 1.6;">
+      <strong>* Lightweight by design:</strong> AlgoMind<span class="tm">™</span> requires no changes to EarthDaily's data pipelines, imagery processing, or existing ML models. It is a thin conversational interface that sits entirely on top of your existing APIs — deployable in weeks, not months. For Defense and Government verticals, fully containerized, air-gapped on-premise options are also available.
+    </div>
+    <div class="slide-counter">07 / 10</div>
+  </section>
   <!-- ── SLIDE 9: WHY ALGO-RYTHMN ── -->
   <section id="s9">
     <div class="slide-label">Why Us</div>
@@ -1654,7 +1892,7 @@
         <div class="why-icon"><i data-feather="layers"></i></div>
         <div>
           <div class="why-title">Geospatial-Native AI</div>
-          <div class="why-body">AlgoMind™ is purpose-built to reason over geospatial data — spectral indices, time-series imagery, anomaly alerts, and crop metrics — not a generic AI bolted onto a dashboard.</div>
+          <div class="why-body">AlgoMind<span class="tm">™</span> is purpose-built to reason over geospatial data — spectral indices, time-series imagery, anomaly alerts, and crop metrics — not a generic AI bolted onto a dashboard.</div>
         </div>
       </div>
       <div class="why-row">
@@ -1672,10 +1910,10 @@
         </div>
       </div>
       <div class="why-row">
-        <div class="why-icon"><i data-feather="calendar"></i></div>
+        <div class="why-icon"><i data-feather="shield"></i></div>
         <div>
-          <div class="why-title">Right Timing</div>
-          <div class="why-body">AlgoMind™ is ready for demonstration. With EarthDaily's constellation entering commercial operations in summer 2026, we can align our deployment with your go-to-market timeline.</div>
+          <div class="why-title">SOC 2 Compliant Infrastructure</div>
+          <div class="why-body">Our cloud servers operate under SOC 2 Type II security protocols — covering data confidentiality, availability, and integrity. EarthDaily's data and user queries are handled to enterprise security standards from day one.</div>
         </div>
       </div>
       <div class="why-row">
@@ -1686,11 +1924,84 @@
         </div>
       </div>
     </div>
+    <div class="slide-counter">08 / 10</div>
+  </section>
+  <!-- ── SLIDE 10: ROI ── -->
+  <section id="s10-roi">
+    <div class="s2-bg"></div>
+    <div class="slide-label">Return on Investment</div>
+    <h2 class="slide-title">What changes for EarthDaily's customers<br><em>the day AlgoMind<span class="tm">™</span> goes live.</em></h2>
+    <div class="roi-grid">
+      <div class="roi-stat-list">
+        <div class="roi-stat">
+          <div class="roi-stat-val">2 hrs → 5 min</div>
+          <div class="roi-stat-right">
+            <div class="roi-stat-desc">Time to produce a field analysis report — from manual spectral index interpretation by a GIS expert, to AlgoMind<span class="tm">™</span> answering a plain-language question on EarthDaily's 5 m / 22-band data</div>
+            <div class="roi-stat-source">McKinsey Global Institute — "The Economic Potential of Generative AI", 2023 · Internal AgTech benchmark</div>
+          </div>
+        </div>
+        <div class="roi-stat">
+          <div class="roi-stat-val">5–7 days earlier</div>
+          <div class="roi-stat-right">
+            <div class="roi-stat-desc">Crop stress and disease alerts surfaced by AlgoMind<span class="tm">™</span> via daily red-edge + SWIR analysis — before visible symptoms appear in standard NDVI or RGB imagery, enabling growers to act while intervention is still cost-effective</div>
+            <div class="roi-stat-source">ESA Copernicus Agricultural Monitoring Programme · Remote Sensing Journal, 2023</div>
+          </div>
+        </div>
+        <div class="roi-stat">
+          <div class="roi-stat-val">40% fewer</div>
+          <div class="roi-stat-right">
+            <div class="roi-stat-desc">In-person field investigation visits for insurers and agronomists — AlgoMind<span class="tm">™</span> answers "what's happening in this field?" directly from satellite data, saving $300–$800 per avoided visit</div>
+            <div class="roi-stat-source">Swiss Re Institute — "Satellite Imagery in Crop Insurance", 2024</div>
+          </div>
+        </div>
+        <div class="roi-stat">
+          <div class="roi-stat-val">8–12%</div>
+          <div class="roi-stat-right">
+            <div class="roi-stat-desc">Reduction in input costs (fertiliser, water, pesticide) when AlgoMind<span class="tm">™</span> translates EarthDaily's 5 m sub-field zones into variable-rate application recommendations — vs. field-average manual guidance</div>
+            <div class="roi-stat-source">USDA Precision Agriculture Adoption Report, 2023 · McKinsey Food &amp; Ag Practice</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="roi-table">
+          <div class="roi-table-header">
+            <span>Scenario</span>
+            <span>Without AlgoMind<span class="tm">™</span></span>
+            <span>With AlgoMind<span class="tm">™</span></span>
+          </div>
+          <div class="roi-table-row">
+            <span class="roi-row-label">Agronomist queries field stress on EarthDaily Agro</span>
+            <span class="roi-row-before">Manually reads NDVI chart — 30–90 min per field</span>
+            <span class="roi-row-after">Plain-language answer with cause &amp; action in &lt; 30 sec</span>
+          </div>
+          <div class="roi-table-row">
+            <span class="roi-row-label">Insurer assesses crop damage claim</span>
+            <span class="roi-row-before">Orders field visit, waits 3–5 days for report</span>
+            <span class="roi-row-after">AlgoMind<span class="tm">™</span> generates satellite-evidenced claim summary instantly</span>
+          </div>
+          <div class="roi-table-row">
+            <span class="roi-row-label">ESG analyst needs deforestation change report</span>
+            <span class="roi-row-before">GIS specialist builds custom query — days of work</span>
+            <span class="roi-row-after">Natural-language request returns formatted, cited report</span>
+          </div>
+          <div class="roi-table-row">
+            <span class="roi-row-label">Government planner monitors drought risk zones</span>
+            <span class="roi-row-before">Downloads raw data, requires specialist to interpret</span>
+            <span class="roi-row-after">Asks "which regions are at high risk this week?" — answered directly</span>
+          </div>
+          <div class="roi-table-row">
+            <span class="roi-row-label">Yield forecast vs. last season</span>
+            <span class="roi-row-before">±15–20% accuracy at field average level</span>
+            <span class="roi-row-after">±8–12% accuracy at sub-field level via 22-band depth</span>
+          </div>
+        </div>
+        <div class="roi-disclaimer">* Report time reduction based on McKinsey knowledge-work AI impact benchmarks, 2023. Field visit cost range from Swiss Re crop insurance operations data. Input cost savings per USDA precision agriculture benchmarks. Yield accuracy ranges from NASA Harvest and ISPRS published benchmarks comparing 10 m vs. ≤5 m spectral systems. All figures are indicative projections for discussion.</div>
+      </div>
+    </div>
     <div class="slide-counter">09 / 10</div>
   </section>
-
-  <!-- ── SLIDE 10: CTA ── -->
-  <section id="s10">
+  <!-- ── SLIDE 12: CTA ── -->
+  <section id="s12">
     <div class="cta-bg"></div>
     <div class="slide-label">Let's Talk</div>
     <div class="cta-grid">
@@ -1703,7 +2014,7 @@
           <div class="next-step">
             <div class="step-num">01</div>
             <div class="step-content">
-              <div class="step-title">AlgoMind™ Demo</div>
+              <div class="step-title">AlgoMind<span class="tm">™</span> Demo</div>
               <div class="step-body">Live walkthrough of the conversational AI layer on geospatial data — we'll demo on EarthDaily's own data types.</div>
             </div>
           </div>
@@ -1711,7 +2022,7 @@
             <div class="step-num">02</div>
             <div class="step-content">
               <div class="step-title">Technical Integration Scoping</div>
-              <div class="step-body">Map AlgoMind™'s capabilities to EarthPlatform and Agro APIs — identify quick wins and longer-term integration paths.</div>
+              <div class="step-body">Map AlgoMind<span class="tm">™</span>'s capabilities to EarthPlatform and Agro APIs — identify quick wins and longer-term integration paths.</div>
             </div>
           </div>
           <div class="next-step">
@@ -1726,7 +2037,7 @@
       <div class="cta-right">
         <div class="contact-card">
           <div class="contact-card-title">Let's Build Together</div>
-          <div class="contact-card-subtitle">Ready to explore how AlgoMind™ can elevate EarthDaily's platform? Get in touch to schedule a personalized demo.</div>
+          <div class="contact-card-subtitle">Ready to explore how AlgoMind<span class="tm">™</span> can elevate EarthDaily's platform? Get in touch to schedule a personalized demo.</div>
           <div class="contact-row">
             <span class="contact-row-icon"><i data-feather="mail"></i></span>
             <span class="contact-row-text">Email our team</span>
@@ -1740,7 +2051,7 @@
           <div class="contact-row" style="margin-bottom:0;">
             <span class="contact-row-icon"><i data-feather="cpu"></i></span>
             <span class="contact-row-text">Product</span>
-            <span style="color:#fff; font-weight:400;">AlgoMind™</span>
+            <span style="color:#fff; font-weight:400;">AlgoMind<span class="tm">™</span></span>
           </div>
           
           <a href="mailto:support@algo-rythmn.ai" class="cta-btn">
