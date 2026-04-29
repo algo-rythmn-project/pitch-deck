@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>CQI+ · AlgoPharma</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #0F8A6A;
+    --primary-dark: #0B6F55;
+    --primary-light: #E8F5F0;
+    --primary-soft: #F1FAF6;
+    --accent: #14B88A;
+    --bg: #F7F8F8;
+    --surface: #FFFFFF;
+    --text: #0F172A;
+    --text-muted: #64748B;
+    --text-subtle: #94A3B8;
+    --border: #E5E7EB;
+    --border-soft: #F1F5F9;
+    --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.04);
+    --shadow: 0 1px 3px rgba(15, 23, 42, 0.06), 0 1px 2px rgba(15, 23, 42, 0.04);
+    --radius-sm: 8px;
+    --radius: 12px;
+    --radius-lg: 16px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 14px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ===== LAYOUT ===== */
+  .app { display: flex; min-height: 100vh; }
+
+  /* ===== SIDEBAR ===== */
+  .sidebar {
+    width: 64px;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 18px 0;
+    gap: 10px;
+    position: fixed;
+    height: 100vh;
+    z-index: 50;
+  }
+  .logo {
+    width: 38px; height: 38px;
+    background: var(--primary);
+    color: white;
+    border-radius: 10px;
+    display: grid; place-items: center;
+    font-weight: 800; font-size: 16px;
+    letter-spacing: -0.02em;
+    margin-bottom: 14px;
+  }
+  .nav-item {
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    display: grid; place-items: center;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  .nav-item:hover { background: var(--primary-soft); color: var(--primary); }
+  .nav-item.active { background: var(--primary-light); color: var(--primary); }
+  .nav-item svg { width: 20px; height: 20px; }
+  .nav-spacer { flex: 1; }
+
+  /* ===== MAIN ===== */
+  .main { flex: 1; margin-left: 64px; }
+
+  /* ===== HEADER ===== */
+  .header {
+    height: 64px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0 32px;
+    gap: 12px;
+    position: sticky; top: 0; z-index: 40;
+  }
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 34px;
+    padding: 0 14px;
+    border-radius: 999px;
+    background: var(--primary-light);
+    color: var(--primary-dark);
+    font-weight: 600;
+    font-size: 13px;
+  }
+  .pill .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--primary); }
+  .icon-btn {
+    width: 34px; height: 34px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    display: grid; place-items: center;
+    color: var(--text-muted);
+    cursor: pointer;
+  }
+  .user-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    height: 34px; padding: 0 12px 0 10px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    font-weight: 600; font-size: 13px;
+  }
+  .user-pill .avatar { width: 22px; height: 22px; border-radius: 50%; background: #CBD5E1; display: grid; place-items: center; color: white; font-size: 11px; }
+  .badge-red {
+    background: #EF4444; color: white;
+    border-radius: 999px;
+    min-width: 18px; height: 18px;
+    padding: 0 5px;
+    font-size: 11px; font-weight: 700;
+    display: inline-grid; place-items: center;
+  }
+
+  /* ===== PAGE ===== */
+  .page { padding: 36px 40px 60px; max-width: 1280px; }
+  .page-title {
+    display: flex; align-items: center; gap: 12px;
+    font-size: 28px; font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 6px;
+  }
+  .page-title .ico {
+    width: 32px; height: 32px; display: grid; place-items: center;
+    color: var(--primary);
+  }
+  .page-subtitle {
+    color: var(--text-muted);
+    font-size: 14px;
+    margin-bottom: 28px;
+    max-width: 720px;
+  }
+
+  /* ===== CARDS ===== */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+  }
+  .card-header {
+    padding: 18px 22px;
+    border-bottom: 1px solid var(--border-soft);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .card-header h2 {
+    font-size: 16px; font-weight: 700;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .card-header h2 .ico { color: var(--primary); display: inline-grid; place-items: center; }
+  .card-header .meta { font-size: 12px; color: var(--text-muted); font-weight: 500; }
+  .card-body { padding: 22px; }
+
+  /* ===== FORM ===== */
+  .form-row { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+  .form-row label {
+    font-size: 12px; font-weight: 600; color: var(--text);
+    display: flex; align-items: center; gap: 6px;
+  }
+  .form-row .hint { font-size: 11px; color: var(--text-muted); font-weight: 400; }
+  .form-row input,
+  .form-row textarea,
+  .form-row select {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 10px 12px;
+    font-family: inherit;
+    font-size: 13px;
+    color: var(--text);
+    background: var(--surface);
+    transition: border 0.15s, box-shadow 0.15s;
+  }
+  .form-row input:focus,
+  .form-row textarea:focus,
+  .form-row select:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(15, 138, 106, 0.1);
+  }
+  .form-row textarea { resize: vertical; min-height: 110px; }
+  .form-row.row-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .form-row.row-2col > div { display: flex; flex-direction: column; gap: 6px; }
+
+  /* ===== BUTTONS ===== */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: all 0.15s ease;
+  }
+  .btn-primary { background: var(--primary); color: white; }
+  .btn-primary:hover { background: var(--primary-dark); }
+  .btn-ghost { background: transparent; color: var(--text-muted); border-color: var(--border); }
+  .btn-ghost:hover { background: var(--bg); color: var(--text); }
+  .btn-dark { background: #0F172A; color: white; }
+  .btn-dark:hover { background: #1E293B; }
+  .btn svg { width: 14px; height: 14px; }
+
+  /* ===== CHIPS ===== */
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 9px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 600;
+    background: var(--border-soft);
+    color: var(--text-muted);
+  }
+  .chip.green { background: #DCFCE7; color: #166534; }
+
+  /* ===== OPTION CHIPS (multi-select) ===== */
+  .opt-chips { display: flex; gap: 8px; flex-wrap: wrap; }
+  .opt-btn {
+    border: 1px solid var(--border);
+    background: white;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.15s ease;
+  }
+  .opt-btn:hover { border-color: var(--primary); color: var(--primary); }
+  .opt-btn.selected { background: var(--primary); color: white; border-color: var(--primary); }
+
+  /* ===== PREVIEW ===== */
+  .preview {
+    background: #FAFBFB;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 18px 20px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    line-height: 1.7;
+    color: #1E293B;
+    white-space: pre-wrap;
+    max-height: 560px;
+    overflow-y: auto;
+  }
+  .preview .label-tag {
+    color: var(--primary-dark);
+    font-weight: 700;
+  }
+  .preview .section-divider {
+    color: var(--text-subtle);
+  }
+
+  /* ===== COPY TOOLBAR ===== */
+  .copy-toolbar {
+    display: flex; gap: 8px;
+    justify-content: flex-end;
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid var(--border-soft);
+  }
+
+  /* ===== GRID ===== */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1.1fr; gap: 20px; }
+  @media (max-width: 1100px) { .grid-2 { grid-template-columns: 1fr; } }
+
+  /* ===== SCROLL ===== */
+  ::-webkit-scrollbar { width: 8px; height: 8px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: #D1D5DB; border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: #9CA3AF; }
+
+  /* ===== DISCLAIMER ===== */
+  .disclaimer {
+    margin-top: 40px;
+    padding: 16px 24px;
+    border-top: 1px solid var(--border);
+    font-size: 11px;
+    color: var(--text-muted);
+    line-height: 1.6;
+    text-align: center;
+  }
+  .disclaimer strong { color: var(--text); }
+</style>
+</head>
+<body>
+<div class="app">
+  <!-- ============ SIDEBAR ============ -->
+  <aside class="sidebar">
+    <div class="logo">A</div>
+    <div class="nav-item" title="Home">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12l9-9 9 9M5 10v10h14V10"/></svg>
+    </div>
+    <div class="nav-item" title="SOP">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v18M3 8l9 4 9-4M3 16l9 4 9-4"/></svg>
+    </div>
+    <div class="nav-item" title="Inspection Reports">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg>
+    </div>
+    <div class="nav-item" title="Pre-Inspection">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    </div>
+    <div class="nav-item active" title="CQI+">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+    </div>
+    <div class="nav-item" title="My Library">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2zM22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+    </div>
+    <div class="nav-spacer"></div>
+    <div class="nav-item" title="Chat">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+    </div>
+    <div class="nav-item" title="Settings">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+    </div>
+  </aside>
+
+  <!-- ============ MAIN ============ -->
+  <main class="main">
+    <!-- HEADER -->
+    <header class="header">
+      <span class="pill"><span class="dot"></span> minthealth_test</span>
+      <button class="icon-btn" title="Pharmacy">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 9h.01M15 9h.01M9 13h.01M15 13h.01M9 17h.01M15 17h.01"/></svg>
+      </button>
+      <span class="user-pill">
+        <span class="avatar">123</span>
+        <span class="badge-red">3</span>
+      </span>
+    </header>
+
+    <!-- PAGE -->
+    <div class="page">
+      <h1 class="page-title">
+        <span class="ico">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+        </span>
+        CQI+ Documentation
+      </h1>
+      <p class="page-subtitle">
+        Capture an incident in plain language — AlgoPharma generates the ACP-aligned narrative, root-cause analysis, and SMART action plan as one copy-ready document for PhIX submission.
+      </p>
+
+      <div class="grid-2">
+        <!-- LEFT: INPUT -->
+        <div class="card">
+          <div class="card-header">
+            <h2>
+              <span class="ico">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4z"/></svg>
+              </span>
+              Incident Details
+            </h2>
+            <span class="meta">Auto-saved 2 min ago</span>
+          </div>
+          <div class="card-body">
+            <div class="form-row row-2col">
+              <div>
+                <label>Date</label>
+                <input type="date" value="2026-04-26" />
+              </div>
+              <div>
+                <label>Type</label>
+                <select>
+                  <option>Wrong drug dispensed</option>
+                  <option selected>Wrong dose / strength</option>
+                  <option>Wrong patient</option>
+                  <option>Missed dose</option>
+                  <option>Documentation error</option>
+                  <option>Near-miss (intercepted)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row row-2col">
+              <div>
+                <label>Severity</label>
+                <select>
+                  <option>Level 1 — No harm</option>
+                  <option selected>Level 2 — Monitoring required</option>
+                  <option>Level 3 — Temporary harm</option>
+                  <option>Level 4 — Permanent harm</option>
+                </select>
+              </div>
+              <div>
+                <label>Detected at</label>
+                <select>
+                  <option selected>Final pharmacist check</option>
+                  <option>Patient counselling</option>
+                  <option>After dispensing</option>
+                  <option>Patient/caregiver report</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <label>What happened? <span class="hint">Plain language is fine</span></label>
+              <textarea>Patient came in for refill of metoprolol 50mg BID. Tech pulled metoprolol 100mg from shelf instead. Pharmacist caught the error during final check before handoff. Patient did not receive incorrect medication.</textarea>
+            </div>
+
+            <div class="form-row">
+              <label>Contributing factors <span class="hint">Select any that apply</span></label>
+              <div class="opt-chips">
+                <button class="opt-btn selected">Look-alike packaging</button>
+                <button class="opt-btn selected">High workload</button>
+                <button class="opt-btn">Distraction</button>
+                <button class="opt-btn">Communication gap</button>
+                <button class="opt-btn">Workflow gap</button>
+                <button class="opt-btn">Training gap</button>
+              </div>
+            </div>
+
+            <button class="btn btn-primary" style="width: 100%; justify-content: center; margin-top: 4px;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9.5 2A2.5 2.5 0 0112 4.5v15a2.5 2.5 0 01-4.96.44 2.5 2.5 0 01-2.96-3.08 3 3 0 01-.34-5.58 2.5 2.5 0 011.32-4.24 2.5 2.5 0 011.98-3A2.5 2.5 0 019.5 2z"/></svg>
+              Generate Documentation
+            </button>
+          </div>
+        </div>
+
+        <!-- RIGHT: SINGLE STACKED OUTPUT -->
+        <div class="card">
+          <div class="card-header">
+            <h2>
+              <span class="ico">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="2" width="6" height="4" rx="1"/><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/></svg>
+              </span>
+              PhIX-Ready Document
+            </h2>
+            <span class="chip green">● Generated</span>
+          </div>
+          <div class="card-body">
+            <div class="preview"><span class="label-tag">INCIDENT NARRATIVE</span> <span class="section-divider">— ACP CQI+ Format</span>
+
+<span class="label-tag">Date of Incident:</span> April 26, 2026
+<span class="label-tag">Severity:</span> Level 2 — No harm; monitoring required
+<span class="label-tag">Detection Point:</span> Final pharmacist verification
+<span class="label-tag">Outcome:</span> Error intercepted; patient unaffected
+
+<span class="label-tag">DESCRIPTION</span>
+A patient presented for a refill of metoprolol 50 mg BID.
+During dispensing, the technician selected metoprolol 100 mg
+rather than the prescribed 50 mg strength. The original
+prescription was scanned and entered correctly. The error was
+identified by the pharmacist during the final verification
+check prior to patient handoff. The dispensed product was
+returned to stock and the correct strength was dispensed.
+
+<span class="label-tag">IMMEDIATE ACTIONS</span>
+1. Incorrect product returned to inventory
+2. Correct strength prepared and verified
+3. Patient counselled on dose regimen
+4. Incident logged in pharmacy CQI+ register
+
+<span class="section-divider">─────────────────────────────────────</span>
+
+<span class="label-tag">ROOT CAUSE ANALYSIS</span> <span class="section-divider">(5 Whys)</span>
+
+1. Why did the wrong dose reach final check?
+   → Technician selected 100 mg instead of 50 mg.
+
+2. Why was the wrong strength selected?
+   → Both strengths sit adjacent on the shelf with
+     near-identical packaging.
+
+3. Why are they stored adjacent without separation?
+   → Current shelf arrangement is alphabetical only.
+
+4. Why is alphabetical-only arrangement still in use?
+   → Look-alike segregation policy not yet implemented.
+
+5. Why has the policy not been implemented?
+   → No SOP currently mandates auxiliary labeling for
+     look-alike strengths.
+
+<span class="label-tag">PRIMARY ROOT CAUSE</span>
+Absence of look-alike/sound-alike (LASA) segregation
+protocol, compounded by elevated workload at time of dispense.
+
+<span class="section-divider">─────────────────────────────────────</span>
+
+<span class="label-tag">SMART ACTION PLAN</span>
+
+Action 1 — LASA Segregation
+  Specific:    Add red auxiliary labels to all metoprolol
+               strengths and physically separate on shelf.
+  Measurable:  100% of metoprolol stock relabeled.
+  Assignable:  Pharmacy Manager
+  Realistic:   Existing labels in stock; 1-hour task.
+  Time-bound:  Complete by May 5, 2026.
+
+Action 2 — SOP Update
+  Specific:    Draft SOP §5.2 on LASA storage and
+               auxiliary labeling.
+  Measurable:  SOP approved and staff signed off.
+  Assignable:  Pharmacy Manager + RPh lead
+  Realistic:   Use AlgoPharma SOP Generator.
+  Time-bound:  Approved by May 14 CQI+ meeting.
+
+Action 3 — Workload Review
+  Specific:    Assess staffing during 11am–2pm peak.
+  Measurable:  Workload data collected over 2 weeks.
+  Assignable:  Pharmacy Manager
+  Realistic:   Use existing Rx volume data.
+  Time-bound:  Review at next CQI+ meeting.
+
+<span class="section-divider">─────────────────────────────────────</span>
+<span class="label-tag">Regulatory alignment:</span> Standards of Practice §15;
+CQI+ Program (Schedule 5).</div>
+
+            <div class="copy-toolbar">
+              <button class="btn btn-ghost">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/></svg>
+                Regenerate
+              </button>
+              <button class="btn btn-ghost">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+                Download
+              </button>
+              <button class="btn btn-dark">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                Copy for PhIX
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="disclaimer">
+        <strong>Disclaimer:</strong> Algo-Rythmn.ai provides informational and analytical tools to support pharmacy compliance efforts. Outputs may contain errors and must be reviewed by the licensed pharmacist before submission to the ACP. AlgoPharma does not fulfill CQI+ program requirements and is not affiliated with or endorsed by the ACP.
+      </div>
+    </div>
+  </main>
+</div>
+
+<script>
+  // Option chip toggling (multi-select)
+  document.querySelectorAll('.opt-chips').forEach(group => {
+    group.addEventListener('click', e => {
+      if (e.target.classList.contains('opt-btn')) {
+        e.target.classList.toggle('selected');
+      }
+    });
+  });
+</script>
+</body>
+</html>
