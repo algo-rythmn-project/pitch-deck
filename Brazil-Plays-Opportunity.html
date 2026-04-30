@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brazil Plays — Opportunity Map</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #14181A;
+    --ink-soft: #2C3338;
+    --ink-mute: #5A6470;
+    --ink-faint: #8B95A1;
+    --rule: #D8DCE0;
+    --rule-soft: #E8EBEE;
+    --paper: #FAF8F3;
+    --paper-tint: #F2EFE6;
+    --green: #0B3D2E;
+    --green-deep: #062318;
+    --green-soft: #E8EFE9;
+    --accent: #C2410C;
+    --accent-soft: #FBE9D7;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--ink);
+    background: var(--paper);
+    background-image:
+      radial-gradient(circle at 20% 10%, rgba(11, 61, 46, 0.025) 0%, transparent 40%),
+      radial-gradient(circle at 80% 90%, rgba(194, 65, 12, 0.02) 0%, transparent 40%);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  .page {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 80px 60px 120px;
+  }
+
+  /* ============ Masthead ============ */
+  .masthead {
+    border-bottom: 1px solid var(--ink);
+    padding-bottom: 28px;
+    margin-bottom: 56px;
+    position: relative;
+  }
+
+  .masthead-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .masthead-tag::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
+
+  .masthead-tag .ref {
+    color: var(--ink-faint);
+    letter-spacing: 0.15em;
+  }
+
+  h1.headline {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 500;
+    font-size: clamp(48px, 6vw, 76px);
+    line-height: 1.02;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+    margin-bottom: 16px;
+    font-variation-settings: "opsz" 144, "SOFT" 50;
+  }
+
+  h1.headline em {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--green);
+  }
+
+  .deck {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 21px;
+    line-height: 1.45;
+    color: var(--ink-soft);
+    max-width: 640px;
+    margin-bottom: 28px;
+    font-variation-settings: "opsz" 24;
+  }
+
+  .meta-row {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+  }
+
+  .meta-row .meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .meta-row .meta-label {
+    color: var(--ink-faint);
+    font-size: 10px;
+  }
+
+  .meta-row .meta-value {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  /* ============ Section primitives ============ */
+  section {
+    margin-bottom: 72px;
+  }
+
+  .section-marker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 8px;
+  }
+
+  h2 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 500;
+    font-size: 36px;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 24px;
+    font-variation-settings: "opsz" 60;
+  }
+
+  h3 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 1.4;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 10px;
+    margin-top: 24px;
+  }
+
+  h3:first-child { margin-top: 0; }
+
+  p {
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--ink-soft);
+    margin-bottom: 16px;
+  }
+
+  p.lede {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 19px;
+    line-height: 1.55;
+    color: var(--ink);
+    font-weight: 400;
+    margin-bottom: 24px;
+    font-variation-settings: "opsz" 30;
+  }
+
+  p.lede::first-letter {
+    font-family: 'Fraunces', serif;
+    font-size: 56px;
+    font-weight: 600;
+    float: left;
+    line-height: 0.9;
+    margin: 6px 10px 0 0;
+    color: var(--green);
+  }
+
+  ul.editorial {
+    list-style: none;
+    margin-bottom: 16px;
+  }
+
+  ul.editorial li {
+    position: relative;
+    padding-left: 26px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--ink-soft);
+  }
+
+  ul.editorial li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 12px;
+    width: 14px;
+    height: 1px;
+    background: var(--green);
+  }
+
+  ul.editorial li strong { color: var(--ink); font-weight: 600; }
+
+  .pull-quote {
+    margin: 32px 0;
+    padding: 24px 28px;
+    background: var(--green-soft);
+    border-left: 3px solid var(--green);
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 18px;
+    line-height: 1.55;
+    color: var(--green-deep);
+    font-variation-settings: "opsz" 30;
+  }
+
+  .pull-quote strong {
+    font-weight: 600;
+    color: var(--green-deep);
+  }
+
+  /* ============ Ranking table ============ */
+  .ranking {
+    border-top: 2px solid var(--ink);
+    border-bottom: 2px solid var(--ink);
+    margin: 32px 0;
+  }
+
+  .rank-row {
+    display: grid;
+    grid-template-columns: 50px 1fr 110px 1fr 130px;
+    gap: 24px;
+    padding: 22px 0;
+    border-bottom: 1px solid var(--rule);
+    align-items: start;
+  }
+
+  .rank-row:last-child { border-bottom: none; }
+
+  .rank-row.head {
+    border-bottom: 1px solid var(--ink);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    padding: 14px 0;
+    align-items: center;
+  }
+
+  .rank-num {
+    font-family: 'Fraunces', serif;
+    font-size: 36px;
+    font-weight: 500;
+    line-height: 1;
+    color: var(--green);
+    font-variation-settings: "opsz" 60;
+  }
+
+  .rank-num sup {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--ink-faint);
+    margin-left: 2px;
+  }
+
+  .rank-name {
+    font-family: 'Fraunces', serif;
+    font-size: 19px;
+    font-weight: 500;
+    line-height: 1.2;
+    color: var(--ink);
+  }
+
+  .rank-name .rank-bucket {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-top: 4px;
+  }
+
+  .rank-buyer, .rank-fee, .rank-why {
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.45;
+  }
+
+  .rank-fee {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  /* ============ Play deep-dives ============ */
+  .play {
+    margin-top: 48px;
+    padding-top: 48px;
+    border-top: 1px solid var(--rule);
+    position: relative;
+  }
+
+  .play:first-of-type { border-top: none; padding-top: 0; }
+
+  .play-marker {
+    display: flex;
+    align-items: baseline;
+    gap: 18px;
+    margin-bottom: 12px;
+  }
+
+  .play-marker .num {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 56px;
+    line-height: 1;
+    color: var(--green);
+    font-variation-settings: "opsz" 144;
+  }
+
+  .play-marker .meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+  }
+
+  .play-marker .meta strong {
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  .play h2 {
+    margin-bottom: 6px;
+  }
+
+  .play .play-buyer {
+    font-family: 'Fraunces', Georgia, serif;
+    font-style: italic;
+    font-size: 17px;
+    color: var(--ink-mute);
+    margin-bottom: 28px;
+    font-variation-settings: "opsz" 24;
+  }
+
+  .play-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px 48px;
+    margin-top: 24px;
+  }
+
+  .play-block {
+    grid-column: span 1;
+  }
+
+  .play-block.full {
+    grid-column: span 2;
+  }
+
+  .roi-callout {
+    grid-column: span 2;
+    background: var(--paper-tint);
+    padding: 22px 26px;
+    margin: 8px 0;
+    position: relative;
+  }
+
+  .roi-callout::before {
+    content: "ROI";
+    position: absolute;
+    top: -10px;
+    left: 22px;
+    background: var(--green);
+    color: var(--paper);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    padding: 4px 10px;
+  }
+
+  .roi-callout p {
+    margin-bottom: 0;
+    font-size: 15px;
+    color: var(--ink);
+  }
+
+  .roi-callout .figure {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    color: var(--green);
+    font-size: 17px;
+  }
+
+  /* ============ Sequencing section ============ */
+  .timeline {
+    margin: 32px 0;
+  }
+
+  .timeline-row {
+    display: grid;
+    grid-template-columns: 200px 180px 1fr;
+    gap: 32px;
+    padding: 22px 0;
+    border-top: 1px solid var(--rule);
+    align-items: start;
+  }
+
+  .timeline-row:last-child {
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .timeline-row .phase {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--green);
+  }
+
+  .timeline-row .plays-in {
+    font-family: 'Fraunces', serif;
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  .timeline-row .rationale {
+    font-size: 15px;
+    color: var(--ink-soft);
+    line-height: 1.55;
+  }
+
+  /* ============ Decisions ============ */
+  .decisions {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 48px 56px;
+    margin: 64px -20px 0;
+  }
+
+  .decisions .section-marker {
+    color: var(--paper-tint);
+  }
+
+  .decisions h2 {
+    color: var(--paper);
+    margin-bottom: 20px;
+  }
+
+  .decisions ul {
+    list-style: none;
+    counter-reset: dec;
+  }
+
+  .decisions ul li {
+    counter-increment: dec;
+    position: relative;
+    padding-left: 48px;
+    padding-top: 18px;
+    padding-bottom: 18px;
+    border-top: 1px solid rgba(250, 248, 243, 0.12);
+    color: var(--paper);
+    font-size: 16px;
+    line-height: 1.55;
+  }
+
+  .decisions ul li:last-child {
+    border-bottom: 1px solid rgba(250, 248, 243, 0.12);
+  }
+
+  .decisions ul li::before {
+    content: counter(dec, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: 18px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--paper-tint);
+    letter-spacing: 0.1em;
+  }
+
+  /* ============ Footer ============ */
+  footer.colophon {
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  /* ============ Responsive ============ */
+  @media (max-width: 720px) {
+    .page { padding: 48px 24px 80px; }
+    .meta-row { gap: 20px; }
+    .rank-row { grid-template-columns: 40px 1fr; gap: 12px 16px; padding: 18px 0; }
+    .rank-row.head { display: none; }
+    .rank-row .rank-buyer,
+    .rank-row .rank-fee,
+    .rank-row .rank-why {
+      grid-column: 2;
+      font-size: 13px;
+    }
+    .rank-row .rank-buyer::before { content: "Buyer — "; color: var(--ink-faint); font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; }
+    .rank-row .rank-fee::before { content: "Fee — "; color: var(--ink-faint); font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; }
+    .rank-row .rank-why::before { content: "Why — "; color: var(--ink-faint); font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; }
+    .play-grid { grid-template-columns: 1fr; gap: 24px; }
+    .play-block.full, .roi-callout { grid-column: span 1; }
+    .timeline-row { grid-template-columns: 1fr; gap: 8px; }
+    .decisions { padding: 32px 24px; margin: 48px -8px 0; }
+    h1.headline { font-size: 44px; }
+    h2 { font-size: 28px; }
+  }
+
+  /* ============ Print ============ */
+  @media print {
+    body { background: white; }
+    .page { padding: 20px 0; max-width: 100%; }
+    .decisions { background: white; color: var(--ink); padding: 0; margin: 32px 0 0; }
+    .decisions h2, .decisions ul li { color: var(--ink); }
+    .decisions ul li { border-color: var(--rule); }
+    section { page-break-inside: avoid; margin-bottom: 32px; }
+    .play { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ============ MASTHEAD ============ -->
+  <header class="masthead">
+    <div class="masthead-tag">
+      <span>Opportunity Map / Internal Briefing</span>
+      <span class="ref">Vol. 01 · Apr 2026</span>
+    </div>
+    <h1 class="headline">Brazil Plays — <em>fastest revenue</em></h1>
+    <p class="deck">A focused opportunity map across AgTech, finance, and commodity trading — filtered to plays that can pilot in ninety days.</p>
+    <div class="meta-row">
+      <div class="meta-item">
+        <span class="meta-label">Prepared for</span>
+        <span class="meta-value">Algo-Rythmn</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Forcing function</span>
+        <span class="meta-value">ICPA / ConBAP — Jul 13–16</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Lens</span>
+        <span class="meta-value">90-day pilot</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Buyers</span>
+        <span class="meta-value">Producers · Traders · Banks</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ FILTER ============ -->
+  <section>
+    <div class="section-marker">§ 01 — How These Were Filtered</div>
+    <h2>Five plays, filtered to ninety-day pilots.</h2>
+    <p>Each play was selected because pilot scope can be defined against existing customer data; decision-makers are one to three people with budget authority, not committees; and value can be measured within a single quarter — basis points captured, hours saved, dollars reduced.</p>
+    <div class="pull-quote">
+      <strong>The recommendation</strong> is to lead with Plays #1 and #2. Both are commodity-trading plays sharing roughly seventy percent of the same data infrastructure — winning one accelerates the other. Plays #3 through #5 are sequential adds.
+    </div>
+  </section>
+
+  <!-- ============ RANKING TABLE ============ -->
+  <section>
+    <div class="section-marker">§ 02 — The Five Plays, Ranked</div>
+    <h2>Sorted by speed-to-revenue.</h2>
+
+    <div class="ranking">
+      <div class="rank-row head">
+        <div>№</div>
+        <div>Play</div>
+        <div>Pilot Fee</div>
+        <div>Buyer</div>
+        <div>Why Fastest</div>
+      </div>
+
+      <div class="rank-row">
+        <div class="rank-num">01</div>
+        <div class="rank-name">Hedging AI Assistant<span class="rank-bucket">Trading</span></div>
+        <div class="rank-fee">$75–150K</div>
+        <div class="rank-buyer">Exporters, millers, integrated processors</div>
+        <div class="rank-why">Pre-warmed market; clear ROI in under one quarter</div>
+      </div>
+
+      <div class="rank-row">
+        <div class="rank-num">02</div>
+        <div class="rank-name">Basis &amp; FOB Pricing Engine<span class="rank-bucket">Trading</span></div>
+        <div class="rank-fee">$100–200K</div>
+        <div class="rank-buyer">Grain traders operating in Brazil</div>
+        <div class="rank-why">Single trader can champion; immediate time-to-value</div>
+      </div>
+
+      <div class="rank-row">
+        <div class="rank-num">03</div>
+        <div class="rank-name">Cross-Exchange Arbitrage Agent<span class="rank-bucket">Trading</span></div>
+        <div class="rank-fee">$150–300K</div>
+        <div class="rank-buyer">Prop desks, commodity hedge funds</div>
+        <div class="rank-why">Performance-share pricing means zero upfront</div>
+      </div>
+
+      <div class="rank-row">
+        <div class="rank-num">04</div>
+        <div class="rank-name">Cooperative Member Intelligence<span class="rank-bucket">AgTech</span></div>
+        <div class="rank-fee">$50–120K</div>
+        <div class="rank-buyer">Large agricultural cooperatives</div>
+        <div class="rank-why">Co-op innovation budgets are pre-allocated</div>
+      </div>
+
+      <div class="rank-row">
+        <div class="rank-num">05</div>
+        <div class="rank-name">CRA / Fiagro Risk Engine<span class="rank-bucket">Finance</span></div>
+        <div class="rank-fee">$100–250K</div>
+        <div class="rank-buyer">Banks, asset managers, family offices</div>
+        <div class="rank-why">Regulatory tailwind from CVM disclosure rules</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PLAY DEEP DIVES ============ -->
+  <section>
+    <div class="section-marker">§ 03 — Deep Dives</div>
+    <h2>The plays in detail.</h2>
+
+    <!-- PLAY 1 -->
+    <div class="play">
+      <div class="play-marker">
+        <span class="num">01</span>
+        <span class="meta">Trading · <strong>Lead bet</strong> · Exporters &amp; Millers</span>
+      </div>
+      <h2>Hedging AI Assistant</h2>
+      <p class="play-buyer">A closed-loop replacement for the Excel-plus-trader-intuition workflow that dominates Brazilian agribusiness treasury today.</p>
+
+      <div class="play-grid">
+        <div class="play-block full">
+          <h3>The Pitch</h3>
+          <p>An agentic layer that ingests CBOT and B3 prices, FX feeds, weather data, freight rates, and the company's physical position, then executes hedge actions against pre-approved policy guardrails. Not a dashboard — closed-loop execution.</p>
+        </div>
+
+        <div class="play-block">
+          <h3>Why It Pilots Fast</h3>
+          <ul class="editorial">
+            <li>Data inputs are licensed market feeds. <strong>No proprietary integration.</strong></li>
+            <li>Single CFO or Head of Trading sponsors. <strong>No committee.</strong></li>
+            <li>Success metric is unambiguous: <strong>basis points captured.</strong></li>
+            <li>Rabobank, Uhedge, PwC have spent eighteen months publishing exactly this thesis. <strong>Buyers are pre-educated.</strong></li>
+          </ul>
+        </div>
+
+        <div class="play-block">
+          <h3>First-Call Targets</h3>
+          <p>São Martinho · Raízen · Amaggi (trading desk) · Inpasa · JBS (feed procurement) · São Paulo arms of Bunge, Cargill, ADM</p>
+          <h3>90-Day Scope</h3>
+          <p>Single commodity (soy or sugar), single book. Read-only execution recommendations weeks 1–6, supervised execution weeks 7–12. Threshold: outperform existing book by 25bps.</p>
+        </div>
+
+        <div class="roi-callout">
+          <p>On a <span class="figure">USD 500M</span> annual soy book, a <span class="figure">50bp</span> improvement in hedge timing returns <span class="figure">USD 2.5M / year</span>. Pilot at <span class="figure">USD 100K</span> fixed; expand to 10–20bps performance share on subsequent books.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PLAY 2 -->
+    <div class="play">
+      <div class="play-marker">
+        <span class="num">02</span>
+        <span class="meta">Trading · <strong>Lead bet</strong> · Grain Traders</span>
+      </div>
+      <h2>Basis &amp; FOB Pricing Engine</h2>
+      <p class="play-buyer">One of the most undertooled high-value workflows in Brazilian agribusiness today — the spread between Chicago futures and physical delivery at Brazilian ports.</p>
+
+      <div class="play-grid">
+        <div class="play-block full">
+          <h3>The Pitch</h3>
+          <p>The basis between CBOT futures and physical FOB delivery at Paranaguá, Santos, or Itaqui moves constantly with logistics, weather, FX, and Chinese demand. Traders price this with spreadsheets and gut instinct. We build the agent that prices basis in real-time and executes hedges across the spread.</p>
+        </div>
+
+        <div class="play-block">
+          <h3>Why It Pilots Fast</h3>
+          <ul class="editorial">
+            <li>Single trader or desk head can sponsor. <strong>No IT integration in v1.</strong></li>
+            <li>Output is a live basis price; <strong>comparison against manual pricing is immediate.</strong></li>
+            <li>Strategically aligned with Felipe's Canadian-Chinese network — most basis flow is to China.</li>
+          </ul>
+        </div>
+
+        <div class="play-block">
+          <h3>First-Call Targets</h3>
+          <p>Amaggi · Cargill Brasil · Bunge Brasil · COFCO Brasil · Viterra · Olam · ADM Brasil · Caramuru · Coamo trading</p>
+          <h3>90-Day Scope</h3>
+          <p>Single port (Paranaguá), single commodity (soy). Parallel-run against trader's manual pricing for sixty days; supervised execution in the last thirty. Threshold: equal or better basis capture with 50% less time.</p>
+        </div>
+
+        <div class="roi-callout">
+          <p>A trader handling <span class="figure">2 Mt / year</span> of soy with a <span class="figure">5¢/bushel</span> basis-capture improvement returns <span class="figure">USD 3.7M / year</span>. A pilot fee of <span class="figure">USD 150K</span> is trivially recoverable.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PLAY 3 -->
+    <div class="play">
+      <div class="play-marker">
+        <span class="num">03</span>
+        <span class="meta">Trading · Prop Desks &amp; Hedge Funds</span>
+      </div>
+      <h2>Cross-Exchange Arbitrage Agent</h2>
+      <p class="play-buyer">Brazil sits at the structural center of a triangle between US supply and Chinese demand — and the Canadian-Chinese network framing makes Algo-Rythmn unusually credible to buyers in this space.</p>
+
+      <div class="play-grid">
+        <div class="play-block full">
+          <h3>The Pitch</h3>
+          <p>Soybean and corn futures trade on CME (Chicago), B3 (São Paulo), and Dalian (China). Latency, FX, and basis arbitrage opportunities exist across the three but require fast multi-venue execution. The agentic layer routes, sequences, and executes.</p>
+        </div>
+
+        <div class="play-block">
+          <h3>Why It Pilots Fast</h3>
+          <ul class="editorial">
+            <li>Prop desks pay for performance — <strong>structure as performance share, zero upfront.</strong></li>
+            <li>Time-to-value measured in <strong>days</strong> once data feeds connect.</li>
+            <li>Smaller buyer set (10–20 firms) but each ticket is large.</li>
+          </ul>
+        </div>
+
+        <div class="play-block">
+          <h3>First-Call Targets</h3>
+          <p>XP commodity desk · BTG Pactual agribusiness fund · specialized commodity hedge funds (Pacifico, Kapitalo agri sleeve) · trading desks at Cargill, Bunge, COFCO, Amaggi</p>
+          <h3>90-Day Scope</h3>
+          <p>Two commodities (soy + corn), three exchanges. Paper-trading mode for forty-five days; live execution with capped notional in last forty-five. Threshold: positive Sharpe ratio above 1.0.</p>
+        </div>
+
+        <div class="roi-callout">
+          <p>A prop desk running <span class="figure">USD 50M</span> of agricultural exposure across three exchanges with <span class="figure">100bps</span> annualized arbitrage capture returns <span class="figure">USD 500K / year</span>. Performance share at 25% returns <span class="figure">USD 125K</span> from a single small desk.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PLAY 4 -->
+    <div class="play">
+      <div class="play-marker">
+        <span class="num">04</span>
+        <span class="meta">AgTech · Cooperatives</span>
+      </div>
+      <h2>Cooperative Member Intelligence</h2>
+      <p class="play-buyer">Brazilian cooperatives finance, supply, and trade for thousands of farmer-members — and today they do this on Excel and tribal knowledge.</p>
+
+      <div class="play-grid">
+        <div class="play-block full">
+          <h3>The Pitch</h3>
+          <p>Cooperatives need year-ahead member-level forecasts: yield, default risk, input demand, and trading position. We provide the agentic forecasting and decision layer, which the co-op uses internally and can resell to members as a premium service.</p>
+        </div>
+
+        <div class="play-block">
+          <h3>Why It Pilots Fast</h3>
+          <ul class="editorial">
+            <li>Innovation budgets are <strong>pre-allocated annually</strong>; spending happens fast once approved.</li>
+            <li>Single Diretor de Inovação or Diretor Comercial can sponsor.</li>
+            <li>Co-ops compete intensely on member services — <strong>real urgency to differentiate.</strong></li>
+          </ul>
+        </div>
+
+        <div class="play-block">
+          <h3>First-Call Targets</h3>
+          <p>Coamo (largest co-op, currently expanding) · C.Vale · Cocamar · Frísia · Lar · Sicredi (financial co-op with major agribusiness arm)</p>
+          <h3>90-Day Scope</h3>
+          <p>Single co-op, member subset of 200–500. Focus on default risk plus input demand forecasting in v1; skip yield and trading. Threshold: forecast accuracy beats existing Excel model by 15% on holdout.</p>
+        </div>
+
+        <div class="roi-callout">
+          <p>A co-op with <span class="figure">5,000 members</span> and <span class="figure">USD 1B</span> trading volume can capture <span class="figure">USD 3–8M / year</span> through better aggregate position sizing, default prediction, and input procurement. Pilot at <span class="figure">USD 75K</span>; scale to <span class="figure">USD 50/member/year</span> SaaS.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PLAY 5 -->
+    <div class="play">
+      <div class="play-marker">
+        <span class="num">05</span>
+        <span class="meta">Finance · Banks &amp; Asset Managers</span>
+      </div>
+      <h2>CRA / Fiagro Risk Engine</h2>
+      <p class="play-buyer">Brazil has built a fifty-billion-dollar market in agribusiness receivables — and no one models counterparty, collateral, and weather risk in an integrated way today.</p>
+
+      <div class="play-grid">
+        <div class="play-block full">
+          <h3>The Pitch</h3>
+          <p>CRAs (Certificados de Recebíveis do Agronegócio) and Fiagros (agribusiness investment funds) each carry non-trivial counterparty, collateral, and weather risk. We build the agentic risk engine: continuous repricing, default-probability scoring, climate-driven collateral revaluation.</p>
+        </div>
+
+        <div class="play-block">
+          <h3>Why It Pilots Fast</h3>
+          <ul class="editorial">
+            <li>CVM has pushed for better disclosure — <strong>regulatory tailwind.</strong></li>
+            <li>Single risk officer or portfolio manager sponsors. No committee in v1.</li>
+            <li>Higher technical bar than Plays 1–3, but <strong>smaller competitive set.</strong></li>
+          </ul>
+        </div>
+
+        <div class="play-block">
+          <h3>First-Call Targets</h3>
+          <p>Itaú BBA agribusiness · Rabobank Brasil · Banco do Brasil rural credit · Bradesco agribusiness · asset managers running Fiagros (Vinci, XP Asset, Itaú Asset agri sleeve)</p>
+          <h3>90-Day Scope</h3>
+          <p>Single Fiagro fund or CRA portfolio. Retrospective backtest in weeks 1–6 against actual default and price events of last three years; live monitoring in weeks 7–12. Threshold: identify at least two risk events the existing model missed.</p>
+        </div>
+
+        <div class="roi-callout">
+          <p>An asset manager running <span class="figure">USD 500M</span> in Fiagro exposure with a <span class="figure">50bp</span> reduction in unexpected losses returns <span class="figure">USD 2.5M / year</span>. Pilot at <span class="figure">USD 150K</span> fixed; expand to ongoing data subscription.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SEQUENCING ============ -->
+  <section>
+    <div class="section-marker">§ 04 — Sequencing</div>
+    <h2>Build credibility first, then expand.</h2>
+    <p class="lede">Plays #3 and #5 have the largest TAM and the highest margins. Neither pilots in ninety days from a cold start — prop desks need a track record; banks need procurement and risk-committee approval. So we build credibility with #1, #2, and #4 first, then expand.</p>
+
+    <div class="timeline">
+      <div class="timeline-row">
+        <div class="phase">Months 1–3<br>Pre-conference</div>
+        <div class="plays-in">#1 + #2</div>
+        <div class="rationale">Both are commodity-trading plays sharing the same data infrastructure (CBOT, B3, FX, weather, freight). Building one builds 70% of the other. Sell to overlapping buyers.</div>
+      </div>
+      <div class="timeline-row">
+        <div class="phase">Months 4–6<br>Post-conference</div>
+        <div class="plays-in">Add #4</div>
+        <div class="rationale">Cooperative play uses different data (member-level + agronomic) but the same agentic engine. Diversifies revenue base away from trading-cycle volatility.</div>
+      </div>
+      <div class="timeline-row">
+        <div class="phase">Months 7–12</div>
+        <div class="plays-in">Add #3 and #5</div>
+        <div class="rationale">Once the platform has 3–4 reference customers, harder financial-sector buyers (prop desks, banks) become accessible. Use early customers as references.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DECISIONS ============ -->
+  <section class="decisions">
+    <div class="section-marker">§ 05 — Decisions Needed Now</div>
+    <h2>Four asks for leadership.</h2>
+    <ul>
+      <li>Confirm focus on Plays #1 and #2 as the lead bets for the conference.</li>
+      <li>Approve performance-based pricing on Play #3 (zero upfront, 20–30% performance share).</li>
+      <li>Decide whether to staff a dedicated quant for #1/#2/#3 or use Algo-Rythmn's general agentic engineering team.</li>
+      <li>Approve a single-page bilingual one-pager per play for Felipe's pre-conference outreach.</li>
+    </ul>
+  </section>
+
+  <footer class="colophon">
+    <span>Algo-Rythmn · Confidential</span>
+    <span>Brazil Plays Opportunity Map · Vol. 01</span>
+  </footer>
+
+</div>
+</body>
+</html>
