@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AlgoPharma&trade; v1.0 — Product Overview</title>
+<title>AlgoPharma&trade; — Product Overview</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -127,7 +127,7 @@
   }
 
   /* ── LAYOUT ── */
-  .page { max-width: 960px; margin: 0 auto; padding: 0 40px 80px; }
+  .page { max-width: 1100px; margin: 0 auto; padding: 0 40px 80px; }
 
   /* ── SECTION ── */
   .section { margin-top: 60px; }
@@ -213,6 +213,52 @@
     color: var(--slate-mid);
   }
 
+  /* ── REGULATORY NOTICE ── (heavier weight than principle-box) */
+  .notice-box {
+    background: var(--white);
+    border: 1px solid var(--amber);
+    border-left: 4px solid var(--amber);
+    border-radius: 10px;
+    padding: 18px 22px 20px;
+    margin-bottom: 14px;
+    position: relative;
+  }
+  .notice-box .notice-label {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--amber);
+    background: var(--amber-lt);
+    padding: 3px 9px;
+    border-radius: 100px;
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+  .notice-box strong {
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--teal-900);
+    display: block;
+    margin-bottom: 4px;
+  }
+  .notice-box p {
+    font-size: 13.5px;
+    color: var(--slate-mid);
+    line-height: 1.6;
+  }
+  .notices-heading {
+    font-family: 'DM Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 26px 0 12px;
+    padding-top: 18px;
+    border-top: 1px dashed var(--border);
+  }
+
   /* ── FEATURE TABLES ── */
   .module-block {
     margin-bottom: 36px;
@@ -247,6 +293,22 @@
     padding: 3px 9px;
     border-radius: 100px;
     color: var(--teal-200);
+  }
+  .module-header-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .module-header .plan-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: .04em;
+    background: rgba(232,160,32,.18);
+    border: 1px solid rgba(232,160,32,.45);
+    color: #f5c878;
+    padding: 3px 10px;
+    border-radius: 100px;
+    white-space: nowrap;
   }
 
   table {
@@ -316,6 +378,72 @@
   .dot-green  { background: var(--green); }
   .dot-amber  { background: var(--amber); }
   .dot-grey   { background: #bbb; }
+
+  /* ── SUBGROUP ROW ── */
+  .subgroup-row td {
+    background: var(--teal-50);
+    color: var(--teal-700);
+    font-family: 'DM Mono', monospace;
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: .07em;
+    text-transform: uppercase;
+    padding: 8px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* ── ADD-ON CARDS ── */
+  .addon-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 22px 24px 20px;
+    margin-bottom: 16px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 14px 24px;
+    align-items: start;
+  }
+  .addon-card .addon-meta {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 4px;
+  }
+  .addon-card .addon-domain {
+    font-family: 'DM Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .addon-card .addon-status {
+    font-family: 'DM Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: .04em;
+    background: var(--amber-lt);
+    color: var(--amber);
+    padding: 3px 10px;
+    border-radius: 100px;
+    font-weight: 600;
+  }
+  .addon-card h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 21px;
+    color: var(--teal-900);
+    letter-spacing: -.01em;
+    line-height: 1.2;
+    margin: 0;
+  }
+  .addon-card p {
+    grid-column: 1 / -1;
+    font-size: 13.5px;
+    color: var(--slate-mid);
+    line-height: 1.6;
+    margin: 0;
+  }
 
   /* ── ROADMAP ── */
   .roadmap-timeline {
@@ -420,10 +548,10 @@
   <div class="cover-inner">
     <div class="cover-badge">
       <span class="dot"></span>
-      Product Overview · v1.0
+      Product Overview &middot; Version 1.0
     </div>
-    <h1>AlgoPharma&trade;<br><em>v1.0 · Product Overview</em></h1>
-    <p class="cover-sub">Compliance intelligence for Canadian pharmacy operators — built to reduce administrative burden and simplify regulatory adherence.</p>
+    <h1>AlgoPharma&trade;<br><em>Product Overview</em></h1>
+    <p class="cover-sub">Compliance intelligence for Alberta pharmacy operators — built to reduce administrative burden and simplify regulatory adherence under ACP standards.</p>
 
     <div class="cover-meta">
       <div class="cover-meta-item">
@@ -442,6 +570,10 @@
         <label>Platform</label>
         <value>Web · Cloud</value>
       </div>
+      <div class="cover-meta-item">
+        <label>Last Updated</label>
+        <value>April 30, 2026</value>
+      </div>
     </div>
   </div>
 </div>
@@ -453,45 +585,68 @@
   <div class="section">
     <div class="section-label">01 · Product Overview</div>
     <h2>What AlgoPharma&trade; Does</h2>
-    <p class="section-desc">AlgoPharma&trade; centralises regulatory intelligence to help Canadian pharmacy operators reduce compliance overhead, draft SOPs faster, manage incident reporting, and prepare for regulatory inspections.</p>
+    <p class="section-desc">AlgoPharma&trade; covers the full inspection lifecycle for Alberta pharmacy operators &mdash; from preparing before an inspector arrives, to answering questions in real time during a visit, to generating compliant responses and corrective documents after a report is issued.</p>
 
     <div class="principle-box">
       <div>
         <strong>Target Users</strong>
-        <p>Canadian pharmacy owners, Designated Managers (DMs), and compliance officers responsible for ensuring operations meet Alberta College of Pharmacy (ACP) standards.</p>
+        <p>Alberta pharmacy owners, Designated Managers (DMs), and compliance officers responsible for ensuring operations meet Alberta College of Pharmacy (ACP) standards, including the SOLP and SPPPT frameworks.</p>
       </div>
     </div>
     <div class="principle-box">
       <div>
         <strong>Core Value Proposition</strong>
-        <p>AlgoPharma&trade; reduces the administrative burden of operating a compliant pharmacy. By centralising regulatory intelligence, it accelerates the drafting of SOPs, simplifies incident reporting (CPhIR), and actively guides pharmacies through preparing for — or responding to — regulatory inspections.</p>
+        <p>AlgoPharma&trade; covers the full ACP inspection lifecycle. <strong>Before</strong> an inspection: build and maintain compliant SOPs, and use Pre-Inspection Intelligence to know what inspectors focus on. <strong>During</strong> an inspection: answer any compliance question in seconds using the AI chat, grounded in ACP regulations and your own uploaded documents. <strong>After</strong> an inspection: upload the report, detect every finding, and generate compliant responses, SOPs, Policies, Checklists, and Log Tables &mdash; ready for official submission.</p>
       </div>
     </div>
-    <div class="principle-box" style="background: var(--amber-lt); border-color: var(--amber); border-left-color: var(--amber);">
-      <div>
-        <strong>What This Platform Does Not Cover</strong>
-        <p>AlgoPharma&trade; is purpose-built as an operational compliance platform, not a clinical or patient-facing system. It excludes prescription handling, theranostics, patient records, dispensing, EMR, point-of-sale, and advanced inventory tracking. It does not fulfil full CQI+ programs in this release.</p>
-      </div>
+
+    <div class="notices-heading">Important Notices</div>
+
+    <div class="notice-box">
+      <span class="notice-label">Scope</span>
+      <strong>What this platform does not cover</strong>
+      <p>AlgoPharma&trade; is purpose-built as an operational compliance platform, not a clinical or patient-facing system. It does not handle prescriptions, theranostics, patient records, dispensing, EMR, point-of-sale, or advanced inventory tracking.</p>
     </div>
-    <div class="principle-box" style="background: var(--amber-lt); border-color: var(--amber); border-left-color: var(--amber);">
-      <div>
-        <strong>Human Oversight &amp; AI Fallibility</strong>
-        <p>The platform augments administrative workflows but does not replace the professional judgment of a licensed pharmacist. AI‑generated documents, chat responses, and regulatory interpretations may contain inaccuracies; all outputs must be critically reviewed and independently verified by a qualified compliance officer before adoption. Accountability for compliance adherence remains with the pharmacy's designated manager.</p>
-      </div>
+
+    <div class="notice-box">
+      <span class="notice-label">Professional Responsibility</span>
+      <strong>Human oversight and AI fallibility</strong>
+      <p>AlgoPharma&trade; augments administrative workflows; it does not replace the professional judgment of a licensed pharmacist. AI-generated documents, chat responses, and regulatory interpretations may contain inaccuracies and must be reviewed and independently verified by a qualified compliance officer before adoption or submission. Accountability for compliance adherence remains with the pharmacy's licence holder and Designated Manager.</p>
     </div>
   </div>
 
   <!-- 2. FEATURES -->
   <div class="section">
-    <div class="section-label">02 · Features (v1.0)</div>
+    <div class="section-label">02 · Features (v1)</div>
     <h2>What's Included</h2>
-    <p class="section-desc">AlgoPharma&trade; v1.0 ships <strong>7 modules</strong> covering the full compliance workflow for Canadian pharmacy operators, with 36 features available on launch.</p>
+    <p class="section-desc">AlgoPharma&trade; v1 ships <strong>6 modules</strong> with <strong>38 features</strong>, organized around the inspection lifecycle: <strong>before</strong> (SOP Intelligence, Pre-Inspection Intelligence), <strong>during</strong> (Home AI Chat, My Library), and <strong>after</strong> (Inspection Report Intelligence) &mdash; supported by a sixth Platform &amp; Core Infrastructure module that spans the entire workflow. Three purpose-built add-on modules are in development.</p>
+
+    <div class="summary-grid">
+      <div class="summary-card">
+        <div class="num">6</div>
+        <div class="lbl">Core modules in v1</div>
+      </div>
+      <div class="summary-card">
+        <div class="num">38</div>
+        <div class="lbl">Features available today</div>
+      </div>
+      <div class="summary-card">
+        <div class="num">3</div>
+        <div class="lbl">Add-on modules in development</div>
+      </div>
+      <div class="summary-card">
+        <div class="num">100%</div>
+        <div class="lbl">ACP-grounded with citations</div>
+      </div>
+    </div>
+
+    <div style="height: 28px;"></div>
 
     <!-- Module 1: Home / AI Chat -->
     <div class="module-block">
       <div class="module-header">
         <div class="module-header-left">
-          <h3>1. AI Compliance Chat</h3>
+          <h3>1. Home — AI Compliance Chat</h3>
         </div>
         <span class="count-badge">4 features</span>
       </div>
@@ -506,33 +661,33 @@
         <tbody>
           <tr>
             <td class="feature-name">Compliance Q&amp;A Chat</td>
-            <td class="feature-desc">Natural language chat interface to query both ACP public pharmacy regulations and privately uploaded documents.</td>
+            <td class="feature-desc">Natural-language chat grounded in three data sources: anonymized Alberta-wide ACP inspection data (<strong>Commons</strong>), public ACP regulations, and the pharmacy's own uploaded inspection reports and SOPs (<strong>Vault</strong>). Every answer is cited to a verifiable source document. Basic-tier subscribers receive Commons-grounded chat; Vault grounding requires a Professional plan.</td>
             <td><span class="status-dot dot-green"></span>Available</td>
           </tr>
           <tr>
-            <td class="feature-name">Deep Thinking Mode</td>
-            <td class="feature-desc">Extended reasoning for complex regulatory questions requiring multi-source analysis.</td>
-            <td><span class="status-dot dot-green"></span>Available</td>
-          </tr>
-          <tr>
-            <td class="feature-name">Generate Compliance Docs</td>
-            <td class="feature-desc">One-click generation of compliance documents from chat responses.</td>
+            <td class="feature-name">Generate Compliance Docs from Chat</td>
+            <td class="feature-desc">Convert any chat response into a formatted document — a quick memo, a draft policy note, or a meeting summary — with one click. For full SOP authoring, see SOP Intelligence; for inspection responses, see Inspection Report Intelligence.</td>
             <td><span class="status-dot dot-green"></span>Available</td>
           </tr>
           <tr>
             <td class="feature-name">Suggested Prompts</td>
-            <td class="feature-desc">Pre-built prompts covering ACP standards and common inspection findings.</td>
+            <td class="feature-desc">Pre-built prompts covering ACP standards, common inspection findings, and regulatory scenarios to guide pharmacists to the right answers faster.</td>
+            <td><span class="status-dot dot-green"></span>Available</td>
+          </tr>
+          <tr>
+            <td class="feature-name">Conversation Memory</td>
+            <td class="feature-desc">The AI retains the full context of each session, referencing prior exchanges and any feedback the user has provided to deliver progressively more relevant and refined responses. Follow-up questions are answered in context &mdash; no need to re-explain the situation with each message.</td>
             <td><span class="status-dot dot-green"></span>Available</td>
           </tr>
         </tbody>
       </table>
     </div>
 
-    <!-- Module 2: SOP -->
+    <!-- Module 2: SOP Intelligence -->
     <div class="module-block">
       <div class="module-header">
         <div class="module-header-left">
-          <h3>2. SOP Management</h3>
+          <h3>2. SOP Intelligence</h3>
         </div>
         <span class="count-badge">5 features</span>
       </div>
@@ -546,28 +701,28 @@
         </thead>
         <tbody>
           <tr>
-            <td class="feature-name">AI Compliance Scan</td>
-            <td class="feature-desc">Upload a PDF SOP; AI identifies non-compliant clauses and missing regulatory requirements via section-level analysis.</td>
+            <td class="feature-name">Scan &amp; Update Existing SOPs</td>
+            <td class="feature-desc">Upload an existing SOP; AI identifies compliance gaps against current ACP, SOLP, and SPPPT standards and generates an updated compliant version with tracked changes and source citations.</td>
             <td><span class="status-dot dot-green"></span>Available</td>
           </tr>
           <tr>
-            <td class="feature-name">AI SOP Generator</td>
-            <td class="feature-desc">Generate full SOPs from regulatory knowledge base in Script Pharmacy format, with citations.</td>
+            <td class="feature-name">Generate New SOPs</td>
+            <td class="feature-desc">Generate complete SOPs from scratch for any pharmacy topic, including related Policies, Checklists, and Log Tables — all grounded in ACP regulatory standards with full source citations.</td>
+            <td><span class="status-dot dot-green"></span>Available</td>
+          </tr>
+          <tr>
+            <td class="feature-name">Auto-Scan All Uploaded SOPs</td>
+            <td class="feature-desc">Batch compliance scan across every SOP in the pharmacy's library. Surfaces gaps, outdated clauses, and missing requirements across the full document set in a single operation.</td>
             <td><span class="status-dot dot-green"></span>Available</td>
           </tr>
           <tr>
             <td class="feature-name">SOP Topic Categories</td>
-            <td class="feature-desc">Dropdown of pharmacy-specific SOP categories tied to the regulatory knowledge base.</td>
+            <td class="feature-desc">Structured dropdown of pharmacy-specific SOP categories mapped to the ACP regulatory knowledge base, ensuring generated documents address the correct regulatory context.</td>
             <td><span class="status-dot dot-green"></span>Available</td>
           </tr>
           <tr>
-            <td class="feature-name">Edited SOP Panel</td>
-            <td class="feature-desc">In-app editor to review and modify generated SOPs before saving.</td>
-            <td><span class="status-dot dot-green"></span>Available</td>
-          </tr>
-          <tr>
-            <td class="feature-name">Auto Review Mode</td>
-            <td class="feature-desc">Automated re-scan of an edited SOP to verify compliance after changes.</td>
+            <td class="feature-name">In-App Document Editor</td>
+            <td class="feature-desc">Review and modify generated SOPs, Policies, Checklists, and Log Tables in-app before saving to My Library.</td>
             <td><span class="status-dot dot-green"></span>Available</td>
           </tr>
         </tbody>
@@ -580,7 +735,9 @@
         <div class="module-header-left">
           <h3>3. Inspection Report Intelligence</h3>
         </div>
-        <span class="count-badge">11 features</span>
+        <div class="module-header-right">
+          <span class="count-badge">10 features</span>
+        </div>
       </div>
       <table>
         <thead>
@@ -592,58 +749,53 @@
         </thead>
         <tbody>
           <tr>
-            <td class="feature-name">PDF Inspection Upload</td>
-            <td class="feature-desc">Drag-and-drop upload of ACP inspection reports (PDF, DOCX, scanned images).</td>
+            <td class="feature-name">Inspection Report Upload</td>
+            <td class="feature-desc">Drag-and-drop upload of ACP inspection reports (PDF). DOCX and scanned image support coming soon.</td>
             <td><span class="status-dot dot-green"></span>Available</td>
           </tr>
           <tr>
-            <td class="feature-name">AI Findings Analysis</td>
-            <td class="feature-desc">Automatically parse and categorise findings into Statutory, Regulatory, and Guidance tiers with severity tagging.</td>
+            <td class="feature-name">AI Findings Detection</td>
+            <td class="feature-desc">Automatically detect inspection findings and categorize them using the ACP-aligned <strong>Statutory / Regulatory / Guidance</strong> framework, with severity tagging and priority breakdown.</td>
             <td><span class="status-dot dot-green"></span>Available</td>
           </tr>
           <tr>
             <td class="feature-name">AI Insights &amp; Recommendations</td>
-            <td class="feature-desc">Summary dashboard with key critical findings, priority breakdown, and estimated resolution timeframe.</td>
+            <td class="feature-desc">Summary dashboard surfacing critical findings, resolution priority, and an estimated remediation timeframe across the full report.</td>
             <td><span class="status-dot dot-green"></span>Available</td>
           </tr>
           <tr>
             <td class="feature-name">Issue Tracker</td>
-            <td class="feature-desc">Persistent issue tracker with status management across all detected findings.</td>
+            <td class="feature-desc">Persistent tracker with per-finding status management, actionable subtasks, and High / Medium / Low priority labels across all detected findings.</td>
             <td><span class="status-dot dot-green"></span>Available</td>
           </tr>
           <tr>
-            <td class="feature-name">AI-Generated Subtasks</td>
-            <td class="feature-desc">Per-finding actionable subtask lists with HIGH/MEDIUM/LOW priority labels.</td>
+            <td class="feature-name">Compliant Response Drafting</td>
+            <td class="feature-desc">AI-generated formal response draft for each inspection finding, editable in-app, with configurable tone and format.</td>
             <td><span class="status-dot dot-green"></span>Available</td>
           </tr>
           <tr>
-            <td class="feature-name">Response Drafting</td>
-            <td class="feature-desc">AI-generated formal response drafts for each inspection finding, editable in-app.</td>
-            <td><span class="status-dot dot-green"></span>Available</td>
-          </tr>
-          <tr>
-            <td class="feature-name">Inspection Finding Export (PDF)</td>
-            <td class="feature-desc">Formatted PDF export of the full action report.</td>
-            <td><span class="status-dot dot-green"></span>Available</td>
-          </tr>
-          <tr>
-            <td class="feature-name">Reference Sources Panel</td>
-            <td class="feature-desc">Cited ACP source documents linked per finding with page-level preview.</td>
-            <td><span class="status-dot dot-green"></span>Available</td>
-          </tr>
-          <tr>
-            <td class="feature-name">Q&amp;A Chat on Report</td>
-            <td class="feature-desc">Natural language chat interface to query the uploaded inspection report directly for specific findings and clarifications.</td>
+            <td class="feature-name">Generate SOPs &amp; Documents per Finding</td>
+            <td class="feature-desc">For each finding, generate a compliant SOP and related Policies, Checklists, and Log Tables that directly address the identified gap — ready to save to My Library.</td>
             <td><span class="status-dot dot-green"></span>Available</td>
           </tr>
           <tr>
             <td class="feature-name">Consolidated Response Generator</td>
-            <td class="feature-desc">Generate a single consolidated formal response document across all findings with configurable tone and format selection.</td>
+            <td class="feature-desc">Generate a single consolidated formal response document across all findings for official submission to the ACP.</td>
             <td><span class="status-dot dot-green"></span>Available</td>
           </tr>
           <tr>
-            <td class="feature-name">Anonymized Global Knowledge Base</td>
-            <td class="feature-desc">Pools anonymized inspection reports into a shared database to safely uncover industry-wide compliance patterns.</td>
+            <td class="feature-name">Q&amp;A Chat on Report</td>
+            <td class="feature-desc">Natural language chat interface to query the uploaded inspection report directly — ask about specific findings, referenced standards, or remediation options.</td>
+            <td><span class="status-dot dot-green"></span>Available</td>
+          </tr>
+          <tr>
+            <td class="feature-name">Reference Sources Panel</td>
+            <td class="feature-desc">Cited ACP source documents linked per finding with page-level preview, so every AI recommendation is traceable to a verifiable regulation.</td>
+            <td><span class="status-dot dot-green"></span>Available</td>
+          </tr>
+          <tr>
+            <td class="feature-name">Inspection Report Export</td>
+            <td class="feature-desc">Formatted PDF/DOCX export of the full action report including findings, responses, and generated documents.</td>
             <td><span class="status-dot dot-green"></span>Available</td>
           </tr>
         </tbody>
@@ -656,7 +808,7 @@
         <div class="module-header-left">
           <h3>4. Pre-Inspection Intelligence</h3>
         </div>
-        <span class="count-badge">3 features</span>
+        <span class="count-badge">6 features</span>
       </div>
       <table>
         <thead>
@@ -667,37 +819,49 @@
           </tr>
         </thead>
         <tbody>
+          <tr class="subgroup-row"><td colspan="3">Commons Inspection Intelligence — Alberta-wide patterns from anonymized ACP inspection data</td></tr>
           <tr>
-            <td class="feature-name">Inspector Intelligence Profiles</td>
-            <td class="feature-desc">Behavioural pattern profiles for auditors: audit pacing tendencies, frequently cited regulations, and focus areas.</td>
+            <td class="feature-name">Commons Inspection Patterns</td>
+            <td class="feature-desc">Province-wide ACP inspection themes, finding frequencies, and regulatory focus areas aggregated from anonymized, pooled Alberta inspection data contributed by the AlgoPharma™ library.</td>
             <td><span class="status-dot dot-green"></span>Available</td>
           </tr>
           <tr>
-            <td class="feature-name">AI Predictive Insights</td>
-            <td class="feature-desc">AI-generated predictions of likely findings based on the assigned inspector profile and pharmacy's historical data.</td>
+            <td class="feature-name">Commons Predictive Insights</td>
+            <td class="feature-desc">AI-generated predictions of the most likely findings for the upcoming inspection, based on current provincial inspection trends across all shared anonymized data.</td>
             <td><span class="status-dot dot-green"></span>Available</td>
           </tr>
           <tr>
-            <td class="feature-name">Pre-Inspection Prep Checklists</td>
-            <td class="feature-desc">Dynamically generated preparation checklists tailored to upcoming auditor profiles and known compliance gaps.</td>
+            <td class="feature-name">Commons Prep Checklists</td>
+            <td class="feature-desc">Dynamically generated pre-inspection checklists derived from the most common findings across Alberta pharmacies — know what inspectors are focusing on before they arrive.</td>
+            <td><span class="status-dot dot-green"></span>Available</td>
+          </tr>
+          <tr class="subgroup-row"><td colspan="3">Vault Inspection Intelligence — your pharmacy's own historical inspection patterns</td></tr>
+          <tr>
+            <td class="feature-name">Vault Inspection Patterns</td>
+            <td class="feature-desc">Your pharmacy's own historical inspection patterns, recurring findings, and compliance trend lines built from your uploaded ACP inspection reports.</td>
             <td><span class="status-dot dot-green"></span>Available</td>
           </tr>
           <tr>
-            <td class="feature-name">Global Auditor Trends</td>
-            <td class="feature-desc">View a global summary of themes and common findings across all inspectors nationwide, helping pharmacies proactively identify and prepare for evolving regulatory focus areas.</td>
+            <td class="feature-name">Vault Predictive Insights</td>
+            <td class="feature-desc">AI-generated predictions based on your pharmacy's specific inspection history and known compliance gaps — the issues your pharmacy has faced before, flagged before they recur.</td>
+            <td><span class="status-dot dot-green"></span>Available</td>
+          </tr>
+          <tr>
+            <td class="feature-name">Vault Prep Checklists</td>
+            <td class="feature-desc">Personalized pre-inspection checklists derived from your own inspection history, prioritized by recurrence and regulatory severity.</td>
             <td><span class="status-dot dot-green"></span>Available</td>
           </tr>
         </tbody>
       </table>
     </div>
 
-    <!-- Module 5: ISMP CPhIR -->
+    <!-- Module 5: My Library -->
     <div class="module-block">
       <div class="module-header">
         <div class="module-header-left">
-          <h3>5. ISMP CPhIR Medication Incident Reports</h3>
+          <h3>5. My Library</h3>
         </div>
-        <span class="count-badge">4 features</span>
+        <span class="count-badge">6 features</span>
       </div>
       <table>
         <thead>
@@ -709,54 +873,33 @@
         </thead>
         <tbody>
           <tr>
-            <td class="feature-name">Incident Report Form</td>
-            <td class="feature-desc">ISMP-compliant structured form (date, time, discovered-by, age range, gender, prescriber, pharmacy, province).</td>
+            <td class="feature-name">Document Upload &amp; Management</td>
+            <td class="feature-desc">Upload and manage SOPs, Policies, Checklists, and Log Tables. Organize by document type and pharmacy area. All uploaded documents ground the AI chatbot and LLM responses across the platform.</td>
             <td><span class="status-dot dot-green"></span>Available</td>
           </tr>
           <tr>
-            <td class="feature-name">Telus Kroll CSV Import</td>
-            <td class="feature-desc">Upload Patient List CSV and Rx History CSV to auto-populate incident forms; PII is stripped immediately on import.</td>
+            <td class="feature-name">In-App Document Editor</td>
+            <td class="feature-desc">Edit any uploaded or AI-generated document directly in the platform without leaving the workflow.</td>
             <td><span class="status-dot dot-green"></span>Available</td>
           </tr>
           <tr>
-            <td class="feature-name">Demo Data Load</td>
-            <td class="feature-desc">One-click demo session for onboarding and evaluation.</td>
+            <td class="feature-name">Document Classification</td>
+            <td class="feature-desc">Classify documents by type (SOP, Policy, Checklist, Log Table), regulatory area, and status (Active, Draft, Archived) for structured, audit-ready organization.</td>
             <td><span class="status-dot dot-green"></span>Available</td>
           </tr>
           <tr>
-            <td class="feature-name">AI Report Generation</td>
-            <td class="feature-desc">Generate a formatted ISMP-compliant incident report from form data with AI assistance.</td>
-            <td><span class="status-dot dot-green"></span>Available</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <!-- Module 6: Library -->
-    <div class="module-block">
-      <div class="module-header">
-        <div class="module-header-left">
-          <h3>6. My Library</h3>
-        </div>
-        <span class="count-badge">2 features</span>
-      </div>
-      <table>
-        <thead>
-          <tr>
-            <th style="width:32%">Feature</th>
-            <th style="width:50%">Description</th>
-            <th style="width:18%">Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="feature-name">Private Document Upload</td>
-            <td class="feature-desc">Upload private PDF SOPs and regulation documents to augment the AI knowledge base with automatic indexing.</td>
+            <td class="feature-name">Version History</td>
+            <td class="feature-desc">Full version history for every document — view prior versions to maintain a complete audit trail of all compliance document changes.</td>
             <td><span class="status-dot dot-green"></span>Available</td>
           </tr>
           <tr>
-            <td class="feature-name">Library &amp; Semantic Search</td>
-            <td class="feature-desc">Centralised repository for management of all uploaded documents with full-text and context-aware semantic search.</td>
+            <td class="feature-name">AI Regulation Search</td>
+            <td class="feature-desc">AI-powered search across ACP regulations. Surface the exact standard, section, and requirements relevant to any compliance question — with direct citations to the source regulation.</td>
+            <td><span class="status-dot dot-green"></span>Available</td>
+          </tr>
+          <tr>
+            <td class="feature-name">AI-Grounded Document Responses</td>
+            <td class="feature-desc">All AI chatbot and LLM responses across the platform are grounded in documents stored in My Library alongside ACP regulatory data, ensuring answers reflect the pharmacy's actual current SOPs and policies.</td>
             <td><span class="status-dot dot-green"></span>Available</td>
           </tr>
         </tbody>
@@ -767,7 +910,7 @@
     <div class="module-block">
       <div class="module-header">
         <div class="module-header-left">
-          <h3>7. Platform &amp; Core Infrastructure</h3>
+          <h3>6. Platform &amp; Core Infrastructure</h3>
         </div>
         <span class="count-badge">6 features</span>
       </div>
@@ -815,12 +958,83 @@
     </div>
   </div>
 
+  <!-- 3. ADD-ON MODULES -->
+  <div class="section">
+    <div class="section-label">03 · Add-on Modules</div>
+    <h2>Purpose-Built Compliance Add-ons</h2>
+    <p class="section-desc">Three additional modules in development, each addressing a distinct regulatory domain. Available as add-ons to any Professional or Enterprise plan; activate only what your pharmacy needs.</p>
+
+    <div class="addon-card">
+      <div class="addon-meta">
+        <span class="addon-domain">Quality Improvement &middot; ACP-Aligned</span>
+        <span class="addon-status">Coming</span>
+      </div>
+      <h3>CQI+ Documentation</h3>
+      <p>Generates the ACP-aligned narrative, root-cause analysis, and SMART action plan as a single document for official submission. The module guides the user from incident logging through regulator-ready package in a structured, fielded workflow.</p>
+    </div>
+
+    <div class="addon-card">
+      <div class="addon-meta">
+        <span class="addon-domain">Federal CDSA Compliance</span>
+        <span class="addon-status">Coming</span>
+      </div>
+      <h3>Controlled Drug Intelligence</h3>
+      <p>A retrieval-first record system for purchases, dispensings, reconciliations, and incidents under the Controlled Drugs and Substances Act (CDSA). Designed for the Pharmacy Manager who carries personal accountability under federal regulation, with the documentation surfaced and queryable on demand.</p>
+    </div>
+
+    <div class="addon-card">
+      <div class="addon-meta">
+        <span class="addon-domain">NAPRA Compliance &middot; CSP Records</span>
+        <span class="addon-status">Coming</span>
+      </div>
+      <h3>Sterile Compounding Intelligence</h3>
+      <p>End-to-end documentation for sterile compounding practice, covering NAPRA-specific metadata and a 24-month inspection calendar. Provides a structured, point-in-time record of each component of the compounding process.</p>
+    </div>
+
+  </div>
+
+  <!-- 4. LOOKING AHEAD -->
+  <div class="section">
+    <div class="section-label">04 · Looking Ahead</div>
+    <h2>Roadmap</h2>
+    <p class="section-desc">AlgoPharma&trade; is actively developed. Below is the public-facing direction; specific delivery dates are confirmed with subscribers as features approach release.</p>
+
+    <div class="roadmap-timeline">
+      <div class="roadmap-item">
+        <div class="ver">v1.0 &middot; Available Now</div>
+        <h4>Full ACP Inspection Lifecycle</h4>
+        <p>Six core modules covering pre-inspection preparation, real-time compliance Q&amp;A, and post-inspection response generation, with multi-user accounts and Canadian data residency.</p>
+        <div class="tags">
+          <span class="tag">SOP Intelligence</span>
+          <span class="tag">Inspection Reports</span>
+          <span class="tag">Pre-Inspection</span>
+          <span class="tag">My Library</span>
+        </div>
+      </div>
+      <div class="roadmap-item future">
+        <div class="ver">Next</div>
+        <h4>Add-on Modules</h4>
+        <p>Three purpose-built compliance domains entering staged release: CQI+ Documentation, Controlled Drug Intelligence (CDSA), and Sterile Compounding Intelligence (NAPRA).</p>
+        <div class="tags">
+          <span class="tag">CQI+</span>
+          <span class="tag">CDSA</span>
+          <span class="tag">NAPRA</span>
+        </div>
+      </div>
+      <div class="roadmap-item future">
+        <div class="ver">Future</div>
+        <h4>Multi-Province Coverage</h4>
+        <p>Extending the regulatory knowledge base beyond Alberta to additional provincial colleges, beginning with the most-requested jurisdictions from current subscribers.</p>
+      </div>
+    </div>
+  </div>
+
 </div>
 
 <!-- FOOTER -->
 <div class="doc-footer">
-  <span>AlgoPharma&trade; · v1.0 Product Overview</span>
-  <span>© 2026 Algo-Rythmn Corp. All rights reserved.</span>
+  <span>AlgoPharma&trade; &middot; v1.0 Product Overview &middot; April 30, 2026</span>
+  <span>&copy; 2026 Algo-Rythmn.ai &middot; All rights reserved</span>
 </div>
 
 </body>
