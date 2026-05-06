@@ -1,0 +1,1403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Algo-Rythmn — Document Intelligence Roadmap</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,500;0,600;1,300;1,500;1,600&family=Outfit:wght@300;400;500;600&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FAF8F5;          /* warm off-white */
+  --bg2:#F2EDE6;         /* warm cream for panels/cells */
+  --panel:#FFFFFF;       /* pure white for elevated cards */
+  --line:#E8E1D6;        /* warm light border */
+  --line2:#D8D0C4;       /* slightly darker warm border */
+  --ink:#1C1917;         /* warm near-black */
+  --muted:#78716C;       /* warm grey */
+  --dim:#A8A09A;         /* lighter muted */
+
+  /* Brand accents */
+  --green:#f06113;       /* orange — primary brand */
+  --green-d:#C2410C;
+  --amber:#D97706;
+  --amber-d:#B45309;
+  --rust:#C2410C;
+  --violet:#edb43a;
+
+  /* Sector accents */
+  --s1:#EA580C;  /* PracticeAssist — orange */
+  --s2:#D97706;  /* SafetyAssist   — amber */
+  --s3:#94650d;  /* EnviroAssist   — teal */
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+
+body{
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Outfit', -apple-system, sans-serif;
+  font-weight: 400;
+  line-height: 1.65;
+  letter-spacing: -0.003em;
+  overflow-x: hidden;
+}
+
+/* Subtle warm grain on light background */
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:radial-gradient(rgba(0,0,0,0.018) 1px, transparent 1px);
+  background-size:4px 4px;mix-blend-mode:multiply;
+}
+
+.deck{position:relative;z-index:1;}
+
+/* ─── slide framework ─── */
+.slide{
+  min-height:100vh;
+  padding: 60px 64px;
+  border-bottom:1px solid var(--line);
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+}
+
+@media(max-width:780px){.slide{padding:40px 24px;}}
+
+.slide-num{
+  position:absolute;top:24px;right:32px;
+  font-family:'Space Mono',monospace;
+  font-size:0.6rem;letter-spacing:0.18em;
+  color:var(--dim);
+  text-transform:uppercase;
+}
+
+.slide-num span{color:var(--ink);font-weight:700;}
+
+.kicker{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:'Space Mono',monospace;
+  font-size:0.62rem;letter-spacing:0.18em;
+  text-transform:uppercase;
+  color:var(--green);
+  margin-bottom:20px;
+  padding:6px 14px;
+  border:1px solid rgba(234,88,12,0.35);
+  background:rgba(234,88,12,0.06);
+  width:fit-content;
+}
+
+.kicker.amber{color:var(--amber);border-color:rgba(217,119,6,0.35);background:rgba(217,119,6,0.06);}
+.kicker.dim{color:var(--muted);border-color:var(--line2);background:transparent;}
+
+.kicker::before{
+  content:'';width:5px;height:5px;background:currentColor;border-radius:50%;
+}
+
+h1.slide-h{
+  font-family:'Cormorant Garamond',serif;
+  font-weight:600;
+  font-size: clamp(2rem, 4vw, 3.8rem);
+  line-height:1.1;
+  letter-spacing:-0.01em;
+  margin-bottom:24px;
+  color:var(--ink);
+}
+
+h1.slide-h em{
+  font-style:italic;
+  font-weight:300;
+  color:var(--green);
+}
+
+h1.slide-h b{
+  font-weight:600;
+  font-style:normal;
+}
+
+.deck-h{
+  font-size:clamp(0.9rem,1.1vw,1.05rem);
+  color:var(--muted);
+  font-weight:400;
+  max-width:700px;
+  line-height:1.7;
+}
+
+/* ─── COVER ─── */
+.cover{
+  min-height:100vh;
+  background:
+    radial-gradient(ellipse at 10% 100%, rgba(234,88,12,0.10), transparent 50%),
+    radial-gradient(ellipse at 90% 0%, rgba(217,119,6,0.06), transparent 45%),
+    #1C1917;
+  display:flex;flex-direction:column;
+  justify-content:space-between;
+  padding:48px 64px;
+}
+
+.cover-top{
+  display:flex;justify-content:space-between;
+  align-items:flex-start;
+  border-bottom:1px solid var(--line2);
+  padding-bottom:24px;
+  flex-wrap:wrap;gap:16px;
+}
+
+.brand{
+  font-family:'Cormorant Garamond',serif;
+  font-weight:600;
+  font-size:1.25rem;
+  letter-spacing:0.01em;
+  display:flex;align-items:center;gap:12px;
+}
+.brand-dot{
+  width:9px;height:9px;background:var(--green);border-radius:50%;
+  box-shadow:0 0 10px rgba(234,88,12,0.4);
+}
+.brand b{font-weight:600;color:var(--line);}
+.brand span{color:var(--muted);font-weight:300;}
+
+.cover-meta{
+  font-family:'Space Mono',monospace;
+  font-size:0.6rem;letter-spacing:0.12em;
+  color:var(--muted);text-transform:uppercase;
+  text-align:right;line-height:2;
+}
+.cover-meta b{color:var(--line);font-weight:700;}
+
+.cover-mid{
+  flex:1;
+  display:flex;flex-direction:column;
+  justify-content:center;
+  padding:48px 0;
+  max-width:1100px;
+}
+
+.cover-eyebrow{
+  font-family:'Space Mono',monospace;
+  font-size:0.66rem;letter-spacing:0.22em;
+  color:var(--green);text-transform:uppercase;
+  margin-bottom:28px;
+  display:flex;align-items:center;gap:16px;
+}
+
+.cover-eyebrow::before{content:'';width:36px;height:1px;background:var(--green);flex-shrink:0;}
+
+.cover-title{
+  font-family:'Cormorant Garamond',serif;
+  font-weight:500;
+  font-size: clamp(2.4rem, 5.5vw, 5.2rem);
+  line-height:1.08;
+  letter-spacing:-0.01em;
+  margin-bottom:32px;
+}
+
+.cover-title em{
+  font-style:italic;
+  color:var(--green);
+  font-weight:500;
+}
+
+.cover-title b{
+  font-weight:600;
+  font-style:normal;
+  color:var(--line);
+}
+
+.cover-sub{
+  font-size:1.1rem;
+  color:var(--line);
+  max-width:680px;
+  line-height:1.7;
+  font-weight:400;
+}
+
+.cover-sub b{color:var(--line2);font-weight:500;}
+
+.cover-bottom{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:0;
+  border-top:1px solid var(--line2);
+  padding-top:28px;
+}
+
+@media(max-width:720px){.cover-bottom{grid-template-columns:1fr 1fr;}}
+
+.cb-cell{
+  padding-right:24px;
+  border-right:1px solid var(--line);
+}
+.cb-cell:last-child{border-right:none;padding-right:0;}
+
+.cb-label{
+  font-family:'Space Mono',monospace;
+  font-size:0.56rem;letter-spacing:0.14em;
+  color:var(--muted);text-transform:uppercase;
+  margin-bottom:8px;
+}
+
+.cb-val{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.5rem;
+  color:var(--line);
+  font-weight:500;
+  line-height:1.1;
+}
+.cb-val small{
+  font-family:'Space Mono',monospace;
+  font-size:0.62rem;color:var(--muted);
+  letter-spacing:0.04em;
+  display:block;margin-top:5px;
+  font-weight:400;
+}
+
+/* ─── COVER DARK THEME: warm charcoal (Calgary identity) ─── */
+.cover .cover-title{color:#F0EBE3;}
+.cover .cover-title b{color:#FFFFFF;}
+.cover .cover-sub{color:rgba(240,235,227,0.72);}
+.cover .cover-sub b{color:#F0EBE3;}
+.cover .brand b{color:#F0EBE3;}
+.cover .brand span{color:rgba(240,235,227,0.48);}
+.cover .cover-meta{color:rgba(240,235,227,0.48);}
+.cover .cover-meta b{color:#F0EBE3;}
+.cover .cb-val{color:#F0EBE3;}
+.cover .cb-label{color:rgba(240,235,227,0.45);}
+.cover .cb-val small{color:rgba(240,235,227,0.45);}
+.cover .cover-top{border-bottom-color:rgba(240,235,227,0.1);}
+.cover .cover-bottom{border-top-color:rgba(240,235,227,0.1);}
+.cover .cb-cell{border-right-color:rgba(240,235,227,0.1);}
+
+/* ─── EXEC SUMMARY (slide 2) ─── */
+.exec-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:48px;
+  margin-top:32px;
+}
+@media(max-width:900px){.exec-grid{grid-template-columns:1fr;}}
+
+.exec-l p{
+  font-size:1.05rem;color:var(--ink);
+  line-height:1.75;font-weight:400;
+  margin-bottom:18px;
+}
+.exec-l p b{color:var(--green);font-weight:600;}
+
+.exec-r{
+  background:var(--panel);
+  border:1px solid var(--line2);
+  padding:28px 32px;
+  border-left:3px solid var(--green);
+  box-shadow:0 2px 12px rgba(0,0,0,0.06);
+}
+
+.exec-r-title{
+  font-family:'Space Mono',monospace;
+  font-size:0.6rem;letter-spacing:0.18em;
+  color:var(--muted);text-transform:uppercase;
+  margin-bottom:18px;
+}
+
+.exec-r ol{
+  list-style:none;counter-reset:exec;
+}
+.exec-r li{
+  counter-increment:exec;
+  padding:14px 0;
+  border-bottom:1px solid var(--line);
+  display:flex;gap:18px;
+  align-items:flex-start;
+}
+.exec-r li:last-child{border-bottom:none;}
+
+.exec-r li::before{
+  content:counter(exec,decimal-leading-zero);
+  font-family:'Space Mono',monospace;
+  font-size:0.66rem;letter-spacing:0.06em;
+  color:var(--green);
+  font-weight:700;flex-shrink:0;
+  padding-top:3px;
+}
+
+.exec-r li strong{
+  color:var(--ink);font-weight:500;display:block;
+  font-size:1rem;margin-bottom:2px;
+}
+.exec-r li span{
+  color:var(--muted);font-size:0.88rem;
+  font-weight:400;
+}
+
+/* ─── THREE-SECTOR OVERVIEW ─── */
+.method-row{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:1px;background:var(--line2);
+  margin-top:32px;
+  border:1px solid var(--line2);
+}
+@media(max-width:880px){.method-row{grid-template-columns:1fr 1fr;}}
+
+.method-cell{
+  background:var(--bg);
+  padding:24px 22px;
+  min-height:180px;
+}
+
+.method-cell.pass{background:var(--panel);}
+.method-cell.fail{background:var(--bg2);opacity:0.55;}
+
+.mc-num{
+  font-family:'Space Mono',monospace;
+  font-size:0.58rem;letter-spacing:0.14em;
+  color:var(--muted);text-transform:uppercase;
+  margin-bottom:6px;
+}
+
+.mc-name{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.3rem;font-weight:600;
+  color:var(--ink);margin-bottom:10px;
+  line-height:1.1;
+}
+
+.mc-reason{
+  font-size:0.82rem;
+  color:var(--muted);
+  line-height:1.6;
+  font-weight:400;
+}
+.mc-reason b{color:var(--ink);font-weight:500;}
+
+/* ─── SELECTION REASONS ─── */
+.select-reasons{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1px;
+  background:var(--line2);
+  border:1px solid var(--line2);
+  margin-top:36px;
+}
+@media(max-width:900px){.select-reasons{grid-template-columns:1fr;}}
+
+.sr-panel{
+  background:var(--panel);
+  padding:28px 28px 32px;
+}
+
+.sr-head{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.35rem;
+  font-weight:600;
+  color:var(--ink);
+  margin-bottom:6px;
+  line-height:1.1;
+}
+
+.sr-verdict{
+  display:inline-block;
+  font-family:'Space Mono',monospace;
+  font-size:0.52rem;letter-spacing:0.16em;
+  text-transform:uppercase;
+  padding:3px 10px;
+  border:1px solid;
+  margin-bottom:20px;
+}
+.sr-verdict.green{color:var(--green);border-color:rgba(234,88,12,0.4);background:rgba(234,88,12,0.07);}
+
+.sr-list{list-style:none;}
+.sr-panel .mc-reason{
+  font-size:0.88rem;
+  color:var(--ink);
+  line-height:1.6;
+  font-weight:400;
+  margin-bottom:18px;
+  padding-bottom:18px;
+  border-bottom:1px solid var(--line);
+}
+.sr-list li{
+  padding:12px 0;
+  border-bottom:1px solid var(--line);
+  font-size:0.86rem;
+  line-height:1.6;
+  color:var(--muted);
+  font-weight:400;
+}
+.sr-list li:last-child{border-bottom:none;}
+.sr-list li b{
+  display:block;
+  font-family:'Space Mono',monospace;
+  font-size:0.56rem;letter-spacing:0.12em;
+  text-transform:uppercase;
+  font-weight:700;
+  color:var(--ink);
+  margin-bottom:4px;
+}
+.sr-panel.green .sr-list li b{color:var(--s1);}
+.sr-panel.amber .sr-list li b{color:var(--s2);}
+.sr-panel.sage .sr-list li b{color:var(--s3);}
+
+/* ─── SECTOR DEEP-DIVE SLIDE ─── */
+.sector-slide{
+  background:linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
+}
+
+.sector-hero{
+  display:grid;
+  grid-template-columns:1.4fr 1fr;
+  gap:48px;
+  align-items:flex-end;
+  padding-bottom:32px;
+  border-bottom:1px solid var(--line2);
+}
+
+@media(max-width:980px){.sector-hero{grid-template-columns:1fr;}}
+
+.sector-id{
+  font-family:'Space Mono',monospace;
+  font-size:0.62rem;letter-spacing:0.16em;
+  color:var(--muted);text-transform:uppercase;
+  margin-bottom:16px;
+  display:flex;align-items:center;gap:14px;
+}
+.sector-id::before{content:'';width:36px;height:1px;background:currentColor;}
+.sector-id b{color:var(--ink);font-weight:700;}
+
+.sector-name{
+  font-family:'Cormorant Garamond',serif;
+  font-size: clamp(2.4rem, 5vw, 4.2rem);
+  font-weight:300;
+  line-height:1.02;
+  letter-spacing:-0.01em;
+  margin-bottom:20px;
+}
+.sector-name b{font-weight:600;}
+.sector-name em{font-style:italic;}
+
+.sector-name.s1 em{color:var(--s1);}
+.sector-name.s2 em{color:var(--s2);}
+.sector-name.s3 em{color:var(--s3);}
+
+.sector-tag{
+  font-size:1rem;color:var(--muted);
+  line-height:1.65;font-weight:400;
+  max-width:600px;
+}
+.sector-tag b{color:var(--ink);font-weight:500;}
+
+.sector-stats{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:1px;
+  background:var(--line2);
+  border:1px solid var(--line2);
+  box-shadow:0 2px 12px rgba(0,0,0,0.06);
+}
+
+.ss-cell{
+  background:var(--panel);
+  padding:20px 22px;
+}
+
+.ss-label{
+  font-family:'Space Mono',monospace;
+  font-size:0.54rem;letter-spacing:0.14em;
+  color:var(--muted);text-transform:uppercase;
+  margin-bottom:8px;
+}
+
+.ss-val{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.9rem;font-weight:500;
+  line-height:1;color:var(--ink);
+}
+.ss-val small{
+  font-family:'Space Mono',monospace;
+  font-size:0.58rem;font-weight:400;
+  color:var(--muted);letter-spacing:0.04em;
+  display:block;margin-top:5px;
+}
+
+/* sector body */
+.sector-body{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:0;
+  margin-top:36px;
+  border:1px solid var(--line2);
+  background:var(--line2);
+}
+
+.sb-panel.span-full{
+  grid-column: 1 / -1;
+  border-top:1px solid var(--line2);
+}
+
+@media(max-width:880px){.sector-body{grid-template-columns:1fr;}}
+
+.sb-panel{
+  background:var(--panel);
+  padding:28px 32px;
+}
+
+.sb-title{
+  font-family:'Space Mono',monospace;
+  font-size:0.58rem;letter-spacing:0.16em;
+  color:var(--muted);text-transform:uppercase;
+  margin-bottom:18px;
+  display:flex;align-items:center;gap:10px;
+}
+.sb-title::after{content:'';flex:1;height:1px;background:var(--line);}
+.sb-title.green{color:var(--s1);}
+.sb-title.amber{color:var(--s2);}
+.sb-title.sage{color:var(--s3);}
+
+.sb-panel p{
+  font-size:0.94rem;color:var(--ink);
+  line-height:1.7;font-weight:400;
+  margin-bottom:14px;
+}
+.sb-panel p:last-child{margin-bottom:0;}
+.sb-panel p b{color:var(--ink);font-weight:600;}
+
+.sb-panel .hl{
+  background:rgba(234,88,12,0.07);
+  border-left:2px solid var(--s1);
+  padding:14px 18px;
+  font-size:0.9rem;
+  color:var(--ink);
+  line-height:1.6;
+  margin-bottom:14px;
+}
+.sb-panel .hl.amber{background:rgba(217,119,6,0.07);border-left-color:var(--s2);}
+.sb-panel .hl.sage{background:rgba(13,148,136,0.07);border-left-color:var(--s3);}
+
+.sb-panel ul{list-style:none;}
+
+.sb-panel ul li{
+  padding:10px 0;
+  border-bottom:1px solid var(--line);
+  font-size:0.88rem;
+  line-height:1.55;
+  color:var(--ink);
+  font-weight:400;
+  display:flex;gap:12px;
+  align-items:flex-start;
+}
+.sb-panel ul li:last-child{border-bottom:none;}
+
+.sb-panel ul li::before{
+  content:'';width:5px;height:5px;
+  background:var(--dim);
+  border-radius:50%;
+  flex-shrink:0;margin-top:9px;
+}
+
+.sb-panel ul.green li::before{background:var(--s1);}
+.sb-panel ul.amber li::before{background:var(--s2);}
+.sb-panel ul.sage li::before{background:var(--s3);}
+
+.sb-panel ul li b{font-weight:600;color:var(--ink);}
+.sb-panel ul li span{color:var(--muted);}
+
+.tag-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;}
+.tag{
+  font-family:'Space Mono',monospace;
+  font-size:0.56rem;letter-spacing:0.08em;
+  text-transform:uppercase;
+  padding:4px 9px;
+  border:1px solid var(--line2);
+  color:var(--muted);
+}
+
+
+
+/* ─── PRODUCT SECTION ─── */
+.product-frame{
+  margin-top:32px;
+  display:grid;
+  grid-template-columns:1.15fr 1fr;
+  gap:0;
+  border:1px solid var(--line2);
+  box-shadow:0 2px 16px rgba(0,0,0,0.07);
+}
+@media(max-width:980px){.product-frame{grid-template-columns:1fr;}}
+
+.pf-l{
+  padding:36px 40px;
+  background:var(--bg2);
+  border-right:1px solid var(--line2);
+}
+
+@media(max-width:980px){.pf-l{border-right:none;border-bottom:1px solid var(--line2);}}
+
+.pf-r{
+  padding:36px 40px;
+  background:var(--panel);
+}
+
+.pf-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.75rem;font-weight:500;
+  margin-bottom:18px;
+  line-height:1.15;
+  color:var(--ink);
+}
+.pf-title em{font-style:italic;color:var(--green);}
+
+.pf-l p{
+  font-size:0.94rem;color:var(--ink);
+  line-height:1.7;font-weight:400;
+  margin-bottom:14px;
+}
+
+/* mock chat preview — intentionally dark to look like a UI */
+.chat-mock{
+  background:#1C1917;
+  border:1px solid #2E2A26;
+  border-radius:0;
+  font-family:'Space Mono',monospace;
+  font-size:0.72rem;
+  line-height:1.55;
+  margin-top:16px;
+  overflow:hidden;
+}
+.chat-head{
+  padding:8px 14px;
+  background:#252120;
+  border-bottom:1px solid #2E2A26;
+  font-size:0.58rem;letter-spacing:0.14em;
+  color:#78716C;text-transform:uppercase;
+  display:flex;justify-content:space-between;align-items:center;
+}
+.chat-head b{color:#EA580C;}
+.chat-body{padding:14px;}
+.chat-q{
+  color:#F5F0E8;
+  padding:10px 12px;
+  background:rgba(234,88,12,0.10);
+  border-left:2px solid #EA580C;
+  margin-bottom:12px;
+}
+.chat-q::before{content:'> ';color:#EA580C;}
+.chat-a{color:#78716C;padding:0 12px 4px;font-size:0.68rem;line-height:1.65;}
+.chat-a b{color:#E7E0D8;font-weight:700;}
+.chat-a .src{
+  display:inline-block;font-size:0.52rem;
+  color:#EA580C;border:1px solid rgba(234,88,12,0.4);
+  padding:1px 5px;margin-left:4px;letter-spacing:0.08em;text-transform:uppercase;
+}
+
+/* ─── ROADMAP ─── */
+.roadmap{margin-top:32px;position:relative;}
+
+.roadmap-line{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:1px;
+  background:var(--line2);
+  border:1px solid var(--line2);
+  position:relative;
+}
+
+@media(max-width:780px){.roadmap-line{grid-template-columns:1fr 1fr;}}
+
+.rm-step{
+  background:var(--panel);
+  padding:28px 24px;
+  position:relative;
+  min-height:200px;
+}
+
+.rm-num{
+  font-family:'Space Mono',monospace;
+  font-size:0.58rem;letter-spacing:0.16em;
+  color:var(--green);text-transform:uppercase;
+  margin-bottom:8px;
+}
+
+.rm-when{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.3rem;font-weight:600;
+  margin-bottom:14px;
+  line-height:1.1;
+  color:var(--ink);
+}
+.rm-when small{
+  font-family:'Space Mono',monospace;
+  font-size:0.58rem;color:var(--muted);
+  font-weight:400;letter-spacing:0.06em;
+  display:block;text-transform:uppercase;
+  margin-top:4px;
+}
+
+.rm-desc{
+  font-size:0.86rem;color:var(--muted);
+  line-height:1.6;font-weight:400;
+}
+.rm-desc b{color:var(--ink);font-weight:600;}
+
+/* ─── CLOSING SLIDE ─── */
+.cta-slide{
+  background:
+    radial-gradient(ellipse at 70% 30%, rgba(234,88,12,0.06), transparent 60%),
+    var(--bg);
+}
+
+.cta-grid{
+  display:grid;
+  grid-template-columns:1.3fr 1fr;
+  gap:48px;
+  margin-top:28px;
+  align-items:flex-start;
+}
+@media(max-width:980px){.cta-grid{grid-template-columns:1fr;}}
+
+.cta-l p{
+  font-size:1.05rem;color:var(--ink);
+  line-height:1.75;font-weight:400;
+  margin-bottom:18px;
+}
+.cta-l p b{color:var(--green);font-weight:600;}
+
+.cta-r{
+  background:var(--panel);
+  border:1px solid var(--line2);
+  border-top:3px solid var(--green);
+  padding:32px;
+  box-shadow:0 2px 16px rgba(0,0,0,0.07);
+}
+
+.cta-r-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.5rem;font-weight:500;
+  margin-bottom:18px;line-height:1.2;
+}
+.cta-r-title em{font-style:italic;color:var(--green);}
+
+.ask-list{list-style:none;}
+.ask-list li{
+  padding:14px 0;
+  border-bottom:1px solid var(--line);
+  font-size:0.94rem;font-weight:400;
+  line-height:1.6;
+  color:var(--ink);
+}
+.ask-list li:last-child{border-bottom:none;}
+.ask-list li b{
+  color:var(--green);
+  display:block;
+  font-family:'Space Mono',monospace;
+  font-size:0.58rem;letter-spacing:0.12em;
+  text-transform:uppercase;
+  font-weight:700;
+  margin-bottom:5px;
+}
+
+.contact-block{
+  margin-top:36px;
+  padding-top:24px;
+  border-top:1px solid var(--line2);
+  display:flex;flex-wrap:wrap;
+  gap:32px;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.contact-l{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.5rem;font-weight:500;line-height:1.2;
+}
+.contact-l small{
+  display:block;
+  font-family:'Space Mono',monospace;
+  font-size:0.6rem;color:var(--muted);
+  font-weight:400;letter-spacing:0.14em;
+  text-transform:uppercase;
+  margin-top:6px;
+}
+
+.btn-primary{
+  display:inline-block;
+  font-family:'Space Mono',monospace;
+  font-size:0.66rem;letter-spacing:0.16em;
+  text-transform:uppercase;
+  padding:14px 26px;
+  background:var(--green);
+  color:#FFFFFF;
+  font-weight:700;
+  border:none;
+  text-decoration:none;
+  transition:opacity .15s ease, transform .15s ease;
+}
+.btn-primary:hover{opacity:0.88;transform:translateY(-1px);}
+
+/* ─── FOOTER ─── */
+footer{
+  padding:28px 64px;
+  background:var(--bg2);
+  border-top:1px solid var(--line2);
+  display:flex;justify-content:space-between;
+  flex-wrap:wrap;gap:16px;
+  font-family:'Space Mono',monospace;
+  font-size:0.58rem;letter-spacing:0.1em;
+  color:var(--muted);text-transform:uppercase;
+}
+
+@media(max-width:780px){footer{padding:24px;}}
+
+/* in-page reveal */
+@keyframes rise{
+  from{opacity:0;transform:translateY(10px);}
+  to{opacity:1;transform:translateY(0);}
+}
+.slide > *{animation:rise .45s ease both;}
+.slide > *:nth-child(2){animation-delay:.05s;}
+.slide > *:nth-child(3){animation-delay:.1s;}
+.slide > *:nth-child(4){animation-delay:.15s;}
+
+</style>
+</head>
+<body>
+
+<div class="deck">
+
+<!-- ════════════════════════════════════════════
+     SLIDE 1 — COVER
+     ════════════════════════════════════════════ -->
+<section class="slide cover">
+  <div class="cover-top">
+    <div class="brand">
+      <span class="brand-dot"></span>
+      <b>Algo-Rythmn</b><span>· document intelligence</span>
+    </div>
+    <div class="cover-meta">
+      Document Intelligence Roadmap<br>
+      <b>Prepared May 2026</b><br>
+      Our story &amp; plan
+    </div>
+  </div>
+
+  <div class="cover-mid">
+    <div class="cover-eyebrow">From pharmacy to document intelligence at scale</div>
+    <h1 class="cover-title">
+      Pharmacy proved it.<br>
+      <em>Now we scale</em> document intelligence
+      <b>across Calgary's regulated sectors.</b>
+    </h1>
+    <p class="cover-sub">
+      AlgoPharma™ turns pharmacy compliance docs into <b>instant, audit-grade answers</b>. We proved the model works. Now we're growing this engine into every regulated profession that carries the same burden — published corpus, recurring inspection, accountable operator. <b>This is our roadmap.</b>
+    </p>
+  </div>
+
+  <div class="cover-bottom">
+    <div class="cb-cell">
+      <div class="cb-label">Proven Market</div>
+      <div class="cb-val">Pharmacy<small>Alberta · ACP regulated</small></div>
+    </div>
+    <div class="cb-cell">
+      <div class="cb-label">New Targets</div>
+      <div class="cb-val">3 Sectors<small>Calgary &amp; area</small></div>
+    </div>
+    <div class="cb-cell">
+      <div class="cb-label">Replication</div>
+      <div class="cb-val">90 / 65 / 60%<small>Architectural reuse</small></div>
+    </div>
+    <div class="cb-cell">
+      <div class="cb-label">Next Milestone</div>
+      <div class="cb-val">Q3 2026<small>First pilots, 3 sectors</small></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     SLIDE 2 — WHY THIS, WHY NOW
+     ════════════════════════════════════════════ -->
+<section class="slide">
+  <div class="slide-num"><span>02</span> / 09 · the thesis</div>
+  <div class="kicker">The thesis</div>
+  <h1 class="slide-h">
+    Every regulator in Calgary <em>already runs an inspection cycle.</em><br>
+    <b>Nobody runs an AI Q&amp;A layer over the documents that cycle inspects.</b>
+  </h1>
+  <p class="deck-h">Published corpus. Recurring inspection. Personally accountable operator. That pattern repeats in three Calgary sectors — stress-tested against five criteria.</p>
+
+  <div class="exec-grid">
+    <div class="exec-l">
+      <p>Compliance buyers don't pay for "AI." They pay for <b>"answer this question against my policy in 6 seconds before the inspector walks in."</b></p>
+      <p>That buyer exists in every regulated profession with a published corpus, a recurring inspection cycle, and an owner-operator who can sign a cheque. <b>Calgary is the densest concentration of that buyer in Canada.</b></p>
+    </div>
+
+    <div class="exec-r">
+      <div class="exec-r-title">// The five tests every sector must pass</div>
+      <ol>
+        <li><div><strong>AlgoPharma™ replication</strong><span>Architecture, doc schema, and Q&amp;A patterns reused — not rebuilt from zero.</span></div></li>
+        <li><div><strong>Defensible moat</strong><span>Regulatory corpus that compounds value, not undercuttable by Lexis or generic LLMs.</span></div></li>
+        <li><div><strong>Short sales cycle</strong><span>Owner-operator buyer, not committee procurement. Decision in weeks, not quarters.</span></div></li>
+        <li><div><strong>Calgary density</strong><span>Enough operators within a 60-minute drive to walk in cold, demo, and close.</span></div></li>
+        <li><div><strong>Hard ROI hook</strong><span>License risk, premium reduction, or audit penalty — quantifiable, not aspirational.</span></div></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     SLIDE 3 — THREE SECTORS
+     ════════════════════════════════════════════ -->
+<section class="slide">
+  <div class="slide-num"><span>03</span> / 09 · the opportunity</div>
+  <div class="kicker dim">// Beyond pharmacy · Three new markets</div>
+  <h1 class="slide-h">
+    Pharmacy proved the model. <em>Three more sectors are ready.</em>
+  </h1>
+  <p class="deck-h">Regulated Health Professions, OHS, and Environmental Consulting share the same document-heavy compliance burden, inspection-driven urgency, and absence of a purpose-built Q&amp;A layer. Three distinct expansion opportunities in Calgary — same engine, different corpus.</p>
+
+  <div class="select-reasons">
+
+    <!-- PracticeAssist -->
+    <div class="sr-panel green">
+      <div class="mc-num">01 · Regulated Health Professions</div>
+      <div class="sr-head">PracticeAssist</div>
+      <p class="mc-reason"><b>Highest replication (~90%).</b> Same provincial-college inspection model as ACP. Eight Alberta health colleges run identical playbooks. One corpus build × N professions.</p>
+      <ul class="sr-list">
+        <li><b>Architecture reuse · ~90%</b>Corpus swaps across 8 Alberta health colleges — same engine, no ground-up rebuild.</li>
+        <li><b>Defensible moat</b>First mover owns the corpus. Clinics 2–500 inherit it at zero marginal build cost.</li>
+        <li><b>Short sales cycle · 2–6 weeks</b>Clinic principal is the sole buyer — no committee, no RFP, no IT review.</li>
+        <li><b>Calgary density · ~4,800 practices</b>Dental, optometry, physio, chiro clustered along Macleod Trail — walkable cold-demo territory.</li>
+        <li><b>Hard ROI hook · license risk</b>One inspection finding can trigger suspension. The near-miss alone pays for years of subscription.</li>
+      </ul>
+    </div>
+
+    <!-- SafetyAssist -->
+    <div class="sr-panel amber">
+      <div class="mc-num">02 · OHS</div>
+      <div class="sr-head">SafetyAssist</div>
+      <p class="mc-reason"><b>Calgary is the highest-density OHS market in Canada.</b> WCB-Alberta PIR program offers up to 20% premium refund — a hard, dollar-quantified ROI hook. Energy services, construction, manufacturing all clustered here.</p>
+      <ul class="sr-list">
+        <li><b>Architecture reuse · ~65%</b>OHS Act + WCB corpus is publicly published and well-structured. Q&amp;A engine transfers directly; remaining work is corpus ingestion only.</li>
+        <li><b>Defensible moat</b>PIR demands annual recertification. Corpus grows with every OHS Code amendment — generic LLMs can't match a curated regulatory layer.</li>
+        <li><b>Short sales cycle · 4–8 weeks</b>HSE Manager + VP Ops close within a single COR audit cycle. No board approval, no RFP.</li>
+        <li><b>Calgary density · highest in Canada</b>Deerfoot Corridor + Stoney Trail: single highest concentration of OHS-liable operators on the continent.</li>
+        <li><b>Hard ROI hook · WCB PIR refund up to 20%</b>$250K WCB premium → $50K refund. SafetyAssist at $3K/month pays for itself 14×.</li>
+      </ul>
+    </div>
+
+    <!-- EnviroAssist -->
+    <div class="sr-panel sage">
+      <div class="mc-num">03 · Env. Consulting</div>
+      <div class="sr-head">EnviroAssist</div>
+      <p class="mc-reason"><b>AER OneStop + Directive 001 (Feb 2025) created a fresh document obligation.</b> Calgary HQs the AER and the consulting firms that file against it. Phase I/II ESA Standard is a clean ingestable corpus.</p>
+      <ul class="sr-list">
+        <li><b>Architecture reuse · ~60%</b>D001 + Phase I/II ESA Standard are bounded corpora. Q&amp;A engine transfers at ~60%; remaining work is AER-specific parsing only.</li>
+        <li><b>Defensible moat</b>Feb 2025 D001 created fresh obligations competitors haven't indexed. Calgary HQs both the AER and the consultancies that file against it.</li>
+        <li><b>Short sales cycle · 6–10 weeks</b>AER submission deadlines replace procurement formality — no RFP, no legal review, one signature.</li>
+        <li><b>Calgary density · AER HQ + top consultancies</b>AER is headquartered in Calgary. Top 20 environmental consultancies are in Bow Valley Square — five cold calls, five hot leads.</li>
+        <li><b>Hard ROI hook · SSLA penalty exposure</b>Spill-reporting penalties reach $500K+. Phase I filing errors trigger costly Phase II escalations — quantifiable in conversation one.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     SLIDE 4 — SECTOR 1: PracticeAssist
+     ════════════════════════════════════════════ -->
+<section class="slide sector-slide">
+  <div class="slide-num"><span>04</span> / 09 · sector 1 of 3</div>
+
+  <div class="sector-hero">
+    <div>
+      <div class="sector-id">Sector 01 · <b>Regulated Health Professions</b></div>
+      <h1 class="sector-name s1">
+        <em>PracticeAssist.</em><br>
+        <b>One playbook,</b> seven Alberta colleges.
+      </h1>
+      <p class="sector-tag">
+        7 Alberta health colleges — optometrists, dentists, physios, chiros, psychologists, podiatrists, OTs — each running <b>practice inspections and continuing-competence audits</b> against published standards. AlgoPharma™ architecture re-runs at ~90% with corpus swaps.
+      </p>
+    </div>
+    <div class="sector-stats">
+      <div class="ss-cell">
+        <div class="ss-label">Calgary operators</div>
+        <div class="ss-val">~4,800<small>practices &amp; clinics</small></div>
+      </div>
+      <div class="ss-cell">
+        <div class="ss-label">Replication</div>
+        <div class="ss-val">~90%<small>vs. AlgoPharma™</small></div>
+      </div>
+      <div class="ss-cell">
+        <div class="ss-label">First-product TAM</div>
+        <div class="ss-val">$58M<small>Alberta, 7 professions</small></div>
+      </div>
+      <div class="ss-cell">
+        <div class="ss-label">Sales cycle</div>
+        <div class="ss-val">2–6 wks<small>owner-operator</small></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sector-body">
+    <div class="sb-panel">
+      <div class="sb-title green">// Why no competitor exists</div>
+      <p>
+        Practice management software (Dentrix, Jane App, OD Link) handles <b>scheduling and billing</b>. Compliance is a binder, a SharePoint folder, or a USB stick.
+      </p>
+      <p>
+        US legal-AI tools (Harvey, Lexis+) are built for case-law, not Q&amp;A against <b>Alberta college standards</b>. No Canadian platform exists for this gap.
+      </p>
+      <div class="hl">
+        <b>The opening:</b> ACO updated Standards in 2025. New CDCP billing rules added fresh compliance layers with no incumbent Q&amp;A tool.
+      </div>
+    </div>
+
+    <div class="sb-panel">
+      <div class="sb-title green">// Three anchor questions</div>
+      <ul class="green">
+        <li><div><b>"Is our IPAC log audit-ready against the RCDSO 2025 standard?"</b></div></li>
+        <li><div><b>"Does our CDCP billing workflow match Federal billing rules?"</b></div></li>
+        <li><div><b>"What CE hours is each licensed staffer short before renewal?"</b></div></li>
+      </ul>
+    </div>
+
+    <div class="sb-panel">
+      <div class="sb-title green">// The moat</div>
+      <p>
+        Corpus built <b>once per college</b>, amortised across every clinic. First dental customer funds the CDSA build — clinics 2–500 inherit it free.
+      </p>
+      <p><b>The first mover in each profession owns the corpus.</b> A multi-disciplinary clinic covers three colleges in one product — no single-discipline incumbent can match that.</p>
+    </div>
+
+    <div class="sb-panel">
+      <div class="sb-title green">// Calgary target</div>
+      <p><b>Owner-operator clinics, 2–10 staff</b> &mdash; <b>~340 dental, ~180 optometry, ~220 physio clinics</b> in Calgary. Owner-operator decision &mdash; fast cycle, direct relationship, high retention.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     SLIDE 5 — SECTOR 2: SafetyAssist
+     ════════════════════════════════════════════ -->
+<section class="slide sector-slide">
+  <div class="slide-num"><span>05</span> / 09 · sector 2 of 3</div>
+
+  <div class="sector-hero">
+    <div>
+      <div class="sector-id">Sector 02 · <b>Occupational Health &amp; Safety</b></div>
+      <h1 class="sector-name s2">
+        <em>SafetyAssist.</em><br>
+        <b>WCB-Alberta pays the customer</b> to buy this.
+      </h1>
+      <p class="sector-tag">
+        Calgary energy services, construction, and manufacturing all run an OHSMS for the <b>PIR program — up to 20% WCB premium refund</b>. Intelex, Cority, and VelocityEHS capture incidents but cannot answer <em>"does our written SOP meet OHS Code Part 5?"</em>
+      </p>
+    </div>
+    <div class="sector-stats">
+      <div class="ss-cell">
+        <div class="ss-label">Calgary self-insured employers</div>
+        <div class="ss-val">~3,200<small>20+ workers</small></div>
+      </div>
+      <div class="ss-cell">
+        <div class="ss-label">PIR refund ceiling</div>
+        <div class="ss-val">20%<small>of WCB premium</small></div>
+      </div>
+      <div class="ss-cell">
+        <div class="ss-label">Pilot ROI</div>
+        <div class="ss-val">3–6 mo<small>premium recovery</small></div>
+      </div>
+      <div class="ss-cell">
+        <div class="ss-label">Replication</div>
+        <div class="ss-val">~60%<small>vs. AlgoPharma™</small></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sector-body">
+    <div class="sb-panel">
+      <div class="sb-title amber">// Why no competitor exists</div>
+      <p>
+        Intelex, Cority, VelocityEHS sell <b>structured EHS platforms</b> — incident logs, forms, dashboards. None let a safety manager ask plain-language questions against their own <b>written OHSMS and safe work procedures</b>.
+      </p>
+      <div class="hl amber">
+        <b>The opening:</b> 20% PIR refund on a $250K premium = $50K. <b>SafetyAssist at $3K/month pays for itself 14×</b> on score improvement alone.
+      </div>
+      <p style="font-style:italic;color:var(--ink);border-left:2px solid var(--s2);padding:10px 14px;background:rgba(232,163,65,0.06);margin-top:14px;">
+        "SafetyAssist is the <b>document Q&amp;A layer Cority does not have</b> — an add-on, not a replacement."
+      </p>
+    </div>
+
+    <div class="sb-panel">
+      <div class="sb-title amber">// Three questions a safety manager asks</div>
+      <ul class="amber">
+        <li><div><b>"Does our confined-space entry SWP meet OHS Code Part 5 §44?"</b></div></li>
+        <li><div><b>"Where in my OHSMS am I weakest on the COR audit's 9 elements?"</b></div></li>
+        <li><div><b>"Has my fall-protection training kept up with OHS Code amendments since 2024?"</b></div></li>
+      </ul>
+    </div>
+
+    <div class="sb-panel">
+      <div class="sb-title amber">// The moat</div>
+      <p>
+        WCB PIR refund is <b>quantified on the customer's own premium</b> — no abstract ROI story. The corpus re-ingests every OHS Code amendment within 24 hrs; all customers inherit the update instantly.
+      </p>
+      <p><b>The first safety team to map their OHSMS in SafetyAssist sets the benchmark</b> — gap patterns from every audit cycle feed the detection layer for everyone who follows.</p>
+    </div>
+
+    <div class="sb-panel">
+      <div class="sb-title amber">// Calgary target</div>
+      <p><b>Self-insured energy services + mid-construction</b> &mdash; <b>~150 mid-size oilfield-services firms</b> in SE Calgary + Airdrie. VP Ops + HSE Manager decide within a single COR audit cycle &mdash; clear, quantifiable ROI conversation.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     SLIDE 6 — SECTOR 3: EnviroAssist
+     ════════════════════════════════════════════ -->
+<section class="slide sector-slide">
+  <div class="slide-num"><span>06</span> / 09 · sector 3 of 3</div>
+
+  <div class="sector-hero">
+    <div>
+      <div class="sector-id">Sector 03 · <b>Environmental Consulting</b></div>
+      <h1 class="sector-name s3">
+        <em>EnviroAssist.</em><br>
+        <b>The AER changed the rules</b> in February 2025.
+      </h1>
+      <p class="sector-tag">
+        AER <b>D001 (Feb 2025) and SED 004 (July 2025)</b> rewrote Phase I/II ESA, RoSC, and SSLA filing requirements via OneStop. <b>Calgary HQs the AER and the country's largest concentration of environmental consultants</b> — with 18 months of backlogged filings and no AI tool to query them.
+      </p>
+    </div>
+    <div class="sector-stats">
+      <div class="ss-cell">
+        <div class="ss-label">Calgary env. consulting firms</div>
+        <div class="ss-val">~180<small>mid-size, AER-active</small></div>
+      </div>
+      <div class="ss-cell">
+        <div class="ss-label">AER directives updated 2025</div>
+        <div class="ss-val">7<small>incl. D001, D011, D068, D088</small></div>
+      </div>
+      <div class="ss-cell">
+        <div class="ss-label">Avg cost per redo</div>
+        <div class="ss-val">$40–80K<small>per failed RoSC</small></div>
+      </div>
+      <div class="ss-cell">
+        <div class="ss-label">Replication</div>
+        <div class="ss-val">~65%<small>vs. AlgoPharma™</small></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sector-body">
+    <div class="sb-panel">
+      <div class="sb-title sage">// Why no competitor exists</div>
+      <p>
+        Environmental consultants use SharePoint or generic doc management. <b>No intelligence layer exists over any of it.</b> No platform lets a junior consultant check a Phase II ESA against CSA Z769 + AER ESA Standard in one query — against their own draft.
+      </p>
+      <div class="hl sage">
+        <b>The opening:</b> A typical mid-size firm files <b>~50 RoSCs/year</b>; AER kicks back roughly <b>15% as supplemental information requests</b> at <b>$40–80K rework each</b>. That's <b>~$350K/year in preventable redo cost</b>. EnviroAssist at $5K/month pays for itself <b>5×</b> on rework avoidance alone.
+      </div>
+      <p style="font-style:italic;color:var(--ink);border-left:2px solid var(--s3);padding:10px 14px;background:rgba(13,148,136,0.06);margin-top:14px;">
+        "EnviroAssist is the <b>pre-submission gap check that OneStop doesn't have</b> — catches the SIR before AER does."
+      </p>
+    </div>
+
+    <div class="sb-panel">
+      <div class="sb-title sage">// Three questions a consultant asks</div>
+      <ul class="sage">
+        <li><div><b>"Will this draft RoSC trigger an AER supplemental information request?"</b></div></li>
+        <li><div><b>"Does our Phase II for this brownfield meet Alberta Tier 2 requirements?"</b></div></li>
+        <li><div><b>"How much of our 2024 SSLA work needs redoing under D001?"</b></div></li>
+      </ul>
+    </div>
+
+    <div class="sb-panel">
+      <div class="sb-title sage">// The compounding moat</div>
+      <p>AER directives change <b>monthly</b>. We re-ingest every update in 24 hrs — all customers inherit it instantly.</p>
+      <p>When one customer's RoSC fails, that pattern joins the gap-detection layer. <b>Every customer makes the next one smarter.</b></p>
+    </div>
+
+    <div class="sb-panel">
+      <div class="sb-title sage">// Calgary target</div>
+      <p><b>Mid-size env. consultancies, 30–200 staff</b> &mdash; <b>~40 Calgary firms</b> active on AER OneStop. Director of Reclamation decides. Every AER directive update re-ingested in 24 hrs &mdash; corpus stays current automatically.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     SLIDE 7 — THE PRODUCT
+     ════════════════════════════════════════════ -->
+<section class="slide">
+  <div class="slide-num"><span>07</span> / 09 · the product</div>
+  <div class="kicker">// what we ship</div>
+  <h1 class="slide-h">
+    <em>One product</em>, three regulatory skins.<br>
+    <b>Same engine</b>, swap the corpus.
+  </h1>
+  <p class="deck-h">PracticeAssist, SafetyAssist, and EnviroAssist are <b>corpus configurations of one production engine</b> — not separate products. That's what makes simultaneous go-to-market viable.</p>
+
+  <div class="product-frame">
+    <div class="pf-l">
+      <div class="pf-title">A single answer pane.<br>Cited. <em>Auditable.</em> 6 seconds.</div>
+      <p>
+        Every answer cites the regulator clause and the customer's own policy line. No hallucinated citations — if no source exists, we say so.
+      </p>
+      <p>
+        The same UI ships to all three sectors. Branding, corpus, and question templates change. Onboarding sector four: <b>3 weeks corpus engineering + 1 week UX polish.</b>
+      </p>
+      <div class="chat-mock">
+        <div class="chat-head">
+          <span>safetyassist · live demo</span>
+          <b>● answering</b>
+        </div>
+        <div class="chat-body">
+          <div class="chat-q">Does our confined-space entry SOP meet OHS Code Part 5 for a Class 2 hazard?</div>
+          <div class="chat-a"><b>Partial match.</b> Your SOP §3.2 satisfies §44(1) for atmospheric testing<span class="src">OHS Code §44</span>, but §3.4 (rescue plan) is missing the requirement for an attendant under §47(2) when entry is into a Class 2 hazard.<span class="src">policy.pdf p.7</span><br>Recommend: add §47(2) attendant clause + rescue equipment list. <b>Estimated time to fix: 12 minutes.</b></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pf-r">
+      <div class="pf-title">One engine.<br><em>Every regulated sector.</em></div>
+      <p style="font-size:0.9rem;color:var(--muted);margin-bottom:20px;font-weight:300;">
+        AlgoPharma™ is the first corpus configuration. PracticeAssist, SafetyAssist, and EnviroAssist are the next three. Each new sector is a corpus build — the Q&amp;A engine, audit trail, and answer UI ship unchanged.
+      </p>
+
+      <div style="border:1px solid var(--line2);">
+        <div style="padding:18px 20px;border-bottom:1px solid var(--line);">
+          <div style="font-family:'Space Mono',monospace;font-size:0.58rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--green);margin-bottom:6px;">What transfers sector to sector</div>
+          <div style="font-size:0.88rem;color:var(--ink);font-weight:300;line-height:1.6;">Q&amp;A engine · Audit trail · Answer UI · Deployment pipeline · Security model · Customer onboarding</div>
+        </div>
+        <div style="padding:18px 20px;border-bottom:1px solid var(--line);">
+          <div style="font-family:'Space Mono',monospace;font-size:0.58rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;">What we build per sector</div>
+          <div style="font-size:0.88rem;color:var(--ink);font-weight:300;line-height:1.6;">Regulatory corpus ingestion · Domain question templates · Sector-specific gap-detection rules</div>
+        </div>
+        <div style="padding:18px 20px;border-bottom:1px solid var(--line);">
+          <div style="font-family:'Space Mono',monospace;font-size:0.58rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--amber);margin-bottom:6px;">Time to onboard a new sector</div>
+          <div style="font-size:0.88rem;color:var(--ink);font-weight:300;line-height:1.6;"><b>3 weeks</b> corpus engineering + <b>1 week</b> UX polish — then the sector ships.</div>
+        </div>
+        <div style="padding:18px 20px;">
+          <div style="font-family:'Space Mono',monospace;font-size:0.58rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;">The compounding advantage</div>
+          <div style="font-size:0.88rem;color:var(--ink);font-weight:300;line-height:1.6;">Every sector we add makes the platform more defensible. Every corpus update we ingest flows to all customers instantly. The moat grows with every document we process.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     SLIDE 8 — ROADMAP
+     ════════════════════════════════════════════ -->
+<section class="slide">
+  <div class="slide-num"><span>08</span> / 09 · roadmap</div>
+  <div class="kicker">// the plan</div>
+  <h1 class="slide-h">
+    Three sectors. <em>Four phases.</em><br>
+    <b>One compounding platform.</b>
+  </h1>
+  <p class="deck-h">
+    PracticeAssist and SafetyAssist ship first, together. EnviroAssist follows. With each phase we deepen the corpus, grow the customer base, and build toward a defensible national footprint.
+  </p>
+
+  <div class="roadmap">
+    <div class="roadmap-line">
+      <div class="rm-step">
+        <div class="rm-num">// Phase 01</div>
+        <div class="rm-when">Launch<small>First pilots</small></div>
+        <div class="rm-desc">
+          <b>PracticeAssist alpha</b> with Calgary dental + optometry clinics. CDSA + ACO corpus complete. <b>SafetyAssist alpha</b> with Calgary energy-services firms. WCB PIR + COR audit standard corpus complete.
+        </div>
+      </div>
+      <div class="rm-step">
+        <div class="rm-num">// Phase 02</div>
+        <div class="rm-when">Expand<small>More sectors, more corpus</small></div>
+        <div class="rm-desc">
+          PracticeAssist expanded to physiotherapy + chiropractic colleges. SafetyAssist first PIR case study. <b>EnviroAssist alpha</b> with Calgary consulting firms. AER directive corpus live.
+        </div>
+      </div>
+      <div class="rm-step">
+        <div class="rm-num">// Phase 03</div>
+        <div class="rm-when">Deepen<small>Calgary footprint</small></div>
+        <div class="rm-desc">
+          Growing Calgary customer base across all three products. Move PracticeAssist beyond Calgary into Edmonton + Red Deer. Begin <b>integration partnerships</b> with Intelex (SafetyAssist) and OneStop submission tooling (EnviroAssist).
+        </div>
+      </div>
+      <div class="rm-step">
+        <div class="rm-num">// Phase 04</div>
+        <div class="rm-when">Scale<small>National rollout</small></div>
+        <div class="rm-desc">
+          Strong Calgary base. Expand PracticeAssist to BC + Saskatchewan health colleges. Defensible platform, ready for <b>national rollout</b> or the next funding milestone.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     SLIDE 9 — CTA
+     ════════════════════════════════════════════ -->
+<section class="slide cta-slide">
+  <div class="slide-num"><span>09</span> / 09 · what's next</div>
+  <div class="kicker">// where we're going</div>
+  <h1 class="slide-h">
+    <em>One proven engine.</em><br>
+    <b>An expanding map of regulated sectors.</b>
+  </h1>
+  <p class="deck-h">AlgoPharma™ proved that regulated professionals will pay for document intelligence done right. We're now executing the same playbook across three more sectors — with the same architecture, the same conviction, and a clear plan ahead.</p>
+
+  <div class="cta-grid">
+    <div class="cta-l">
+      <p>We started in pharmacy because it had the sharpest pain, the clearest corpus, and the fastest path to a paying customer. <b>Every one of those conditions is true again in regulated health, OHS, and environmental consulting.</b></p>
+      <p>This isn't a pivot. It's the original thesis playing out — <b>document intelligence as a platform, not a single product.</b> Three sectors next. More to follow.</p>
+      <p>We're building in Calgary because the density of regulated operators here is unmatched in Canada. <b>It's the best place in the country to prove this at scale before we go national.</b></p>
+    </div>
+
+    <div class="cta-r">
+      <div class="cta-r-title">The direction, <em>in one view.</em></div>
+      <ol class="ask-list">
+        <li>
+          <b>// PHARMACY — DONE</b>
+          AlgoPharma™ is live. Paying Alberta operators. Corpus built. Model proven.
+        </li>
+        <li>
+          <b>// REGULATED HEALTH + OHS — PHASE 01</b>
+          PracticeAssist and SafetyAssist ship together. Calgary pilot cohort in both sectors simultaneously.
+        </li>
+        <li>
+          <b>// ENVIRONMENTAL — PHASE 02</b>
+          EnviroAssist launches as D001 backlog pressure peaks. AER directive corpus live on day one.
+        </li>
+        <li>
+          <b>// NATIONAL + SECTOR 5+</b>
+          Calgary validates the model. Edmonton, Red Deer, then BC and Saskatchewan follow. New sectors added at 4-week cadence.
+        </li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="contact-block">
+    <div class="contact-l">
+      We'd love to share more.
+      <small>Algo-Rythmn · Document Intelligence · May 2026</small>
+    </div>
+    <a href="https://algo-rythmn.ai/contact-us" class="btn-primary">Get in touch →</a>
+  </div>
+</section>
+
+<footer>
+  <span>Algo-Rythmn — Document Intelligence Roadmap</span>
+  <span>// AlgoPharma™ · PracticeAssist · SafetyAssist · EnviroAssist</span>
+  <span>Prepared May 2026</span>
+</footer>
+
+</div>
+</body>
+</html>
