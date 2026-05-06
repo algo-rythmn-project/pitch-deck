@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Algo-Rythmn — Olds College Region Document Intelligence Roadmap</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,500;0,600;1,300;1,500;1,600&family=Outfit:wght@300;400;500;600&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FAF8F5;
+  --bg2:#F2EDE6;
+  --panel:#FFFFFF;
+  --line:#E8E1D6;
+  --line2:#D8D0C4;
+  --ink:#1C1917;
+  --muted:#78716C;
+  --dim:#A8A09A;
+  --green:#059669;       /* emerald — primary */
+  --green-d:#047857;
+  --amber:#16A34A;       /* green-600 — secondary green */
+  --amber-d:#15803D;
+  --rust:#166534;        /* green-800 — deep green */
+  --violet:#4ADE80;      /* green-400 — light green accent */
+  /* Sector accents — Olds deck */
+  --s1:#059669;  /* MuniAssist   — emerald */
+  --s2:#16A34A;  /* SafetyAssist — green-600 */
+  --s3:#0D9488;  /* EnviroAssist — teal (land/water) */
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:'Outfit',-apple-system,sans-serif;
+  font-weight:400;
+  line-height:1.65;
+  letter-spacing:-0.003em;
+  overflow-x:hidden;
+}
+
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:radial-gradient(rgba(0,0,0,0.018) 1px,transparent 1px);
+  background-size:4px 4px;mix-blend-mode:multiply;
+}
+
+.deck{position:relative;z-index:1;}
+
+.slide{
+  min-height:100vh;padding:60px 64px;
+  border-bottom:1px solid var(--line);
+  position:relative;display:flex;
+  flex-direction:column;justify-content:flex-start;
+}
+@media(max-width:780px){.slide{padding:40px 24px;}}
+
+.slide-num{
+  position:absolute;top:24px;right:32px;
+  font-family:'Space Mono',monospace;
+  font-size:0.6rem;letter-spacing:0.18em;
+  color:var(--dim);text-transform:uppercase;
+}
+.slide-num span{color:var(--ink);font-weight:700;}
+
+.kicker{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:'Space Mono',monospace;
+  font-size:0.62rem;letter-spacing:0.18em;
+  text-transform:uppercase;color:var(--green);
+  margin-bottom:20px;padding:6px 14px;
+  border:1px solid rgba(5,150,105,0.35);
+  background:rgba(5,150,105,0.06);width:fit-content;
+}
+.kicker.blue{color:var(--s1);border-color:rgba(5,150,105,0.35);background:rgba(5,150,105,0.06);}
+.kicker.amber{color:var(--amber);border-color:rgba(217,119,6,0.35);background:rgba(217,119,6,0.06);}
+.kicker.dim{color:var(--muted);border-color:var(--line2);background:transparent;}
+.kicker::before{content:'';width:5px;height:5px;background:currentColor;border-radius:50%;}
+
+h1.slide-h{
+  font-family:'Cormorant Garamond',serif;
+  font-weight:600;font-size:clamp(2rem,4vw,3.8rem);
+  line-height:1.1;letter-spacing:-0.01em;
+  margin-bottom:24px;color:var(--ink);
+}
+h1.slide-h em{font-style:italic;font-weight:300;color:var(--green);}
+h1.slide-h b{font-weight:600;font-style:normal;}
+
+.deck-h{
+  font-size:clamp(0.9rem,1.1vw,1.05rem);
+  color:var(--muted);font-weight:400;
+  max-width:700px;line-height:1.7;
+}
+
+/* ─── COVER ─── */
+.cover{
+  min-height:100vh;
+  background:
+    radial-gradient(ellipse at 10% 100%,rgba(5,150,105,0.10),transparent 50%),
+    radial-gradient(ellipse at 90% 0%,rgba(217,119,6,0.06),transparent 45%),
+    #1A2B19;
+  display:flex;flex-direction:column;
+  justify-content:space-between;padding:48px 64px;
+}
+
+.cover-top{
+  display:flex;justify-content:space-between;
+  align-items:flex-start;
+  border-bottom:1px solid var(--line2);
+  padding-bottom:24px;flex-wrap:wrap;gap:16px;
+}
+
+.brand{
+  font-family:'Cormorant Garamond',serif;
+  font-weight:600;font-size:1.25rem;
+  letter-spacing:0.01em;display:flex;align-items:center;gap:12px;
+}
+.brand-dot{width:9px;height:9px;background:var(--green);border-radius:50%;box-shadow:0 0 10px rgba(5,150,105,0.4);}
+.brand b{font-weight:600;color:var(--ink);}
+.brand span{color:var(--muted);font-weight:300;}
+
+.cover-meta{
+  font-family:'Space Mono',monospace;
+  font-size:0.6rem;letter-spacing:0.12em;
+  color:var(--muted);text-transform:uppercase;
+  text-align:right;line-height:2;
+}
+.cover-meta b{color:var(--ink);font-weight:700;}
+
+.cover-mid{
+  flex:1;display:flex;flex-direction:column;
+  justify-content:center;padding:48px 0;max-width:1100px;
+}
+
+.cover-eyebrow{
+  font-family:'Space Mono',monospace;
+  font-size:0.66rem;letter-spacing:0.22em;
+  color:var(--green);text-transform:uppercase;
+  margin-bottom:28px;display:flex;align-items:center;gap:16px;
+}
+.cover-eyebrow::before{content:'';width:36px;height:1px;background:var(--green);flex-shrink:0;}
+
+.cover-title{
+  font-family:'Cormorant Garamond',serif;
+  font-weight:500;font-size:clamp(2.4rem,5.5vw,5.2rem);
+  line-height:1.08;letter-spacing:-0.01em;margin-bottom:32px;
+}
+.cover-title em{font-style:italic;color:var(--green);font-weight:500;}
+.cover-title b{font-weight:600;font-style:normal;}
+
+.cover-sub{
+  font-size:1.1rem;color:var(--muted);
+  max-width:680px;line-height:1.7;font-weight:400;
+}
+.cover-sub b{color:var(--ink);font-weight:500;}
+
+.cover-bottom{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:0;border-top:1px solid var(--line2);padding-top:28px;
+}
+@media(max-width:720px){.cover-bottom{grid-template-columns:1fr 1fr;}}
+
+.cb-cell{padding-right:24px;border-right:1px solid var(--line);}
+.cb-cell:last-child{border-right:none;padding-right:0;}
+.cb-label{
+  font-family:'Space Mono',monospace;font-size:0.56rem;
+  letter-spacing:0.14em;color:var(--muted);text-transform:uppercase;margin-bottom:8px;
+}
+.cb-val{
+  font-family:'Cormorant Garamond',serif;font-size:1.5rem;
+  color:var(--ink);font-weight:500;line-height:1.1;
+}
+.cb-val small{
+  font-family:'Space Mono',monospace;font-size:0.62rem;
+  color:var(--muted);letter-spacing:0.04em;
+  display:block;margin-top:5px;font-weight:400;
+}
+
+/* ─── COVER DARK THEME: deep forest (Olds identity) ─── */
+.cover .cover-title{color:#F0FDF4;}
+.cover .cover-title b{color:#FFFFFF;}
+.cover .cover-title em{color:#6EE7B7;}
+.cover .cover-sub{color:rgba(220,252,231,0.68);}
+.cover .cover-sub b{color:#F0FDF4;}
+.cover .brand b{color:#F0FDF4;}
+.cover .brand span{color:rgba(220,252,231,0.42);}
+.cover .cover-meta{color:rgba(220,252,231,0.42);}
+.cover .cover-meta b{color:#F0FDF4;}
+.cover .cover-eyebrow{color:#6EE7B7;}
+.cover .cover-eyebrow::before{background:#6EE7B7;}
+.cover .brand-dot{background:#6EE7B7;box-shadow:0 0 10px rgba(110,231,183,0.4);}
+.cover .cb-val{color:#F0FDF4;}
+.cover .cb-label{color:rgba(220,252,231,0.42);}
+.cover .cb-val small{color:rgba(220,252,231,0.42);}
+.cover .cover-top{border-bottom-color:rgba(220,252,231,0.08);}
+.cover .cover-bottom{border-top-color:rgba(220,252,231,0.08);}
+.cover .cb-cell{border-right-color:rgba(220,252,231,0.08);}
+
+/* ─── EXEC SUMMARY ─── */
+.exec-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:32px;}
+@media(max-width:900px){.exec-grid{grid-template-columns:1fr;}}
+
+.exec-l p{font-size:1.05rem;color:var(--ink);line-height:1.75;font-weight:400;margin-bottom:18px;}
+.exec-l p b{color:var(--green);font-weight:600;}
+
+.exec-r{
+  background:var(--panel);border:1px solid var(--line2);
+  padding:28px 32px;border-left:3px solid var(--green);
+  box-shadow:0 2px 12px rgba(0,0,0,0.06);
+}
+.exec-r-title{
+  font-family:'Space Mono',monospace;font-size:0.6rem;
+  letter-spacing:0.18em;color:var(--muted);
+  text-transform:uppercase;margin-bottom:18px;
+}
+.exec-r ol{list-style:none;counter-reset:exec;}
+.exec-r li{
+  counter-increment:exec;padding:14px 0;
+  border-bottom:1px solid var(--line);
+  display:flex;gap:18px;align-items:flex-start;
+}
+.exec-r li:last-child{border-bottom:none;}
+.exec-r li::before{
+  content:counter(exec,decimal-leading-zero);
+  font-family:'Space Mono',monospace;font-size:0.66rem;
+  letter-spacing:0.06em;color:var(--green);
+  font-weight:700;flex-shrink:0;padding-top:3px;
+}
+.exec-r li strong{color:var(--ink);font-weight:500;display:block;font-size:1rem;margin-bottom:2px;}
+.exec-r li span{color:var(--muted);font-size:0.88rem;font-weight:400;}
+
+/* ─── SELECTION REASONS ─── */
+.select-reasons{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1px;background:var(--line2);
+  border:1px solid var(--line2);margin-top:36px;
+}
+@media(max-width:900px){.select-reasons{grid-template-columns:1fr;}}
+
+.sr-panel{background:var(--panel);padding:28px 28px 32px;}
+
+.sr-head{
+  font-family:'Cormorant Garamond',serif;font-size:1.35rem;
+  font-weight:600;color:var(--ink);margin-bottom:6px;line-height:1.1;
+}
+
+.sr-list{list-style:none;}
+.sr-panel .mc-reason{
+  font-size:0.88rem;color:var(--ink);line-height:1.6;font-weight:400;
+  margin-bottom:18px;padding-bottom:18px;border-bottom:1px solid var(--line);
+}
+.sr-list li{
+  padding:12px 0;border-bottom:1px solid var(--line);
+  font-size:0.86rem;line-height:1.6;color:var(--muted);font-weight:400;
+}
+.sr-list li:last-child{border-bottom:none;}
+.sr-list li b{
+  display:block;font-family:'Space Mono',monospace;font-size:0.56rem;
+  letter-spacing:0.12em;text-transform:uppercase;font-weight:700;
+  color:var(--ink);margin-bottom:4px;
+}
+.sr-panel.blue .sr-list li b{color:var(--s1);}
+.sr-panel.amber .sr-list li b{color:var(--s2);}
+.sr-panel.sage .sr-list li b{color:var(--s3);}
+
+.mc-num{
+  font-family:'Space Mono',monospace;font-size:0.58rem;
+  letter-spacing:0.14em;color:var(--muted);text-transform:uppercase;margin-bottom:6px;
+}
+
+/* ─── SECTOR DEEP-DIVE ─── */
+.sector-slide{background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 100%);}
+
+.sector-hero{
+  display:grid;grid-template-columns:1.4fr 1fr;
+  gap:48px;align-items:flex-end;
+  padding-bottom:32px;border-bottom:1px solid var(--line2);
+}
+@media(max-width:980px){.sector-hero{grid-template-columns:1fr;}}
+
+.sector-id{
+  font-family:'Space Mono',monospace;font-size:0.62rem;
+  letter-spacing:0.16em;color:var(--muted);text-transform:uppercase;
+  margin-bottom:16px;display:flex;align-items:center;gap:14px;
+}
+.sector-id::before{content:'';width:36px;height:1px;background:currentColor;}
+.sector-id b{color:var(--ink);font-weight:700;}
+
+.sector-name{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2.4rem,5vw,4.2rem);
+  font-weight:300;line-height:1.02;
+  letter-spacing:-0.01em;margin-bottom:20px;
+}
+.sector-name b{font-weight:600;}
+.sector-name em{font-style:italic;}
+.sector-name.s1 em{color:var(--s1);}
+.sector-name.s2 em{color:var(--s2);}
+.sector-name.s3 em{color:var(--s3);}
+
+.sector-tag{font-size:1rem;color:var(--muted);line-height:1.65;font-weight:400;max-width:600px;}
+.sector-tag b{color:var(--ink);font-weight:500;}
+
+.sector-stats{
+  display:grid;grid-template-columns:1fr 1fr;gap:1px;
+  background:var(--line2);border:1px solid var(--line2);
+  box-shadow:0 2px 12px rgba(0,0,0,0.06);
+}
+.ss-cell{background:var(--panel);padding:20px 22px;}
+.ss-label{
+  font-family:'Space Mono',monospace;font-size:0.54rem;
+  letter-spacing:0.14em;color:var(--muted);text-transform:uppercase;margin-bottom:8px;
+}
+.ss-val{
+  font-family:'Cormorant Garamond',serif;font-size:1.9rem;
+  font-weight:500;line-height:1;color:var(--ink);
+}
+.ss-val small{
+  font-family:'Space Mono',monospace;font-size:0.58rem;font-weight:400;
+  color:var(--muted);letter-spacing:0.04em;display:block;margin-top:5px;
+}
+
+.sector-body{
+  display:grid;grid-template-columns:1fr 1fr;gap:0;
+  margin-top:36px;border:1px solid var(--line2);background:var(--line2);
+}
+.sb-panel.span-full{grid-column:1/-1;border-top:1px solid var(--line2);}
+@media(max-width:880px){.sector-body{grid-template-columns:1fr;}}
+
+.sb-panel{background:var(--panel);padding:28px 32px;}
+
+.sb-title{
+  font-family:'Space Mono',monospace;font-size:0.58rem;
+  letter-spacing:0.16em;color:var(--muted);text-transform:uppercase;
+  margin-bottom:18px;display:flex;align-items:center;gap:10px;
+}
+.sb-title::after{content:'';flex:1;height:1px;background:var(--line);}
+.sb-title.blue{color:var(--s1);}
+.sb-title.amber{color:var(--s2);}
+.sb-title.sage{color:var(--s3);}
+
+.sb-panel p{font-size:0.94rem;color:var(--ink);line-height:1.7;font-weight:400;margin-bottom:14px;}
+.sb-panel p:last-child{margin-bottom:0;}
+.sb-panel p b{color:var(--ink);font-weight:600;}
+
+.sb-panel .hl{
+  background:rgba(5,150,105,0.06);border-left:2px solid var(--s1);
+  padding:14px 18px;font-size:0.9rem;color:var(--ink);line-height:1.6;margin-bottom:14px;
+}
+.sb-panel .hl.amber{background:rgba(217,119,6,0.07);border-left-color:var(--s2);}
+.sb-panel .hl.sage{background:rgba(13,148,136,0.07);border-left-color:var(--s3);}
+
+.sb-panel ul{list-style:none;}
+.sb-panel ul li{
+  padding:10px 0;border-bottom:1px solid var(--line);
+  font-size:0.88rem;line-height:1.55;color:var(--ink);font-weight:400;
+  display:flex;gap:12px;align-items:flex-start;
+}
+.sb-panel ul li:last-child{border-bottom:none;}
+.sb-panel ul li::before{
+  content:'';width:5px;height:5px;background:var(--dim);
+  border-radius:50%;flex-shrink:0;margin-top:9px;
+}
+.sb-panel ul.blue li::before{background:var(--s1);}
+.sb-panel ul.amber li::before{background:var(--s2);}
+.sb-panel ul.sage li::before{background:var(--s3);}
+.sb-panel ul li b{font-weight:600;color:var(--ink);}
+.sb-panel ul li span{color:var(--muted);}
+
+/* ─── PRODUCT SECTION ─── */
+.product-frame{
+  margin-top:32px;display:grid;
+  grid-template-columns:1.15fr 1fr;gap:0;
+  border:1px solid var(--line2);box-shadow:0 2px 16px rgba(0,0,0,0.07);
+}
+@media(max-width:980px){.product-frame{grid-template-columns:1fr;}}
+
+.pf-l{padding:36px 40px;background:var(--bg2);border-right:1px solid var(--line2);}
+@media(max-width:980px){.pf-l{border-right:none;border-bottom:1px solid var(--line2);}}
+
+.pf-r{padding:36px 40px;background:var(--panel);}
+
+.pf-title{
+  font-family:'Cormorant Garamond',serif;font-size:1.75rem;
+  font-weight:500;margin-bottom:18px;line-height:1.15;color:var(--ink);
+}
+.pf-title em{font-style:italic;color:var(--green);}
+.pf-l p{font-size:0.94rem;color:var(--ink);line-height:1.7;font-weight:400;margin-bottom:14px;}
+
+.chat-mock{
+  background:#1C1917;border:1px solid #2E2A26;
+  border-radius:0;font-family:'Space Mono',monospace;
+  font-size:0.72rem;line-height:1.55;margin-top:16px;overflow:hidden;
+}
+.chat-head{
+  padding:8px 14px;background:#252120;border-bottom:1px solid #2E2A26;
+  font-size:0.58rem;letter-spacing:0.14em;color:#78716C;
+  text-transform:uppercase;display:flex;justify-content:space-between;align-items:center;
+}
+.chat-head b{color:#059669;}
+.chat-body{padding:14px;}
+.chat-q{
+  color:#F5F0E8;padding:10px 12px;
+  background:rgba(5,150,105,0.10);
+  border-left:2px solid #059669;margin-bottom:12px;
+}
+.chat-q::before{content:'> ';color:#059669;}
+.chat-a{color:#78716C;padding:0 12px 4px;font-size:0.68rem;line-height:1.65;}
+.chat-a b{color:#E7E0D8;font-weight:700;}
+.chat-a .src{
+  display:inline-block;font-size:0.52rem;color:#059669;
+  border:1px solid rgba(5,150,105,0.4);padding:1px 5px;
+  margin-left:4px;letter-spacing:0.08em;text-transform:uppercase;
+}
+
+/* ─── ROADMAP ─── */
+.roadmap{margin-top:32px;position:relative;}
+.roadmap-line{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+  background:var(--line2);border:1px solid var(--line2);position:relative;
+}
+@media(max-width:780px){.roadmap-line{grid-template-columns:1fr 1fr;}}
+
+.rm-step{background:var(--panel);padding:28px 24px;position:relative;min-height:200px;}
+.rm-num{
+  font-family:'Space Mono',monospace;font-size:0.58rem;
+  letter-spacing:0.16em;color:var(--green);text-transform:uppercase;margin-bottom:8px;
+}
+.rm-when{
+  font-family:'Cormorant Garamond',serif;font-size:1.3rem;
+  font-weight:600;margin-bottom:14px;line-height:1.1;color:var(--ink);
+}
+.rm-when small{
+  font-family:'Space Mono',monospace;font-size:0.58rem;color:var(--muted);
+  font-weight:400;letter-spacing:0.06em;display:block;text-transform:uppercase;margin-top:4px;
+}
+.rm-desc{font-size:0.86rem;color:var(--muted);line-height:1.6;font-weight:400;}
+.rm-desc b{color:var(--ink);font-weight:600;}
+
+/* ─── CLOSING SLIDE ─── */
+.cta-slide{
+  background:radial-gradient(ellipse at 70% 30%,rgba(5,150,105,0.06),transparent 60%),var(--bg);
+}
+.cta-grid{
+  display:grid;grid-template-columns:1.3fr 1fr;
+  gap:48px;margin-top:28px;align-items:flex-start;
+}
+@media(max-width:980px){.cta-grid{grid-template-columns:1fr;}}
+
+.cta-l p{font-size:1.05rem;color:var(--ink);line-height:1.75;font-weight:400;margin-bottom:18px;}
+.cta-l p b{color:var(--green);font-weight:600;}
+
+.cta-r{
+  background:var(--panel);border:1px solid var(--line2);
+  border-top:3px solid var(--s1);padding:32px;
+  box-shadow:0 2px 16px rgba(0,0,0,0.07);
+}
+.cta-r-title{
+  font-family:'Cormorant Garamond',serif;font-size:1.5rem;
+  font-weight:500;margin-bottom:18px;line-height:1.2;
+}
+.cta-r-title em{font-style:italic;color:var(--s1);}
+
+.ask-list{list-style:none;}
+.ask-list li{
+  padding:14px 0;border-bottom:1px solid var(--line);
+  font-size:0.94rem;font-weight:400;line-height:1.6;color:var(--ink);
+}
+.ask-list li:last-child{border-bottom:none;}
+.ask-list li b{
+  color:var(--s1);display:block;font-family:'Space Mono',monospace;
+  font-size:0.58rem;letter-spacing:0.12em;text-transform:uppercase;
+  font-weight:700;margin-bottom:5px;
+}
+
+.contact-block{
+  margin-top:36px;padding-top:24px;border-top:1px solid var(--line2);
+  display:flex;flex-wrap:wrap;gap:32px;
+  align-items:center;justify-content:space-between;
+}
+.contact-l{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:500;line-height:1.2;}
+.contact-l small{
+  display:block;font-family:'Space Mono',monospace;font-size:0.6rem;
+  color:var(--muted);font-weight:400;letter-spacing:0.14em;text-transform:uppercase;margin-top:6px;
+}
+
+.btn-primary{
+  display:inline-block;font-family:'Space Mono',monospace;
+  font-size:0.66rem;letter-spacing:0.16em;text-transform:uppercase;
+  padding:14px 26px;background:var(--s1);color:#FFFFFF;
+  font-weight:700;border:none;text-decoration:none;
+  transition:opacity .15s ease,transform .15s ease;
+}
+.btn-primary:hover{opacity:0.88;transform:translateY(-1px);}
+
+/* ─── FOOTER ─── */
+footer{
+  padding:28px 64px;background:var(--bg2);border-top:1px solid var(--line2);
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;
+  font-family:'Space Mono',monospace;font-size:0.58rem;
+  letter-spacing:0.1em;color:var(--muted);text-transform:uppercase;
+}
+@media(max-width:780px){footer{padding:24px;}}
+
+@keyframes rise{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+.slide > *{animation:rise .45s ease both;}
+.slide > *:nth-child(2){animation-delay:.05s;}
+.slide > *:nth-child(3){animation-delay:.1s;}
+.slide > *:nth-child(4){animation-delay:.15s;}
+</style>
+</head>
+<body>
+
+<div class="deck">
+
+<!-- ════════════════════════════════════════════
+     SLIDE 1 — COVER
+     ════════════════════════════════════════════ -->
+<section class="slide cover">
+  <div class="cover-top">
+    <div class="brand">
+      <span class="brand-dot"></span>
+      <b>Algo-Rythmn</b><span>· document intelligence</span>
+    </div>
+    <div class="cover-meta">
+      Olds College Region Roadmap<br>
+      <b>Prepared May 2026</b><br>
+      Central Alberta · Agricultural &amp; Rural Sectors
+    </div>
+  </div>
+
+  <div class="cover-mid">
+    <div class="cover-eyebrow">Pharmacy proven · Central Alberta expansion · Olds College ecosystem</div>
+    <h1 class="cover-title">
+      Pharmacy proved it.<br>
+      <em>Now we bring</em> document intelligence
+      <b>to Alberta's agricultural heartland.</b>
+    </h1>
+    <p class="cover-sub">
+      AlgoPharma™ turns compliance documents into <b>instant, audit-grade answers</b>. The same document-heavy burden exists in central Alberta's municipalities, farms, and environmental operations — with no AI tool to help. <b>Olds College is the anchor. Mountain View County is the first market. Central Alberta is the proof point.</b>
+    </p>
+  </div>
+
+  <div class="cover-bottom">
+    <div class="cb-cell">
+      <div class="cb-label">Proven Model</div>
+      <div class="cb-val">AlgoPharma™<small>Alberta · ACP regulated</small></div>
+    </div>
+    <div class="cb-cell">
+      <div class="cb-label">New Sectors</div>
+      <div class="cb-val">3 Sectors<small>Central Alberta</small></div>
+    </div>
+    <div class="cb-cell">
+      <div class="cb-label">Anchor Institution</div>
+      <div class="cb-val">Olds College<small>3,000+ students · 400+ partners</small></div>
+    </div>
+    <div class="cb-cell">
+      <div class="cb-label">First Pilot Region</div>
+      <div class="cb-val">Mtn View Co.<small>+ Red Deer County</small></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     SLIDE 2 — WHY THIS, WHY NOW
+     ════════════════════════════════════════════ -->
+<section class="slide">
+  <div class="slide-num"><span>02</span> / 09 · the thesis</div>
+  <div class="kicker">The thesis</div>
+  <h1 class="slide-h">
+    Every regulator in central Alberta <em>already runs an inspection cycle.</em><br>
+    <b>Nobody runs an AI Q&amp;A layer over the documents that cycle inspects.</b>
+  </h1>
+  <p class="deck-h">Published corpus. Recurring inspection. Accountable operator. That pattern repeats across Mountain View County's 347 municipal offices, 12,000 Alberta farms with hired labour, and 4,500 confined feeding operations — stress-tested against five criteria.</p>
+
+  <div class="exec-grid">
+    <div class="exec-l">
+      <p>Compliance buyers don't pay for "AI." They pay for <b>"answer this question against my policy in 6 seconds before the inspector walks in."</b></p>
+      <p>That buyer runs a municipality under the Municipal Government Act, a farm under the Farm Freedom &amp; Safety Act (2021), or a confined feeding operation under AOPA. <b>Olds College trains the operators who run these organizations — making it the ideal anchor for reaching this market.</b></p>
+      <p>AlgoPharma™ proves the model. Olds College provides the door. <b>Central Alberta is the market.</b></p>
+    </div>
+
+    <div class="exec-r">
+      <div class="exec-r-title">// The five tests every sector must pass</div>
+      <ol>
+        <li><div><strong>AlgoPharma™ replication</strong><span>Architecture, doc schema, and Q&amp;A patterns reused — not rebuilt from zero.</span></div></li>
+        <li><div><strong>Defensible moat</strong><span>Regulatory corpus that compounds value and can't be replicated by generic LLMs.</span></div></li>
+        <li><div><strong>Short sales cycle</strong><span>Single-signature buyer — CAO, farm owner, or operations director. Weeks, not quarters.</span></div></li>
+        <li><div><strong>Central Alberta density</strong><span>Enough regulated operators within a 100km radius of Olds to sustain a sales motion.</span></div></li>
+        <li><div><strong>Hard ROI hook</strong><span>Bylaw liability, WCB premium, or NRCB operating approval — quantifiable, not aspirational.</span></div></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     SLIDE 3 — THREE SECTORS
+     ════════════════════════════════════════════ -->
+<section class="slide">
+  <div class="slide-num"><span>03</span> / 09 · the opportunity</div>
+  <div class="kicker dim">// Beyond pharmacy · Three central Alberta markets</div>
+  <h1 class="slide-h">
+    Pharmacy proved the model. <em>Three more sectors are ready in agricultural Alberta.</em>
+  </h1>
+  <p class="deck-h">Municipal Government, Agricultural OHS, and Environmental Compliance share the same document-heavy burden in central Alberta. All three operate under published regulatory corpora, recurring inspection cycles, and single-signature buyers. Olds College connects directly to all three through its graduates, partners, and research programs.</p>
+
+  <div class="select-reasons">
+
+    <!-- MuniAssist -->
+    <div class="sr-panel blue">
+      <div class="mc-num">01 · Municipal Government</div>
+      <div class="sr-head">MuniAssist</div>
+      <p class="mc-reason"><b>Alberta has 347 municipalities — and every one operates under the same Municipal Government Act.</b> Land use bylaws, FOIP obligations, procurement policy, and environmental bylaws all live in document stacks no AI tool has ever touched.</p>
+      <ul class="sr-list">
+        <li><b>Architecture reuse · ~70%</b>MGA + individual bylaws form a bounded, well-structured corpus. Q&amp;A engine transfers directly; remaining work is per-municipality bylaw ingestion.</li>
+        <li><b>Defensible moat</b>First mover in a region shares the MGA layer — neighboring municipalities adopt at near-zero marginal cost. Network effect by county.</li>
+        <li><b>Short sales cycle · 4–8 weeks</b>Chief Administrative Officer is the sole buyer — no committee, no RFP, direct conversation on liability risk.</li>
+        <li><b>Central AB density · ~40 municipalities</b>Mountain View County, Red Deer County, Lacombe County, Clearwater County — 40+ municipalities within 100km of Olds College.</li>
+        <li><b>Hard ROI hook · legal exposure</b>Bylaw misinterpretation triggers legal challenges. FOIP non-compliance generates provincial penalties. One avoided dispute pays for years of MuniAssist.</li>
+      </ul>
+    </div>
+
+    <!-- SafetyAssist -->
+    <div class="sr-panel amber">
+      <div class="mc-num">02 · OHS · Farm Safety</div>
+      <div class="sr-head">SafetyAssist</div>
+      <p class="mc-reason"><b>Alberta's Farm Freedom &amp; Safety Act (October 2021) brought 42,000 farm workers under the OHS Code for the first time.</b> Four years later, there is still no purpose-built AI compliance tool for agricultural OHS — anywhere in Canada.</p>
+      <ul class="sr-list">
+        <li><b>Architecture reuse · ~65%</b>OHS Code as applied to agriculture is a bounded corpus. Q&amp;A engine transfers; ag-specific sections (confined bins, livestock handling, chemical use) are additive builds.</li>
+        <li><b>Defensible moat</b>Agricultural OHS corpus is distinct from industrial. First customer sets the farm-specific gap-detection benchmark. WCB inspection cycles create annual urgency.</li>
+        <li><b>Short sales cycle · 4–8 weeks</b>Farm owner or operations manager decides alone — no board, no legal review, one conversation about WCB compliance risk.</li>
+        <li><b>Central AB density · ~1,200 farms</b>Mountain View County alone has ~1,200 farms with hired labour. Red Deer + Lacombe counties add ~900 more. Olds College graduates many of the operators.</li>
+        <li><b>Hard ROI hook · WCB + OHS Code liability</b>Farm OHS Code violations carry personal liability for owners. WCB premium reduction available. Near-miss on a bin-entry incident pays for years of subscription.</li>
+      </ul>
+    </div>
+
+    <!-- EnviroAssist -->
+    <div class="sr-panel sage">
+      <div class="mc-num">03 · Environmental Compliance</div>
+      <div class="sr-head">EnviroAssist</div>
+      <p class="mc-reason"><b>4,500 confined feeding operations in Alberta require NRCB operating approval and annual compliance under AOPA.</b> Mountain View County has the highest CFO density in the province — and zero AI tools to help operators check their manure management plans or water licences.</p>
+      <ul class="sr-list">
+        <li><b>Architecture reuse · ~55%</b>AOPA + Water Act agricultural provisions + NRCB regulations are bounded and publicly published. Q&amp;A engine transfers; NRCB-specific parsing is the additive build.</li>
+        <li><b>Defensible moat</b>AOPA + NRCB compliance corpus is relatively compact. First CFO operator's gap patterns seed the detection layer for all future customers. NRCB updates re-ingested in 24 hrs.</li>
+        <li><b>Short sales cycle · 6–10 weeks</b>Farm owner or agri-business operations director signs. NRCB inspection deadlines create natural urgency — no procurement formality required.</li>
+        <li><b>Central AB density · ~350 CFOs</b>Mountain View County has ~350 CFOs — the highest density in Alberta. Red Deer + Lacombe counties add ~480 more. Olds College designs these systems.</li>
+        <li><b>Hard ROI hook · NRCB operating approval</b>NRCB violation = production shutdown. Water Act non-compliance = $500K+ penalties. One avoided shutdown pays for years of EnviroAssist.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     SLIDE 4 — SECTOR 1: MuniAssist
+     ════════════════════════════════════════════ -->
+<section class="slide sector-slide">
+  <div class="slide-num"><span>04</span> / 09 · sector 1 of 3</div>
+
+  <div class="sector-hero">
+    <div>
+      <div class="sector-id">Sector 01 · <b>Municipal Government</b></div>
+      <h1 class="sector-name s1">
+        <em>MuniAssist.</em><br>
+        <b>Alberta has 347 municipalities.</b> None has a policy Q&amp;A tool.
+      </h1>
+      <p class="sector-tag">
+        Every Alberta municipality operates under the <b>Municipal Government Act</b> — land use bylaws, FOIP obligations, procurement policy, development agreements. The compliance burden is the same in Olds as it is in Lethbridge. <b>No AI tool exists for any of it.</b>
+      </p>
+    </div>
+    <div class="sector-stats">
+      <div class="ss-cell">
+        <div class="ss-label">Alberta municipalities</div>
+        <div class="ss-val">347<small>cities, towns, villages, counties</small></div>
+      </div>
+      <div class="ss-cell">
+        <div class="ss-label">Replication</div>
+        <div class="ss-val">~70%<small>vs. AlgoPharma™</small></div>
+      </div>
+      <div class="ss-cell">
+        <div class="ss-label">Olds region targets</div>
+        <div class="ss-val">~40<small>municipalities within 100km</small></div>
+      </div>
+      <div class="ss-cell">
+        <div class="ss-label">Sales cycle</div>
+        <div class="ss-val">4–8 wks<small>CAO decision</small></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sector-body">
+    <div class="sb-panel">
+      <div class="sb-title blue">// Why no competitor exists</div>
+      <p>
+        Granicus and OpenGov sell <b>structured data platforms</b> — agenda management, budget visualization, open data portals. None let a CAO or bylaw officer ask plain-language questions against their own <b>bylaws, policy manuals, and MGA sections</b>.
+      </p>
+      <p>
+        Municipal staff use binders, SharePoint, and institutional memory. When a question comes in — from council, a developer, or the public — someone searches manually for 20 minutes.
+      </p>
+      <div class="hl">
+        <b>The opening:</b> One misapplied land use bylaw triggers a legal challenge that costs the municipality $80–200K. <b>MuniAssist at $2K/month pays for itself on a single avoided dispute.</b>
+      </div>
+    </div>
+
+    <div class="sb-panel">
+      <div class="sb-title blue">// Three anchor questions</div>
+      <ul class="blue">
+        <li><div><b>"Does our land use bylaw permit secondary suites in this AG-1 zone under MGA Section 640?"</b></div></li>
+        <li><div><b>"Does this FOIP request require a response within 30 days or does our policy extend it?"</b></div></li>
+        <li><div><b>"Is our tender process for this capital project compliant with our own procurement bylaw Section 8?"</b></div></li>
+      </ul>
+    </div>
+
+    <div class="sb-panel">
+      <div class="sb-title blue">// The moat</div>
+      <p>
+        MGA corpus is built <b>once, province-wide</b>. Each municipality adds only its own bylaws — a lightweight per-customer ingestion. The first municipality in a county shares the MGA layer with every neighbor at near-zero cost.
+      </p>
+      <p><b>Network effect by county:</b> Mountain View County's 8 municipalities onboarding together create a shared corpus that no single-municipality competitor can replicate.</p>
+    </div>
+
+    <div class="sb-panel">
+      <div class="sb-title blue">// Olds region target</div>
+      <p><b>Town of Olds, Mountain View County, Carstairs, Didsbury, Cremona, Bowden, Sundre</b> — 8 municipalities in the immediate area, plus Red Deer County, Lacombe County, and Clearwater County within 100km. CAO is the sole buyer in every case — familiar with Olds College, receptive to local tech.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     SLIDE 5 — SECTOR 2: SafetyAssist
+     ════════════════════════════════════════════ -->
+<section class="slide sector-slide">
+  <div class="slide-num"><span>05</span> / 09 · sector 2 of 3</div>
+
+  <div class="sector-hero">
+    <div>
+      <div class="sector-id">Sector 02 · <b>Agricultural OHS</b></div>
+      <h1 class="sector-name s2">
+        <em>SafetyAssist.</em><br>
+        <b>42,000 Alberta farm workers</b> came under OHS Code in 2021.<br>Nobody built a tool for them.
+      </h1>
+      <p class="sector-tag">
+        Alberta's Farm Freedom &amp; Safety Act (October 2021) extended OHS Code to farms with paid workers for the first time. Grain bin confined spaces, pesticide handler training, livestock handling violence provisions — all now regulated. <b>Zero purpose-built compliance AI exists for agricultural OHS anywhere in Canada.</b>
+      </p>
+    </div>
+    <div class="sector-stats">
+      <div class="ss-cell">
+        <div class="ss-label">AB farms with paid workers</div>
+        <div class="ss-val">~12,000<small>province-wide</small></div>
+      </div>
+      <div class="ss-cell">
+        <div class="ss-label">Workers newly under OHS</div>
+        <div class="ss-val">42,000<small>as of Oct 2021</small></div>
+      </div>
+      <div class="ss-cell">
+        <div class="ss-label">Mtn View Co. farms</div>
+        <div class="ss-val">~1,200<small>with hired labour</small></div>
+      </div>
+      <div class="ss-cell">
+        <div class="ss-label">Replication</div>
+        <div class="ss-val">~65%<small>vs. AlgoPharma™</small></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sector-body">
+    <div class="sb-panel">
+      <div class="sb-title amber">// Why no competitor exists</div>
+      <p>
+        WorkSafe Alberta has guidance PDFs. Ag industry associations have fact sheets. <b>No one has built an AI Q&amp;A layer over the OHS Code as it applies to agriculture</b> — grain bin confined spaces, livestock handling, pesticide handler certification, and field sanitation.
+      </p>
+      <div class="hl amber">
+        <b>The opening:</b> Alberta OHS Code Part 5 §44 (confined spaces) now applies to every grain bin entry on every farm with paid workers. <b>Most farm operators don't know their existing SWP is non-compliant</b> — and the WCB inspector's first visit will tell them.
+      </div>
+      <p style="font-style:italic;color:var(--ink);border-left:2px solid var(--s2);padding:10px 14px;background:rgba(232,163,65,0.06);margin-top:14px;">
+        "SafetyAssist is the <b>OHS compliance layer that WorkSafe Alberta's website cannot be</b> — specific to my operation, my procedures, my staff."
+      </p>
+    </div>
+
+    <div class="sb-panel">
+      <div class="sb-title amber">// Three questions a farm operator asks</div>
+      <ul class="amber">
+        <li><div><b>"Does our grain bin entry SWP meet OHS Code Part 5 §44 for a Class 2 confined space?"</b></div></li>
+        <li><div><b>"Do our pesticide handler records satisfy the Pest Control Products Act and OHS Code requirements?"</b></div></li>
+        <li><div><b>"Are our livestock handling procedures compliant with OHS Code Part 36 for violence prevention?"</b></div></li>
+      </ul>
+    </div>
+
+    <div class="sb-panel">
+      <div class="sb-title amber">// The moat</div>
+      <p>
+        Agricultural OHS corpus is <b>distinct from industrial OHS</b> — grain bin entry, livestock handling, crop chemical safety, and remote work provisions that industrial safety tools don't cover. The first customer's gap patterns seed a detection layer that industrial competitors can never replicate.
+      </p>
+      <p><b>Olds College trains the farm managers and ag technicians who run these operations</b> — making it the ideal channel to reach the first 100 customers across central Alberta.</p>
+    </div>
+
+    <div class="sb-panel">
+      <div class="sb-title amber">// Olds region target</div>
+      <p><b>Mixed grain and livestock operations, 5–50 hired workers.</b> Mountain View County (~1,200 farms), Red Deer County (~680), Lacombe County (~420) — all within 100km. Farm owner or operations manager is the sole buyer. <b>Olds College alumni run many of these operations</b> — warm introduction, fast cycle.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     SLIDE 6 — SECTOR 3: EnviroAssist
+     ════════════════════════════════════════════ -->
+<section class="slide sector-slide">
+  <div class="slide-num"><span>06</span> / 09 · sector 3 of 3</div>
+
+  <div class="sector-hero">
+    <div>
+      <div class="sector-id">Sector 03 · <b>Agricultural Environmental Compliance</b></div>
+      <h1 class="sector-name s3">
+        <em>EnviroAssist.</em><br>
+        <b>4,500 CFOs in Alberta.</b> NRCB inspection cycles. No AI compliance tool.
+      </h1>
+      <p class="sector-tag">
+        Confined feeding operations in Alberta require <b>NRCB operating approval</b> and annual compliance under AOPA (Agricultural Operations Practices Act). Manure management plans, water setback calculations, and nutrient application records — all document-heavy, all inspection-driven. <b>Mountain View County has the highest CFO density in the province.</b>
+      </p>
+    </div>
+    <div class="sector-stats">
+      <div class="ss-cell">
+        <div class="ss-label">Alberta CFOs</div>
+        <div class="ss-val">~4,500<small>NRCB operating approval</small></div>
+      </div>
+      <div class="ss-cell">
+        <div class="ss-label">Mtn View Co. CFOs</div>
+        <div class="ss-val">~350<small>highest density in AB</small></div>
+      </div>
+      <div class="ss-cell">
+        <div class="ss-label">Avg NRCB violation cost</div>
+        <div class="ss-val">$45K<small>remediation + production loss</small></div>
+      </div>
+      <div class="ss-cell">
+        <div class="ss-label">Replication</div>
+        <div class="ss-val">~55%<small>vs. AlgoPharma™</small></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sector-body">
+    <div class="sb-panel">
+      <div class="sb-title sage">// Why no competitor exists</div>
+      <p>
+        NRCB has a public website. Alberta Agriculture publishes fact sheets. <b>No intelligence layer exists over any of it.</b> No tool lets a CFO operator check their manure management plan against AOPA Schedule 1 storage requirements or verify water setbacks against the Water Act.
+      </p>
+      <div class="hl sage">
+        <b>The opening:</b> An NRCB operating approval violation triggers a production shutdown order. Remediation averages $45K. For a 2,500-head beef operation doing $2M/year, <b>EnviroAssist at $3K/month is insurance that pays for itself on the first avoided shutdown.</b>
+      </div>
+      <p style="font-style:italic;color:var(--ink);border-left:2px solid var(--s3);padding:10px 14px;background:rgba(13,148,136,0.06);margin-top:14px;">
+        "EnviroAssist is the <b>pre-inspection gap check that NRCB's website cannot be</b> — checks my actual plan against the actual regulation before the inspector arrives."
+      </p>
+    </div>
+
+    <div class="sb-panel">
+      <div class="sb-title sage">// Three questions a CFO operator asks</div>
+      <ul class="sage">
+        <li><div><b>"Does our manure storage plan meet AOPA Schedule 1 capacity requirements for 2,500 beef cattle?"</b></div></li>
+        <li><div><b>"Is our water licence sufficient for the irrigation expansion we're planning under Water Act Section 52?"</b></div></li>
+        <li><div><b>"Does our CFO operating approval cover the expansion to an additional 500 head?"</b></div></li>
+      </ul>
+    </div>
+
+    <div class="sb-panel">
+      <div class="sb-title sage">// The compounding moat</div>
+      <p>AOPA + NRCB regulations update <b>annually</b>. We re-ingest every update in 24 hrs — all customers inherit it instantly.</p>
+      <p>When one customer's operating approval fails an NRCB inspection, that gap pattern joins the detection layer. <b>Every central Alberta CFO operator makes the next one smarter.</b></p>
+      <p>Olds College Land Management and Environmental Sciences programs train the technicians who design and manage these systems — a natural channel for the first customer cohort.</p>
+    </div>
+
+    <div class="sb-panel">
+      <div class="sb-title sage">// Olds region target</div>
+      <p><b>Confined feeding operations, 500–5,000 animal units.</b> Mountain View County (~350 CFOs), Red Deer County (~280), Lacombe County (~200) — the most concentrated CFO market in Canada within 100km of Olds. Farm owner or agri-business operations director is the buyer. <b>Olds College Environmental Sciences alumni design these compliance programs.</b></p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     SLIDE 7 — THE PRODUCT
+     ════════════════════════════════════════════ -->
+<section class="slide">
+  <div class="slide-num"><span>07</span> / 09 · the product</div>
+  <div class="kicker">// what we ship</div>
+  <h1 class="slide-h">
+    <em>One product</em>, three regulatory skins.<br>
+    <b>Same engine</b>, swap the corpus.
+  </h1>
+  <p class="deck-h">MuniAssist, SafetyAssist, and EnviroAssist are <b>corpus configurations of one production engine</b> — not separate products. That's what makes simultaneous go-to-market viable across central Alberta's municipalities, farms, and environmental operations.</p>
+
+  <div class="product-frame">
+    <div class="pf-l">
+      <div class="pf-title">A single answer pane.<br>Cited. <em>Auditable.</em> 6 seconds.</div>
+      <p>
+        Every answer cites the regulation clause and the operator's own policy document. No hallucinated citations — if no source exists, we say so.
+      </p>
+      <p>
+        The same UI ships to all three sectors. Branding, corpus, and question templates change. Onboarding a fourth sector: <b>3 weeks corpus engineering + 1 week UX polish.</b>
+      </p>
+      <div class="chat-mock">
+        <div class="chat-head">
+          <span>muniassist · live demo</span>
+          <b>● answering</b>
+        </div>
+        <div class="chat-body">
+          <div class="chat-q">Does our land use bylaw permit a secondary suite in an AG-1 zone under Section 640 of the MGA?</div>
+          <div class="chat-a"><b>Not permitted as written.</b> Your LUB Schedule A defines AG-1 as restricted to principal dwellings only<span class="src">LUB Schedule A §3.1</span>, and MGA §640(1) requires explicit discretionary or permitted use designation for secondary suites to be allowed.<span class="src">MGA §640</span><br>Recommend: add secondary suite as discretionary use in AG-1 through a bylaw amendment. <b>Estimated council process: 6–8 weeks.</b></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pf-r">
+      <div class="pf-title">One engine.<br><em>Every regulated sector.</em></div>
+      <p style="font-size:0.9rem;color:var(--muted);margin-bottom:20px;font-weight:300;">
+        AlgoPharma™ is the first corpus configuration. MuniAssist, SafetyAssist, and EnviroAssist are the next three. Each new sector is a corpus build — the Q&amp;A engine, audit trail, and answer UI ship unchanged.
+      </p>
+
+      <div style="border:1px solid var(--line2);">
+        <div style="padding:18px 20px;border-bottom:1px solid var(--line);">
+          <div style="font-family:'Space Mono',monospace;font-size:0.58rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--s1);margin-bottom:6px;">What transfers sector to sector</div>
+          <div style="font-size:0.88rem;color:var(--ink);font-weight:400;line-height:1.6;">Q&amp;A engine · Audit trail · Answer UI · Deployment pipeline · Security model · Customer onboarding</div>
+        </div>
+        <div style="padding:18px 20px;border-bottom:1px solid var(--line);">
+          <div style="font-family:'Space Mono',monospace;font-size:0.58rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;">What we build per sector</div>
+          <div style="font-size:0.88rem;color:var(--ink);font-weight:400;line-height:1.6;">Regulatory corpus ingestion · Domain question templates · Sector-specific gap-detection rules</div>
+        </div>
+        <div style="padding:18px 20px;border-bottom:1px solid var(--line);">
+          <div style="font-family:'Space Mono',monospace;font-size:0.58rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--amber);margin-bottom:6px;">Time to onboard a new sector</div>
+          <div style="font-size:0.88rem;color:var(--ink);font-weight:400;line-height:1.6;"><b>3 weeks</b> corpus engineering + <b>1 week</b> UX polish — then the sector ships.</div>
+        </div>
+        <div style="padding:18px 20px;">
+          <div style="font-family:'Space Mono',monospace;font-size:0.58rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;">The compounding advantage</div>
+          <div style="font-size:0.88rem;color:var(--ink);font-weight:400;line-height:1.6;">Every sector we add makes the platform more defensible. Every corpus update flows to all customers instantly. The moat grows with every document we process — from Olds to the rest of agricultural Canada.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     SLIDE 8 — ROADMAP
+     ════════════════════════════════════════════ -->
+<section class="slide">
+  <div class="slide-num"><span>08</span> / 09 · roadmap</div>
+  <div class="kicker">// the plan</div>
+  <h1 class="slide-h">
+    Olds College to central Alberta to the national farm belt.<br>
+    <em>Four phases.</em> <b>One agricultural platform.</b>
+  </h1>
+  <p class="deck-h">
+    Olds College is the anchor — 400+ industry partners, 3,000+ students who graduate into the exact roles that need this product. Mountain View County is the first market. Central Alberta validates the model before we expand to the national agricultural belt.
+  </p>
+
+  <div class="roadmap">
+    <div class="roadmap-line">
+      <div class="rm-step">
+        <div class="rm-num">// Phase 01</div>
+        <div class="rm-when">Launch<small>Olds College pilots</small></div>
+        <div class="rm-desc">
+          <b>MuniAssist pilot</b> with Town of Olds + Mountain View County. MGA + local bylaw corpus complete. <b>SafetyAssist pilot</b> with 5 Mountain View County grain and livestock operations. OHS Code agricultural corpus live. <b>EnviroAssist pilot</b> with Mountain View County CFO operators. AOPA + NRCB corpus complete.
+        </div>
+      </div>
+      <div class="rm-step">
+        <div class="rm-num">// Phase 02</div>
+        <div class="rm-when">Expand<small>Central Alberta</small></div>
+        <div class="rm-desc">
+          MuniAssist expands to Red Deer County, Lacombe County, Clearwater County. SafetyAssist to Red Deer + Ponoka County farm operators. EnviroAssist to Red Deer + Lacombe CFO cluster. <b>Olds College case studies published</b> — proof point for regional expansion.
+        </div>
+      </div>
+      <div class="rm-step">
+        <div class="rm-num">// Phase 03</div>
+        <div class="rm-when">Deepen<small>Alberta-wide agriculture</small></div>
+        <div class="rm-desc">
+          All three products available province-wide. Begin <b>integration partnerships</b> — Farmers Edge (SafetyAssist), NRCB online compliance portal (EnviroAssist), Munisoft (MuniAssist). Build Alberta agricultural reference network. Connect with AFSC and ATB Agriculture division.
+        </div>
+      </div>
+      <div class="rm-step">
+        <div class="rm-num">// Phase 04</div>
+        <div class="rm-when">Scale<small>National farm belt</small></div>
+        <div class="rm-desc">
+          Alberta base becomes the national proof point. SafetyAssist expands to Saskatchewan and Manitoba farm OHS corpora. EnviroAssist adds BC Agricultural Land Commission and Manitoba Water Stewardship. <b>Canada's first national agricultural document intelligence platform.</b>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     SLIDE 9 — CTA
+     ════════════════════════════════════════════ -->
+<section class="slide cta-slide">
+  <div class="slide-num"><span>09</span> / 09 · what's next</div>
+  <div class="kicker">// where we're going</div>
+  <h1 class="slide-h">
+    <em>One proven engine.</em><br>
+    <b>An expanding map of Alberta's agricultural sectors.</b>
+  </h1>
+  <p class="deck-h">AlgoPharma™ proved that regulated operators will pay for document intelligence done right. The same document burden, the same inspection anxiety, and the same absence of AI tools exists in every municipality, farm, and CFO operation in central Alberta.</p>
+
+  <div class="cta-grid">
+    <div class="cta-l">
+      <p>We started in pharmacy because it had the sharpest pain, the clearest corpus, and the fastest path to a paying customer. <b>Every one of those conditions is true again in municipal government, agricultural OHS, and CFO environmental compliance.</b></p>
+      <p>Olds College is the right anchor for this market. Its graduates run the farms, municipalities, and environmental consultancies we're pitching. Its research programs use the same regulatory corpora we're ingesting. <b>It's the densest concentration of our exact buyer in central Alberta.</b></p>
+      <p>Central Alberta validates the agricultural model. Then Saskatchewan, Manitoba, and the national farm belt follow — <b>document intelligence for every regulated operator in Canadian agriculture.</b></p>
+    </div>
+
+    <div class="cta-r">
+      <div class="cta-r-title">The direction, <em>in one view.</em></div>
+      <ol class="ask-list">
+        <li>
+          <b>// PHARMACY — DONE</b>
+          AlgoPharma™ is live. Paying Alberta operators. Corpus built. Model proven.
+        </li>
+        <li>
+          <b>// MUNI + FARM OHS — PHASE 01</b>
+          MuniAssist and SafetyAssist pilot with Olds College ecosystem partners. Town of Olds + Mountain View County farms as first customers.
+        </li>
+        <li>
+          <b>// CFO ENVIRONMENTAL — PHASE 01</b>
+          EnviroAssist launches alongside Muni + Safety. AOPA + NRCB corpus live. Mountain View County CFOs as primary targets.
+        </li>
+        <li>
+          <b>// ALBERTA + NATIONAL FARM BELT</b>
+          Central Alberta validates the model. Red Deer, Lacombe, Ponoka, Stettler counties follow. Then Saskatchewan, Manitoba, and national expansion.
+        </li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="contact-block">
+    <div class="contact-l">
+      We'd love to share more.
+      <small>Algo-Rythmn · Document Intelligence · May 2026</small>
+    </div>
+    <a href="https://algo-rythmn.ai/contact-us" class="btn-primary">Get in touch →</a>
+  </div>
+</section>
+
+<footer>
+  <span>Algo-Rythmn — Olds College Region Document Intelligence Roadmap</span>
+  <span>// AlgoPharma™ · MuniAssist · SafetyAssist · EnviroAssist</span>
+  <span>Prepared May 2026</span>
+</footer>
+
+</div>
+</body>
+</html>
