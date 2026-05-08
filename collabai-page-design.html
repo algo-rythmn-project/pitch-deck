@@ -1,0 +1,3080 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CollabAI — AlgoPharma</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  :root {
+    --teal-900: #064e3b;
+    --teal-800: #065f46;
+    --teal-700: #047857;
+    --teal-600: #059669;
+    --teal-500: #10b981;
+    --teal-400: #34d399;
+    --teal-300: #6ee7b7;
+    --teal-200: #a7f3d0;
+    --teal-100: #d1fae5;
+    --teal-50:  #ecfdf5;
+    --mint-bg:  #f0fbf6;
+
+    --ink-900: #0a1f1a;
+    --ink-800: #14302a;
+    --ink-700: #1f3a33;
+    --ink-600: #344f47;
+    --ink-500: #4a635c;
+    --ink-400: #6b8580;
+    --ink-300: #9bb0ab;
+    --ink-200: #d6e0dd;
+    --ink-100: #eaf0ee;
+    --ink-50:  #f6f9f8;
+
+    --coral:    #ef4444;
+    --coral-soft: #fee2e2;
+    --amber:    #f59e0b;
+    --amber-soft: #fef3c7;
+    --violet:   #7c3aed;
+    --violet-soft: #ede9fe;
+    --sky:      #0ea5e9;
+    --sky-soft: #e0f2fe;
+
+    --upvote: #ff6a3d;
+    --downvote: #6366f1;
+
+    --white: #ffffff;
+    --bg:    #f6f8f7;
+
+    --shadow-sm: 0 1px 2px rgba(6, 78, 59, 0.04), 0 1px 3px rgba(6, 78, 59, 0.06);
+    --shadow-md: 0 4px 6px -1px rgba(6, 78, 59, 0.06), 0 2px 4px -1px rgba(6, 78, 59, 0.04);
+    --shadow-lg: 0 10px 25px -5px rgba(6, 78, 59, 0.08);
+    --shadow-xl: 0 20px 40px -10px rgba(6, 78, 59, 0.12);
+
+    --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --display: 'Plus Jakarta Sans', sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body {
+    font-family: var(--sans);
+    color: var(--ink-900);
+    background: var(--bg);
+    font-size: 14px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+  input, textarea, select { font-family: inherit; }
+
+  /* ============ APP LAYOUT ============ */
+  .app {
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    min-height: 100vh;
+  }
+
+  /* ============ EXACT SIDEBAR (matching screenshots) ============ */
+  .sidebar {
+    background: var(--white);
+    border-right: 1px solid var(--ink-100);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 14px 0;
+    gap: 4px;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+  }
+  .sidebar-logo {
+    width: 36px; height: 36px;
+    display: grid; place-items: center;
+    margin-bottom: 18px;
+    color: var(--teal-600);
+    font-size: 26px;
+    line-height: 1;
+  }
+  .sidebar-logo svg { width: 28px; height: 32px; }
+
+  .nav-icon {
+    width: 40px; height: 40px;
+    border-radius: 8px;
+    display: grid; place-items: center;
+    color: var(--ink-400);
+    font-size: 16px;
+    transition: all 0.15s;
+    margin: 2px 0;
+  }
+  .nav-icon:hover {
+    color: var(--teal-700);
+    background: var(--teal-50);
+  }
+  .nav-icon.active {
+    color: var(--teal-700);
+    background: var(--teal-100);
+  }
+  .nav-spacer { flex: 1; }
+
+  /* ============ MAIN ============ */
+  .main { display: flex; flex-direction: column; min-width: 0; }
+
+  /* ============ TOP BAR ============ */
+  .topbar {
+    height: 56px;
+    background: var(--white);
+    border-bottom: 1px solid var(--ink-100);
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    padding: 0 24px;
+    position: sticky;
+    top: 0;
+    z-index: 60;
+    gap: 16px;
+  }
+  .topbar > .topbar-right {
+    justify-self: end;
+  }
+  .top-search {
+    width: 100%;
+    max-width: 540px;
+    justify-self: center;
+    position: relative;
+  }
+  .top-search input {
+    width: 100%;
+    padding: 8px 14px 8px 38px;
+    border: 1px solid var(--ink-200);
+    border-radius: 999px;
+    font-size: 13px;
+    background: var(--ink-50);
+    transition: all 0.15s;
+  }
+  .top-search input:focus {
+    outline: none;
+    background: white;
+    border-color: var(--teal-400);
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+  }
+  .top-search i {
+    position: absolute;
+    left: 14px; top: 50%;
+    transform: translateY(-50%);
+    color: var(--ink-400);
+    font-size: 13px;
+  }
+  .topbar-right { display: flex; align-items: center; gap: 10px; }
+  .pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 6px 12px;
+    background: var(--teal-100);
+    color: var(--teal-700);
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .icon-btn {
+    width: 34px; height: 34px;
+    border-radius: 8px;
+    display: grid; place-items: center;
+    color: var(--ink-500);
+    border: 1px solid var(--ink-100);
+    background: var(--white);
+  }
+  .icon-btn:hover { color: var(--teal-700); border-color: var(--teal-300); }
+  .user-chip {
+    display: flex; align-items: center; gap: 8px;
+    padding: 4px 10px 4px 4px;
+    border: 1px solid var(--ink-100);
+    border-radius: 999px;
+    background: var(--white);
+  }
+  .user-chip .avatar {
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--teal-500), var(--teal-700));
+    color: white;
+    display: grid; place-items: center;
+    font-size: 11px; font-weight: 700;
+  }
+  .user-chip .name { font-size: 13px; font-weight: 600; }
+  .user-chip .badge {
+    background: var(--coral);
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 999px;
+  }
+
+  /* ============ PAGE LAYOUT ============ */
+  .page {
+    display: grid;
+    grid-template-columns: 240px 1fr 320px;
+    gap: 24px;
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+    padding: 20px 24px 60px;
+    align-items: start;
+  }
+
+  /* ============ LEFT NAV (community list) ============ */
+  .lnav {
+    position: sticky;
+    top: 76px;
+    background: white;
+    border: 1px solid var(--ink-100);
+    border-radius: 12px;
+    padding: 8px;
+    max-height: calc(100vh - 92px);
+    overflow-y: auto;
+  }
+  .lnav-section { padding: 6px 0; }
+  .lnav-section + .lnav-section { border-top: 1px solid var(--ink-100); margin-top: 6px; padding-top: 12px; }
+  .lnav-title {
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-400);
+    font-weight: 700;
+    margin: 4px 12px 6px;
+  }
+  .lnav-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    color: var(--ink-700);
+    font-size: 13.5px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.12s;
+    width: 100%;
+    text-align: left;
+  }
+  .lnav-item:hover { background: var(--ink-50); }
+  .lnav-item.active {
+    background: var(--teal-100);
+    color: var(--teal-900);
+    font-weight: 600;
+  }
+  .lnav-item i { width: 16px; text-align: center; color: var(--ink-400); font-size: 13px; }
+  .lnav-item.active i { color: var(--teal-700); }
+  .lnav-item .count {
+    margin-left: auto;
+    font-size: 11px;
+    color: var(--ink-400);
+    font-weight: 500;
+  }
+  .lnav-item.active .count { color: var(--teal-700); font-weight: 600; }
+
+  .community-icon {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    display: grid; place-items: center;
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .ci-1 { background: linear-gradient(135deg, #10b981, #047857); }
+  .ci-2 { background: linear-gradient(135deg, #0ea5e9, #1e40af); }
+  .ci-3 { background: linear-gradient(135deg, #f59e0b, #b45309); }
+  .ci-4 { background: linear-gradient(135deg, #8b5cf6, #6d28d9); }
+  .ci-5 { background: linear-gradient(135deg, #ec4899, #be185d); }
+  .ci-6 { background: linear-gradient(135deg, #14b8a6, #0f766e); }
+  .ci-7 { background: linear-gradient(135deg, #ef4444, #b91c1c); }
+
+  /* ============ FEED HEADER ============ */
+  .feed { min-width: 0; }
+  .feed-banner {
+    background: linear-gradient(120deg, var(--ink-900) 0%, var(--teal-900) 60%, var(--teal-700) 100%);
+    border-radius: 14px 14px 0 0;
+    height: 92px;
+    position: relative;
+    overflow: hidden;
+  }
+  .feed-banner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 1px 1px, rgba(255,255,255,0.15) 1px, transparent 0);
+    background-size: 22px 22px;
+    opacity: 0.5;
+  }
+  .feed-banner::after {
+    content: '';
+    position: absolute;
+    top: -50px; right: -50px;
+    width: 220px; height: 220px;
+    background: radial-gradient(circle, rgba(110, 231, 183, 0.4), transparent 60%);
+  }
+  .feed-head {
+    background: white;
+    border: 1px solid var(--ink-100);
+    border-top: none;
+    border-radius: 0 0 14px 14px;
+    padding: 16px 20px 18px 92px;
+    position: relative;
+    margin-bottom: 14px;
+  }
+  .feed-avatar {
+    position: absolute;
+    left: 20px; top: -28px;
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--teal-500), var(--teal-700));
+    border: 4px solid white;
+    display: grid; place-items: center;
+    color: white;
+    font-size: 24px;
+    box-shadow: var(--shadow-md);
+  }
+  .feed-title-row {
+    display: flex; align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .feed-title {
+    font-family: var(--display);
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: -0.015em;
+    color: var(--ink-900);
+  }
+  .feed-handle {
+    font-size: 13px;
+    color: var(--ink-500);
+    margin-top: 2px;
+  }
+  .feed-cta-row { display: flex; gap: 8px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 7px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 600;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+  .btn-primary {
+    background: var(--teal-600);
+    color: white;
+  }
+  .btn-primary:hover { background: var(--teal-700); }
+  .btn-dark {
+    background: var(--ink-900);
+    color: white;
+  }
+  .btn-dark:hover { background: var(--ink-700); }
+  .btn-ghost {
+    color: var(--ink-700);
+    border: 1px solid var(--ink-200);
+    background: var(--white);
+  }
+  .btn-ghost:hover { background: var(--ink-50); border-color: var(--ink-300); }
+  .btn-rounded { border-radius: 8px; }
+
+  /* ============ COMPOSER STRIP ============ */
+  .composer-strip {
+    background: white;
+    border: 1px solid var(--ink-100);
+    border-radius: 12px;
+    padding: 10px 14px;
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 12px;
+  }
+  .composer-strip .avatar-md {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--teal-500), var(--teal-700));
+    color: white;
+    display: grid; place-items: center;
+    font-size: 12px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .composer-input {
+    flex: 1;
+    padding: 9px 14px;
+    border: 1px solid var(--ink-200);
+    border-radius: 999px;
+    font-size: 13.5px;
+    color: var(--ink-500);
+    background: var(--ink-50);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .composer-input:hover { background: white; border-color: var(--teal-300); color: var(--ink-900); }
+  .composer-tools {
+    display: flex; gap: 4px;
+  }
+  .composer-tool {
+    width: 34px; height: 34px;
+    border-radius: 8px;
+    color: var(--ink-500);
+    display: grid; place-items: center;
+    font-size: 14px;
+  }
+  .composer-tool:hover { background: var(--ink-50); color: var(--teal-700); }
+
+  /* ============ SORT BAR ============ */
+  .sort-bar {
+    background: white;
+    border: 1px solid var(--ink-100);
+    border-radius: 12px;
+    padding: 6px 8px;
+    display: flex; align-items: center;
+    margin-bottom: 12px;
+    gap: 2px;
+  }
+  .sort-btn {
+    padding: 7px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink-500);
+    display: inline-flex; align-items: center; gap: 6px;
+    transition: all 0.12s;
+  }
+  .sort-btn:hover { background: var(--ink-50); color: var(--ink-900); }
+  .sort-btn.active {
+    background: var(--ink-900);
+    color: white;
+  }
+  .sort-divider { width: 1px; background: var(--ink-100); height: 22px; margin: 0 6px; }
+  .sort-btn-mini {
+    padding: 7px 12px;
+    border-radius: 8px;
+    font-size: 12.5px;
+    color: var(--ink-500);
+    display: inline-flex; align-items: center; gap: 6px;
+    margin-left: auto;
+  }
+  .sort-btn-mini:hover { background: var(--ink-50); color: var(--ink-900); }
+
+  /* ============ POST CARD (Reddit-style) ============ */
+  .post {
+    background: white;
+    border: 1px solid var(--ink-100);
+    border-radius: 12px;
+    margin-bottom: 10px;
+    display: flex;
+    transition: all 0.15s;
+    overflow: visible;
+    position: relative;
+  }
+  .post:hover { border-color: var(--teal-300); }
+
+  /* vote rail */
+  .vote-rail {
+    width: 44px;
+    background: var(--ink-50);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 0;
+    flex-shrink: 0;
+    gap: 2px;
+    border-radius: 12px 0 0 12px;
+  }
+  .vote-btn {
+    width: 30px; height: 30px;
+    border-radius: 6px;
+    display: grid; place-items: center;
+    color: var(--ink-400);
+    font-size: 14px;
+    transition: all 0.12s;
+  }
+  .vote-btn:hover { background: var(--white); color: var(--ink-900); }
+  .vote-btn.up.active { color: var(--upvote); background: rgba(255, 106, 61, 0.1); }
+  .vote-btn.down.active { color: var(--downvote); background: rgba(99, 102, 241, 0.1); }
+  .vote-count {
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--ink-700);
+    padding: 2px 0;
+  }
+  .vote-count.up { color: var(--upvote); }
+  .vote-count.down { color: var(--downvote); }
+
+  .post-body {
+    flex: 1;
+    padding: 12px 16px 14px;
+    min-width: 0;
+  }
+  .post-meta-row {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 12px;
+    color: var(--ink-400);
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+  }
+  .ci-mini {
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    display: grid; place-items: center;
+    color: white;
+    font-size: 9px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .post-meta-row .community {
+    font-size: 12.5px;
+    color: var(--ink-900);
+    font-weight: 700;
+    text-decoration: none;
+  }
+  .post-meta-row .community:hover { color: var(--teal-700); }
+  .post-meta-row .by { color: var(--ink-400); }
+  .post-meta-row .author-link {
+    color: var(--ink-500);
+    font-weight: 500;
+  }
+  .post-meta-row .author-link:hover { color: var(--teal-700); text-decoration: underline; }
+  .post-meta-row .dot { color: var(--ink-300); }
+  .post-meta-row .role-chip {
+    display: inline-flex; align-items: center;
+    padding: 1px 6px;
+    border-radius: 999px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .role-rph { background: var(--teal-100); color: var(--teal-800); }
+  .role-tech { background: var(--sky-soft); color: #075985; }
+  .role-owner { background: var(--amber-soft); color: #92400e; }
+  .role-mod { background: var(--violet-soft); color: #5b21b6; }
+  .verified-badge {
+    color: var(--teal-600);
+    font-size: 11px;
+  }
+
+  .post-pinned {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-size: 11px;
+    color: var(--teal-700);
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  .post-title {
+    font-family: var(--display);
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--ink-900);
+    line-height: 1.3;
+    letter-spacing: -0.005em;
+    margin-bottom: 8px;
+    cursor: pointer;
+  }
+  .post-title:hover { color: var(--teal-700); }
+
+  .post-tags-row { display: flex; gap: 6px; margin-bottom: 10px; flex-wrap: wrap; }
+  .tag {
+    display: inline-flex; align-items: center; gap: 4px;
+    padding: 2px 9px;
+    background: var(--ink-50);
+    color: var(--ink-700);
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .tag.tag-hot { background: var(--coral-soft); color: #991b1b; }
+  .tag.tag-ai { background: linear-gradient(135deg, var(--teal-100), var(--mint-bg)); color: var(--teal-800); border: 1px solid var(--teal-300); }
+  .tag.tag-province { background: var(--sky-soft); color: #075985; }
+  .tag.tag-discussion { background: var(--violet-soft); color: #5b21b6; }
+
+  .post-excerpt {
+    font-size: 13.5px;
+    color: var(--ink-600);
+    line-height: 1.55;
+    margin-bottom: 10px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    cursor: pointer;
+  }
+
+  .post-image {
+    width: 100%;
+    max-height: 320px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, var(--teal-100), var(--ink-100));
+    margin-bottom: 10px;
+    overflow: hidden;
+    display: grid; place-items: center;
+    color: var(--ink-400);
+    font-size: 32px;
+    cursor: pointer;
+    height: 220px;
+  }
+  .post-image i { opacity: 0.6; }
+
+  .post-actions {
+    display: flex; gap: 4px;
+    color: var(--ink-500);
+  }
+  .post-action {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--ink-500);
+    transition: all 0.12s;
+  }
+  .post-action:hover { background: var(--ink-50); color: var(--ink-900); }
+  .post-action i { font-size: 13px; }
+  .post-action.has-ai {
+    background: linear-gradient(135deg, var(--teal-100), var(--mint-bg));
+    color: var(--teal-800);
+    border: 1px solid var(--teal-300);
+  }
+  .post-action.has-ai:hover { background: var(--teal-200); }
+
+  /* ============ RIGHT SIDEBAR ============ */
+  .rside {
+    display: flex; flex-direction: column;
+    gap: 14px;
+    position: sticky;
+    top: 76px;
+    align-self: start;
+    padding-right: 2px;
+  }
+  .rside-card {
+    background: white;
+    border: 1px solid var(--ink-100);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .rside-card-header {
+    padding: 12px 16px;
+    background: var(--ink-50);
+    border-bottom: 1px solid var(--ink-100);
+    font-size: 11.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-700);
+    font-weight: 700;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .rside-card-body { padding: 14px 16px; }
+
+  /* upgrade card */
+  .upgrade-card {
+    background: linear-gradient(135deg, var(--ink-900) 0%, var(--teal-900) 100%);
+    color: white;
+    border: none;
+    position: relative;
+    overflow: hidden;
+  }
+  .upgrade-card::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 180px; height: 180px;
+    background: radial-gradient(circle, rgba(16, 185, 129, 0.4), transparent 70%);
+    pointer-events: none;
+  }
+  .upgrade-card::after {
+    content: '';
+    position: absolute;
+    bottom: -50px; left: -30px;
+    width: 140px; height: 140px;
+    background: radial-gradient(circle, rgba(110, 231, 183, 0.2), transparent 70%);
+    pointer-events: none;
+  }
+  .upgrade-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 4px 10px;
+    background: rgba(110, 231, 183, 0.15);
+    border-radius: 999px;
+    font-size: 10.5px;
+    font-weight: 700;
+    color: var(--teal-300);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 10px;
+    position: relative;
+  }
+  .upgrade-card-body { padding: 18px; position: relative; }
+  .upgrade-headline {
+    font-family: var(--display);
+    font-size: 20px;
+    line-height: 1.2;
+    font-weight: 800;
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+  }
+  .upgrade-headline em {
+    font-style: normal;
+    color: var(--teal-300);
+  }
+  .upgrade-sub {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 14px;
+    line-height: 1.5;
+  }
+  .upgrade-features { display: flex; flex-direction: column; gap: 7px; margin-bottom: 16px; }
+  .upgrade-feat {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 12.5px;
+    color: rgba(255, 255, 255, 0.9);
+  }
+  .upgrade-feat i { color: var(--teal-300); font-size: 11px; width: 14px; }
+  .upgrade-cta {
+    width: 100%;
+    padding: 10px 14px;
+    background: white;
+    color: var(--ink-900);
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 700;
+    transition: all 0.2s;
+    display: inline-flex; justify-content: center; align-items: center; gap: 8px;
+  }
+  .upgrade-cta:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
+
+  /* about community */
+  .stat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 14px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--ink-100);
+  }
+  .stat-item .num {
+    font-family: var(--display);
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--ink-900);
+    letter-spacing: -0.01em;
+  }
+  .stat-item .lbl {
+    font-size: 11px;
+    color: var(--ink-500);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+    margin-top: 2px;
+  }
+  .about-text {
+    font-size: 13px;
+    color: var(--ink-600);
+    line-height: 1.55;
+    margin-bottom: 12px;
+  }
+  .rules-list { list-style: none; counter-reset: r; }
+  .rules-list li {
+    counter-increment: r;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--ink-100);
+    font-size: 13px;
+    color: var(--ink-700);
+    display: flex; gap: 10px;
+  }
+  .rules-list li:last-child { border-bottom: none; }
+  .rules-list li::before {
+    content: counter(r);
+    flex-shrink: 0;
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: var(--ink-100);
+    color: var(--ink-700);
+    display: grid; place-items: center;
+    font-size: 11px;
+    font-weight: 700;
+  }
+
+  /* mod list */
+  .mod-row {
+    display: flex; align-items: center; gap: 10px;
+    padding: 8px 0;
+  }
+  .mod-row + .mod-row { border-top: 1px solid var(--ink-100); }
+  .avatar-sm {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    display: grid; place-items: center;
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .avatar-1 { background: linear-gradient(135deg, #10b981, #047857); }
+  .avatar-2 { background: linear-gradient(135deg, #0ea5e9, #1e40af); }
+  .avatar-3 { background: linear-gradient(135deg, #f59e0b, #b45309); }
+  .avatar-4 { background: linear-gradient(135deg, #8b5cf6, #6d28d9); }
+  .avatar-5 { background: linear-gradient(135deg, #ec4899, #be185d); }
+  .avatar-6 { background: linear-gradient(135deg, #14b8a6, #0f766e); }
+  .mod-row .name { font-size: 13px; font-weight: 600; color: var(--ink-900); }
+  .mod-row .role { font-size: 11px; color: var(--ink-400); }
+
+  /* ============ MODALS ============ */
+  .modal-bg {
+    position: fixed; inset: 0;
+    background: rgba(10, 31, 26, 0.55);
+    backdrop-filter: blur(6px);
+    z-index: 100;
+    display: none;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 60px 20px 40px;
+    overflow-y: auto;
+  }
+  .modal-bg.open { display: flex; }
+  .modal {
+    background: white;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 720px;
+    box-shadow: var(--shadow-xl);
+    overflow: hidden;
+    animation: slideUp 0.22s ease;
+  }
+  @keyframes slideUp {
+    from { transform: translateY(16px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+  .modal-head {
+    padding: 18px 22px;
+    border-bottom: 1px solid var(--ink-100);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .modal-head h3 {
+    font-family: var(--display);
+    font-size: 18px;
+    font-weight: 800;
+  }
+  .modal-close {
+    width: 30px; height: 30px;
+    border-radius: 8px;
+    color: var(--ink-500);
+    display: grid; place-items: center;
+  }
+  .modal-close:hover { background: var(--ink-50); color: var(--ink-900); }
+  .modal-body { padding: 20px 22px; }
+
+  /* compose tabs */
+  .compose-tabs {
+    display: flex;
+    border-bottom: 1px solid var(--ink-100);
+    margin: 0 -22px 18px;
+    padding: 0 22px;
+    gap: 4px;
+  }
+  .compose-tab {
+    padding: 10px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink-500);
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    display: inline-flex; align-items: center; gap: 7px;
+    transition: all 0.12s;
+  }
+  .compose-tab:hover { color: var(--ink-900); }
+  .compose-tab.active {
+    color: var(--teal-700);
+    border-bottom-color: var(--teal-600);
+  }
+  .field { margin-bottom: 14px; }
+  .field label {
+    display: block;
+    font-size: 11.5px;
+    font-weight: 700;
+    color: var(--ink-700);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 6px;
+  }
+  .field input, .field textarea, .field select {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1.5px solid var(--ink-200);
+    border-radius: 10px;
+    font-size: 14px;
+    color: var(--ink-900);
+    background: var(--white);
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  .field input:focus, .field textarea:focus, .field select:focus {
+    outline: none;
+    border-color: var(--teal-500);
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+  }
+  .field textarea { min-height: 130px; resize: vertical; font-family: inherit; line-height: 1.55; }
+  .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .tag-pick { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag-opt {
+    padding: 5px 11px;
+    border: 1.5px solid var(--ink-200);
+    background: var(--white);
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ink-700);
+    transition: all 0.12s;
+  }
+  .tag-opt:hover { border-color: var(--teal-400); }
+  .tag-opt.selected {
+    background: var(--teal-100);
+    border-color: var(--teal-500);
+    color: var(--teal-800);
+  }
+  .modal-foot {
+    padding: 14px 22px;
+    background: var(--ink-50);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--ink-100);
+    gap: 12px;
+  }
+  .modal-foot .helper { font-size: 12px; color: var(--ink-500); }
+
+  /* ============ POST DETAIL ============ */
+  .detail-modal { max-width: 860px; }
+  .detail-body { padding: 24px 28px; max-height: 76vh; overflow-y: auto; }
+  .detail-meta-row {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 12.5px;
+    color: var(--ink-500);
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+  }
+  .detail-title {
+    font-family: var(--display);
+    font-size: 24px;
+    font-weight: 800;
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+    margin-bottom: 12px;
+  }
+  .detail-content {
+    font-size: 14.5px;
+    line-height: 1.7;
+    color: var(--ink-700);
+    margin-bottom: 18px;
+  }
+  .detail-content p { margin-bottom: 12px; }
+  .detail-content code {
+    font-family: var(--mono);
+    background: var(--ink-50);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 13px;
+  }
+  .detail-content strong { color: var(--ink-900); }
+  .detail-actions {
+    display: flex; gap: 4px;
+    padding: 10px 0;
+    border-top: 1px solid var(--ink-100);
+    border-bottom: 1px solid var(--ink-100);
+    margin-bottom: 18px;
+  }
+  .detail-vote {
+    display: inline-flex; align-items: center; gap: 4px;
+    background: var(--ink-50);
+    border-radius: 999px;
+    padding: 4px;
+  }
+  .detail-vote .vote-btn { width: 26px; height: 26px; }
+
+  /* AI box */
+  .ai-box {
+    background: linear-gradient(135deg, var(--mint-bg), var(--white));
+    border: 1.5px solid var(--teal-300);
+    border-radius: 14px;
+    padding: 16px;
+    margin: 0 0 22px;
+    position: relative;
+    overflow: hidden;
+  }
+  .ai-box::before {
+    content: '';
+    position: absolute;
+    top: -30px; right: -30px;
+    width: 140px; height: 140px;
+    background: radial-gradient(circle, var(--teal-200), transparent 70%);
+    opacity: 0.5;
+  }
+  .ai-box-head {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 8px;
+    position: relative;
+  }
+  .ai-icon {
+    width: 30px; height: 30px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, var(--ink-900), var(--teal-700));
+    color: white;
+    display: grid; place-items: center;
+    font-size: 12px;
+  }
+  .ai-box-title {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--ink-900);
+    display: flex; align-items: center; gap: 6px;
+  }
+  .ai-box-title .pro-badge {
+    background: var(--ink-900);
+    color: var(--teal-300);
+    font-size: 9.5px;
+    font-weight: 800;
+    padding: 2px 7px;
+    border-radius: 999px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .ai-box-sub { font-size: 11.5px; color: var(--ink-500); }
+
+  .ai-locked-blur {
+    filter: blur(5px);
+    user-select: none;
+    color: var(--ink-500);
+    font-size: 13px;
+    line-height: 1.6;
+    background: white;
+    border-radius: 10px;
+    padding: 14px;
+    margin-top: 10px;
+    border: 1px solid var(--ink-100);
+    min-height: 120px;
+  }
+  .ai-lock-overlay {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    text-align: center;
+    padding: 60px 20px 16px;
+    background: linear-gradient(to bottom, transparent, white 35%);
+    z-index: 2;
+  }
+  .ai-lock-overlay .lock-icon {
+    width: 38px; height: 38px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, var(--ink-900), var(--teal-700));
+    color: white;
+    display: grid; place-items: center;
+    font-size: 14px;
+    margin: 0 auto 8px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  }
+  .ai-lock-overlay .msg {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--ink-900);
+    margin-bottom: 4px;
+  }
+  .ai-lock-overlay .sub {
+    font-size: 12.5px;
+    color: var(--ink-500);
+    max-width: 360px;
+    margin: 0 auto 12px;
+  }
+
+  .ai-answer {
+    font-size: 13.5px;
+    line-height: 1.65;
+    color: var(--ink-700);
+    margin-top: 10px;
+    background: white;
+    border-radius: 10px;
+    padding: 14px;
+    border: 1px solid var(--teal-200);
+    position: relative;
+  }
+  .ai-answer p { margin-bottom: 8px; }
+  .ai-answer p:last-child { margin-bottom: 0; }
+  .ai-citations {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px dashed var(--teal-300);
+    display: flex; flex-wrap: wrap; gap: 6px;
+  }
+  .citation {
+    font-size: 11px;
+    background: var(--mint-bg);
+    border: 1px solid var(--teal-300);
+    color: var(--teal-800);
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-family: var(--mono);
+  }
+  .ai-feedback {
+    margin-top: 10px;
+    display: flex; gap: 8px; align-items: center;
+    font-size: 12px;
+    color: var(--ink-500);
+  }
+  .ai-feedback button {
+    width: 26px; height: 26px;
+    border-radius: 6px;
+    color: var(--ink-500);
+  }
+  .ai-feedback button:hover { background: var(--ink-50); color: var(--ink-900); }
+
+  /* COMMENTS */
+  .comments-head {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 12px;
+  }
+  .comments-title {
+    font-family: var(--display);
+    font-size: 16px;
+    font-weight: 800;
+  }
+  .comments-title .count { color: var(--ink-400); font-weight: 500; }
+  .comment-composer-top {
+    display: flex; gap: 12px;
+    margin-bottom: 18px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--ink-100);
+  }
+  .comment-composer-top textarea {
+    flex: 1;
+    min-height: 70px;
+    padding: 12px 14px;
+    border: 1.5px solid var(--ink-200);
+    border-radius: 12px;
+    font-size: 13.5px;
+    color: var(--ink-900);
+    resize: vertical;
+    font-family: inherit;
+    line-height: 1.55;
+  }
+  .comment-composer-top textarea:focus {
+    outline: none; border-color: var(--teal-500);
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+  }
+
+  /* threaded comments */
+  .comment-thread { display: flex; flex-direction: column; gap: 4px; }
+  .comment {
+    display: flex; gap: 10px;
+    padding: 10px 0;
+    position: relative;
+  }
+  .comment.reply {
+    margin-left: 28px;
+    padding-left: 16px;
+    border-left: 2px solid var(--ink-100);
+  }
+  .comment.reply.reply-2 {
+    margin-left: 56px;
+  }
+  .comment-body { flex: 1; min-width: 0; }
+  .comment-head {
+    display: flex; align-items: center; gap: 6px;
+    margin-bottom: 3px;
+    flex-wrap: wrap;
+    font-size: 12px;
+    color: var(--ink-400);
+  }
+  .comment-author { font-size: 12.5px; font-weight: 700; color: var(--ink-900); }
+  .comment-text { font-size: 13.5px; line-height: 1.55; color: var(--ink-700); margin-bottom: 6px; }
+  .comment-actions { display: flex; gap: 4px; align-items: center; }
+  .comment-vote {
+    display: inline-flex; align-items: center; gap: 2px;
+    background: var(--ink-50);
+    border-radius: 999px;
+    padding: 2px;
+  }
+  .comment-vote button {
+    width: 22px; height: 22px;
+    border-radius: 999px;
+    color: var(--ink-400);
+    font-size: 11px;
+    display: grid; place-items: center;
+  }
+  .comment-vote button:hover { color: var(--ink-900); }
+  .comment-vote .num {
+    font-size: 11.5px;
+    font-weight: 700;
+    color: var(--ink-700);
+    padding: 0 6px;
+  }
+  .comment-vote button.up.active { color: var(--upvote); }
+  .comment-vote button.down.active { color: var(--downvote); }
+  .comment-action {
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    color: var(--ink-500);
+    font-weight: 600;
+    display: inline-flex; align-items: center; gap: 5px;
+  }
+  .comment-action:hover { background: var(--ink-50); color: var(--ink-900); }
+
+
+  /* fade in */
+  .fade-in { animation: fadeIn 0.3s ease; }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* responsive */
+  @media (max-width: 1180px) {
+    .page { grid-template-columns: 220px 1fr; }
+    .rside { display: none; }
+  }
+  @media (max-width: 820px) {
+    .page { grid-template-columns: 1fr; padding: 16px; }
+    .lnav { display: none; }
+    .top-search { max-width: none; }
+  }
+
+  ::-webkit-scrollbar { width: 8px; height: 8px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--ink-200); border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--ink-300); }
+
+  /* ============ INTERACTIVE STATES (added) ============ */
+
+  /* Joined button state */
+  .btn-ghost.joined {
+    background: var(--teal-100);
+    border-color: var(--teal-400);
+    color: var(--teal-800);
+  }
+  .btn-ghost.joined:hover {
+    background: var(--coral-soft);
+    border-color: var(--coral);
+    color: #991b1b;
+  }
+
+  /* Bookmark/save active state */
+  .post-action.saved,
+  .comment-action.saved {
+    color: var(--amber);
+    background: var(--amber-soft);
+  }
+  .post-action.saved i,
+  .comment-action.saved i { font-weight: 900; }
+
+  /* Hidden post when removed */
+  .post.removing {
+    opacity: 0;
+    transform: translateY(-8px);
+    transition: all 0.25s ease;
+    pointer-events: none;
+  }
+
+  /* Dropdown / popover */
+  .popover {
+    position: absolute;
+    background: white;
+    border: 1px solid var(--ink-100);
+    border-radius: 12px;
+    box-shadow: var(--shadow-xl);
+    min-width: 200px;
+    padding: 6px;
+    z-index: 80;
+    animation: popIn 0.14s ease;
+  }
+  @keyframes popIn {
+    from { opacity: 0; transform: translateY(-4px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .popover-item {
+    display: flex; align-items: center; gap: 10px;
+    width: 100%;
+    padding: 9px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    color: var(--ink-700);
+    text-align: left;
+    transition: background 0.1s;
+  }
+  .popover-item:hover { background: var(--ink-50); color: var(--ink-900); }
+  .popover-item i { width: 14px; text-align: center; color: var(--ink-400); font-size: 12px; }
+  .popover-item.danger { color: var(--coral); }
+  .popover-item.danger:hover { background: var(--coral-soft); color: #991b1b; }
+  .popover-item.danger i { color: var(--coral); }
+  .popover-divider { height: 1px; background: var(--ink-100); margin: 4px 8px; }
+  .popover-check { margin-left: auto; color: var(--teal-600); font-size: 11px; }
+
+  /* Wrapper for buttons that anchor a popover */
+  .popover-anchor { position: relative; display: inline-block; }
+
+  /* Search dropdown for top search */
+  .search-results {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0; right: 0;
+    background: white;
+    border: 1px solid var(--ink-100);
+    border-radius: 12px;
+    box-shadow: var(--shadow-xl);
+    overflow: hidden;
+    z-index: 70;
+    max-height: 360px;
+    overflow-y: auto;
+    animation: popIn 0.14s ease;
+  }
+  .search-result-section {
+    padding: 6px 4px;
+  }
+  .search-result-section + .search-result-section { border-top: 1px solid var(--ink-100); }
+  .search-result-label {
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-400);
+    font-weight: 700;
+    padding: 6px 12px 4px;
+  }
+  .search-result-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    color: var(--ink-700);
+    cursor: pointer;
+    margin: 0 4px;
+  }
+  .search-result-item:hover { background: var(--ink-50); }
+  .search-result-item .ci-mini-sm {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    display: grid; place-items: center;
+    color: white; font-size: 10px; flex-shrink: 0;
+  }
+  .search-result-item .res-meta {
+    margin-left: auto;
+    font-size: 11px;
+    color: var(--ink-400);
+  }
+  .search-empty {
+    padding: 24px 12px;
+    text-align: center;
+    color: var(--ink-400);
+    font-size: 13px;
+  }
+
+  /* Notifications popover */
+  .notif-popover {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    width: 360px;
+    max-height: 460px;
+    overflow-y: auto;
+    background: white;
+    border: 1px solid var(--ink-100);
+    border-radius: 14px;
+    box-shadow: var(--shadow-xl);
+    z-index: 80;
+    animation: popIn 0.14s ease;
+  }
+  .notif-head {
+    padding: 14px 16px 10px;
+    border-bottom: 1px solid var(--ink-100);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .notif-head h4 {
+    font-family: var(--display);
+    font-size: 14px;
+    font-weight: 800;
+  }
+  .notif-head button {
+    font-size: 11.5px;
+    font-weight: 600;
+    color: var(--teal-700);
+  }
+  .notif-head button:hover { color: var(--teal-900); text-decoration: underline; }
+  .notif-item {
+    display: flex; gap: 10px;
+    padding: 11px 16px;
+    border-bottom: 1px solid var(--ink-100);
+    cursor: pointer;
+    transition: background 0.1s;
+  }
+  .notif-item:hover { background: var(--ink-50); }
+  .notif-item.unread { background: var(--teal-50); }
+  .notif-item.unread:hover { background: var(--teal-100); }
+  .notif-item:last-child { border-bottom: none; }
+  .notif-icon {
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    display: grid; place-items: center;
+    color: white;
+    font-size: 11px;
+    flex-shrink: 0;
+  }
+  .notif-text { font-size: 13px; color: var(--ink-700); line-height: 1.45; }
+  .notif-text strong { color: var(--ink-900); }
+  .notif-time { font-size: 11.5px; color: var(--ink-400); margin-top: 3px; }
+
+  /* User menu */
+  .user-chip { cursor: pointer; transition: all 0.12s; }
+  .user-chip:hover { border-color: var(--teal-300); background: var(--teal-50); }
+
+  /* Pharmacy switcher */
+  .pharmacy-popover {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    width: 280px;
+    background: white;
+    border: 1px solid var(--ink-100);
+    border-radius: 14px;
+    box-shadow: var(--shadow-xl);
+    overflow: hidden;
+    z-index: 80;
+    animation: popIn 0.14s ease;
+  }
+  .pharmacy-popover .ph-head {
+    padding: 12px 16px;
+    background: var(--ink-50);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-500);
+    font-weight: 700;
+    border-bottom: 1px solid var(--ink-100);
+  }
+  .pharmacy-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 11px 14px;
+    cursor: pointer;
+    border-bottom: 1px solid var(--ink-100);
+    transition: background 0.1s;
+  }
+  .pharmacy-item:hover { background: var(--ink-50); }
+  .pharmacy-item:last-child { border-bottom: none; }
+  .pharmacy-item.active { background: var(--teal-50); }
+  .pharmacy-item .ph-icon {
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    display: grid; place-items: center;
+    background: linear-gradient(135deg, var(--teal-500), var(--teal-700));
+    color: white; font-size: 12px;
+    flex-shrink: 0;
+  }
+  .pharmacy-item .ph-name { font-size: 13px; font-weight: 600; color: var(--ink-900); }
+  .pharmacy-item .ph-sub { font-size: 11.5px; color: var(--ink-400); }
+  .pharmacy-item.active .ph-check {
+    margin-left: auto; color: var(--teal-600); font-size: 13px;
+  }
+
+  /* Vote button now also has a press animation */
+  .vote-btn:active { transform: scale(0.92); }
+  .post-action:active { transform: scale(0.96); }
+  .btn:active { transform: scale(0.97); }
+  .nav-icon:active { transform: scale(0.92); }
+
+  /* AI lock overlay needs a Pro CTA pulse */
+  @keyframes proPulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.5); }
+    50% { box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+  }
+  .pulse-cta { animation: proPulse 2s infinite; }
+
+  /* Empty feed state when filtered */
+  .feed-empty {
+    background: white;
+    border: 1px dashed var(--ink-200);
+    border-radius: 12px;
+    padding: 40px 20px;
+    text-align: center;
+    color: var(--ink-500);
+  }
+  .feed-empty .icon {
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    background: var(--ink-50);
+    color: var(--ink-400);
+    display: grid; place-items: center;
+    font-size: 18px;
+    margin: 0 auto 12px;
+  }
+  .feed-empty h4 {
+    font-family: var(--display);
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--ink-900);
+    margin-bottom: 6px;
+  }
+  .feed-empty p { font-size: 13px; max-width: 320px; margin: 0 auto; }
+
+  /* Filter pill above feed when a filter is active */
+  .active-filter-bar {
+    display: none;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    background: var(--teal-50);
+    border: 1px solid var(--teal-200);
+    border-radius: 8px;
+    margin-bottom: 10px;
+    font-size: 12.5px;
+    color: var(--teal-800);
+  }
+  .active-filter-bar.show { display: flex; }
+  .active-filter-bar .clear {
+    margin-left: auto;
+    font-weight: 600;
+    color: var(--teal-700);
+  }
+  .active-filter-bar .clear:hover { color: var(--teal-900); text-decoration: underline; }
+
+  /* AI feedback button states */
+  .ai-feedback button.up.active { color: var(--teal-600); background: var(--teal-50); }
+  .ai-feedback button.down.active { color: var(--coral); background: var(--coral-soft); }
+</style>
+</head>
+<body>
+
+<div class="app">
+  <!-- ============ EXACT SIDEBAR (matching screenshots) ============ -->
+  <aside class="sidebar">
+    <!-- Logo: caduceus / Rx symbol -->
+    <div class="sidebar-logo" title="AlgoPharma">
+      <svg viewBox="0 0 24 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 2 L12 26 M6 6 L18 6 M8 10 Q8 14 12 14 Q16 14 16 10 M12 14 L8 22 M12 14 L16 22 M16 18 L20 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+
+    <button class="nav-icon" data-nav="Home" title="Home"><i class="fa-solid fa-house"></i></button>
+    <button class="nav-icon" data-nav="SOP" title="SOP"><i class="fa-solid fa-scale-balanced"></i></button>
+    <button class="nav-icon" data-nav="Reports" title="Reports"><i class="fa-regular fa-file-lines"></i></button>
+    <button class="nav-icon" data-nav="Vault" title="Vault"><i class="fa-solid fa-user-shield"></i></button>
+    <button class="nav-icon" data-nav="Library" title="Library"><i class="fa-solid fa-book-bookmark"></i></button>
+    <button class="nav-icon" data-nav="Activity" title="Activity"><i class="fa-solid fa-clock-rotate-left"></i></button>
+
+    <div style="height: 16px;"></div>
+
+    <button class="nav-icon active" data-nav="CollabAI" title="CollabAI"><i class="fa-solid fa-people-group"></i></button>
+
+    <div class="nav-spacer"></div>
+    <button class="nav-icon" data-nav="Settings" title="Settings"><i class="fa-solid fa-sliders"></i></button>
+    <button class="nav-icon" data-nav="Sign out" title="Sign out"><i class="fa-solid fa-arrow-right-from-bracket"></i></button>
+  </aside>
+
+  <!-- ============ MAIN ============ -->
+  <main class="main">
+
+    <!-- TOP BAR -->
+    <div class="topbar">
+      <div></div>
+      <div class="top-search popover-anchor">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" id="topSearchInput" placeholder="Search CollabAI — questions, communities, members..." autocomplete="off" />
+      </div>
+      <div class="topbar-right">
+        <span class="pill"><i class="fa-solid fa-flask"></i> test</span>
+        <div class="popover-anchor">
+          <button class="icon-btn" id="pharmacyBtn" title="Switch pharmacy"><i class="fa-solid fa-building-columns"></i></button>
+        </div>
+        <div class="popover-anchor">
+          <button class="icon-btn" id="notifBtn" title="Notifications" style="position: relative;">
+            <i class="fa-regular fa-bell"></i>
+            <span style="position:absolute; top:-2px; right:-2px; width:8px; height:8px; background:var(--coral); border-radius:50%; border:2px solid white;"></span>
+          </button>
+        </div>
+        <div class="popover-anchor">
+          <div class="user-chip" id="userChipBtn">
+            <div class="avatar">JS</div>
+            <span class="name">123</span>
+            <span class="badge">24</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE -->
+    <div class="page">
+
+      <!-- LEFT: COMMUNITIES NAV -->
+      <aside class="lnav">
+        <div class="lnav-section">
+          <div class="lnav-title">Feeds</div>
+          <button class="lnav-item active" data-feed="home"><i class="fa-solid fa-house"></i> Home <span class="count">All</span></button>
+          <button class="lnav-item" data-feed="popular"><i class="fa-solid fa-fire-flame-curved"></i> Popular</button>
+          <button class="lnav-item" data-feed="trending"><i class="fa-solid fa-arrow-trend-up"></i> Trending</button>
+          <button class="lnav-item" data-feed="unanswered"><i class="fa-solid fa-circle-question"></i> Unanswered <span class="count">87</span></button>
+          <button class="lnav-item" data-feed="ai"><i class="fa-solid fa-wand-magic-sparkles"></i> AI-Answered</button>
+        </div>
+
+        <div class="lnav-section" id="myCommSection">
+          <div class="lnav-title">My Communities</div>
+          <button class="lnav-item" data-community="Compounding">
+            <span class="community-icon ci-1"><i class="fa-solid fa-flask"></i></span>
+            c/Compounding <span class="count">8.4k</span>
+          </button>
+          <button class="lnav-item" data-community="Narcotics">
+            <span class="community-icon ci-3"><i class="fa-solid fa-pills"></i></span>
+            c/Narcotics <span class="count">5.1k</span>
+          </button>
+          <button class="lnav-item" data-community="Injections">
+            <span class="community-icon ci-2"><i class="fa-solid fa-syringe"></i></span>
+            c/Injections <span class="count">3.2k</span>
+          </button>
+          <button class="lnav-item" data-community="Inspections">
+            <span class="community-icon ci-7"><i class="fa-solid fa-clipboard-check"></i></span>
+            c/Inspections <span class="count">6.8k</span>
+          </button>
+          <button class="lnav-item" data-community="SOPs">
+            <span class="community-icon ci-4"><i class="fa-solid fa-file-shield"></i></span>
+            c/SOPs <span class="count">2.9k</span>
+          </button>
+        </div>
+
+        <div class="lnav-section" id="discoverSection">
+          <div class="lnav-title">Discover</div>
+          <button class="lnav-item" data-community="ColdChain">
+            <span class="community-icon ci-6"><i class="fa-solid fa-temperature-half"></i></span>
+            c/ColdChain
+          </button>
+          <button class="lnav-item" data-community="PatientCare">
+            <span class="community-icon ci-5"><i class="fa-solid fa-user-doctor"></i></span>
+            c/PatientCare
+          </button>
+          <button class="lnav-item" data-community="Cannabis">
+            <span class="community-icon ci-2"><i class="fa-solid fa-leaf"></i></span>
+            c/Cannabis
+          </button>
+          <button class="lnav-item" data-community="Pediatric">
+            <span class="community-icon ci-3"><i class="fa-solid fa-baby"></i></span>
+            c/Pediatric
+          </button>
+          <button class="lnav-item" data-community="Veterinary">
+            <span class="community-icon ci-1"><i class="fa-solid fa-paw"></i></span>
+            c/Veterinary
+          </button>
+        </div>
+
+        <div class="lnav-section">
+          <div class="lnav-title">By Province</div>
+          <button class="lnav-item" data-province="Alberta"><i class="fa-solid fa-mountain"></i> Alberta-ACP</button>
+          <button class="lnav-item" data-province="Ontario"><i class="fa-solid fa-tree"></i> Ontario-OCP</button>
+          <button class="lnav-item" data-province="BC"><i class="fa-solid fa-water"></i> BC-CPBC</button>
+          <button class="lnav-item" data-province="Saskatchewan"><i class="fa-solid fa-wheat-awn"></i> Saskatchewan</button>
+          <button class="lnav-item" data-province="Manitoba"><i class="fa-solid fa-snowflake"></i> Manitoba</button>
+          <button class="lnav-item" data-province="Quebec"><i class="fa-solid fa-fleur-de-lis"></i> Quebec-OPQ</button>
+        </div>
+      </aside>
+
+      <!-- CENTER: FEED -->
+      <section class="feed">
+
+        <!-- Community banner -->
+        <div class="feed-banner"></div>
+        <div class="feed-head">
+          <div class="feed-avatar"><i class="fa-solid fa-people-group"></i></div>
+          <div class="feed-title-row">
+            <div>
+              <div class="feed-title">CollabAI</div>
+              <div class="feed-handle">Where Canadian pharmacy professionals talk shop</div>
+            </div>
+            <div class="feed-cta-row" id="feedCtaRow">
+              <button class="btn btn-primary" id="newPostBtn"><i class="fa-solid fa-plus"></i> Create Post</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick composer -->
+        <div class="composer-strip">
+          <div class="avatar-md">JS</div>
+          <div class="composer-input" onclick="openModal('newPostModal')">Create a post — ask the community...</div>
+          <div class="composer-tools">
+            <button class="composer-tool" onclick="openModal('newPostModal')" title="Image"><i class="fa-regular fa-image"></i></button>
+            <button class="composer-tool" onclick="openModal('newPostModal')" title="Link"><i class="fa-solid fa-link"></i></button>
+            <button class="composer-tool" onclick="openModal('newPostModal')" title="Poll"><i class="fa-solid fa-square-poll-vertical"></i></button>
+          </div>
+        </div>
+
+        <!-- Sort bar -->
+        <div class="sort-bar">
+          <button class="sort-btn active" data-sort="hot"><i class="fa-solid fa-fire-flame-curved"></i> Hot</button>
+          <button class="sort-btn" data-sort="new"><i class="fa-solid fa-bolt"></i> New</button>
+          <button class="sort-btn" data-sort="top"><i class="fa-solid fa-arrow-up"></i> Top</button>
+          <button class="sort-btn" data-sort="rising"><i class="fa-solid fa-arrow-trend-up"></i> Rising</button>
+          <div class="sort-divider"></div>
+          <div class="popover-anchor" style="margin-left: auto;">
+            <button class="sort-btn-mini" id="timeFilterBtn" style="margin-left: 0;"><i class="fa-regular fa-clock"></i> <span id="timeFilterLabel">All time</span> <i class="fa-solid fa-chevron-down" style="font-size: 9px;"></i></button>
+          </div>
+        </div>
+
+        <!-- Active filter indicator -->
+        <div class="active-filter-bar" id="activeFilterBar">
+          <i class="fa-solid fa-filter"></i>
+          <span id="activeFilterLabel">Filter</span>
+          <button class="clear" onclick="clearFilter()">Clear <i class="fa-solid fa-xmark"></i></button>
+        </div>
+
+        <!-- POSTS -->
+        <div id="postFeed"></div>
+
+      </section>
+
+      <!-- RIGHT SIDEBAR -->
+      <aside class="rside">
+
+        <!-- UPGRADE -->
+        <div class="rside-card upgrade-card">
+          <div class="upgrade-card-body">
+            <div class="upgrade-eyebrow"><i class="fa-solid fa-bolt"></i> AlgoPharma AI</div>
+            <h3 class="upgrade-headline">Get AI-powered <em>compliance answers</em> in every thread.</h3>
+            <p class="upgrade-sub">Free members read & post. Paid members ask the AI — grounded in ACP sources.</p>
+            <button class="upgrade-cta pulse-cta" onclick="goToPricing()">
+              View Plans <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- ABOUT COMMUNITY -->
+        <div class="rside-card">
+          <div class="rside-card-header"><i class="fa-solid fa-circle-info"></i> About CollabAI</div>
+          <div class="rside-card-body">
+            <p class="about-text">Real questions, real answers — from RPhs, owners, and technicians across every province. Free to read and discuss. No PHI, ever.</p>
+            <div class="stat-grid">
+              <div class="stat-item">
+                <div class="num">4,287</div>
+                <div class="lbl">Members</div>
+              </div>
+              <div class="stat-item">
+                <div class="num">312</div>
+                <div class="lbl">Online now</div>
+              </div>
+              <div class="stat-item">
+                <div class="num">1,932</div>
+                <div class="lbl">Posts</div>
+              </div>
+              <div class="stat-item">
+                <div class="num">10</div>
+                <div class="lbl">Provinces</div>
+              </div>
+            </div>
+            <div style="font-size: 11.5px; color: var(--ink-500); display: flex; justify-content: space-between;">
+              <span>Created Jan 2026</span>
+              <span style="color: var(--teal-700); font-weight: 600;"><i class="fa-solid fa-check-circle"></i> Verified</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- RULES -->
+        <div class="rside-card">
+          <div class="rside-card-header"><i class="fa-solid fa-shield-halved"></i> Bench Rules</div>
+          <div class="rside-card-body" style="padding: 4px 16px;">
+            <ol class="rules-list">
+              <li>No PHI — ever. Anonymize before posting.</li>
+              <li>Cite your province or college when discussing regulation.</li>
+              <li>Disagree on practice, not on people.</li>
+              <li>No advertising or recruiting without mod approval.</li>
+              <li>AI answers are guidance — verify with primary sources.</li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- MODS -->
+        <div class="rside-card">
+          <div class="rside-card-header"><i class="fa-solid fa-user-shield"></i> Moderators</div>
+          <div class="rside-card-body" style="padding: 4px 16px;">
+            <div class="mod-row">
+              <div class="avatar-sm avatar-1">SP</div>
+              <div>
+                <div class="name">u/sarahpatel-rph <i class="fa-solid fa-circle-check verified-badge"></i></div>
+                <div class="role">RPh · Ontario</div>
+              </div>
+            </div>
+            <div class="mod-row">
+              <div class="avatar-sm avatar-3">MK</div>
+              <div>
+                <div class="name">u/marcus_owner_ab</div>
+                <div class="role">Owner · Alberta</div>
+              </div>
+            </div>
+            <div class="mod-row">
+              <div class="avatar-sm avatar-4">JN</div>
+              <div>
+                <div class="name">u/jin_bc_rph <i class="fa-solid fa-circle-check verified-badge"></i></div>
+                <div class="role">RPh · BC</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </aside>
+
+    </div>
+  </main>
+</div>
+
+<!-- ============ NEW POST MODAL ============ -->
+<div class="modal-bg" id="newPostModal">
+  <div class="modal">
+    <div class="modal-head">
+      <h3>Create a post</h3>
+      <button class="modal-close" onclick="closeModal('newPostModal')"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="compose-tabs">
+        <button class="compose-tab active"><i class="fa-regular fa-file-lines"></i> Text</button>
+        <button class="compose-tab"><i class="fa-regular fa-image"></i> Image</button>
+        <button class="compose-tab"><i class="fa-solid fa-link"></i> Link</button>
+        <button class="compose-tab"><i class="fa-solid fa-square-poll-vertical"></i> Poll</button>
+      </div>
+
+      <div class="row-2">
+        <div class="field">
+          <label>Community</label>
+          <select>
+            <option>Compounding</option>
+            <option>Narcotics</option>
+            <option>Injections</option>
+            <option>Inspections</option>
+            <option>SOPs</option>
+            <option>ColdChain</option>
+            <option>PatientCare</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Province / College</label>
+          <select>
+            <option>Alberta — ACP</option>
+            <option>Ontario — OCP</option>
+            <option>British Columbia — CPBC</option>
+            <option>Saskatchewan — SCP</option>
+            <option>Manitoba — CPhM</option>
+            <option>Quebec — OPQ</option>
+            <option>Multi-province / general</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Title</label>
+        <input id="postTitleInput" type="text" placeholder="What's your question or topic?" maxlength="200" />
+      </div>
+      <div class="field">
+        <label>Body <span style="color: var(--ink-400); text-transform: none; font-weight: 500;">(optional)</span></label>
+        <textarea id="postBodyInput" placeholder="Share context — what have you tried, what regulation are you looking at, what's the specific scenario? The more specific, the better the responses."></textarea>
+      </div>
+      <div class="field">
+        <label>Flair <span style="color: var(--ink-400); text-transform: none; font-weight: 500;">(pick up to 2)</span></label>
+        <div class="tag-pick">
+          <button class="tag-opt" onclick="this.classList.toggle('selected')">Question</button>
+          <button class="tag-opt" onclick="this.classList.toggle('selected')">Discussion</button>
+          <button class="tag-opt" onclick="this.classList.toggle('selected')">Help Needed</button>
+          <button class="tag-opt" onclick="this.classList.toggle('selected')">USP 797</button>
+          <button class="tag-opt" onclick="this.classList.toggle('selected')">Methadone</button>
+          <button class="tag-opt" onclick="this.classList.toggle('selected')">Vaccines</button>
+          <button class="tag-opt" onclick="this.classList.toggle('selected')">Audit</button>
+          <button class="tag-opt" onclick="this.classList.toggle('selected')">SOP</button>
+        </div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <span class="helper"><i class="fa-solid fa-shield-halved"></i> No PHI · Be specific · Cite your province</span>
+      <div style="display: flex; gap: 8px;">
+        <button class="btn btn-ghost btn-rounded" onclick="closeModal('newPostModal')">Save Draft</button>
+        <button class="btn btn-dark btn-rounded" onclick="submitPost()"><i class="fa-solid fa-paper-plane"></i> Post</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ POST DETAIL MODAL ============ -->
+<div class="modal-bg" id="detailModal">
+  <div class="modal detail-modal">
+    <div class="modal-head">
+      <h3 id="detailHeadTitle">Post</h3>
+      <button class="modal-close" onclick="closeModal('detailModal')"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="detail-body" id="detailBody"></div>
+  </div>
+</div>
+
+<!-- ============ UPGRADE MODAL ============ -->
+<div class="modal-bg" id="upgradeModal">
+  <div class="modal" style="max-width: 760px;">
+    <div class="modal-head">
+      <h3>Unlock AI Q&A</h3>
+      <button class="modal-close" onclick="closeModal('upgradeModal')"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="modal-body" style="padding: 24px;">
+      <p style="font-size: 14px; color: var(--ink-500); margin-bottom: 22px; max-width: 580px;">Ask the AlgoPharma engine any compliance question — get answers grounded in ACP, OCP, NAPRA, and Health Canada source documents, with citations to primary sources.</p>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px;">
+
+        <div style="border: 1.5px solid var(--ink-200); border-radius: 14px; padding: 22px; position: relative;">
+          <div style="font-family: var(--display); font-size: 18px; font-weight: 800;">Reader</div>
+          <div style="font-size: 11px; color: var(--ink-400); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 700;">Free Forever</div>
+          <div style="font-family: var(--display); font-size: 36px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 16px;">$0<span style="font-size: 14px; color: var(--ink-400); font-weight: 500;">/mo</span></div>
+          <ul style="list-style: none; font-size: 13px; line-height: 1.9; color: var(--ink-700);">
+            <li><i class="fa-solid fa-check" style="color: var(--teal-600); margin-right: 8px;"></i> Read all communities</li>
+            <li><i class="fa-solid fa-check" style="color: var(--teal-600); margin-right: 8px;"></i> Post, comment, vote</li>
+            <li><i class="fa-solid fa-check" style="color: var(--teal-600); margin-right: 8px;"></i> Follow & save</li>
+            <li style="color: var(--ink-300);"><i class="fa-solid fa-xmark" style="margin-right: 8px;"></i> No AI Q&A</li>
+            <li style="color: var(--ink-300);"><i class="fa-solid fa-xmark" style="margin-right: 8px;"></i> No SOP scanning</li>
+          </ul>
+          <button style="margin-top: 18px; width: 100%; padding: 11px; background: var(--ink-50); color: var(--ink-700); border-radius: 999px; font-weight: 700; font-size: 13px;">Current Plan</button>
+        </div>
+
+        <div style="background: linear-gradient(135deg, var(--ink-900), var(--teal-900)); color: white; border-radius: 14px; padding: 22px; position: relative; overflow: hidden;">
+          <div style="position: absolute; top: 12px; right: 12px; background: var(--teal-400); color: var(--ink-900); font-size: 10px; font-weight: 800; padding: 3px 8px; border-radius: 999px; text-transform: uppercase; letter-spacing: 0.06em;">Most Popular</div>
+          <div style="font-family: var(--display); font-size: 18px; font-weight: 800;">Pro</div>
+          <div style="font-size: 11px; color: var(--teal-300); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 700;">For Practicing RPhs</div>
+          <div style="font-family: var(--display); font-size: 36px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 16px;">$39<span style="font-size: 14px; color: rgba(255,255,255,0.6); font-weight: 500;">/mo</span></div>
+          <ul style="list-style: none; font-size: 13px; line-height: 1.9; color: rgba(255,255,255,0.9);">
+            <li><i class="fa-solid fa-check" style="color: var(--teal-300); margin-right: 8px;"></i> Everything in Reader</li>
+            <li><i class="fa-solid fa-bolt" style="color: var(--teal-300); margin-right: 8px;"></i> Unlimited AI Q&A</li>
+            <li><i class="fa-solid fa-bolt" style="color: var(--teal-300); margin-right: 8px;"></i> Cited regulatory sources</li>
+            <li><i class="fa-solid fa-bolt" style="color: var(--teal-300); margin-right: 8px;"></i> SOP scanning + Vault</li>
+            <li><i class="fa-solid fa-bolt" style="color: var(--teal-300); margin-right: 8px;"></i> Pre-inspection intelligence</li>
+          </ul>
+          <button onclick="goToPricing()" style="margin-top: 18px; width: 100%; padding: 11px; background: white; color: var(--ink-900); border-radius: 999px; font-weight: 700; font-size: 13px; cursor: pointer;">Start 14-day trial <i class="fa-solid fa-arrow-right" style="margin-left: 4px;"></i></button>
+        </div>
+
+      </div>
+      <p style="margin-top: 18px; font-size: 12px; color: var(--ink-400); text-align: center;">Annual billing available · Cancel anytime · ACP & OCP CE-eligible threads included</p>
+    </div>
+  </div>
+</div>
+
+<!-- ============ TOAST ============ -->
+<div class="toast" id="toast">
+  <i class="fa-solid fa-circle-check"></i>
+  <span id="toastMsg">Done</span>
+</div>
+
+<script>
+  // ============ DATA ============
+  const POSTS = [
+    {
+      id: 1,
+      pinned: true,
+      community: { name: "Compounding", icon: "ci-1", glyph: "fa-flask" },
+      author: "u/sarahpatel-rph",
+      authorName: "Dr. Sarah Patel",
+      role: "RPh", roleClass: "role-rph", verified: true,
+      avatarClass: "avatar-1", avatarInit: "SP",
+      time: "2h",
+      title: "ACP just updated USP 797 sterile compounding guidance — here's a side-by-side of what actually changed",
+      excerpt: "I spent the morning combing through the new bulletin and comparing it to the November version. The big shifts are around BUDs for low-risk CSPs and the documentation expectations for the master formulation record. Posting a side-by-side here for anyone preparing for inspection in Q2.",
+      tags: [
+        { label: "Discussion", className: "tag-discussion" },
+        { label: "Alberta", className: "tag-province" },
+        { label: "USP 797", className: "" },
+      ],
+      score: 218, comments: 47, hasAI: true,
+      content: `<p>I spent the morning combing through the ACP's updated USP 797 bulletin and comparing it line-by-line to the November 2024 version. There are three substantive changes worth knowing before your next inspection.</p>
+        <p><strong>1. BUDs for low-risk CSPs.</strong> The default beyond-use date guidance for low-risk Category 1 preparations stored at controlled room temperature has been clarified — it now explicitly references the new USP General Chapter, with a max of <code>12 hours</code> from compounding rather than the older 48-hour interpretation many of us had been using.</p>
+        <p><strong>2. Master Formulation Record (MFR) documentation.</strong> The MFR now needs to include explicit reference to the source of the BUD assignment (literature, stability data, or default chapter values). Auditors flagged this on three of the inspections summarized in the December report.</p>
+        <p><strong>3. Personnel competency re-assessment.</strong> Annual re-assessment for sterile compounding is now <em>semi-annual</em> for high-risk CSPs. This is the one most people will get caught off guard by.</p>
+        <p>Curious how others are operationalizing point #3 — are you doing media-fill twice a year for everyone or rotating staff?</p>`,
+      replies: [
+        { author: "u/marcus_owner_ab", role: "Owner", roleClass: "role-owner", avatarClass: "avatar-3", avatarInit: "MK", time: "1h", text: "Thank you for the breakdown. We're rotating media-fill across staff so each person hits semi-annual but we're not doing the whole team at once — keeps us operational.", score: 14,
+          children: [
+            { author: "u/sarahpatel-rph", role: "RPh", roleClass: "role-rph", avatarClass: "avatar-1", avatarInit: "SP", time: "52m", text: "Smart approach. Are you using a tracker spreadsheet or has someone integrated this into their LMS?", score: 6, verified: true,
+              children: [
+                { author: "u/marcus_owner_ab", role: "Owner", roleClass: "role-owner", avatarClass: "avatar-3", avatarInit: "MK", time: "40m", text: "Spreadsheet for now. Looking into the AlgoPharma vault for it actually.", score: 4 }
+              ]
+            }
+          ]
+        },
+        { author: "u/jin_bc_rph", role: "RPh", roleClass: "role-rph", avatarClass: "avatar-4", avatarInit: "JN", time: "47m", text: "Point 1 is huge. We had a near-miss last month because our SOP still referenced the old 48-hour interpretation. Updating ours today.", score: 9, verified: true },
+        { author: "u/aisha_tech_mb", role: "Tech", roleClass: "role-tech", avatarClass: "avatar-5", avatarInit: "AT", time: "22m", text: "Is the new bulletin number published anywhere I can grab the PDF directly? The link on the ACP site goes to a 404 for me.", score: 3 },
+      ]
+    },
+    {
+      id: 2,
+      community: { name: "ColdChain", icon: "ci-6", glyph: "fa-temperature-half" },
+      author: "u/marcus_owner_ab",
+      authorName: "Marcus Kowalski",
+      role: "Owner", roleClass: "role-owner", verified: false,
+      avatarClass: "avatar-3", avatarInit: "MK",
+      time: "5h",
+      title: "Fridge temperature excursion at 4 AM — what's your decision tree?",
+      excerpt: "Got the alert this morning. Excursion was 11 minutes at 9.4°C before the unit recovered. Walking through the stability data on the affected stock now. Curious how others document the call to keep vs discard, especially for vaccines where the manufacturer's response is often 'consult your provincial guidance.'",
+      tags: [
+        { label: "Help Needed", className: "tag-hot", icon: "fa-fire" },
+        { label: "Alberta", className: "tag-province" },
+      ],
+      score: 164, comments: 31, hasAI: true,
+      content: `<p>Got the alert this morning at 4:13 AM. Compressor cycled off, ambient kicked the unit up to 9.4°C for 11 minutes before recovery. Affected stock is mostly travel vaccines and a small inventory of insulins.</p><p>I'm walking through the stability data on each product now and reaching out to manufacturers, but I'd love to hear how others document the keep/discard call — especially for vaccines where the manufacturer's response is often "consult your provincial guidance."</p>`,
+      replies: [
+        { author: "u/sarahpatel-rph", role: "RPh", roleClass: "role-rph", avatarClass: "avatar-1", avatarInit: "SP", time: "4h", text: "We use a one-page excursion log: time, duration, peak temp, affected lots, manufacturer contact, decision, signature. The signature line is the part inspectors look for.", score: 22, verified: true,
+          children: [
+            { author: "u/marcus_owner_ab", role: "Owner", roleClass: "role-owner", avatarClass: "avatar-3", avatarInit: "MK", time: "3h", text: "This is gold, thank you. Mind if I borrow the format?", score: 5 }
+          ]
+        },
+        { author: "u/jin_bc_rph", role: "RPh", roleClass: "role-rph", avatarClass: "avatar-4", avatarInit: "JN", time: "3h", text: "11 min at 9.4 is well within most vaccine stability envelopes — VaxiCool publishes a useful chart. But document everything regardless.", score: 11, verified: true },
+      ]
+    },
+    {
+      id: 3,
+      community: { name: "Narcotics", icon: "ci-3", glyph: "fa-pills" },
+      author: "u/jin_bc_rph",
+      authorName: "Jin Nakamura",
+      role: "RPh", roleClass: "role-rph", verified: true,
+      avatarClass: "avatar-4", avatarInit: "JN",
+      time: "8h",
+      title: "Methadone witnessed dosing — virtual witnessing during weather closures, what's the consensus?",
+      excerpt: "BC had heavy snow last week and we couldn't open. We have a small panel of methadone patients and a few asked about video witnessing. I know the College guidance allows it during declared emergencies but the threshold for 'emergency' is fuzzy.",
+      tags: [
+        { label: "Question", className: "tag-discussion" },
+        { label: "BC", className: "tag-province" },
+      ],
+      score: 142, comments: 28, hasAI: false,
+      content: `<p>We had heavy snow last week and couldn't safely open the pharmacy. Two of our methadone patients reached out asking if we could do witnessed dosing over video for their carries. I know CPBC guidance permits virtual witnessing during declared emergencies, but "declared emergency" is fuzzy when it's a regional weather event vs a provincial declaration.</p><p>How are others interpreting this? Documenting the rationale in the patient record?</p>`,
+      replies: [
+        { author: "u/aisha_tech_mb", role: "Tech", roleClass: "role-tech", avatarClass: "avatar-5", avatarInit: "AT", time: "6h", text: "We had the same issue in Manitoba last winter. Our pharmacist documented in the patient note that local roads were closed per municipal advisory and that was sufficient on inspection.", score: 8 },
+      ]
+    },
+    {
+      id: 4,
+      community: { name: "Injections", icon: "ci-2", glyph: "fa-syringe" },
+      author: "u/priya_ocp",
+      authorName: "Priya Reddy",
+      role: "RPh", roleClass: "role-rph", verified: false,
+      avatarClass: "avatar-2", avatarInit: "PR",
+      time: "1d",
+      title: "Travel vaccine clinic from scratch — what did you wish you'd known on day one?",
+      excerpt: "Owner just signed off on launching a travel vaccine service. I've done my injection certification but never run a dedicated travel clinic. Looking for the unwritten lessons — the things that aren't in the OCP guidance.",
+      tags: [
+        { label: "Discussion", className: "tag-discussion" },
+        { label: "Ontario", className: "tag-province" },
+      ],
+      score: 98, comments: 22, hasAI: true,
+      content: `<p>Our owner just signed off on launching a travel vaccine service. I've done my injection certification but never set up a dedicated travel clinic. The OCP guidance covers the regulatory floor but not the operational reality.</p><p>What did you wish you'd known on day one? Pricing, scheduling, yellow fever certification, country-specific reference tools — open to all of it.</p>`,
+      replies: []
+    },
+    {
+      id: 5,
+      community: { name: "Pediatric", icon: "ci-3", glyph: "fa-baby" },
+      author: "u/aisha_tech_mb",
+      authorName: "Aisha Thompson",
+      role: "Tech", roleClass: "role-tech", verified: false,
+      avatarClass: "avatar-5", avatarInit: "AT",
+      time: "1d",
+      title: "Reconstituted azithromycin BUD — manufacturer says 10 days, our SOP says 7. Time to update?",
+      excerpt: "Manufacturer monograph says 10 days refrigerated. CPS confirms 10 days. But our internal SOP from 2019 says 7 days as a 'safety margin' and our auxiliary labels reflect 7 days. Onboarding a new tech who keeps asking why the labels don't match the bottle insert.",
+      tags: [
+        { label: "Question", className: "tag-discussion" },
+        { label: "SOP", className: "" },
+      ],
+      score: 76, comments: 19, hasAI: true,
+      content: `<p>Manufacturer monograph says 10 days refrigerated post-reconstitution. CPS confirms 10 days. But our internal SOP from 2019 says 7 days as a "safety margin," and our auxiliary labels reflect 7 days.</p><p>Onboarding a new tech who keeps (correctly) asking why the labels don't match the bottle insert. I think the SOP needs updating but I want to be sure I'm not missing a provincial nuance.</p>`,
+      replies: []
+    },
+    {
+      id: 6,
+      community: { name: "Inspections", icon: "ci-7", glyph: "fa-clipboard-check" },
+      author: "u/daniel_scp",
+      authorName: "Daniel Okafor",
+      role: "RPh", roleClass: "role-rph", verified: true,
+      avatarClass: "avatar-6", avatarInit: "DO",
+      time: "2d",
+      title: "SCP inspection prep — the three things on every checklist this year",
+      excerpt: "Just had my pre-inspection meeting. The inspector mentioned three areas that are getting extra attention province-wide in 2026. Sharing for anyone with an upcoming visit.",
+      tags: [
+        { label: "Discussion", className: "tag-discussion" },
+        { label: "Saskatchewan", className: "tag-province" },
+      ],
+      score: 64, comments: 15, hasAI: false,
+      content: `<p>Just wrapped up my pre-inspection meeting. The inspector flagged three areas that SCP is paying extra attention to in 2026 across the province:</p>
+      <p><strong>1.</strong> Cold chain documentation — specifically the calibration certificates for digital data loggers.<br/>
+      <strong>2.</strong> Methadone reconciliation — daily counts and the audit trail for any discrepancies.<br/>
+      <strong>3.</strong> SOP currency — any SOP older than 24 months without a documented review is a finding now.</p>
+      <p>Sharing for anyone with an upcoming visit.</p>`,
+      replies: []
+    },
+  ];
+
+  function fmtScore(n) {
+    if (n >= 1000) return (n / 1000).toFixed(1).replace('.0', '') + 'k';
+    return n;
+  }
+
+  // ============ RENDER FEED ============
+  function renderFeed() {
+    const feed = document.getElementById("postFeed");
+    feed.innerHTML = POSTS.map((p, i) => `
+      <article class="post fade-in" style="animation-delay: ${i * 0.04}s" data-id="${p.id}">
+        <div class="vote-rail">
+          <button class="vote-btn up" onclick="voteUp(this, ${p.id}, event)" title="Upvote"><i class="fa-solid fa-arrow-up"></i></button>
+          <span class="vote-count" id="score-${p.id}">${fmtScore(p.score)}</span>
+          <button class="vote-btn down" onclick="voteDown(this, ${p.id}, event)" title="Downvote"><i class="fa-solid fa-arrow-down"></i></button>
+        </div>
+        <div class="post-body" onclick="openDetail(${p.id})">
+          ${p.pinned ? '<div class="post-pinned"><i class="fa-solid fa-thumbtack"></i> Pinned by mods</div>' : ''}
+          <div class="post-meta-row">
+            <span class="ci-mini ${p.community.icon}"><i class="fa-solid ${p.community.glyph}"></i></span>
+            <a class="community" onclick="event.stopPropagation()">${p.community.name}</a>
+            <span class="dot">·</span>
+            <span class="by">posted by</span>
+            <a class="author-link" onclick="event.stopPropagation()">${p.author}</a>
+            ${p.verified ? '<i class="fa-solid fa-circle-check verified-badge" title="Verified RPh"></i>' : ''}
+            <span class="role-chip ${p.roleClass}">${p.role}</span>
+            <span class="dot">·</span>
+            <span>${p.time} ago</span>
+          </div>
+          <h2 class="post-title">${p.title}</h2>
+          <div class="post-tags-row">
+            ${p.tags.map(t => `<span class="tag ${t.className}">${t.icon ? `<i class="fa-solid ${t.icon}"></i>` : ''}${t.label}</span>`).join('')}
+            ${p.hasAI ? '<span class="tag tag-ai"><i class="fa-solid fa-wand-magic-sparkles"></i> AI Answer</span>' : ''}
+          </div>
+          <p class="post-excerpt">${p.excerpt}</p>
+          <div class="post-actions" onclick="event.stopPropagation()">
+            <button class="post-action" onclick="openDetail(${p.id})"><i class="fa-regular fa-comment"></i> ${p.comments} comments</button>
+            <button class="post-action" onclick="sharePost(this, ${p.id})"><i class="fa-solid fa-arrow-up-from-bracket"></i> Share</button>
+            <button class="post-action" onclick="savePost(this, ${p.id})"><i class="fa-regular fa-bookmark"></i> Save</button>
+            <button class="post-action" style="margin-left: auto;" onclick="showPostMenu(this, ${p.id}, event)"><i class="fa-solid fa-ellipsis"></i></button>
+          </div>
+        </div>
+      </article>
+    `).join('');
+  }
+
+  // upvote/downvote on cards
+  function voteUp(btn, id, e) {
+    e.stopPropagation();
+    const downBtn = btn.parentElement.querySelector('.down');
+    const scoreEl = document.getElementById('score-' + id);
+    const post = POSTS.find(p => p.id === id);
+    let s = post.score + (post._userVote || 0) * -1;
+    if (btn.classList.contains('active')) {
+      btn.classList.remove('active');
+      post._userVote = 0;
+    } else {
+      btn.classList.add('active');
+      downBtn.classList.remove('active');
+      post._userVote = 1;
+      s += 1;
+    }
+    if (post._userVote === 1) {
+      post.score = s;
+      scoreEl.textContent = fmtScore(s);
+      scoreEl.className = 'vote-count up';
+    } else {
+      post.score = s;
+      scoreEl.textContent = fmtScore(s);
+      scoreEl.className = 'vote-count';
+    }
+  }
+  function voteDown(btn, id, e) {
+    e.stopPropagation();
+    const upBtn = btn.parentElement.querySelector('.up');
+    const scoreEl = document.getElementById('score-' + id);
+    const post = POSTS.find(p => p.id === id);
+    if (btn.classList.contains('active')) {
+      btn.classList.remove('active');
+      post.score += 1;
+      scoreEl.className = 'vote-count';
+    } else {
+      const wasUp = upBtn.classList.contains('active');
+      btn.classList.add('active');
+      upBtn.classList.remove('active');
+      post.score -= wasUp ? 2 : 1;
+      scoreEl.className = 'vote-count down';
+    }
+    scoreEl.textContent = fmtScore(post.score);
+  }
+
+  // ============ DETAIL ============
+  function openDetail(id) {
+    const p = POSTS.find(x => x.id === id);
+    if (!p) return;
+    document.getElementById('detailHeadTitle').textContent = p.community.name;
+    document.getElementById('detailBody').innerHTML = `
+      <div class="detail-meta-row">
+        <span class="ci-mini ${p.community.icon}"><i class="fa-solid ${p.community.glyph}"></i></span>
+        <a class="community" style="font-weight: 700; color: var(--ink-900); text-decoration: none;">${p.community.name}</a>
+        <span class="dot">·</span>
+        <span>posted by</span>
+        <span style="color: var(--ink-700); font-weight: 500;">${p.author}</span>
+        ${p.verified ? '<i class="fa-solid fa-circle-check verified-badge"></i>' : ''}
+        <span class="role-chip ${p.roleClass}">${p.role}</span>
+        <span class="dot">·</span>
+        <span>${p.time} ago</span>
+      </div>
+      <h1 class="detail-title">${p.title}</h1>
+      <div class="post-tags-row" style="margin-bottom: 16px;">
+        ${p.tags.map(t => `<span class="tag ${t.className}">${t.icon ? `<i class="fa-solid ${t.icon}"></i>` : ''}${t.label}</span>`).join('')}
+      </div>
+      <div class="detail-content">${p.content}</div>
+
+      <div class="detail-actions">
+        <div class="detail-vote">
+          <button class="vote-btn up" onclick="voteDetailUp(this, ${p.id})"><i class="fa-solid fa-arrow-up"></i></button>
+          <span class="vote-count" id="detail-score-${p.id}" style="padding: 0 8px;">${fmtScore(p.score)}</span>
+          <button class="vote-btn down" onclick="voteDetailDown(this, ${p.id})"><i class="fa-solid fa-arrow-down"></i></button>
+        </div>
+        <button class="post-action" onclick="sharePost(this, ${p.id})"><i class="fa-solid fa-arrow-up-from-bracket"></i> Share</button>
+        <button class="post-action" onclick="savePost(this, ${p.id})"><i class="fa-regular fa-bookmark"></i> Save</button>
+        <button class="post-action" style="margin-left: auto;" onclick="reportPost(${p.id})"><i class="fa-solid fa-flag"></i> Report</button>
+      </div>
+
+      <!-- AI Q&A Box -->
+      <div class="ai-box">
+        <div class="ai-box-head">
+          <div class="ai-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+          <div>
+            <div class="ai-box-title">AlgoPharma AI</div>
+            <div class="ai-box-sub">Grounded answer with citations to ACP, OCP, NAPRA & Health Canada</div>
+          </div>
+        </div>
+        ${isPro() ? renderAIAnswer(p) : renderAILocked()}
+      </div>
+
+      <!-- Comments header -->
+      <div class="comments-head">
+        <h3 class="comments-title">Comments <span class="count">· ${p.comments}</span></h3>
+        <button class="sort-btn-mini"><i class="fa-solid fa-arrow-down-wide-short"></i> Best <i class="fa-solid fa-chevron-down" style="font-size: 9px;"></i></button>
+      </div>
+
+      <!-- composer -->
+      <div class="comment-composer-top">
+        <div class="avatar-sm avatar-1">JS</div>
+        <div style="flex: 1;">
+          <textarea placeholder="Add a comment — share your experience, your province's guidance, or a follow-up question..."></textarea>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px;">
+            <span style="font-size: 11.5px; color: var(--ink-400);"><i class="fa-solid fa-shield-halved"></i> No PHI · Cite your province</span>
+            <button class="btn btn-dark btn-rounded" onclick="addComment()"><i class="fa-solid fa-paper-plane"></i> Comment</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- threaded comments -->
+      <div class="comment-thread">
+        ${renderCommentTree(p.replies, 0) || '<div style="text-align:center; padding: 30px 0; color: var(--ink-400); font-size: 13px;">No comments yet — be the first.</div>'}
+      </div>
+    `;
+    openModal('detailModal');
+  }
+
+  function renderCommentTree(comments, depth) {
+    if (!comments || !comments.length) return '';
+    return comments.map(c => `
+      <div class="comment ${depth > 0 ? 'reply' : ''} ${depth > 1 ? 'reply-2' : ''}">
+        <div class="avatar-sm ${c.avatarClass}">${c.avatarInit}</div>
+        <div class="comment-body">
+          <div class="comment-head">
+            <span class="comment-author">${c.author}</span>
+            ${c.verified ? '<i class="fa-solid fa-circle-check verified-badge"></i>' : ''}
+            <span class="role-chip ${c.roleClass}">${c.role}</span>
+            <span class="dot">·</span>
+            <span>${c.time} ago</span>
+          </div>
+          <div class="comment-text">${c.text}</div>
+          <div class="comment-actions">
+            <div class="comment-vote">
+              <button class="up" onclick="voteCommentUp(this, ${c.score})"><i class="fa-solid fa-arrow-up"></i></button>
+              <span class="num">${c.score}</span>
+              <button class="down" onclick="voteCommentDown(this, ${c.score})"><i class="fa-solid fa-arrow-down"></i></button>
+            </div>
+            <button class="comment-action" onclick="replyToComment(this)"><i class="fa-regular fa-comment"></i> Reply</button>
+            <button class="comment-action" onclick="shareComment(this)"><i class="fa-solid fa-arrow-up-from-bracket"></i> Share</button>
+            <button class="comment-action" onclick="saveComment(this)"><i class="fa-regular fa-bookmark"></i> Save</button>
+            <button class="comment-action" onclick="commentMenu(this, event)"><i class="fa-solid fa-ellipsis"></i></button>
+          </div>
+        </div>
+      </div>
+      ${renderCommentTree(c.children || [], depth + 1)}
+    `).join('');
+  }
+
+  function voteDetailUp(btn, id) {
+    const down = btn.parentElement.querySelector('.down');
+    btn.classList.toggle('active');
+    if (btn.classList.contains('active')) down.classList.remove('active');
+  }
+  function voteDetailDown(btn, id) {
+    const up = btn.parentElement.querySelector('.up');
+    btn.classList.toggle('active');
+    if (btn.classList.contains('active')) up.classList.remove('active');
+  }
+  function voteCommentUp(btn, base) {
+    const wrap = btn.parentElement;
+    const num = wrap.querySelector('.num');
+    const down = wrap.querySelector('.down');
+    btn.classList.toggle('active');
+    if (btn.classList.contains('active')) {
+      down.classList.remove('active');
+      num.textContent = base + 1;
+    } else {
+      num.textContent = base;
+    }
+  }
+  function voteCommentDown(btn, base) {
+    const wrap = btn.parentElement;
+    const num = wrap.querySelector('.num');
+    const up = wrap.querySelector('.up');
+    btn.classList.toggle('active');
+    if (btn.classList.contains('active')) {
+      up.classList.remove('active');
+      num.textContent = base - 1;
+    } else {
+      num.textContent = base;
+    }
+  }
+
+  // gate
+  let _isPro = false;
+  function isPro() { return _isPro; }
+
+  function renderAIAnswer(p) {
+    return `
+      <div class="ai-answer">
+        <p>Based on ACP Standards of Practice §3.2 and the most recent USP 797 bulletin, the BUD for low-risk Category 1 CSPs at controlled room temperature is now <strong>12 hours from time of compounding</strong>, not 48 hours as in the prior interpretation.</p>
+        <p>Documentation must reference the source of the BUD on the Master Formulation Record. Inspectors flagged this gap in 14% of 2025 ACP inspections.</p>
+        <div class="ai-citations">
+          <span class="citation">ACP SoP §3.2.1</span>
+          <span class="citation">USP 797 (2024)</span>
+          <span class="citation">ACP Bulletin 2026-01</span>
+        </div>
+        <div class="ai-feedback">
+          <span>Was this helpful?</span>
+          <button class="up" title="Helpful" onclick="aiThumb(this, 'up')"><i class="fa-regular fa-thumbs-up"></i></button>
+          <button class="down" title="Not helpful" onclick="aiThumb(this, 'down')"><i class="fa-regular fa-thumbs-down"></i></button>
+          <button style="margin-left: auto;" title="Copy" onclick="aiCopy()"><i class="fa-regular fa-copy"></i></button>
+          <button title="Share" onclick="aiShare()"><i class="fa-solid fa-arrow-up-from-bracket"></i></button>
+        </div>
+      </div>
+    `;
+  }
+
+  function renderAILocked() {
+    return `
+      <div style="position: relative;">
+      <div class="ai-locked-blur">
+        Based on ACP Standards of Practice §3.2 and the most recent USP 797 bulletin, the BUD for low-risk Category 1 CSPs at controlled room temperature is now 12 hours from time of compounding. Documentation must reference the source of the BUD on the Master Formulation Record. Inspectors flagged this gap in 14% of 2025 ACP inspections, with citations to ACP SoP §3.2.1, USP 797 (2024), and the most recent regulatory bulletins...
+      </div>
+      <div class="ai-lock-overlay">
+        <div class="lock-icon"><i class="fa-solid fa-lock"></i></div>
+        <div class="msg">AI Answers are a Paid feature</div>
+        <div class="sub">Get unlimited grounded answers with citations to ACP, OCP, NAPRA, and Health Canada source documents.</div>
+        <button class="btn btn-dark btn-rounded pulse-cta" onclick="closeModal('detailModal'); goToPricing();" style="padding: 9px 18px;">
+          <i class="fa-solid fa-bolt"></i> Subscribe Now
+        </button>
+      </div>
+      </div>
+    `;
+  }
+
+  function addComment() {
+    const ta = document.querySelector('#detailBody .comment-composer-top textarea');
+    if (!ta || !ta.value.trim()) { ta?.focus(); return; }
+    showToast('Comment posted');
+    ta.value = '';
+  }
+
+  // ============ PRICING REDIRECT ============
+  const PRICING_URL = 'https://deck.algo-rythmn.ai/AlgoPharma-pricing';
+  function goToPricing() {
+    showToast('Opening plans...');
+    setTimeout(() => {
+      window.open(PRICING_URL, '_blank', 'noopener');
+    }, 250);
+  }
+  // Any AI-gated feature for non-Pro users routes through here
+  function askAI(postId) {
+    if (isPro()) {
+      openDetail(postId);
+      // Scroll to AI box after open
+      setTimeout(() => {
+        const aiBox = document.querySelector('#detailBody .ai-box');
+        if (aiBox) aiBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 100);
+    } else {
+      // Free user → pricing
+      goToPricing();
+    }
+  }
+
+  // ============ MODALS ============
+  function openModal(id) {
+    document.getElementById(id).classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal(id) {
+    document.getElementById(id).classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function showUpgrade() { openModal('upgradeModal'); }
+
+  document.getElementById('newPostBtn').addEventListener('click', () => openModal('newPostModal'));
+
+  document.querySelectorAll('.modal-bg').forEach(bg => {
+    bg.addEventListener('click', e => { if (e.target === bg) closeModal(bg.id); });
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.modal-bg.open').forEach(m => closeModal(m.id));
+      closeAllPopovers();
+    }
+  });
+
+  function submitPost() {
+    const title = document.getElementById('postTitleInput').value.trim();
+    if (!title) { document.getElementById('postTitleInput').focus(); return; }
+    closeModal('newPostModal');
+    showToast('Posted to CollabAI');
+    document.getElementById('postTitleInput').value = '';
+    document.getElementById('postBodyInput').value = '';
+  }
+
+  // ============ SORTING & FILTERING ============
+  let _currentSort = 'hot';
+  let _currentTimeFilter = 'all';
+  let _currentFilter = null; // { type: 'community'|'province'|'feed', value: '...' }
+
+  function getFilteredPosts() {
+    let list = [...POSTS];
+    if (_currentFilter) {
+      const f = _currentFilter;
+      if (f.type === 'community') {
+        list = list.filter(p => p.community.name === f.value);
+      } else if (f.type === 'province') {
+        list = list.filter(p => p.tags.some(t => t.label === f.value || t.label.toLowerCase().includes(f.value.toLowerCase())));
+      } else if (f.type === 'feed') {
+        if (f.value === 'unanswered') list = list.filter(p => p.comments < 20);
+        else if (f.value === 'ai') list = list.filter(p => p.hasAI);
+        else if (f.value === 'popular') list = list.filter(p => p.score > 100);
+        else if (f.value === 'trending') list = list.filter(p => p.score > 80);
+      }
+    }
+    // sort
+    if (_currentSort === 'top') list.sort((a, b) => b.score - a.score);
+    else if (_currentSort === 'new') list.sort((a, b) => parseTimeToMin(a.time) - parseTimeToMin(b.time));
+    else if (_currentSort === 'rising') list.sort((a, b) => (b.score / (parseTimeToMin(b.time) || 1)) - (a.score / (parseTimeToMin(a.time) || 1)));
+    else { // hot: pinned first, then score
+      list.sort((a, b) => (b.pinned ? 1 : 0) - (a.pinned ? 1 : 0) || b.score - a.score);
+    }
+    return list;
+  }
+
+  function parseTimeToMin(t) {
+    // "2h" → 120, "5h" → 300, "1d" → 1440, "47m" → 47
+    const n = parseFloat(t);
+    if (t.includes('m')) return n;
+    if (t.includes('h')) return n * 60;
+    if (t.includes('d')) return n * 1440;
+    return n;
+  }
+
+  function refreshFeed() {
+    const feed = document.getElementById("postFeed");
+    const list = getFilteredPosts();
+    if (!list.length) {
+      feed.innerHTML = `
+        <div class="feed-empty">
+          <div class="icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+          <h4>No posts match this filter</h4>
+          <p>Try clearing the filter or browsing another community.</p>
+        </div>`;
+      return;
+    }
+    feed.innerHTML = list.map((p, i) => buildPostCard(p, i)).join('');
+  }
+
+  function buildPostCard(p, i) {
+    return `
+      <article class="post fade-in" style="animation-delay: ${i * 0.04}s" data-id="${p.id}">
+        <div class="vote-rail">
+          <button class="vote-btn up ${p._userVote === 1 ? 'active' : ''}" onclick="voteUp(this, ${p.id}, event)" title="Upvote"><i class="fa-solid fa-arrow-up"></i></button>
+          <span class="vote-count ${p._userVote === 1 ? 'up' : p._userVote === -1 ? 'down' : ''}" id="score-${p.id}">${fmtScore(p.score)}</span>
+          <button class="vote-btn down ${p._userVote === -1 ? 'active' : ''}" onclick="voteDown(this, ${p.id}, event)" title="Downvote"><i class="fa-solid fa-arrow-down"></i></button>
+        </div>
+        <div class="post-body" onclick="openDetail(${p.id})">
+          ${p.pinned ? '<div class="post-pinned"><i class="fa-solid fa-thumbtack"></i> Pinned by mods</div>' : ''}
+          <div class="post-meta-row">
+            <span class="ci-mini ${p.community.icon}"><i class="fa-solid ${p.community.glyph}"></i></span>
+            <a class="community" onclick="event.stopPropagation(); filterByCommunity('${p.community.name}')">${p.community.name}</a>
+            <span class="dot">·</span>
+            <span class="by">posted by</span>
+            <a class="author-link" onclick="event.stopPropagation(); showToast('Profile: ${p.author}')">${p.author}</a>
+            ${p.verified ? '<i class="fa-solid fa-circle-check verified-badge" title="Verified RPh"></i>' : ''}
+            <span class="role-chip ${p.roleClass}">${p.role}</span>
+            <span class="dot">·</span>
+            <span>${p.time} ago</span>
+          </div>
+          <h2 class="post-title">${p.title}</h2>
+          <div class="post-tags-row">
+            ${p.tags.map(t => `<span class="tag ${t.className}">${t.icon ? `<i class="fa-solid ${t.icon}"></i>` : ''}${t.label}</span>`).join('')}
+            ${p.hasAI ? '<span class="tag tag-ai"><i class="fa-solid fa-wand-magic-sparkles"></i> AI Answer</span>' : ''}
+          </div>
+          <p class="post-excerpt">${p.excerpt}</p>
+          <div class="post-actions" onclick="event.stopPropagation()">
+            <button class="post-action" onclick="openDetail(${p.id})"><i class="fa-regular fa-comment"></i> ${p.comments} comments</button>
+            <button class="post-action" onclick="sharePost(this, ${p.id})"><i class="fa-solid fa-arrow-up-from-bracket"></i> Share</button>
+            <button class="post-action ${p._saved ? 'saved' : ''}" onclick="savePost(this, ${p.id})"><i class="fa-${p._saved ? 'solid' : 'regular'} fa-bookmark"></i> ${p._saved ? 'Saved' : 'Save'}</button>
+            <button class="post-action" style="margin-left: auto;" onclick="showPostMenu(this, ${p.id}, event)"><i class="fa-solid fa-ellipsis"></i></button>
+          </div>
+        </div>
+      </article>`;
+  }
+
+  // Sort tabs wire-up
+  document.querySelectorAll('.sort-btn').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.sort-btn').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      _currentSort = tab.dataset.sort;
+      refreshFeed();
+    });
+  });
+
+  // Compose tabs (modal)
+  document.querySelectorAll('.compose-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.compose-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+    });
+  });
+
+  // Tag selection in modal
+  document.querySelectorAll('#newPostModal .tag-opt').forEach(opt => {
+    opt.addEventListener('click', () => {
+      const selected = document.querySelectorAll('#newPostModal .tag-opt.selected').length;
+      if (!opt.classList.contains('selected') && selected >= 2) {
+        showToast('Pick up to 2 flairs');
+        return;
+      }
+      opt.classList.toggle('selected');
+    });
+  });
+
+  // ============ LEFT NAV FILTERING ============
+  document.querySelectorAll('.lnav-item').forEach(item => {
+    item.addEventListener('click', () => {
+      document.querySelectorAll('.lnav-item').forEach(i => i.classList.remove('active'));
+      item.classList.add('active');
+
+      const community = item.dataset.community;
+      const province = item.dataset.province;
+      const feed = item.dataset.feed;
+      const resource = item.dataset.resource;
+
+      const bar = document.getElementById('activeFilterBar');
+      const lbl = document.getElementById('activeFilterLabel');
+
+      if (community) {
+        _currentFilter = { type: 'community', value: community };
+        lbl.textContent = `c/${community}`;
+        bar.classList.add('show');
+        document.querySelector('.feed-title').textContent = `c/${community}`;
+        document.querySelector('.feed-handle').textContent = community;
+        updateFeedJoinBtn(community);
+        refreshFeed();
+        showToast(`Filtering: ${community}`);
+      } else if (province) {
+        _currentFilter = { type: 'province', value: province };
+        lbl.textContent = `Province: ${province}`;
+        bar.classList.add('show');
+        refreshFeed();
+        showToast(`Filtering: ${province}`);
+      } else if (feed && feed !== 'home') {
+        _currentFilter = { type: 'feed', value: feed };
+        lbl.textContent = `Feed: ${feed[0].toUpperCase() + feed.slice(1)}`;
+        bar.classList.add('show');
+        refreshFeed();
+        showToast(`Showing: ${feed[0].toUpperCase() + feed.slice(1)}`);
+      } else if (feed === 'home') {
+        clearFilter();
+      } else if (resource) {
+        // Resource is read-only preview
+        showToast(`${resource} — coming soon`);
+      }
+    });
+  });
+
+  function filterByCommunity(name) {
+    const btn = document.querySelector(`.lnav-item[data-community="${name}"]`);
+    if (btn) { btn.click(); btn.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }
+    else { showToast(`Filter: ${name}`); }
+  }
+  function clearFilter() {
+    _currentFilter = null;
+    document.getElementById('activeFilterBar').classList.remove('show');
+    document.querySelectorAll('.lnav-item').forEach(i => i.classList.remove('active'));
+    const homeBtn = document.querySelector('.lnav-item[data-feed="home"]');
+    if (homeBtn) homeBtn.classList.add('active');
+    document.querySelector('.feed-title').textContent = 'CollabAI';
+    document.querySelector('.feed-handle').textContent = 'Where Canadian pharmacy professionals talk shop';
+    updateFeedJoinBtn(null);
+    refreshFeed();
+  }
+
+  // ============ SIDEBAR NAV ============
+  document.querySelectorAll('.sidebar .nav-icon').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const name = btn.dataset.nav;
+      if (!name) return;
+      if (name === 'CollabAI') return; // already here
+      if (name === 'Sign out') {
+        showToast('Signed out');
+        return;
+      }
+      showToast(`Navigating to ${name}…`);
+    });
+  });
+
+  // ============ SAVE / SHARE / REPORT ============
+  function sharePost(btn, id) {
+    showToast('Link copied to clipboard');
+    // Try real clipboard
+    try {
+      navigator.clipboard?.writeText(window.location.href + '#post-' + id);
+    } catch(e) {}
+  }
+  function savePost(btn, id) {
+    const post = POSTS.find(p => p.id === id);
+    post._saved = !post._saved;
+    btn.classList.toggle('saved');
+    const i = btn.querySelector('i');
+    if (post._saved) {
+      i.className = 'fa-solid fa-bookmark';
+      btn.innerHTML = '<i class="fa-solid fa-bookmark"></i> Saved';
+      showToast('Saved to your library');
+    } else {
+      btn.innerHTML = '<i class="fa-regular fa-bookmark"></i> Save';
+      showToast('Removed from library');
+    }
+  }
+  function reportPost(id) {
+    showToast('Report submitted to mods');
+  }
+
+  // ============ POST OVERFLOW MENU ============
+  function showPostMenu(btn, id, e) {
+    e.stopPropagation();
+    closeAllPopovers();
+    const post = POSTS.find(p => p.id === id);
+    const author = post ? post.author : '';
+    const commName = post ? post.community.name : '';
+    const pop = document.createElement('div');
+    pop.className = 'popover';
+    pop.dataset.popover = 'post-menu';
+    pop.style.right = '0';
+    pop.style.top = 'calc(100% + 4px)';
+    pop.innerHTML = `
+      <button class="popover-item" onclick="hidePost(${id})"><i class="fa-regular fa-eye-slash"></i> Hide post</button>
+      <button class="popover-item" onclick="closeAllPopovers(); showToast('Following ${author}')"><i class="fa-solid fa-user-plus"></i> Follow author</button>
+      <button class="popover-item" onclick="closeAllPopovers(); showToast('Muted c/${commName}')"><i class="fa-regular fa-bell-slash"></i> Mute community</button>
+      <div class="popover-divider"></div>
+      <button class="popover-item danger" onclick="closeAllPopovers(); reportPost(${id})"><i class="fa-solid fa-flag"></i> Report</button>
+    `;
+    const wrap = btn.parentElement;
+    wrap.style.position = 'relative';
+    wrap.appendChild(pop);
+  }
+  function hidePost(id) {
+    closeAllPopovers();
+    const card = document.querySelector(`.post[data-id="${id}"]`);
+    if (card) {
+      card.classList.add('removing');
+      setTimeout(() => { card.remove(); showToast('Post hidden'); }, 250);
+    }
+  }
+
+  // ============ COMMENT ACTIONS ============
+  function replyToComment(btn) {
+    showToast('Reply mode — type below');
+    const ta = document.querySelector('#detailBody .comment-composer-top textarea');
+    if (ta) { ta.focus(); ta.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+  }
+  function shareComment(btn) {
+    showToast('Comment link copied');
+  }
+  function saveComment(btn) {
+    btn.classList.toggle('saved');
+    const i = btn.querySelector('i');
+    if (btn.classList.contains('saved')) {
+      i.className = 'fa-solid fa-bookmark';
+      showToast('Comment saved');
+    } else {
+      i.className = 'fa-regular fa-bookmark';
+      showToast('Comment unsaved');
+    }
+  }
+  function commentMenu(btn, e) {
+    e.stopPropagation();
+    closeAllPopovers();
+    const pop = document.createElement('div');
+    pop.className = 'popover';
+    pop.dataset.popover = 'comment-menu';
+    pop.style.right = '0';
+    pop.style.top = 'calc(100% + 4px)';
+    pop.innerHTML = `
+      <button class="popover-item" onclick="closeAllPopovers(); showToast('Copied permalink')"><i class="fa-solid fa-link"></i> Copy permalink</button>
+      <button class="popover-item" onclick="closeAllPopovers(); showToast('Following user')"><i class="fa-solid fa-user-plus"></i> Follow user</button>
+      <div class="popover-divider"></div>
+      <button class="popover-item danger" onclick="closeAllPopovers(); showToast('Report submitted')"><i class="fa-solid fa-flag"></i> Report</button>
+    `;
+    const wrap = btn.parentElement;
+    wrap.style.position = 'relative';
+    wrap.appendChild(pop);
+  }
+
+  // ============ AI FEEDBACK ============
+  function aiThumb(btn, dir) {
+    const wrap = btn.parentElement;
+    wrap.querySelectorAll('button.up, button.down').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    showToast(dir === 'up' ? 'Thanks — feedback recorded' : 'Thanks — we\'ll improve this');
+  }
+  function aiCopy() {
+    showToast('AI answer copied');
+  }
+  function aiShare() {
+    showToast('AI answer link copied');
+  }
+
+  // ============ JOIN SYSTEM ============
+  const _joinedCommunities = new Set(['Compounding', 'Narcotics', 'Injections', 'Inspections', 'SOPs']);
+  const _discoverCommunities = new Set(['ColdChain', 'PatientCare', 'Cannabis', 'Pediatric', 'Veterinary']);
+
+  function addJoinedTag(item) {}
+
+  function updateFeedJoinBtn(community) {
+    const ctaRow = document.getElementById('feedCtaRow');
+    const existing = document.getElementById('communityJoinBtn');
+    if (existing) existing.remove();
+    if (!community) return;
+    const isJoined = _joinedCommunities.has(community);
+    const btn = document.createElement('button');
+    btn.id = 'communityJoinBtn';
+    btn.className = isJoined ? 'btn btn-ghost joined' : 'btn btn-ghost';
+    btn.innerHTML = isJoined
+      ? '<i class="fa-solid fa-check"></i> Joined'
+      : '<i class="fa-solid fa-bell"></i> Join';
+    btn.addEventListener('click', () => joinCommunity(community));
+    ctaRow.insertBefore(btn, ctaRow.firstChild);
+  }
+
+  function joinCommunity(community) {
+    if (_joinedCommunities.has(community)) {
+      // Leave
+      _joinedCommunities.delete(community);
+      const item = document.querySelector(`.lnav-item[data-community="${community}"]`);
+      if (_discoverCommunities.has(community)) {
+        // Move back to Discover
+        const discoverSection = document.getElementById('discoverSection');
+        if (item) discoverSection.appendChild(item);
+      }
+      updateFeedJoinBtn(community);
+      showToast(`Left c/${community}`);
+    } else {
+      // Join
+      _joinedCommunities.add(community);
+      const item = document.querySelector(`.lnav-item[data-community="${community}"]`);
+      if (_discoverCommunities.has(community) && item) {
+        document.getElementById('myCommSection').appendChild(item);
+      }
+      updateFeedJoinBtn(community);
+      showToast(`Joined c/${community}!`);
+    }
+  }
+
+  // ============ TIME FILTER POPOVER ============
+  document.getElementById('timeFilterBtn').addEventListener('click', (e) => {
+    e.stopPropagation();
+    const existing = document.querySelector('[data-popover="time"]');
+    if (existing) { existing.remove(); return; }
+    closeAllPopovers();
+    const pop = document.createElement('div');
+    pop.className = 'popover';
+    pop.dataset.popover = 'time';
+    pop.style.right = '0';
+    pop.style.top = 'calc(100% + 4px)';
+    const opts = [
+      ['hour', 'Past hour'],
+      ['day', 'Past 24 hours'],
+      ['week', 'Past week'],
+      ['month', 'Past month'],
+      ['year', 'Past year'],
+      ['all', 'All time'],
+    ];
+    pop.innerHTML = opts.map(([v, l]) => `
+      <button class="popover-item" onclick="setTimeFilter('${v}', '${l}')">
+        <i class="fa-regular fa-clock"></i> ${l}
+        ${_currentTimeFilter === v ? '<i class="fa-solid fa-check popover-check"></i>' : ''}
+      </button>
+    `).join('');
+    const wrap = e.currentTarget.parentElement;
+    wrap.appendChild(pop);
+  });
+  function setTimeFilter(v, label) {
+    _currentTimeFilter = v;
+    document.getElementById('timeFilterLabel').textContent = label;
+    closeAllPopovers();
+    showToast(`Showing posts from ${label.toLowerCase()}`);
+  }
+
+  // ============ TOP BAR: Notifications, Pharmacy, User chip ============
+  document.getElementById('notifBtn').addEventListener('click', (e) => {
+    e.stopPropagation();
+    const existing = document.querySelector('[data-popover="notif"]');
+    if (existing) { existing.remove(); return; }
+    closeAllPopovers();
+    const pop = document.createElement('div');
+    pop.className = 'notif-popover';
+    pop.dataset.popover = 'notif';
+    pop.innerHTML = `
+      <div class="notif-head">
+        <h4>Notifications</h4>
+        <button onclick="markAllRead()">Mark all read</button>
+      </div>
+      <div class="notif-item unread" onclick="closeAllPopovers(); openDetail(1)">
+        <div class="notif-icon avatar-1">SP</div>
+        <div>
+          <div class="notif-text"><strong>Dr. Sarah Patel</strong> replied to your comment on <em>USP 797 update</em></div>
+          <div class="notif-time">12 min ago</div>
+        </div>
+      </div>
+      <div class="notif-item unread" onclick="closeAllPopovers(); openDetail(2)">
+        <div class="notif-icon avatar-3">MK</div>
+        <div>
+          <div class="notif-text"><strong>Marcus Kowalski</strong> mentioned you in <em>Fridge excursion</em></div>
+          <div class="notif-time">1h ago</div>
+        </div>
+      </div>
+      <div class="notif-item unread" onclick="closeAllPopovers(); showToast('Trending in Compounding')">
+        <div class="notif-icon" style="background: linear-gradient(135deg, var(--teal-500), var(--teal-700))"><i class="fa-solid fa-fire-flame-curved"></i></div>
+        <div>
+          <div class="notif-text">Your post is trending in <strong>Compounding</strong> — 47 new upvotes</div>
+          <div class="notif-time">2h ago</div>
+        </div>
+      </div>
+      <div class="notif-item" onclick="closeAllPopovers(); goToPricing()">
+        <div class="notif-icon" style="background: linear-gradient(135deg, var(--ink-900), var(--teal-700))"><i class="fa-solid fa-bolt"></i></div>
+        <div>
+          <div class="notif-text"><strong>AI Answers</strong> are now in your most-followed thread. Subscribe now to read.</div>
+          <div class="notif-time">5h ago</div>
+        </div>
+      </div>
+      <div class="notif-item" onclick="closeAllPopovers(); showToast('Profile views')">
+        <div class="notif-icon avatar-2">JN</div>
+        <div>
+          <div class="notif-text"><strong>Jin Nakamura</strong> followed you</div>
+          <div class="notif-time">1d ago</div>
+        </div>
+      </div>
+    `;
+    e.currentTarget.parentElement.appendChild(pop);
+  });
+  function markAllRead() {
+    document.querySelectorAll('.notif-item.unread').forEach(i => i.classList.remove('unread'));
+    showToast('All notifications marked read');
+  }
+
+  document.getElementById('pharmacyBtn').addEventListener('click', (e) => {
+    e.stopPropagation();
+    const existing = document.querySelector('[data-popover="pharmacy"]');
+    if (existing) { existing.remove(); return; }
+    closeAllPopovers();
+    const pop = document.createElement('div');
+    pop.className = 'pharmacy-popover';
+    pop.dataset.popover = 'pharmacy';
+    pop.innerHTML = `
+      <div class="ph-head">Switch Pharmacy</div>
+      <div class="pharmacy-item active" onclick="closeAllPopovers()">
+        <div class="ph-icon"><i class="fa-solid fa-prescription-bottle-medical"></i></div>
+        <div>
+          <div class="ph-name">Riverside Pharmacy</div>
+          <div class="ph-sub">Calgary, AB · ACP</div>
+        </div>
+        <i class="fa-solid fa-check ph-check"></i>
+      </div>
+      <div class="pharmacy-item" onclick="switchPharmacy('Northgate Drugmart')">
+        <div class="ph-icon" style="background: linear-gradient(135deg, var(--sky), #1e40af)"><i class="fa-solid fa-mortar-pestle"></i></div>
+        <div>
+          <div class="ph-name">Northgate Drugmart</div>
+          <div class="ph-sub">Edmonton, AB · ACP</div>
+        </div>
+      </div>
+      <div class="pharmacy-item" onclick="switchPharmacy('Lakeshore Compounding')">
+        <div class="ph-icon" style="background: linear-gradient(135deg, var(--violet), #6d28d9)"><i class="fa-solid fa-flask"></i></div>
+        <div>
+          <div class="ph-name">Lakeshore Compounding</div>
+          <div class="ph-sub">Toronto, ON · OCP</div>
+        </div>
+      </div>
+      <div class="pharmacy-item" onclick="closeAllPopovers(); showToast('Add pharmacy — coming soon')">
+        <div class="ph-icon" style="background: var(--ink-100); color: var(--ink-500)"><i class="fa-solid fa-plus"></i></div>
+        <div>
+          <div class="ph-name" style="color: var(--ink-500)">Add pharmacy</div>
+          <div class="ph-sub">Connect another location</div>
+        </div>
+      </div>
+    `;
+    e.currentTarget.parentElement.appendChild(pop);
+  });
+  function switchPharmacy(name) {
+    closeAllPopovers();
+    showToast(`Switched to ${name}`);
+  }
+
+  document.getElementById('userChipBtn').addEventListener('click', (e) => {
+    e.stopPropagation();
+    const existing = document.querySelector('[data-popover="user"]');
+    if (existing) { existing.remove(); return; }
+    closeAllPopovers();
+    const pop = document.createElement('div');
+    pop.className = 'popover';
+    pop.dataset.popover = 'user';
+    pop.style.right = '0';
+    pop.style.top = 'calc(100% + 8px)';
+    pop.style.minWidth = '220px';
+    pop.innerHTML = `
+      <div style="padding: 10px 12px; border-bottom: 1px solid var(--ink-100); margin-bottom: 4px;">
+        <div style="font-size: 13px; font-weight: 700; color: var(--ink-900);">u/123</div>
+        <div style="font-size: 11.5px; color: var(--ink-500);">Reader · Free plan</div>
+      </div>
+      <button class="popover-item" onclick="closeAllPopovers(); showToast('Profile')"><i class="fa-regular fa-user"></i> My profile</button>
+      <button class="popover-item" onclick="closeAllPopovers(); showToast('Saved posts')"><i class="fa-regular fa-bookmark"></i> Saved</button>
+      <button class="popover-item" onclick="closeAllPopovers(); showToast('Drafts')"><i class="fa-regular fa-file-lines"></i> Drafts</button>
+      <div class="popover-divider"></div>
+      <button class="popover-item" onclick="closeAllPopovers(); goToPricing()" style="color: var(--teal-700); font-weight: 600;"><i class="fa-solid fa-bolt"></i> Subscribe Now</button>
+      <div class="popover-divider"></div>
+      <button class="popover-item" onclick="closeAllPopovers(); showToast('Settings')"><i class="fa-solid fa-sliders"></i> Settings</button>
+      <button class="popover-item danger" onclick="closeAllPopovers(); showToast('Signed out')"><i class="fa-solid fa-arrow-right-from-bracket"></i> Sign out</button>
+    `;
+    e.currentTarget.parentElement.appendChild(pop);
+  });
+
+  // ============ TOP SEARCH ============
+  const searchInput = document.getElementById('topSearchInput');
+  const searchAnchor = searchInput.parentElement;
+
+  searchInput.addEventListener('input', () => {
+    const q = searchInput.value.trim().toLowerCase();
+    renderSearchResults(q);
+  });
+  searchInput.addEventListener('focus', () => {
+    renderSearchResults(searchInput.value.trim().toLowerCase());
+  });
+
+  function renderSearchResults(q) {
+    const existing = document.querySelector('[data-popover="search"]');
+    if (existing) existing.remove();
+
+    if (q.length === 0) {
+      // Show recent / suggestions
+      const pop = document.createElement('div');
+      pop.className = 'search-results';
+      pop.dataset.popover = 'search';
+      pop.innerHTML = `
+        <div class="search-result-section">
+          <div class="search-result-label">Trending</div>
+          <div class="search-result-item" onclick="closeAllPopovers(); document.getElementById('topSearchInput').value=''; filterByCommunity('Compounding')">
+            <span class="ci-mini-sm ci-1"><i class="fa-solid fa-flask"></i></span>
+            <span>USP 797 update</span>
+            <span class="res-meta">218 votes</span>
+          </div>
+          <div class="search-result-item" onclick="closeAllPopovers(); document.getElementById('topSearchInput').value=''; filterByCommunity('ColdChain')">
+            <span class="ci-mini-sm ci-6"><i class="fa-solid fa-temperature-half"></i></span>
+            <span>Fridge excursion decision tree</span>
+            <span class="res-meta">164 votes</span>
+          </div>
+        </div>
+        <div class="search-result-section">
+          <div class="search-result-label">Quick links</div>
+          <div class="search-result-item" onclick="closeAllPopovers(); goToPricing()"><i class="fa-solid fa-bolt" style="color: var(--teal-600); width: 22px; text-align: center;"></i> Subscribe Now</div>
+          <div class="search-result-item" onclick="closeAllPopovers(); showToast('Help center')"><i class="fa-regular fa-circle-question" style="color: var(--ink-400); width: 22px; text-align: center;"></i> Help center</div>
+        </div>`;
+      searchAnchor.appendChild(pop);
+      return;
+    }
+
+    // Match posts by title/excerpt
+    const matches = POSTS.filter(p =>
+      p.title.toLowerCase().includes(q) ||
+      p.excerpt.toLowerCase().includes(q) ||
+      p.community.name.toLowerCase().includes(q)
+    ).slice(0, 5);
+
+    const pop = document.createElement('div');
+    pop.className = 'search-results';
+    pop.dataset.popover = 'search';
+
+    if (matches.length === 0) {
+      pop.innerHTML = `<div class="search-empty">No results for "<strong>${escapeHtml(q)}</strong>"</div>`;
+    } else {
+      pop.innerHTML = `
+        <div class="search-result-section">
+          <div class="search-result-label">Posts</div>
+          ${matches.map(p => `
+            <div class="search-result-item" onclick="closeAllPopovers(); document.getElementById('topSearchInput').value=''; openDetail(${p.id})">
+              <span class="ci-mini-sm ${p.community.icon}"><i class="fa-solid ${p.community.glyph}"></i></span>
+              <span style="flex:1; min-width:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${escapeHtml(p.title)}</span>
+              <span class="res-meta">${p.community.name}</span>
+            </div>
+          `).join('')}
+        </div>`;
+    }
+    searchAnchor.appendChild(pop);
+  }
+  function escapeHtml(s) {
+    return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+
+  // ============ POPOVER CLOSE-ON-OUTSIDE ============
+  function closeAllPopovers() {
+    document.querySelectorAll('.popover, .search-results, .notif-popover, .pharmacy-popover').forEach(p => p.remove());
+  }
+  document.addEventListener('click', (e) => {
+    // Don't close if click was inside a popover or its anchor
+    if (e.target.closest('.popover, .search-results, .notif-popover, .pharmacy-popover')) return;
+    if (e.target.closest('.popover-anchor')) return;
+    closeAllPopovers();
+  });
+
+  // ============ COMPOSER STRIP / TOOLS ============
+  // Quick composer strip already opens the modal via inline onclick.
+  // Pre-select the right tab based on tool clicked:
+  document.querySelectorAll('.composer-tool').forEach(tool => {
+    tool.addEventListener('click', (e) => {
+      // wait a beat for modal to open, then select the right compose-tab
+      const title = tool.getAttribute('title');
+      const map = { 'Image': 'Image', 'Link': 'Link', 'Poll': 'Poll' };
+      const target = map[title];
+      setTimeout(() => {
+        if (!target) return;
+        document.querySelectorAll('.compose-tab').forEach(t => {
+          t.classList.toggle('active', t.textContent.trim() === target);
+        });
+      }, 50);
+    });
+  });
+
+  // ============ TOAST ============
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    document.getElementById('toastMsg').textContent = msg;
+    t.classList.add('show');
+    clearTimeout(window._toastT);
+    window._toastT = setTimeout(() => t.classList.remove('show'), 2200);
+  }
+
+  // ============ MAKE renderFeed CALL refreshFeed ============
+  // Override the original renderFeed by re-exposing refreshFeed under same name
+  window.renderFeed = refreshFeed;
+
+  // initial render
+  refreshFeed();
+</script>
+
+</body>
+</html>
