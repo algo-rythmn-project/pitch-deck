@@ -6,7 +6,7 @@
 <title>AlgoMind × ICE — HarvestAlpha Pitch</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=JetBrains+Mono:wght@300;400;500;600&family=Inter+Tight:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #0a0d12;
@@ -28,7 +28,7 @@
   html, body {
     background: var(--bg);
     color: var(--ink);
-    font-family: 'Inter Tight', system-ui, sans-serif;
+    font-family: 'Inter', system-ui, sans-serif;
     font-weight: 400;
     -webkit-font-smoothing: antialiased;
     scroll-behavior: smooth;
@@ -93,8 +93,8 @@
   }
 
   h1, h2, h3 {
-    font-family: 'Fraunces', Georgia, serif;
-    font-weight: 400;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-weight: 500;
     letter-spacing: -0.02em;
     line-height: 1.05;
   }
@@ -198,7 +198,7 @@
 
   .thesis-sub {
     margin-top: 48px;
-    font-family: 'Fraunces', serif;
+    font-family: 'Inter', system-ui, sans-serif;
     font-style: italic;
     font-size: 22px;
     line-height: 1.55;
@@ -744,22 +744,126 @@
   }
 
   .ask-content h2 {
-    font-size: clamp(56px, 6.5vw, 104px);
+    font-size: clamp(44px, 5.5vw, 84px);
     font-weight: 300;
     line-height: 1.02;
     letter-spacing: -0.025em;
     max-width: 1200px;
-    margin-bottom: 56px;
+    margin-bottom: 48px;
   }
 
   .ask-content h2 em { color: var(--signal); font-style: italic; }
 
-  .ask-grid {
+  .tier-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 48px;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border: 1px solid var(--rule);
+  }
+
+  .tier-card {
+    padding: 40px 44px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  .tier-card:first-child {
+    border-right: 1px solid var(--rule);
+  }
+
+  .tier-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--bg);
+    background: var(--signal);
+    padding: 5px 12px;
+    margin-bottom: 28px;
+    align-self: flex-start;
+  }
+
+  .tier-card:last-child .tier-badge {
+    background: var(--market);
+  }
+
+  .tier-card h3 {
+    font-size: 30px;
+    font-weight: 400;
+    line-height: 1.15;
+    margin-bottom: 16px;
+    color: var(--ink);
+  }
+
+  .tier-card .tier-lede {
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--ink-dim);
+    margin-bottom: 28px;
+    flex: 1;
+  }
+
+  .tier-card .tier-lede strong { color: var(--ink); }
+
+  .tier-details {
+    list-style: none;
     border-top: 1px solid var(--rule);
-    padding-top: 40px;
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .tier-details li {
+    display: grid;
+    grid-template-columns: 18px 1fr;
+    gap: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    color: var(--ink-dim);
+    line-height: 1.5;
+  }
+
+  .tier-details li::before {
+    content: '→';
+    color: var(--signal);
+  }
+
+  .tier-card:last-child .tier-details li::before {
+    color: var(--market);
+  }
+
+  .tier-footer {
+    margin-top: 24px;
+    padding-top: 16px;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .tier-price {
+    font-size: 28px;
+    font-weight: 500;
+    color: var(--signal);
+    letter-spacing: -0.02em;
+  }
+
+  .tier-card:last-child .tier-price {
+    color: var(--market);
+  }
+
+  .tier-timeline {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--ink-dim);
   }
 
   .ask-item .step {
@@ -1443,25 +1547,53 @@
   </div>
 
   <div class="ask-content">
-    <div class="eyebrow">What we'd like to explore with ICE</div>
-    <h2>A three-step path from <em>conversation</em> to <em>co-product</em>.</h2>
+    <div class="eyebrow">A two-tier engagement for ICE · Canola</div>
+    <h2>Start with the signal.<br><em>Build the curve together.</em></h2>
 
-    <div class="ask-grid">
-      <div class="ask-item">
-        <div class="step">Step 01 · Q1</div>
-        <h3>Technical diligence</h3>
-        <p>A working session with ICE's research and quantitative teams. We walk through methodology, back-tests, and the 2021 canola case in full technical depth. Mutual NDA.</p>
+    <div class="tier-grid">
+
+      <!-- TIER 1 -->
+      <div class="tier-card">
+        <span class="tier-badge">Tier 1 · Yield Forecast</span>
+        <h3>A better number, earlier — validated against ICE's own contract.</h3>
+        <p class="tier-lede">
+          HarvestAlpha delivers canola yield forecasts that are <strong>more accurate and 6–12 weeks earlier</strong> than USDA and StatCan government releases. We have back-tested accuracy metrics and a live case study in the 2021 Prairie drought.
+          <br><br>
+          We propose a <strong>one-month proof-of-concept engineering trial</strong> — scoped, fixed-price — to validate signal integration against ICE RS contract behavior. Beta product in three months.
+        </p>
+        <ul class="tier-details">
+          <li>Sample accuracy metrics and methodology available under NDA</li>
+          <li>Signal delivered as API — no workflow disruption to ICE systems</li>
+          <li>Fixed scope: one growing-season crop, one contract (RS canola)</li>
+          <li>3-month path to beta; standalone product if Tier 2 does not proceed</li>
+        </ul>
+        <div class="tier-footer">
+          <span class="tier-price">$30k</span>
+          <span class="tier-timeline">1-month PoC · 3-month to beta</span>
+        </div>
       </div>
-      <div class="ask-item">
-        <div class="step">Step 02 · Q2</div>
-        <h3>Live pilot</h3>
-        <p>HarvestAlpha signal delivered to a defined set of ICE desks or customer counterparties through the 2026 North American growing season. Joint evaluation of signal performance against contract behavior.</p>
+
+      <!-- TIER 2 -->
+      <div class="tier-card">
+        <span class="tier-badge">Tier 2 · Yield → Forward Curve</span>
+        <h3>A financial product — built with ICE data, anchored to the contract.</h3>
+        <p class="tier-lede">
+          Translating a yield signal into a forward curve requires inputs only ICE holds: multi-year settlement history, carry structure, open interest, and basis data across the full term structure.
+          <br><br>
+          <strong>We can build a parametric model without ICE data.</strong> With it, we can build ML models — LSTM and transformer architectures — that learn the yield-to-curve relationship across 5–15 years of contract history. The result is an exchange-grade forward curve product, co-developed and co-owned.
+        </p>
+        <ul class="tier-details">
+          <li>Parametric baseline available independently as proof of methodology</li>
+          <li>LSTM + transformer models require ICE historical data partnership</li>
+          <li>Target: ICE-branded Canola Yield Curve — licensed, exchange-grade reference</li>
+          <li>Revenue-share or licensing structure to be agreed; ICE retains index ownership</li>
+        </ul>
+        <div class="tier-footer">
+          <span class="tier-price">Partnership</span>
+          <span class="tier-timeline">12-month target · follows Tier 1 validation</span>
+        </div>
       </div>
-      <div class="ask-item">
-        <div class="step">Step 03 · Q3+</div>
-        <h3>Co-developed yield index</h3>
-        <p>If the pilot validates, structure a co-branded ICE Canola Yield Index — exchange-grade, licensed, and integrated into the ICE ag-data product line.</p>
-      </div>
+
     </div>
   </div>
 </section>
