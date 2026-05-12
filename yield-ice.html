@@ -997,6 +997,27 @@
   .nav-dots a:hover { background: var(--signal); transform: scale(1.5); }
   .nav-dots a.active { background: var(--signal); box-shadow: 0 0 10px var(--signal); width: 8px; height: 8px; }
 
+  /* Presenter note */
+  .presenter-note {
+    margin-top: 28px;
+    padding: 14px 20px;
+    border-left: 2px solid var(--ink-faint);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    line-height: 1.6;
+    color: var(--ink-faint);
+    letter-spacing: 0.04em;
+  }
+
+  .presenter-note .note-label {
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: 9px;
+    color: var(--ink-faint);
+    margin-bottom: 6px;
+    display: block;
+  }
+
   /* Print / smaller screens */
   @media (max-width: 1100px) {
     .slide { padding: 48px 40px; }
@@ -1024,6 +1045,7 @@
   <a href="#s9" title="Positioning"></a>
   <a href="#s10" title="Delivery"></a>
   <a href="#s11" title="Close"></a>
+  <a href="#s12" title="Customer Models"></a>
 </nav>
 
 <!-- ============ SLIDE 1 — COVER ============ -->
@@ -1609,6 +1631,55 @@
     <div class="contact">
       <span class="label">For</span>
       Intercontinental Exchange<br>Ag Commodities · 2026
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 12 — 5 MODELS ============ -->
+<section class="slide" id="s12">
+  <div class="chrome">
+    <div class="left"><span class="dot"></span><span>How customers use the signal</span></div>
+    <div>12 / 12</div>
+  </div>
+
+  <div class="delivery-header">
+    <div class="eyebrow">Downstream use cases</div>
+    <h2>Five model families. <em>Our customers run them.</em> We provide the input.</h2>
+    <p style="font-size: 16px; line-height: 1.6; color: var(--ink-dim); margin-top: 16px; max-width: 880px;">
+      Algo-Rythmn does not trade. We do not advise. We supply the yield signal that customers feed into the modelling frameworks they already operate. Below is the vocabulary — to make clear we understand exactly how the signal becomes price-relevant on the other side of the API.
+    </p>
+  </div>
+
+  <div class="models-grid">
+    <div class="model-cell">
+      <div class="model-num">01 / Baseline</div>
+      <h3>Supply shock projection</h3>
+      <p>Yield deviation × harvested acres × price elasticity → expected futures impact. The entry-level model every commodity desk runs.</p>
+      <div class="footer">Outright futures</div>
+    </div>
+    <div class="model-cell">
+      <div class="model-num">02 / Term structure</div>
+      <h3>Basis & carry curve</h3>
+      <p>Yield surprises reshape the forward curve. Bearish flattens, bullish steepens. Trade the calendar spread, not the outright.</p>
+      <div class="footer">Calendar spreads</div>
+    </div>
+    <div class="model-cell">
+      <div class="model-num">03 / Relative value</div>
+      <h3>Cross-commodity spreads</h3>
+      <p>Corn–soy ratio, crush spreads, oil–meal. Differential yield signals drive cross-commodity trades that single-crop platforms cannot generate.</p>
+      <div class="footer">Spread / crush</div>
+    </div>
+    <div class="model-cell">
+      <div class="model-num">04 / Vol</div>
+      <h3>Options & implied vol</h3>
+      <p>Modified Black-76 calibrated to our yield distribution — not the market's consensus. Where the market underprices the tail, the skew is tradeable.</p>
+      <div class="footer">Options skew</div>
+    </div>
+    <div class="model-cell">
+      <div class="model-num">05 / Portfolio</div>
+      <h3>Portfolio optimization</h3>
+      <p>Mean-variance with commodity-specific constraints — seasonal correlations, non-normal returns, liquidity. Risk-adjusted weights across the stack.</p>
+      <div class="footer">Multi-asset</div>
     </div>
   </div>
 </section>
