@@ -15,7 +15,7 @@
     --ink-dim: #8a8578;
     --ink-faint: #4a4639;
     --paper: #f4efe2;
-    --signal: #c8e85c;       /* AlgoMind green — our signal */
+    --signal: #c8e85c;       /* HarvestAlpha green — our signal */
     --signal-deep: #8fb02e;
     --market: #e28a6d;        /* warm copper — market / consensus */
     --alert: #e8b85c;
@@ -120,7 +120,7 @@
   }
 
   .cover h1 {
-    font-size: clamp(72px, 9vw, 144px);
+    font-size: clamp(62px, 8vw, 134px);
     font-weight: 300;
     letter-spacing: -0.04em;
     line-height: 0.92;
@@ -262,7 +262,7 @@
 
   .timeline-event {
     color: var(--ink);
-    font-size: 13px;
+    font-size: 15px;
   }
 
   .timeline-source {
@@ -277,14 +277,14 @@
     flex: 1;
     display: grid;
     grid-template-columns: 1.1fr 1fr;
-    gap: 80px;
+    gap: 48px;
   }
 
   .what-grid h2 {
-    font-size: clamp(44px, 5vw, 72px);
+    font-size: clamp(36px, 4vw, 56px);
     font-weight: 300;
     line-height: 1.05;
-    margin-bottom: 36px;
+    margin-bottom: 20px;
   }
 
   .what-grid h2 em {
@@ -293,10 +293,10 @@
   }
 
   .what-grid .lede {
-    font-size: 19px;
-    line-height: 1.65;
+    font-size: 16px;
+    line-height: 1.6;
     color: var(--ink);
-    margin-bottom: 28px;
+    margin-bottom: 14px;
     max-width: 560px;
   }
 
@@ -305,11 +305,11 @@
   }
 
   .feature-list li {
-    padding: 22px 0;
+    padding: 14px 0;
     border-top: 1px solid var(--rule);
     display: grid;
     grid-template-columns: 48px 1fr;
-    gap: 20px;
+    gap: 16px;
     align-items: start;
   }
 
@@ -325,11 +325,11 @@
 
   .feature-title {
     font-family: 'Fraunces', serif;
-    font-size: 22px;
+    font-size: 17px;
     font-weight: 400;
     line-height: 1.25;
     color: var(--ink);
-    margin-bottom: 6px;
+    margin-bottom: 4px;
   }
 
   .feature-desc {
@@ -343,11 +343,11 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    margin-bottom: 48px;
+    margin-bottom: 20px;
   }
 
   .proof-header h2 {
-    font-size: clamp(40px, 4.5vw, 64px);
+    font-size: clamp(28px, 3vw, 44px);
     font-weight: 300;
     line-height: 1.05;
     max-width: 760px;
@@ -369,7 +369,7 @@
 
   .proof-stat .num {
     font-family: 'Fraunces', serif;
-    font-size: 44px;
+    font-size: 32px;
     font-weight: 400;
     line-height: 1;
     color: var(--ink);
@@ -391,12 +391,14 @@
   }
 
   .chart-wrap {
-    flex: 1;
+    flex: 0 1 auto;
+    max-height: 72vh;
     background: var(--bg-elevated);
     border: 1px solid var(--rule);
-    padding: 32px 40px;
+    padding: 16px 24px;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
   }
 
   .chart-title-row {
@@ -428,8 +430,11 @@
 
   .canola-chart {
     flex: 1;
+    min-height: 0;
     width: 100%;
-    margin-top: 16px;
+    display: block;
+    margin-top: 8px;
+    max-height: 580px;
   }
 
   .chart-caption {
@@ -990,6 +995,7 @@
   }
 
   .nav-dots a:hover { background: var(--signal); transform: scale(1.5); }
+  .nav-dots a.active { background: var(--signal); box-shadow: 0 0 10px var(--signal); width: 8px; height: 8px; }
 
   /* Print / smaller screens */
   @media (max-width: 1100px) {
@@ -1010,15 +1016,14 @@
   <a href="#s1" title="Cover"></a>
   <a href="#s2" title="Thesis"></a>
   <a href="#s3" title="The Gap"></a>
-  <a href="#s4" title="What We Do"></a>
-  <a href="#s5" title="Proof"></a>
-  <a href="#s6" title="Why ICE"></a>
-  <a href="#s7" title="Customer Use"></a>
+  <a href="#s4" title="Why ICE"></a>
+  <a href="#s5" title="HarvestAlpha"></a>
+  <a href="#s6" title="Proof"></a>
+  <a href="#s7" title="CropQuant"></a>
   <a href="#s8" title="Vol Window"></a>
   <a href="#s9" title="Positioning"></a>
   <a href="#s10" title="Delivery"></a>
-  <a href="#s11" title="The Ask"></a>
-  <a href="#s12" title="Close"></a>
+  <a href="#s11" title="Close"></a>
 </nav>
 
 <!-- ============ SLIDE 1 — COVER ============ -->
@@ -1029,7 +1034,7 @@
       <span>Algo-Rythmn</span>
       <span>Confidential — for ICE discussion</span>
     </div>
-    <div>01 / 12</div>
+    <div>01 / 11</div>
   </div>
 
   <div class="cover-hero">
@@ -1074,7 +1079,7 @@
 <section class="slide" id="s2">
   <div class="chrome">
     <div class="left"><span class="dot"></span><span>Thesis</span></div>
-    <div>02 / 12</div>
+    <div>02 / 11</div>
   </div>
 
   <div class="thesis-content">
@@ -1082,7 +1087,7 @@
       <div class="eyebrow">One sentence</div>
       <h2>
         Yield deviations move futures prices.<br>
-        AlgoMind detects them <span class="accent">5 weeks</span><br>
+        HarvestAlpha detects them <span class="accent">5 weeks</span><br>
         before <span class="strike">USDA and StatCan</span> publish.
       </h2>
       <p class="thesis-sub">
@@ -1096,7 +1101,7 @@
 <section class="slide" id="s3">
   <div class="chrome">
     <div class="left"><span class="dot"></span><span>The Information Gap</span></div>
-    <div>03 / 12</div>
+    <div>03 / 11</div>
   </div>
 
   <div class="two-col">
@@ -1122,12 +1127,12 @@
         <div class="timeline-row">
           <span class="timeline-week">Wk –10</span>
           <span class="timeline-event">Satellite NDVI begins diverging from 5-yr norm across Prairie growing regions</span>
-          <span class="timeline-source">AlgoMind</span>
+          <span class="timeline-source">HarvestAlpha</span>
         </div>
         <div class="timeline-row">
           <span class="timeline-week">Wk –8</span>
           <span class="timeline-event">Soil moisture & temperature signal compound. Yield model flags &gt;25% production miss probability</span>
-          <span class="timeline-source">AlgoMind</span>
+          <span class="timeline-source">HarvestAlpha</span>
         </div>
         <div class="timeline-row">
           <span class="timeline-week">Wk –6</span>
@@ -1149,23 +1154,70 @@
   </div>
 </section>
 
-<!-- ============ SLIDE 4 — WHAT WE DO ============ -->
+<!-- ============ SLIDE 4 — WHY ICE ============ -->
 <section class="slide" id="s4">
   <div class="chrome">
-    <div class="left"><span class="dot"></span><span>The Product</span></div>
-    <div>04 / 12</div>
+    <div class="left"><span class="dot"></span><span>Why ICE specifically</span></div>
+    <div>04 / 11</div>
+  </div>
+
+  <div class="why-ice">
+    <div>
+      <div class="eyebrow">The contract & the franchise</div>
+      <h2>Canola is <em>ICE's contract</em>. The signal sharpens it.</h2>
+      <ul class="ice-points">
+        <li>ICE Canola (RS) is the global price discovery benchmark for the world's most concentrated oilseed origin.</li>
+        <li>Canada supplies roughly 60% of internationally traded canola — a single-origin contract with maximum yield sensitivity.</li>
+        <li>Standard elasticity: a 1% Canadian production surprise can move RS futures 3–5%. The 2021 episode was the live demonstration.</li>
+        <li>An ICE-branded yield signal — or a co-developed yield index — deepens engagement with the exact desks that already trade the contract.</li>
+      </ul>
+    </div>
+
+    <div class="market-box">
+      <span class="market-box-label">Sensitivity</span>
+      <h3>A single-origin contract amplifies every yield surprise.</h3>
+      <div class="big-num">3–5%</div>
+      <div class="big-num-lbl">
+        Estimated ICE RS futures move per 1% Canadian production surprise — the highest yield-elasticity coefficient among major ag contracts. The signal-to-price coupling is structurally tighter here than for any USDA crop.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 5 — HARVESTALPHA ============ -->
+<section class="slide" id="s5">
+  <div class="chrome">
+    <div class="left"><span class="dot"></span><span>HarvestAlpha · Data Product</span></div>
+    <div>05 / 11</div>
   </div>
 
   <div class="what-grid">
     <div>
-      <div class="eyebrow">What HarvestAlpha is</div>
+      <div class="eyebrow">What HarvestAlpha is — and what we're asking</div>
       <h2>Satellite-grade yield intelligence, <em>delivered as a signal</em>.</h2>
       <p class="lede">
-        We fuse multi-spectral satellite imagery, parcel-level weather, soil moisture, and crop-stage models into a single yield deviation signal — calibrated against historical USDA and StatCan ground truth.
+        We fuse multi-spectral satellite imagery, parcel-level weather, soil moisture, and crop-stage models into a single yield deviation signal — calibrated against historical USDA and StatCan ground truth. More accurate and <strong>5 weeks earlier</strong> than government releases.
       </p>
-      <p class="lede" style="color: var(--ink-dim); font-size: 16px;">
-        The output is a probability-weighted yield forecast at the contract-relevant geography, refreshed through the growing season, with explicit confidence intervals and feature attribution.
+      <p class="lede" style="color: var(--ink-dim);">
+        Probability-weighted forecast at the contract-relevant geography, refreshed through the growing season, with explicit confidence intervals and feature attribution.
       </p>
+      <div style="margin-top: 20px; padding: 18px 24px; background: var(--bg-elevated); border: 1px solid var(--rule); border-left: 2px solid var(--signal);">
+        <div class="eyebrow" style="margin-bottom: 14px;">The ask</div>
+        <p style="font-size: 15px; line-height: 1.65; color: var(--ink); margin-bottom: 20px;">
+          A <strong>one-month proof-of-concept</strong> — scoped, fixed-price — to validate signal integration against ICE RS contract behavior. Standalone beta in six months.
+        </p>
+        <ul class="tier-details" style="border-top: 1px solid var(--rule); padding-top: 16px;">
+          <li>Sample accuracy metrics and methodology available under NDA</li>
+          <li>API feed, analyst dashboard, or direct ICE platform integration</li>
+          <li>Fixed scope: RS canola, one growing season</li>
+        </ul>
+        <div class="tier-footer" style="margin-top: 20px; padding-top: 14px; border-top: 1px solid var(--rule);">
+          <span class="tier-price">$50k</span>
+          <span class="tier-timeline">1-month PoC</span>
+          <span class="tier-price">$1 million</span>
+          <span class="tier-timeline">6-month to beta</span>
+        </div>
+      </div>
     </div>
 
     <ul class="feature-list">
@@ -1201,11 +1253,11 @@
   </div>
 </section>
 
-<!-- ============ SLIDE 5 — THE PROOF / CANOLA CHART ============ -->
-<section class="slide" id="s5">
+<!-- ============ SLIDE 6 — THE PROOF / CANOLA CHART ============ -->
+<section class="slide" id="s6">
   <div class="chrome">
     <div class="left"><span class="dot"></span><span>Proof of value</span></div>
-    <div>05 / 12</div>
+    <div>06 / 11</div>
   </div>
 
   <div class="proof-header">
@@ -1233,13 +1285,13 @@
     <div class="chart-title-row">
       <span>ICE Canola (RS) — 2021 Growing Season  ·  C$/tonne  ·  live case study from 10-year OOS back-test</span>
       <div class="chart-legend">
-        <div class="legend-item"><span class="legend-swatch" style="background:#c8e85c"></span><span>AlgoMind yield deviation signal</span></div>
+        <div class="legend-item"><span class="legend-swatch" style="background:#c8e85c"></span><span>HarvestAlpha yield deviation signal</span></div>
         <div class="legend-item"><span class="legend-swatch" style="background:#d97757"></span><span>ICE RS settlement</span></div>
         <div class="legend-item"><span class="legend-swatch" style="background:#8a8578;border-top:1px dashed #8a8578;height:0"></span><span>StatCan release</span></div>
       </div>
     </div>
 
-    <svg class="canola-chart" viewBox="0 0 1000 380" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <svg class="canola-chart" viewBox="0 0 1000 380" preserveAspectRatio="xMidYMid meet" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
       <!-- Grid -->
       <g stroke="rgba(232,228,217,0.05)" stroke-width="1">
         <line x1="0" y1="60" x2="1000" y2="60"/>
@@ -1273,13 +1325,13 @@
       <rect x="280" y="40" width="380" height="310" fill="rgba(200,232,92,0.05)"/>
       <line x1="280" y1="40" x2="280" y2="350" stroke="rgba(200,232,92,0.4)" stroke-width="1" stroke-dasharray="2 4"/>
       <line x1="660" y1="40" x2="660" y2="350" stroke="rgba(232,184,92,0.5)" stroke-width="1" stroke-dasharray="2 4"/>
-      <text x="290" y="56" font-family="JetBrains Mono" font-size="9" fill="#c8e85c" letter-spacing="2">SIGNAL PUBLISHED: JUL 15 · 36 DAYS BEFORE STATCAN (AUG 20)</text>
+      <text x="290" y="56" font-family="JetBrains Mono" font-size="9" fill="#c8e85c" letter-spacing="2">SIGNAL PUBLISHED: JUL 15 · 36 DAYS BEFORE STATCAN</text>
 
       <!-- ICE RS price line — starts flat near 650, climbs aggressively after week 0 -->
       <path d="M 50 295 L 120 290 L 190 287 L 260 285 L 330 280 L 400 268 L 470 250 L 540 220 L 610 175 L 660 130 L 720 100 L 790 95 L 860 105 L 930 115"
         stroke="#d97757" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
 
-      <!-- AlgoMind signal — starts dropping at week ~-10, leads the price -->
+      <!-- HarvestAlpha signal — starts dropping at week ~-10, leads the price -->
       <path d="M 50 110 L 120 115 L 190 130 L 260 165 L 330 210 L 400 240 L 470 255 L 540 265 L 610 270 L 660 268 L 720 270 L 790 268 L 860 270 L 930 270"
         stroke="#c8e85c" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"
         stroke-dasharray="0" opacity="0.95"/>
@@ -1299,7 +1351,7 @@
       <text x="668" y="64" font-family="JetBrains Mono" font-size="9" fill="#8a8578" letter-spacing="1">~35% MISS</text>
 
       <!-- Signal trigger marker -->
-      <text x="290" y="76" font-family="Fraunces" font-style="italic" font-size="13" fill="#c8e85c">↑ AlgoMind flags &gt;25% production miss</text>
+      <text x="290" y="76" font-family="Fraunces" font-style="italic" font-size="13" fill="#c8e85c">↑ HarvestAlpha flags &gt;25% production miss</text>
       <text x="290" y="92" font-family="JetBrains Mono" font-size="9" fill="#8a8578" letter-spacing="1">NDVI &amp; SOIL MOISTURE DIVERGE</text>
 
       <!-- Price annotation at peak -->
@@ -1341,81 +1393,42 @@
   </div>
 </section>
 
-<!-- ============ SLIDE 6 — WHY ICE ============ -->
-<section class="slide" id="s6">
+<!-- ============ SLIDE 7 — CROPQUANT ============ -->
+<section class="slide" id="s7">
   <div class="chrome">
-    <div class="left"><span class="dot"></span><span>Why ICE specifically</span></div>
-    <div>06 / 12</div>
+    <div class="left"><span class="dot"></span><span>CropQuant · Financial Analytic Product</span></div>
+    <div>07 / 11</div>
   </div>
 
   <div class="why-ice">
     <div>
-      <div class="eyebrow">The contract & the franchise</div>
-      <h2>Canola is <em>ICE's contract</em>. The signal sharpens it.</h2>
+      <div class="eyebrow">Where HarvestAlpha leads</div>
+      <h2>A yield curve <em>built with ICE data</em>, anchored to the contract.</h2>
+      <p style="font-size: 17px; line-height: 1.7; color: var(--ink-dim); margin-bottom: 20px;">
+        Translating a yield signal into a forward curve requires inputs only ICE holds: multi-year settlement history, carry structure, open interest, and basis data across the full term structure.
+      </p>
+      <p style="font-size: 17px; line-height: 1.7; color: var(--ink-dim); margin-bottom: 32px;">
+        We can build a parametric model without ICE data. <strong style="color: var(--ink);">With it, we can build ML models</strong> — that learn the yield-to-curve relationship across 5–15 years of contract history. The result is an exchange-grade forward curve product, co-developed and co-owned.
+      </p>
       <ul class="ice-points">
-        <li>ICE Canola (RS) is the global price discovery benchmark for the world's most concentrated oilseed origin.</li>
-        <li>Canada supplies roughly 60% of internationally traded canola — a single-origin contract with maximum yield sensitivity.</li>
-        <li>Standard elasticity: a 1% Canadian production surprise can move RS futures 3–5%. The 2021 episode was the live demonstration.</li>
-        <li>An ICE-branded yield signal — or a co-developed yield index — deepens engagement with the exact desks that already trade the contract.</li>
+        <li>Parametric baseline available independently as proof of methodology</li>
+        <li>ML models require ICE historical data partnership</li>
+        <li>Target: ICE-branded Canola Yield Curve — licensed, exchange-grade reference</li>
+        <li>Revenue-share or licensing structure to be agreed; ICE retains index ownership</li>
       </ul>
     </div>
 
     <div class="market-box">
-      <span class="market-box-label">Sensitivity</span>
-      <h3>A single-origin contract amplifies every yield surprise.</h3>
-      <div class="big-num">3–5%</div>
-      <div class="big-num-lbl">
-        Estimated ICE RS futures move per 1% Canadian production surprise — the highest yield-elasticity coefficient among major ag contracts. The signal-to-price coupling is structurally tighter here than for any USDA crop.
+      <span class="market-box-label">The opportunity</span>
+      <h3>From signal to benchmark.</h3>
+      <p style="font-size: 15px; line-height: 1.65; color: var(--ink-dim); margin: 20px 0;">
+        HarvestAlpha proves the yield signal works against ICE RS. CropQuant turns that signal into a <strong style="color: var(--ink);">tradeable, exchange-grade forward curve</strong> — a new financial product anchored to the world's most concentrated oilseed contract.
+      </p>
+      <div style="border-top: 1px solid var(--rule); padding-top: 20px; font-family: 'JetBrains Mono', monospace;">
+        <div style="font-size: 10px; color: var(--ink-dim); text-transform: uppercase; letter-spacing: 0.14em; margin-bottom: 8px;">Engagement</div>
+        <div style="font-size: 22px; color: var(--market); letter-spacing: -0.02em; font-weight: 500;">Partnership</div>
+        <div style="font-size: 11px; color: var(--ink-dim); margin-top: 8px; letter-spacing: 0.06em;">12-month target · follows HarvestAlpha PoC</div>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ SLIDE 7 — 5 MODELS ============ -->
-<section class="slide" id="s7">
-  <div class="chrome">
-    <div class="left"><span class="dot"></span><span>How customers use the signal</span></div>
-    <div>07 / 12</div>
-  </div>
-
-  <div class="delivery-header">
-    <div class="eyebrow">Downstream use cases</div>
-    <h2>Five model families. <em>Our customers run them.</em> We provide the input.</h2>
-    <p style="font-size: 16px; line-height: 1.6; color: var(--ink-dim); margin-top: 16px; max-width: 880px;">
-      Algo-Rythmn does not trade. We do not advise. We supply the yield signal that customers feed into the modelling frameworks they already operate. Below is the vocabulary — to make clear we understand exactly how the signal becomes price-relevant on the other side of the API.
-    </p>
-  </div>
-
-  <div class="models-grid">
-    <div class="model-cell">
-      <div class="model-num">01 / Baseline</div>
-      <h3>Supply shock projection</h3>
-      <p>Yield deviation × harvested acres × price elasticity → expected futures impact. The entry-level model every commodity desk runs.</p>
-      <div class="footer">Outright futures</div>
-    </div>
-    <div class="model-cell">
-      <div class="model-num">02 / Term structure</div>
-      <h3>Basis & carry curve</h3>
-      <p>Yield surprises reshape the forward curve. Bearish flattens, bullish steepens. Trade the calendar spread, not the outright.</p>
-      <div class="footer">Calendar spreads</div>
-    </div>
-    <div class="model-cell">
-      <div class="model-num">03 / Relative value</div>
-      <h3>Cross-commodity spreads</h3>
-      <p>Corn–soy ratio, crush spreads, oil–meal. Differential yield signals drive cross-commodity trades that single-crop platforms cannot generate.</p>
-      <div class="footer">Spread / crush</div>
-    </div>
-    <div class="model-cell">
-      <div class="model-num">04 / Vol</div>
-      <h3>Options & implied vol</h3>
-      <p>Modified Black-76 calibrated to our yield distribution — not the market's consensus. Where the market underprices the tail, the skew is tradeable.</p>
-      <div class="footer">Options skew</div>
-    </div>
-    <div class="model-cell">
-      <div class="model-num">05 / Portfolio</div>
-      <h3>Portfolio optimization</h3>
-      <p>Mean-variance with commodity-specific constraints — seasonal correlations, non-normal returns, liquidity. Risk-adjusted weights across the stack.</p>
-      <div class="footer">Multi-asset</div>
     </div>
   </div>
 </section>
@@ -1424,7 +1437,7 @@
 <section class="slide" id="s8">
   <div class="chrome">
     <div class="left"><span class="dot"></span><span>The WASDE / StatCan window</span></div>
-    <div>08 / 12</div>
+    <div>08 / 11</div>
   </div>
 
   <div class="vol-content">
@@ -1496,7 +1509,7 @@
 <section class="slide" id="s9">
   <div class="chrome">
     <div class="left"><span class="dot"></span><span>Positioning</span></div>
-    <div>09 / 12</div>
+    <div>09 / 11</div>
   </div>
 
   <div class="positioning">
@@ -1538,7 +1551,7 @@
 <section class="slide" id="s10">
   <div class="chrome">
     <div class="left"><span class="dot"></span><span>Product delivery</span></div>
-    <div>10 / 12</div>
+    <div>10 / 11</div>
   </div>
 
   <div class="delivery-header">
@@ -1568,72 +1581,11 @@
   </div>
 </section>
 
-<!-- ============ SLIDE 11 — THE ASK ============ -->
-<section class="slide" id="s11">
-  <div class="chrome">
-    <div class="left"><span class="dot"></span><span>The proposed partnership</span></div>
-    <div>11 / 12</div>
-  </div>
-
-  <div class="ask-content">
-    <div class="eyebrow">A two-tier engagement for ICE · Canola</div>
-    <h2>Start with the signal.<br><em>Build the curve together.</em></h2>
-
-    <div class="tier-grid">
-
-      <!-- TIER 1 -->
-      <div class="tier-card">
-        <span class="tier-badge">HarvestAlpha · Data Product</span>
-        <h3>A better number, earlier — validated against ICE's own contract.</h3>
-        <p class="tier-lede">
-          HarvestAlpha delivers canola yield forecasts that are <strong>more accurate and 5 weeks earlier</strong> than USDA and StatCan government releases. We have back-tested accuracy metrics and a live case study in the 2021 Prairie drought.
-          <br><br>
-          We propose a <strong>one-month proof-of-concept engineering trial</strong> — scoped, fixed-price — to validate signal integration against ICE RS contract behavior. Beta product in three months.
-        </p>
-        <ul class="tier-details">
-          <li>Sample accuracy metrics and methodology available under NDA</li>
-          <li>Delivered as API feed, analyst dashboard, or agentic AI platform — no workflow disruption to ICE systems; or integrated directly into ICE's platform</li>
-          <li>Fixed scope: one growing-season crop, one contract (RS canola)</li>
-          <li>6-month path to beta; standalone product if Tier 2 does not proceed</li>
-        </ul>
-        <div class="tier-footer">
-          <span class="tier-price">$50k</span>
-          <span class="tier-timeline">1-month PoC</span>
-          <span class="tier-price">$1 million</span>
-          <span class="tier-timeline">6-month to beta</span>
-        </div>
-      </div>
-
-      <!-- TIER 2 -->
-      <div class="tier-card">
-        <span class="tier-badge">CropQuant · Financial Analytic Product</span>
-        <h3>A financial product — built with ICE data, anchored to the contract.</h3>
-        <p class="tier-lede">
-          Translating a yield signal into a forward curve requires inputs only ICE holds: multi-year settlement history, carry structure, open interest, and basis data across the full term structure.
-          <br><br>
-          We can build a parametric model without ICE data. <strong>With it, we can build ML models</strong> — that learn the yield-to-curve relationship across 5–15 years of contract history. The result is an exchange-grade forward curve product, co-developed and co-owned.
-        </p>
-        <ul class="tier-details">
-          <li>Parametric baseline available independently as proof of methodology</li>
-          <li>ML models require ICE historical data partnership</li>
-          <li>Target: ICE-branded Canola Yield Curve — licensed, exchange-grade reference</li>
-          <li>Revenue-share or licensing structure to be agreed; ICE retains index ownership</li>
-        </ul>
-        <div class="tier-footer">
-          <span class="tier-price">Partnership</span>
-          <span class="tier-timeline">12-month target · follows Tier 1 validation</span>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ============ SLIDE 12 — CLOSE ============ -->
-<section class="slide close-slide" id="s12">
+<!-- ============ SLIDE 11 — CLOSE ============ -->
+<section class="slide close-slide" id="s11">
   <div class="chrome">
     <div class="left"><span class="dot"></span><span>Close</span></div>
-    <div>12 / 12</div>
+    <div>11 / 11</div>
   </div>
 
   <div class="close-hero">
@@ -1661,5 +1613,22 @@
   </div>
 </section>
 
+<script>
+(function () {
+  const dots = Array.from(document.querySelectorAll('.nav-dots a'));
+  const sections = dots.map(a => document.querySelector(a.getAttribute('href')));
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const idx = sections.indexOf(entry.target);
+        dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+      }
+    });
+  }, { threshold: 0.5 });
+
+  sections.forEach(s => s && observer.observe(s));
+})();
+</script>
 </body>
 </html>
