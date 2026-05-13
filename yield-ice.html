@@ -6,7 +6,7 @@
 <title>Algo-Rythmn × ICE — HarvestAlpha Pitch</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #0a0d12;
@@ -43,7 +43,7 @@
   .slide {
     min-height: 100vh;
     scroll-snap-align: start;
-    padding: 64px 80px;
+    padding: 64px 110px;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -167,175 +167,545 @@
     opacity: 0.9;
   }
 
-  /* ============ SLIDE — THESIS ============ */
-  .thesis-content {
+  /* ============ SLIDE — THESIS REDESIGN ============ */
+  .thesis-wrapper {
     flex: 1;
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .thesis-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+    margin-bottom: 50px;
+  }
+
+  .thesis-grid {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 80px;
     align-items: center;
   }
 
-  .thesis-text {
-    max-width: 1100px;
-  }
-
-  .thesis-text h2 {
-    font-size: clamp(48px, 5.5vw, 84px);
+  .thesis-statement h2 {
+    font-size: clamp(40px, 4.5vw, 68px);
     font-weight: 300;
-    line-height: 1.08;
-    letter-spacing: -0.025em;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin: 0 0 16px 0;
   }
 
-  .thesis-text h2 .accent {
-    color: var(--signal);
-    font-style: italic;
+  .thesis-statement .indent-1 {
+    padding-left: 8%;
+    color: var(--ink-dim);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
   }
 
-  .thesis-text h2 .strike {
+  .thesis-statement .indent-2 {
+    padding-left: 16%;
+    color: var(--ink-dim);
+  }
+
+  .thesis-metric {
+    display: inline-flex;
+    align-items: baseline;
+    background: var(--signal);
+    color: #1a1a1a;
+    padding: 0px 16px;
+    border-radius: 4px;
+    transform: translateY(-4px);
+  }
+
+  .thesis-metric .num {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: clamp(40px, 4.5vw, 68px);
+    line-height: 1;
+    margin-right: 8px;
+  }
+
+  .thesis-metric .lbl {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+  }
+
+  .thesis-statement .strike {
     color: var(--ink-faint);
     text-decoration: line-through;
     text-decoration-thickness: 2px;
   }
 
-  .thesis-sub {
-    margin-top: 48px;
-    font-family: 'Inter', system-ui, sans-serif;
-    font-style: italic;
-    font-size: 22px;
-    line-height: 1.55;
-    color: var(--ink-dim);
-    max-width: 720px;
-    padding-left: 24px;
-    border-left: 2px solid var(--signal);
+  .thesis-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
   }
 
-  /* ============ SLIDE — PROBLEM ============ */
-  .two-col {
+  .thesis-card {
+    background: var(--bg-elevated);
+    border: 1px solid var(--rule);
+    padding: 28px 24px;
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .thesis-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: var(--signal);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .thesis-card:hover::before {
+    opacity: 1;
+  }
+
+  .thesis-card h3 {
+    font-size: 17px;
+    font-weight: 500;
+    margin: 16px 0 10px 0;
+    color: var(--ink);
+  }
+
+  .thesis-card p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--ink-dim);
+  }
+
+  .card-icon {
+    font-size: 24px;
+    opacity: 0.9;
+  }
+
+  /* ============ SLIDE 3 — THE GAP REDESIGN ============ */
+  .gap-wrapper {
     flex: 1;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1.2fr;
     gap: 80px;
-    align-items: stretch;
-  }
-
-  .col-heading h2 {
-    font-size: clamp(40px, 4.5vw, 68px);
-    font-weight: 300;
-    line-height: 1.05;
-  }
-
-  .col-heading h2 em {
-    color: var(--signal);
-    font-style: italic;
-  }
-
-  .col-body p {
-    font-size: 17px;
-    line-height: 1.7;
-    color: var(--ink-dim);
-    margin-bottom: 20px;
-    max-width: 520px;
-  }
-
-  .col-body p strong { color: var(--ink); font-weight: 500; }
-
-  .timeline {
-    margin-top: 40px;
-    border-top: 1px solid var(--rule);
-    padding-top: 32px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-  }
-
-  .timeline-row {
-    display: grid;
-    grid-template-columns: 80px 1fr auto;
-    gap: 24px;
-    padding: 14px 0;
-    border-bottom: 1px dashed var(--rule);
     align-items: center;
   }
 
-  .timeline-week {
-    color: var(--signal);
-    letter-spacing: 0.1em;
-  }
-
-  .timeline-event {
+  .gap-content h2 {
+    font-size: clamp(36px, 4vw, 56px);
+    font-weight: 300;
+    line-height: 1.1;
+    margin-bottom: 24px;
     color: var(--ink);
-    font-size: 15px;
   }
 
-  .timeline-source {
+  .gap-content h2 em {
+    color: var(--market); 
+    font-style: normal;  
+  }
+  
+  .gap-content .highlight {
+    color: var(--signal);
+    font-style: italic;
+  }
+
+  .gap-body {
+    font-size: 16px;
+    line-height: 1.65;
     color: var(--ink-dim);
+  }
+
+  .gap-body p {
+    margin-bottom: 24px;
+  }
+
+  .gap-body strong {
+    color: var(--ink);
+    font-weight: 500;
+  }
+  
+  .gap-box {
+    background: rgba(232, 184, 92, 0.05);
+    border-left: 3px solid var(--alert);
+    padding: 20px 24px;
+    margin-top: 32px;
+  }
+  
+  .gap-box p {
+    margin: 0;
+    color: var(--alert);
+    font-style: italic;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  /* Structural Timeline */
+  .gap-timeline-container {
+    background: var(--bg-elevated);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 32px 40px;
+    position: relative;
+  }
+
+  .gap-timeline-container::after {
+    content: '';
+    position: absolute;
+    left: 92px;
+    top: 50px;
+    bottom: 50px;
+    width: 1px;
+    background: var(--rule-strong);
+    z-index: 0;
+  }
+
+  .gap-timeline-row {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 32px;
+    padding: 16px 0;
+    align-items: center;
+  }
+
+  .gap-timeline-week {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    color: var(--ink-dim);
+    background: var(--bg-elevated);
+    padding: 8px 0;
+    text-align: right;
+    padding-right: 16px;
+  }
+
+  .gap-timeline-content {
+    background: var(--bg);
+    border: 1px solid var(--rule);
+    padding: 16px 20px;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  }
+
+  .gap-timeline-row.is-alpha .gap-timeline-content {
+    border-color: rgba(200, 232, 92, 0.3);
+  }
+
+  .gap-timeline-row.is-alpha .gap-timeline-week {
+    color: var(--signal);
+    font-weight: 500;
+  }
+  
+  .gap-timeline-row.is-market .gap-timeline-week {
+    color: var(--market);
+  }
+
+  .gap-timeline-row.is-consensus .gap-timeline-week {
+    color: var(--alert);
+  }
+
+  .gap-timeline-event {
+    color: var(--ink);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .gap-timeline-source {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--ink-faint);
     text-transform: uppercase;
     letter-spacing: 0.1em;
     font-size: 10px;
   }
-
-  /* ============ SLIDE — WHAT WE DO ============ */
-  .what-grid {
+  
+  .gap-timeline-row.is-alpha .gap-timeline-source {
+    color: var(--signal-deep);
+  }
+  /* ============ SLIDE 5 — HARVESTALPHA REDESIGN ============ */
+  .ha-layout {
     flex: 1;
-    display: grid;
-    grid-template-columns: 1.1fr 1fr;
-    gap: 48px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    min-height: 0;
   }
 
-  .what-grid h2 {
-    font-size: clamp(36px, 4vw, 56px);
+  /* Top header band */
+  .ha-header {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 48px;
+    align-items: start;
+    padding-bottom: 40px;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 0;
+  }
+
+  .ha-headline h2 {
+    font-size: clamp(40px, 4.8vw, 66px);
     font-weight: 300;
-    line-height: 1.05;
+    line-height: 1.03;
+    letter-spacing: -0.025em;
     margin-bottom: 20px;
   }
 
-  .what-grid h2 em {
-    color: var(--signal);
+  .ha-headline h2 em {
     font-style: italic;
-  }
-
-  .what-grid .lede {
-    font-size: 16px;
-    line-height: 1.6;
-    color: var(--ink);
-    margin-bottom: 14px;
-    max-width: 560px;
-  }
-
-  .feature-list {
-    list-style: none;
-  }
-
-  .feature-list li {
-    padding: 14px 0;
-    border-top: 1px solid var(--rule);
-    display: grid;
-    grid-template-columns: 48px 1fr;
-    gap: 16px;
-    align-items: start;
-  }
-
-  .feature-list li:last-child { border-bottom: 1px solid var(--rule); }
-
-  .feature-num {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
     color: var(--signal);
-    letter-spacing: 0.1em;
-    padding-top: 4px;
   }
 
-  .feature-title {
-    font-family: 'Fraunces', serif;
-    font-size: 17px;
-    font-weight: 400;
-    line-height: 1.25;
-    color: var(--ink);
-    margin-bottom: 4px;
-  }
-
-  .feature-desc {
-    font-size: 14px;
-    line-height: 1.55;
+  .ha-lede {
+    font-size: 15.5px;
+    line-height: 1.65;
     color: var(--ink-dim);
+    max-width: 680px;
+  }
+
+  .ha-lede strong { color: var(--ink); font-weight: 500; }
+
+  /* 36-days callout panel */
+  .ha-callout {
+    background: linear-gradient(160deg, rgba(200,232,92,0.07) 0%, rgba(200,232,92,0.02) 100%);
+    border: 1px solid rgba(200,232,92,0.25);
+    padding: 28px 28px 24px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ha-callout::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--signal), transparent);
+  }
+
+  .ha-callout-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--signal);
+    margin-bottom: 12px;
+  }
+
+  .ha-callout-num {
+    font-family: 'Fraunces', serif;
+    font-size: 84px;
+    font-weight: 300;
+    line-height: 0.9;
+    color: var(--signal);
+    letter-spacing: -0.04em;
+    margin-bottom: 8px;
+  }
+
+  .ha-callout-unit {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin-bottom: 16px;
+  }
+
+  .ha-callout-divider {
+    height: 1px;
+    background: var(--rule);
+    margin-bottom: 14px;
+  }
+
+  .ha-callout-sources {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .ha-callout-pill {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+    border: 1px solid var(--rule);
+    padding: 3px 8px;
+  }
+
+  .ha-callout-sub {
+    font-size: 12px;
+    line-height: 1.5;
+    color: var(--ink-dim);
+    margin-top: 12px;
+  }
+
+  /* 5-signal cards grid */
+  .ha-signals {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0;
+    min-height: 0;
+  }
+
+  .ha-signal-card {
+    padding: 28px 24px 26px;
+    border-right: 1px solid var(--rule);
+    border-top: 1px solid var(--rule);
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    position: relative;
+    transition: background 0.25s ease;
+    overflow: hidden;
+  }
+
+  .ha-signal-card:last-child { border-right: none; }
+
+  .ha-signal-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--signal);
+    transition: width 0.35s ease;
+  }
+
+  .ha-signal-card:hover::before { width: 100%; }
+  .ha-signal-card:hover { background: rgba(200,232,92,0.03); }
+
+  .ha-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+  }
+
+  .ha-card-icon {
+    width: 36px;
+    height: 36px;
+    opacity: 0.7;
+  }
+
+  .ha-card-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: var(--ink-faint);
+  }
+
+  .ha-card-title {
+    font-family: 'Fraunces', serif;
+    font-size: 16px;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--ink);
+    line-height: 1.25;
+    margin-bottom: 10px;
+  }
+
+  .ha-card-desc {
+    font-size: 12.5px;
+    line-height: 1.58;
+    color: var(--ink-dim);
+    flex: 1;
+  }
+
+  .ha-card-tag {
+    margin-top: 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    padding-top: 12px;
+    border-top: 1px dashed var(--rule);
+  }
+
+  /* Delivery strip */
+  .ha-delivery {
+    display: grid;
+    grid-template-columns: auto 1fr 1fr 1fr;
+    gap: 0;
+    border-top: 1px solid var(--rule);
+    margin-top: 0;
+  }
+
+  .ha-delivery-label {
+    display: flex;
+    align-items: center;
+    padding: 18px 28px 18px 0;
+    border-right: 1px solid var(--rule);
+    white-space: nowrap;
+    gap: 12px;
+  }
+
+  .ha-delivery-label span {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+  }
+
+  .ha-delivery-label .dl-arrow {
+    font-size: 14px;
+    color: var(--signal);
+    line-height: 1;
+  }
+
+  .ha-delivery-mode {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 18px 24px;
+    border-right: 1px solid var(--rule);
+    transition: background 0.2s ease;
+    cursor: default;
+  }
+
+  .ha-delivery-mode:last-child { border-right: none; }
+  .ha-delivery-mode:hover { background: rgba(200,232,92,0.03); }
+
+  .ha-delivery-mode-icon {
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+    opacity: 0.75;
+  }
+
+  .ha-delivery-mode-body {}
+
+  .ha-delivery-mode-name {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+    margin-bottom: 2px;
+  }
+
+  .ha-delivery-mode-desc {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    color: var(--ink-dim);
+    letter-spacing: 0.06em;
   }
 
   /* ============ SLIDE — PROOF / CANOLA ============ */
@@ -690,260 +1060,440 @@
     flex: 1;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 40px;
+    gap: 30px;
+    margin-top: 20px;
   }
 
   .delivery-card {
     background: var(--bg-elevated);
     border: 1px solid var(--rule);
-    padding: 40px 36px;
+    padding: 40px 32px;
     display: flex;
     flex-direction: column;
     position: relative;
-    transition: border-color 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    overflow: hidden;
+  }
+
+  .delivery-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 2px;
+    height: 100%;
+    background: var(--signal);
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform 0.4s ease;
   }
 
   .delivery-card:hover {
-    border-color: var(--signal);
+    border-color: rgba(200, 232, 92, 0.3);
+    transform: translateY(-8px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+  }
+
+  .delivery-card:hover::before {
+    transform: scaleY(1);
   }
 
   .delivery-card .tag {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
+    font-size: 11px;
     color: var(--signal);
-    letter-spacing: 0.14em;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
-    margin-bottom: 24px;
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .delivery-card .tag::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
   }
 
   .delivery-card h3 {
-    font-size: 28px;
-    font-weight: 400;
-    margin-bottom: 18px;
-    line-height: 1.2;
+    font-size: 32px;
+    font-weight: 300;
+    margin-bottom: 24px;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
   }
 
   .delivery-card p {
-    font-size: 15px;
-    line-height: 1.65;
+    font-size: 16px;
+    line-height: 1.7;
     color: var(--ink-dim);
     flex: 1;
   }
 
   .delivery-card .footer {
-    margin-top: 24px;
-    padding-top: 18px;
+    margin-top: 32px;
+    padding: 12px 0;
     border-top: 1px solid var(--rule);
     font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    color: var(--ink);
+    font-size: 12px;
+    color: var(--signal);
     letter-spacing: 0.05em;
-  }
-
-  /* ============ SLIDE — THE ASK ============ */
-  .ask-content {
-    flex: 1;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
+    opacity: 0.8;
   }
 
-  .ask-content h2 {
-    font-size: clamp(44px, 5.5vw, 84px);
-    font-weight: 300;
-    line-height: 1.02;
-    letter-spacing: -0.025em;
-    max-width: 1200px;
-    margin-bottom: 48px;
+  .delivery-card .footer span:last-child {
+    color: var(--ink-dim);
   }
 
-  .ask-content h2 em { color: var(--signal); font-style: italic; }
-
-  .tier-grid {
+  
+  /* ============ INTEGRATION BLOCKS (Slide 10) ============ */
+  .integration-grid {
+    flex: 1;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0;
-    border: 1px solid var(--rule);
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 30px;
   }
 
-  .tier-card {
-    padding: 40px 44px;
+  .integration-block {
+    background: transparent;
+    border-top: 2px solid var(--rule-strong);
+    padding: 30px 24px;
     display: flex;
     flex-direction: column;
     position: relative;
   }
 
-  .tier-card:first-child {
-    border-right: 1px solid var(--rule);
-  }
-
-  .tier-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
+  .integration-label {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.18em;
+    font-size: 11px;
+    color: var(--ink-dim);
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--bg);
-    background: var(--signal);
-    padding: 5px 12px;
-    margin-bottom: 28px;
-    align-self: flex-start;
+    margin-bottom: 24px;
   }
 
-  .tier-card:last-child .tier-badge {
-    background: var(--market);
-  }
-
-  .tier-card h3 {
-    font-size: 30px;
-    font-weight: 400;
-    line-height: 1.15;
+  .integration-block h3 {
+    font-size: 24px;
+    font-weight: 500;
     margin-bottom: 16px;
     color: var(--ink);
   }
 
-  .tier-card .tier-lede {
-    font-size: 16px;
-    line-height: 1.65;
+  .integration-block p {
+    font-size: 15px;
+    line-height: 1.6;
     color: var(--ink-dim);
-    margin-bottom: 28px;
     flex: 1;
   }
 
-  .tier-card .tier-lede strong { color: var(--ink); }
-
-  .tier-details {
-    list-style: none;
-    border-top: 1px solid var(--rule);
-    padding-top: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .tier-details li {
-    display: grid;
-    grid-template-columns: 18px 1fr;
-    gap: 10px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 13px;
-    letter-spacing: 0.04em;
-    color: var(--ink-dim);
-    line-height: 1.5;
-  }
-
-  .tier-details li::before {
-    content: '→';
-    color: var(--signal);
-  }
-
-  .tier-card:last-child .tier-details li::before {
-    color: var(--market);
-  }
-
-  .tier-footer {
-    margin-top: 24px;
-    padding-top: 16px;
-    border-top: 1px solid var(--rule);
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    font-family: 'JetBrains Mono', monospace;
-  }
-
-  .tier-price {
-    font-size: 28px;
-    font-weight: 500;
-    color: var(--signal);
-    letter-spacing: -0.02em;
-  }
-
-  .tier-card:last-child .tier-price {
-    color: var(--market);
-  }
-
-  .tier-timeline {
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-    color: var(--ink-dim);
-  }
-
-  .ask-item .step {
+  .integration-block .footer {
+    margin-top: 30px;
+    padding-top: 14px;
+    border-top: 1px dotted var(--rule);
     font-family: 'JetBrains Mono', monospace;
     font-size: 11px;
-    color: var(--signal);
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    margin-bottom: 16px;
+    color: var(--ink);
+    opacity: 0.7;
   }
 
-  .ask-item h3 {
-    font-size: 26px;
-    font-weight: 400;
-    line-height: 1.2;
-    margin-bottom: 14px;
-  }
-
-  .ask-item p {
-    font-size: 14.5px;
-    line-height: 1.65;
-    color: var(--ink-dim);
-  }
-
-  /* ============ SLIDE — CLOSE ============ */
+  /* ============ SLIDE 12 — CLOSE REDESIGN ============ */
   .close-slide {
     background: var(--bg);
     justify-content: space-between;
+    overflow: hidden;
   }
 
-  .close-hero {
+  .close-wrapper {
     flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 80px;
+    align-items: center;
+    position: relative;
+    z-index: 10;
+  }
+  
+  .close-wrapper::after {
+    content: "36";
+    position: absolute;
+    right: -150px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 800px;
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    color: var(--signal);
+    opacity: 0.02;
+    pointer-events: none;
+    z-index: -1;
   }
 
-  .close-hero .eyebrow { color: var(--signal); }
+  .close-quote-box {
+    padding-right: 40px;
+  }
 
   .close-quote {
     font-family: 'Fraunces', serif;
-    font-weight: 300;
+    font-weight: 200;
     font-style: italic;
-    font-size: clamp(36px, 4vw, 58px);
-    line-height: 1.18;
+    font-size: clamp(40px, 4vw, 56px);
+    line-height: 1.15;
     letter-spacing: -0.02em;
-    max-width: 1100px;
     color: var(--ink);
   }
 
-  .close-quote .accent { color: var(--signal); font-style: normal; }
+  .close-quote .highlight { 
+    color: var(--signal); 
+    font-style: normal; 
+    font-weight: 400; 
+  }
 
   .close-attrib {
-    margin-top: 40px;
+    margin-top: 48px;
     font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    letter-spacing: 0.14em;
+    font-size: 13px;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
     color: var(--ink-dim);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .close-attrib::before {
+    content: "";
+    width: 40px;
+    height: 1px;
+    background: var(--signal);
+  }
+
+  .close-action-card {
+    background: var(--bg-elevated);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .close-action-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px; height: 100%;
+    background: var(--signal);
+  }
+
+  .action-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--signal);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  .action-body {
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--ink-dim);
+    margin-bottom: 32px;
+  }
+
+  .action-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    border-top: 1px solid var(--rule);
+    padding-top: 24px;
+  }
+
+  .action-list li {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--ink);
+  }
+
+  .action-list li span {
+    color: var(--signal);
+    font-weight: 600;
   }
 
   .close-footer {
-    border-top: 1px solid var(--rule);
-    padding-top: 32px;
     display: grid;
     grid-template-columns: 2fr 1fr 1fr;
-    gap: 48px;
-    align-items: end;
+    gap: 40px;
+    border-top: 1px solid var(--rule);
+    padding-top: 32px;
+    margin-top: 60px;
+    align-items: stretch;
+  }
+
+  .close-footer .brand-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
+  .close-footer .logo-mark {
+    font-size: 26px;
+    font-weight: 500;
+    letter-spacing: -0.04em;
+    margin-bottom: 8px;
+    color: var(--ink);
+  }
+
+  .close-footer .logo-mark em { color: var(--signal); font-style: normal; }
+
+  .close-footer .tag {
+    font-size: 13px;
+    color: var(--ink-dim);
+  }
+
+  .close-footer .contact-col {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
+  .close-footer .contact-col .label {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 12px;
+  }
+  
+  .close-footer .contact-col .value {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--ink);
+  }
+
+  .close-footer .logo-mark {
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: -0.04em;
+    margin-bottom: 8px;
+  }
+
+  .close-footer .logo-mark em { color: var(--signal); font-style: normal; }
+
+  .close-footer .tag {
+    font-size: 13px;
+    color: var(--ink-dim);
+  }
+
+  .close-footer .contact {
+    font-size: 13px;
+    color: var(--ink);
+    text-align: right;
+  }
+
+  .close-footer .contact .label {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--ink-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 4px;
+  }
+  /* Specific styling for the next-step card in the close slide */
+  .close-cta-card {
+    background: var(--bg-elevated);
+    border: 1px solid var(--rule-strong);
+    padding: 48px;
+    position: relative;
+    box-shadow: 20px 20px 0px rgba(200, 232, 92, 0.05);
+  }
+
+  .close-cta-card::before {
+    content: "NEXT";
+    position: absolute;
+    top: -12px;
+    right: 24px;
+    background: var(--signal);
+    color: var(--bg);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 4px 12px;
+    letter-spacing: 0.1em;
+  }
+
+  .close-footer {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 40px;
+    border-top: 1px solid var(--rule);
+    padding-top: 32px;
+    margin-top: 60px;
+    align-items: stretch;
+  }
+
+  .close-footer .brand-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
+  .close-footer .logo-mark {
+    font-size: 26px;
+    font-weight: 500;
+    letter-spacing: -0.04em;
+    margin-bottom: 8px;
+    color: var(--ink);
+  }
+
+  .close-footer .logo-mark em { color: var(--signal); font-style: normal; }
+
+  .close-footer .tag {
+    font-size: 13px;
+    color: var(--ink-dim);
+  }
+
+  .close-footer .contact-col {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
+  .close-footer .contact-col .label {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 12px;
+  }
+  
+  .close-footer .contact-col .value {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--ink);
   }
 
   .close-footer .logo-mark {
     font-family: 'Fraunces', serif;
-    font-size: 28px;
+    font-size: 32px;
     font-weight: 400;
     letter-spacing: -0.02em;
+    margin-bottom: 8px;
   }
 
   .close-footer .logo-mark em { color: var(--signal); font-style: italic; }
@@ -1025,6 +1575,9 @@
       grid-template-columns: 1fr;
       gap: 40px;
     }
+    .ha-header { grid-template-columns: 1fr; }
+    .ha-signals { grid-template-columns: repeat(2, 1fr); }
+    .ha-signal-card:nth-child(2n) { border-right: none; }
     .models-grid { grid-template-columns: repeat(2, 1fr); }
     .delivery-grid, .ask-grid { grid-template-columns: 1fr; }
     .analog-row { grid-template-columns: repeat(2, 1fr); }
@@ -1039,13 +1592,14 @@
   <a href="#s3" title="The Gap"></a>
   <a href="#s4" title="Why ICE"></a>
   <a href="#s5" title="HarvestAlpha"></a>
+  <a href="#s5b" title="HarvestAlpha Use Cases"></a>
   <a href="#s6" title="Proof"></a>
   <a href="#s7" title="CropQuant"></a>
+  <a href="#s7b" title="CropQuant Use Cases"></a>
   <a href="#s8" title="Vol Window"></a>
   <a href="#s9" title="Positioning"></a>
   <a href="#s10" title="Delivery"></a>
   <a href="#s11" title="Close"></a>
-  <a href="#s12" title="Customer Models"></a>
 </nav>
 
 <!-- ============ SLIDE 1 — COVER ============ -->
@@ -1056,14 +1610,14 @@
       <span>Algo-Rythmn</span>
       <span>Confidential — for ICE discussion</span>
     </div>
-    <div>01 / 11</div>
+    <div>01 / 12</div>
   </div>
 
   <div class="cover-hero">
     <div class="eyebrow">A proposal to Intercontinental Exchange</div>
     <h1>The yield signal,<br><em>weeks before</em><br>the market sees it.</h1>
     <p class="cover-sub">
-      Satellite-derived yield intelligence for corn, soybeans, wheat, and canola — delivered to institutional desks at least 5 weeks ahead of USDA and StatCan releases. A proposed partnership between Algo-Rythmn and ICE.
+      Multi-factor yield intelligence for corn, soybeans, wheat, and canola — fusing satellite, weather, energy, and geopolitical data to deliver a forecast 36 days ahead of USDA and StatCan releases. A proposed partnership between Algo-Rythmn and ICE.
     </p>
 
     <svg class="glyph" viewBox="0 0 380 380" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -1101,20 +1655,41 @@
 <section class="slide" id="s2">
   <div class="chrome">
     <div class="left"><span class="dot"></span><span>Thesis</span></div>
-    <div>02 / 11</div>
+    <div>02 / 12</div>
   </div>
 
-  <div class="thesis-content">
-    <div class="thesis-text">
-      <div class="eyebrow">One sentence</div>
-      <h2>
-        Yield deviations move futures prices.<br>
-        HarvestAlpha detects them <span class="accent">5 weeks</span><br>
-        before <span class="strike">USDA and StatCan</span> publish.
-      </h2>
-      <p class="thesis-sub">
-        Our customers — funds, trading houses, and exchanges — see price-relevant information before the market does. They keep their models. They keep their execution. We give them the input the rest of the market is still waiting for.
-      </p>
+  <div class="thesis-wrapper">
+    <div class="thesis-eyebrow">The core thesis</div>
+    <div class="thesis-grid">
+      <div class="thesis-statement">
+        <h2>
+          Yield deviations move futures prices.
+        </h2>
+        <h2 class="indent-1">
+          HarvestAlpha detects them
+          <div class="thesis-metric"><span class="num">36</span><span class="lbl">days</span></div>
+        </h2>
+        <h2 class="indent-2">
+          before <span class="strike">USDA & StatCan</span> publish.
+        </h2>
+      </div>
+      
+      <div class="thesis-sidebar">
+        <div class="thesis-card">
+          <div class="card-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--signal)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+          </div>
+          <h3>Information Asymmetry</h3>
+          <p>Our customers see price-relevant supply information weeks before the market prices it in.</p>
+        </div>
+        <div class="thesis-card">
+          <div class="card-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--signal)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+          </div>
+          <h3>Pure Alpha Input</h3>
+          <p>We do not disrupt their execution. They keep their models and mechanics. We inject the raw input the rest of the market is waiting for.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -1123,54 +1698,72 @@
 <section class="slide" id="s3">
   <div class="chrome">
     <div class="left"><span class="dot"></span><span>The Information Gap</span></div>
-    <div>03 / 11</div>
+    <div>03 / 12</div>
   </div>
 
-  <div class="two-col">
-    <div class="col-heading">
-      <div class="eyebrow">The structural problem</div>
-      <h2>Government crop data is <em>weeks late</em> by design.</h2>
-      <div class="col-body" style="margin-top: 36px;">
+  <div class="gap-wrapper">
+    <div class="gap-content">
+      <div class="eyebrow" style="margin-bottom: 24px;">The structural problem</div>
+      <h2>Government crop data is <em>retrospective.</em> HarvestAlpha is <span class="highlight">predictive.</span></h2>
+      <div class="gap-body">
         <p>
           USDA's WASDE, NASS Crop Production, and Statistics Canada Principal Field Crops reports are the consensus inputs the entire ag-commodity complex prices off.
         </p>
         <p>
-          They are also <strong>retrospective.</strong> The data they publish reflects field conditions and farmer surveys gathered weeks before release. By the time a number prints, the crop has already evolved past it.
+          But the data they publish reflects field conditions and farmer surveys gathered weeks before release. By the time a number prints, the <strong>crop has already evolved past it.</strong>
         </p>
+      </div>
+      <div class="gap-box">
         <p>
-          That lag is the window. <strong>It is also the window in which option implied volatility rises, hedging demand peaks, and directional conviction is scarce.</strong>
+          That lag is the window. It is also the specific window in which option implied volatility rises, hedging demand peaks, and directional conviction is incredibly scarce.
         </p>
       </div>
     </div>
 
     <div>
-      <div class="eyebrow">2021 Canadian canola — anatomy of a lag</div>
-      <div class="timeline">
-        <div class="timeline-row">
-          <span class="timeline-week">Wk –10</span>
-          <span class="timeline-event">Satellite NDVI begins diverging from 5-yr norm across Prairie growing regions</span>
-          <span class="timeline-source">HarvestAlpha</span>
+      <div class="eyebrow" style="margin-bottom: 20px;">2021 Canadian Canola / Anatomy of a lag</div>
+      <div class="gap-timeline-container">
+        
+        <div class="gap-timeline-row is-alpha">
+          <div class="gap-timeline-week">Wk –8</div>
+          <div class="gap-timeline-content">
+            <span class="gap-timeline-source">HarvestAlpha</span>
+            <span class="gap-timeline-event">Satellite NDVI begins diverging from 5-yr norm across Prairie growing regions.</span>
+          </div>
         </div>
-        <div class="timeline-row">
-          <span class="timeline-week">Wk –8</span>
-          <span class="timeline-event">Soil moisture & temperature signal compound. Yield model flags &gt;25% production miss probability</span>
-          <span class="timeline-source">HarvestAlpha</span>
+        
+        <div class="gap-timeline-row is-market">
+          <div class="gap-timeline-week">Wk –6</div>
+          <div class="gap-timeline-content">
+            <span class="gap-timeline-source">Market</span>
+            <span class="gap-timeline-event">ICE canola (RS) trades near C$650/tonne. Market consensus is still pricing an average crop.</span>
+          </div>
         </div>
-        <div class="timeline-row">
-          <span class="timeline-week">Wk –6</span>
-          <span class="timeline-event">ICE canola (RS) trades near C$650/tonne. Market consensus: average crop</span>
-          <span class="timeline-source">Market</span>
+
+        <div class="gap-timeline-row is-alpha">
+          <div class="gap-timeline-week">Wk –5</div>
+          <div class="gap-timeline-content">
+            <span class="gap-timeline-source">HarvestAlpha</span>
+            <span class="gap-timeline-event">Soil moisture & temperature signal compound. Yield model flags &gt;25% production miss. <strong style="color:var(--signal)">[36 Days Early]</strong></span>
+          </div>
         </div>
-        <div class="timeline-row">
-          <span class="timeline-week">Wk –4</span>
-          <span class="timeline-event">Anecdotal field reports begin appearing in trade press</span>
-          <span class="timeline-source">Trade press</span>
+        
+        <div class="gap-timeline-row is-market">
+          <div class="gap-timeline-week">Wk –2</div>
+          <div class="gap-timeline-content">
+            <span class="gap-timeline-source">Trade press</span>
+            <span class="gap-timeline-event">Anecdotal field reports of severe drought begin appearing in the market.</span>
+          </div>
         </div>
-        <div class="timeline-row">
-          <span class="timeline-week">Wk 0</span>
-          <span class="timeline-event">StatCan confirms ~35% production decline. Canola peaks near C$1,000/tonne</span>
-          <span class="timeline-source">StatCan</span>
+        
+        <div class="gap-timeline-row is-consensus">
+          <div class="gap-timeline-week">Wk 0</div>
+          <div class="gap-timeline-content">
+            <span class="gap-timeline-source">StatCan</span>
+            <span class="gap-timeline-event">StatCan confirms ~35% production decline. Canola peaks near C$1,000/tonne.</span>
+          </div>
         </div>
+
       </div>
     </div>
   </div>
@@ -1180,7 +1773,7 @@
 <section class="slide" id="s4">
   <div class="chrome">
     <div class="left"><span class="dot"></span><span>Why ICE specifically</span></div>
-    <div>04 / 11</div>
+    <div>04 / 12</div>
   </div>
 
   <div class="why-ice">
@@ -1210,71 +1803,127 @@
 <section class="slide" id="s5">
   <div class="chrome">
     <div class="left"><span class="dot"></span><span>HarvestAlpha · Data Product</span></div>
-    <div>05 / 11</div>
+    <div>05 / 12</div>
   </div>
 
-  <div class="what-grid">
-    <div>
-      <div class="eyebrow">What HarvestAlpha is — and what we're asking</div>
-      <h2>Satellite-grade yield intelligence, <em>delivered as a signal</em>.</h2>
-      <p class="lede">
-        We fuse multi-spectral satellite imagery, parcel-level weather, soil moisture, and crop-stage models into a single yield deviation signal — calibrated against historical USDA and StatCan ground truth. More accurate and <strong>5 weeks earlier</strong> than government releases.
-      </p>
-      <p class="lede" style="color: var(--ink-dim);">
-        Probability-weighted forecast at the contract-relevant geography, refreshed through the growing season, with explicit confidence intervals and feature attribution.
-      </p>
-      <div style="margin-top: 20px; padding: 18px 24px; background: var(--bg-elevated); border: 1px solid var(--rule); border-left: 2px solid var(--signal);">
-        <div class="eyebrow" style="margin-bottom: 14px;">The ask</div>
-        <p style="font-size: 15px; line-height: 1.65; color: var(--ink); margin-bottom: 20px;">
-          A <strong>one-month proof-of-concept</strong> — scoped — to validate signal integration against ICE RS contract behavior. Standalone beta in six months.
-        </p>
-        <ul class="tier-details" style="border-top: 1px solid var(--rule); padding-top: 16px;">
-          <li>Sample accuracy metrics and methodology available under NDA</li>
-          <li>API feed, analyst dashboard, or direct ICE platform integration</li>
-          <li>Fixed scope: RS canola, one growing season</li>
-        </ul>
+  <div class="ha-layout">
 
+    <!-- Header row: headline left, 36-days callout right -->
+    <div class="ha-header">
+      <div class="ha-headline">
+        <div class="eyebrow">What HarvestAlpha is — a data product</div>
+        <h2><em>HarvestAlpha</em> — multi‑factor intelligence,<br> distilled into one yield-prediction signal.</h2>
+        <p class="ha-lede">
+          We fuse satellite imagery, weather, energy prices, geopolitical feeds, and supply-shock indicators into a single probability-weighted yield forecast — calibrated against a decade of USDA and StatCan ground truth. <strong>More accurate, and available weeks before government releases.</strong>
+        </p>
+      </div>
+
+      <div class="ha-callout">
+        <div class="ha-callout-label">Lead time over govt. release</div>
+        <div class="ha-callout-num">36</div>
+        <div class="ha-callout-unit">days early</div>
+        <div class="ha-callout-divider"></div>
+        <div class="ha-callout-sources">
+          <span class="ha-callout-pill">vs. USDA WASDE</span>
+          <span class="ha-callout-pill">vs. StatCan</span>
+          <span class="ha-callout-pill">Jul 15 forecast</span>
+        </div>
+        <p class="ha-callout-sub">Confidence intervals &amp; feature attribution refreshed weekly through the growing season.</p>
       </div>
     </div>
 
-    <ul class="feature-list">
-      <li>
-        <span class="feature-num">01</span>
-        <div>
-          <div class="feature-title">Multi-feature ingestion</div>
-          <div class="feature-desc">NDVI, EVI, surface temperature, precipitation, soil moisture, and phenological stage — pixel-aligned and time-aligned.</div>
+    <!-- 5 signal source cards -->
+    <div class="ha-signals">
+
+      <div class="ha-signal-card">
+        <div class="ha-card-top">
+          <svg class="ha-card-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="18" cy="18" r="5" stroke="#c8e85c" stroke-width="1.2"/>
+            <circle cx="18" cy="18" r="11" stroke="#c8e85c" stroke-width="0.8" stroke-dasharray="2 3" opacity="0.6"/>
+            <circle cx="18" cy="18" r="17" stroke="#c8e85c" stroke-width="0.6" stroke-dasharray="1.5 4" opacity="0.3"/>
+            <line x1="18" y1="0" x2="18" y2="36" stroke="#c8e85c" stroke-width="0.5" stroke-dasharray="2 5" opacity="0.25"/>
+            <line x1="0" y1="18" x2="36" y2="18" stroke="#c8e85c" stroke-width="0.5" stroke-dasharray="2 5" opacity="0.25"/>
+            <circle cx="18" cy="18" r="2.5" fill="#c8e85c"/>
+          </svg>
+          <span class="ha-card-num">01</span>
         </div>
-      </li>
-      <li>
-        <span class="feature-num">02</span>
-        <div>
-          <div class="feature-title">Dual-hemisphere coverage</div>
-          <div class="feature-desc">North American and South American crops modeled in parallel — enabling cross-commodity and inter-hemispheric signal generation.</div>
+        <div class="ha-card-title">Satellite Imagery</div>
+        <div class="ha-card-desc">High-frequency NDVI, EVI, and multispectral analysis monitoring crop health, biomass, and phenological divergence at sub-field resolution.</div>
+        <div class="ha-card-tag">Sentinel-2 · Landsat · Planet</div>
+      </div>
+
+      <div class="ha-signal-card">
+        <div class="ha-card-top">
+          <svg class="ha-card-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M4 24 Q9 14 14 20 Q19 26 24 16 Q29 6 32 18" stroke="#c8e85c" stroke-width="1.4" stroke-linecap="round" fill="none" opacity="0.8"/>
+            <path d="M4 30 Q9 22 14 26 Q19 30 24 22 Q29 14 32 24" stroke="#c8e85c" stroke-width="0.8" stroke-linecap="round" fill="none" opacity="0.4"/>
+            <circle cx="14" cy="20" r="2" fill="#c8e85c" opacity="0.7"/>
+            <circle cx="24" cy="16" r="2" fill="#c8e85c" opacity="0.7"/>
+          </svg>
+          <span class="ha-card-num">02</span>
         </div>
-      </li>
-      <li>
-        <span class="feature-num">03</span>
-        <div>
-          <div class="feature-title">Calibrated against ground truth</div>
-          <div class="feature-desc">Back-tested against a decade of county- and CAR-level final yield data from USDA NASS and Statistics Canada.</div>
+        <div class="ha-card-title">Weather Intelligence</div>
+        <div class="ha-card-desc">Hyper-local heat accumulation (GDD), soil moisture stress, and extreme event modeling (frost/flood) weighted by critical crop-stage sensitivity.</div>
+        <div class="ha-card-tag">ERA5 · GFS · Soil Moisture</div>
+      </div>
+
+      <div class="ha-signal-card">
+        <div class="ha-card-top">
+          <svg class="ha-card-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <polyline points="18,4 12,20 16,20 10,32" stroke="#c8e85c" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <line x1="8" y1="20" x2="28" y2="20" stroke="#c8e85c" stroke-width="0.7" opacity="0.35"/>
+            <circle cx="18" cy="20" r="2.5" fill="#c8e85c" opacity="0.4"/>
+          </svg>
+          <span class="ha-card-num">03</span>
         </div>
-      </li>
-      <li>
-        <span class="feature-num">04</span>
-        <div>
-          <div class="feature-title">Honest uncertainty</div>
-          <div class="feature-desc">Every signal ships with confidence intervals and feature attribution. No black boxes, no hidden assumptions.</div>
+        <div class="ha-card-title">Energy Signals</div>
+        <div class="ha-card-desc">Natural gas and diesel price volatility mapped to fertiliser application rates and logistical constraints — capturing the input-driven yield margin.</div>
+        <div class="ha-card-tag">NatGas · Diesel · Input Costs</div>
+      </div>
+
+      <div class="ha-signal-card">
+        <div class="ha-card-top">
+          <svg class="ha-card-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="18" cy="18" r="14" stroke="#c8e85c" stroke-width="1" opacity="0.5"/>
+            <ellipse cx="18" cy="18" rx="6" ry="14" stroke="#c8e85c" stroke-width="0.8" opacity="0.5"/>
+            <line x1="4" y1="18" x2="32" y2="18" stroke="#c8e85c" stroke-width="0.8" opacity="0.4"/>
+            <circle cx="26" cy="10" r="2.5" fill="#c8e85c" opacity="0.8"/>
+            <circle cx="26" cy="10" r="5" stroke="#c8e85c" stroke-width="0.8" opacity="0.4"/>
+          </svg>
+          <span class="ha-card-num">04</span>
         </div>
-      </li>
-    </ul>
-  </div>
+        <div class="ha-card-title">Geopolitical &amp; Shocks</div>
+        <div class="ha-card-desc">Real-time encoding of trade embargoes, conflict disruptions in major export hubs, and supply-chain crises that structurally shift the yield distribution.</div>
+        <div class="ha-card-tag">Trade Policy · Conflict · Shocks</div>
+      </div>
+
+      <div class="ha-signal-card">
+        <div class="ha-card-top">
+          <svg class="ha-card-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="4" y="8" width="28" height="20" rx="1" stroke="#c8e85c" stroke-width="1" opacity="0.5"/>
+            <line x1="4" y1="14" x2="32" y2="14" stroke="#c8e85c" stroke-width="0.7" opacity="0.35"/>
+            <line x1="4" y1="20" x2="32" y2="20" stroke="#c8e85c" stroke-width="0.7" opacity="0.35"/>
+            <line x1="13" y1="8" x2="13" y2="28" stroke="#c8e85c" stroke-width="0.7" opacity="0.35"/>
+            <polyline points="6,24 10,17 14,21 20,11 26,15" stroke="#c8e85c" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <circle cx="26" cy="15" r="2" fill="#c8e85c"/>
+          </svg>
+          <span class="ha-card-num">05</span>
+        </div>
+        <div class="ha-card-title">Calibrated against ground truth</div>
+        <div class="ha-card-desc">Back-tested against a decade of county- and CAR-level final yield data from USDA NASS and Statistics Canada — across normal seasons and crisis years alike.</div>
+        <div class="ha-card-tag">USDA NASS · StatCan · 10yr OOS</div>
+      </div>
+
+    </div><!-- /ha-signals -->
+
+  </div><!-- /ha-layout -->
 </section>
 
 <!-- ============ SLIDE 6 — THE PROOF / CANOLA CHART ============ -->
-<section class="slide" id="s6">
+<section class="slide" id="s5b">
   <div class="chrome">
     <div class="left"><span class="dot"></span><span>Proof of value</span></div>
-    <div>06 / 11</div>
+    <div>06 / 12</div>
   </div>
 
   <div class="proof-header">
@@ -1390,7 +2039,7 @@
       <div style="padding:10px 14px; border-right:1px solid var(--rule);">
         <div style="color:var(--ink-dim); letter-spacing:.12em; text-transform:uppercase; font-size:9px; margin-bottom:6px;">Alberta</div>
         <div style="color:var(--ink-faint); font-size:16px;">Excluded</div>
-        <div style="color:var(--ink-faint); font-size:9px; margin-top:3px;">Data gaps · structural (see notes)</div>
+        <div style="color:var(--ink-faint); font-size:9px; margin-top:3px;">Excluded — incomplete CAR-level reporting coverage</div>
       </div>
       <div style="padding:10px 14px; border-right:1px solid var(--rule);">
         <div style="color:var(--ink-dim); letter-spacing:.12em; text-transform:uppercase; font-size:9px; margin-bottom:6px;">Prairie (SK+MB)</div>
@@ -1400,7 +2049,7 @@
       <div style="padding:10px 14px;">
         <div style="color:var(--ink-dim); letter-spacing:.12em; text-transform:uppercase; font-size:9px; margin-bottom:6px;">vs. Statistics Canada</div>
         <div style="color:var(--alert); font-size:16px; letter-spacing:-.01em;">+36 days</div>
-        <div style="color:var(--ink-dim); font-size:9px; margin-top:3px;">2× MAE · directional edge before Aug 20</div>
+        <div style="color:var(--ink-dim); font-size:9px; margin-top:3px;">Early forecast; ~2× final-report MAE — directional edge persists</div>
       </div>
     </div>
 
@@ -1410,51 +2059,11 @@
   </div>
 </section>
 
-<!-- ============ SLIDE 7 — CROPQUANT ============ -->
-<section class="slide" id="s7">
-  <div class="chrome">
-    <div class="left"><span class="dot"></span><span>CropQuant · Financial Analytic Product</span></div>
-    <div>07 / 11</div>
-  </div>
-
-  <div class="why-ice">
-    <div>
-      <div class="eyebrow">Where HarvestAlpha leads</div>
-      <h2>A yield curve <em>built with ICE data</em>, anchored to the contract.</h2>
-      <p style="font-size: 17px; line-height: 1.7; color: var(--ink-dim); margin-bottom: 20px;">
-        Translating a yield signal into a forward curve requires inputs only ICE holds: multi-year settlement history, carry structure, open interest, and basis data across the full term structure.
-      </p>
-      <p style="font-size: 17px; line-height: 1.7; color: var(--ink-dim); margin-bottom: 32px;">
-        We can build a parametric model without ICE data. <strong style="color: var(--ink);">With it, we can build ML models</strong> — that learn the yield-to-curve relationship across 5–15 years of contract history. The result is an exchange-grade forward curve product, co-developed and co-owned.
-      </p>
-      <ul class="ice-points">
-        <li>Parametric baseline available independently as proof of methodology</li>
-        <li>ML models require ICE historical data partnership</li>
-        <li>Target: ICE-branded Canola Yield Curve — licensed, exchange-grade reference</li>
-        <li>Revenue-share or licensing structure to be agreed; ICE retains index ownership</li>
-      </ul>
-    </div>
-
-    <div class="market-box">
-      <span class="market-box-label">The opportunity</span>
-      <h3>From signal to benchmark.</h3>
-      <p style="font-size: 15px; line-height: 1.65; color: var(--ink-dim); margin: 20px 0;">
-        HarvestAlpha proves the yield signal works against ICE RS. CropQuant turns that signal into a <strong style="color: var(--ink);">tradeable, exchange-grade forward curve</strong> — a new financial product anchored to the world's most concentrated oilseed contract.
-      </p>
-      <div style="border-top: 1px solid var(--rule); padding-top: 20px; font-family: 'JetBrains Mono', monospace;">
-        <div style="font-size: 10px; color: var(--ink-dim); text-transform: uppercase; letter-spacing: 0.14em; margin-bottom: 8px;">Engagement</div>
-        <div style="font-size: 22px; color: var(--market); letter-spacing: -0.02em; font-weight: 500;">Partnership</div>
-        <div style="font-size: 11px; color: var(--ink-dim); margin-top: 8px; letter-spacing: 0.06em;">12-month target · follows HarvestAlpha PoC</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ SLIDE 8 — VOL WINDOW ============ -->
+<!-- ============ SLIDE 7 — VOL WINDOW ============ -->
 <section class="slide" id="s8">
   <div class="chrome">
     <div class="left"><span class="dot"></span><span>The WASDE / StatCan window</span></div>
-    <div>08 / 11</div>
+    <div>07 / 12</div>
   </div>
 
   <div class="vol-content">
@@ -1522,159 +2131,203 @@
   </div>
 </section>
 
-<!-- ============ SLIDE 9 — POSITIONING ============ -->
-<section class="slide" id="s9">
+
+<!-- ============ SLIDE 8 — HARVESTALPHA CUSTOMER USE CASES ============ -->
+<section class="slide" id="s6">
   <div class="chrome">
-    <div class="left"><span class="dot"></span><span>Positioning</span></div>
-    <div>09 / 11</div>
-  </div>
-
-  <div class="positioning">
-    <div class="eyebrow">What we are, and what we are not</div>
-    <h2>
-      We sell <em>intelligence</em>,<br>
-      <span class="quiet">not execution.</span>
-    </h2>
-    <p style="margin-top: 36px; font-size: 19px; line-height: 1.65; color: var(--ink-dim); max-width: 860px;">
-      Bloomberg doesn't trade. Reuters doesn't trade. Kpler doesn't trade. They sell the data and analysis that informs decisions made by others. HarvestAlpha sits in that same category — institutional infrastructure, not a trading firm.
-    </p>
-
-    <div class="analog-row">
-      <div>
-        <div class="lbl">Bloomberg</div>
-        <div class="name">Cross-asset data</div>
-        <div class="domain">Financial markets</div>
-      </div>
-      <div>
-        <div class="lbl">Reuters</div>
-        <div class="name">News & analytics</div>
-        <div class="domain">Global information</div>
-      </div>
-      <div>
-        <div class="lbl">Kpler</div>
-        <div class="name">Cargo intelligence</div>
-        <div class="domain">Energy & commodities</div>
-      </div>
-      <div>
-        <div class="lbl">Algo-Rythmn</div>
-        <div class="name us">HarvestAlpha</div>
-        <div class="domain">Agricultural yield signal</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ SLIDE 10 — DELIVERY ============ -->
-<section class="slide" id="s10">
-  <div class="chrome">
-    <div class="left"><span class="dot"></span><span>Product delivery</span></div>
-    <div>10 / 11</div>
+    <div class="left"><span class="dot"></span><span>HarvestAlpha · Customer Use Cases</span></div>
+    <div>08 / 12</div>
   </div>
 
   <div class="delivery-header">
-    <div class="eyebrow">How customers consume HarvestAlpha</div>
-    <h2>Three integration surfaces. <em>Zero workflow disruption.</em></h2>
+    <div class="eyebrow">How customers put the signal to work</div>
+    <h2>HarvestAlpha in <em>three live contexts</em>.</h2>
   </div>
 
   <div class="delivery-grid">
     <div class="delivery-card">
-      <span class="tag">Surface 01</span>
+      <span class="tag">01 / Hedge Fund</span>
+      <h3>Macro Directional</h3>
+      <p>A commodity fund ingests the HarvestAlpha API 36 days before StatCan. When the signal flags a >20% production miss, the desk builds a long in ICE RS front-month &mdash; ahead of the vol spike and before consensus re-prices.</p>
+      <div class="footer">
+        <span>Futures</span>
+        <span>Pre-report Entry</span>
+      </div>
+    </div>
+    <div class="delivery-card">
+      <span class="tag">02 / Merchant</span>
+      <h3>Physical Procurement</h3>
+      <p>A global grain handler uses regional yield deviations to time Prairie purchases. Indicating oversupply weeks before public data, procurement teams lock in basis contracts at a discount &mdash; improving physical book margins.</p>
+      <div class="footer">
+        <span>Basis</span>
+        <span>Local Advantage</span>
+      </div>
+    </div>
+    <div class="delivery-card">
+      <span class="tag">03 / Options</span>
+      <h3>Structured Vol</h3>
+      <p>A desk monitors implied vol against the signal. If projecting a yield surprise while IV is low, the desk structures long-gamma positions ahead of the report &mdash; capturing premium expansion with directional conviction.</p>
+      <div class="footer">
+        <span>Options</span>
+        <span>Gamma Scalping</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 9 — CROPQUANT ============ -->
+<section class="slide" id="s7">
+  <div class="chrome">
+    <div class="left"><span class="dot"></span><span>CropQuant · Financial Analytic Product</span></div>
+    <div>09 / 12</div>
+  </div>
+
+  <div class="why-ice">
+    <div>
+      <div class="eyebrow">Where HarvestAlpha leads — A Financial Analytic Product</div>
+      <h2><em>CropQuant</em> — A yield curve <em>built with ICE data</em>, anchored to the contract.</h2>
+      <p style="font-size: 17px; line-height: 1.7; color: var(--ink-dim); margin-bottom: 20px;">
+        Translating a yield signal into a forward curve requires inputs only ICE holds: multi-year settlement history, carry structure, open interest, and basis data across the full term structure.
+      </p>
+      <p style="font-size: 17px; line-height: 1.7; color: var(--ink-dim); margin-bottom: 32px;">
+        We can build a parametric model without ICE data. <strong style="color: var(--ink);">With it, we can build ML models</strong> — that learn the yield-to-curve relationship across 5–15 years of contract history. The result is an exchange-grade forward curve product, co-developed and co-owned.
+      </p>
+      <ul class="ice-points">
+        <li>Parametric baseline available independently as proof of methodology</li>
+        <li>ML models require ICE historical data partnership</li>
+        <li>Target: ICE-branded Canola Yield Curve — licensed, exchange-grade reference</li>
+        <li>Revenue-share or licensing structure to be agreed; ICE retains index ownership</li>
+      </ul>
+    </div>
+
+    <div class="market-box">
+      <span class="market-box-label">The opportunity</span>
+      <h3>From signal to benchmark.</h3>
+      <p style="font-size: 15px; line-height: 1.65; color: var(--ink-dim); margin: 20px 0;">
+        HarvestAlpha proves the yield signal works against ICE RS. CropQuant turns that signal into a <strong style="color: var(--ink);">tradeable, exchange-grade forward curve</strong> — a new financial product anchored to the world's most concentrated oilseed contract.
+      </p>
+      <div style="border-top: 1px solid var(--rule); padding-top: 20px; font-family: 'JetBrains Mono', monospace;">
+        <div style="font-size: 10px; color: var(--ink-dim); text-transform: uppercase; letter-spacing: 0.14em; margin-bottom: 8px;">Engagement</div>
+        <div style="font-size: 22px; color: var(--market); letter-spacing: -0.02em; font-weight: 500;">Partnership</div>
+        <div style="font-size: 11px; color: var(--ink-dim); margin-top: 8px; letter-spacing: 0.06em;">12-month target · follows HarvestAlpha PoC</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 10 — CROPQUANT CUSTOMER USE CASES ============ -->
+<section class="slide" id="s7b">
+  <div class="chrome">
+    <div class="left"><span class="dot"></span><span>CropQuant · Customer Use Cases</span></div>
+    <div>10 / 12</div>
+  </div>
+
+  <div class="delivery-header">
+    <div class="eyebrow">Institutional applications of the yield curve</div>
+    <h2>CropQuant in <em>three live contexts</em>.</h2>
+  </div>
+
+  <div class="delivery-grid">
+    <div class="delivery-card">
+      <span class="tag">Use Case 01</span>
+      <h3>ICE Product Franchise</h3>
+      <p>ICE co-develops the Canola Yield Curve as an exchange-grade published index &mdash; a new benchmark anchored to the RS contract. The index deepens engagement with desks that already trade the contract and creates a licensing revenue stream from funds and structured-product issuers that reference it.</p>
+      <div class="footer">Index licensing &middot; benchmark product</div>
+    </div>
+    <div class="delivery-card">
+      <span class="tag">Use Case 02</span>
+      <h3>Agricultural Lender</h3>
+      <p>A major agri-bank uses CropQuant’s forward curve to price multi-year operating credit for Prairie canola producers. Instead of relying on static historical averages, credit officers mark expected farm revenue to the yield-adjusted forward curve &mdash; calibrating loan covenants and collateral requirements to real-time growing conditions.</p>
+      <div class="footer">Credit underwriting &middot; farm lending</div>
+    </div>
+    <div class="delivery-card">
+      <span class="tag">Use Case 03</span>
+      <h3>Food Manufacturer</h3>
+      <p>A large canola oil processor with a 3-year procurement book uses CropQuant to structure multi-year hedges beyond the liquid part of the RS term structure. The yield curve provides the forward reference needed to price and execute customised OTC options &mdash; reducing basis risk on long-dated raw material costs.</p>
+      <div class="footer">Multi-year hedging &middot; OTC structuring</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 11 — DELIVERY & POSITIONING ============ -->
+<section class="slide" id="s10">
+  <div class="chrome">
+    <div class="left"><span class="dot"></span><span>Product delivery</span></div>
+    <div>11 / 12</div>
+  </div>
+
+  <div class="delivery-header">
+    <div class="eyebrow">We sell intelligence, not execution</div>
+    <h2>Three integration surfaces. <em>Zero workflow disruption.</em></h2>
+    <p style="margin-top: 16px; font-size: 19px; line-height: 1.65; color: var(--ink-dim); max-width: 860px;">
+      Like Bloomberg or Reuters, we sell the data that informs decisions made by others &mdash; delivered through surfaces designed for institutional integration.
+    </p>
+  </div>
+
+  <div class="integration-grid">
+    <div class="integration-block">
+      <span class="integration-label">Surface 01</span>
       <h3>API feed</h3>
       <p>Yield signal as a structured time-series — JSON or Parquet, REST or streaming. Customer quants ingest directly into existing pricing models and risk systems. No black box, no displacement of internal workflow.</p>
       <div class="footer">For: hedge funds, prop trading, commercial desks</div>
     </div>
-    <div class="delivery-card">
-      <span class="tag">Surface 02</span>
+    <div class="integration-block">
+      <span class="integration-label">Surface 02</span>
       <h3>Analyst dashboard</h3>
       <p>Visual interface for research and structuring teams. Geography drilldown, confidence intervals, feature attribution, and historical back-testing. Built for the analyst who needs to interrogate the signal before the desk acts on it.</p>
       <div class="footer">For: research, structuring, risk</div>
     </div>
-    <div class="delivery-card">
-      <span class="tag">Surface 03</span>
-      <h3>Co-developed index</h3>
-      <p>An ICE-branded yield index — co-constructed with ICE's product team, licensed and published as an exchange-grade reference. The signal becomes a tradeable, recognized benchmark anchored to the canola contract.</p>
-      <div class="footer">For: ICE product franchise</div>
+    <div class="integration-block">
+      <span class="integration-label">Surface 03</span>
+      <h3>Agentic platform</h3>
+      <p>An autonomous monitoring layer that watches the signal continuously through the growing season — alerting desks when the yield deviation crosses a configured threshold, summarising the driving factors, and surfacing the relevant contract context. Operates over API or dashboard; no analyst polling required.</p>
+      <div class="footer">For: trading desks, risk, automated workflows</div>
     </div>
   </div>
 </section>
 
-<!-- ============ SLIDE 11 — CLOSE ============ -->
+<!-- ============ SLIDE 12 — CLOSE ============ -->
 <section class="slide close-slide" id="s11">
   <div class="chrome">
     <div class="left"><span class="dot"></span><span>Close</span></div>
-    <div>11 / 11</div>
-  </div>
-
-  <div class="close-hero">
-    <div class="eyebrow">In one line</div>
-    <p class="close-quote">
-      "We give you a yield signal <span class="accent">five weeks</span> before USDA does.<br>
-      What you do with it is up to you — but we can show you what the market did the last time someone had it <em>and the market didn't.</em>"
-    </p>
-    <div class="close-attrib">— Algo-Rythmn positioning</div>
-  </div>
-
-  <div class="close-footer">
-    <div>
-      <div class="logo-mark">Algo<em>·</em>Rythmn</div>
-      <div class="tag">Math that acts · Intelligent middleware for complex industries</div>
-    </div>
-    <div class="contact">
-      <span class="label">Web</span>
-      algo-rythmn.ai
-    </div>
-    <div class="contact">
-      <span class="label">For</span>
-      Intercontinental Exchange<br>Ag Commodities · 2026
-    </div>
-  </div>
-</section>
-
-<!-- ============ SLIDE 12 — 5 MODELS ============ -->
-<section class="slide" id="s12">
-  <div class="chrome">
-    <div class="left"><span class="dot"></span><span>How customers use the signal</span></div>
     <div>12 / 12</div>
   </div>
 
-  <div class="delivery-header">
-    <div class="eyebrow">Downstream use cases</div>
-    <h2>Five model families. <em>Our customers run them.</em> We provide the input.</h2>
-    <p style="font-size: 16px; line-height: 1.6; color: var(--ink-dim); margin-top: 16px; max-width: 880px;">
-      Algo-Rythmn does not trade. We do not advise. We supply the yield signal that customers feed into the modelling frameworks they already operate. Below is the vocabulary — to make clear we understand exactly how the signal becomes price-relevant on the other side of the API.
-    </p>
+  <div class="close-wrapper">
+    <div class="close-quote-box">
+      <div class="eyebrow" style="margin-bottom: 32px;">The bottom line</div>
+      <p class="close-quote">
+        "We deliver a yield signal <span class="highlight">36 days</span> before the USDA & StatCan.<br>
+        What you do with it is yours — but we will show you what the market does when transparency is asymmetric."
+      </p>
+      <div class="close-attrib">Algo-Rythmn Positioning</div>
+    </div>
+
+    <div class="close-action-card">
+      <div class="action-title">Proposed Pilot Program</div>
+      <p class="action-body">
+        A surgical, one-season validation. We will map HarvestAlpha's historical signals directly against ICE RS contract volatility to prove the correlation.
+      </p>
+      <ul class="action-list">
+        <li><span>01</span> ICE RS Canola (Saskatchewan focus)</li>
+        <li><span>02</span> Full methodology & error-rate audit</li>
+        <li><span>03</span> Next step: NDA & historical back-test access</li>
+      </ul>
+    </div>
   </div>
 
-  <div class="models-grid">
-    <div class="model-cell">
-      <div class="model-num">01 / Baseline</div>
-      <h3>Supply shock projection</h3>
-      <p>Yield deviation × harvested acres × price elasticity → expected futures impact. The entry-level model every commodity desk runs.</p>
-      <div class="footer">Outright futures</div>
+  <div class="close-footer">
+    <div class="brand-col">
+      <div class="logo-mark">Algo<em>-</em>Rythmn</div>
+      <div class="tag">Math that acts · Intelligent middleware for complex industries</div>
     </div>
-    <div class="model-cell">
-      <div class="model-num">02 / Term structure</div>
-      <h3>Basis & carry curve</h3>
-      <p>Yield surprises reshape the forward curve. Bearish flattens, bullish steepens. Trade the calendar spread, not the outright.</p>
-      <div class="footer">Calendar spreads</div>
+    <div class="contact-col">
+      <span class="label">Prepared For</span>
+      <div class="value">Intercontinental Exchange<br>Ag Commodities &middot; 2026</div>
     </div>
-    <div class="model-cell">
-      <div class="model-num">03 / Relative value</div>
-      <h3>Cross-commodity spreads</h3>
-      <p>Corn–soy ratio, crush spreads, oil–meal. Differential yield signals drive cross-commodity trades that single-crop platforms cannot generate.</p>
-      <div class="footer">Spread / crush</div>
-    </div>
-    <div class="model-cell">
-      <div class="model-num">04 / Vol</div>
-      <h3>Options & implied vol</h3>
-      <p>Modified Black-76 calibrated to our yield distribution — not the market's consensus. Where the market underprices the tail, the skew is tradeable.</p>
-      <div class="footer">Options skew</div>
-    </div>
-    <div class="model-cell">
-      <div class="model-num">05 / Portfolio</div>
-      <h3>Portfolio optimization</h3>
-      <p>Mean-variance with commodity-specific constraints — seasonal correlations, non-normal returns, liquidity. Risk-adjusted weights across the stack.</p>
-      <div class="footer">Multi-asset</div>
+    <div class="contact-col">
+      <span class="label">Contact</span>
+      <div class="value">algo-rythmn.ai<br>support@algo-rythmn.ai</div>
     </div>
   </div>
 </section>
