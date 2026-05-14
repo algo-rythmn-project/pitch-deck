@@ -1,0 +1,1443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Co‑op Member Intelligence — Algo-Rythmn × Brazil</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a2820;
+    --ink-soft: #3b4a3f;
+    --paper: #f5f1e8;
+    --paper-warm: #ede5d3;
+    --forest: #2d4a3a;
+    --forest-deep: #1c2f24;
+    --terracotta: #b85c3a;
+    --terracotta-soft: #d4825e;
+    --gold: #c9a961;
+    --rule: #c8bda3;
+    --muted: #6b7568;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: #1a1a1a;
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ━━━━━━━━━━ DECK CONTAINER — scroll-based ━━━━━━━━━━ */
+  .deck-container {
+    width: 100%;
+    padding: 40px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+  }
+
+  /* Each slide is its own 16:9 card stacked vertically */
+  .slide {
+    width: min(95vw, calc(95vh * 16 / 9));
+    aspect-ratio: 16 / 9;
+    position: relative;
+    padding: 5% 6%;
+    background: var(--paper);
+    background-image:
+      radial-gradient(ellipse at top right, rgba(184,92,58,0.04), transparent 50%),
+      radial-gradient(ellipse at bottom left, rgba(45,74,58,0.05), transparent 50%);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    container-type: inline-size;
+    /* Smooth-scroll perf: promote each slide to its own compositor layer so
+       the heavy shadows/gradients don't repaint on every scroll frame. */
+    transform: translateZ(0);
+    contain: layout paint;
+  }
+
+  .slide-num {
+    position: absolute;
+    top: 3%;
+    left: 6%;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75cqw;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    text-transform: uppercase;
+    z-index: 2;
+  }
+  .slide-num .badge {
+    display: inline-block;
+    background: var(--forest-deep);
+    color: var(--paper);
+    padding: 0.3em 0.6em;
+    margin-right: 0.8em;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+  }
+
+  .slide-foot {
+    position: absolute;
+    bottom: 3%;
+    left: 6%;
+    right: 6%;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65cqw;
+    letter-spacing: 0.18em;
+    color: var(--muted);
+    text-transform: uppercase;
+    display: flex;
+    justify-content: space-between;
+    padding-top: 0.8em;
+    border-top: 1px solid var(--rule);
+    z-index: 2;
+  }
+
+  /* ━━━━━━━━━━ TYPOGRAPHY ━━━━━━━━━━ */
+  h1, h2, h3 { font-family: 'Fraunces', serif; font-weight: 500; line-height: 1.05; letter-spacing: -0.02em; }
+  h1 { font-size: 5cqw; font-weight: 400; }
+  h2 { font-size: 3.2cqw; font-weight: 500; line-height: 1.08; }
+  h3 { font-size: 1.4cqw; font-weight: 600; letter-spacing: -0.01em; }
+
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75cqw;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 1.2em;
+    font-weight: 500;
+  }
+
+  p { font-size: 1.05cqw; line-height: 1.6; color: var(--ink-soft); }
+  p.lead { font-size: 1.3cqw; line-height: 1.5; color: var(--ink); font-weight: 400; max-width: 70%; }
+  .serif-italic { font-family: 'Fraunces', serif; font-style: italic; font-weight: 400; }
+  .pt { font-family: 'Fraunces', serif; font-style: italic; color: var(--terracotta); }
+
+  strong { color: var(--ink); font-weight: 600; }
+  .accent { color: var(--terracotta); }
+  .forest { color: var(--forest); }
+
+  .slide-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 3vh;
+    margin-bottom: 2vh;
+  }
+
+  /* ━━━━━━━━━━ SLIDE 1 — COVER ━━━━━━━━━━ */
+  .cover { background: var(--forest-deep); color: var(--paper); }
+  .cover .slide-num { color: rgba(245,241,232,0.55); }
+  .cover .slide-num .badge { background: var(--terracotta); color: var(--paper); }
+  .cover .slide-foot { color: rgba(245,241,232,0.55); border-top-color: rgba(245,241,232,0.18); }
+
+  .cover h1 {
+    color: var(--paper);
+    font-size: 6cqw;
+    font-weight: 300;
+    margin-bottom: 0.3em;
+    line-height: 0.95;
+  }
+  .cover h1 em {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--gold);
+  }
+  .cover .project-name {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.9cqw;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 1.5em;
+    padding-bottom: 0.6em;
+    border-bottom: 1px solid rgba(201,169,97,0.3);
+    width: fit-content;
+  }
+  .cover .tagline {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 1.5cqw;
+    color: rgba(245,241,232,0.85);
+    max-width: 65%;
+    line-height: 1.5;
+    margin-bottom: 4vh;
+  }
+  .cover-meta {
+    display: flex;
+    gap: 4cqw;
+    padding-top: 2vh;
+    border-top: 1px solid rgba(245,241,232,0.2);
+  }
+  .cover-meta .item .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65cqw;
+    letter-spacing: 0.18em;
+    color: rgba(245,241,232,0.5);
+    text-transform: uppercase;
+    margin-bottom: 0.6em;
+  }
+  .cover-meta .item .value {
+    font-family: 'Fraunces', serif;
+    font-size: 1.1cqw;
+    color: var(--paper);
+  }
+
+  /* ━━━━━━━━━━ CALLOUT ━━━━━━━━━━ */
+  .callout {
+    background: var(--paper-warm);
+    border-left: 0.4cqw solid var(--terracotta);
+    padding: 1.6cqw 2cqw;
+    margin: 1.5vh 0;
+    max-width: 78%;
+  }
+  .callout .note-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7cqw;
+    letter-spacing: 0.2em;
+    color: var(--terracotta);
+    text-transform: uppercase;
+    margin-bottom: 0.8em;
+  }
+  .callout p {
+    font-family: 'Fraunces', serif;
+    font-size: 1.25cqw;
+    line-height: 1.5;
+    color: var(--ink);
+    font-weight: 400;
+  }
+
+  /* ━━━━━━━━━━ LAYOUTS ━━━━━━━━━━ */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3cqw;
+    margin-top: 2vh;
+  }
+  .two-col-uneven {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 3cqw;
+    margin-top: 2vh;
+  }
+
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75cqw;
+    letter-spacing: 0.2em;
+    color: var(--forest);
+    text-transform: uppercase;
+    margin-bottom: 1em;
+    font-weight: 600;
+    padding-bottom: 0.5em;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  /* ━━━━━━━━━━ PAIN LIST ━━━━━━━━━━ */
+  .pain-list { list-style: none; }
+  .pain-list li {
+    padding: 0.85cqw 0;
+    border-bottom: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: 1.8cqw 1fr;
+    gap: 0.8cqw;
+    align-items: baseline;
+  }
+  .pain-list li:last-child { border-bottom: none; }
+  .pain-list .arrow {
+    font-family: 'Fraunces', serif;
+    color: var(--terracotta);
+    font-size: 1.3cqw;
+    font-weight: 600;
+  }
+  .pain-list .pain-text { font-size: 0.95cqw; line-height: 1.5; color: var(--ink-soft); }
+  .pain-list .pain-text strong { color: var(--ink); }
+
+  /* ━━━━━━━━━━ LAYER STACK ━━━━━━━━━━ */
+  .layer-stack { margin-top: 2vh; }
+  .layer {
+    background: var(--paper-warm);
+    border: 1px solid var(--rule);
+    padding: 1.2cqw 1.6cqw;
+    margin-bottom: 0.9vh;
+    display: grid;
+    grid-template-columns: 3cqw 1fr;
+    gap: 1.2cqw;
+    align-items: center;
+  }
+  .layer-num {
+    font-family: 'Fraunces', serif;
+    font-size: 2.4cqw;
+    color: var(--terracotta);
+    font-weight: 300;
+    line-height: 1;
+  }
+  .layer h3 { color: var(--ink); margin-bottom: 0.2em; font-size: 1.2cqw; }
+  .layer p { font-size: 0.9cqw; color: var(--ink-soft); margin: 0; line-height: 1.5; }
+
+  /* ━━━━━━━━━━ PROOF BLOCK ━━━━━━━━━━ */
+  .proof-block {
+    background: var(--forest-deep);
+    color: var(--paper);
+    padding: 2.5cqw 3cqw;
+    margin-top: 1.5vh;
+    position: relative;
+    overflow: hidden;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .proof-block::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 15cqw; height: 15cqw;
+    background: radial-gradient(circle, rgba(201,169,97,0.15), transparent 70%);
+    pointer-events: none;
+  }
+  .proof-block .eyebrow { color: var(--gold); }
+  .proof-block h2 { color: var(--paper); margin-bottom: 0.5em; font-size: 2.2cqw; }
+  .proof-block p { color: rgba(245,241,232,0.85); font-size: 1cqw; max-width: 78%; line-height: 1.6; }
+  .proof-block .pullquote {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 1.35cqw;
+    color: var(--gold);
+    line-height: 1.5;
+    margin: 1.2vh 0;
+    max-width: 82%;
+    border-left: 3px solid var(--gold);
+    padding-left: 1.3cqw;
+  }
+
+  /* ━━━━━━━━━━ PILLARS ━━━━━━━━━━ */
+  .pillar-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2cqw 3cqw;
+    margin-top: 2vh;
+  }
+  .pillar {
+    padding: 1.2vh 0;
+    border-top: 2px solid var(--forest);
+  }
+  .pillar .pillar-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7cqw;
+    color: var(--terracotta);
+    letter-spacing: 0.15em;
+    margin-bottom: 0.5em;
+    font-weight: 600;
+  }
+  .pillar h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.35cqw;
+    color: var(--ink);
+    margin-bottom: 0.35em;
+    font-weight: 500;
+  }
+  .pillar p { font-size: 0.92cqw; line-height: 1.55; color: var(--ink-soft); }
+
+  /* ━━━━━━━━━━ TARGET CARDS ━━━━━━━━━━ */
+  .target-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1.5cqw;
+    margin-top: 1.5vh;
+  }
+  .target-card {
+    background: var(--paper-warm);
+    padding: 1.6vh 1.4cqw;
+    border-top: 4px solid var(--forest);
+  }
+  .target-card .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65cqw;
+    letter-spacing: 0.18em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 0.7em;
+  }
+  .target-card h3 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 1.5cqw;
+    margin-bottom: 0.4em;
+    color: var(--ink);
+  }
+  .target-card p { font-size: 0.88cqw; color: var(--ink-soft); line-height: 1.5; }
+
+  /* ━━━━━━━━━━ COOP TARGET CHIPS ━━━━━━━━━━ */
+  .coop-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6cqw;
+    margin-top: 1vh;
+  }
+  .coop-chip {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    padding: 0.6cqw 1cqw;
+    font-family: 'Fraunces', serif;
+    font-size: 1.05cqw;
+    color: var(--ink);
+    font-weight: 500;
+    position: relative;
+  }
+  .coop-chip .meta {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7cqw;
+    color: var(--muted);
+    font-weight: 400;
+    display: block;
+    margin-top: 0.2em;
+    letter-spacing: 0.05em;
+  }
+
+  /* ━━━━━━━━━━ ROI BOX ━━━━━━━━━━ */
+  .roi-box {
+    background: #e8efe7;
+    border: 1px solid #b9c9b6;
+    padding: 1.8vh 2.3cqw;
+    margin-top: 1.5vh;
+  }
+  .roi-box .roi-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75cqw;
+    letter-spacing: 0.22em;
+    color: var(--forest);
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 0.8em;
+  }
+  .roi-box p {
+    font-size: 1.05cqw;
+    line-height: 1.6;
+    color: var(--ink);
+  }
+  .roi-box .num { color: var(--terracotta); font-weight: 600; }
+
+  /* ━━━━━━━━━━ TIMELINE ━━━━━━━━━━ */
+  .timeline { margin-top: 1.5vh; }
+  .timeline-row {
+    display: grid;
+    grid-template-columns: 7cqw 1fr;
+    gap: 2cqw;
+    padding: 1vh 0;
+    border-bottom: 1px solid var(--rule);
+    align-items: baseline;
+  }
+  .timeline-row:last-child { border-bottom: none; }
+  .timeline-row .phase {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 1.05cqw;
+    color: var(--terracotta);
+    font-weight: 500;
+  }
+  .timeline-row h3 {
+    font-size: 1.15cqw;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 0.25em;
+  }
+  .timeline-row p { font-size: 0.92cqw; color: var(--ink-soft); line-height: 1.5; }
+
+  /* ━━━━━━━━━━ WHY-NOW STAT GRID ━━━━━━━━━━ */
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.2cqw;
+    margin-top: 1.5vh;
+  }
+  .stat-card {
+    background: var(--paper-warm);
+    padding: 1.4vh 1.2cqw;
+    border-left: 0.25cqw solid var(--terracotta);
+  }
+  .stat-card .stat-num {
+    font-family: 'Fraunces', serif;
+    font-size: 2.4cqw;
+    color: var(--forest);
+    font-weight: 500;
+    line-height: 1.05;
+    margin-bottom: 0.3em;
+    letter-spacing: -0.02em;
+  }
+  .stat-card .stat-num .unit {
+    font-size: 0.55em;
+    color: var(--terracotta);
+    font-weight: 600;
+    margin-left: 0.15em;
+  }
+  .stat-card .stat-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62cqw;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    margin-bottom: 0.5em;
+    font-weight: 600;
+  }
+  .stat-card .stat-detail {
+    font-size: 0.82cqw;
+    color: var(--ink-soft);
+    line-height: 1.45;
+  }
+
+  /* ━━━━━━━━━━ PRODUCT MOCKUP ━━━━━━━━━━ */
+  .product-mockup {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 2cqw;
+    margin-top: 1.5vh;
+    align-items: stretch;
+  }
+  .mockup-frame {
+    background: #faf7ee;
+    border: 1px solid var(--rule);
+    border-radius: 0.6cqw;
+    padding: 1cqw;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .mockup-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.4cqw;
+    padding-bottom: 0.7cqw;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 0.8cqw;
+  }
+  .mockup-bar .dot {
+    width: 0.55cqw;
+    height: 0.55cqw;
+    border-radius: 50%;
+    background: #d8cfb5;
+  }
+  .mockup-bar .url {
+    flex: 1;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6cqw;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-align: center;
+  }
+  .chat-msg {
+    margin-bottom: 0.7cqw;
+    font-size: 0.78cqw;
+    line-height: 1.5;
+  }
+  .chat-msg .role {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.55cqw;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 0.3em;
+    font-weight: 600;
+  }
+  .chat-msg.user .role { color: var(--terracotta); }
+  .chat-msg.ai .role { color: var(--forest); }
+  .chat-msg .bubble {
+    padding: 0.55cqw 0.7cqw;
+    border-radius: 0.4cqw;
+    background: white;
+    border: 1px solid var(--rule);
+    color: var(--ink);
+  }
+  .chat-msg.user .bubble {
+    background: var(--paper-warm);
+    border-color: rgba(184,92,58,0.2);
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 0.82cqw;
+  }
+  .chat-msg.ai .bubble strong { color: var(--forest); font-weight: 600; }
+  .chat-msg.ai .bubble .data-line {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7cqw;
+    color: var(--muted);
+    margin-top: 0.4em;
+    padding-top: 0.4em;
+    border-top: 1px dashed var(--rule);
+    letter-spacing: 0.05em;
+  }
+  .mockup-notes {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 0.5cqw;
+  }
+  .mockup-notes .anno {
+    margin-bottom: 1.2vh;
+    padding-left: 1cqw;
+    border-left: 2px solid var(--terracotta);
+  }
+  .mockup-notes .anno-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62cqw;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--terracotta);
+    font-weight: 600;
+    margin-bottom: 0.3em;
+  }
+  .mockup-notes .anno-text {
+    font-size: 0.88cqw;
+    color: var(--ink-soft);
+    line-height: 1.5;
+  }
+  .mockup-notes .anno-text strong { color: var(--ink); }
+
+  /* ━━━━━━━━━━ COMPETITIVE MATRIX ━━━━━━━━━━ */
+  .compete-table {
+    width: 100%;
+    margin-top: 1.2vh;
+    border-collapse: collapse;
+    font-size: 0.88cqw;
+  }
+  .compete-table th,
+  .compete-table td {
+    text-align: left;
+    padding: 0.9vh 0.8cqw;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+  }
+  .compete-table th {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62cqw;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--forest);
+    font-weight: 600;
+    border-bottom: 2px solid var(--forest);
+    padding-bottom: 1vh;
+  }
+  .compete-table td.player {
+    font-family: 'Fraunces', serif;
+    font-size: 1cqw;
+    font-weight: 500;
+    color: var(--ink);
+    width: 18%;
+  }
+  .compete-table td.player .sub {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.65cqw;
+    color: var(--muted);
+    font-weight: 400;
+    margin-top: 0.2em;
+    letter-spacing: 0.04em;
+  }
+  .compete-table td.focus { color: var(--ink-soft); width: 32%; }
+  .compete-table td.gap { color: var(--ink-soft); width: 32%; font-style: italic; }
+  .compete-table tr.us {
+    background: rgba(184,92,58,0.06);
+  }
+  .compete-table tr.us td.player {
+    color: var(--terracotta);
+    font-weight: 600;
+  }
+  .compete-table tr.us td.focus,
+  .compete-table tr.us td.gap {
+    color: var(--ink);
+    font-weight: 500;
+    font-style: normal;
+  }
+
+  /* ━━━━━━━━━━ RISK / ENGAGEMENT GRID ━━━━━━━━━━ */
+  .risk-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.2vh 2cqw;
+    margin-top: 1.5vh;
+  }
+  .risk-row {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1cqw;
+    padding: 1vh 0;
+    border-top: 1px solid var(--rule);
+    align-items: start;
+  }
+  .risk-row .risk-icon {
+    font-family: 'Fraunces', serif;
+    font-size: 1.4cqw;
+    color: var(--terracotta);
+    line-height: 1;
+    font-weight: 500;
+    margin-top: 0.1em;
+  }
+  .risk-row h3 {
+    font-size: 1cqw;
+    color: var(--ink);
+    margin-bottom: 0.35em;
+    font-weight: 600;
+  }
+  .risk-row p { font-size: 0.85cqw; line-height: 1.5; color: var(--ink-soft); }
+
+  /* ━━━━━━━━━━ COVER STAT STRIP ━━━━━━━━━━ */
+  .cover-strip {
+    display: flex;
+    gap: 3cqw;
+    margin-top: 2vh;
+    padding-top: 1.5vh;
+    border-top: 1px solid rgba(245,241,232,0.15);
+  }
+  .cover-strip .cstat {
+    flex: 1;
+  }
+  .cover-strip .cstat .cstat-num {
+    font-family: 'Fraunces', serif;
+    font-size: 2cqw;
+    color: var(--gold);
+    font-weight: 400;
+    line-height: 1;
+    margin-bottom: 0.4em;
+  }
+  .cover-strip .cstat .cstat-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6cqw;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: rgba(245,241,232,0.55);
+  }
+
+  /* ━━━━━━━━━━ CLOSING ━━━━━━━━━━ */
+  .closing { background: var(--forest-deep); color: var(--paper); }
+  .closing .slide-num { color: rgba(245,241,232,0.5); }
+  .closing .slide-num .badge { background: var(--terracotta); }
+  .closing .slide-foot { color: rgba(245,241,232,0.5); border-top-color: rgba(245,241,232,0.18); }
+  .closing h2 { color: var(--paper); max-width: 82%; }
+  .closing h2 em { color: var(--gold); font-style: italic; }
+  .closing .eyebrow { color: var(--gold); }
+
+  .ask-section {
+    background: rgba(245,241,232,0.05);
+    border-left: 0.4cqw solid var(--gold);
+    padding: 2vh 2.3cqw;
+    margin-top: 1.5vh;
+  }
+  .ask-section ol {
+    list-style: none;
+    counter-reset: ask;
+  }
+  .ask-section ol li {
+    counter-increment: ask;
+    padding: 0.9vh 0 0.9vh 3cqw;
+    position: relative;
+    font-size: 1cqw;
+    line-height: 1.55;
+    color: rgba(245,241,232,0.85);
+    border-bottom: 1px solid rgba(245,241,232,0.15);
+  }
+  .ask-section ol li:last-child { border-bottom: none; }
+  .ask-section ol li::before {
+    content: counter(ask, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: 0.9vh;
+    font-family: 'Fraunces', serif;
+    font-size: 1.3cqw;
+    color: var(--gold);
+    font-weight: 500;
+  }
+  .ask-section li strong { color: var(--paper); }
+
+  .closing .signature {
+    margin-top: 2.5vh;
+    padding-top: 1.2vh;
+    border-top: 1px solid rgba(245,241,232,0.2);
+  }
+  .closing .signature .name {
+    font-family: 'Fraunces', serif;
+    font-size: 1.5cqw;
+    color: var(--paper);
+    margin-bottom: 0.3em;
+  }
+  .closing .signature .meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78cqw;
+    letter-spacing: 0.1em;
+    color: rgba(245,241,232,0.6);
+  }
+  .closing .signature .url {
+    color: var(--gold);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(201,169,97,0.4);
+    padding-bottom: 2px;
+  }
+
+  /* ━━━━━━━━━━ SCROLL PROGRESS ━━━━━━━━━━ */
+  .progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: var(--gold);
+    width: 0%;
+    z-index: 100;
+    will-change: width;
+  }
+
+  @media print {
+    @page { size: landscape; margin: 0; }
+    html, body { background: white; }
+    .deck-container { padding: 0; gap: 0; }
+    .slide {
+      width: 100%;
+      box-shadow: none;
+      page-break-after: always;
+      break-after: page;
+    }
+    .progress-bar { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<div class="deck-container">
+
+    <!-- ━━━━━━━━━━ SLIDE 1 — COVER ━━━━━━━━━━ -->
+    <section class="slide cover" data-slide="1">
+      <div class="slide-num"><span class="badge">01</span> Cover · Confidential</div>
+
+      <div class="slide-content">
+        <div class="project-name">Co‑op Member Intelligence · Brazil 2026</div>
+        <h1>Sold to the co‑op.<br>Forecast for the <em>member</em>.</h1>
+        <div class="tagline" style="margin-top: 1.5vh;">
+          Agentic AI for Brazil's largest agricultural cooperatives — enterprise-grade decision intelligence
+          for credit, procurement, and trading desks, built on member-by-member forecasts of default risk,
+          input demand, and yield.
+        </div>
+
+        <div class="cover-strip">
+          <div class="cstat">
+            <div class="cstat-num">~30M acres</div>
+            <div class="cstat-label">Imagery our AI has run over (US deployment)</div>
+          </div>
+          <div class="cstat">
+            <div class="cstat-num">5,000–30,000</div>
+            <div class="cstat-label">Farmer-members per target co-op</div>
+          </div>
+          <div class="cstat">
+            <div class="cstat-num">USD 3–8M / yr</div>
+            <div class="cstat-label">Value captured per reference co-op</div>
+          </div>
+          <div class="cstat">
+            <div class="cstat-num">90 days</div>
+            <div class="cstat-label">From contract to validated pilot result</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-foot">
+        <span>© 2026 Algo-Rythmn. All rights reserved.</span>
+        <span>01 / 12</span>
+      </div>
+    </section>
+
+    <!-- ━━━━━━━━━━ SLIDE 2 — EXECUTIVE SUMMARY ━━━━━━━━━━ -->
+    <section class="slide" data-slide="2">
+      <div class="slide-num"><span class="badge">02</span> Executive Summary</div>
+
+      <div class="slide-content">
+        <div class="eyebrow">The product, in one frame</div>
+        <h2>Two audiences. One product.<br>That's the whole point.</h2>
+
+        <div class="callout" style="margin-top: 1.5vh;">
+          <div class="note-label">Summary</div>
+          <p>
+            <strong>Co‑op Member Intelligence</strong> is an agentic AI platform we
+            <span class="serif-italic accent">sell to</span> a co-op's enterprise — credit committee,
+            procurement, and trading desks — and that <span class="serif-italic accent">forecasts at the level of</span>
+            each individual farmer-member. The co-op pays for the platform; the platform thinks one member at a time.
+          </p>
+        </div>
+
+        <div class="two-col">
+          <div>
+            <div class="section-label">The Enterprise Buyer</div>
+            <p>
+              The co-op itself — a billion-dollar institution that finances inputs, supplies seed and fertilizer,
+              and trades aggregated grain on behalf of thousands of members. Buys software through an
+              <strong>annual innovation budget</strong>, sponsored by a Diretor de Inovação or Diretor Comercial.
+            </p>
+          </div>
+          <div>
+            <div class="section-label">The Operational Unit</div>
+            <p>
+              The <strong>individual farmer-member</strong> — a farm with its own credit history, planted area,
+              and likely input order. The co-op's decisions only get smart if they're grounded in member-by-member
+              signal, not aggregate guesses.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-foot">
+        <span>© 2026 Algo-Rythmn. All rights reserved.</span>
+        <span>02 / 12</span>
+      </div>
+    </section>
+
+    <!-- ━━━━━━━━━━ SLIDE 3 — THE PROBLEM ━━━━━━━━━━ -->
+    <section class="slide" data-slide="3">
+      <div class="slide-num"><span class="badge">03</span> The Problem</div>
+
+      <div class="slide-content">
+        <div class="eyebrow">What we hear from co-op leadership</div>
+        <h2>Billion-dollar decisions,<br>made on Excel and tribal knowledge.</h2>
+
+        <div class="two-col-uneven">
+          <div>
+            <p class="lead">
+              The co-op's biggest decisions — how much fertilizer to pre-buy, how to size grain positions,
+              which members to extend credit to — are <span class="serif-italic accent">enterprise-level</span>.
+              But they only get smart when they're grounded in <span class="serif-italic accent">member-level</span> truth.
+              Today, that grounding is missing. The bridge is Excel and tribal knowledge.
+            </p>
+          </div>
+
+          <div>
+            <div class="section-label">The hidden cost</div>
+            <ul class="pain-list">
+              <li>
+                <span class="arrow">›</span>
+                <span class="pain-text">Member <strong>default events</strong> cluster in bad seasons — exactly when the co-op's own balance sheet is most exposed.</span>
+              </li>
+              <li>
+                <span class="arrow">›</span>
+                <span class="pain-text">Input procurement is locked months ahead based on <strong>aggregate guesses</strong>, not member-level demand signals.</span>
+              </li>
+              <li>
+                <span class="arrow">›</span>
+                <span class="pain-text">Aggregate <strong>trading positions</strong> are sized without knowing what 5,000 individual farms will actually deliver.</span>
+              </li>
+              <li>
+                <span class="arrow">›</span>
+                <span class="pain-text">Member-facing agronomy advice doesn't scale — and rival co-ops <strong>compete intensely</strong> on exactly this service.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-foot">
+        <span>© 2026 Algo-Rythmn. All rights reserved.</span>
+        <span>03 / 12</span>
+      </div>
+    </section>
+
+    <!-- ━━━━━━━━━━ SLIDE 4 — WHY NOW IN BRAZIL ━━━━━━━━━━ -->
+    <section class="slide" data-slide="4">
+      <div class="slide-num"><span class="badge">04</span> Why Now</div>
+
+      <div class="slide-content">
+        <div class="eyebrow">The window is open — briefly</div>
+        <h2>Brazil's co-op sector is at<br>a structural inflection point.</h2>
+
+        <p class="lead" style="font-size: 1.1cqw; max-width: 82%; margin-top: 0.5vh;">
+          Four forces are converging right now. Each one alone makes member-level AI valuable.
+          Together, they make it <span class="serif-italic accent">strategically urgent</span> —
+          for the first co-op that moves, and for everyone trying to catch up.
+        </p>
+
+        <div class="stat-grid">
+          <div class="stat-card">
+            <div class="stat-label">Force 01 · Credit Stress</div>
+            <div class="stat-num">↑ Rural<br><span class="unit">defaults</span></div>
+            <div class="stat-detail">Brazilian rural credit defaults have risen materially post-2023. Co-ops absorb the risk on member financing. Better default forecasting is now a P&amp;L issue, not a research project.</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Force 02 · Input Volatility</div>
+            <div class="stat-num">±40%<br><span class="unit">fertilizer</span></div>
+            <div class="stat-detail">Fertilizer prices have swung &gt;40% peak-to-trough in the last 24 months. Co-ops that pre-buy on aggregate guesses get punished. Member-level demand signal is the hedge.</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Force 03 · AI Readiness</div>
+            <div class="stat-num">2026<br><span class="unit">inflection</span></div>
+            <div class="stat-detail">Foundation models now let an analyst <em>talk to</em> a decade of member data in Portuguese. The infrastructure to do this didn't exist in 2022. It does now.</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Force 04 · Competitive Pressure</div>
+            <div class="stat-num">Member<br><span class="unit">churn</span></div>
+            <div class="stat-detail">Brazil's top co-ops compete intensely for the same members. The co-op that offers smarter credit, better procurement, and a member-facing AI service first wins retention.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-foot">
+        <span>© 2026 Algo-Rythmn. All rights reserved.</span>
+        <span>04 / 12</span>
+      </div>
+    </section>
+
+    <!-- ━━━━━━━━━━ SLIDE 5 — WHAT WE BUILD ━━━━━━━━━━ -->
+    <section class="slide" data-slide="5">
+      <div class="slide-num"><span class="badge">05</span> What We Build</div>
+
+      <div class="slide-content">
+        <div class="eyebrow">The product</div>
+        <h2>Three models that feed up<br>from the member to the enterprise.</h2>
+
+        <p class="lead" style="font-size: 1.1cqw; max-width: 80%; margin-top: 0.8vh; margin-bottom: 0.5vh;">
+          Each layer takes <span class="serif-italic accent">member-level signal</span> as input and
+          delivers an <span class="serif-italic accent">enterprise-level decision</span> as output.
+          That's the whole architecture.
+        </p>
+
+        <div class="layer-stack">
+          <div class="layer">
+            <div class="layer-num">01</div>
+            <div>
+              <h3>Member-level default-risk → Credit Committee decisions</h3>
+              <p>Per-member, year-ahead probability of repayment difficulty, built from credit history, plot-level satellite data, weather risk, and commodity exposure. The credit committee uses it to size and price each member's input financing.</p>
+            </div>
+          </div>
+          <div class="layer">
+            <div class="layer-num">02</div>
+            <div>
+              <h3>Member-level input demand → Procurement &amp; Trading positions</h3>
+              <p>Member-by-member predictions of fertilizer, seed, and defensives demand — aggregated up so procurement negotiates better contracts, and the trading desk sizes its grain position knowing what 5,000 farms will actually deliver.</p>
+            </div>
+          </div>
+          <div class="layer">
+            <div class="layer-num">03</div>
+            <div>
+              <h3>Conversational layer → Relationship Managers &amp; (optional) Members</h3>
+              <p>An agentic chat interface in Portuguese. Internal users — relationship managers, credit analysts — ask plain-language questions across the member base. Optionally, the co-op resells a member-facing version as a <span class="pt">premium service</span>.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-foot">
+        <span>© 2026 Algo-Rythmn. All rights reserved.</span>
+        <span>05 / 12</span>
+      </div>
+    </section>
+
+    <!-- ━━━━━━━━━━ SLIDE 6 — PRODUCT PREVIEW ━━━━━━━━━━ -->
+    <section class="slide" data-slide="6">
+      <div class="slide-num"><span class="badge">06</span> Product Preview</div>
+
+      <div class="slide-content">
+        <div class="eyebrow">What the user actually sees</div>
+        <h2>One question.<br>An answer grounded in the co-op's own data.</h2>
+
+        <div class="product-mockup">
+          <div class="mockup-frame">
+            <div class="mockup-bar">
+              <div class="dot"></div>
+              <div class="dot"></div>
+              <div class="dot"></div>
+              <div class="url">cooperado-intel · Coamo · gerente_silva</div>
+            </div>
+
+            <div class="chat-msg user">
+              <div class="role">Gerente Comercial</div>
+              <div class="bubble">
+                "Quais cooperados na região de Campo Mourão estão com risco alto de inadimplência
+                nesta safra? E qual a exposição total em adubo?"
+              </div>
+            </div>
+
+            <div class="chat-msg ai">
+              <div class="role">Co‑op Member Intelligence</div>
+              <div class="bubble">
+                Encontrei <strong>47 cooperados</strong> com probabilidade de inadimplência acima de
+                35% para a safra 2026/27 na sua região. Em conjunto, eles representam
+                <strong>R$ 18,4M em financiamento de insumos</strong> e
+                <strong>~4.200 toneladas de demanda projetada de adubo NPK</strong>.
+                <div class="data-line">SOURCES · plot_imagery · credit_history · weather_risk · commodity_exposure</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mockup-notes">
+            <div class="anno">
+              <div class="anno-label">Note 01</div>
+              <div class="anno-text">The user is a <strong>commercial manager inside the co-op</strong> — not a farmer. The product speaks their language, in Portuguese, with their member portfolio.</div>
+            </div>
+            <div class="anno">
+              <div class="anno-label">Note 02</div>
+              <div class="anno-text">Every answer is <strong>grounded in the co-op's own data</strong> — credit records, satellite imagery, weather, commodity prices. Sources cited on every response.</div>
+            </div>
+            <div class="anno">
+              <div class="anno-label">Note 03</div>
+              <div class="anno-text">A single question replaces what is today <strong>three reports, two analysts, and a week of work</strong>. That's the unit economic shift.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-foot">
+        <span>© 2026 Algo-Rythmn. All rights reserved.</span>
+        <span>06 / 12</span>
+      </div>
+    </section>
+
+    <!-- ━━━━━━━━━━ SLIDE 7 — PROOF ━━━━━━━━━━ -->
+    <section class="slide" data-slide="7">
+      <div class="slide-num"><span class="badge">07</span> Why We Can Do This</div>
+
+      <div class="slide-content">
+        <div class="eyebrow">Track record</div>
+        <h2>We've already shipped this pattern at scale.</h2>
+
+        <div class="proof-block">
+          <div class="eyebrow">Reference engagement</div>
+          <h2>A leading US precision-agriculture platform.</h2>
+          <p>
+            Algo-Rythmn built the conversational AI layer of a major US-based imagery and agronomy platform
+            serving large-scale corn and soybean producers across the Midwest. The platform had world-class
+            satellite data. What it didn't have was a way for users to <em>talk to it</em> — to query in
+            natural language and get grounded answers.
+          </p>
+
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5cqw; margin: 1.5vh 0;">
+            <div>
+              <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.6cqw; color: rgba(201,169,97,0.8); letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 0.4em;">Imagery footprint</div>
+              <div style="font-family: 'Fraunces', serif; font-size: 1.8cqw; color: var(--gold); font-weight: 400; line-height: 1;">+10M acres</div>
+              <div style="font-size: 0.8cqw; color: rgba(245,241,232,0.7); margin-top: 0.4em; line-height: 1.4;">of US farmland under the platform's analytics — the AI we built answers questions across all of it</div>
+            </div>
+            <div>
+              <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.6cqw; color: rgba(201,169,97,0.8); letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 0.4em;">User reduction</div>
+              <div style="font-family: 'Fraunces', serif; font-size: 1.8cqw; color: var(--gold); font-weight: 400; line-height: 1;">Multiple → 1</div>
+              <div style="font-size: 0.8cqw; color: rgba(245,241,232,0.7); margin-top: 0.4em; line-height: 1.4;">Multiple user surfaces are accessible through one conversational interface layered on top of the platform</div>
+            </div>
+            <div>
+              <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.6cqw; color: rgba(201,169,97,0.8); letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 0.4em;">In production</div>
+              <div style="font-family: 'Fraunces', serif; font-size: 1.8cqw; color: var(--gold); font-weight: 400; line-height: 1;">2+ years</div>
+              <div style="font-size: 0.8cqw; color: rgba(245,241,232,0.7); margin-top: 0.4em; line-height: 1.4;">of production deployment with paying users — not a demo, not a POC</div>
+            </div>
+          </div>
+
+          <div class="pullquote">
+            The hard part of agentic AI on agricultural data isn't the LLM. It's grounding the model in
+            messy real-world farm data without it hallucinating. We've solved that — once.
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-foot">
+        <span>© 2026 Algo-Rythmn. All rights reserved.</span>
+        <span>07 / 12</span>
+      </div>
+    </section>
+
+    <!-- ━━━━━━━━━━ SLIDE 8 — COMPETITIVE LANDSCAPE ━━━━━━━━━━ -->
+    <section class="slide" data-slide="8">
+      <div class="slide-num"><span class="badge">08</span> Competitive Landscape</div>
+
+      <div class="slide-content">
+        <div class="eyebrow">Where we sit in the market</div>
+        <h2>The Brazilian AgTech stack is crowded.<br>The co-op enterprise layer is empty.</h2>
+
+        <p class="lead" style="font-size: 1cqw; max-width: 85%; margin-top: 0.5vh;">
+          Every major player serves the <span class="serif-italic">farmer-member</span> directly with field-level
+          tools. None of them are building the <span class="serif-italic accent">enterprise decision layer</span>
+          that a co-op's head office actually buys. That's the gap.
+        </p>
+
+        <table class="compete-table">
+          <thead>
+            <tr>
+              <th>Player</th>
+              <th>What they do well</th>
+              <th>Where the gap is for co-ops</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="player">Solinftec<span class="sub">Brazilian · field-ops AI</span></td>
+              <td class="focus">Real-time field operations and machinery telemetry. Deep relationships with large producers.</td>
+              <td class="gap">Sold to the farm operation, not the co-op enterprise. No member-portfolio view.</td>
+            </tr>
+            <tr>
+              <td class="player">Aegro / Strider<span class="sub">Brazilian · farm management</span></td>
+              <td class="focus">Farm management software and digital agronomy for individual farms and consultants.</td>
+              <td class="gap">Operational tools, not decision intelligence. Built for the farmer, not the credit committee.</td>
+            </tr>
+            <tr>
+              <td class="player">Climate / Deere<span class="sub">International · imagery &amp; agronomy</span></td>
+              <td class="focus">World-class satellite imagery, yield maps, and agronomic recommendations at field level.</td>
+              <td class="gap">Dashboards, not agents. No enterprise-level forecasting for co-op credit or procurement.</td>
+            </tr>
+            <tr class="us">
+              <td class="player">Algo-Rythmn<span class="sub">Co‑op Member Intelligence</span></td>
+              <td class="focus">Agentic AI sold to the co-op enterprise. Member-level forecasts that feed credit, procurement, and trading decisions.</td>
+              <td class="gap">— this is the open lane.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="slide-foot">
+        <span>© 2026 Algo-Rythmn. All rights reserved.</span>
+        <span>08 / 12</span>
+      </div>
+    </section>
+
+    <!-- ━━━━━━━━━━ SLIDE 9 — TARGETS & SCOPE ━━━━━━━━━━ -->
+    <section class="slide" data-slide="9">
+      <div class="slide-num"><span class="badge">09</span> First-Call Targets &amp; Scope</div>
+
+      <div class="slide-content">
+        <div class="eyebrow">Where to start</div>
+        <h2>One co-op. A 200–500 member subset.<br>Ninety days.</h2>
+
+        <div class="two-col">
+          <div>
+            <div class="section-label">First-call targets</div>
+            <div class="coop-chips">
+              <div class="coop-chip">Coamo<span class="meta">Largest co-op · expanding</span></div>
+              <div class="coop-chip">C.Vale<span class="meta">Grain · poultry</span></div>
+              <div class="coop-chip">Cocamar<span class="meta">Grain · citrus</span></div>
+              <div class="coop-chip">Lar<span class="meta">Grain · protein</span></div>
+              <div class="coop-chip">Frísia<span class="meta">Dairy · grain</span></div>
+              <div class="coop-chip">Sicredi<span class="meta">Financial · agribusiness arm</span></div>
+            </div>
+            <p style="margin-top: 1.5vh; font-size: 0.92cqw;">
+              Innovation budgets are <strong>pre-allocated annually</strong>; once a Diretor de Inovação or
+              Diretor Comercial sponsors, spending moves fast. Co-ops compete intensely on member services —
+              real urgency to differentiate.
+            </p>
+          </div>
+
+          <div>
+            <div class="section-label">90-day pilot scope</div>
+            <p style="font-size: 0.92cqw; margin-bottom: 1vh;">
+              Single co-op, member subset of <strong>200–500</strong>. Focus on
+              <strong>default risk + input demand</strong> forecasting in v1; skip yield and trading.
+            </p>
+            <div class="timeline">
+              <div class="timeline-row">
+                <div class="phase">Days 1–30</div>
+                <div>
+                  <h3>Data ingest &amp; baseline</h3>
+                  <p>Connect to co-op's member, financial, and plot data. Benchmark current Excel model.</p>
+                </div>
+              </div>
+              <div class="timeline-row">
+                <div class="phase">Days 31–60</div>
+                <div>
+                  <h3>Model build</h3>
+                  <p>Default-risk + input-demand models on the member subset. Portuguese conversational interface.</p>
+                </div>
+              </div>
+              <div class="timeline-row">
+                <div class="phase">Days 61–90</div>
+                <div>
+                  <h3>Hold-out validation</h3>
+                  <p>Forecast accuracy <strong>≥ 15% better</strong> than existing Excel model on hold-out members.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-foot">
+        <span>© 2026 Algo-Rythmn. All rights reserved.</span>
+        <span>09 / 12</span>
+      </div>
+    </section>
+
+    <!-- ━━━━━━━━━━ SLIDE 10 — COMMERCIAL & ROI ━━━━━━━━━━ -->
+    <section class="slide" data-slide="10">
+      <div class="slide-num"><span class="badge">10</span> Commercial Shape</div>
+
+      <div class="slide-content">
+        <div class="eyebrow">Pricing &amp; ROI</div>
+        <h2>Priced to pilot fast,<br>structured to scale per-member.</h2>
+
+        <div class="target-row">
+          <div class="target-card">
+            <div class="label">Pilot — 90 days</div>
+            <h3>USD 75K</h3>
+            <p>Fixed-fee engagement on a 200–500 member subset. Includes data integration, model build, conversational interface, and validation report.</p>
+          </div>
+          <div class="target-card">
+            <div class="label">Co-op SaaS</div>
+            <h3>USD 50 / member / year</h3>
+            <p>Annual SaaS fee priced per active member. Scales naturally with the co-op. Includes retraining, hosting, support, and the member-facing chat layer.</p>
+          </div>
+          <div class="target-card">
+            <div class="label">Member Premium</div>
+            <h3>Reseller upside</h3>
+            <p>The co-op can resell the conversational agronomy service to members as a premium offering — additional revenue line on top of the platform fee.</p>
+          </div>
+        </div>
+
+        <div class="roi-box">
+          <div class="roi-label">ROI Summary</div>
+          <p>
+            A co-op with <span class="num">5,000 members</span> and <span class="num">USD 1B trading volume</span>
+            captures <span class="num">USD 3–8M / year</span> by making enterprise-level decisions — credit pricing,
+            input procurement, trading position — on the back of member-level forecasts instead of aggregate guesses.
+            Pilot at <span class="num">USD 75K</span>; scale to <span class="num">USD 50 / member / year</span> SaaS,
+            under 3% of the value created.
+          </p>
+        </div>
+      </div>
+
+      <div class="slide-foot">
+        <span>© 2026 Algo-Rythmn. All rights reserved.</span>
+        <span>10 / 12</span>
+      </div>
+    </section>
+
+    <!-- ━━━━━━━━━━ SLIDE 11 — ENGAGEMENT & RISK ━━━━━━━━━━ -->
+    <section class="slide" data-slide="11">
+      <div class="slide-num"><span class="badge">11</span> Engagement &amp; Risk</div>
+
+      <div class="slide-content">
+        <div class="eyebrow">How we de-risk this for the co-op</div>
+        <h2>The objections we hear — answered up front.</h2>
+
+        <p class="lead" style="font-size: 1cqw; max-width: 85%; margin-top: 0.5vh;">
+          Co-ops buying mission-critical AI from a foreign vendor have the same questions every time.
+          Here's how the engagement is structured so none of them are deal-breakers.
+        </p>
+
+        <div class="risk-grid">
+          <div class="risk-row">
+            <div class="risk-icon">◆</div>
+            <div>
+              <h3>Data sovereignty</h3>
+              <p>Models train and run inside the co-op's own cloud environment (AWS São Paulo region or Azure Brazil South). Member data never crosses jurisdictions. Co-op retains full control and can revoke access at any time.</p>
+            </div>
+          </div>
+          <div class="risk-row">
+            <div class="risk-icon">◆</div>
+            <div>
+              <h3>IP &amp; model ownership</h3>
+              <p>Models trained on the co-op's data become the co-op's property at production cutover. We license the underlying agentic framework; the co-op owns the fine-tuned weights and all derived outputs.</p>
+            </div>
+          </div>
+          <div class="risk-row">
+            <div class="risk-icon">◆</div>
+            <div>
+              <h3>Exit path &amp; vendor risk</h3>
+              <p>All models, prompts, and data pipelines deliverable in escrow at contract signing. If we disappear, the co-op's team or any successor vendor can run the system. No black boxes.</p>
+            </div>
+          </div>
+          <div class="risk-row">
+            <div class="risk-icon">◆</div>
+            <div>
+              <h3>Local presence</h3>
+              <p>Pilot runs remote-first. On year-one platform conversion, we commit to a Brazilian operating partner or local hire for embedded support — named in the contract.</p>
+            </div>
+          </div>
+          <div class="risk-row">
+            <div class="risk-icon">◆</div>
+            <div>
+              <h3>Accuracy guarantee</h3>
+              <p>Pilot fee is tied to a measurable accuracy threshold against the co-op's current model. If we don't beat the baseline by 15% on held-out data, the pilot fee converts to credit toward future work.</p>
+            </div>
+          </div>
+          <div class="risk-row">
+            <div class="risk-icon">◆</div>
+            <div>
+              <h3>Governance fit</h3>
+              <p>We brief the co-op's Conselho de Administração on request. Member-facing rollouts are opt-in. No data crosses to other co-ops or third parties — ever, contractually.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-foot">
+        <span>© 2026 Algo-Rythmn. All rights reserved.</span>
+        <span>11 / 12</span>
+      </div>
+    </section>
+
+    <!-- ━━━━━━━━━━ SLIDE 12 — CLOSING ━━━━━━━━━━ -->
+    <section class="slide closing" data-slide="12">
+      <div class="slide-num"><span class="badge">12</span> Next Steps</div>
+
+      <div class="slide-content">
+        <div class="eyebrow">A specific, time-bound offer</div>
+        <h2>Two weeks to a signed pilot.<br><em>One reference co-op before next safra.</em></h2>
+
+        <div class="ask-section">
+          <ol>
+            <li>
+              <strong>Week 1 · Free diagnostic workshop.</strong> Half-day on-site or video with the Diretor de Inovação,
+              credit, and procurement leads. We walk through current member-forecasting workflows and produce a one-page
+              opportunity assessment — at no cost, regardless of whether the engagement proceeds.
+            </li>
+            <li>
+              <strong>Week 2 · Pilot SOW.</strong> Fixed-scope 90-day pilot statement of work — USD 75K, 200–500 members,
+              two model layers, Portuguese conversational interface, and a clearly defined accuracy threshold against
+              the existing baseline. Ready to sign.
+            </li>
+            <li>
+              <strong>Day 90 · Validated result.</strong> Either we beat the baseline by 15% and convert to platform —
+              or the pilot fee converts to credit. The co-op carries zero downside risk on the pilot.
+            </li>
+          </ol>
+        </div>
+
+        <div class="signature">
+          <div class="name">Algo-Rythmn</div>
+          <div class="meta">
+            Math that acts &nbsp;·&nbsp;
+            <a href="https://algo-rythmn.ai" class="url">algo-rythmn.ai</a>
+            &nbsp;·&nbsp; <span style="color: rgba(245,241,232,0.7);">Available for Brazil engagements 2026</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-foot">
+        <span>© 2026 Algo-Rythmn. All rights reserved.</span>
+        <span>12 / 12</span>
+      </div>
+    </section>
+
+</div>
+
+<script>
+  // Scroll progress bar — fills the gold line as you scroll through the deck.
+  // Uses requestAnimationFrame so the handler only fires once per repaint,
+  // not on every raw scroll event (which can stack and cause jank).
+  const progressBar = document.getElementById('progressBar');
+  let ticking = false;
+
+  function updateProgress() {
+    const scrollTop = window.scrollY;
+    const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+    progressBar.style.width = pct + '%';
+    ticking = false;
+  }
+
+  function onScroll() {
+    if (!ticking) {
+      window.requestAnimationFrame(updateProgress);
+      ticking = true;
+    }
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  updateProgress();
+</script>
+
+</body>
+</html>
