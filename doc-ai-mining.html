@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document Intelligence — Product Roadmap</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,900&family=Spline+Sans:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f4f1ea;
+    --paper-2:#eae5da;
+    --card:#fffdf8;
+    --ink:#1c1a16;
+    --ink-2:#46423a;
+    --ink-3:#736d61;
+    --ink-faint:#a39c8d;
+    --rule:#d8d2c4;
+    --rule-soft:#e4dfd2;
+    --rust:#b4451f;
+    --rust-deep:#8f3517;
+    --forest:#2f5d3f;
+    --ochre:#c08a2e;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Spline Sans',sans-serif;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+    background-image:
+      radial-gradient(circle at 12% 8%, rgba(180,69,31,.035), transparent 30%),
+      radial-gradient(circle at 88% 92%, rgba(47,93,63,.035), transparent 32%);
+  }
+  .display{font-family:'Fraunces',serif;}
+  .mono{font-family:'Spline Sans Mono',monospace;}
+
+  body::before{
+    content:'';position:fixed;inset:0;pointer-events:none;z-index:1;
+    opacity:.4;mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
+  }
+
+  .slide{
+    max-width:1080px;
+    margin:0 auto;
+    padding:40px 20px;
+    position:relative;
+    z-index:2;
+  }
+  .slide + .slide{border-top:1px solid var(--rule);}
+
+  .eyebrow{
+    font-family:'Spline Sans Mono',monospace;
+    font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--rust);display:flex;align-items:center;gap:12px;margin-bottom:28px;
+  }
+  .eyebrow::before{content:'';width:34px;height:1.5px;background:var(--rust);display:inline-block;}
+  .eyebrow.forest{color:var(--forest);}
+  .eyebrow.forest::before{background:var(--forest);}
+  .eyebrow.ink{color:var(--ink-2);}
+  .eyebrow.ink::before{background:var(--ink-2);}
+
+  h1{font-family:'Fraunces',serif;font-size:72px;font-weight:900;line-height:1.02;letter-spacing:-.02em;color:var(--ink);}
+  h2{font-family:'Fraunces',serif;font-size:46px;font-weight:600;line-height:1.08;letter-spacing:-.015em;color:var(--ink);}
+  h3{font-family:'Fraunces',serif;font-size:24px;font-weight:600;letter-spacing:-.01em;color:var(--ink);}
+  .lede{font-size:19px;color:var(--ink-2);max-width:60ch;line-height:1.7;}
+  em.it{font-family:'Fraunces',serif;font-style:italic;font-weight:500;}
+  .rust{color:var(--rust);}
+  .forest{color:var(--forest);}
+
+  /* COVER */
+  .cover{min-height:100vh;display:flex;flex-direction:column;padding-top:64px;padding-bottom:72px;}
+  .masthead{display:flex;justify-content:space-between;align-items:center;padding-bottom:22px;border-bottom:2px solid var(--ink);}
+  .masthead .brand{font-family:'Spline Sans Mono',monospace;font-size:13px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);}
+  .masthead .issue{font-family:'Spline Sans Mono',monospace;font-size:11px;letter-spacing:.1em;color:var(--ink-3);}
+  .cover-body{flex:1;display:flex;flex-direction:column;justify-content:center;padding:60px 0;}
+  .cover h1{font-size:88px;}
+  .cover h1 .sub{display:block;font-weight:400;font-style:italic;color:var(--rust);font-size:64px;margin-top:6px;}
+  .cover-lede{font-size:21px;color:var(--ink-2);max-width:56ch;margin-top:34px;line-height:1.7;}
+  .cover-foot{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--rule);padding-top:28px;gap:30px;}
+  .cf-item .cf-num{font-family:'Fraunces',serif;font-size:38px;font-weight:600;color:var(--ink);line-height:1;}
+  .cf-item .cf-lbl{font-family:'Spline Sans Mono',monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin-top:8px;}
+  .cf-item .cf-num.rust{color:var(--rust);}
+  .cf-item .cf-num.forest{color:var(--forest);}
+
+  /* THESIS */
+  .thesis-cols{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;margin-top:48px;align-items:start;}
+  .pain-stack{display:flex;flex-direction:column;}
+  .pain-row{display:grid;grid-template-columns:auto 1fr;gap:20px;padding:20px 0;border-bottom:1px solid var(--rule-soft);}
+  .pain-row:first-child{border-top:1px solid var(--rule-soft);}
+  .pain-row .pn{font-family:'Fraunces',serif;font-size:30px;font-weight:600;color:var(--ink-faint);line-height:1;}
+  .pain-row .pt{font-size:15px;color:var(--ink-2);}
+  .pain-row .pt b{color:var(--ink);font-weight:600;}
+  .thesis-aside{background:var(--ink);color:var(--paper);padding:38px 34px;position:relative;}
+  .thesis-aside::after{content:'';position:absolute;top:-1px;left:-1px;width:46px;height:46px;border-top:3px solid var(--rust);border-left:3px solid var(--rust);}
+  .thesis-aside h3{color:var(--paper);margin-bottom:16px;}
+  .thesis-aside p{font-size:15px;color:#cfc9bc;margin-bottom:14px;}
+  .thesis-aside .pull{font-family:'Fraunces',serif;font-style:italic;font-size:21px;color:#fff;line-height:1.45;padding:16px 0;border-top:1px solid #45413a;border-bottom:1px solid #45413a;margin:18px 0;}
+  .thesis-aside b{color:#fff;}
+
+  .criteria{margin-top:56px;display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--rule);background:var(--card);}
+  .crit{padding:26px 24px;border-right:1px solid var(--rule);}
+  .crit:last-child{border-right:none;}
+  .crit .ci{font-family:'Spline Sans Mono',monospace;font-size:11px;color:var(--rust);letter-spacing:.1em;margin-bottom:10px;}
+  .crit .ct{font-size:13.5px;color:var(--ink-2);line-height:1.55;}
+
+  /* ARCHITECTURE */
+  .arch-row{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:50px;border:1px solid var(--rule);}
+  .arch-cell{padding:34px 30px;border-right:1px solid var(--rule);background:var(--card);position:relative;}
+  .arch-cell:last-child{border-right:none;}
+  .arch-cell .al{font-family:'Spline Sans Mono',monospace;font-size:11px;letter-spacing:.14em;color:var(--ink-faint);margin-bottom:16px;}
+  .arch-cell h3{margin-bottom:12px;}
+  .arch-cell h3 .rust{color:var(--rust);}
+  .arch-cell p{font-size:14px;color:var(--ink-3);line-height:1.6;}
+  .arch-cell .anum{position:absolute;top:24px;right:26px;font-family:'Fraunces',serif;font-size:40px;font-weight:900;color:var(--paper-2);line-height:1;}
+  .note-band{margin-top:36px;background:var(--paper-2);border-left:4px solid var(--forest);padding:24px 28px;}
+  .note-band .nl{font-family:'Spline Sans Mono',monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--forest);margin-bottom:10px;}
+  .note-band p{font-size:14.5px;color:var(--ink-2);}
+  .note-band b{color:var(--ink);font-weight:600;}
+
+  /* SECTION DIVIDER */
+  .section-mark{max-width:1080px;margin:0 auto;padding:60px 72px;border-top:1px solid var(--rule);display:flex;align-items:baseline;gap:28px;position:relative;z-index:2;}
+  .section-mark .sm-num{font-family:'Fraunces',serif;font-size:64px;font-weight:900;color:var(--rust);line-height:.8;}
+  .section-mark .sm-txt h2{font-size:34px;}
+  .section-mark .sm-txt .sm-sub{font-family:'Spline Sans Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin-top:6px;}
+  .section-mark.forest .sm-num{color:var(--forest);}
+
+  /* PRODUCT SLIDE */
+  .prod-top{display:flex;justify-content:space-between;align-items:flex-start;gap:48px;padding-bottom:30px;border-bottom:2px solid var(--ink);}
+  .prod-cat{font-family:'Spline Sans Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);margin-bottom:14px;}
+  .badge{display:inline-block;font-family:'Spline Sans Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;padding:5px 11px;margin-bottom:18px;border:1.5px solid;}
+  .badge.now{color:var(--forest);border-color:var(--forest);background:rgba(47,93,63,.06);}
+  .badge.soon{color:var(--ochre);border-color:var(--ochre);background:rgba(192,138,46,.07);}
+  .badge.flag{color:var(--rust);border-color:var(--rust);background:rgba(180,69,31,.06);}
+  .prod-name{font-family:'Fraunces',serif;font-size:56px;font-weight:900;line-height:1;letter-spacing:-.02em;color:var(--ink);}
+  .prod-name .qual{font-weight:400;font-style:italic;font-size:30px;color:var(--ink-faint);}
+  .prod-tag{font-size:16px;color:var(--ink-2);margin-top:18px;max-width:54ch;line-height:1.65;}
+  .prod-mkt{text-align:right;flex-shrink:0;}
+  .prod-mkt .mv{font-family:'Fraunces',serif;font-size:48px;font-weight:900;color:var(--rust);line-height:1;}
+  .prod-mkt .ml{font-family:'Spline Sans Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin-top:8px;}
+  .prod-mkt.fr .mv{color:var(--forest);}
+  .prod-mkt.oc .mv{color:var(--ochre);}
+
+  .gap-note{margin-top:28px;display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:start;}
+  .gap-note .gl{font-family:'Spline Sans Mono',monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);writing-mode:vertical-rl;transform:rotate(180deg);padding-top:4px;}
+  .gap-note .gp{font-size:15.5px;color:var(--ink-2);line-height:1.65;border-left:2px solid var(--rule);padding-left:22px;}
+  .gap-note .gp b{color:var(--ink);font-weight:600;}
+  .gap-note .gp .it{color:var(--rust);}
+
+  .two-col{display:grid;grid-template-columns:.85fr 1.15fr;gap:44px;margin-top:38px;}
+  .col-h{font-family:'Spline Sans Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);padding-bottom:10px;border-bottom:1px solid var(--ink);margin-bottom:18px;}
+  .doctypes{display:flex;flex-wrap:wrap;gap:7px;}
+  .dt{font-family:'Spline Sans Mono',monospace;font-size:10.5px;color:var(--ink-2);padding:6px 10px;background:var(--paper-2);border:1px solid var(--rule);}
+  .ucase{display:flex;flex-direction:column;gap:14px;}
+  .uc{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:start;}
+  .uc .uc-mk{font-family:'Fraunces',serif;font-size:22px;color:var(--rust);font-style:italic;line-height:1;padding-top:2px;}
+  .uc .uc-q{font-family:'Fraunces',serif;font-size:17px;font-weight:500;color:var(--ink);line-height:1.4;}
+  .uc .uc-q::before,.uc .uc-q::after{color:var(--ink-faint);}
+  .uc .uc-q::before{content:'“';}
+  .uc .uc-q::after{content:'”';}
+  .uc .uc-d{font-size:13px;color:var(--ink-3);margin-top:3px;line-height:1.55;}
+
+  .mining-block{margin-top:36px;background:var(--ink);color:var(--paper);padding:30px 34px;position:relative;}
+  .mining-block::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--rust),var(--ochre));}
+  .mining-block .mh{display:flex;align-items:center;gap:14px;margin-bottom:20px;}
+  .mining-block .mh .mt{font-family:'Spline Sans Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ochre);font-weight:500;}
+  .mining-block .mh .ml{flex:1;height:1px;background:#45413a;}
+  .mining-block .mh .mtag{font-family:'Spline Sans Mono',monospace;font-size:10px;color:var(--ink-faint);letter-spacing:.08em;}
+  .mgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px 30px;}
+  .mitem{font-size:13.5px;color:#cfc9bc;line-height:1.55;padding-left:18px;position:relative;}
+  .mitem::before{content:'';position:absolute;left:0;top:8px;width:7px;height:7px;background:var(--rust);transform:rotate(45deg);}
+  .mitem b{color:#fff;font-weight:600;}
+
+  .prod-foot{margin-top:34px;padding-top:20px;border-top:1px solid var(--rule);display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;}
+  .prod-foot .pf-tam{font-family:'Fraunces',serif;font-size:22px;font-weight:600;color:var(--ink);}
+  .prod-foot .pf-tam span{font-family:'Spline Sans',sans-serif;font-size:13px;color:var(--ink-3);font-weight:400;}
+  .pf-tag{font-family:'Spline Sans Mono',monospace;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);padding:4px 9px;border:1px solid var(--rule);}
+
+  /* FLAGSHIP */
+  .flagship{background:radial-gradient(700px 460px at 84% 6%, rgba(180,69,31,.07), transparent 60%),radial-gradient(560px 420px at 6% 96%, rgba(192,138,46,.06), transparent 60%);}
+  .big-pull{font-family:'Fraunces',serif;font-size:32px;font-weight:500;font-style:italic;line-height:1.4;color:var(--ink);border-left:3px solid var(--rust);padding-left:28px;margin:40px 0;}
+  .triad{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:18px;}
+  .tri{background:var(--card);border:1px solid var(--rule);padding:26px 24px;position:relative;}
+  .tri .tn{font-family:'Spline Sans Mono',monospace;font-size:10.5px;letter-spacing:.1em;color:var(--rust);margin-bottom:14px;}
+  .tri h3{font-size:19px;margin-bottom:10px;}
+  .tri p{font-size:13px;color:var(--ink-3);line-height:1.6;}
+
+  /* SUMMARY TABLE */
+  .table-frame{margin-top:44px;border:1px solid var(--ink);background:var(--card);}
+  table{width:100%;border-collapse:collapse;font-size:13.5px;}
+  thead th{font-family:'Spline Sans Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--paper);background:var(--ink);text-align:left;padding:16px 18px;font-weight:400;}
+  tbody td{padding:18px 18px;border-bottom:1px solid var(--rule-soft);vertical-align:top;color:var(--ink-2);}
+  tbody tr:last-child td{border-bottom:none;}
+  tbody tr.flagrow{background:rgba(180,69,31,.045);}
+  td .opp{font-family:'Fraunces',serif;font-size:16px;font-weight:600;color:var(--ink);}
+  td .pn2{font-weight:600;color:var(--ink);}
+  td .tamv{font-family:'Fraunces',serif;font-weight:600;color:var(--ink);font-size:15px;}
+  .tpill{font-family:'Spline Sans Mono',monospace;font-size:9px;letter-spacing:.08em;text-transform:uppercase;padding:4px 8px;border:1.5px solid;white-space:nowrap;}
+  .tpill.now{color:var(--forest);border-color:var(--forest);}
+  .tpill.soon{color:var(--ochre);border-color:var(--ochre);}
+  .tpill.flag{color:var(--rust);border-color:var(--rust);background:rgba(180,69,31,.06);}
+
+  /* CLOSING */
+  .closing{min-height:88vh;display:flex;flex-direction:column;justify-content:center;background:radial-gradient(640px 440px at 50% 34%, rgba(47,93,63,.07), transparent 62%);}
+  .closing h2{font-size:54px;max-width:18ch;}
+  .closing h2 .it{color:var(--rust);}
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:54px;border-top:1px solid var(--rule);}
+  .step{padding:32px 28px 0 0;border-right:1px solid var(--rule);}
+  .step:last-child{border-right:none;padding-right:0;}
+  .step .sn{font-family:'Fraunces',serif;font-size:42px;font-weight:900;color:var(--rust);line-height:1;margin-bottom:14px;}
+  .step h3{font-size:19px;margin-bottom:10px;}
+  .step p{font-size:14px;color:var(--ink-3);line-height:1.6;}
+  .colophon{margin-top:64px;padding-top:24px;border-top:2px solid var(--ink);display:flex;justify-content:space-between;align-items:center;font-family:'Spline Sans Mono',monospace;font-size:11px;color:var(--ink-3);letter-spacing:.08em;}
+
+  /* TABS */
+  .tab-bar{display:flex;gap:6px;margin-bottom:44px;}
+  .tab-btn{
+    font-family:'Spline Sans Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    padding:13px 28px;background:var(--paper-2);border:1.5px solid var(--rule);cursor:pointer;
+    color:var(--ink-3);position:relative;transition:color .15s,background .15s,border-color .15s;
+    flex:1;text-align:center;
+  }
+  .tab-btn:hover{background:var(--card);color:var(--ink);border-color:var(--ink-faint);}
+  .tab-btn.active{
+    background:var(--ink);color:var(--paper);border-color:var(--ink);
+    font-weight:500;
+  }
+  .tab-panel{display:none;}
+  .tab-panel.active{display:block;}
+
+  .rv{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease;}
+  .rv.in{opacity:1;transform:none;}
+
+  @media (max-width:900px){
+    .slide{padding:60px 30px;}
+    .section-mark{padding:44px 30px;}
+    h1,.cover h1{font-size:48px;}
+    .cover h1 .sub{font-size:36px;}
+    .thesis-cols,.two-col,.mgrid{grid-template-columns:1fr;gap:32px;}
+    .criteria,.arch-row,.triad,.steps,.cover-foot{grid-template-columns:1fr;}
+    .crit,.arch-cell,.step{border-right:none;border-bottom:1px solid var(--rule);}
+    .prod-top{flex-direction:column;gap:20px;}
+    .prod-mkt{text-align:left;}
+    .gap-note{grid-template-columns:1fr;}
+    .gap-note .gl{writing-mode:horizontal-tb;transform:none;}
+    .table-frame{overflow-x:auto;}
+    table{min-width:780px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<section class="slide cover">
+  <div class="masthead">
+    <div class="brand">Document Intelligence</div>
+    <div class="issue">Product Roadmap&nbsp;&nbsp;·&nbsp;&nbsp;May 2026&nbsp;&nbsp;·&nbsp;&nbsp;Prepared for the Potash &amp; Fertilizer Sector</div>
+  </div>
+  <div class="cover-body">
+    <div class="eyebrow">The Compliance Document Problem</div>
+    <h1>Every regulated industry<br>holds documents
+      <span class="sub">it cannot ask questions of.</span>
+    </h1>
+    <p class="cover-lede">A roadmap of AI document-intelligence products for organizations under heavy regulatory burden — the ones that survive on detailed cross-referencing, nuanced interpretation, and the same reports produced again and again. Including a product built specifically for potash mining and fertilizer production.</p>
+  </div>
+  <div class="cover-foot">
+    <div class="cf-item"><div class="cf-num">5</div><div class="cf-lbl">Sectors mapped</div></div>
+    <div class="cf-item"><div class="cf-num rust">$280B+</div><div class="cf-lbl">Resource pipeline TAM</div></div>
+    <div class="cf-item"><div class="cf-num">0</div><div class="cf-lbl">AI doc-intel incumbents</div></div>
+    <div class="cf-item"><div class="cf-num forest">1</div><div class="cf-lbl">Shared platform engine</div></div>
+  </div>
+</section>
+
+<!-- THESIS -->
+<section class="slide rv">
+  <div class="eyebrow ink">Why This Matters To You</div>
+  <h2>You already live this problem.<br>Potash &amp; fertilizer is the <em class="it">proof case.</em></h2>
+  <p class="lede" style="margin-top:22px;">Any organization facing significant regulatory issues — needing detailed, nuanced understanding, cross-referencing across hundreds of documents, and redundant report production — carries the same structural pain. Mining is simply the most extreme version of it.</p>
+
+  <div class="thesis-cols">
+    <div class="pain-stack">
+      <div class="pain-row"><div class="pn">01</div><div class="pt"><b>The documents exist — but nobody can interrogate them.</b> Environmental permits, tailings plans, FPIC consultation records, OHS procedures, closure plans. They sit in SharePoint as dead PDFs.</div></div>
+      <div class="pain-row"><div class="pn">02</div><div class="pt"><b>Cross-referencing is manual and fragile.</b> Does this water-monitoring procedure satisfy the provincial permit, the federal requirement <em>and</em> the corporate ESG commitment? Today, a person reads three binders.</div></div>
+      <div class="pain-row"><div class="pn">03</div><div class="pt"><b>Report production is redundant and repeated.</b> The same facts get re-written into regulator submissions, board reports, ESG disclosures and community updates — every quarter, by hand.</div></div>
+      <div class="pain-row"><div class="pn">04</div><div class="pt"><b>Audit and inspection create recurring fear.</b> When the regulator says "show me," staff scramble through document stores hoping the evidence is current and complete.</div></div>
+    </div>
+    <aside class="thesis-aside">
+      <h3>The product category</h3>
+      <p>One question separates a real opportunity from a crowded market —</p>
+      <div class="pull">Is there any platform today that lets users query their own compliance documents in plain language?</div>
+      <p>For mining, fertilizer, health, municipal, environmental and OHS, the answer is <b>no</b>. Today's software manages forms, dashboards and project files. None of it supplies the intelligence layer.</p>
+      <p style="margin-bottom:0;">Whoever builds it first does not enter the category. They <b>define</b> it.</p>
+    </aside>
+  </div>
+
+  <div class="criteria">
+    <div class="crit"><div class="ci">Test 01</div><div class="ct">No existing AI that queries compliance documents in plain language</div></div>
+    <div class="crit"><div class="ci">Test 02</div><div class="ct">A regulated inspection or audit cycle creating recurring, fear-based retention</div></div>
+    <div class="crit"><div class="ci">Test 03</div><div class="ct">Dense, standardized document types that can be ingested across all clients</div></div>
+    <div class="crit"><div class="ci">Test 04</div><div class="ct">A regulatory corpus that can be built once and shared across every tenant</div></div>
+  </div>
+</section>
+
+<!-- ARCHITECTURE -->
+<section class="slide rv">
+  <div class="eyebrow forest">The Shared Architecture</div>
+  <h2>One platform. One regulatory corpus.<br>Six industry products on top.</h2>
+  <p class="lede" style="margin-top:22px;">Each product looks bespoke to its industry, but they share an engine. The regulatory standards corpus is built once per jurisdiction; every client's own documents are queried against it. That is why the roadmap compounds — each product makes the next cheaper to ship.</p>
+
+  <div class="arch-row">
+    <div class="arch-cell"><div class="anum">01</div><div class="al">FIRST LAYER</div><h3><span class="rust">Ingest</span></h3><p>The client's own compliance documents — permits, procedures, inspection records, consultation files — are parsed, structured and indexed. Messy PDFs become queryable knowledge.</p></div>
+    <div class="arch-cell"><div class="anum">02</div><div class="al">SECOND LAYER</div><h3><span class="rust">Cross-reference</span></h3><p>A jurisdiction-specific regulatory corpus — federal acts, provincial regulations, association standards — is built once. Client documents are mapped and tested against it automatically.</p></div>
+    <div class="arch-cell"><div class="anum">03</div><div class="al">THIRD LAYER</div><h3><span class="rust">Answer &amp; produce</span></h3><p>Staff ask questions in plain language and get cited answers. Recurring reports — regulator submissions, board packs, ESG disclosures — are drafted from one source of truth.</p></div>
+  </div>
+</section>
+
+<!-- SECTION A -->
+<div class="section-mark">
+  <div class="sm-num">A</div>
+  <div class="sm-txt">
+    <h2>The four priority products</h2>
+    <div class="sm-sub">Regulated Health · Municipal · Environmental · Occupational Health &amp; Safety</div>
+  </div>
+</div>
+
+<!-- PRODUCTS 1–4 (tabbed) -->
+<section class="slide rv">
+  <div class="tab-bar">
+    <button class="tab-btn active" data-tab="practice">PracticeAssist</button>
+    <button class="tab-btn" data-tab="muni">MuniAssist</button>
+    <button class="tab-btn" data-tab="enviro">EnviroAssist</button>
+    <button class="tab-btn" data-tab="safety">SafetyAssist</button>
+  </div>
+
+  <!-- TAB: PracticeAssist -->
+  <div class="tab-panel active" id="tab-practice">
+    <div class="prod-top">
+      <div>
+        <div class="prod-cat">Priority Product No. 01 — Regulated Health Professions</div>
+        <div class="prod-name">PracticeAssist</div>
+        <p class="prod-tag">Optometrists, dentists, physiotherapists, chiropractors, psychologists — every regulated health profession has a provincial college with inspection standards and no AI compliance tool.</p>
+      </div>
+      <div class="prod-mkt fr"><div class="mv">$45B+</div><div class="ml">Allied Health Sector</div></div>
+    </div>
+    <div class="gap-note">
+      <div class="gl">Why no competitor</div>
+      <div class="gp">Practice software — Dentrix, Eaglesoft, Curve — manages scheduling and billing. <b>None provide compliance document intelligence against college standards</b> like the RCDSO's. One architecture serves eight professions: a <span class="it">pure category-creation play.</span></div>
+    </div>
+    <div class="two-col">
+      <div>
+        <div class="col-h">Document types ingested</div>
+        <div class="doctypes">
+          <span class="dt">Infection control protocols</span><span class="dt">Staff training records</span><span class="dt">Equipment sterilization logs</span><span class="dt">Consent documentation</span><span class="dt">Patient safety incident reports</span><span class="dt">College inspection reports</span><span class="dt">Continuing education records</span><span class="dt">Controlled substance records</span><span class="dt">Clinic policy manuals</span>
+        </div>
+      </div>
+      <div>
+        <div class="col-h">Specific use cases</div>
+        <div class="ucase">
+          <div class="uc"><div class="uc-mk">i</div><div><div class="uc-q">Does our sterilization log meet RCDSO standard 4.1 this quarter?</div><div class="uc-d">An instant cited answer in place of a manual binder review before inspection.</div></div></div>
+          <div class="uc"><div class="uc-mk">ii</div><div><div class="uc-q">Which staff are missing current infection-control training?</div><div class="uc-d">Training records cross-referenced against college requirements automatically.</div></div></div>
+          <div class="uc"><div class="uc-mk">iii</div><div><div class="uc-q">Draft our college inspection readiness report.</div><div class="uc-d">A redundant report produced from existing documents, not re-written by hand.</div></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="mining-block">
+      <div class="mh"><span class="mt">◆ The same engine — applied to potash &amp; fertilizer</span><span class="ml"></span><span class="mtag">occupational health</span></div>
+      <div class="mgrid">
+        <div class="mitem"><b>Occupational health surveillance —</b> "Do our miner respiratory-monitoring records meet provincial occupational health standards for silica and dust exposure?"</div>
+        <div class="mitem"><b>Certified-worker tracking —</b> "Which underground staff lack current blasting or confined-space certification?" — the identical missing-credential query.</div>
+        <div class="mitem"><b>First-aid &amp; medical readiness —</b> "Does our on-site medical response plan meet mine-rescue regulation requirements?"</div>
+        <div class="mitem"><b>Audit-readiness reports —</b> Auto-draft the recurring occupational-health compliance pack for both the regulator and the board.</div>
+      </div>
+    </div>
+    <div class="prod-foot">
+      <div class="pf-tam">$500M+ <span>/yr across 8 professions</span></div>
+      <span class="pf-tag">PharmaAssist playbook ×8</span><span class="pf-tag">College corpus built once</span><span class="pf-tag">CDCP urgency driver</span>
+    </div>
+  </div>
+
+  <!-- TAB: MuniAssist -->
+  <div class="tab-panel" id="tab-muni">
+    <div class="prod-top">
+      <div>
+        <div class="prod-cat">Priority Product No. 02 — Municipal Government</div>
+        <div class="prod-name">MuniAssist</div>
+        <p class="prod-tag">3,500+ Canadian municipalities. 23% use AI, but almost none use document intelligence. By-law compliance, permits, ATIP responses, council minutes, procurement — all unserved.</p>
+      </div>
+      <div class="prod-mkt fr"><div class="mv">$60B</div><div class="ml">Muni Operating Budgets</div></div>
+    </div>
+    <div class="gap-note">
+      <div class="gl">Why no competitor</div>
+      <div class="gp">Municipal software — Tyler Technologies, Questica, Esri, OpenGov — handles financial management and GIS. <b>None provide AI document intelligence over by-laws, official plans, permits, council resolutions or ATIP requests.</b> A municipality answering 1,000 ATIP requests a year <span class="it">spends enormous staff time searching policy documents by hand.</span></div>
+    </div>
+    <div class="two-col">
+      <div>
+        <div class="col-h">Document types ingested</div>
+        <div class="doctypes">
+          <span class="dt">Official Plans &amp; by-laws</span><span class="dt">Building permits</span><span class="dt">Council minutes &amp; resolutions</span><span class="dt">ATIP / FOI requests &amp; responses</span><span class="dt">Environmental assessments</span><span class="dt">Procurement RFP/RFQ documents</span><span class="dt">Infrastructure inspection reports</span><span class="dt">Development applications</span><span class="dt">Zoning compliance records</span>
+        </div>
+      </div>
+      <div>
+        <div class="col-h">Specific use cases</div>
+        <div class="ucase">
+          <div class="uc"><div class="uc-mk">i</div><div><div class="uc-q">Which by-laws apply to this development application, and does it comply?</div><div class="uc-d">The application cross-referenced against the full by-law corpus instantly.</div></div></div>
+          <div class="uc"><div class="uc-mk">ii</div><div><div class="uc-q">Find every council resolution touching this parcel since 2015.</div><div class="uc-d">ATIP and FOI requests answered in minutes instead of staff-days.</div></div></div>
+          <div class="uc"><div class="uc-mk">iii</div><div><div class="uc-q">Has this RFP been evaluated consistently with our procurement policy?</div><div class="uc-d">Procurement accountability checked against the organization's own rules.</div></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="mining-block">
+      <div class="mh"><span class="mt">◆ The same engine — applied to potash &amp; fertilizer</span><span class="ml"></span><span class="mtag">local permitting</span></div>
+      <div class="mgrid">
+        <div class="mitem"><b>Local permitting interface —</b> "Which municipal by-laws and zoning conditions govern our mine expansion, rail spur or fertilizer plant?" — the development-application query, mine-side.</div>
+        <div class="mitem"><b>Council &amp; community record —</b> Track every municipal resolution, hearing and condition attached to the operation in one queryable place.</div>
+        <div class="mitem"><b>Information-request response —</b> When municipalities or the public file information requests about the site, locate every relevant commitment instantly.</div>
+        <div class="mitem"><b>Procurement-policy alignment —</b> Check the mine's own large-contract procurement against internal and regulatory rules — identical evaluation logic.</div>
+      </div>
+    </div>
+    <div class="prod-foot">
+      <div class="pf-tam">$200M+ <span>/yr TAM (top 500 munis)</span></div>
+      <span class="pf-tag">3,500 Canadian municipalities</span><span class="pf-tag">By-law corpus built once</span><span class="pf-tag">No AI doc-intel competitor</span>
+    </div>
+  </div>
+
+  <!-- TAB: EnviroAssist -->
+  <div class="tab-panel" id="tab-enviro">
+    <div class="prod-top">
+      <div>
+        <div class="prod-cat">Priority Product No. 03 — Environmental Consulting</div>
+        <div class="prod-name">EnviroAssist</div>
+        <p class="prod-tag">Phase I/II/III ESA firms, ESG reporting consultants, EA report authors — an enormous document-production burden with zero AI-native intelligence tools purpose-built for the workflow.</p>
+      </div>
+      <div class="prod-mkt oc"><div class="mv">$8.2B</div><div class="ml">Canadian Env. Consulting</div></div>
+    </div>
+    <div class="gap-note">
+      <div class="gl">Why no competitor</div>
+      <div class="gp">Environmental consultants produce Phase I/II ESAs (CSA Z768/Z769), EA reports, remediation plans and GHG verification reports — each with hundreds of pages of regulatory cross-references. <b>The industry uses generic document management with no intelligence layer.</b> No platform lets a junior consultant ask <span class="it">"Does this Phase II ESA meet all CSA Z769-00 requirements?"</span></div>
+    </div>
+    <div class="two-col">
+      <div>
+        <div class="col-h">Document types ingested</div>
+        <div class="doctypes">
+          <span class="dt">Phase I/II/III ESAs</span><span class="dt">EA / Impact Assessment reports</span><span class="dt">Contaminated site risk assessments</span><span class="dt">Remediation action plans</span><span class="dt">GHG verification reports</span><span class="dt">Air dispersion modeling reports</span><span class="dt">Spill contingency plans</span><span class="dt">Regulatory correspondence files</span><span class="dt">CEPA substance assessments</span>
+        </div>
+      </div>
+      <div>
+        <div class="col-h">Specific use cases</div>
+        <div class="ucase">
+          <div class="uc"><div class="uc-mk">i</div><div><div class="uc-q">Does this Phase II ESA meet every CSA Z769 requirement for a Schedule 2 substance?</div><div class="uc-d">The standard checked automatically — no senior-review bottleneck.</div></div></div>
+          <div class="uc"><div class="uc-mk">ii</div><div><div class="uc-q">Pull all regulatory commitments we have made across this client's reports.</div><div class="uc-d">Years of correspondence cross-referenced into one consistent view.</div></div></div>
+          <div class="uc"><div class="uc-mk">iii</div><div><div class="uc-q">Draft the GHG verification summary from this year's monitoring data.</div><div class="uc-d">Redundant report production, automated from source documents.</div></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="mining-block">
+      <div class="mh"><span class="mt">◆ The same engine — applied to potash &amp; fertilizer</span><span class="ml"></span><span class="mtag">environmental compliance</span></div>
+      <div class="mgrid">
+        <div class="mitem"><b>Environmental permit compliance —</b> "Does our groundwater &amp; brine monitoring program satisfy every condition of our provincial environmental permit and federal MDMER?"</div>
+        <div class="mitem"><b>Tailings &amp; salt-pile management —</b> "Do our tailings management and salt-stockpile runoff plans meet current regulatory and CDA-equivalent standards?"</div>
+        <div class="mitem"><b>GHG &amp; ESG disclosure —</b> Auto-produce the recurring GHG verification and sustainability disclosures from monitoring data — the most redundant report mining produces.</div>
+        <div class="mitem"><b>Mine closure &amp; reclamation —</b> "Is our closure and reclamation plan still consistent with every commitment in the original EA?" — cross-referenced across decades of filings.</div>
+      </div>
+    </div>
+    <div class="prod-foot">
+      <div class="pf-tam">$400M+ <span>/yr addressable</span></div>
+      <span class="pf-tag">CSA standard corpus built once</span><span class="pf-tag">ESA report format standardized</span><span class="pf-tag">500+ mid-size consulting firms</span>
+    </div>
+  </div>
+
+  <!-- TAB: SafetyAssist -->
+  <div class="tab-panel" id="tab-safety">
+    <div class="prod-top">
+      <div>
+        <div class="prod-cat">Priority Product No. 04 — Occupational Health &amp; Safety</div>
+        <div class="prod-name">SafetyAssist</div>
+        <p class="prod-tag">Self-insured employers, WSIB-regulated businesses, high-hazard industries — OHS programs generate enormous document burdens that current EHS software manages structurally but cannot intelligently query.</p>
+      </div>
+      <div class="prod-mkt oc"><div class="mv">$3.5B</div><div class="ml">OHS Compliance Market</div></div>
+    </div>
+    <div class="gap-note">
+      <div class="gl">Why no competitor</div>
+      <div class="gp">Intelex, Cority and VelocityEHS are structured EHS platforms — they manage incident logs, training records and inspection checklists in forms and dashboards. <b>None let you ask "Does our confined space entry procedure meet Section 9.3 of the regulation for a Class C permit?" from your own uploaded SOPs.</b> That is <span class="it">document intelligence, not forms management.</span></div>
+    </div>
+    <div class="two-col">
+      <div>
+        <div class="col-h">Document types ingested</div>
+        <div class="doctypes">
+          <span class="dt">OHSMS program documents</span><span class="dt">Safe work procedures</span><span class="dt">Hazard assessment records</span><span class="dt">Confined space entry permits</span><span class="dt">WHMIS/GHS SDS binders</span><span class="dt">Injury &amp; incident investigation reports</span><span class="dt">Joint H&amp;S committee minutes</span><span class="dt">Return-to-work plans</span><span class="dt">WSIB claim correspondence</span>
+        </div>
+      </div>
+      <div>
+        <div class="col-h">Specific use cases</div>
+        <div class="ucase">
+          <div class="uc"><div class="uc-mk">i</div><div><div class="uc-q">Does our confined space SOP meet the regulation for a Class C permit?</div><div class="uc-d">A procedure tested against the regulatory section — the question EHS tools cannot answer.</div></div></div>
+          <div class="uc"><div class="uc-mk">ii</div><div><div class="uc-q">Show every hazard assessment that references this equipment type.</div><div class="uc-d">The full SOP and hazard library cross-referenced in one query.</div></div></div>
+          <div class="uc"><div class="uc-mk">iii</div><div><div class="uc-q">Does our written OHSMS actually satisfy current OHSA requirements?</div><div class="uc-d">The gap existing tools leave open — captured, not just stored.</div></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="mining-block">
+      <div class="mh"><span class="mt">◆ The same engine — applied to potash &amp; fertilizer</span><span class="ml"></span><span class="mtag">high-hazard SOPs</span></div>
+      <div class="mgrid">
+        <div class="mitem"><b>Underground &amp; mine-specific regs —</b> "Do our ground-control, ventilation and diesel-equipment procedures meet current underground mining regulations?"</div>
+        <div class="mitem"><b>Confined space &amp; high-hazard SOPs —</b> Verify every confined-space, hot-work and lockout procedure in a fertilizer plant against the applicable regulatory section.</div>
+        <div class="mitem"><b>Hazardous-material handling —</b> Query the full SDS binder for anhydrous ammonia, sulphuric acid and reagent handling against transport and storage rules.</div>
+        <div class="mitem"><b>Incident-to-procedure linkage —</b> "After this incident, which safe work procedures need revision?" — investigations cross-referenced to the SOP library automatically.</div>
+      </div>
+    </div>
+    <div class="prod-foot">
+      <div class="pf-tam">$200M+ <span>/yr large-employer TAM</span></div>
+      <span class="pf-tag">Adjacent to existing EHS tools</span><span class="pf-tag">OHSA corpus built once</span><span class="pf-tag">WSIB incentive alignment</span>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION B -->
+<div class="section-mark forest">
+  <div class="sm-num">B</div>
+  <div class="sm-txt">
+    <h2 style="color:var(--rust)">The flagship — built for you</h2>
+    <div class="sm-sub">Resource Sector Compliance · Mining · Fertilizer Production</div>
+  </div>
+</div>
+
+<!-- FLAGSHIP -->
+<section class="slide flagship rv">
+  <div class="folio">ConsultAssist</div>
+  <div class="prod-top">
+    <div>
+      <div class="prod-cat" style="color:var(--rust)">Flagship Product — Resource Sector Compliance</div>
+      <div class="prod-name">ConsultAssist <span class="qual">for mining &amp; fertilizer</span></div>
+      <p class="prod-tag">UNDRIP / FPIC documentation, environmental compliance, and operating-permit intelligence for mining, oil &amp; gas, fertilizer production and resource projects — the document-heaviest regulated sector in the country.</p>
+    </div>
+    <div class="prod-mkt"><div class="mv">$280B+</div><div class="ml">Resource Project Pipeline</div></div>
+  </div>
+  <div class="gap-note">
+    <div class="gl">Why none can</div>
+    <div class="gp">The February 2025 <b>Kebaowek Federal Court ruling</b> established UNDRIP as binding Canadian law for Crown consultation — an entirely new documentation obligation for every resource project. Every proponent must now maintain FPIC process records, community correspondence, impact-assessment responses and accommodation documentation. <b>Zero compliance software platforms have built this.</b> Law firms charge $500–$2,000/hour to manage it manually. It is a post-2025 regulatory creation with <span class="it">no possible incumbent.</span></div>
+  </div>
+  <div class="big-pull">Can a mine GM ask — "Does our consultation record for this expansion satisfy our duty-to-consult obligations?" — and get a cited answer in seconds?</div>
+  <div class="two-col">
+    <div>
+      <div class="col-h">Document types ingested</div>
+      <div class="doctypes">
+        <span class="dt">FPIC process records</span><span class="dt">Duty-to-consult correspondence</span><span class="dt">Community meeting minutes</span><span class="dt">Accommodation measure docs</span><span class="dt">Impact assessment responses</span><span class="dt">Indigenous knowledge records</span><span class="dt">Benefit sharing agreements</span><span class="dt">Operating &amp; environmental permits</span><span class="dt">Tailings &amp; closure plans</span><span class="dt">Section 35 Constitution records</span><span class="dt">Water &amp; brine monitoring data</span><span class="dt">MDMER &amp; ESG disclosure filings</span>
+      </div>
+    </div>
+    <div>
+      <div class="col-h">Core use cases — potash &amp; fertilizer</div>
+      <div class="ucase">
+        <div class="uc"><div class="uc-mk">i</div><div><div class="uc-q">Does our FPIC record for this mine expansion meet duty-to-consult standards post-Kebaowek?</div><div class="uc-d">The single question that today costs $2,000/hour in legal time — answered, cited, from your own files.</div></div></div>
+        <div class="uc"><div class="uc-mk">ii</div><div><div class="uc-q">Cross-reference every commitment we made in the EA against what we have actually filed.</div><div class="uc-d">Decades of permits, monitoring data and correspondence checked for consistency automatically.</div></div></div>
+        <div class="uc"><div class="uc-mk">iii</div><div><div class="uc-q">Draft this quarter's regulator, board and ESG reports from current monitoring data.</div><div class="uc-d">The redundant report problem solved — one source of truth, three audiences, zero re-typing.</div></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="triad">
+    <div class="tri"><div class="tn">MINING USE CASE · 01</div><h3>Permit-condition tracking</h3><p>A potash operation runs on dozens of provincial and federal permits, each with conditions. ConsultAssist maps every monitoring record and procedure to its governing permit condition — and flags drift before the regulator does.</p></div>
+    <div class="tri"><div class="tn">MINING USE CASE · 02</div><h3>Consultation continuity</h3><p>FPIC is not a one-time filing — it is an ongoing record across the life of the mine. Every meeting, accommodation and agreement stays queryable, so a new GM or counsel inherits the full history, not a box of binders.</p></div>
+    <div class="tri"><div class="tn">MINING USE CASE · 03</div><h3>Closure &amp; legacy assurance</h3><p>Closure plans must stay consistent with commitments made decades earlier. The platform cross-references the original EA, every amendment, and current reclamation activity into one defensible compliance picture.</p></div>
+  </div>
+  <div class="prod-foot">
+    <div class="pf-tam">$500M+ <span>/yr addressable spend</span></div>
+    <span class="pf-tag">Post-2025 legal creation</span><span class="pf-tag">No incumbents possible</span><span class="pf-tag">Replaces law-firm billings</span><span class="pf-tag">Tier-1 resource companies</span>
+  </div>
+</section>
+
+<!-- SUMMARY -->
+<section class="slide rv">
+  <div class="eyebrow ink">The Full Roadmap</div>
+  <h2>Five products. One platform.<br>Ranked by urgency, document density and TAM.</h2>
+  <p class="lede" style="margin-top:22px;">The five priority products and the mining flagship sit inside a wider roadmap — each new product reuses the same ingestion engine and adds one more regulatory corpus.</p>
+  <div class="table-frame">
+    <table>
+      <thead><tr><th>Opportunity</th><th>Product</th><th>TAM</th><th>Key Regulatory Trigger</th><th>Moat Type</th></tr></thead>
+      <tbody>
+        <tr class="flagrow"><td><span class="opp" style="color:var(--rust)">Mining &amp; Fertilizer</span></td><td><span class="pn2">ConsultAssist</span></td><td><span class="tamv">$500M+/yr</span></td><td>Kebaowek FC 319, Feb 2025 — new legal standard</td><td>Post-2025 legal creation — no incumbents possible</td></tr>
+        <tr><td><span class="opp">Regulated Health Professions</span></td><td><span class="pn2">PracticeAssist</span></td><td><span class="tamv">$500M+/yr</span></td><td>CDCP 2025 + RCDSO inspection expansion</td><td>College corpus × 8 professions</td></tr>
+        <tr><td><span class="opp">Municipal Government</span></td><td><span class="pn2">MuniAssist</span></td><td><span class="tamv">$200M+/yr</span></td><td>Housing crisis + ATIP volume + NBC 2025</td><td>By-law corpus built once per province</td></tr>
+        <tr><td><span class="opp">Environmental Consulting</span></td><td><span class="pn2">EnviroAssist</span></td><td><span class="tamv">$400M+/yr</span></td><td>GHG Cap 2026 + CSDS sustainability standards</td><td>CSA standard corpus + 500 mid-size firms</td></tr>
+        <tr><td><span class="opp">Occupational Health &amp; Safety</span></td><td><span class="pn2">SafetyAssist</span></td><td><span class="tamv">$200M+/yr</span></td><td>Underground Mining regs + WSIB incentives</td><td>Complementary to Intelex / Cority, not competitive</td></tr>
+
+      </tbody>
+    </table>
+  </div>
+  <div class="note-band" style="border-left-color:var(--rust);margin-top:32px;">
+    <div class="nl" style="color:var(--rust)">The read for a potash &amp; fertilizer operator</div>
+    <p>Your sector is not a side application of this roadmap — it is the <b>highest-value, hardest-to-displace product on it.</b> Mining and fertilizer production combine the newest regulatory obligations (UNDRIP / FPIC), the densest document burden (permits, tailings, closure, monitoring), and the most expensive current workaround (law firms at $2,000/hour). Every other product proves the engine; yours captures the most value from it.</p>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="slide closing rv">
+  <div class="eyebrow forest">Where This Goes Next</div>
+  <h2>If you cannot query your compliance documents, <em class="it">you do not really have them.</em></h2>
+  <p class="lede" style="margin-top:24px;">The roadmap is built. The mining flagship is the clearest, highest-value entry point — and the one most relevant to your operations. The question is which document set we start with.</p>
+  <div class="steps">
+    <div class="step"><div class="sn">01</div><h3>Pick a pilot document set</h3><p>Choose one high-pain corpus from a real operation — environmental permits, FPIC consultation records, or OHS procedures. Narrow, real, measurable.</p></div>
+    <div class="step"><div class="sn">02</div><h3>Prove the query layer</h3><p>Ingest it, build the regulatory cross-reference, and run the real questions your compliance team asks today. Measure the time saved against the manual baseline.</p></div>
+    <div class="step"><div class="sn">03</div><h3>Scale across the platform</h3><p>Once the engine is proven on mining, the same architecture extends to health, municipal, environmental and OHS — each adding a corpus, not a rebuild.</p></div>
+  </div>
+  <div class="colophon">
+    <span>Document Intelligence — Product Roadmap</span>
+    <span>Prepared May 2026</span>
+  </div>
+</section>
+
+<script>
+  const obs = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target); } });
+  },{threshold:.1});
+  document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+
+  document.querySelectorAll('.tab-btn').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const tab = btn.dataset.tab;
+      btn.closest('section').querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+      btn.closest('section').querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('tab-'+tab).classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>
