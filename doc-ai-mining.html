@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ConsultAssist — Mining &amp; Fertilizer</title>
+<title>ConsultAssist — Briefing Doc · Mining &amp; Fertilizer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,900&family=Spline+Sans:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -264,6 +264,33 @@
     width:5px;height:5px;background:var(--rust);transform:rotate(45deg);
   }
 
+  /* ════ COMPANY GRID ════ */
+  .company-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:38px;}
+  .co-card{background:var(--card);border:1px solid var(--rule);padding:28px 24px;}
+  .co-name{font-family:'Fraunces',serif;font-size:24px;font-weight:900;color:var(--ink);margin-bottom:4px;letter-spacing:-.02em;}
+  .co-sub{font-family:'Spline Sans Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--rust);margin-bottom:16px;}
+  .co-need{font-size:13.5px;color:var(--ink-2);line-height:1.65;margin-bottom:14px;}
+  .co-fact{font-family:'Spline Sans Mono',monospace;font-size:11px;color:var(--ink-3);padding:10px 14px;background:var(--paper-2);border-left:3px solid var(--rust);line-height:1.55;}
+  .co-opener{font-size:13px;color:var(--ink-2);line-height:1.6;margin-top:12px;padding:12px 14px;background:rgba(192,138,46,.06);border-left:3px solid var(--ochre);font-style:italic;}
+  .co-opener-label{display:block;font-family:'Spline Sans Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--ochre);margin-bottom:6px;font-style:normal;}
+
+  /* ════ CONF BADGE ════ */
+  .conf-badge{
+    display:inline-flex;align-items:center;gap:10px;
+    font-family:'Spline Sans Mono',monospace;font-size:9px;letter-spacing:.18em;
+    text-transform:uppercase;color:rgba(255,255,255,.28);
+    border:1px solid rgba(255,255,255,.1);padding:5px 12px;margin-bottom:28px;
+  }
+  .conf-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:rgba(255,165,80,.45);flex-shrink:0;}
+
+  /* ════ DATA TIERS ════ */
+  .data-tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--rule);margin-top:28px;}
+  .dt{padding:18px 22px;border-right:1px solid var(--rule);}
+  .dt:last-child{border-right:none;}
+  .dt-tag{font-family:'Spline Sans Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--rust);margin-bottom:8px;}
+  .dt-title{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:8px;}
+  .dt-desc{font-size:12.5px;color:var(--ink-3);line-height:1.6;}
+
   /* ════ 09 CTA ════ */
   .cta-hl{font-size:clamp(42px,5.8vw,72px);max-width:18ch;margin-bottom:22px;line-height:1.05;}
   .cta-hl .it{color:var(--forest);}
@@ -303,31 +330,433 @@
   /* ── RESPONSIVE ── */
   @media(max-width:900px){
     .slide{padding:40px 28px 60px;}
-    .cover-stats,.pain-grid,.impl-row,.gap-two,.pillars,.arch-row,.uc-grid,.doc-cols,.steps{
+    .cover-stats,.pain-grid,.impl-row,.gap-two,.pillars,.arch-row,.uc-grid,.doc-cols,.steps,
+    .company-grid,.data-tiers{
       grid-template-columns:1fr;
     }
     .pain-cell,.arch-cell{border-right:none;border-bottom:1px solid var(--rule);}
+    .dt{border-right:none;border-bottom:1px solid var(--rule);}
     .step{border-right:none;padding-right:0;padding-bottom:26px;border-bottom:1px solid rgba(255,255,255,.07);}
     .cover-hl{font-size:44px;}
   }
+
+  /* ══ VIEW SWITCHING ══ */
+  body[data-mode="client"] .view-tom{display:none;}
+  body[data-mode="tom"] .view-client{display:none;}
+
+  /* ══ TOGGLE BUTTON ══ */
+  .view-toggle{
+    position:fixed;top:20px;right:24px;z-index:9999;
+    display:inline-flex;align-items:stretch;
+    font-family:'Spline Sans Mono',monospace;
+    font-size:9px;letter-spacing:.14em;text-transform:uppercase;
+    border-radius:2px;overflow:hidden;
+    box-shadow:0 2px 12px rgba(0,0,0,.28);
+    user-select:none;
+  }
+  .vt-btn{
+    padding:8px 16px;cursor:pointer;
+    background:rgba(28,26,22,.88);backdrop-filter:blur(10px);
+    color:rgba(255, 255, 255, 0.685);transition:color .15s,background .15s;
+    border:1px solid rgba(255,255,255,.1);
+  }
+  .vt-btn:hover{color:rgba(255,255,255,.7);}
+  .vt-btn.active{background:var(--rust);color:#fff;border-color:var(--rust);}
+  .vt-div{width:1px;background:rgba(255,255,255,.12);flex-shrink:0;}
+
+  /* ══════════════════════════════════════════
+     CLIENT-FACING PAGE
+  ══════════════════════════════════════════ */
+  .view-client{background:#fff;}
+
+  /* Hero — dark full-viewport */
+  .c-hero{
+    min-height:100vh;display:flex;flex-direction:column;
+    padding:52px 80px 72px;
+    background:#1c1a16;
+    background-image:radial-gradient(ellipse at 75% 20%, rgba(180,69,31,.11) 0%, transparent 55%);
+    position:relative;
+  }
+  .c-hero::before{
+    content:'';position:absolute;inset:0;pointer-events:none;
+    opacity:.18;mix-blend-mode:screen;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
+  }
+  .c-nav{
+    display:flex;justify-content:space-between;align-items:center;
+    padding-bottom:28px;margin-bottom:4px;position:relative;z-index:2;
+  }
+  .c-nav-brand{font-family:'Spline Sans Mono',monospace;font-size:12px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.55);}
+  .c-nav-label{font-family:'Spline Sans Mono',monospace;font-size:10px;letter-spacing:.1em;color:rgba(255,255,255,.25);}
+  .c-hero-body{flex:1;display:flex;flex-direction:column;justify-content:center;position:relative;z-index:2;}
+  .c-eyebrow{
+    font-family:'Spline Sans Mono',monospace;font-size:10.5px;letter-spacing:.22em;
+    text-transform:uppercase;color:rgba(200,100,60,.9);
+    display:flex;align-items:center;gap:12px;margin-bottom:28px;
+  }
+  .c-eyebrow::before{content:'';width:26px;height:1.5px;background:rgba(200,100,60,.9);flex-shrink:0;}
+  .c-hl{
+    font-family:'Fraunces',serif;font-size:clamp(48px,6.5vw,84px);
+    font-weight:900;line-height:1.04;letter-spacing:-.025em;
+    color:#fff;margin-bottom:28px;max-width:18ch;
+  }
+  .c-hl em{font-style:italic;font-weight:400;color:rgba(200,110,70,.9);}
+  .c-hero-sub{font-size:17px;color:rgba(255,255,255,.55);line-height:1.75;max-width:54ch;}
+  .c-hero-stats{
+    display:grid;grid-template-columns:repeat(4,1fr);
+    border-top:1px solid rgba(255,255,255,.08);padding-top:32px;gap:24px;
+    margin-top:auto;position:relative;z-index:2;
+  }
+  .c-stat-v{font-family:'Fraunces',serif;font-size:30px;font-weight:600;color:#fff;line-height:1;}
+  .c-stat-v.acc{color:rgba(190,90,50,.9);}
+  .c-stat-l{font-family:'Spline Sans Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-top:8px;}
+
+  /* Section wrapper */
+  .c-section{padding:80px 80px;position:relative;}
+  .c-section.alt{background:var(--paper);}
+  .c-section.white{background:#fff;}
+  .c-page-num{
+    position:absolute;top:32px;right:40px;
+    font-family:'Spline Sans Mono',monospace;font-size:9.5px;letter-spacing:.15em;
+    text-transform:uppercase;color:var(--ink-faint);opacity:.55;
+  }
+  .c-section.dark .c-page-num{color:rgba(255,255,255,.2);opacity:1;}
+  .c-section.dark{
+    background:#1c1a16;
+    background-image:radial-gradient(ellipse at 80% 18%, rgba(252, 63, 0, 0.08) 0%, transparent 52%);
+  }
+  .c-section-inner{max-width:1040px;margin:0 auto;}
+  .c-sec-eyebrow{
+    font-family:'Spline Sans Mono',monospace;font-size:10px;letter-spacing:.2em;
+    text-transform:uppercase;color:var(--rust);
+    display:flex;align-items:center;gap:12px;margin-bottom:16px;
+  }
+  .c-sec-eyebrow::before{content:'';width:22px;height:1.5px;background:var(--rust);flex-shrink:0;}
+  .c-section.dark .c-sec-eyebrow{color:rgba(200,100,60,.9);}
+  .c-section.dark .c-sec-eyebrow::before{background:rgba(200,100,60,.9);}
+  .c-sec-hl{
+    font-family:'Fraunces',serif;font-size:clamp(30px,3.8vw,46px);
+    font-weight:900;line-height:1.06;letter-spacing:-.02em;
+    color:var(--ink);margin-bottom:12px;max-width:22ch;
+  }
+  .c-sec-hl em{font-style:italic;font-weight:400;}
+  .c-section.dark .c-sec-hl{color:#fff;}
+  .c-sec-sub{font-size:15.5px;color:var(--ink-3);line-height:1.75;max-width:58ch;margin-bottom:48px;}
+  .c-section.dark .c-sec-sub{color:rgba(255,255,255,.45);}
+
+  .c-section.dark .c-sec-sub{color:rgba(255,255,255,.45);}
+  .c-section.dark .c-doc-col-h{color:rgba(200,100,60,.85);}
+  .c-section.dark .c-doc-items .c-doc-item{background:rgba(255,255,255,.03);border-color:rgba(255,255,255,.07);color:rgba(255,255,255,.7);}
+  .c-section.dark .c-doc-item::before{background:rgba(200,100,60,.7);}
+  .c-section.dark .c-doc-col{border-right-color:rgba(255,255,255,.07);}
+  .c-section.dark .c-doc-cols,.c-section.dark .c-tiers{border-color:rgba(255,255,255,.07);}
+  .c-section.dark .c-tier{border-right-color:rgba(255,255,255,.07);}
+  .c-section.dark .c-tier-tag{color:rgba(200,100,60,.7);}
+  .c-section.dark .c-tier-title{color:#fff;}
+  .c-section.dark .c-tier-desc{color:rgba(255,255,255,.38);}
+
+  /* Kebaowek ruling box */
+  .c-keb-box{
+    background:rgba(180,69,31,.06);border:1px solid rgba(180,69,31,.25);
+    padding:36px 40px;margin-bottom:40px;position:relative;
+  }
+  .c-keb-box::before{
+    content:'';position:absolute;top:-1px;left:-1px;
+    width:30px;height:30px;border-top:2px solid var(--rust);border-left:2px solid var(--rust);
+  }
+  .c-keb-tag{font-family:'Spline Sans Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--rust);opacity:.7;margin-bottom:12px;}
+  .c-keb-text{font-family:'Fraunces',serif;font-size:20px;font-weight:500;color:var(--ink);line-height:1.55;}
+  .c-keb-imps{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:28px;padding-top:28px;border-top:1px solid var(--rule);}
+  .c-keb-imp{font-size:13px;color:var(--ink-3);line-height:1.65;}
+  .c-keb-imp b{display:block;font-size:13.5px;color:var(--ink);margin-bottom:5px;}
+
+  /* Capabilities grid */
+  .c-caps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--rule);}
+  .c-cap{padding:32px 28px;border-right:1px solid var(--rule);}
+  .c-cap:last-child{border-right:none;}
+  .c-cap-n{font-family:'Fraunces',serif;font-size:42px;font-weight:900;color:var(--rule-soft);line-height:1;margin-bottom:14px;}
+  .c-cap-title{font-family:'Fraunces',serif;font-size:17px;font-weight:700;color:var(--ink);margin-bottom:10px;line-height:1.2;letter-spacing:-.01em;}
+  .c-cap-body{font-size:13.5px;color:var(--ink-3);line-height:1.7;}
+
+  /* Competitive gap */
+  .c-gap-two{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start;}
+  .c-col-label{font-family:'Spline Sans Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);padding-bottom:10px;border-bottom:1px solid var(--rule);margin-bottom:18px;}
+  .c-comp-list{display:flex;flex-direction:column;gap:16px;}
+  .c-comp-item{display:grid;grid-template-columns:8px 1fr;gap:14px;align-items:start;}
+  .c-c-dot{width:7px;height:7px;border-radius:50%;background:var(--rule);margin-top:5px;flex-shrink:0;}
+  .c-ci-name{font-size:13.5px;font-weight:600;color:var(--ink);margin-bottom:2px;}
+  .c-ci-does{font-size:12.5px;color:var(--ink-3);}
+  .c-ci-gap{font-size:12px;color:var(--rust);margin-top:3px;}
+  .c-verdict{
+    background:var(--ink);color:var(--paper);
+    padding:26px 28px;border-left:4px solid var(--rust);margin-top:24px;
+    font-family:'Fraunces',serif;font-size:17px;font-weight:500;font-style:italic;line-height:1.55;
+  }
+  .c-verdict b{font-style:normal;color:#fff;}
+  .c-gap-q{
+    font-family:'Fraunces',serif;font-size:22px;font-weight:500;color:var(--ink);
+    line-height:1.5;border-left:3px solid var(--rust);padding-left:22px;margin-bottom:22px;
+  }
+  .c-gap-q::before{content:'\201C';color:var(--ink-faint);}
+  .c-gap-q::after{content:'\201D';color:var(--ink-faint);}
+  .c-gap-note{font-size:14px;color:var(--ink-3);line-height:1.7;margin-bottom:22px;}
+
+  /* Query cards */
+  .c-queries{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+  .c-query{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);padding:26px 22px;}
+  .c-q-tag{font-family:'Spline Sans Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(200,100,60,.85);margin-bottom:12px;display:block;}
+  .c-q-text{
+    font-family:'Fraunces',serif;font-size:15px;font-weight:500;
+    color:rgba(255,255,255,.88);line-height:1.45;
+  }
+  .c-q-text::before{content:'\201C';color:rgba(255,255,255,.2);}
+  .c-q-text::after{content:'\201D';color:rgba(255,255,255,.2);}
+  .c-q-note{font-size:12.5px;color:rgba(255,255,255,.38);margin-top:10px;line-height:1.6;}
+
+  /* Data requirements */
+  .c-doc-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--rule);margin-bottom:36px;}
+  .c-doc-col{padding:26px 24px;border-right:1px solid var(--rule);}
+  .c-doc-col:last-child{border-right:none;}
+  .c-doc-col-h{font-family:'Spline Sans Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--rust);margin-bottom:14px;}
+  .c-doc-items{display:flex;flex-direction:column;gap:6px;}
+  .c-doc-item{font-size:13px;color:var(--ink-2);padding:7px 10px 7px 18px;background:var(--paper);border:1px solid var(--rule);position:relative;line-height:1.35;}
+  .c-doc-item::before{content:'';position:absolute;left:7px;top:12px;width:4px;height:4px;background:var(--rust);transform:rotate(45deg);}
+  .c-tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--rule);}
+  .c-tier{padding:20px 22px;border-right:1px solid var(--rule);}
+  .c-tier:last-child{border-right:none;}
+  .c-tier-tag{font-family:'Spline Sans Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--rust);margin-bottom:7px;}
+  .c-tier-title{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:7px;}
+  .c-tier-desc{font-size:12.5px;color:var(--ink-3);line-height:1.6;}
+
+  /* CTA / getting started */
+  .c-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid rgba(255,255,255,.08);padding-top:40px;}
+  .c-step{padding:0 36px 0 0;border-right:1px solid rgba(255,255,255,.06);}
+  .c-step:first-child{padding-left:0;}
+  .c-step:last-child{border-right:none;padding-right:0;}
+  .c-step-n{font-family:'Fraunces',serif;font-size:38px;font-weight:900;color:var(--ochre);line-height:1;margin-bottom:14px;}
+  .c-step h3{color:#fff;font-size:16px;margin-bottom:8px;}
+  .c-step p{font-size:13px;color:rgba(255,255,255,.38);line-height:1.7;}
+
+  /* Footer */
+  .c-footer{
+    background:#141210;padding:28px 80px;
+    display:flex;justify-content:space-between;align-items:center;
+  }
+  .c-footer-l,.c-footer-r{font-family:'Spline Sans Mono',monospace;font-size:10px;letter-spacing:.08em;color:rgba(255,255,255,.18);}
+
+  /* Client responsive */
+  @media(max-width:900px){
+    .c-hero,.c-section{padding:40px 28px;}
+    .c-hero-stats,.c-keb-imps,.c-caps,.c-gap-two,.c-queries,.c-steps,.c-doc-cols,.c-tiers{grid-template-columns:1fr;}
+    .c-cap{border-right:none;border-bottom:1px solid var(--rule);}
+    .c-cap:last-child{border-bottom:none;}
+    .c-step{border-right:none;padding-right:0;padding-bottom:26px;border-bottom:1px solid rgba(255,255,255,.07);}
+    .c-footer{padding:22px 28px;flex-direction:column;gap:8px;align-items:flex-start;}
+  }
 </style>
 </head>
-<body>
+<body data-mode="client">
+
+<!-- ══ TOGGLE ══ -->
+<div class="view-toggle">
+  <div class="vt-btn" id="vt-client">Client View</div>
+  <div class="vt-div"></div>
+  <div class="vt-btn" id="vt-tom">Tom&#39;s View</div>
+</div>
+
+<!-- ══ CLIENT-FACING VIEW ══ -->
+<div class="view-client">
+
+  <!-- HERO -->
+  <div class="c-hero">
+    <div class="c-nav">
+      <div class="c-nav-brand">Algo-Rythmn &nbsp;/&nbsp; ConsultAssist</div>
+    </div>
+    <div class="c-hero-body">
+      <div class="c-eyebrow">Document Intelligence</div>
+      <h1 class="c-hl">Your compliance documents<br>can&rsquo;t answer questions.<br><em>Ours can.</em></h1>
+      <p class="c-hero-sub">Document AI built specifically for potash mining and fertilizer production. Your compliance team asks questions in plain language. The platform answers with citations from your own files &mdash; in seconds, not staff-days or legal invoices.</p>
+    </div>
+    <div class="c-hero-stats">
+      <div><div class="c-stat-v acc">Feb 2025</div><div class="c-stat-l">Kebaowek ruling &mdash; new FPIC legal standard</div></div>
+      <div><div class="c-stat-v">0</div><div class="c-stat-l">AI doc-intel incumbents in this space</div></div>
+      <div><div class="c-stat-v">12+</div><div class="c-stat-l">Compliance document types ingested</div></div>
+      <div><div class="c-stat-v">Seconds</div><div class="c-stat-l">Time to a cited answer from your files</div></div>
+    </div>
+  </div>
+
+  <!-- WHY NOW -->
+  <div class="c-section white">
+    <div class="c-page-num">01 / 06</div>
+    <div class="c-section-inner">
+      <div class="c-sec-eyebrow">The regulatory shift</div>
+      <h2 class="c-sec-hl">February 2025. Kebaowek.<br>The rules <em>changed.</em></h2>
+      <p class="c-sec-sub">UNDRIP is now binding Canadian law for Crown consultation. Compliance document obligations that were best practice are now legal requirements &mdash; and no software platform was built to meet them.</p>
+      <div class="c-keb-box">
+        <div class="c-keb-tag">Kebaowek First Nation v. Canada &middot; Federal Court FC 319 &middot; February 2025</div>
+        <div class="c-keb-text">Every resource project must maintain queryable FPIC process records, community correspondence, impact-assessment responses, and accommodation documentation &mdash; as a legal obligation, not a best practice.</div>
+        <div class="c-keb-imps">
+          <div class="c-keb-imp"><b>A new document burden</b>Law firms charge $500&ndash;$2,000/hr to handle FPIC records manually. No software manages it automatically.</div>
+          <div class="c-keb-imp"><b>Every active operation affected</b>Permit renewals, EA amendments, and expansions all require post-Kebaowek FPIC compliance immediately.</div>
+          <div class="c-keb-imp"><b>No incumbent exists</b>This obligation is a post-2025 regulatory creation. No platform was built for it before &mdash; or since.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- THE GAP -->
+  <div class="c-section alt">
+    <div class="c-page-num">02 / 06</div>
+    <div class="c-section-inner">
+      <div class="c-sec-eyebrow">The gap</div>
+      <h2 class="c-sec-hl">Current software manages documents.<br>It cannot <em>understand them.</em></h2>
+      <div class="c-gap-two">
+        <div>
+          <div class="c-col-label">What exists today</div>
+          <div class="c-comp-list">
+            <div class="c-comp-item"><div class="c-c-dot"></div><div><div class="c-ci-name">Intelex / Cority / VelocityEHS</div><div class="c-ci-does">Structured EHS &mdash; incident logs, training checklists, permit dashboards</div><div class="c-ci-gap">&#10007; Cannot answer: &ldquo;Does our SOP meet regulation &sect;9.3?&rdquo;</div></div></div>
+            <div class="c-comp-item"><div class="c-c-dot"></div><div><div class="c-ci-name">SharePoint / OpenText</div><div class="c-ci-does">Document management and keyword search</div><div class="c-ci-gap">&#10007; Finds documents. Does not interpret them against regulatory standards.</div></div></div>
+            <div class="c-comp-item"><div class="c-c-dot"></div><div><div class="c-ci-name">Law firms ($500&ndash;$2,000/hr)</div><div class="c-ci-does">Manual FPIC records management and permit interpretation</div><div class="c-ci-gap">&#10007; Expensive, slow, and knowledge leaves when counsel does</div></div></div>
+          </div>
+        </div>
+        <div>
+          <div class="c-col-label">The unanswered question</div>
+          <div class="c-gap-q">Does our consultation record for this expansion satisfy our duty-to-consult obligations?</div>
+          <p class="c-gap-note">No compliance software platform can answer that today. It requires cross-referencing your FPIC correspondence, community minutes, accommodation measures, and permit conditions &mdash; against the Kebaowek standard &mdash; in real time.</p>
+          <div class="c-verdict">That is exactly what <b>ConsultAssist</b> does.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CAPABILITIES -->
+  <div class="c-section white">
+    <div class="c-page-num">03 / 06</div>
+    <div class="c-section-inner">
+      <div class="c-sec-eyebrow">What ConsultAssist does</div>
+      <h2 class="c-sec-hl">Ask any question.<br>Get a <em>cited answer.</em> In seconds.</h2>
+      <p class="c-sec-sub">ConsultAssist ingests your compliance documents and the applicable regulatory corpus. Your team asks questions in plain language. The platform answers &mdash; with citations, from your own files.</p>
+      <div class="c-caps">
+        <div class="c-cap"><div class="c-cap-n">01</div><div class="c-cap-title">FPIC &amp; Consultation</div><div class="c-cap-body">Every meeting record, accommodation measure, and community correspondence queryable against UNDRIP and post-Kebaowek standards. A new GM inherits the full history &mdash; not a box of binders.</div></div>
+        <div class="c-cap"><div class="c-cap-n">02</div><div class="c-cap-title">Permits &amp; Conditions</div><div class="c-cap-body">Operating and environmental permits mapped to monitoring data, tailings plans, and closure commitments. Flags drift before the regulator does.</div></div>
+        <div class="c-cap"><div class="c-cap-n">03</div><div class="c-cap-title">Reports &amp; Disclosures</div><div class="c-cap-body">Regulator submissions, board packs, and ESG reports drafted from one source of truth. The same facts reach every audience &mdash; without re-typing.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DATA REQUIREMENTS -->
+  <div class="c-section alt">
+    <div class="c-page-num">04 / 06</div>
+    <div class="c-section-inner">
+      <div class="c-sec-eyebrow">What you provide</div>
+      <h2 class="c-sec-hl">The documents you already have &mdash;<br><em>all of it queryable.</em></h2>
+      <p class="c-sec-sub">ConsultAssist works with the compliance library your operation already produces. Any format &mdash; PDF, Word, scanned. No new documents required.</p>
+      <div class="c-doc-cols">
+        <div class="c-doc-col">
+          <div class="c-doc-col-h">FPIC &amp; Consultation</div>
+          <div class="c-doc-items">
+            <div class="c-doc-item">FPIC process records</div>
+            <div class="c-doc-item">Duty-to-consult correspondence</div>
+            <div class="c-doc-item">Community meeting minutes</div>
+            <div class="c-doc-item">Accommodation measure documentation</div>
+          </div>
+        </div>
+        <div class="c-doc-col">
+          <div class="c-doc-col-h">Environmental &amp; Operational</div>
+          <div class="c-doc-items">
+            <div class="c-doc-item">Operating &amp; environmental permits</div>
+            <div class="c-doc-item">Tailings &amp; closure plans</div>
+            <div class="c-doc-item">Water &amp; brine monitoring data</div>
+            <div class="c-doc-item">Impact assessment responses</div>
+          </div>
+        </div>
+        <div class="c-doc-col">
+          <div class="c-doc-col-h">OHS &amp; Compliance Programs</div>
+          <div class="c-doc-items">
+            <div class="c-doc-item">Safe work procedures &amp; SOPs</div>
+            <div class="c-doc-item">Hazard assessment records</div>
+            <div class="c-doc-item">Incident investigation reports</div>
+            <div class="c-doc-item">Joint H&amp;S committee minutes</div>
+          </div>
+        </div>
+      </div>
+      <div class="c-tiers">
+        <div class="c-tier">
+          <div class="c-tier-tag">To run a pilot</div>
+          <div class="c-tier-title">One corpus, 50+ documents</div>
+          <div class="c-tier-desc">Any single column above &mdash; FPIC records, permits, or OHS procedures. Any format. Cited answers within days of onboarding.</div>
+        </div>
+        <div class="c-tier">
+          <div class="c-tier-tag">For full compliance coverage</div>
+          <div class="c-tier-title">All three document types</div>
+          <div class="c-tier-desc">Cross-domain referencing unlocks as the corpus grows. An OHS question checked against permit conditions; FPIC records mapped against EA commitments.</div>
+        </div>
+        <div class="c-tier">
+          <div class="c-tier-tag">For ongoing intelligence</div>
+          <div class="c-tier-title">Feeds &amp; new filings</div>
+          <div class="c-tier-desc">New monitoring reports, correspondence, and regulatory filings are ingested automatically. The system stays current &mdash; not just a snapshot of last year&rsquo;s binders.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUERIES -->
+  <div class="c-section dark">
+    <div class="c-page-num">05 / 06</div>
+    <div class="c-section-inner">
+      <div class="c-sec-eyebrow">Real queries</div>
+      <h2 class="c-sec-hl">Questions your team<br>is asking <em>right now.</em></h2>
+      <p class="c-sec-sub">ConsultAssist answers these from your own files &mdash; with citations, in seconds.</p>
+      <div class="c-queries">
+        <div class="c-query"><span class="c-q-tag">FPIC &amp; Consultation</span><div class="c-q-text">Does our FPIC record for this mine expansion meet duty-to-consult standards post-Kebaowek?</div><div class="c-q-note">The question that today costs $2,000/hour in legal time.</div></div>
+        <div class="c-query"><span class="c-q-tag">Environmental Permits</span><div class="c-q-text">Does our groundwater and brine monitoring satisfy every condition of our provincial permit and federal MDMER?</div><div class="c-q-note">Every permit condition cross-referenced against field data.</div></div>
+        <div class="c-query"><span class="c-q-tag">EA Consistency</span><div class="c-q-text">Cross-reference every commitment in the original EA against what we have actually filed.</div><div class="c-q-note">Decades of permits and correspondence checked automatically.</div></div>
+        <div class="c-query"><span class="c-q-tag">Tailings &amp; Closure</span><div class="c-q-text">Is our closure and reclamation plan still consistent with every commitment in the original EA?</div><div class="c-q-note">Cross-referenced into one defensible compliance picture.</div></div>
+        <div class="c-query"><span class="c-q-tag">OHS &amp; Safety</span><div class="c-q-text">Do our ground-control and ventilation procedures meet current underground mining regulations?</div><div class="c-q-note">SOPs tested against the regulatory section EHS tools cannot read.</div></div>
+        <div class="c-query"><span class="c-q-tag">Report Production</span><div class="c-q-text">Draft this quarter&rsquo;s regulator, board, and ESG reports from current monitoring data.</div><div class="c-q-note">One source of truth. Three audiences. Zero re-typing.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GETTING STARTED -->
+  <div class="c-section dark">
+    <div class="c-page-num">06 / 06</div>
+    <div class="c-section-inner">
+      <div class="c-sec-eyebrow">Getting started</div>
+      <h2 class="c-sec-hl">One pilot corpus.<br><em>Cited answers within days.</em></h2>
+      <p class="c-sec-sub">A pilot requires one document set &mdash; 50 or more documents in any format. No IT project, no transformation programme.</p>
+      <div class="c-steps">
+        <div class="c-step"><div class="c-step-n">01</div><h3>Pick a pilot corpus</h3><p>One high-pain set &mdash; FPIC consultation records, environmental permits, or OHS procedures. Any format: PDF, Word, scanned. Narrow, real, measurable.</p></div>
+        <div class="c-step"><div class="c-step-n">02</div><h3>Prove the query layer</h3><p>We ingest the corpus, build the regulatory cross-reference, and run the real questions your team asks today. Measure time saved against the manual baseline.</p></div>
+        <div class="c-step"><div class="c-step-n">03</div><h3>Scale the library</h3><p>Once proven on one set, the platform extends across your full compliance library. Each domain adds a corpus &mdash; not a rebuild.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="c-footer">
+    <div class="c-footer-l">ConsultAssist &middot; Algo-Rythmn Corp.</div>
+    <div class="c-footer-r">&copy; 2026 Algo-Rythmn Corp. All rights reserved.</div>
+  </div>
+
+</div><!-- /view-client -->
+
+<!-- ══ TOM’S BRIEFING VIEW ══ -->
+<div class="view-tom">
 
 <!-- ══ 01 COVER ══ -->
 <section class="slide bg-dark rv" id="s1">
   <div class="masthead">
-    <div class="brand">Algo-Rythmn</div>
-    <div class="issue">Mining &amp; Fertilizer · May 2026</div>
+    <div class="brand">Algo-Rythmn <br> Mining &amp; Fertilizer · Introduction Deck · May 2026</div>
   </div>
   <div class="slide-body">
-    <div class="eyebrow">Document Intelligence</div>
+    <div class="conf-badge">Confidential &middot; Not for Distribution</div>
+    <div class="eyebrow">Briefing Document</div>
     <h1 class="cover-hl">
-      Your compliance documents<br>
-      can't answer questions.<br>
-      <em class="it" style="color:var(--rust);">Ours can.</em>
+      ConsultAssist —<br>
+      Mining &amp; Fertilizer.
     </h1>
-    <p class="lede" style="max-width:50ch;">Document AI built specifically for potash mining and fertilizer production — so your compliance team gets cited answers in seconds, not staff-days or legal invoices.</p>
+    <p class="lede" style="max-width:54ch;">This is an introduction deck for Tom Mix. Slide 2 profiles each target with suggested openers. Slides 3–9 are the arguments you deliver verbally. Slide 10 is your playbook. Never share this file directly.</p>
   </div>
   <div class="cover-stats">
     <div class="cs"><div class="cs-v accent">Feb 2025</div><div class="cs-l">Kebaowek ruling — new FPIC legal standard</div></div>
@@ -335,17 +764,56 @@
     <div class="cs"><div class="cs-v">12+</div><div class="cs-l">Compliance document types ingested</div></div>
     <div class="cs"><div class="cs-v">1</div><div class="cs-l">Platform — your documents, your queries</div></div>
   </div>
-  <div class="pg">01 / 09</div>
+  <div class="pg">01 / 10</div>
 </section>
 
-<!-- ══ 02 THE PROBLEM ══ -->
-<section class="slide bg-warm rv" id="s2">
+<!-- ══ 02 THE TARGETS ══ -->
+<section class="slide bg-light rv" id="s2">
+  <div class="masthead">
+    <div class="brand">Algo-Rythmn</div>
+    <div class="issue">The Opportunity</div>
+  </div>
+  <div class="slide-body">
+    <div class="eyebrow">Three operators. Three acute compliance pressures.</div>
+    <h2 style="font-size:clamp(34px,4.6vw,56px);max-width:26ch;margin-bottom:0;">
+      Nutrien. Mosaic. BHP.<br>
+      Each has a document problem <em class="it">you can name.</em>
+    </h2>
+    <div class="company-grid">
+      <div class="co-card">
+        <div class="co-name">Nutrien</div>
+        <div class="co-sub">World's largest potash &amp; nitrogen producer</div>
+        <div class="co-need">Six Saskatchewan potash mines plus nitrogen facilities at Joffre and Fort Saskatchewan. Decades of FPIC consultation records across every operation — most in binders, none queryable. Every permit renewal post-Kebaowek reopens the full consultation archive.</div>
+        <div class="co-fact">Deepest compliance archive of any producer. Highest cost if a single FPIC record is missing or undefendable.</div>
+        <div class="co-opener"><span class="co-opener-label">Suggested opener</span>Every permit renewal you face now reopens your full FPIC archive — and none of it is queryable. Since Kebaowek, that's a legal liability, not just an operational headache.</div>
+      </div>
+      <div class="co-card">
+        <div class="co-name">Mosaic</div>
+        <div class="co-sub">Esterhazy K3 expansion — active EA obligations</div>
+        <div class="co-need">K3 is one of the largest active mine expansions in Canada. New EA commitments, new FPIC obligations, new provincial permit conditions — all generating documents that must be cross-referenced against each other and the original approval.</div>
+        <div class="co-fact">Active expansion means active document liability. EA commitments made years ago must reconcile with every filing since.</div>
+        <div class="co-opener"><span class="co-opener-label">Suggested opener</span>K3 is generating new EA commitments every month. When the regulator asks whether your current filings still reconcile with the original approval, what does that answer cost you to produce today?</div>
+      </div>
+      <div class="co-card">
+        <div class="co-name">BHP Jansen</div>
+        <div class="co-sub">Largest greenfield potash mine in Canadian history</div>
+        <div class="co-need">Stage 1 and Stage 2 together represent $10.6B in capital. Brand-new FPIC obligations from day one — no legacy system, no inherited compliance architecture. The cleanest possible implementation: build the compliance layer right, before the archive grows unmanageable.</div>
+        <div class="co-fact">$10.6B committed. No incumbent compliance platform. No legacy debt to work around.</div>
+        <div class="co-opener"><span class="co-opener-label">Suggested opener</span>You're building from scratch — that's the advantage. No legacy compliance architecture to untangle. You can build the queryable layer in from day one, before the archive grows unmanageable.</div>
+      </div>
+    </div>
+  </div>
+  <div class="pg">02 / 10</div>
+</section>
+
+<!-- ══ 03 THE PROBLEM ══ -->
+<section class="slide bg-warm rv" id="s3">
   <div class="masthead">
     <div class="brand">Algo-Rythmn</div>
     <div class="issue">The Problem</div>
   </div>
   <div class="slide-body">
-    <div class="eyebrow">A problem hiding in plain sight</div>
+    <div class="eyebrow">The pain point you're naming</div>
     <h2 style="font-size:clamp(38px,5vw,62px);max-width:20ch;margin-bottom:20px;">
       The documents exist.<br>But nobody can <em class="it">interrogate them.</em>
     </h2>
@@ -357,17 +825,17 @@
       <div class="pain-cell"><div class="pc-n">04</div><b>Institutional knowledge walks out the door</b><p>When a GM or environmental officer leaves, decades of contextual compliance knowledge leaves with them — not indexed anywhere.</p></div>
     </div>
   </div>
-  <div class="pg">02 / 09</div>
+  <div class="pg">03 / 10</div>
 </section>
 
-<!-- ══ 03 WHY NOW ══ -->
-<section class="slide bg-rust rv" id="s3">
+<!-- ══ 04 WHY NOW ══ -->
+<section class="slide bg-rust rv" id="s4">
   <div class="masthead">
     <div class="brand">Algo-Rythmn</div>
     <div class="issue">Why Now</div>
   </div>
   <div class="slide-body">
-    <div class="eyebrow">The regulatory shift that changes everything</div>
+    <div class="eyebrow">Your 60-second regulatory argument</div>
     <h2 style="font-size:clamp(36px,4.8vw,58px);max-width:22ch;margin-bottom:0;">
       February 2025. Kebaowek.<br>The rules <em class="it">changed.</em>
     </h2>
@@ -381,17 +849,17 @@
       <div class="impl"><div class="il">Implication 03</div><p><b>No possible incumbent.</b> This obligation is a post-2025 regulatory creation. No platform existed before it; none has been built since.</p></div>
     </div>
   </div>
-  <div class="pg">03 / 09</div>
+  <div class="pg">04 / 10</div>
 </section>
 
-<!-- ══ 04 THE GAP ══ -->
-<section class="slide bg-mid rv" id="s4">
+<!-- ══ 05 THE GAP ══ -->
+<section class="slide bg-mid rv" id="s5">
   <div class="masthead">
     <div class="brand">Algo-Rythmn</div>
     <div class="issue">The Gap</div>
   </div>
   <div class="slide-body">
-    <div class="eyebrow">No platform does this. Still.</div>
+    <div class="eyebrow">Why no existing software works</div>
     <h2 style="font-size:clamp(34px,4.6vw,56px);max-width:26ch;margin-bottom:0;">
       Current software manages documents.<br>It cannot <em class="it">understand them.</em>
     </h2>
@@ -413,17 +881,17 @@
       </div>
     </div>
   </div>
-  <div class="pg">04 / 09</div>
+  <div class="pg">05 / 10</div>
 </section>
 
-<!-- ══ 05 THE SOLUTION ══ -->
-<section class="slide bg-dark rv" id="s5">
+<!-- ══ 06 THE SOLUTION ══ -->
+<section class="slide bg-dark rv" id="s6">
   <div class="masthead">
     <div class="brand">Algo-Rythmn</div>
     <div class="issue">The Solution</div>
   </div>
   <div class="slide-body">
-    <div class="eyebrow">Introducing ConsultAssist</div>
+    <div class="eyebrow">How to describe ConsultAssist</div>
     <h2 class="sol-hl">
       Ask any question.<br>
       Get a <em class="it" style="color:rgba(200,130,80,.9);">cited answer.</em><br>
@@ -436,17 +904,17 @@
       <div class="pillar"><div class="p-n">03</div><h3>Reports &amp; Disclosures</h3><p>Regulator submissions, board packs and ESG reports drafted from one source of truth. The same facts reach every audience — without re-typing.</p></div>
     </div>
   </div>
-  <div class="pg">05 / 09</div>
+  <div class="pg">06 / 10</div>
 </section>
 
-<!-- ══ 06 HOW IT WORKS ══ -->
-<section class="slide bg-light rv" id="s6">
+<!-- ══ 07 HOW IT WORKS ══ -->
+<section class="slide bg-light rv" id="s7">
   <div class="masthead">
     <div class="brand">Algo-Rythmn</div>
     <div class="issue">How It Works</div>
   </div>
   <div class="slide-body">
-    <div class="eyebrow grn">Three layers. One cited answer.</div>
+    <div class="eyebrow grn">If they ask how it works</div>
     <h2 style="font-size:clamp(34px,4.4vw,52px);max-width:28ch;">
       Your documents. The regulatory corpus.<br>
       One <em class="it">intelligent layer</em> on top.
@@ -479,19 +947,19 @@
       <div class="flow-item"><div class="flow-v">Plain-language query</div><div class="flow-l">Cited answer in seconds</div></div>
     </div>
   </div>
-  <div class="pg">06 / 09</div>
+  <div class="pg">07 / 10</div>
 </section>
 
-<!-- ══ 07 WHAT YOU CAN ASK ══ -->
-<section class="slide bg-warm rv" id="s7">
+<!-- ══ 08 WHAT YOU CAN ASK ══ -->
+<section class="slide bg-warm rv" id="s8">
   <div class="masthead">
     <div class="brand">Algo-Rythmn</div>
     <div class="issue">Real Queries</div>
   </div>
   <div class="slide-body">
-    <div class="eyebrow">Questions your team asks today</div>
+    <div class="eyebrow">Demo anchors — queries to walk through</div>
     <h2 style="font-size:clamp(34px,4.4vw,52px);max-width:26ch;">
-      Real questions. Cited answers.<br>From <em class="it">your own files.</em>
+      Real questions that resonate.<br>Walk through each <em class="it">from their files.</em>
     </h2>
     <div class="uc-grid">
       <div class="uc-card">
@@ -526,19 +994,19 @@
       </div>
     </div>
   </div>
-  <div class="pg">07 / 09</div>
+  <div class="pg">08 / 10</div>
 </section>
 
-<!-- ══ 08 DOCUMENTS ══ -->
-<section class="slide bg-mid rv" id="s8">
+<!-- ══ 09 DOCUMENTS ══ -->
+<section class="slide bg-mid rv" id="s9">
   <div class="masthead">
     <div class="brand">Algo-Rythmn</div>
     <div class="issue">What We Ingest</div>
   </div>
   <div class="slide-body">
-    <div class="eyebrow">Built for the full compliance library</div>
+    <div class="eyebrow">What to ask them to provide</div>
     <h2 style="font-size:clamp(34px,4.4vw,52px);max-width:28ch;">
-      Every document type your operation produces —<br><em class="it">all of it queryable.</em>
+      The documents you already have —<br>indexed, mapped, and <em class="it">instantly queryable.</em>
     </h2>
     <div class="doc-cols">
       <div class="doc-col">
@@ -578,37 +1046,69 @@
         </div>
       </div>
     </div>
-  </div>
-  <div class="pg">08 / 09</div>
-</section>
-
-<!-- ══ 09 CTA ══ -->
-<section class="slide bg-forest rv" id="s9">
-  <div class="masthead">
-    <div class="brand">Algo-Rythmn</div>
-    <div class="issue">Next Step</div>
-  </div>
-  <div class="slide-body">
-    <div class="eyebrow">Where this goes next</div>
-    <h2 class="cta-hl">
-      If you cannot query your<br>compliance documents,<br>
-      <em class="it cta-hl__it">you don't really have them.</em>
-    </h2>
-    <p class="cta-sub">ConsultAssist is built for operations exactly like yours. The question is which document set we start with — and how quickly we can show you a cited answer from your own files.</p>
-    <div class="steps">
-      <div class="step"><div class="sn">01</div><h3>Pick a pilot document set</h3><p>One high-pain corpus — FPIC consultation records, environmental permits, or OHS procedures. Narrow, real, measurable.</p></div>
-      <div class="step"><div class="sn">02</div><h3>Prove the query layer</h3><p>Ingest it, build the regulatory cross-reference, run the real questions your team asks today. Measure time saved against the manual baseline.</p></div>
-      <div class="step"><div class="sn">03</div><h3>Scale the library</h3><p>Once proven on one set, it extends across your full compliance library — each domain adding a corpus, not a rebuild.</p></div>
+    <div class="data-tiers">
+      <div class="dt">
+        <div class="dt-tag">To run a pilot</div>
+        <div class="dt-title">One corpus, 50+ documents</div>
+        <div class="dt-desc">Any single column from the library above — FPIC records, environmental permits, or OHS procedures. Any format: PDF, Word, scanned documents. Sufficient to produce cited answers from your own files within days of onboarding.</div>
+      </div>
+      <div class="dt">
+        <div class="dt-tag">For full compliance coverage</div>
+        <div class="dt-title">All three document types</div>
+        <div class="dt-desc">Cross-domain referencing unlocks as the corpus grows. An OHS question can be checked against permit conditions; an FPIC record mapped against EA commitments. The platform compounds in value with each document type added.</div>
+      </div>
+      <div class="dt">
+        <div class="dt-tag">For ongoing intelligence</div>
+        <div class="dt-title">Feeds &amp; new filings</div>
+        <div class="dt-desc">As monitoring reports, correspondence, and regulatory filings are produced they are ingested automatically. The system stays current with the document reality — not just a snapshot of last year’s binders.</div>
+      </div>
     </div>
   </div>
-  <div class="pg">09 / 09</div>
+  <div class="pg">09 / 10</div>
 </section>
+
+<!-- ══ 10 CTA ══ -->
+<section class="slide bg-forest rv" id="s10">
+  <div class="masthead">
+    <div class="brand">Algo-Rythmn</div>
+    <div class="issue">Introduction Playbook</div>
+  </div>
+  <div class="slide-body">
+    <div class="eyebrow">How to open the conversation</div>
+    <h2 class="cta-hl">
+      Three warm conversations.<br>
+      <em class="it cta-hl__it">One clean introduction each.</em>
+    </h2>
+    <p class="cta-sub">You know these operations better than anyone in the room. The regulatory pressure is specific, the market gap is real, and the ask is narrow — a single pilot corpus, not a transformation project.</p>
+    <div class="steps">
+      <div class="step"><div class="sn">01</div><h3>Name the pain point</h3><p>“Post-Kebaowek, every permit renewal puts your FPIC records on the stand — and no one can query them.” One sentence. Their General Counsel or VP Compliance will immediately recognise the problem.</p></div>
+      <div class="step"><div class="sn">02</div><h3>Walk through this deck</h3><p>Slides 4 through 9 carry the argument: the regulatory shift, the market gap, the product, the document library, and what they need to provide to get started. No technical champion needs to be in the room.</p></div>
+      <div class="step"><div class="sn">03</div><h3>Make the introduction</h3><p>A warm email connecting their General Counsel or VP Compliance to us is all it takes. We run the demo, close the pilot, and build the engagement — and we will need experienced M&amp;A and regulatory counsel throughout.</p></div>
+    </div>
+  </div>
+  <div class="pg">10 / 10</div>
+</section>
+
+</div><!-- /view-tom -->
 
 <script>
   const obs = new IntersectionObserver((entries)=>{
     entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target); } });
   },{threshold:.08});
-  document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+
+  function setMode(mode){
+    document.body.setAttribute('data-mode', mode);
+    document.getElementById('vt-client').classList.toggle('active', mode==='client');
+    document.getElementById('vt-tom').classList.toggle('active', mode==='tom');
+    window.scrollTo(0,0);
+    if(mode==='tom'){
+      document.querySelectorAll('.view-tom .rv:not(.in)').forEach(el=>obs.observe(el));
+    }
+  }
+
+  document.getElementById('vt-client').addEventListener('click', ()=>setMode('client'));
+  document.getElementById('vt-tom').addEventListener('click', ()=>setMode('tom'));
+  setMode('client');
 </script>
 
 </body>
