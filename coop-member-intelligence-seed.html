@@ -100,14 +100,14 @@
   }
 
   /* ━━━━━━━━━━ TYPOGRAPHY ━━━━━━━━━━ */
-  h1, h2, h3 { font-family: 'Fraunces', serif; font-style: italic; font-weight: 500; line-height: 1.05; letter-spacing: -0.02em; }
+  h1, h2, h3 { font-family: 'Fraunces', serif; font-weight: 500; line-height: 1.05; letter-spacing: -0.02em; }
   h1 { font-size: 5cqw; font-weight: 400; }
   h2 { font-size: 3.4cqw; font-weight: 500; line-height: 1.08;}
   h3 { font-size: max(14px, 1.5cqw); font-weight: 600; letter-spacing: -0.01em; }
 
   .eyebrow {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 15px;
+    font-size: 14px;
     letter-spacing: 0.22em;
     text-transform: uppercase;
     color: var(--terracotta);
@@ -158,7 +158,7 @@
   /* ━━━━━━━━━━ SLIDE 1 — COVER ━━━━━━━━━━ */
   .cover h1 {
     color: var(--paper);
-    font-size: 6.5cqw;
+    font-size: 6cqw;
     font-weight: 300;
     margin-bottom: 0.3em;
     line-height: 0.95;
@@ -216,7 +216,7 @@
   }
   .cover-strip .cstat .cstat-label {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 14px;
+    font-size: 13px;
     text-transform: uppercase;
     letter-spacing: 0.18em;
     color: rgba(245,241,232,0.7);
@@ -226,7 +226,7 @@
   .callout {
     background: var(--paper-warm);
     border-left: 0.4cqw solid var(--terracotta);
-    padding: 1cqw 2cqw;
+    padding: 0.5cqw 1cqw;
     max-width: 100%;
   }
   .callout .note-label {
@@ -253,7 +253,7 @@
   }
   .section-break .break-eyebrow {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 17px;
+    font-size: 15px;
     letter-spacing: 0.28em;
     color: var(--gold);
     text-transform: uppercase;
@@ -261,7 +261,7 @@
   }
   .section-break .break-headline {
     font-family: 'Fraunces', serif;
-    font-size: 6.5cqw;
+    font-size: 6cqw;
     font-weight: 300;
     line-height: 1.05;
     color: var(--paper);
@@ -284,7 +284,7 @@
   }
   .section-break .break-footnote {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 17px;
+    font-size: 15px;
     letter-spacing: 0.2em;
     color: rgba(245, 241, 232, 0.685);
     text-transform: uppercase;
@@ -386,7 +386,7 @@
   .quote-card .qtext {
     font-family: 'Fraunces', serif;
     font-style: italic;
-    font-size: max(14px, 1.5cqw);
+    font-size: max(14px, 1.4cqw);
     line-height: 1.5;
     color: rgba(245,241,232,0.92);
     margin: 1.5cqw 0 1cqw;
@@ -422,7 +422,7 @@
   .hero-stat:last-child { border-right: none; }
   .hero-stat .hs-num {
     font-family: 'Fraunces', serif;
-    font-size: 3cqw;
+    font-size: 3.6cqw;
     font-weight: 400;
     color: var(--terracotta);
     line-height: 1;
@@ -722,7 +722,7 @@
   }
   .section-label {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 14px;
+    font-size: 13px;
     letter-spacing: 0.2em;
     color: var(--forest);
     text-transform: uppercase;
@@ -899,7 +899,7 @@
   .timeline-row .phase {
     font-family: 'Fraunces', serif;
     font-style: italic;
-    font-size: max(13px, 1.2cqw);
+    font-size: max(12px, 1.05cqw);
     color: var(--terracotta);
     font-weight: 500;
   }
@@ -1250,7 +1250,7 @@
       width: 95vw;
       aspect-ratio: unset;
       height: auto;
-      padding: 0;            /* we'll pad via inner wrappers */
+      padding: 0;
       overflow: visible;
       contain: layout;
       display: grid;
@@ -1269,7 +1269,7 @@
       position: static;
       padding: 10px 5% 14px;
       border-top: 1px solid var(--rule);
-      font-size: 12px;
+      font-size: 11px;
       letter-spacing: 0.12em;
     }
     .dark .slide-foot { border-top-color: rgba(245,241,232,0.18); }
@@ -1290,7 +1290,7 @@
     .eyebrow                { font-size: 12px; margin-bottom: 0.9em; }
 
     /* ── Cover ── */
-    .cover h1               { font-size: clamp(28px, 5.5vw, 6.5cqw); }
+    .cover h1               { font-size: clamp(28px, 5.5vw, 6cqw); }
     .cover .project-name    { font-size: clamp(11px, 1.3vw, 1.2cqw); }
     .cover .tagline         { font-size: clamp(13px, 1.7vw, 1.5cqw); max-width: 100%; margin-bottom: 18px; }
     .cover-strip            { flex-wrap: wrap; gap: 14px; margin-top: 14px; padding-top: 14px; }
@@ -1453,7 +1453,7 @@
     .funds-card p                     { font-size: clamp(12px, 1.3vw, 1.2cqw); }
 
     /* ── Section label ── */
-    .section-label                    { font-size: 13px; }
+    .section-label                    { font-size: 12px; }
   }
 
   /* ━━━━━━━━━━ PHONE (≤ 600 px) — further consolidation ━━━━━━━━━━ */
@@ -1468,9 +1468,6 @@
 
     /* Cover strip → full stacked */
     .cover-strip .cstat               { flex: 1 1 100%; }
-
-    /* Problem points: tighter */
-    .pp-col                           { padding: 0; }
 
     /* Process line dot: hide on very small, keep text flow */
     .process-line .step .dot          { display: none; }
@@ -1510,81 +1507,80 @@
 
 <div class="deck-container">
 
-  <div class="deck client-deck active" id="clientDeck">
+  <div class="deck investor-deck active" id="investorDeck">
 
-    <!-- ━━━━━━━━━━ C1 — COVER ━━━━━━━━━━ -->
+    <!-- ━━━━━━━━━━ SLIDE 1 — COVER ━━━━━━━━━━ -->
     <section class="slide dark cover" data-slide="1">
-      <div class="slide-num"><span class="badge">01</span> For your cooperative</div>
+      <div class="slide-num"><span class="badge">01</span> Cover · Confidential</div>
 
       <div class="slide-content">
-        <div class="project-name">Cooperado Intelligence · pilot proposal · 2026</div>
-        <h1>Know every<br>member, one by<br>one. <em>At scale.</em></h1>
+        <div class="project-name">Cooperado Intelligence · Algo-Rythmn · Seed Round 2026</div>
+        <h1>Brazil's co-ops run<br>on <em>aggregate guesses</em>.</h1>
         <div class="tagline" style="margin-top: 1.5vh;">
-          Agentic AI — in Portuguese, trained on your cooperative's own data — for credit,
-          input procurement, and trading-desk decisions. Already in production at North American
-          ag cooperatives. Ready for your next season.
+          We replace them with member-by-member AI — agentic decision intelligence for credit,
+          procurement, and trading desks inside Brazil's largest agricultural cooperatives.
+          We've already shipped this pattern in production in the United States.
         </div>
 
         <div class="cover-strip">
           <div class="cstat">
-            <div class="cstat-num">Portuguese-native</div>
-            <div class="cstat-label">Your team talks to your own data in plain Portuguese — not SQL, not dashboards</div>
+            <div class="cstat-num">10M+ acres</div>
+            <div class="cstat-label">US farmland under our AI in production today</div>
           </div>
           <div class="cstat">
-            <div class="cstat-num">90-day pilot</div>
-            <div class="cstat-label">200–500 member subset · result validated against your existing spreadsheet baseline</div>
+            <div class="cstat-num">USD 60B+</div>
+            <div class="cstat-label">Annual trading volume across Brazil's top 20 ag co-ops</div>
           </div>
           <div class="cstat">
-            <div class="cstat-num">Your data, your cloud</div>
-            <div class="cstat-label">Deployed in your AWS, Azure or GCP — you keep full control and audit rights</div>
+            <div class="cstat-num">~500K members</div>
+            <div class="cstat-label">Addressable farmer-members across Tier-1 co-ops</div>
           </div>
           <div class="cstat">
-            <div class="cstat-num">No-risk terms</div>
-            <div class="cstat-label">Contractual guarantee of ≥15% accuracy lift or the pilot fee converts to credit</div>
+            <div class="cstat-num">0 competitors</div>
+            <div class="cstat-label">Building the enterprise co-op intelligence layer in Brazil</div>
           </div>
         </div>
       </div>
 
       <div class="slide-foot">
         <span>© 2026 Algo-Rythmn Corp. All rights reserved.</span>
-        <span>01 / 12</span>
+        <span>01 / 14</span>
       </div>
     </section>
 
-    <!-- ━━━━━━━━━━ C2 — SECTION BREAK ━━━━━━━━━━ -->
+    <!-- ━━━━━━━━━━ SLIDE 2 — SECTION BREAK: "A problem hiding in plain sight" ━━━━━━━━━━ -->
     <section class="slide dark section-break" data-slide="2">
-      <div class="slide-num"><span class="badge">02</span> The Question</div>
+      <div class="slide-num"><span class="badge">02</span> The Problem</div>
 
       <div class="slide-content center">
-        <div class="break-eyebrow">Every executive team asks</div>
+        <div class="break-eyebrow">Every co-op has to answer</div>
         <div class="break-headline">
           <span class="quote-mark">"</span>Who, exactly,<br>are <em>our members</em>?<span class="quote-mark">"</span>
         </div>
-        <div class="break-footnote">— and today, no co-op can answer it member by member</div>
+        <div class="break-footnote">— and today, no co-op can answer it at member-level scale</div>
       </div>
 
       <div class="slide-foot">
         <span>© 2026 Algo-Rythmn Corp. All rights reserved.</span>
-        <span>02 / 12</span>
+        <span>02 / 14</span>
       </div>
     </section>
 
-    <!-- ━━━━━━━━━━ C3 — YOUR PAIN ━━━━━━━━━━ -->
+    <!-- ━━━━━━━━━━ SLIDE 3 — THE PROBLEM ━━━━━━━━━━ -->
     <section class="slide" data-slide="3">
-      <div class="slide-num"><span class="badge">03</span> The Pain You Already Know</div>
+      <div class="slide-num"><span class="badge">03</span> The Problem</div>
 
       <div class="slide-content">
-        <div class="eyebrow">What happens every season</div>
-        <h2>You make decisions<br>on 10% of the data you already own.</h2>
+        <div class="eyebrow">A problem hiding in plain sight</div>
+        <h2>Billion-dollar decisions,<br>made on Excel and tribal knowledge.</h2>
 
         <div class="two-col-uneven">
           <div>
             <p class="lead">
-              Your cooperative has <span class="serif-italic accent">decades</span> of data on every member:
-              credit history, crop profile, plot-level imagery, default events, input purchases.
-              The credit committee uses <span class="serif-italic accent">a spreadsheet</span>.
-              The trading desk uses <span class="serif-italic accent">aggregate averages</span>.
-              The commercial manager uses <span class="serif-italic accent">memory</span>.
+              The co-op's biggest decisions — how much fertilizer to pre-buy, how to size grain positions,
+              which members to extend credit to — are <span class="serif-italic accent">enterprise-level</span>.
+              But they only get smart when they're grounded in <span class="serif-italic accent">member-level</span> truth.
+              Today, that grounding is missing. The bridge is Excel and tribal knowledge.
             </p>
           </div>
 
@@ -1593,19 +1589,19 @@
             <ul class="pain-list">
               <li>
                 <span class="arrow">›</span>
-                <span class="pain-text"><strong>Defaults cluster in bad seasons</strong> — exactly when the cooperative's own cash position is tightest.</span>
+                <span class="pain-text">Member <strong>default events</strong> cluster in bad seasons — exactly when the co-op's balance sheet is most exposed.</span>
               </li>
               <li>
                 <span class="arrow">›</span>
-                <span class="pain-text"><strong>Fertilizer is pre-bought</strong> months ahead based on aggregate estimates, not on real member-by-member demand.</span>
+                <span class="pain-text">Input procurement is locked months ahead on <strong>aggregate guesses</strong>, not member-level demand signals.</span>
               </li>
               <li>
                 <span class="arrow">›</span>
-                <span class="pain-text"><strong>The grain desk sizes positions</strong> without knowing what 5,000 individual farms will actually deliver.</span>
+                <span class="pain-text">Aggregate <strong>trading positions</strong> are sized without knowing what 5,000 individual farms will actually deliver.</span>
               </li>
               <li>
                 <span class="arrow">›</span>
-                <span class="pain-text">The commercial manager <strong>can't scale agronomy advice</strong> — and the rival cooperative is already doing it.</span>
+                <span class="pain-text">Member-facing agronomy advice doesn't scale — and rival co-ops <strong>compete intensely</strong> on exactly this service.</span>
               </li>
             </ul>
           </div>
@@ -1614,22 +1610,22 @@
 
       <div class="slide-foot">
         <span>© 2026 Algo-Rythmn Corp. All rights reserved.</span>
-        <span>03 / 12</span>
+        <span>03 / 14</span>
       </div>
     </section>
 
-    <!-- ━━━━━━━━━━ C4 — 3-POINT LINE ━━━━━━━━━━ -->
+    <!-- ━━━━━━━━━━ SLIDE 4 — "Co-ops struggle to scale the best ways of working" — 3-point line (Scribe Image 5) ━━━━━━━━━━ -->
     <section class="slide dark section-break" data-slide="4">
       <div class="slide-num"><span class="badge">04</span> Why It Persists</div>
 
       <div class="slide-content center" style="gap: 5vh;">
-        <h2 style="text-align: center; max-width: 100%; font-size: 3.5cqw; font-weight: 400; color: var(--paper); margin-bottom: 0;">
-          The work that matters doesn't scale.
+        <h2 style="text-align: center; max-width: 100%; font-size: 3.2cqw; font-weight: 400; color: var(--paper); margin-bottom: 0;">
+          Co-ops struggle to scale the best ways of working.
         </h2>
 
         <div class="problem-points">
           <div class="pp-col">
-            <h3>Member-by-member analysis is <strong>too painful</strong> to do by hand.</h3>
+            <h3>Forecasting is <strong>too painful</strong> to do member-by-member.</h3>
           </div>
           <div class="pp-col">
             <h3>Decisions get made <strong>inconsistently</strong> across desks.</h3>
@@ -1642,61 +1638,105 @@
 
       <div class="slide-foot">
         <span>© 2026 Algo-Rythmn Corp. All rights reserved.</span>
-        <span>04 / 12</span>
+        <span>04 / 14</span>
       </div>
     </section>
 
-    <!-- ━━━━━━━━━━ C5 — WHAT CHANGES (triptych) ━━━━━━━━━━ -->
+    <!-- ━━━━━━━━━━ SLIDE 5 — WHY NOW (4 forces) ━━━━━━━━━━ -->
     <section class="slide" data-slide="5">
-      <div class="slide-num"><span class="badge">05</span> What Changes on Monday</div>
+      <div class="slide-num"><span class="badge">05</span> Why Now</div>
 
       <div class="slide-content">
-        <div class="eyebrow">The solution, in one frame</div>
-        <h2>Three layers. One conversation.<br>Your entire cooperative, in a single <em style="font-style: italic; color: var(--terracotta);">prompt</em>.</h2>
+        <div class="eyebrow">This has never been possible for co-ops — until now</div>
+        <h2>Brazil's co-op sector is at<br>a structural inflection point.</h2>
 
-        <p class="lead" style="font-size: max(13px, 1.2cqw); max-width: 78%; margin-top: 0.5vh;">
-          The signal comes from the member. The decision comes out at the executive level.
-          And your commercial managers can ask questions in plain Portuguese, against your own base.
+        <p class="lead" style="font-size: max(13px, 1.2cqw); max-width: 82%; margin-top: 0.5vh;">
+          Four forces are converging right now. Each one alone makes member-level AI valuable.
+          Together, they make it <span class="serif-italic accent">strategically urgent</span> —
+          for the first co-op that moves, and for every investor positioned ahead of them.
         </p>
 
-        <div class="triptych">
-          <div class="tri-col">
-            <span class="tri-label">Risk</span>
-            <h3>Member-by-member<br>default risk</h3>
-            <p>Next-season probability of default for every member — using credit history, plot-level satellite imagery, climate risk, and commodity exposure. Feeds your credit committee directly.</p>
+        <div class="stat-grid">
+          <div class="stat-card">
+            <div class="stat-label">Force 01 · Credit Stress</div>
+            <div class="stat-num">↑ Rural<span class="unit">defaults</span></div>
+            <div class="stat-detail">Brazilian rural credit defaults have risen materially post-2023. Co-ops absorb the risk on member financing. Better default forecasting is now a P&amp;L issue, not a research project.</div>
           </div>
-          <div class="tri-col">
-            <span class="tri-label">Demand</span>
-            <h3>Inputs &amp;<br>trading position</h3>
-            <p>Per-member forecasts for fertilizer, seed, and crop-protection demand — aggregated up so procurement negotiates better and the grain desk sizes positions accurately.</p>
+          <div class="stat-card">
+            <div class="stat-label">Force 02 · Input Volatility</div>
+            <div class="stat-num">±40%<span class="unit">fertilizer</span></div>
+            <div class="stat-detail">Fertilizer prices have swung &gt;40% peak-to-trough in the last 24 months. Co-ops that pre-buy on aggregate guesses get punished. Member-level demand signal is the hedge.</div>
           </div>
-          <div class="tri-col">
-            <span class="tri-label">Conversation</span>
-            <h3>Portuguese-native<br>agent</h3>
-            <p>Commercial managers, credit analysts, and (optionally) members talk to your data in plain language. Replaces three reports and a week of analyst work with one question.</p>
+          <div class="stat-card">
+            <div class="stat-label">Force 03 · AI Readiness</div>
+            <div class="stat-num">2026<span class="unit">inflection</span></div>
+            <div class="stat-detail">Foundation models now let an analyst <em>talk to</em> a decade of member data in Portuguese. The infrastructure to do this didn't exist in 2022. It does now.</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Force 04 · Competitive Pressure</div>
+            <div class="stat-num">Member<span class="unit">churn</span></div>
+            <div class="stat-detail">Brazil's top co-ops compete intensely for the same members. The co-op that offers smarter credit, better procurement, and a member-facing AI service first wins retention.</div>
           </div>
         </div>
       </div>
 
       <div class="slide-foot">
         <span>© 2026 Algo-Rythmn Corp. All rights reserved.</span>
-        <span>05 / 12</span>
+        <span>05 / 14</span>
       </div>
     </section>
 
-    <!-- ━━━━━━━━━━ C6 — PRODUCT PREVIEW ━━━━━━━━━━ -->
+    <!-- ━━━━━━━━━━ SLIDE 6 — PRODUCT: Capture / Scale / Optimize triptych (Scribe Image 4) ━━━━━━━━━━ -->
     <section class="slide" data-slide="6">
-      <div class="slide-num"><span class="badge">06</span> How It Works in Practice</div>
+      <div class="slide-num"><span class="badge">06</span> What We Build</div>
 
       <div class="slide-content">
-        <div class="eyebrow">One question · one answer · grounded in your data</div>
-        <h2>Your manager asks.<br>The system answers — with sources.</h2>
+        <div class="eyebrow">The product, in one frame</div>
+        <h2>We document the co-op, and<br>ensure decisions get made the best way possible.</h2>
+
+        <p class="lead" style="font-size: max(13px, 1.2cqw); max-width: 78%; margin-top: 0.5vh;">
+          Three layers, one continuous loop. Member-level signal flows up into enterprise decisions —
+          which flow back down as smarter credit, procurement, and member service.
+        </p>
+
+        <div class="triptych">
+          <div class="tri-col">
+            <span class="tri-label">Capture</span>
+            <h3>Member-level<br>default-risk</h3>
+            <p>Per-member, year-ahead probability of repayment difficulty — built from credit history, plot-level satellite data, weather risk, commodity exposure. Feeds the credit committee.</p>
+          </div>
+          <div class="tri-col">
+            <span class="tri-label">Aggregate</span>
+            <h3>Procurement &amp;<br>trading positions</h3>
+            <p>Member-by-member predictions of fertilizer, seed, and defensives demand — aggregated up so procurement negotiates better contracts and trading sizes grain positions accurately.</p>
+          </div>
+          <div class="tri-col">
+            <span class="tri-label">Converse</span>
+            <h3>Portuguese<br>agent layer</h3>
+            <p>Relationship managers, credit analysts, and (optionally) members talk to the co-op's own data in plain language. Replaces three reports and a week of work with one question.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-foot">
+        <span>© 2026 Algo-Rythmn Corp. All rights reserved.</span>
+        <span>06 / 14</span>
+      </div>
+    </section>
+
+    <!-- ━━━━━━━━━━ SLIDE 7 — PRODUCT PREVIEW (chat mockup) ━━━━━━━━━━ -->
+    <section class="slide" data-slide="7">
+      <div class="slide-num"><span class="badge">07</span> Product Preview</div>
+
+      <div class="slide-content">
+        <div class="eyebrow">What the user actually sees</div>
+        <h2>One question.<br>An answer grounded in the co-op's own data.</h2>
 
         <div class="product-mockup">
           <div class="mockup-frame">
             <div class="mockup-bar">
               <div class="dot"></div><div class="dot"></div><div class="dot"></div>
-              <div class="url">cooperado-intel · your-cooperative · manager_silva</div>
+              <div class="url">cooperado-intel · Coamo · manager_silva</div>
             </div>
 
             <div class="chat-msg user">
@@ -1710,11 +1750,11 @@
             <div class="chat-msg ai">
               <div class="role">Cooperado Intelligence</div>
               <div class="bubble">
-                Found <strong>47 members</strong> with default probability above 35% for the 2026/27 season
-                in your region. Together they represent
+                Found <strong>47 members</strong> with default probability above
+                35% for the 2026/27 season in your region. Together they represent
                 <strong>R$ 18.4M in input financing</strong> and
                 <strong>~4,200 tonnes of projected NPK fertilizer demand</strong>.
-                <div class="data-line">SOURCES · plot_imagery · credit_history · climate_risk · commodity_exposure</div>
+                <div class="data-line">SOURCES · plot_imagery · credit_history · weather_risk · commodity_exposure</div>
               </div>
             </div>
           </div>
@@ -1722,15 +1762,15 @@
           <div class="mockup-notes">
             <div class="anno">
               <div class="anno-label">Note 01</div>
-              <div class="anno-text">The user is your <strong>commercial manager</strong>, not a data scientist. Portuguese. Your portfolio. Answer in seconds.</div>
+              <div class="anno-text">The user is a <strong>commercial manager inside the co-op</strong> — not a farmer. The product speaks their language, in Portuguese, with their member portfolio.</div>
             </div>
             <div class="anno">
               <div class="anno-label">Note 02</div>
-              <div class="anno-text">Every answer is <strong>grounded in your data</strong> — credit records, satellite, climate, commodities. Sources cited on every response. <strong>No hallucination.</strong></div>
+              <div class="anno-text">Every answer is <strong>grounded in the co-op's own data</strong> — credit records, satellite imagery, weather, commodity prices. Sources cited on every response.</div>
             </div>
             <div class="anno">
               <div class="anno-label">Note 03</div>
-              <div class="anno-text">One question replaces what is today <strong>three reports, two analysts, and a week of work</strong>.</div>
+              <div class="anno-text">A single question replaces what is today <strong>three reports, two analysts, and a week of work</strong>. That's the unit economic shift.</div>
             </div>
           </div>
         </div>
@@ -1738,61 +1778,103 @@
 
       <div class="slide-foot">
         <span>© 2026 Algo-Rythmn Corp. All rights reserved.</span>
-        <span>06 / 12</span>
+        <span>07 / 14</span>
       </div>
     </section>
 
-    <!-- ━━━━━━━━━━ C7 — YOUR ROI ━━━━━━━━━━ -->
-    <section class="slide" data-slide="7">
-      <div class="slide-num"><span class="badge">07</span> The Return, For You</div>
+    <!-- ━━━━━━━━━━ SLIDE 8 — TRACTION: "We know how work gets done" — 3 circles + growth (Scribe Image 3 + 6) ━━━━━━━━━━ -->
+    <section class="slide dark" data-slide="8">
+      <div class="slide-num"><span class="badge">08</span> Traction</div>
 
       <div class="slide-content">
-        <div class="eyebrow">For a 20,000-member cooperative</div>
+        <div class="eyebrow">Not a demo. Not a POC. Production for two years.</div>
+        <h2 style="text-align: center; max-width: 100%;">
+          With our large, proprietary dataset,<br>we know <em>how farms actually run</em>.
+        </h2>
+
+        <div class="data-circles">
+          <div class="dc">
+            <div class="dc-label">US farmland</div>
+            <div class="dc-num">10M+</div>
+          </div>
+          <div class="dc">
+            <div class="dc-label">Years in production</div>
+            <div class="dc-num">2+</div>
+          </div>
+          <div class="dc">
+            <div class="dc-label">Enterprise users</div>
+            <div class="dc-num">Live</div>
+          </div>
+        </div>
+
+        <p style="text-align: center; max-width: 70%; margin: 4vh auto 0; font-style: italic; font-family: 'Fraunces', serif; font-size: max(14px, 1.4cqw); color: var(--gold); line-height: 1.5;">
+          "The hard part of agentic AI on farm data isn't the LLM.<br>
+          It's grounding the model in messy real-world data without hallucinating. We've solved that — once, in production."
+        </p>
+      </div>
+
+      <div class="slide-foot">
+        <span>© 2026 Algo-Rythmn Corp. All rights reserved.</span>
+        <span>08 / 14</span>
+      </div>
+    </section>
+
+    <!-- ━━━━━━━━━━ SLIDE 9 — VALUE: hero stat strip + logo band (Scribe Image 2) ━━━━━━━━━━ -->
+    <section class="slide" data-slide="9">
+      <div class="slide-num"><span class="badge">09</span> Enterprise Value</div>
+
+      <div class="slide-content">
+        <div class="eyebrow">What a co-op gets, quantified</div>
         <h2 style="text-align: center; max-width: 90%; margin: 0 auto;">
-          What shows up in your P&amp;L.
+          Co-ops see significant business value.
         </h2>
 
         <div class="hero-stats">
           <div class="hero-stat">
-            <div class="hs-num">R$ 90M<span class="unit">/season</span></div>
-            <div class="hs-label">Default exposure identified early — before it becomes a loss on the books</div>
+            <div class="hs-num">15<span class="unit">%+</span></div>
+            <div class="hs-label">Lift in default-prediction accuracy vs. the co-op's existing model</div>
           </div>
           <div class="hero-stat">
-            <div class="hs-num">R$ 12M<span class="unit">/year</span></div>
+            <div class="hs-num">3–5<span class="unit">%</span></div>
             <div class="hs-label">Procurement savings from sharper input-demand forecasting</div>
           </div>
           <div class="hero-stat">
-            <div class="hs-num">15<span class="unit">%+</span></div>
-            <div class="hs-label">Accuracy lift over your current model — contractually guaranteed</div>
+            <div class="hs-num">$18M<span class="unit">/co-op</span></div>
+            <div class="hs-label">Avoidable bad-debt exposure surfaced per Tier-1 co-op, per season</div>
           </div>
           <div class="hero-stat">
             <div class="hs-num">5×<span class="unit">faster</span></div>
-            <div class="hs-label">Credit-committee analysis cycles vs. today's spreadsheet-driven baseline</div>
+            <div class="hs-label">Credit-committee analysis cycles vs. today's Excel-driven baseline</div>
           </div>
         </div>
 
-        <div class="roi-box" style="margin-top: 2.5vh;">
-          <div class="roi-label">The math, in one line</div>
-          <p>
-            A <span class="num">90-day pilot</span> (200–500 members) surfaces
-            <span class="num">R$ 18M+ of avoidable default exposure</span> in a single season, in the test region alone.
-            Payback: <span class="num">the first credit decision</span> it informs.
-          </p>
+        <div class="logo-band">
+          <span class="ref">Coamo</span>
+          <span class="ref">C.Vale</span>
+          <span class="ref">Cocamar</span>
+          <span class="ref">Lar</span>
+          <span class="ref">Frísia</span>
+          <span class="ref">Sicredi</span>
+          <span class="ref">Castrolanda</span>
+          <span class="ref">Cocari</span>
         </div>
+        <p style="text-align: center; font-family: 'JetBrains Mono', monospace; font-size: max(12px, 1.0cqw); letter-spacing: 0.18em; color: var(--muted); text-transform: uppercase; margin-top: 1vh;">
+          Tier-1 target co-ops · combined ~500K members · ~USD 60B annual trading volume
+        </p>
       </div>
 
       <div class="slide-foot">
         <span>© 2026 Algo-Rythmn Corp. All rights reserved.</span>
-        <span>07 / 12</span>
+        <span>09 / 14</span>
       </div>
     </section>
 
-    <!-- ━━━━━━━━━━ C8 — VOICE OF CO-OP LEADERS ━━━━━━━━━━ -->
-    <section class="slide dark" data-slide="8">
-      <div class="slide-num"><span class="badge">08</span> What Your Peers Are Saying</div>
+    <!-- ━━━━━━━━━━ SLIDE 10 — VOICE OF THE CUSTOMER (Scribe Image 2 quote wall) ━━━━━━━━━━ -->
+    <section class="slide dark" data-slide="10">
+      <div class="slide-num"><span class="badge">10</span> Voice of the Co-op</div>
 
       <div class="slide-content">
-        <div class="eyebrow">Conversations with Tier-1 cooperative executives</div>
+        <div class="eyebrow">What co-op leaders tell us</div>
         <h2 style="max-width: 75%;">
           This has never been possible<br>for co-ops <em>until now</em>.
         </h2>
@@ -1800,14 +1882,14 @@
         <div class="quote-wall">
           <div class="quote-card">
             <div class="qtext">"We have 18,000 members. We talk about them as one number. The truth is 18,000 different stories — and we've never had the tools to see them that way."</div>
-            <div class="qattr">Commercial Director · Tier-1 Cooperative</div>
+            <div class="qattr">Commercial Director · Top-5 Cooperative</div>
           </div>
           <div class="quote-card">
-            <div class="qtext">"Our credit committee meets every week. Most of what they look at is a spreadsheet someone pulled the night before. We know it's wrong. We didn't know it could be different."</div>
+            <div class="qtext">"Our credit committee meets every week. Most of what they look at is an Excel sheet someone pulled at midnight. We know that's wrong. We didn't know it could be different."</div>
             <div class="qattr">Credit Director · Paraná Cooperative</div>
           </div>
           <div class="quote-card">
-            <div class="qtext">"If you can tell my procurement desk what 5,000 farms will actually plant — in September, not after the season — you've paid for yourselves in one contract."</div>
+            <div class="qtext">"If you can tell my procurement desk what 5,000 farms will actually plant — in September, not after the season — you've just paid for yourselves in one contract."</div>
             <div class="qattr">Innovation Director · Mato Grosso Cooperative</div>
           </div>
         </div>
@@ -1815,63 +1897,141 @@
 
       <div class="slide-foot">
         <span>© 2026 Algo-Rythmn Corp. All rights reserved.</span>
-        <span>08 / 12</span>
+        <span>10 / 14</span>
       </div>
     </section>
 
-    <!-- ━━━━━━━━━━ C9 — PILOT TERMS ━━━━━━━━━━ -->
-    <section class="slide" data-slide="9">
-      <div class="slide-num"><span class="badge">09</span> Pilot Terms</div>
+    <!-- ━━━━━━━━━━ SLIDE 11 — MARKET (with growth chart, Scribe Image 6) ━━━━━━━━━━ -->
+    <section class="slide" data-slide="11">
+      <div class="slide-num"><span class="badge">11</span> Market</div>
 
       <div class="slide-content">
-        <div class="eyebrow">90 days · fixed scope · contractually limited risk</div>
-        <h2>A pilot designed<br>so that <em style="font-style: italic; color: var(--terracotta);">it doesn't go wrong</em>.</h2>
+        <div class="eyebrow">Big enough. Concentrated enough. Empty enough.</div>
+        <h2>A USD 60B sector with no<br>enterprise <em style="font-style: italic; color: var(--terracotta);">intelligence layer</em>.</h2>
 
-        <div class="target-row" style="margin-top: 2vh;">
-          <div class="target-card">
-            <div class="label">Scope</div>
-            <h3>200–500 members</h3>
-            <p>A single regional or a subset of your choice. Two models: default risk and input demand. Portuguese conversational interface for your team.</p>
+        <div class="growth-layout">
+          <div class="growth-chart">
+            <div class="gc-title">Brazilian co-op revenue has grown <em>quickly</em>.</div>
+            <div class="gc-bars">
+              <!-- 5 years × monthly bars, ramp shape -->
+              <div class="bar" style="height: 12%"></div>
+              <div class="bar" style="height: 14%"></div>
+              <div class="bar" style="height: 13%"></div>
+              <div class="bar" style="height: 17%"></div>
+              <div class="bar" style="height: 18%"></div>
+              <div class="bar" style="height: 22%"></div>
+              <div class="bar" style="height: 24%"></div>
+              <div class="bar" style="height: 23%"></div>
+              <div class="bar" style="height: 28%"></div>
+              <div class="bar" style="height: 32%"></div>
+              <div class="bar" style="height: 35%"></div>
+              <div class="bar" style="height: 38%"></div>
+              <div class="bar" style="height: 41%"></div>
+              <div class="bar" style="height: 45%"></div>
+              <div class="bar" style="height: 48%"></div>
+              <div class="bar" style="height: 53%"></div>
+              <div class="bar" style="height: 56%"></div>
+              <div class="bar" style="height: 62%"></div>
+              <div class="bar" style="height: 68%"></div>
+              <div class="bar" style="height: 73%"></div>
+              <div class="bar" style="height: 78%"></div>
+              <div class="bar" style="height: 82%"></div>
+              <div class="bar" style="height: 88%"></div>
+              <div class="bar" style="height: 95%"></div>
+              <div class="bar" style="height: 100%"></div>
+            </div>
+            <div class="gc-years">
+              <div class="gc-year">2020</div>
+              <div class="gc-year">2021</div>
+              <div class="gc-year">2022</div>
+              <div class="gc-year">2023</div>
+              <div class="gc-year">2024</div>
+            </div>
+            <p style="font-size: max(12px, 1.0cqw); color: var(--muted); margin-top: 1vh; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.08em;">
+              Source · OCB (Sistema OCB), top-50 co-op aggregate revenue, indexed
+            </p>
           </div>
-          <div class="target-card">
-            <div class="label">Duration</div>
-            <h3>90 days</h3>
-            <p>Fixed scope. No variable charges. Includes data integration, model build, conversational interface, and validation against your current baseline.</p>
+
+          <div class="growth-side">
+            <div class="gs-stat">
+              <div class="gs-num">1,500+</div>
+              <div class="gs-label">Registered ag co-ops</div>
+            </div>
+            <div class="gs-stat">
+              <div class="gs-num">~500K</div>
+              <div class="gs-label">Members in top-50 co-ops</div>
+            </div>
+            <div class="gs-stat">
+              <div class="gs-num">USD 25M</div>
+              <div class="gs-label">Estimated ARR ceiling across Tier-1 co-ops</div>
+            </div>
+            <div class="gs-stat">
+              <div class="gs-num">0</div>
+              <div class="gs-label">Vendors building this layer today</div>
+            </div>
           </div>
-          <div class="target-card">
-            <div class="label">Guarantee</div>
-            <h3>≥15% lift or credit</h3>
-            <p>If we don't deliver at least <strong>15% accuracy lift</strong> over your existing model, the pilot fee converts to full credit on a future SaaS contract — or refund.</p>
+        </div>
+      </div>
+
+      <div class="slide-foot">
+        <span>© 2026 Algo-Rythmn Corp. All rights reserved.</span>
+        <span>11 / 14</span>
+      </div>
+    </section>
+
+    <!-- ━━━━━━━━━━ SLIDE 12 — BUSINESS MODEL + GTM (merged for tightness) ━━━━━━━━━━ -->
+    <section class="slide" data-slide="12">
+      <div class="slide-num"><span class="badge">12</span> Business Model &amp; GTM</div>
+
+      <div class="slide-content">
+        <div class="eyebrow">Pilot to prove. SaaS to scale. ARR that compounds.</div>
+        <h2>Three steps. No cold outbound.<br>Two warm conversations <em style="font-style: italic; color: var(--terracotta);">already in progress</em>.</h2>
+
+        <div class="process-line" style="margin-top: 3vh;">
+          <div class="step">
+            <div class="dot"></div>
+            <h3>Diagnostic workshop</h3>
+            <p>Half-day on-site with credit, procurement, and innovation leads. We audit their member-forecasting stack and deliver a quantified opportunity assessment.</p>
+          </div>
+          <div class="step">
+            <div class="dot"></div>
+            <h3>90-day pilot</h3>
+            <p>200–500 member subset. Default-risk + input-demand models. Portuguese conversational interface. Accuracy validated against the co-op's Excel baseline.</p>
+          </div>
+          <div class="step">
+            <div class="dot"></div>
+            <h3>Multi-year SaaS</h3>
+            <p>Full member base. Guaranteed ≥15% accuracy lift or pilot converts to credit. Co-op carries zero downside on the pilot-to-SaaS transition.</p>
           </div>
         </div>
 
-        <div class="roi-box" style="margin-top: 2vh; background: rgba(45,74,58,0.08); border-color: var(--forest);">
-          <div class="roi-label" style="color: var(--forest);">What you sign</div>
+        <div class="roi-box" style="margin-top: 3vh;">
+          <div class="roi-label">Unit Economics</div>
           <p>
-            A <span class="num">standard MSA</span> + <span class="num">90-day SOW</span> + <span class="num">data-processing agreement (LGPD-compliant)</span>.
-            No exclusivity clause. No lock-in. You own the output. The models trained on your data stay with you if you decide not to proceed.
+            A <span class="num">20,000-member co-op</span> scales from a fixed-scope pilot
+            to multi-year SaaS within one season cycle.
+            Gross margin target <span class="num">&gt;70%</span> at scale. <span class="num">3 co-ops × 20K members</span> — our Series A trigger.
           </p>
         </div>
       </div>
 
       <div class="slide-foot">
         <span>© 2026 Algo-Rythmn Corp. All rights reserved.</span>
-        <span>09 / 13</span>
+        <span>12 / 15</span>
       </div>
     </section>
 
-    <!-- ━━━━━━━━━━ C10 — DATA REQUIREMENTS ━━━━━━━━━━ -->
-    <section class="slide" data-slide="10">
-      <div class="slide-num"><span class="badge">10</span> Data Requirements</div>
+    <!-- ━━━━━━━━━━ SLIDE 13 — DATA REQUIREMENTS ━━━━━━━━━━ -->
+    <section class="slide" data-slide="13">
+      <div class="slide-num"><span class="badge">13</span> Data Requirements</div>
 
       <div class="slide-content">
-        <div class="eyebrow">What we need from your cooperative</div>
-        <h2>Low lift on your IT team.<br>High return on ours.</h2>
+        <div class="eyebrow">What we need from the cooperative to get started</div>
+        <h2>Minimal lift on your side.<br>Maximum signal on ours.</h2>
 
-        <p class="lead" style="font-size: max(13px, 1.2cqw); max-width: 80%; margin-top: 0.5vh; margin-bottom: 2vh;">
-          The pilot runs on data you already hold in your ERP and credit systems.
-          A <span class="serif-italic accent">partial export of a 200–500-member subset</span> is enough to get started.
-          Full-base integration comes after the pilot validates results.
+        <p class="lead" style="font-size: max(13px, 1.2cqw); max-width: 80%; margin-top: 0.5vh; margin-bottom: 1vh;">
+          The pilot requires two categories of data — a <span class="serif-italic accent">pilot subset</span> for the 90-day engagement,
+          and <span class="serif-italic accent">full-base exports</span> for the production SaaS. All transfers happen inside your own cloud environment.
         </p>
 
         <div class="two-col">
@@ -1884,7 +2044,7 @@
               </li>
               <li>
                 <span class="arrow">›</span>
-                <span class="pain-text"><strong>Credit &amp; repayment history</strong> — loan amounts, due dates, settlement dates, any renegotiations. Anonymised IDs sufficient.</span>
+                <span class="pain-text"><strong>Credit &amp; repayment history</strong> — loan amounts, due dates, settlement dates, any renegotiations. Anonymised member IDs sufficient.</span>
               </li>
               <li>
                 <span class="arrow">›</span>
@@ -1906,7 +2066,7 @@
               </li>
               <li>
                 <span class="arrow">›</span>
-                <span class="pain-text"><strong>Plot boundaries (optional)</strong> — GIS shapefiles or cadastral codes. Enables satellite-imagery grounding and meaningfully improves accuracy.</span>
+                <span class="pain-text"><strong>Plot boundaries (optional)</strong> — GIS shapefiles or cadastral codes. Enables satellite-imagery grounding. Meaningfully improves default-risk accuracy.</span>
               </li>
               <li>
                 <span class="arrow">›</span>
@@ -1922,155 +2082,127 @@
 
         <div class="callout" style="margin-top: 1.5vh;">
           <div class="note-label">Integration note</div>
-          <p>We work from flat-file exports (CSV, XLSX, Parquet) or direct API. No co-op has required more than <strong>two weeks of IT time</strong> for a pilot data transfer. We provide a data-mapping template and handle all transformation on our side.</p>
+          <p>We work from flat-file exports (CSV, XLSX, Parquet) or direct API. No co-op has required more than <strong>two weeks of IT time</strong> to complete the initial data transfer for a pilot. We provide a data-mapping template and handle all transformation on our side.</p>
         </div>
       </div>
 
       <div class="slide-foot">
         <span>© 2026 Algo-Rythmn Corp. All rights reserved.</span>
-        <span>10 / 13</span>
+        <span>13 / 15</span>
       </div>
     </section>
 
-    <!-- ━━━━━━━━━━ C11 — DATA & CONTROL ━━━━━━━━━━ -->
-    <section class="slide" data-slide="11">
-      <div class="slide-num"><span class="badge">11</span> Data, Security, Control</div>
+    <!-- ━━━━━━━━━━ SLIDE 14 — COMPETITION + MOATS (merged) ━━━━━━━━━━ -->
+    <section class="slide" data-slide="14">
+      <div class="slide-num"><span class="badge">14</span> Why We Win</div>
 
       <div class="slide-content">
-        <div class="eyebrow">For your CIO, legal, and audit teams</div>
-        <h2>The data is yours.<br>It stays yours.</h2>
+        <div class="eyebrow">The lane is open · and it deepens with time</div>
+        <h2>The Brazilian AgTech stack is crowded.<br>The co-op enterprise layer is <em style="font-style: italic; color: var(--terracotta);">empty</em>.</h2>
+
+        <table class="compete-table" style="margin-top: 1vh;">
+          <thead>
+            <tr>
+              <th>Player</th>
+              <th>What they do well</th>
+              <th>Where the gap is for co-ops</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="player">Solinftec<span class="sub">Brazilian · field-ops AI</span></td>
+              <td class="focus">Real-time field operations and machinery telemetry.</td>
+              <td class="gap">Sold to the farm operation, not the co-op enterprise.</td>
+            </tr>
+            <tr>
+              <td class="player">Aegro / Strider<span class="sub">Brazilian · farm management</span></td>
+              <td class="focus">Farm management software and digital agronomy.</td>
+              <td class="gap">Operational tools, not decision intelligence.</td>
+            </tr>
+            <tr>
+              <td class="player">Climate / Deere<span class="sub">International · imagery</span></td>
+              <td class="focus">Satellite imagery, yield maps, agronomic recommendations.</td>
+              <td class="gap">Dashboards, not agents. No enterprise forecasting.</td>
+            </tr>
+            <tr class="us">
+              <td class="player">Algo-Rythmn<span class="sub">Cooperado Intelligence</span></td>
+              <td class="focus">Agentic AI for the co-op enterprise. Member-level forecasts feeding credit, procurement, trading.</td>
+              <td class="gap">— this is the open lane.</td>
+            </tr>
+          </tbody>
+        </table>
 
         <div class="moat-grid" style="margin-top: 2vh;">
           <div class="moat-card">
-            <div class="moat-num">CONTROL 01</div>
-            <h3>Hosted in your cloud</h3>
-            <p>Deployed in your AWS, Azure, or GCP. The data never leaves your environment. Our access is via VPN, with auditable logs, revocable at any time.</p>
+            <div class="moat-num">MOAT 01</div>
+            <h3>Proprietary training data</h3>
+            <p>Every co-op going live adds labeled member-default and input-demand data. Contractually exclusive. Compounds with every safra.</p>
           </div>
           <div class="moat-card">
-            <div class="moat-num">CONTROL 02</div>
-            <h3>LGPD-native</h3>
-            <p>Standard LGPD data-processing agreement (DPA). Field-level anonymization configurable. Right to portability and deletion guaranteed contractually.</p>
+            <div class="moat-num">MOAT 02</div>
+            <h3>Grounding without hallucination</h3>
+            <p>Two years of production hardening on messy farm-ERP data. Competitors starting from scratch face 12–18 months of the same grind.</p>
           </div>
           <div class="moat-card">
-            <div class="moat-num">CONTROL 03</div>
-            <h3>Trained models stay with you</h3>
-            <p>If you decide not to renew, you keep the models trained on your data. No retention, no vendor lock-in. The intelligence belongs to the cooperative, not to us.</p>
-          </div>
-          <div class="moat-card">
-            <div class="moat-num">CONTROL 04</div>
-            <h3>No cross-training</h3>
-            <p>Your data never trains models for other cooperatives. Every client runs in a logical silo. Contractual guarantee, not just a usage policy.</p>
-          </div>
-          <div class="moat-card">
-            <div class="moat-num">CONTROL 05</div>
-            <h3>Model audit trail</h3>
-            <p>Every recommendation comes with the sources that ground it (sources cited). Your compliance team can audit any decision down to the raw data point.</p>
-          </div>
-          <div class="moat-card">
-            <div class="moat-num">CONTROL 06</div>
-            <h3>Contractual SLA</h3>
-            <p>99.5% uptime. Critical-incident response in &lt;2 hours, in Portuguese, with a dedicated SRE on call during the planting and harvest seasons.</p>
+            <div class="moat-num">MOAT 03</div>
+            <h3>Relationship density</h3>
+            <p>Brazil's co-op sector is relationship-dense. First-mover at Coamo or C.Vale gets warm intros to every co-op in their orbit.</p>
           </div>
         </div>
       </div>
 
       <div class="slide-foot">
         <span>© 2026 Algo-Rythmn Corp. All rights reserved.</span>
-        <span>11 / 13</span>
+        <span>14 / 15</span>
       </div>
     </section>
 
-    <!-- ━━━━━━━━━━ C12 — IMPLEMENTATION TIMELINE ━━━━━━━━━━ -->
-    <section class="slide" data-slide="12">
-      <div class="slide-num"><span class="badge">12</span> Pilot Timeline</div>
+    <!-- ━━━━━━━━━━ SLIDE 15 — TEAM + THE ASK (closing, Scribe-style "Thank you") ━━━━━━━━━━ -->
+    <section class="slide dark closing" data-slide="15">
+      <div class="slide-num"><span class="badge">15</span> Team &amp; The Ask</div>
 
-      <div class="slide-content">
-        <div class="eyebrow">90 days · weekly milestones · continuous validation</div>
-        <h2>From signature to<br>first validated report.</h2>
-
-        <div class="timeline" style="margin-top: 2vh;">
-          <div class="timeline-row">
-            <div class="phase">Weeks 1–2</div>
-            <div>
-              <h3>Data integration &amp; baseline</h3>
-              <p>Connection to your ERP (Sysagri, AgroSys, or other), CRM, and credit systems. Documentation of your current baseline: what the credit committee uses today, and its historical accuracy.</p>
-            </div>
-          </div>
-          <div class="timeline-row">
-            <div class="phase">Weeks 3–6</div>
-            <div>
-              <h3>Model build</h3>
-              <p>Default-risk and input-demand models trained on the 200–500-member subset. Weekly iteration with your technical team. First internal results by end of week 6.</p>
-            </div>
-          </div>
-          <div class="timeline-row">
-            <div class="phase">Weeks 7–10</div>
-            <div>
-              <h3>Conversational interface &amp; user training</h3>
-              <p>Deploy of the Portuguese agent inside your environment. Training of 5–8 users from your team (commercial managers, credit analysts). Supervised use for 4 weeks.</p>
-            </div>
-          </div>
-          <div class="timeline-row">
-            <div class="phase">Weeks 11–13</div>
-            <div>
-              <h3>Validation &amp; final report</h3>
-              <p>Backtest against the baseline. Presentation to the executive team with quantified accuracy lift, validated use cases, and a proposal to expand to the full member base. Go/no-go decision.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="slide-foot">
-        <span>© 2026 Algo-Rythmn Corp. All rights reserved.</span>
-        <span>12 / 13</span>
-      </div>
-    </section>
-
-    <!-- ━━━━━━━━━━ C13 — CLOSING ━━━━━━━━━━ -->
-    <section class="slide dark closing" data-slide="13">
-      <div class="slide-num"><span class="badge">13</span> The Next Step</div>
-
-      <div class="slide-content" style="justify-content: flex-start; padding-top: 3vh;">
+      <div class="slide-content" style="justify-content: flex-start; padding-top: 4vh;">
         <h1 style="font-size: 4.5cqw; font-weight: 300; color: var(--paper); line-height: 1; margin-bottom: 0.4em; position: relative; z-index: 1;">
-          Let's start with the diagnostic.
+          Thank you.
         </h1>
 
-        <div class="callout" style="max-width: 80%; background: rgba(245,241,232,0.05); border-left-color: var(--gold); margin-bottom: 3vh; position: relative; z-index: 1;">
+        <div class="callout" style="max-width: 75%; background: rgba(245,241,232,0.05); border-left-color: var(--gold); margin-bottom: 3vh; position: relative; z-index: 1;">
           <p style="font-family: 'Fraunces', serif; font-size: max(14px, 1.4cqw); line-height: 1.45; color: var(--paper); font-style: italic; font-weight: 400;">
-            "It's like having an army of analysts who know every member — and who never sleep through a season."
+            "It's like deploying an army of analysts who know every member — and never sleep through a safra."
           </p>
           <div style="font-family: 'JetBrains Mono', monospace; font-size: max(12px, 1.0cqw); color: rgba(245,241,232,0.55); text-transform: uppercase; letter-spacing: 0.15em; margin-top: 0.8em;">— Innovation Director · reference cooperative (pilot in progress)</div>
         </div>
 
         <div class="two-col" style="margin-top: 0; gap: 4cqw; position: relative; z-index: 1;">
           <div>
-            <div class="eyebrow" style="color: var(--gold);">Diagnostic · half-day session</div>
-            <p style="color: rgba(245,241,232,0.85); font-size: max(13px, 1.2cqw); line-height: 1.6;">
-              On-site session with your credit, commercial, and innovation leads. We map where
-              your cooperative is leaving money on the table from low-resolution decisions —
-              and we quantify the opportunity in R$ before you sign any pilot.
-            </p>
-            <p style="color: var(--paper); font-size: max(13px, 1.2cqw); line-height: 1.6; margin-top: 1vh;">
-              <strong style="color: var(--gold);">The diagnostic fee is credited in full</strong> against the pilot, if you proceed.
-              If it doesn't make sense, the report is yours to keep. No strings.
-            </p>
+            <div class="eyebrow" style="color: var(--gold);">Founding team</div>
+            <div class="team-card">
+              <div class="team-name" style="color: var(--paper);">Kenny Cheung, Founder</div>
+              <div class="team-pedigree" style="color: var(--gold);">Serial Founder · Energy · Capital Strategy</div>
+              <p style="font-size: max(13px, 1.2cqw); line-height: 1.5; color: rgba(245,241,232,0.75);">20+ years in energy before founding Algo-Rythmn in 2019. Leads commercial strategy and Brazil market entry.</p>
+            </div>
+            <div class="team-card" style="margin-top: 1.5vh;">
+              <div class="team-name" style="color: var(--paper);">Dr. Albert Cheung, Head of Research</div>
+              <div class="team-pedigree" style="color: var(--gold);">Stanford · Berkeley · Naval Research Lab · HKUST</div>
+              <p style="font-size: max(13px, 1.2cqw); line-height: 1.5; color: rgba(245,241,232,0.75);">Full-time. Career across US Naval Research Laboratory, UC Davis, HKUST. Builds the sensing and anomaly-detection engine.</p>
+            </div>
           </div>
 
           <div>
-            <div class="eyebrow" style="color: var(--gold);">Next steps</div>
+            <div class="eyebrow" style="color: var(--gold);">The ask · seed round</div>
             <div class="ask-section" style="margin-top: 0;">
-              <div class="milestone-row" style="border-top: 1px solid rgba(245,241,232,0.18); padding-top: 1vh; margin-top: 0; grid-template-columns: 1fr;">
-                <div class="milestone" style="border-left-color: var(--gold); margin-bottom: 1vh;">
-                  <div class="ms-date" style="color: var(--gold);">This week</div>
-                  <p style="color: rgba(245,241,232,0.85); font-size: max(12px, 1.0cqw);">30-minute call with your innovation team. Q&amp;A on data, integration, LGPD.</p>
-                </div>
-                <div class="milestone" style="border-left-color: var(--gold); margin-bottom: 1vh;">
-                  <div class="ms-date" style="color: var(--gold);">Next 2 weeks</div>
-                  <p style="color: rgba(245,241,232,0.85); font-size: max(12px, 1.0cqw);">On-site diagnostic. Quantified report delivered within 10 business days.</p>
+              <p style="color: rgba(245,241,232,0.92); font-size: max(12px, 1.1cqw); line-height: 1.6; margin-bottom: 1vh;">
+                We are raising to <strong style="color: var(--paper);">validate, not to scale prematurely</strong>.
+                Warm co-op conversations in progress. First paid diagnostics being scoped now.
+              </p>
+              <div class="milestone-row" style="border-top: 1px solid rgba(245,241,232,0.18); padding-top: 1vh; margin-top: 0.5vh; grid-template-columns: 1fr 1fr;">
+                <div class="milestone" style="border-left-color: var(--gold);">
+                  <div class="ms-date" style="color: var(--gold);">90 days</div>
+                  <p style="color: rgba(245,241,232,0.75); font-size: max(12px, 1.0cqw);">First pilot signed and in-flight.</p>
                 </div>
                 <div class="milestone" style="border-left-color: var(--gold);">
-                  <div class="ms-date" style="color: var(--gold);">Before the next season</div>
-                  <p style="color: rgba(245,241,232,0.85); font-size: max(12px, 1.0cqw);">Pilot signed, integration started, first models live before planting begins.</p>
+                  <div class="ms-date" style="color: var(--gold);">12–18 months</div>
+                  <p style="color: rgba(245,241,232,0.75); font-size: max(12px, 1.0cqw);">2–3 live co-ops. Contracted ARR triggers Series A.</p>
                 </div>
               </div>
             </div>
@@ -2078,21 +2210,22 @@
         </div>
 
         <div class="signature">
-          <div class="name">Shall we talk?</div>
+          <div class="name">Algo-Rythmn</div>
           <div class="meta">
-            <a href="mailto:support@algo-rythmn.ai" class="url">support@algo-rythmn.ai</a>
-            &nbsp;·&nbsp; <span style="color: rgba(245,241,232,0.7);">algo-rythmn.ai · São Paulo · 2026</span>
+            Math that acts &nbsp;·&nbsp;
+            <a href="https://algo-rythmn.ai" class="url">algo-rythmn.ai</a>
+            &nbsp;·&nbsp; <span style="color: rgba(245,241,232,0.7);">Brazil market entry · 2026</span>
           </div>
         </div>
       </div>
 
       <div class="slide-foot">
         <span>© 2026 Algo-Rythmn Corp. All rights reserved.</span>
-        <span>13 / 13</span>
+        <span>15 / 15</span>
       </div>
     </section>
 
-  </div><!-- /client-deck -->
+  </div><!-- /investor-deck -->
 
 </div><!-- /deck-container -->
 
