@@ -383,24 +383,6 @@
   .btn-rounded { border-radius: 8px; }
 
   /* ============ COMPOSER STRIP ============ */
-  .composer-strip {
-    background: white;
-    border: 1px solid var(--ink-100);
-    border-radius: 12px;
-    padding: 10px 14px;
-    display: flex; align-items: center; gap: 10px;
-    margin-bottom: 12px;
-  }
-  .composer-strip .avatar-md {
-    width: 36px; height: 36px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--teal-500), var(--teal-700));
-    color: white;
-    display: grid; place-items: center;
-    font-size: 12px;
-    font-weight: 700;
-    flex-shrink: 0;
-  }
   .composer-input {
     flex: 1;
     padding: 9px 14px;
@@ -890,6 +872,277 @@
     color: var(--teal-700);
     border-bottom-color: var(--teal-600);
   }
+
+  /* ============ COMMUNITY PICKER ============ */
+  .comm-picker-wrap {
+    position: relative;
+  }
+  .comm-picker-trigger {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1.5px solid var(--ink-200);
+    border-radius: 10px;
+    font-size: 14px;
+    color: var(--ink-900);
+    background: var(--white);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: border-color 0.15s, box-shadow 0.15s;
+    text-align: left;
+  }
+  .comm-picker-trigger:hover,
+  .comm-picker-trigger.open {
+    border-color: var(--teal-500);
+    box-shadow: 0 0 0 3px rgba(16,185,129,0.1);
+  }
+  .comm-picker-trigger .comm-trigger-icon {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    display: grid; place-items: center;
+    font-size: 10px;
+    color: white;
+    flex-shrink: 0;
+  }
+  .comm-picker-trigger .comm-trigger-label {
+    flex: 1;
+    font-weight: 600;
+  }
+  .comm-picker-trigger .comm-trigger-label.placeholder {
+    color: var(--ink-400);
+    font-weight: 400;
+  }
+  .comm-picker-trigger .comm-trigger-chevron {
+    color: var(--ink-400);
+    font-size: 11px;
+    transition: transform 0.15s;
+  }
+  .comm-picker-trigger.open .comm-trigger-chevron { transform: rotate(180deg); }
+
+  .comm-picker-dropdown {
+    display: none;
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0; right: 0;
+    background: white;
+    border: 1.5px solid var(--ink-200);
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(6,78,59,0.12);
+    z-index: 200;
+    overflow: hidden;
+    animation: fadeIn 0.12s ease;
+  }
+  .comm-picker-dropdown.open { display: block; }
+  .comm-picker-search {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--ink-100);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .comm-picker-search i { color: var(--ink-400); font-size: 13px; }
+  .comm-picker-search input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 13.5px;
+    color: var(--ink-900);
+    background: transparent;
+    font-family: inherit;
+  }
+  .comm-picker-list {
+    max-height: 220px;
+    overflow-y: auto;
+    padding: 6px 0;
+  }
+  .comm-picker-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 14px;
+    cursor: pointer;
+    transition: background 0.1s;
+  }
+  .comm-picker-option:hover { background: var(--ink-50); }
+  .comm-picker-option.selected { background: var(--teal-50); }
+  .comm-picker-option .comm-opt-icon {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    display: grid; place-items: center;
+    font-size: 12px;
+    color: white;
+    flex-shrink: 0;
+  }
+  .comm-picker-option .comm-opt-info { flex: 1; min-width: 0; }
+  .comm-picker-option .comm-opt-name {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--ink-900);
+  }
+  .comm-picker-option .comm-opt-meta {
+    font-size: 11.5px;
+    color: var(--ink-400);
+  }
+  .comm-picker-divider {
+    height: 1px;
+    background: var(--ink-100);
+    margin: 4px 0;
+  }
+  .comm-picker-create-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    width: 100%;
+    cursor: pointer;
+    transition: background 0.1s;
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--teal-700);
+  }
+  .comm-picker-create-btn:hover { background: var(--teal-50); }
+  .comm-picker-create-btn .comm-create-circle {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    border: 2px dashed var(--teal-400);
+    display: grid; place-items: center;
+    font-size: 14px;
+    color: var(--teal-500);
+    flex-shrink: 0;
+  }
+  .comm-no-results {
+    padding: 14px;
+    text-align: center;
+    font-size: 13px;
+    color: var(--ink-400);
+  }
+
+  /* ============ CREATE COMMUNITY INLINE FORM ============ */
+  .create-community-form {
+    display: none;
+    background: var(--teal-50);
+    border: 1.5px solid var(--teal-200);
+    border-radius: 12px;
+    padding: 16px;
+    margin-top: 6px;
+    animation: fadeIn 0.15s ease;
+  }
+  .create-community-form.open { display: block; }
+  .create-community-form-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+  }
+  .create-community-form-head span {
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--teal-800);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .create-community-form .field { margin-bottom: 10px; }
+  .comm-name-input-wrap {
+    display: flex;
+    align-items: stretch;
+    border: 1.5px solid var(--ink-200);
+    border-radius: 10px;
+    background: white;
+    overflow: hidden;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  .comm-name-input-wrap:focus-within {
+    border-color: var(--teal-500);
+    box-shadow: 0 0 0 3px rgba(16,185,129,0.1);
+  }
+  .comm-name-prefix {
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    background: var(--ink-50);
+    border-right: 1.5px solid var(--ink-200);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--teal-700);
+    font-family: var(--mono);
+    letter-spacing: 0.02em;
+    user-select: none;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .comm-name-input-wrap:focus-within .comm-name-prefix {
+    background: var(--teal-50);
+    border-right-color: var(--teal-300);
+  }
+  .comm-name-input-wrap input {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 11px 14px;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--ink-900);
+    font-family: var(--mono);
+    letter-spacing: 0.01em;
+    background: transparent;
+  }
+  .comm-name-input-wrap input::placeholder {
+    font-weight: 400;
+    color: var(--ink-300);
+    font-family: var(--sans);
+    letter-spacing: 0;
+  }
+  .comm-name-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 5px;
+  }
+  .comm-name-hint {
+    font-size: 11.5px;
+    color: var(--ink-400);
+  }
+  .comm-name-counter {
+    font-size: 11.5px;
+    color: var(--ink-400);
+    font-variant-numeric: tabular-nums;
+  }
+  .comm-name-counter.warn { color: var(--amber); }
+  .comm-name-counter.danger { color: var(--coral); font-weight: 700; }
+  .comm-privacy-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+  .comm-privacy-opt {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 10px 8px;
+    border: 1.5px solid var(--ink-200);
+    border-radius: 10px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.12s;
+    font-size: 12px;
+    color: var(--ink-600);
+    font-weight: 600;
+  }
+  .comm-privacy-opt:hover { border-color: var(--teal-300); background: var(--teal-50); }
+  .comm-privacy-opt.selected { border-color: var(--teal-500); background: var(--teal-50); color: var(--teal-800); }
+  .comm-privacy-opt i { font-size: 18px; color: var(--ink-400); }
+  .comm-privacy-opt.selected i { color: var(--teal-600); }
+  .comm-privacy-label { font-size: 11px; color: var(--ink-400); font-weight: 400; text-align: center; }
+  .create-community-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 4px;
+  }
   .field { margin-bottom: 14px; }
   .field label {
     display: block;
@@ -1148,6 +1401,7 @@
   .comment-composer-top textarea {
     flex: 1;
     min-height: 70px;
+    min-width: 600px;
     padding: 12px 14px;
     border: 1.5px solid var(--ink-200);
     border-radius: 12px;
@@ -1539,6 +1793,346 @@
   /* AI feedback button states */
   .ai-feedback button.up.active { color: var(--teal-600); background: var(--teal-50); }
   .ai-feedback button.down.active { color: var(--coral); background: var(--coral-soft); }
+
+  /* ============ TOAST ============ */
+  .toast {
+    position: fixed;
+    bottom: 28px; left: 50%;
+    transform: translateX(-50%) translateY(16px);
+    background: var(--ink-900);
+    color: white;
+    padding: 10px 18px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 600;
+    display: flex; align-items: center; gap: 8px;
+    box-shadow: var(--shadow-xl);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.22s ease;
+    z-index: 999;
+    white-space: nowrap;
+  }
+  .toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+    pointer-events: auto;
+  }
+  .toast i { color: var(--teal-400); }
+
+  /* ============ MANAGEMENT PANELS ============ */
+  .mgmt-search-wrap {
+    display: flex; align-items: center; gap: 8px;
+    padding: 9px 14px;
+    border: 1.5px solid var(--ink-200);
+    border-radius: 10px;
+    background: var(--ink-50);
+    transition: all 0.15s;
+  }
+  .mgmt-search-wrap:focus-within {
+    border-color: var(--teal-400);
+    background: white;
+    box-shadow: 0 0 0 3px rgba(16,185,129,0.1);
+  }
+  .mgmt-search-wrap i { color: var(--ink-400); font-size: 13px; flex-shrink: 0; }
+  .mgmt-search-wrap input {
+    flex: 1; border: none; outline: none;
+    font-size: 13.5px; color: var(--ink-900);
+    background: transparent; font-family: inherit;
+  }
+  .mgmt-tabs {
+    display: flex;
+    border-bottom: 1px solid var(--ink-100);
+    background: var(--ink-50);
+    padding: 8px 14px;
+    flex-shrink: 0;
+    gap: 2px;
+  }
+  .mgmt-tab {
+    padding: 6px 12px;
+    font-size: 12.5px; font-weight: 600;
+    color: var(--ink-500);
+    border-radius: 8px;
+    display: inline-flex; align-items: center; gap: 6px;
+    transition: all 0.14s; cursor: pointer; white-space: nowrap;
+    background: none; border: none;
+  }
+  .mgmt-tab:hover { color: var(--ink-800); background: var(--ink-100); }
+  .mgmt-tab.active {
+    color: var(--teal-700);
+    background: white;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 0 0 1px var(--ink-100);
+  }
+  .mgmt-tab .tab-count {
+    background: var(--ink-200); color: var(--ink-600);
+    font-size: 10px; font-weight: 700;
+    padding: 1px 7px; border-radius: 999px; min-width: 18px; text-align: center;
+  }
+  .mgmt-tab.active .tab-count { background: var(--teal-100); color: var(--teal-700); }
+  .modal-body-scroll { max-height: 58vh; overflow-y: auto; }
+  .mgmt-section-label {
+    font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--ink-400); font-weight: 700;
+    padding: 14px 22px 6px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .mgmt-section-label i { font-size: 10px; }
+  .mgmt-section-label .mgmt-count {
+    margin-left: auto;
+    background: var(--ink-100); color: var(--ink-600);
+    font-size: 10px; padding: 2px 7px; border-radius: 999px;
+    text-transform: none; letter-spacing: 0;
+  }
+  .mgmt-empty {
+    padding: 24px 22px;
+    font-size: 13px; color: var(--ink-400); text-align: center;
+  }
+  /* Community management list item */
+  .mgmt-comm-item {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 22px;
+    border-top: 1px solid var(--ink-100);
+    transition: background 0.1s;
+  }
+  .mgmt-comm-item:hover { background: var(--ink-50); }
+  .mgmt-comm-info { flex: 1; min-width: 0; }
+  .mgmt-comm-name {
+    font-size: 13.5px; font-weight: 700; color: var(--ink-900);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .mgmt-comm-meta { font-size: 11.5px; color: var(--ink-400); margin-top: 1px; }
+  .mgmt-comm-actions { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+  /* Access type pill */
+  .access-pill {
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 4px 10px;
+    border-radius: 999px; font-size: 11.5px; font-weight: 700;
+    border: 1.5px solid transparent;
+    cursor: pointer; transition: all 0.12s; white-space: nowrap;
+  }
+  .access-pill.public   { background: var(--teal-100);   color: var(--teal-800);  border-color: var(--teal-300); }
+  .access-pill.restricted { background: var(--amber-soft); color: #92400e;        border-color: #fde68a; }
+  .access-pill.private  { background: var(--violet-soft); color: #5b21b6;        border-color: #c4b5fd; }
+  .access-pill:hover { filter: brightness(0.93); }
+  .access-pill .ap-chevron { font-size: 9px; margin-left: 1px; }
+  /* Access change dropdown */
+  .access-menu {
+    position: absolute; top: calc(100% + 5px); left: 0;
+    background: white; border: 1.5px solid var(--ink-200);
+    border-radius: 12px; box-shadow: var(--shadow-xl);
+    z-index: 300; overflow: hidden; min-width: 230px;
+    animation: popIn 0.12s ease;
+  }
+  .access-menu-head {
+    padding: 8px 14px 4px;
+    font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--ink-400); font-weight: 700;
+    border-bottom: 1px solid var(--ink-100);
+  }
+  .access-menu-item {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 10px 14px; cursor: pointer; transition: background 0.1s;
+  }
+  .access-menu-item:hover { background: var(--ink-50); }
+  .access-menu-item.active { background: var(--teal-50); }
+  .access-menu-item .am-icon { font-size: 14px; margin-top: 1px; width: 16px; text-align: center; }
+  .access-menu-item.pub  .am-icon { color: var(--teal-600); }
+  .access-menu-item.rest .am-icon { color: var(--amber); }
+  .access-menu-item.priv .am-icon { color: var(--violet); }
+  .access-menu-item .opt-name { font-weight: 700; color: var(--ink-900); font-size: 13px; }
+  .access-menu-item .opt-desc { font-size: 11px; color: var(--ink-400); }
+  .access-menu-item .opt-check { margin-left: auto; color: var(--teal-600); font-size: 11px; align-self: center; }
+  /* Small icon action button */
+  .mgmt-icon-btn {
+    width: 30px; height: 30px; border-radius: 8px;
+    color: var(--ink-400);
+    display: grid; place-items: center; font-size: 13px;
+    transition: all 0.12s; flex-shrink: 0; cursor: pointer;
+  }
+  .mgmt-icon-btn:hover { background: var(--coral-soft); color: var(--coral); }
+  /* Leave button */
+  .mgmt-leave-btn {
+    padding: 5px 12px; border-radius: 999px;
+    font-size: 12px; font-weight: 600; color: var(--ink-500);
+    border: 1.5px solid var(--ink-200); background: white;
+    cursor: pointer; transition: all 0.12s;
+  }
+  .mgmt-leave-btn:hover { border-color: var(--coral); color: #991b1b; background: var(--coral-soft); }
+  /* Confirm delete row */
+  .confirm-row {
+    display: none; align-items: center; gap: 10px;
+    background: #fef2f2; border: 1px solid #fecaca;
+    border-top: none; border-radius: 0 0 10px 10px;
+    margin: 0 16px 8px; padding: 10px 14px;
+    font-size: 12.5px; color: #991b1b;
+  }
+  .confirm-row.show { display: flex; }
+  .confirm-row .cr-text { flex: 1; font-weight: 600; display: flex; align-items: center; gap: 6px; }
+  .confirm-btn-yes {
+    padding: 5px 14px; border-radius: 7px;
+    background: var(--coral); color: white;
+    font-size: 12px; font-weight: 700; cursor: pointer; border: none;
+    transition: background 0.12s;
+  }
+  .confirm-btn-yes:hover { background: #dc2626; }
+  .confirm-btn-no {
+    padding: 5px 12px; border-radius: 7px;
+    background: white; color: var(--ink-700);
+    font-size: 12px; font-weight: 700; cursor: pointer;
+    border: 1px solid var(--ink-200); transition: all 0.12s;
+  }
+  .confirm-btn-no:hover { background: var(--ink-50); border-color: var(--ink-300); }
+  /* My Posts list item */
+  .mypost-item {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 12px 22px; border-top: 1px solid var(--ink-100);
+    transition: background 0.1s;
+  }
+  .mypost-item:hover { background: var(--ink-50); }
+  .mypost-item.hidden-post { opacity: 0.5; }
+  .mypost-item.hidden-post .mypost-title { text-decoration: line-through; color: var(--ink-400); }
+  .mypost-info { flex: 1; min-width: 0; }
+  .mypost-title {
+    font-size: 13.5px; font-weight: 700; color: var(--ink-900);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    cursor: pointer; margin-bottom: 4px;
+  }
+  .mypost-title:hover { color: var(--teal-700); }
+  .mypost-meta {
+    font-size: 12px; color: var(--ink-400);
+    display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  }
+  .mypost-actions { display: flex; align-items: center; gap: 6px; flex-shrink: 0; padding-top: 1px; }
+  .mypost-btn {
+    padding: 5px 10px; border-radius: 7px;
+    font-size: 12px; font-weight: 600; color: var(--ink-600);
+    border: 1px solid var(--ink-200); background: white;
+    display: inline-flex; align-items: center; gap: 5px;
+    transition: all 0.12s; white-space: nowrap; cursor: pointer;
+  }
+  .mypost-btn:hover { background: var(--ink-50); border-color: var(--ink-300); color: var(--ink-900); }
+  .mypost-btn.hide-active { color: var(--amber); background: var(--amber-soft); border-color: #fbbf24; }
+  .mypost-btn.hide-active:hover { background: #fde68a; }
+  .mypost-btn.danger { color: var(--coral); border-color: #fecaca; }
+  .mypost-btn.danger:hover { background: var(--coral-soft); border-color: var(--coral); color: #dc2626; }
+  /* My Comments list item */
+  .mycomment-item {
+    padding: 12px 22px; border-top: 1px solid var(--ink-100);
+    display: flex; align-items: flex-start; gap: 12px;
+    transition: background 0.1s;
+  }
+  .mycomment-item:hover { background: var(--ink-50); }
+  .mycomment-body { flex: 1; min-width: 0; }
+  .mycomment-ctx {
+    font-size: 11.5px; color: var(--ink-400);
+    display: flex; align-items: center; gap: 6px;
+    margin-bottom: 5px; flex-wrap: wrap;
+  }
+  .mycomment-ctx .ctx-post {
+    font-weight: 600; color: var(--teal-700); cursor: pointer;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px;
+  }
+  .mycomment-ctx .ctx-post:hover { text-decoration: underline; }
+  .mycomment-text {
+    font-size: 13.5px; color: var(--ink-700); line-height: 1.5;
+    display: -webkit-box; -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical; overflow: hidden;
+  }
+  .mycomment-del-btn {
+    width: 30px; height: 30px; border-radius: 7px;
+    color: var(--ink-400); border: 1px solid var(--ink-200); background: white;
+    display: grid; place-items: center;
+    font-size: 13px; transition: all 0.12s; flex-shrink: 0; cursor: pointer;
+  }
+  .mycomment-del-btn:hover { background: var(--coral-soft); color: var(--coral); border-color: #fecaca; }
+  /* lnav action items (modal openers — same look as lnav-item) */
+  .lnav-action-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 8px 10px; border-radius: 8px;
+    color: var(--ink-700); font-size: 13.5px; font-weight: 500;
+    cursor: pointer; transition: all 0.12s;
+    width: 100%; text-align: left; background: none; border: none;
+  }
+  .lnav-action-item:hover { background: var(--ink-50); }
+  .lnav-action-item i { width: 16px; text-align: center; color: var(--ink-400); font-size: 13px; }
+  .lnav-action-item .count {
+    margin-left: auto; font-size: 11px; color: var(--ink-400); font-weight: 500;
+  }
+
+  /* ============ UNIFIED POST COMPOSER ADD-ONS ============ */
+  .post-addons-bar {
+    display: flex; align-items: center; gap: 2px;
+    padding: 10px 0 0; border-top: 1px solid var(--ink-100);
+    margin-top: 12px; flex-wrap: wrap;
+  }
+  .post-addons-label {
+    font-size: 11px; font-weight: 700; color: var(--ink-400);
+    text-transform: uppercase; letter-spacing: 0.07em;
+    padding: 0 8px 0 2px; flex-shrink: 0; white-space: nowrap;
+  }
+  .addon-toggle-btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 6px 12px; border-radius: 8px;
+    font-size: 12.5px; font-weight: 600; color: var(--ink-600);
+    border: 1.5px solid transparent; transition: all 0.12s; background: none;
+  }
+  .addon-toggle-btn:hover { background: var(--ink-50); color: var(--ink-900); }
+  .addon-toggle-btn.active { color: var(--teal-700); background: var(--teal-50); border-color: var(--teal-300); }
+  .addon-toggle-btn i { font-size: 13px; }
+  .addon-panel {
+    display: none; margin-top: 10px;
+    border: 1.5px solid var(--ink-200); border-radius: 12px;
+    padding: 14px; background: var(--ink-50);
+    animation: fadeIn 0.15s ease;
+  }
+  .addon-panel.open { display: block; }
+  .image-dropzone {
+    border: 2px dashed var(--ink-200); border-radius: 10px;
+    padding: 28px 20px; text-align: center; cursor: pointer;
+    transition: all 0.15s; background: white;
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+  }
+  .image-dropzone:hover { border-color: var(--teal-400); background: var(--teal-50); }
+  .image-dropzone > i { font-size: 28px; color: var(--ink-300); }
+  .image-dropzone .dz-text { font-size: 13px; color: var(--ink-600); font-weight: 600; }
+  .image-dropzone .dz-sub { font-size: 11.5px; color: var(--ink-400); }
+  .poll-option-row { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+  .poll-option-row input {
+    flex: 1; padding: 9px 12px;
+    border: 1.5px solid var(--ink-200); border-radius: 8px;
+    font-size: 13.5px; font-family: inherit; background: white; color: var(--ink-900);
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  .poll-option-row input:focus { outline: none; border-color: var(--teal-400); box-shadow: 0 0 0 3px rgba(16,185,129,0.1); }
+  .poll-opt-del {
+    width: 28px; height: 28px; border-radius: 6px; color: var(--ink-300);
+    display: grid; place-items: center; font-size: 13px; cursor: pointer;
+    flex-shrink: 0; transition: all 0.12s;
+  }
+  .poll-opt-del:hover { background: var(--coral-soft); color: var(--coral); }
+  .poll-add-btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 12.5px; font-weight: 600; color: var(--teal-700);
+    padding: 5px 8px; border-radius: 6px; transition: background 0.12s;
+  }
+  .poll-add-btn:hover { background: var(--teal-50); }
+  .poll-duration-row {
+    display: flex; align-items: center; gap: 8px;
+    margin-top: 10px; padding-top: 10px;
+    border-top: 1px solid var(--ink-100); font-size: 12.5px; color: var(--ink-500);
+  }
+  .poll-duration-row select {
+    padding: 5px 10px; border: 1.5px solid var(--ink-200); border-radius: 8px;
+    font-size: 12.5px; font-family: inherit; color: var(--ink-900); background: white;
+  }
+  /* New community preview card */
+  .new-comm-preview {
+    display: flex; align-items: center; gap: 12px;
+    padding: 12px 14px; background: white;
+    border: 1px solid var(--ink-100); border-radius: 10px; margin-bottom: 14px;
+  }
+  .new-comm-preview-name { font-size: 14px; font-weight: 800; color: var(--ink-900); font-family: var(--mono); }
+  .new-comm-preview-sub { font-size: 11.5px; color: var(--ink-400); margin-top: 2px; }
 </style>
 </head>
 <body>
@@ -1583,16 +2177,10 @@
           <button class="icon-btn" id="pharmacyBtn" title="Switch pharmacy"><i class="fa-solid fa-building-columns"></i></button>
         </div>
         <div class="popover-anchor">
-          <button class="icon-btn" id="notifBtn" title="Notifications" style="position: relative;">
-            <i class="fa-regular fa-bell"></i>
-            <span style="position:absolute; top:-2px; right:-2px; width:8px; height:8px; background:var(--coral); border-radius:50%; border:2px solid white;"></span>
-          </button>
-        </div>
-        <div class="popover-anchor">
-          <div class="user-chip" id="userChipBtn">
+          <div class="user-chip" id="userChipBtn" style="position:relative;">
             <div class="avatar">JS</div>
             <span class="name">123</span>
-            <span class="badge">24</span>
+            <span id="notifBadge" style="position:absolute;top:-5px;right:-6px;min-width:17px;height:17px;background:var(--coral);border-radius:99px;border:2px solid white;font-size:10px;font-weight:700;color:white;display:flex;align-items:center;justify-content:center;padding:0 3px;line-height:1;">3</span>
           </div>
         </div>
       </div>
@@ -1667,7 +2255,19 @@
           <button class="lnav-item" data-province="BC"><i class="fa-solid fa-water"></i> BC-CPBC</button>
           <button class="lnav-item" data-province="Saskatchewan"><i class="fa-solid fa-wheat-awn"></i> Saskatchewan</button>
           <button class="lnav-item" data-province="Manitoba"><i class="fa-solid fa-snowflake"></i> Manitoba</button>
-          <button class="lnav-item" data-province="Quebec"><i class="fa-solid fa-fleur-de-lis"></i> Quebec-OPQ</button>
+          <button class="lnav-item" data-province="Quebec"><i class="fa-solid fa-flag"></i> Quebec-OPQ</button>
+        </div>
+
+        <div class="lnav-section">
+          <div class="lnav-title">My Activity</div>
+          <button class="lnav-action-item" onclick="openManageCommunities()">
+            <i class="fa-solid fa-layer-group"></i> Communities
+            <span class="count" id="myCommMgmtCount">5</span>
+          </button>
+          <button class="lnav-action-item" onclick="openMyPostsModal()">
+            <i class="fa-solid fa-newspaper"></i> Posts
+            <span class="count" id="myPostsCount">6</span>
+          </button>
         </div>
       </aside>
 
@@ -1686,17 +2286,6 @@
             <div class="feed-cta-row" id="feedCtaRow">
               <button class="btn btn-primary" id="newPostBtn"><i class="fa-solid fa-plus"></i> Create Post</button>
             </div>
-          </div>
-        </div>
-
-        <!-- Quick composer -->
-        <div class="composer-strip">
-          <div class="avatar-md">JS</div>
-          <div class="composer-input" onclick="openModal('newPostModal')">Create a post — ask the community...</div>
-          <div class="composer-tools">
-            <button class="composer-tool" onclick="openModal('newPostModal')" title="Image"><i class="fa-regular fa-image"></i></button>
-            <button class="composer-tool" onclick="openModal('newPostModal')" title="Link"><i class="fa-solid fa-link"></i></button>
-            <button class="composer-tool" onclick="openModal('newPostModal')" title="Poll"><i class="fa-solid fa-square-poll-vertical"></i></button>
           </div>
         </div>
 
@@ -1817,33 +2406,97 @@
   </main>
 </div>
 
-<!-- ============ NEW POST MODAL ============ -->
-<div class="modal-bg" id="newPostModal">
-  <div class="modal">
+<!-- ============ CREATE COMMUNITY MODAL ============ -->
+<div class="modal-bg" id="createCommunityModal">
+  <div class="modal" style="max-width: 580px;">
     <div class="modal-head">
-      <h3>Create a post</h3>
-      <button class="modal-close" onclick="closeModal('newPostModal')"><i class="fa-solid fa-xmark"></i></button>
+      <h3><i class="fa-solid fa-people-group" style="color:var(--teal-600);font-size:15px;margin-right:6px;"></i> Create a community</h3>
+      <button class="modal-close" onclick="closeCreateCommunity()"><i class="fa-solid fa-xmark"></i></button>
     </div>
     <div class="modal-body">
-      <div class="compose-tabs">
-        <button class="compose-tab active"><i class="fa-regular fa-file-lines"></i> Text</button>
-        <button class="compose-tab"><i class="fa-regular fa-image"></i> Image</button>
-        <button class="compose-tab"><i class="fa-solid fa-link"></i> Link</button>
-        <button class="compose-tab"><i class="fa-solid fa-square-poll-vertical"></i> Poll</button>
+      <!-- Live preview -->
+      <div class="new-comm-preview">
+        <div class="community-icon ci-1" id="newCommPreviewIcon" style="width:44px;height:44px;font-size:18px;flex-shrink:0;"><i class="fa-solid fa-people-group"></i></div>
+        <div>
+          <div class="new-comm-preview-name" id="newCommPreviewName">p/CommunityName</div>
+          <div class="new-comm-preview-sub">New community &middot; You are the creator</div>
+        </div>
       </div>
 
       <div class="row-2">
         <div class="field">
+          <label>Name</label>
+          <div class="comm-name-input-wrap">
+            <span class="comm-name-prefix">p/</span>
+            <input type="text" id="newCommName" placeholder="CommunityName" maxlength="50"
+              oninput="this.value=this.value.replace(/[^a-zA-Z0-9_]/g,''); updateCommCounter(); updateCommPreview(this.value)" />
+          </div>
+          <div class="comm-name-footer">
+            <span class="comm-name-hint">Letters, numbers, underscores only</span>
+            <span class="comm-name-counter" id="commNameCounter">0 / 50</span>
+          </div>
+        </div>
+        <div class="field">
+          <label>Description <span style="color:var(--ink-400);text-transform:none;font-weight:500;">(optional)</span></label>
+          <textarea id="newCommDesc" placeholder="What is this community about?" style="min-height:64px;resize:none;"></textarea>
+        </div>
+      </div>
+
+      <div class="field" style="margin-bottom: 6px;">
+        <label>Access</label>
+        <div class="comm-privacy-row">
+          <button type="button" class="comm-privacy-opt selected" data-type="public" onclick="selectPrivacy(this)">
+            <i class="fa-solid fa-earth-americas"></i>
+            <span style="font-size:12.5px;font-weight:700;">Public</span>
+            <span class="comm-privacy-label">Anyone can join</span>
+          </button>
+          <button type="button" class="comm-privacy-opt" data-type="private" onclick="selectPrivacy(this)">
+            <i class="fa-solid fa-lock"></i>
+            <span style="font-size:12.5px;font-weight:700;">Private</span>
+            <span class="comm-privacy-label">Only the creator</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="modal-foot" style="justify-content: flex-end; display: flex; gap: 8px;">
+      <button type="button" class="btn btn-ghost btn-rounded" onclick="closeCreateCommunity()">Cancel</button>
+      <button type="button" class="btn btn-dark btn-rounded" onclick="submitCreateCommunity()"><i class="fa-solid fa-people-group"></i> Create community</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ NEW POST MODAL ============ -->
+<div class="modal-bg" id="newPostModal">
+  <div class="modal" style="max-width: 680px;">
+    <div class="modal-head">
+      <h3>Create a post</h3>
+      <button class="modal-close" onclick="closeModal('newPostModal')"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="modal-body" style="overflow-y: auto; max-height: 72vh; padding-bottom: 4px;">
+
+      <!-- Community + Province row -->
+      <div class="row-2">
+        <div class="field">
           <label>Community</label>
-          <select>
-            <option>Compounding</option>
-            <option>Narcotics</option>
-            <option>Injections</option>
-            <option>Inspections</option>
-            <option>SOPs</option>
-            <option>ColdChain</option>
-            <option>PatientCare</option>
-          </select>
+          <div class="comm-picker-wrap" id="commPickerWrap">
+            <button type="button" class="comm-picker-trigger" id="commPickerTrigger" onclick="toggleCommPicker()">
+              <span class="comm-trigger-icon ci-1" id="commTriggerIcon" style="display:none;"><i class="fa-solid fa-flask" id="commTriggerGlyph"></i></span>
+              <span class="comm-trigger-label placeholder" id="commTriggerLabel">Choose a community</span>
+              <i class="fa-solid fa-chevron-down comm-trigger-chevron"></i>
+            </button>
+            <div class="comm-picker-dropdown" id="commPickerDropdown">
+              <div class="comm-picker-search">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="commSearchInput" placeholder="Search communities…" autocomplete="off" oninput="filterComms(this.value)" />
+              </div>
+              <div class="comm-picker-list" id="commPickerList"></div>
+              <div class="comm-picker-divider"></div>
+              <button type="button" class="comm-picker-create-btn" onclick="openCreateCommunity()">
+                <span class="comm-create-circle"><i class="fa-solid fa-plus"></i></span>
+                Create a new community
+              </button>
+            </div>
+          </div>
         </div>
         <div class="field">
           <label>Province / College</label>
@@ -1859,27 +2512,95 @@
         </div>
       </div>
 
+      <!-- Title -->
       <div class="field">
         <label>Title</label>
         <input id="postTitleInput" type="text" placeholder="What's your question or topic?" maxlength="200" />
       </div>
-      <div class="field">
+
+      <!-- Body -->
+      <div class="field" style="margin-bottom: 0;">
         <label>Body <span style="color: var(--ink-400); text-transform: none; font-weight: 500;">(optional)</span></label>
         <textarea id="postBodyInput" placeholder="Share context — what have you tried, what regulation are you looking at, what's the specific scenario? The more specific, the better the responses."></textarea>
       </div>
-      <div class="field">
-        <label>Flair <span style="color: var(--ink-400); text-transform: none; font-weight: 500;">(pick up to 2)</span></label>
-        <div class="tag-pick">
-          <button class="tag-opt" onclick="this.classList.toggle('selected')">Question</button>
-          <button class="tag-opt" onclick="this.classList.toggle('selected')">Discussion</button>
-          <button class="tag-opt" onclick="this.classList.toggle('selected')">Help Needed</button>
-          <button class="tag-opt" onclick="this.classList.toggle('selected')">USP 797</button>
-          <button class="tag-opt" onclick="this.classList.toggle('selected')">Methadone</button>
-          <button class="tag-opt" onclick="this.classList.toggle('selected')">Vaccines</button>
-          <button class="tag-opt" onclick="this.classList.toggle('selected')">Audit</button>
-          <button class="tag-opt" onclick="this.classList.toggle('selected')">SOP</button>
+
+      <!-- Add to post toolbar -->
+      <div class="post-addons-bar">
+        <button type="button" class="addon-toggle-btn" id="addonBtn-image" onclick="toggleAddon('image')">
+          <i class="fa-regular fa-image"></i> Image
+        </button>
+        <button type="button" class="addon-toggle-btn" id="addonBtn-link" onclick="toggleAddon('link')">
+          <i class="fa-solid fa-link"></i> Link
+        </button>
+        <button type="button" class="addon-toggle-btn" id="addonBtn-poll" onclick="toggleAddon('poll')">
+          <i class="fa-solid fa-square-poll-vertical"></i> Poll
+        </button>
+      </div>
+
+      <!-- Image addon panel -->
+      <div class="addon-panel" id="addonPanel-image">
+        <div class="image-dropzone" onclick="showToast('File picker — coming soon')">
+          <i class="fa-regular fa-image"></i>
+          <span class="dz-text">Click to upload or drag &amp; drop</span>
+          <span class="dz-sub">PNG, JPG, GIF &middot; up to 20 MB</span>
         </div>
       </div>
+
+      <!-- Link addon panel -->
+      <div class="addon-panel" id="addonPanel-link">
+        <div class="field" style="margin-bottom: 8px;">
+          <label>URL</label>
+          <input type="url" id="postLinkInput" placeholder="https://…" />
+        </div>
+        <div class="field" style="margin-bottom: 0;">
+          <label>Link title <span style="color:var(--ink-400);text-transform:none;font-weight:500;">(optional)</span></label>
+          <input type="text" id="postLinkTitle" placeholder="Describe what this link is" />
+        </div>
+      </div>
+
+      <!-- Poll addon panel -->
+      <div class="addon-panel" id="addonPanel-poll">
+        <div class="field" style="margin-bottom: 8px;">
+          <label>Poll options</label>
+          <div id="pollOptions">
+            <div class="poll-option-row">
+              <input type="text" placeholder="Option 1" />
+              <button type="button" class="poll-opt-del" onclick="removePollOption(this)" title="Remove"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="poll-option-row">
+              <input type="text" placeholder="Option 2" />
+              <button type="button" class="poll-opt-del" onclick="removePollOption(this)" title="Remove"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+          </div>
+          <button type="button" class="poll-add-btn" onclick="addPollOption()"><i class="fa-solid fa-plus"></i> Add option</button>
+        </div>
+        <div class="poll-duration-row">
+          <i class="fa-regular fa-clock"></i>
+          <span>Poll duration:</span>
+          <select id="pollDuration">
+            <option>1 day</option>
+            <option selected>3 days</option>
+            <option>7 days</option>
+            <option>14 days</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Flair -->
+      <div class="field" style="margin-top: 14px;">
+        <label>Flair <span style="color: var(--ink-400); text-transform: none; font-weight: 500;">(pick up to 2)</span></label>
+        <div class="tag-pick">
+          <button class="tag-opt">Question</button>
+          <button class="tag-opt">Discussion</button>
+          <button class="tag-opt">Help Needed</button>
+          <button class="tag-opt">USP 797</button>
+          <button class="tag-opt">Methadone</button>
+          <button class="tag-opt">Vaccines</button>
+          <button class="tag-opt">Audit</button>
+          <button class="tag-opt">SOP</button>
+        </div>
+      </div>
+
     </div>
     <div class="modal-foot">
       <span class="helper"><i class="fa-solid fa-shield-halved"></i> No PHI · Be specific · Cite your province</span>
@@ -1953,6 +2674,85 @@
 <div class="toast" id="toast">
   <i class="fa-solid fa-circle-check"></i>
   <span id="toastMsg">Done</span>
+</div>
+
+<!-- ============ MANAGE COMMUNITIES MODAL ============ -->
+<div class="modal-bg" id="manageCommunityModal">
+  <div class="modal" style="max-width: 760px; display: flex; flex-direction: column; max-height: 92vh;">
+    <div class="modal-head">
+      <h3><i class="fa-solid fa-layer-group" style="color:var(--teal-600);font-size:15px;margin-right:6px;"></i> Manage Communities</h3>
+      <button class="modal-close" onclick="closeModal('manageCommunityModal')"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div style="padding: 14px 22px 12px; border-bottom: 1px solid var(--ink-100); flex-shrink: 0;">
+      <div class="mgmt-search-wrap">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" id="commMgmtSearch" placeholder="Search all communities to join or manage…" autocomplete="off" oninput="filterMgmtComms(this.value)" />
+      </div>
+    </div>
+    <div class="mgmt-tabs" style="flex-shrink:0;">
+      <button class="mgmt-tab active" id="mgmtTab-created" onclick="switchMgmtTab('created')">
+        <i class="fa-solid fa-crown"></i> Created
+        <span class="tab-count" id="mgmt-created-count">1</span>
+      </button>
+      <button class="mgmt-tab" id="mgmtTab-joined" onclick="switchMgmtTab('joined')">
+        <i class="fa-solid fa-user-check"></i> Joined
+        <span class="tab-count" id="mgmt-joined-count">5</span>
+      </button>
+      <button class="mgmt-tab" id="mgmtTab-search" onclick="switchMgmtTab('search')" style="display:none;">
+        <i class="fa-solid fa-magnifying-glass"></i> Results
+        <span class="tab-count" id="mgmt-search-count">0</span>
+      </button>
+    </div>
+    <div class="modal-body-scroll" style="flex:1;">
+      <div id="mgmtPanel-created"></div>
+      <div id="mgmtPanel-joined" style="display:none;"></div>
+      <div id="mgmtPanel-search" style="display:none;"></div>
+    </div>
+    <div class="modal-foot">
+      <span class="helper"><i class="fa-solid fa-info-circle"></i> Only you (the creator) can change access or delete a community</span>
+      <button class="btn btn-primary btn-rounded" onclick="closeModal('manageCommunityModal'); openModal('createCommunityModal')"><i class="fa-solid fa-plus"></i> Create New</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ MY ACTIVITY MODAL (Posts · Comments · Replies · Saved · Reactions) ============ -->
+<div class="modal-bg" id="myPostsModal">
+  <div class="modal" style="max-width: 680px; display: flex; flex-direction: column; max-height: 92vh;">
+    <div class="modal-head">
+      <h3><i class="fa-solid fa-chart-simple" style="color:var(--teal-600);font-size:15px;margin-right:6px;"></i> My Activity</h3>
+      <button class="modal-close" onclick="closeModal('myPostsModal')"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="mgmt-tabs" style="flex-shrink:0;">
+      <button class="mgmt-tab active" id="postsTab-posts" onclick="switchPostsTab('posts')">
+        <i class="fa-solid fa-newspaper"></i> Posts <span class="tab-count" id="postsTabCount-posts">6</span>
+      </button>
+      <button class="mgmt-tab" id="postsTab-comments" onclick="switchPostsTab('comments')">
+        <i class="fa-regular fa-comment"></i> Comments <span class="tab-count" id="postsTabCount-comments">8</span>
+      </button>
+      <button class="mgmt-tab" id="postsTab-replies" onclick="switchPostsTab('replies')">
+        <i class="fa-solid fa-reply"></i> Replies <span class="tab-count" id="postsTabCount-replies">5</span>
+      </button>
+      <button class="mgmt-tab" id="postsTab-saved" onclick="switchPostsTab('saved')">
+        <i class="fa-regular fa-bookmark"></i> Saved <span class="tab-count" id="postsTabCount-saved">7</span>
+      </button>
+      <button class="mgmt-tab" id="postsTab-reactions" onclick="switchPostsTab('reactions')">
+        <i class="fa-solid fa-fire-flame-curved"></i> Reactions <span class="tab-count" id="postsTabCount-reactions">14</span>
+      </button>
+    </div>
+    <div class="modal-body-scroll" style="flex:1;">
+      <div id="postsPanel-posts"></div>
+      <div id="postsPanel-comments" style="display:none;"></div>
+      <div id="postsPanel-replies" style="display:none;"></div>
+      <div id="postsPanel-saved" style="display:none;"></div>
+      <div id="postsPanel-reactions" style="display:none;">
+        <div id="reactionsPanel"></div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <span class="helper" id="myPostsHelper">— posts</span>
+      <button class="btn btn-primary btn-rounded" onclick="closeModal('myPostsModal'); openModal('newPostModal')"><i class="fa-solid fa-plus"></i> New Post</button>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -2164,6 +2964,11 @@
       post.score = s;
       scoreEl.textContent = fmtScore(s);
       scoreEl.className = 'vote-count up';
+      const shortTitle = post.title.length > 55 ? post.title.slice(0, 55) + '…' : post.title;
+      pushNotif(
+        '<div class="notif-icon" style="background:linear-gradient(135deg,var(--upvote),#ff8c5a)"><i class="fa-solid fa-arrow-up"></i></div>',
+        `Someone upvoted your post <em>${escapeHtml(shortTitle)}</em>`,
+        () => { closeAllPopovers(); openDetail(post.id); });
     } else {
       post.score = s;
       scoreEl.textContent = fmtScore(s);
@@ -2190,7 +2995,9 @@
   }
 
   // ============ DETAIL ============
+  let _detailPostId = null;
   function openDetail(id) {
+    _detailPostId = id;
     const p = POSTS.find(x => x.id === id);
     if (!p) return;
     document.getElementById('detailHeadTitle').textContent = p.community.name;
@@ -2295,7 +3102,15 @@
   function voteDetailUp(btn, id) {
     const down = btn.parentElement.querySelector('.down');
     btn.classList.toggle('active');
-    if (btn.classList.contains('active')) down.classList.remove('active');
+    if (btn.classList.contains('active')) {
+      down.classList.remove('active');
+      const p = POSTS.find(x => x.id === id);
+      const shortTitle = p ? (p.title.length > 55 ? p.title.slice(0, 55) + '…' : p.title) : 'your post';
+      pushNotif(
+        '<div class="notif-icon" style="background:linear-gradient(135deg,var(--upvote),#ff8c5a)"><i class="fa-solid fa-arrow-up"></i></div>',
+        `Someone upvoted your post <em>${escapeHtml(shortTitle)}</em>`,
+        () => { closeAllPopovers(); openDetail(id); });
+    }
   }
   function voteDetailDown(btn, id) {
     const up = btn.parentElement.querySelector('.up');
@@ -2310,6 +3125,10 @@
     if (btn.classList.contains('active')) {
       down.classList.remove('active');
       num.textContent = base + 1;
+      pushNotif(
+        '<div class="notif-icon" style="background:linear-gradient(135deg,var(--upvote),#ff8c5a)"><i class="fa-solid fa-arrow-up"></i></div>',
+        'Someone upvoted your comment',
+        () => { closeAllPopovers(); if (_detailPostId) openDetail(_detailPostId); });
     } else {
       num.textContent = base;
     }
@@ -2373,6 +3192,12 @@
   function addComment() {
     const ta = document.querySelector('#detailBody .comment-composer-top textarea');
     if (!ta || !ta.value.trim()) { ta?.focus(); return; }
+    const p = _detailPostId ? POSTS.find(x => x.id === _detailPostId) : null;
+    const shortTitle = p ? (p.title.length > 55 ? p.title.slice(0, 55) + '\u2026' : p.title) : 'your post';
+    pushNotif(
+      '<div class="notif-icon avatar-0" style="background:linear-gradient(135deg,var(--teal-500),var(--teal-700))"><i class="fa-solid fa-comment"></i></div>',
+      `Someone commented on your post <em>${escapeHtml(shortTitle)}</em>`,
+      () => { closeAllPopovers(); if (_detailPostId) openDetail(_detailPostId); });
     showToast('Comment posted');
     ta.value = '';
   }
@@ -2533,13 +3358,165 @@
     });
   });
 
-  // Compose tabs (modal)
-  document.querySelectorAll('.compose-tab').forEach(tab => {
-    tab.addEventListener('click', () => {
-      document.querySelectorAll('.compose-tab').forEach(t => t.classList.remove('active'));
-      tab.classList.add('active');
-    });
+  // ============ ADDON TOGGLE (unified post composer) ============
+  function toggleAddon(key) {
+    const panel = document.getElementById('addonPanel-' + key);
+    const btn   = document.getElementById('addonBtn-'   + key);
+    if (!panel) return;
+    const isOpen = panel.classList.contains('open');
+    panel.classList.toggle('open', !isOpen);
+    btn.classList.toggle('active', !isOpen);
+  }
+  function openAddon(key) {
+    const panel = document.getElementById('addonPanel-' + key);
+    const btn   = document.getElementById('addonBtn-'   + key);
+    if (!panel) return;
+    panel.classList.add('open');
+    if (btn) btn.classList.add('active');
+  }
+  function addPollOption() {
+    const container = document.getElementById('pollOptions');
+    if (!container) return;
+    const count = container.querySelectorAll('.poll-option-row').length + 1;
+    if (count > 6) { showToast('Maximum 6 options'); return; }
+    const row = document.createElement('div');
+    row.className = 'poll-option-row';
+    row.innerHTML = `<input type="text" placeholder="Option ${count}" /><button type="button" class="poll-opt-del" onclick="removePollOption(this)" title="Remove"><i class="fa-solid fa-xmark"></i></button>`;
+    container.appendChild(row);
+  }
+  function removePollOption(btn) {
+    const container = document.getElementById('pollOptions');
+    if (!container) return;
+    if (container.querySelectorAll('.poll-option-row').length <= 2) { showToast('Minimum 2 options required'); return; }
+    btn.closest('.poll-option-row').remove();
+  }
+  function updateCommPreview(val) {
+    const nameEl = document.getElementById('newCommPreviewName');
+    if (nameEl) nameEl.textContent = val ? 'p/' + val : 'p/CommunityName';
+  }
+
+  // ============ COMMUNITY PICKER ============
+  const COMMUNITIES = [
+    { name: 'Compounding',  glyph: 'fa-flask',           iconClass: 'ci-1', members: '1.2k members' },
+    { name: 'Narcotics',    glyph: 'fa-pills',           iconClass: 'ci-3', members: '890 members'  },
+    { name: 'Injections',   glyph: 'fa-syringe',         iconClass: 'ci-2', members: '640 members'  },
+    { name: 'Inspections',  glyph: 'fa-clipboard-check', iconClass: 'ci-7', members: '540 members'  },
+    { name: 'SOPs',         glyph: 'fa-file-shield',     iconClass: 'ci-4', members: '720 members'  },
+    { name: 'ColdChain',    glyph: 'fa-temperature-half',iconClass: 'ci-6', members: '430 members'  },
+    { name: 'PatientCare',  glyph: 'fa-user-doctor',     iconClass: 'ci-5', members: '980 members'  },
+    { name: 'Cannabis',     glyph: 'fa-leaf',            iconClass: 'ci-2', members: '310 members'  },
+  ];
+
+  let _selectedComm = null;
+
+  function renderCommList(filter) {
+    const list = document.getElementById('commPickerList');
+    const q = (filter || '').toLowerCase().trim();
+    const filtered = COMMUNITIES.filter(c => c.name.toLowerCase().includes(q));
+    if (!filtered.length) {
+      list.innerHTML = `<div class="comm-no-results">No communities match &ldquo;${filter}&rdquo;</div>`;
+      return;
+    }
+    list.innerHTML = filtered.map(c => `
+      <div class="comm-picker-option ${_selectedComm === c.name ? 'selected' : ''}" onclick="selectComm('${c.name}')">
+        <span class="comm-opt-icon ${c.iconClass}"><i class="fa-solid ${c.glyph}"></i></span>
+        <div class="comm-opt-info">
+          <div class="comm-opt-name">p/${c.name}</div>
+          <div class="comm-opt-meta">${c.members}</div>
+        </div>
+        ${_selectedComm === c.name ? '<i class="fa-solid fa-check" style="color:var(--teal-600);font-size:12px;"></i>' : ''}
+      </div>`).join('');
+  }
+
+  function toggleCommPicker() {
+    const trigger  = document.getElementById('commPickerTrigger');
+    const dropdown = document.getElementById('commPickerDropdown');
+    const isOpen   = dropdown.classList.contains('open');
+    dropdown.classList.toggle('open', !isOpen);
+    trigger.classList.toggle('open', !isOpen);
+    if (!isOpen) {
+      renderCommList('');
+      document.getElementById('commSearchInput').value = '';
+      setTimeout(() => document.getElementById('commSearchInput').focus(), 50);
+    }
+  }
+
+  function filterComms(q) { renderCommList(q); }
+
+  function selectComm(name) {
+    _selectedComm = name;
+    const c = COMMUNITIES.find(x => x.name === name);
+    const trigger  = document.getElementById('commPickerTrigger');
+    const dropdown = document.getElementById('commPickerDropdown');
+    const icon     = document.getElementById('commTriggerIcon');
+    const glyph    = document.getElementById('commTriggerGlyph');
+    const label    = document.getElementById('commTriggerLabel');
+    icon.className  = `comm-trigger-icon ${c.iconClass}`;
+    icon.style.display = 'grid';
+    glyph.className = `fa-solid ${c.glyph}`;
+    label.textContent = `p/${c.name}`;
+    label.classList.remove('placeholder');
+    dropdown.classList.remove('open');
+    trigger.classList.remove('open');
+    // close create form if open
+    closeCreateCommunity();
+  }
+
+  // Close picker when clicking outside
+  document.addEventListener('click', e => {
+    const wrap = document.getElementById('commPickerWrap');
+    if (wrap && !wrap.contains(e.target)) {
+      document.getElementById('commPickerDropdown').classList.remove('open');
+      document.getElementById('commPickerTrigger').classList.remove('open');
+    }
   });
+
+  // ============ CREATE COMMUNITY ============
+  function openCreateCommunity() {
+    closeModal('newPostModal');
+    openModal('createCommunityModal');
+    setTimeout(() => document.getElementById('newCommName').focus(), 80);
+  }
+
+  function closeCreateCommunity() {
+    closeModal('createCommunityModal');
+    document.getElementById('newCommName').value = '';
+    document.getElementById('newCommDesc').value = '';
+    updateCommCounter();
+    updateCommPreview('');
+    // reset privacy
+    document.querySelectorAll('.comm-privacy-opt').forEach(o => o.classList.toggle('selected', o.dataset.type === 'public'));
+  }
+
+  function updateCommCounter() {
+    const input = document.getElementById('newCommName');
+    const counter = document.getElementById('commNameCounter');
+    if (!input || !counter) return;
+    const len = input.value.length;
+    counter.textContent = `${len} / 50`;
+    counter.className = 'comm-name-counter' + (len >= 50 ? ' danger' : len >= 40 ? ' warn' : '');
+  }
+
+  function selectPrivacy(btn) {
+    document.querySelectorAll('.comm-privacy-opt').forEach(o => o.classList.remove('selected'));
+    btn.classList.add('selected');
+  }
+
+  function submitCreateCommunity() {
+    const name = document.getElementById('newCommName').value.trim();
+    if (!name) { showToast('Please enter a community name'); return; }
+    if (name.length < 3) { showToast('Name must be at least 3 characters'); return; }
+    if (COMMUNITIES.find(c => c.name.toLowerCase() === name.toLowerCase())) {
+      showToast('A community with that name already exists'); return;
+    }
+    const privacy = document.querySelector('.comm-privacy-opt.selected')?.dataset.type || 'public';
+    const glyphMap = { public: 'fa-earth-americas', private: 'fa-lock' };
+    const newComm = { name, glyph: glyphMap[privacy], iconClass: 'ci-1', members: 'New community' };
+    COMMUNITIES.unshift(newComm);
+    closeCreateCommunity();
+    selectComm(name);
+    showToast(`p/${name} created! You're now the moderator.`);
+  }
 
   // Tag selection in modal
   document.querySelectorAll('#newPostModal .tag-opt').forEach(opt => {
@@ -2556,6 +3533,9 @@
   // ============ LEFT NAV FILTERING ============
   document.querySelectorAll('.lnav-item').forEach(item => {
     item.addEventListener('click', () => {
+      // Skip items that open modals (they use inline onclick and should not affect nav state)
+      if (!item.dataset.community && !item.dataset.province && !item.dataset.feed && !item.dataset.resource) return;
+
       document.querySelectorAll('.lnav-item').forEach(i => i.classList.remove('active'));
       item.classList.add('active');
 
@@ -2820,8 +3800,67 @@
     showToast(`Showing posts from ${label.toLowerCase()}`);
   }
 
+  // ============ NOTIFICATIONS DATA ============
+  let _notifSeq = 100;
+  const NOTIFICATIONS = [
+    { id: 1, unread: true,  iconHtml: '<div class="notif-icon avatar-1">SP</div>',
+      text: '<strong>Dr. Sarah Patel</strong> replied to your comment on <em>USP 797 update</em>', time: '12 min ago',
+      action: () => { closeAllPopovers(); openDetail(1); } },
+    { id: 2, unread: true,  iconHtml: '<div class="notif-icon avatar-3">MK</div>',
+      text: '<strong>Marcus Kowalski</strong> mentioned you in <em>Fridge excursion</em>', time: '1h ago',
+      action: () => { closeAllPopovers(); openDetail(2); } },
+    { id: 3, unread: true,  iconHtml: '<div class="notif-icon" style="background:linear-gradient(135deg,var(--teal-500),var(--teal-700))"><i class="fa-solid fa-fire-flame-curved"></i></div>',
+      text: 'Your post is trending in <strong>Compounding</strong> — 47 new upvotes', time: '2h ago',
+      action: () => { closeAllPopovers(); showToast('Trending in Compounding'); } },
+    { id: 4, unread: false, iconHtml: '<div class="notif-icon" style="background:linear-gradient(135deg,var(--ink-900),var(--teal-700))"><i class="fa-solid fa-bolt"></i></div>',
+      text: '<strong>AI Answers</strong> are now in your most-followed thread. Subscribe now to read.', time: '5h ago',
+      action: () => { closeAllPopovers(); goToPricing(); } },
+    { id: 5, unread: false, iconHtml: '<div class="notif-icon avatar-2">JN</div>',
+      text: '<strong>Jin Nakamura</strong> followed you', time: '1d ago',
+      action: () => { closeAllPopovers(); showToast('Profile views'); } },
+  ];
+
+  function _notifUnreadCount() { return NOTIFICATIONS.filter(n => n.unread).length; }
+
+  function updateNotifBadge() {
+    const badge = document.getElementById('notifBadge');
+    if (!badge) return;
+    const count = _notifUnreadCount();
+    badge.textContent = count > 9 ? '9+' : String(count);
+    badge.style.display = count > 0 ? 'flex' : 'none';
+  }
+
+  function pushNotif(iconHtml, text, action) {
+    NOTIFICATIONS.unshift({ id: ++_notifSeq, unread: true, iconHtml, text, time: 'just now', action });
+    updateNotifBadge();
+    const pop = document.querySelector('[data-popover="notif"]');
+    if (pop) _renderNotifInto(pop);
+  }
+
+  function _renderNotifInto(pop) {
+    pop.innerHTML = `<div class="notif-head"><h4>Notifications</h4><button onclick="markAllRead()">Mark all read</button></div>` +
+      (NOTIFICATIONS.length === 0
+        ? `<div style="padding:20px;text-align:center;color:var(--ink-400);font-size:13px;">No notifications yet</div>`
+        : NOTIFICATIONS.map((n, i) => `
+      <div class="notif-item ${n.unread ? 'unread' : ''}" onclick="_notifClick(${i})">
+        ${n.iconHtml}
+        <div>
+          <div class="notif-text">${n.text}</div>
+          <div class="notif-time">${n.time}</div>
+        </div>
+      </div>`).join(''));
+  }
+
+  function _notifClick(idx) {
+    if (NOTIFICATIONS[idx]) {
+      NOTIFICATIONS[idx].unread = false;
+      updateNotifBadge();
+      NOTIFICATIONS[idx].action?.();
+    }
+  }
+
   // ============ TOP BAR: Notifications, Pharmacy, User chip ============
-  document.getElementById('notifBtn').addEventListener('click', (e) => {
+  document.getElementById('userChipBtn').addEventListener('click', (e) => {
     e.stopPropagation();
     const existing = document.querySelector('[data-popover="notif"]');
     if (existing) { existing.remove(); return; }
@@ -2829,51 +3868,15 @@
     const pop = document.createElement('div');
     pop.className = 'notif-popover';
     pop.dataset.popover = 'notif';
-    pop.innerHTML = `
-      <div class="notif-head">
-        <h4>Notifications</h4>
-        <button onclick="markAllRead()">Mark all read</button>
-      </div>
-      <div class="notif-item unread" onclick="closeAllPopovers(); openDetail(1)">
-        <div class="notif-icon avatar-1">SP</div>
-        <div>
-          <div class="notif-text"><strong>Dr. Sarah Patel</strong> replied to your comment on <em>USP 797 update</em></div>
-          <div class="notif-time">12 min ago</div>
-        </div>
-      </div>
-      <div class="notif-item unread" onclick="closeAllPopovers(); openDetail(2)">
-        <div class="notif-icon avatar-3">MK</div>
-        <div>
-          <div class="notif-text"><strong>Marcus Kowalski</strong> mentioned you in <em>Fridge excursion</em></div>
-          <div class="notif-time">1h ago</div>
-        </div>
-      </div>
-      <div class="notif-item unread" onclick="closeAllPopovers(); showToast('Trending in Compounding')">
-        <div class="notif-icon" style="background: linear-gradient(135deg, var(--teal-500), var(--teal-700))"><i class="fa-solid fa-fire-flame-curved"></i></div>
-        <div>
-          <div class="notif-text">Your post is trending in <strong>Compounding</strong> — 47 new upvotes</div>
-          <div class="notif-time">2h ago</div>
-        </div>
-      </div>
-      <div class="notif-item" onclick="closeAllPopovers(); goToPricing()">
-        <div class="notif-icon" style="background: linear-gradient(135deg, var(--ink-900), var(--teal-700))"><i class="fa-solid fa-bolt"></i></div>
-        <div>
-          <div class="notif-text"><strong>AI Answers</strong> are now in your most-followed thread. Subscribe now to read.</div>
-          <div class="notif-time">5h ago</div>
-        </div>
-      </div>
-      <div class="notif-item" onclick="closeAllPopovers(); showToast('Profile views')">
-        <div class="notif-icon avatar-2">JN</div>
-        <div>
-          <div class="notif-text"><strong>Jin Nakamura</strong> followed you</div>
-          <div class="notif-time">1d ago</div>
-        </div>
-      </div>
-    `;
+    _renderNotifInto(pop);
     e.currentTarget.parentElement.appendChild(pop);
   });
+
   function markAllRead() {
-    document.querySelectorAll('.notif-item.unread').forEach(i => i.classList.remove('unread'));
+    NOTIFICATIONS.forEach(n => n.unread = false);
+    updateNotifBadge();
+    const pop = document.querySelector('[data-popover="notif"]');
+    if (pop) _renderNotifInto(pop);
     showToast('All notifications marked read');
   }
 
@@ -2923,34 +3926,6 @@
     closeAllPopovers();
     showToast(`Switched to ${name}`);
   }
-
-  document.getElementById('userChipBtn').addEventListener('click', (e) => {
-    e.stopPropagation();
-    const existing = document.querySelector('[data-popover="user"]');
-    if (existing) { existing.remove(); return; }
-    closeAllPopovers();
-    const pop = document.createElement('div');
-    pop.className = 'popover';
-    pop.dataset.popover = 'user';
-    pop.style.right = '0';
-    pop.style.top = 'calc(100% + 8px)';
-    pop.style.minWidth = '220px';
-    pop.innerHTML = `
-      <div style="padding: 10px 12px; border-bottom: 1px solid var(--ink-100); margin-bottom: 4px;">
-        <div style="font-size: 13px; font-weight: 700; color: var(--ink-900);">u/123</div>
-        <div style="font-size: 11.5px; color: var(--ink-500);">Reader · Free plan</div>
-      </div>
-      <button class="popover-item" onclick="closeAllPopovers(); showToast('Profile')"><i class="fa-regular fa-user"></i> My profile</button>
-      <button class="popover-item" onclick="closeAllPopovers(); showToast('Saved posts')"><i class="fa-regular fa-bookmark"></i> Saved</button>
-      <button class="popover-item" onclick="closeAllPopovers(); showToast('Drafts')"><i class="fa-regular fa-file-lines"></i> Drafts</button>
-      <div class="popover-divider"></div>
-      <button class="popover-item" onclick="closeAllPopovers(); goToPricing()" style="color: var(--teal-700); font-weight: 600;"><i class="fa-solid fa-bolt"></i> Subscribe Now</button>
-      <div class="popover-divider"></div>
-      <button class="popover-item" onclick="closeAllPopovers(); showToast('Settings')"><i class="fa-solid fa-sliders"></i> Settings</button>
-      <button class="popover-item danger" onclick="closeAllPopovers(); showToast('Signed out')"><i class="fa-solid fa-arrow-right-from-bracket"></i> Sign out</button>
-    `;
-    e.currentTarget.parentElement.appendChild(pop);
-  });
 
   // ============ TOP SEARCH ============
   const searchInput = document.getElementById('topSearchInput');
@@ -3040,20 +4015,13 @@
   });
 
   // ============ COMPOSER STRIP / TOOLS ============
-  // Quick composer strip already opens the modal via inline onclick.
-  // Pre-select the right tab based on tool clicked:
+  // Quick composer strip opens the modal; toolbar shortcuts open the matching addon panel.
   document.querySelectorAll('.composer-tool').forEach(tool => {
-    tool.addEventListener('click', (e) => {
-      // wait a beat for modal to open, then select the right compose-tab
+    tool.addEventListener('click', () => {
       const title = tool.getAttribute('title');
-      const map = { 'Image': 'Image', 'Link': 'Link', 'Poll': 'Poll' };
-      const target = map[title];
-      setTimeout(() => {
-        if (!target) return;
-        document.querySelectorAll('.compose-tab').forEach(t => {
-          t.classList.toggle('active', t.textContent.trim() === target);
-        });
-      }, 50);
+      const map = { 'Image': 'image', 'Link': 'link', 'Poll': 'poll' };
+      const key = map[title];
+      if (key) setTimeout(() => openAddon(key), 60);
     });
   });
 
@@ -3067,11 +4035,603 @@
   }
 
   // ============ MAKE renderFeed CALL refreshFeed ============
+
+  // ============ MY POSTS DATA ============
+  const MY_POSTS_DATA = [
+    { id: 'myp1', postId: 1,   title: 'ACP just updated USP 797 sterile compounding guidance — here\'s a side-by-side of what actually changed', community: { name: 'Compounding', icon: 'ci-1', glyph: 'fa-flask' },           time: '2h',  score: 218, comments: 47, _hidden: false, _deleted: false },
+    { id: 'myp2', postId: null, title: 'New Metolazone shortage: has anyone found an alternative compound?',                                        community: { name: 'Narcotics',   icon: 'ci-3', glyph: 'fa-pills' },           time: '3d',  score: 34,  comments: 11, _hidden: false, _deleted: false },
+    { id: 'myp3', postId: null, title: 'OCP inspection checklist — updated for 2026 requirements',                                                  community: { name: 'Inspections', icon: 'ci-7', glyph: 'fa-clipboard-check' }, time: '1w',  score: 87,  comments: 23, _hidden: true,  _deleted: false },
+    { id: 'myp4', postId: null, title: 'Travel vaccine documentation best practices for busy clinics',                                               community: { name: 'Injections',  icon: 'ci-2', glyph: 'fa-syringe' },         time: '2w',  score: 54,  comments: 8,  _hidden: false, _deleted: false },
+    { id: 'myp5', postId: null, title: 'Reminder: SOP review date tracking template (editable)',                                                     community: { name: 'SOPs',        icon: 'ci-4', glyph: 'fa-file-shield' },     time: '3w',  score: 142, comments: 31, _hidden: false, _deleted: false },
+    { id: 'myp6', postId: null, title: 'Azithromycin reconstitution — clearing up the BUD confusion',                                               community: { name: 'Compounding', icon: 'ci-1', glyph: 'fa-flask' },           time: '1mo', score: 19,  comments: 5,  _hidden: false, _deleted: false },
+  ];
+
+  // ============ MY COMMENTS DATA ============
+  const MY_COMMENTS_DATA = [
+    { id: 'myc1', text: 'We use a one-page excursion log: time, duration, peak temp, affected lots, manufacturer contact, decision, signature. The signature line is the part inspectors look for.', postTitle: 'Fridge temperature excursion at 4 AM — what\'s your decision tree?',            postId: 2, community: { name: 'ColdChain',   icon: 'ci-6' }, time: '4h',  score: 22, _deleted: false },
+    { id: 'myc2', text: 'Point 1 is huge. We had a near-miss last month because our SOP still referenced the old 48-hour interpretation. Updating ours today.',                                      postTitle: 'ACP just updated USP 797 sterile compounding guidance',                         postId: 1, community: { name: 'Compounding', icon: 'ci-1' }, time: '1d',  score: 9,  _deleted: false },
+    { id: 'myc3', text: 'We had the same issue in Manitoba last winter. Our pharmacist documented in the patient note that local roads were closed per municipal advisory — that was sufficient on inspection.', postTitle: 'Methadone witnessed dosing — virtual witnessing during weather closures',  postId: 3, community: { name: 'Narcotics',   icon: 'ci-3' }, time: '6h',  score: 8,  _deleted: false },
+    { id: 'myc4', text: 'Manufacturer monograph and CPS both confirm 10 days. Your 2019 SOP should be updated — this is exactly what annual SOP review is for.',                                     postTitle: 'Reconstituted azithromycin BUD — manufacturer says 10 days, our SOP says 7',    postId: 5, community: { name: 'Compounding', icon: 'ci-1' }, time: '3d',  score: 4,  _deleted: false },
+    { id: 'myc5', text: 'Yellow fever requires a designated PHAC-authorized travel clinic. You need the Yellow Fever Vaccination Certificate (YFVC) and a designated cold chain record for 17D vaccines.', postTitle: 'Travel vaccine clinic from scratch — what did you wish you\'d known?',     postId: 4, community: { name: 'Injections',  icon: 'ci-2' }, time: '1w',  score: 6,  _deleted: false },
+    { id: 'myc6', text: 'The SCP focus on data logger calibration certificates is new this year — we got flagged for certificates older than 12 months. Budget for annual recalibration.',           postTitle: 'SCP inspection prep — the three things on every checklist this year',           postId: 6, community: { name: 'Inspections', icon: 'ci-7' }, time: '2d',  score: 11, _deleted: false },
+    { id: 'myc7', text: 'Good breakdown. Does anyone have a template for the new MFR documentation format that includes the BUD source field?',                                                       postTitle: 'ACP just updated USP 797 sterile compounding guidance',                         postId: 1, community: { name: 'Compounding', icon: 'ci-1' }, time: '2h',  score: 3,  _deleted: false },
+    { id: 'myc8', text: 'We\'ve been using AlgoPharma Vault for SOP tracking and the review date reminders have been a game changer for compliance.',                                               postTitle: 'Reminder: SOP review date tracking template',                                   postId: null, community: { name: 'SOPs',     icon: 'ci-4' }, time: '3w',  score: 7,  _deleted: false },
+  ];
+
+  // ============ MY REPLIES DATA (replies from others to my posts/comments) ============
+  const MY_REPLIES_DATA = [
+    { id: 'myrp1', from: 'u/mike_rph',      fromName: 'Mike Chen',       fromRole: 'RPh',  fromRoleClass: 'role-rph',  avatarInit: 'MC', avatarClass: 'avatar-3', text: 'Thanks for the side-by-side — saved me at least two hours this morning.', onType: 'post',    onTitle: 'ACP just updated USP 797 sterile compounding guidance', postId: 1, time: '1h',  score: 6,  _read: false },
+    { id: 'myrp2', from: 'u/jenpharm_ab',   fromName: 'Jennifer Walsh',  fromRole: 'RPh',  fromRoleClass: 'role-rph',  avatarInit: 'JW', avatarClass: 'avatar-2', text: 'We just did ours last week — the new BUD source field tripped us up. Do you have a template for the updated MFR?', onType: 'comment', onTitle: 'ACP just updated USP 797 sterile compounding guidance', postId: 1, time: '30m', score: 3,  _read: false },
+    { id: 'myrp3', from: 'u/techsarah99',   fromName: 'Sarah B.',        fromRole: 'Tech', fromRoleClass: 'role-tech', avatarInit: 'SB', avatarClass: 'avatar-5', text: 'Our excursion log is more complex — we also track relative humidity. Happy to share if useful.', onType: 'comment', onTitle: 'Fridge temperature excursion at 4 AM — what\'s your decision tree?', postId: 2, time: '2h',  score: 4,  _read: false },
+    { id: 'myrp4', from: 'u/drrivera_on',   fromName: 'Dr. Rivera',      fromRole: 'RPh',  fromRoleClass: 'role-rph',  avatarInit: 'DR', avatarClass: 'avatar-4', text: 'Agreed on the calibration certs — we budget for it annually now. What vendor are you using?', onType: 'comment', onTitle: 'SCP inspection prep — the three things on every checklist this year', postId: 6, time: '5h',  score: 2,  _read: true  },
+    { id: 'myrp5', from: 'u/compoundking',  fromName: 'Alex T.',         fromRole: 'RPh',  fromRoleClass: 'role-rph',  avatarInit: 'AT', avatarClass: 'avatar-1', text: 'This is exactly what I needed before my ACP audit next week. Bookmarked.', onType: 'post', onTitle: 'OCP inspection checklist — updated for 2026 requirements', postId: null, time: '1d',  score: 8,  _read: true  },
+  ];
+
+  // ============ MY REACTIONS DATA (votes others gave my content) ============
+  const MY_REACTIONS_POSTS_DATA = [
+    { id: 'myp1', postId: 1,    title: 'ACP just updated USP 797 sterile compounding guidance — here\'s a side-by-side of what actually changed', community: { name: 'Compounding', icon: 'ci-1', glyph: 'fa-flask' },           time: '2h',  upvotes: 218, downvotes: 4  },
+    { id: 'myp2', postId: null, title: 'New Metolazone shortage: has anyone found an alternative compound?',                                        community: { name: 'Narcotics',   icon: 'ci-3', glyph: 'fa-pills' },           time: '3d',  upvotes: 34,  downvotes: 1  },
+    { id: 'myp3', postId: null, title: 'OCP inspection checklist — updated for 2026 requirements',                                                  community: { name: 'Inspections', icon: 'ci-7', glyph: 'fa-clipboard-check' }, time: '1w',  upvotes: 87,  downvotes: 2  },
+    { id: 'myp4', postId: null, title: 'Travel vaccine documentation best practices for busy clinics',                                               community: { name: 'Injections',  icon: 'ci-2', glyph: 'fa-syringe' },         time: '2w',  upvotes: 54,  downvotes: 0  },
+    { id: 'myp5', postId: null, title: 'Reminder: SOP review date tracking template (editable)',                                                     community: { name: 'SOPs',        icon: 'ci-4', glyph: 'fa-file-shield' },     time: '3w',  upvotes: 142, downvotes: 3  },
+    { id: 'myp6', postId: null, title: 'Azithromycin reconstitution — clearing up the BUD confusion',                                               community: { name: 'Compounding', icon: 'ci-1', glyph: 'fa-flask' },           time: '1mo', upvotes: 19,  downvotes: 0  },
+  ];
+  const MY_REACTIONS_COMMENTS_DATA = [
+    { id: 'myc1', postId: 2,    text: 'We use a one-page excursion log: time, duration, peak temp…', postTitle: 'Fridge temperature excursion at 4 AM — what\'s your decision tree?',         community: { name: 'ColdChain',   icon: 'ci-6' }, time: '4h',  upvotes: 22, downvotes: 0 },
+    { id: 'myc2', postId: 1,    text: 'Point 1 is huge. We had a near-miss last month…',             postTitle: 'ACP just updated USP 797 sterile compounding guidance',                       community: { name: 'Compounding', icon: 'ci-1' }, time: '1d',  upvotes: 9,  downvotes: 1 },
+    { id: 'myc3', postId: 3,    text: 'We had the same issue in Manitoba last winter…',              postTitle: 'Methadone witnessed dosing — virtual witnessing during weather closures',     community: { name: 'Narcotics',   icon: 'ci-3' }, time: '6h',  upvotes: 8,  downvotes: 0 },
+    { id: 'myc4', postId: 5,    text: 'Manufacturer monograph and CPS both confirm 10 days…',       postTitle: 'Reconstituted azithromycin BUD — manufacturer says 10 days, our SOP says 7', community: { name: 'Compounding', icon: 'ci-1' }, time: '3d',  upvotes: 4,  downvotes: 2 },
+    { id: 'myc5', postId: 4,    text: 'Yellow fever requires a designated PHAC-authorized travel clinic…', postTitle: 'Travel vaccine clinic from scratch — what did you wish you\'d known?', community: { name: 'Injections',  icon: 'ci-2' }, time: '1w',  upvotes: 6,  downvotes: 0 },
+    { id: 'myc6', postId: 6,    text: 'The SCP focus on data logger calibration certificates is new this year…', postTitle: 'SCP inspection prep — the three things on every checklist this year', community: { name: 'Inspections', icon: 'ci-7' }, time: '2d',  upvotes: 11, downvotes: 0 },
+    { id: 'myc7', postId: 1,    text: 'Good breakdown. Does anyone have a template…',               postTitle: 'ACP just updated USP 797 sterile compounding guidance',                       community: { name: 'Compounding', icon: 'ci-1' }, time: '2h',  upvotes: 3,  downvotes: 0 },
+    { id: 'myc8', postId: null, text: 'We\'ve been using AlgoPharma Vault for SOP tracking…',      postTitle: 'Reminder: SOP review date tracking template',                                 community: { name: 'SOPs',        icon: 'ci-4' }, time: '3w',  upvotes: 7,  downvotes: 1 },
+  ];
+
+  // ============ CREATED COMMUNITIES STATE ============
+  const USER_CREATED_COMMUNITIES = ['Compounding'];
+  const USER_COMMUNITY_ACCESS = { 'Compounding': 'public' };
+
+  // ============ MANAGE COMMUNITIES ============
+  let _mgmtTab = 'created';
+  let _mgmtSearchQ = '';
+
+  function openManageCommunities() {
+    _mgmtTab = 'created';
+    _mgmtSearchQ = '';
+    const inp = document.getElementById('commMgmtSearch');
+    if (inp) inp.value = '';
+    document.getElementById('mgmtTab-search').style.display = 'none';
+    switchMgmtTab('created');
+    openModal('manageCommunityModal');
+  }
+
+  function switchMgmtTab(tab) {
+    _mgmtTab = tab;
+    ['created', 'joined', 'search'].forEach(t => {
+      const tabEl = document.getElementById(`mgmtTab-${t}`);
+      const panelEl = document.getElementById(`mgmtPanel-${t}`);
+      if (tabEl) tabEl.classList.toggle('active', t === tab);
+      if (panelEl) panelEl.style.display = t === tab ? '' : 'none';
+    });
+    if (tab === 'created') renderMgmtCreated();
+    if (tab === 'joined')  renderMgmtJoined();
+    if (tab === 'search')  renderMgmtSearch();
+  }
+
+  function filterMgmtComms(q) {
+    _mgmtSearchQ = q.trim().toLowerCase();
+    const searchTab = document.getElementById('mgmtTab-search');
+    if (_mgmtSearchQ) {
+      searchTab.style.display = '';
+      switchMgmtTab('search');
+    } else {
+      searchTab.style.display = 'none';
+      switchMgmtTab(_mgmtTab === 'search' ? 'created' : _mgmtTab);
+    }
+  }
+
+  function renderMgmtCreated() {
+    const panel = document.getElementById('mgmtPanel-created');
+    const countEl = document.getElementById('mgmt-created-count');
+    const items = USER_CREATED_COMMUNITIES;
+    if (countEl) countEl.textContent = items.length;
+    document.getElementById('myCommMgmtCount').textContent = [..._joinedCommunities].length;
+    if (!items.length) {
+      panel.innerHTML = `<div class="mgmt-empty">You haven't created any communities yet.<br><br><span style="color:var(--teal-700);cursor:pointer;font-weight:600;" onclick="closeModal('manageCommunityModal'); openModal('createCommunityModal')">Create your first community →</span></div>`;
+      return;
+    }
+    panel.innerHTML = items.map((name, idx) => {
+      const comm = COMMUNITIES.find(c => c.name === name) || { name, iconClass: 'ci-1', glyph: 'fa-people-group', members: 'New community' };
+      const access = USER_COMMUNITY_ACCESS[name] || 'public';
+      const accessIcons = { public: 'fa-earth-americas', private: 'fa-lock' };
+      const accessLabels = { public: 'Public', private: 'Private' };
+      return `
+      <div class="mgmt-comm-item">
+        <span class="community-icon ${comm.iconClass}"><i class="fa-solid ${comm.glyph}"></i></span>
+        <div class="mgmt-comm-info">
+          <div class="mgmt-comm-name">p/${name}</div>
+          <div class="mgmt-comm-meta">${comm.members} &middot; You are the creator</div>
+        </div>
+        <div class="mgmt-comm-actions">
+          <div style="position:relative;display:inline-block;">
+            <button class="access-pill ${access}" onclick="toggleAccessMenu(this,'${name}',event)" title="Change access type">
+              <i class="fa-solid ${accessIcons[access]}"></i> ${accessLabels[access]} <i class="fa-solid fa-chevron-down ap-chevron"></i>
+            </button>
+          </div>
+          <button class="mgmt-icon-btn" title="Delete community" onclick="confirmDeleteComm('${name}',${idx})"><i class="fa-solid fa-trash"></i></button>
+        </div>
+      </div>
+      <div class="confirm-row" id="confirm-del-comm-${idx}">
+        <span class="cr-text"><i class="fa-solid fa-triangle-exclamation"></i> Delete p/${name}? This cannot be undone.</span>
+        <button class="confirm-btn-yes" onclick="executeDeleteComm('${name}',${idx})">Delete</button>
+        <button class="confirm-btn-no" onclick="document.getElementById('confirm-del-comm-${idx}').classList.remove('show')">Cancel</button>
+      </div>`;
+    }).join('');
+  }
+
+  function renderMgmtJoined() {
+    const panel = document.getElementById('mgmtPanel-joined');
+    const countEl = document.getElementById('mgmt-joined-count');
+    const joined = [..._joinedCommunities].filter(n => !USER_CREATED_COMMUNITIES.includes(n));
+    if (countEl) countEl.textContent = [..._joinedCommunities].length;
+    if (!joined.length) {
+      panel.innerHTML = `<div class="mgmt-empty">You haven't joined any communities yet.</div>`;
+      return;
+    }
+    panel.innerHTML = joined.map((name, idx) => {
+      const comm = COMMUNITIES.find(c => c.name === name) || { name, iconClass: 'ci-1', glyph: 'fa-people-group', members: '' };
+      return `
+      <div class="mgmt-comm-item" id="mgmt-joined-item-${idx}">
+        <span class="community-icon ${comm.iconClass}"><i class="fa-solid ${comm.glyph}"></i></span>
+        <div class="mgmt-comm-info">
+          <div class="mgmt-comm-name">p/${name}</div>
+          <div class="mgmt-comm-meta">${comm.members}</div>
+        </div>
+        <div class="mgmt-comm-actions">
+          <button class="mgmt-leave-btn" onclick="leaveJoinedComm('${name}')">Leave</button>
+        </div>
+      </div>`;
+    }).join('');
+  }
+
+  function renderMgmtSearch() {
+    const panel = document.getElementById('mgmtPanel-search');
+    const countEl = document.getElementById('mgmt-search-count');
+    const q = _mgmtSearchQ;
+    const results = COMMUNITIES.filter(c => c.name.toLowerCase().includes(q));
+    if (countEl) countEl.textContent = results.length;
+    if (!results.length) {
+      panel.innerHTML = `<div class="mgmt-empty">No communities match "<strong>${escapeHtml(q)}</strong>"</div>`;
+      return;
+    }
+    panel.innerHTML = results.map(comm => {
+      const isJoined  = _joinedCommunities.has(comm.name);
+      const isCreated = USER_CREATED_COMMUNITIES.includes(comm.name);
+      const badge = isCreated ? `<span style="font-size:11px;color:var(--amber);font-weight:700;"><i class="fa-solid fa-crown"></i> Creator</span>`
+                  : isJoined  ? `<span style="font-size:11px;color:var(--teal-700);font-weight:700;"><i class="fa-solid fa-check"></i> Joined</span>` : '';
+      const actionBtn = !isJoined
+        ? `<button class="btn btn-ghost btn-rounded" style="padding:5px 12px;font-size:12px;" onclick="joinFromSearch('${comm.name}',this)"><i class="fa-solid fa-plus"></i> Join</button>`
+        : !isCreated
+          ? `<button class="mgmt-leave-btn" onclick="leaveJoinedCommSearch('${comm.name}',this)">Leave</button>`
+          : '';
+      return `
+      <div class="mgmt-comm-item">
+        <span class="community-icon ${comm.iconClass}"><i class="fa-solid ${comm.glyph}"></i></span>
+        <div class="mgmt-comm-info">
+          <div class="mgmt-comm-name">p/${comm.name}</div>
+          <div class="mgmt-comm-meta">${comm.members}${badge ? ' &middot; ' + badge : ''}</div>
+        </div>
+        <div class="mgmt-comm-actions">${actionBtn}</div>
+      </div>`;
+    }).join('');
+  }
+
+  // Access change menu
+  function toggleAccessMenu(btn, commName, e) {
+    e.stopPropagation();
+    document.querySelectorAll('.access-menu').forEach(m => m.remove());
+    const current = USER_COMMUNITY_ACCESS[commName] || 'public';
+    const opts = [
+      { type: 'public',  icon: 'fa-earth-americas', label: 'Public',  desc: 'Anyone can view & join', cls: 'pub'  },
+      { type: 'private', icon: 'fa-lock',            label: 'Private', desc: 'Only you (the creator)', cls: 'priv' },
+    ];
+    
+    const rect = btn.getBoundingClientRect();
+    const menu = document.createElement('div');
+    menu.className = 'access-menu';
+    menu.style.position = 'fixed';
+    menu.style.top = (rect.bottom + 5) + 'px';
+    menu.style.left = 'auto';
+    menu.style.right = (window.innerWidth - rect.right) + 'px';
+    menu.style.zIndex = '999999';
+    
+    menu.innerHTML = `<div class="access-menu-head">Access type</div>` +
+      opts.map(o => `
+        <div class="access-menu-item ${o.cls} ${current === o.type ? 'active' : ''}" onclick="setCommAccess('${commName}','${o.type}',event)">
+          <i class="fa-solid ${o.icon} am-icon"></i>
+          <div style="flex:1;"><div class="opt-name">${o.label}</div><div class="opt-desc">${o.desc}</div></div>
+          ${current === o.type ? '<i class="fa-solid fa-check opt-check"></i>' : ''}
+        </div>`).join('');
+        
+    document.body.appendChild(menu);
+  }
+
+  function setCommAccess(commName, newType, e) {
+    e.stopPropagation();
+    USER_COMMUNITY_ACCESS[commName] = newType;
+    document.querySelectorAll('.access-menu').forEach(m => m.remove());
+    renderMgmtCreated();
+    showToast(`p/${commName} is now ${newType.charAt(0).toUpperCase() + newType.slice(1)}`);
+  }
+
+  function confirmDeleteComm(name, idx) {
+    document.getElementById(`confirm-del-comm-${idx}`)?.classList.add('show');
+  }
+
+  function executeDeleteComm(name, idx) {
+    const i = USER_CREATED_COMMUNITIES.indexOf(name);
+    if (i > -1) USER_CREATED_COMMUNITIES.splice(i, 1);
+    delete USER_COMMUNITY_ACCESS[name];
+    _joinedCommunities.delete(name);
+    const lnavItem = document.querySelector(`.lnav-item[data-community="${name}"]`);
+    if (lnavItem) lnavItem.remove();
+    renderMgmtCreated();
+    renderMgmtJoined();
+    showToast(`p/${name} deleted`);
+  }
+
+  function leaveJoinedComm(name) {
+    _joinedCommunities.delete(name);
+    const lnavItem = document.querySelector(`.lnav-item[data-community="${name}"]`);
+    if (lnavItem) {
+      if (_discoverCommunities.has(name)) document.getElementById('discoverSection')?.appendChild(lnavItem);
+      else lnavItem.remove();
+    }
+    renderMgmtJoined();
+    document.getElementById('myCommMgmtCount').textContent = [..._joinedCommunities].length;
+    showToast(`Left p/${name}`);
+  }
+
+  function leaveJoinedCommSearch(name, btn) {
+    _joinedCommunities.delete(name);
+    const lnavItem = document.querySelector(`.lnav-item[data-community="${name}"]`);
+    if (lnavItem) {
+      if (_discoverCommunities.has(name)) document.getElementById('discoverSection')?.appendChild(lnavItem);
+      else lnavItem.remove();
+    }
+    btn.outerHTML = `<button class="btn btn-ghost btn-rounded" style="padding:5px 12px;font-size:12px;" onclick="joinFromSearch('${name}',this)"><i class="fa-solid fa-plus"></i> Join</button>`;
+    document.getElementById('myCommMgmtCount').textContent = [..._joinedCommunities].length;
+    showToast(`Left p/${name}`);
+  }
+
+  function joinFromSearch(name, btn) {
+    _joinedCommunities.add(name);
+    const lnavItem = document.querySelector(`.lnav-item[data-community="${name}"]`);
+    if (lnavItem && _discoverCommunities.has(name)) document.getElementById('myCommSection')?.appendChild(lnavItem);
+    btn.outerHTML = `<button class="mgmt-leave-btn" onclick="leaveJoinedCommSearch('${name}',this)">Leave</button>`;
+    document.getElementById('myCommMgmtCount').textContent = [..._joinedCommunities].length;
+    showToast(`Joined p/${name}!`);
+  }
+
+  // ============ MY POSTS (Activity Hub) ============
+  let _postsTab = 'posts';
+
+  function openMyPostsModal() {
+    _postsTab = 'posts';
+    document.getElementById('postsTabCount-posts').textContent = MY_POSTS_DATA.filter(p => !p._deleted).length;
+    document.getElementById('postsTabCount-comments').textContent = MY_COMMENTS_DATA.filter(c => !c._deleted).length;
+    document.getElementById('postsTabCount-replies').textContent = MY_REPLIES_DATA.length;
+    document.getElementById('postsTabCount-saved').textContent =
+      SAVED_POSTS_DATA.filter(p => !p._unsaved).length + SAVED_COMMENTS_DATA.filter(c => !c._unsaved).length;
+    document.getElementById('postsTabCount-reactions').textContent =
+      MY_REACTIONS_POSTS_DATA.length + MY_REACTIONS_COMMENTS_DATA.length;
+    ['posts','comments','replies','saved','reactions'].forEach(t => {
+      document.getElementById(`postsTab-${t}`)?.classList.toggle('active', t === _postsTab);
+      const panel = document.getElementById(`postsPanel-${t}`);
+      if (panel) panel.style.display = t === _postsTab ? '' : 'none';
+    });
+    renderPostsPanel('posts');
+    openModal('myPostsModal');
+  }
+
+  function switchPostsTab(tab) {
+    _postsTab = tab;
+    ['posts','comments','replies','saved','reactions'].forEach(t => {
+      document.getElementById(`postsTab-${t}`)?.classList.toggle('active', t === tab);
+      const panel = document.getElementById(`postsPanel-${t}`);
+      if (panel) panel.style.display = t === tab ? '' : 'none';
+    });
+    renderPostsPanel(tab);
+  }
+
+  function renderPostsPanel(tab) {
+    if (tab === 'posts')     renderMyPosts();
+    else if (tab === 'comments')  renderMyComments();
+    else if (tab === 'replies')   renderMyReplies();
+    else if (tab === 'saved')     renderSavedPanel();
+    else if (tab === 'reactions') initReactionsPanel();
+    const helpers = {
+      posts:     () => { const a = MY_POSTS_DATA.filter(p => !p._deleted), h = a.filter(p => p._hidden).length; return `${a.length} post${a.length !== 1 ? 's' : ''}${h ? ' · ' + h + ' hidden' : ''}`; },
+      comments:  () => { const a = MY_COMMENTS_DATA.filter(c => !c._deleted); return `${a.length} comment${a.length !== 1 ? 's' : ''}`; },
+      replies:   () => { const u = MY_REPLIES_DATA.filter(r => !r._read).length; return `${MY_REPLIES_DATA.length} repl${MY_REPLIES_DATA.length !== 1 ? 'ies' : 'y'}${u ? ' · ' + u + ' new' : ''}`; },
+      saved:     () => { const p = SAVED_POSTS_DATA.filter(x => !x._unsaved).length, c = SAVED_COMMENTS_DATA.filter(x => !x._unsaved).length; return `${p} post${p !== 1 ? 's' : ''} · ${c} comment${c !== 1 ? 's' : ''} saved`; },
+      reactions: () => 'Votes others gave your content',
+    };
+    const helper = document.getElementById('myPostsHelper');
+    if (helper && helpers[tab]) helper.textContent = helpers[tab]();
+  }
+
+  function renderMyPosts() {
+    const list = document.getElementById('postsPanel-posts');
+    const active = MY_POSTS_DATA.filter(p => !p._deleted);
+    document.getElementById('postsTabCount-posts').textContent = active.length;
+    document.getElementById('myPostsCount').textContent = active.length;
+    if (!active.length) {
+      list.innerHTML = `<div class="mgmt-empty" style="padding:40px 22px;">You haven't created any posts yet.<br><br><span style="color:var(--teal-700);cursor:pointer;font-weight:600;" onclick="closeModal('myPostsModal');openModal('newPostModal')">Write your first post →</span></div>`;
+      return;
+    }
+    list.innerHTML = active.map(p => `
+      <div class="mypost-item ${p._hidden ? 'hidden-post' : ''}" id="mypost-row-${p.id}">
+        <div class="mypost-info">
+          <div class="mypost-title" onclick="closeModal('myPostsModal');${p.postId ? `openDetail(${p.postId})` : `showToast('Post preview')`}">${escapeHtml(p.title)}</div>
+          <div class="mypost-meta">
+            <span class="ci-mini ${p.community.icon}" style="width:14px;height:14px;font-size:7px;flex-shrink:0;"><i class="fa-solid ${p.community.glyph}"></i></span>
+            p/${p.community.name} &middot;
+            <i class="fa-solid fa-arrow-up" style="font-size:10px;"></i> ${fmtScore(p.score)} &middot;
+            <i class="fa-regular fa-comment" style="font-size:10px;"></i> ${p.comments} &middot;
+            ${p.time} ago
+            ${p._hidden ? '&middot; <span style="color:var(--amber);font-weight:700;"><i class="fa-regular fa-eye-slash"></i> Hidden</span>' : ''}
+          </div>
+        </div>
+        <div class="mypost-actions">
+          <button class="mypost-btn ${p._hidden ? 'hide-active' : ''}" onclick="toggleHideMyPost('${p.id}')" title="${p._hidden ? 'Unhide post' : 'Hide post from feed'}">
+            <i class="fa-${p._hidden ? 'solid' : 'regular'} fa-eye${p._hidden ? '-slash' : ''}"></i> ${p._hidden ? 'Unhide' : 'Hide'}
+          </button>
+          <button class="mypost-btn danger" onclick="confirmDeleteMyPost('${p.id}')" title="Delete post permanently">
+            <i class="fa-solid fa-trash"></i>
+          </button>
+        </div>
+      </div>
+      <div class="confirm-row" id="confirm-del-mypost-${p.id}">
+        <span class="cr-text"><i class="fa-solid fa-triangle-exclamation"></i> Permanently delete this post?</span>
+        <button class="confirm-btn-yes" onclick="executeDeleteMyPost('${p.id}')">Delete</button>
+        <button class="confirm-btn-no" onclick="document.getElementById('confirm-del-mypost-${p.id}').classList.remove('show')">Cancel</button>
+      </div>`).join('');
+  }
+
+  function toggleHideMyPost(id) {
+    const p = MY_POSTS_DATA.find(x => x.id === id);
+    if (!p) return;
+    p._hidden = !p._hidden;
+    renderMyPosts();
+    showToast(p._hidden ? 'Post hidden from the feed' : 'Post is now visible again');
+  }
+
+  function confirmDeleteMyPost(id) {
+    document.getElementById(`confirm-del-mypost-${id}`)?.classList.add('show');
+  }
+
+  function executeDeleteMyPost(id) {
+    const p = MY_POSTS_DATA.find(x => x.id === id);
+    if (p) p._deleted = true;
+    renderMyPosts();
+    showToast('Post deleted permanently');
+  }
+
+  // ============ MY COMMENTS ============
+  function renderMyComments() {
+    const list = document.getElementById('postsPanel-comments');
+    const active = MY_COMMENTS_DATA.filter(c => !c._deleted);
+    document.getElementById('postsTabCount-comments').textContent = active.length;
+    if (!active.length) {
+      list.innerHTML = `<div class="mgmt-empty" style="padding:40px 22px;">You haven't made any comments yet.</div>`;
+      return;
+    }
+    list.innerHTML = active.map(c => `
+      <div class="mycomment-item" id="mycomment-row-${c.id}">
+        <div class="mycomment-body">
+          <div class="mycomment-ctx">
+            <span class="ci-mini ${c.community.icon}" style="width:14px;height:14px;font-size:7px;flex-shrink:0;"><i class="fa-solid fa-people-group"></i></span>
+            p/${c.community.name} &middot;
+            <span class="ctx-post" onclick="closeModal('myPostsModal');${c.postId ? `openDetail(${c.postId})` : `showToast('Post not found')`}" title="${escapeHtml(c.postTitle)}">${escapeHtml(c.postTitle)}</span>
+            &middot; ${c.time} ago &middot; <i class="fa-solid fa-arrow-up" style="font-size:10px;"></i> ${c.score}
+          </div>
+          <div class="mycomment-text">${escapeHtml(c.text)}</div>
+        </div>
+        <button class="mycomment-del-btn" onclick="confirmDeleteMyComment('${c.id}')" title="Delete this comment">
+          <i class="fa-solid fa-trash"></i>
+        </button>
+      </div>
+      <div class="confirm-row" id="confirm-del-mycomment-${c.id}" style="margin:0 22px;border-top:none;border-radius:0 0 8px 8px;">
+        <span class="cr-text"><i class="fa-solid fa-triangle-exclamation"></i> Delete this comment permanently?</span>
+        <button class="confirm-btn-yes" onclick="executeDeleteMyComment('${c.id}')">Delete</button>
+        <button class="confirm-btn-no" onclick="document.getElementById('confirm-del-mycomment-${c.id}').classList.remove('show')">Cancel</button>
+      </div>`).join('');
+  }
+
+  function confirmDeleteMyComment(id) {
+    document.getElementById(`confirm-del-mycomment-${id}`)?.classList.add('show');
+  }
+
+  function executeDeleteMyComment(id) {
+    const c = MY_COMMENTS_DATA.find(x => x.id === id);
+    if (c) c._deleted = true;
+    renderMyComments();
+    showToast('Comment deleted permanently');
+  }
+
+  // ============ SAVED POSTS DATA ============
+  const SAVED_POSTS_DATA = [
+    { id: 'svp1', postId: 1,    title: 'ACP just updated USP 797 sterile compounding guidance — here\'s a side-by-side of what actually changed', community: { name: 'Compounding', icon: 'ci-1', glyph: 'fa-flask' },           author: 'u/sarahpatel-rph', time: '2h',  score: 218, comments: 47, _unsaved: false },
+    { id: 'svp2', postId: 2,    title: 'Fridge temperature excursion at 4 AM — what\'s your decision tree?',                                        community: { name: 'ColdChain',   icon: 'ci-6', glyph: 'fa-temperature-low' }, author: 'u/mike_rph',       time: '5h',  score: 91,  comments: 29, _unsaved: false },
+    { id: 'svp3', postId: 3,    title: 'Methadone witnessed dosing — virtual witnessing during weather closures',                                     community: { name: 'Narcotics',   icon: 'ci-3', glyph: 'fa-pills' },           author: 'u/jenpharm_ab',    time: '1d',  score: 64,  comments: 18, _unsaved: false },
+    { id: 'svp4', postId: null, title: 'SCP inspection prep — the three things on every checklist this year',                                        community: { name: 'Inspections', icon: 'ci-7', glyph: 'fa-clipboard-check' }, author: 'u/drrivera_on',    time: '3d',  score: 103, comments: 22, _unsaved: false },
+  ];
+
+  // ============ SAVED COMMENTS DATA ============
+  const SAVED_COMMENTS_DATA = [
+    { id: 'svc1', text: 'The key distinction in ACP\'s bulletin is that witnessed dosing requires real-time audio-visual — a phone call is no longer sufficient after April 1st.', postTitle: 'Methadone witnessed dosing — virtual witnessing during weather closures', postId: 3, author: 'u/drrivera_on',  community: { name: 'Narcotics',   icon: 'ci-3' }, time: '1d',  score: 34, _unsaved: false },
+    { id: 'svc2', text: 'Calibration certs need to be <12 months old at time of inspection AND stored in the device\'s physical binder — digital-only copies were flagged at two sites last month.', postTitle: 'SCP inspection prep — the three things on every checklist this year', postId: 6, author: 'u/compoundking', community: { name: 'Inspections', icon: 'ci-7' }, time: '2d',  score: 19, _unsaved: false },
+    { id: 'svc3', text: 'For low-risk CSPs the new ACP bulletin aligns BUDs with the revised USP 797 table: 12h at room temp, 24h refrigerated — down from 48h in the November draft.', postTitle: 'ACP just updated USP 797 sterile compounding guidance',                   postId: 1, author: 'u/sarahpatel-rph', community: { name: 'Compounding', icon: 'ci-1' }, time: '3h',  score: 41, _unsaved: false },
+  ];
+
+  // ============ SAVED (Posts + Comments combined) ============
+  function renderSavedPanel() {
+    const panel = document.getElementById('postsPanel-saved');
+    const activePosts = SAVED_POSTS_DATA.filter(p => !p._unsaved);
+    const activeCmts  = SAVED_COMMENTS_DATA.filter(c => !c._unsaved);
+    document.getElementById('postsTabCount-saved').textContent = activePosts.length + activeCmts.length;
+    if (!activePosts.length && !activeCmts.length) {
+      panel.innerHTML = `<div class="mgmt-empty" style="padding:40px 22px;">Nothing saved yet. Bookmark posts and comments to find them here.</div>`;
+      return;
+    }
+    let html = '';
+    if (activePosts.length) {
+      html += `<div class="mgmt-section-label"><i class="fa-solid fa-newspaper"></i> Saved Posts <span class="mgmt-count">${activePosts.length}</span></div>`;
+      html += activePosts.map(p => `
+        <div class="mypost-item" id="svpost-row-${p.id}">
+          <div class="mypost-info">
+            <div class="mypost-title" onclick="closeModal('myPostsModal');${p.postId ? `openDetail(${p.postId})` : `showToast('Post not available')`}">${escapeHtml(p.title)}</div>
+            <div class="mypost-meta">
+              <span class="ci-mini ${p.community.icon}" style="width:14px;height:14px;font-size:7px;flex-shrink:0;"><i class="fa-solid ${p.community.glyph}"></i></span>
+              p/${p.community.name} &middot; ${escapeHtml(p.author)} &middot;
+              <i class="fa-solid fa-arrow-up" style="font-size:10px;"></i> ${fmtScore(p.score)} &middot;
+              <i class="fa-regular fa-comment" style="font-size:10px;"></i> ${p.comments} &middot; ${p.time} ago
+            </div>
+          </div>
+          <button class="mypost-btn" onclick="unsavePost('${p.id}')" title="Remove from saved"><i class="fa-solid fa-bookmark"></i> Unsave</button>
+        </div>`).join('');
+    }
+    if (activeCmts.length) {
+      html += `<div class="mgmt-section-label" style="${activePosts.length ? 'border-top:1px solid var(--ink-100);' : ''}"><i class="fa-regular fa-comment"></i> Saved Comments <span class="mgmt-count">${activeCmts.length}</span></div>`;
+      html += activeCmts.map(c => `
+        <div class="mycomment-item" id="svcmt-row-${c.id}">
+          <div class="mycomment-body">
+            <div class="mycomment-ctx">
+              <span class="ci-mini ${c.community.icon}" style="width:14px;height:14px;font-size:7px;flex-shrink:0;"><i class="fa-solid fa-people-group"></i></span>
+              p/${c.community.name} &middot;
+              <span class="ctx-post" onclick="closeModal('myPostsModal');${c.postId ? `openDetail(${c.postId})` : `showToast('Thread not available')`}" title="${escapeHtml(c.postTitle)}">${escapeHtml(c.postTitle)}</span>
+              &middot; by ${escapeHtml(c.author)} &middot; ${c.time} ago &middot; <i class="fa-solid fa-arrow-up" style="font-size:10px;"></i> ${c.score}
+            </div>
+            <div class="mycomment-text">${escapeHtml(c.text)}</div>
+          </div>
+          <button class="mycomment-del-btn" onclick="unsaveComment('${c.id}')" title="Remove from saved" style="color:var(--teal-600);">
+            <i class="fa-solid fa-bookmark"></i>
+          </button>
+        </div>`).join('');
+    }
+    panel.innerHTML = html;
+  }
+
+  function unsavePost(id) {
+    const p = SAVED_POSTS_DATA.find(x => x.id === id);
+    if (p) p._unsaved = true;
+    renderPostsPanel('saved');
+    showToast('Post removed from saved');
+  }
+
+  function unsaveComment(id) {
+    const c = SAVED_COMMENTS_DATA.find(x => x.id === id);
+    if (c) c._unsaved = true;
+    renderPostsPanel('saved');
+    showToast('Comment removed from saved');
+  }
+
+  // ============ MY REPLIES ============
+  function renderMyReplies() {
+    const list = document.getElementById('postsPanel-replies');
+    document.getElementById('postsTabCount-replies').textContent = MY_REPLIES_DATA.length;
+    if (!MY_REPLIES_DATA.length) {
+      list.innerHTML = `<div class="mgmt-empty" style="padding:40px 22px;">No one has replied to you yet.</div>`;
+      return;
+    }
+    list.innerHTML = MY_REPLIES_DATA.map(r => `
+      <div class="mycomment-item" style="${!r._read ? 'background:var(--teal-50);' : ''}" onclick="markReplyRead('${r.id}');${r.postId ? `closeModal('myPostsModal');openDetail(${r.postId})` : `showToast('Thread not available')`}">
+        <div class="mycomment-body" style="cursor:pointer;">
+          <div class="mycomment-ctx" style="display:flex;align-items:center;gap:6px;">
+            <span class="avatar-xs" style="width:22px;height:22px;border-radius:50%;background:var(--teal-100);color:var(--teal-700);font-size:9px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;">${escapeHtml(r.avatarInit)}</span>
+            <span style="font-weight:600;color:var(--ink-800);font-size:12.5px;">${escapeHtml(r.fromName)}</span>
+            <span class="role-badge ${r.fromRoleClass}" style="font-size:9px;padding:1px 5px;">${escapeHtml(r.fromRole)}</span>
+            <span style="color:var(--ink-400);">&middot;</span>
+            <span style="color:var(--ink-400);">${r.time} ago</span>
+            ${!r._read ? '<span style="width:6px;height:6px;border-radius:50%;background:var(--teal-500);display:inline-block;margin-left:2px;" title="New"></span>' : ''}
+          </div>
+          <div class="mycomment-text" style="margin-top:5px;">${escapeHtml(r.text)}</div>
+          <div class="mycomment-ctx" style="margin-top:5px;">
+            <i class="fa-solid fa-${r.onType === 'post' ? 'newspaper' : 'reply'}" style="font-size:10px;color:var(--ink-400);"></i>
+            <span style="color:var(--ink-400);">on ${r.onType}:</span>
+            <span class="ctx-post">${escapeHtml(r.onTitle)}</span>
+            &middot; <i class="fa-solid fa-arrow-up" style="font-size:10px;"></i> ${r.score}
+          </div>
+        </div>
+      </div>`).join('');
+  }
+
+  function markReplyRead(id) {
+    const r = MY_REPLIES_DATA.find(x => x.id === id);
+    if (r) r._read = true;
+  }
+
+  // ============ MY REACTIONS ============
+  function initReactionsPanel() {
+    renderReactionsPanel();
+  }
+
+  function renderReactionsPanel() {
+    const panel = document.getElementById('reactionsPanel');
+    const posts    = MY_REACTIONS_POSTS_DATA.map(p => ({ ...p, _type: 'post' }));
+    const comments = MY_REACTIONS_COMMENTS_DATA.map(c => ({ ...c, _type: 'comment' }));
+    const all = [...posts, ...comments];
+    if (!all.length) {
+      panel.innerHTML = `<div class="mgmt-empty" style="padding:40px 22px;">No reactions yet.</div>`;
+      return;
+    }
+    panel.innerHTML = all.map(item => {
+      const net = item.upvotes - item.downvotes;
+      const netColor = net > 0 ? 'var(--upvote)' : net < 0 ? 'var(--downvote)' : 'var(--ink-400)';
+      const title = item._type === 'post' ? escapeHtml(item.title) : escapeHtml(item.text);
+      const clickAction = item.postId ? `closeModal('myPostsModal');openDetail(${item.postId})` : `showToast('Thread not available')`;
+      const typeIcon  = item._type === 'post' ? 'fa-newspaper' : 'fa-comment';
+      const typeLabel = item._type === 'post' ? 'Post' : 'Comment';
+      return `
+      <div class="mycomment-item" style="cursor:pointer;" onclick="${clickAction}">
+        <div class="mycomment-body">
+          <div class="mypost-title" style="white-space:normal;line-height:1.4;">${title}</div>
+          <div class="mycomment-ctx" style="margin-top:5px;">
+            <span class="ci-mini ${item.community.icon}" style="width:14px;height:14px;font-size:7px;flex-shrink:0;"><i class="fa-solid ${item.community.glyph || 'fa-people-group'}"></i></span>
+            p/${item.community.name} &middot; ${item.time} ago &middot;
+            <i class="fa-solid ${typeIcon}" style="font-size:10px;"></i> ${typeLabel}
+            ${item._type === 'comment' ? `&middot; <span class="ctx-post" style="max-width:160px;">${escapeHtml(item.postTitle)}</span>` : ''}
+          </div>
+        </div>
+        <div style="flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:3px;min-width:52px;">
+          <span style="font-size:15px;font-weight:800;color:${netColor};">${net > 0 ? '+' : ''}${net}</span>
+          <span style="font-size:10px;color:var(--ink-400);">net score</span>
+          <span style="font-size:10px;color:var(--ink-400);"><i class="fa-solid fa-arrow-up" style="color:var(--upvote);"></i> ${item.upvotes}${item.downvotes ? ` <i class="fa-solid fa-arrow-down" style="color:var(--downvote);"></i> ${item.downvotes}` : ''}</span>
+        </div>
+      </div>`;
+    }).join('');
+  }
+
+  // Close access menus on outside click
+  document.addEventListener('click', e => {
+    if (!e.target.closest('.access-menu') && !e.target.closest('.access-pill')) {
+      document.querySelectorAll('.access-menu').forEach(m => m.remove());
+    }
+  });
+
+  // Wire new modals to close-on-backdrop and ESC (already handled by the global listeners
+  // but we need to register the new modal IDs)
+  ['manageCommunityModal','createCommunityModal','myPostsModal'].forEach(id => {
+    const bg = document.getElementById(id);
+    if (bg) bg.addEventListener('click', e => { if (e.target === bg) closeModal(id); });
+  });
   // Override the original renderFeed by re-exposing refreshFeed under same name
   window.renderFeed = refreshFeed;
 
   // initial render
   refreshFeed();
+  updateNotifBadge();
 </script>
 
 </body>
