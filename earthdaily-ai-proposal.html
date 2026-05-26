@@ -310,7 +310,7 @@
     letter-spacing: -0.01em;
   }
   .shift-point p {
-    color: var(--slate); font-size: 15px; line-height: 1.6;
+    color: var(--slate); font-size: 17px; line-height: 1.6;
   }
 
   /* ============ SECTION 2 — PILLARS ============ */
@@ -355,7 +355,7 @@
     margin-bottom: 18px;
   }
   .pillar .desc {
-    color: var(--slate); font-size: 16px; line-height: 1.6;
+    color: var(--slate); font-size: 17px; line-height: 1.6;
     margin-bottom: 28px;
   }
   .pillar ul { list-style: none; }
@@ -364,7 +364,7 @@
     padding: 12px 0;
     border-top: 1px dashed var(--line);
     align-items: start;
-    font-size: 15px; color: var(--ink);
+    font-size: 16.5px; color: var(--ink);
   }
   .pillar li:first-of-type { border-top: 1px solid var(--line); }
   .pillar li .check {
@@ -401,7 +401,7 @@
     margin-bottom: 14px;
   }
   .outcome p {
-    color: var(--slate); font-size: 15.5px; line-height: 1.65;
+    color: var(--slate); font-size: 17px; line-height: 1.65;
   }
   .outcome::after {
     content: ""; position: absolute; left: 0; top: 0;
@@ -450,8 +450,8 @@
     font-family: var(--mono); font-size: 10px; color: var(--emerald);
     letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 12px;
   }
-  .demo-callout h4 { font-size: 17px; font-weight: 600; margin-bottom: 8px; color: #fff; letter-spacing: -0.01em; }
-  .demo-callout p { font-size: 13.5px; color: #94a3b8; line-height: 1.55; }
+  .demo-callout h4 { font-size: 18px; font-weight: 600; margin-bottom: 8px; color: #fff; letter-spacing: -0.01em; }
+  .demo-callout p { font-size: 15.5px; color: #94a3b8; line-height: 1.55; }
 
   /* ============ SECTION 5 — DIVERSITY ============ */
   .diversity-grid {
@@ -515,7 +515,7 @@
     font-size: 20px; font-weight: 600; letter-spacing: -0.01em;
     margin-bottom: 8px;
   }
-  .layer p { color: var(--slate); font-size: 15px; line-height: 1.6; }
+  .layer p { color: var(--slate); font-size: 17px; line-height: 1.6; }
 
   /* ============ SECTION 6 — WHY US ============ */
   .why-us {
@@ -580,12 +580,12 @@
   }
   .cred-item .title {
     display: flex; align-items: center; gap: 12px;
-    font-size: 16px; font-weight: 600; margin-bottom: 8px;
+    font-size: 16.5px; font-weight: 600; margin-bottom: 8px;
   }
   .cred-item .title::before {
     content: "✦"; color: var(--emerald); font-size: 14px;
   }
-  .cred-item p { color: #94a3b8; font-size: 13.5px; line-height: 1.6; }
+  .cred-item p { color: #94a3b8; font-size: 15.5px; line-height: 1.6; }
 
   /* ============ SECTION 7 — NEXT STEP ============ */
   .next-step {
@@ -656,8 +656,8 @@
     display: grid; place-items: center;
     font-family: var(--mono); font-size: 13px; font-weight: 700;
   }
-  .step h5 { font-size: 16px; font-weight: 600; margin-bottom: 4px; color: #fff; letter-spacing: -0.01em; }
-  .step p { font-size: 13.5px; color: #94a3b8; line-height: 1.55; margin: 0; }
+  .step h5 { font-size: 17px; font-weight: 600; margin-bottom: 4px; color: #fff; letter-spacing: -0.01em; }
+  .step p { font-size: 15.5px; color: #94a3b8; line-height: 1.55; margin: 0; }
 
   /* ============ CLOSING ============ */
   .closing {
@@ -746,6 +746,94 @@
   footer #page-num { color: var(--emerald); }
   @media (max-width: 560px) { footer .row { flex-direction: column; gap: 12px; } }
 
+  /* ============ SECTION 7 — DATA READINESS GAP ============ */
+  .gap-grid {
+    display: grid; grid-template-columns: 1fr 1.35fr; gap: 56px;
+    align-items: start; margin-bottom: 72px;
+  }
+  @media (max-width: 900px) { .gap-grid { grid-template-columns: 1fr; gap: 40px; } }
+
+  .gap-reality {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 6px; padding: 40px 36px;
+  }
+  .gap-reality-label {
+    font-family: var(--mono); font-size: 10px; color: var(--emerald);
+    letter-spacing: 0.22em; text-transform: uppercase; margin-bottom: 28px;
+  }
+  .data-sources { display: flex; flex-direction: column; }
+  .data-source { padding: 22px 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .data-source:first-child { padding-top: 0; }
+  .data-source:last-child { border-bottom: none; padding-bottom: 0; }
+  .ds-title {
+    font-size: 16.5px; font-weight: 600; color: #fff;
+    margin-bottom: 6px; letter-spacing: -0.01em;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .ds-title::before {
+    content: ""; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--emerald); opacity: 0.6; flex-shrink: 0;
+  }
+  .ds-desc { font-size: 17px; color: #94a3b8; line-height: 1.65; }
+
+  .gap-solution-head { margin-bottom: 20px; }
+  .gap-solution-head h3 {
+    font-family: var(--display); font-weight: 400;
+    font-size: 30px; line-height: 1.1; letter-spacing: -0.01em; color: #fff;
+  }
+  .bridge-items { display: flex; flex-direction: column; }
+  .bridge-item {
+    display: grid; grid-template-columns: 52px 1fr; gap: 16px;
+    padding: 20px 0; border-top: 1px solid rgba(255,255,255,0.1); align-items: start;
+  }
+  .bridge-item:first-child { border-top: none; padding-top: 0; }
+  .bridge-item:last-child { padding-bottom: 0; }
+  .bi-num {
+    font-family: var(--mono); font-size: 11px; color: var(--emerald);
+    letter-spacing: 0.1em; padding-top: 4px;
+  }
+  .bridge-item strong {
+    display: block; font-size: 17.5px; font-weight: 600;
+    color: #fff; margin-bottom: 8px; letter-spacing: -0.01em;
+  }
+  .bridge-item p { font-size: 17px; color: #94a3b8; line-height: 1.65; margin: 0; }
+
+  .value-prop { padding-top: 56px; border-top: 1px solid rgba(255,255,255,0.12); }
+  .vp-label {
+    font-family: var(--mono); font-size: 11px; color: var(--emerald);
+    letter-spacing: 0.22em; text-transform: uppercase; margin-bottom: 36px;
+  }
+  .vp-grid {
+    display: grid; grid-template-columns: 1fr 32px 1fr 32px 1.3fr; gap: 24px;
+    align-items: center;
+  }
+  @media (max-width: 1000px) { .vp-grid { grid-template-columns: 1fr; gap: 20px; } .vp-connector { display: none; } }
+  .vp-item {
+    background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 6px; padding: 28px 24px;
+  }
+  .vp-badge {
+    display: inline-block; font-family: var(--mono); font-size: 10px; font-weight: 600;
+    color: var(--emerald); background: rgba(16,185,129,0.1);
+    border: 1px solid rgba(16,185,129,0.25); border-radius: 999px;
+    padding: 3px 10px; margin-bottom: 14px; letter-spacing: 0.1em; text-transform: uppercase;
+  }
+  .vp-item h4, .vp-result h4 {
+    font-size: 17px; font-weight: 600; color: #fff; margin-bottom: 8px; letter-spacing: -0.01em;
+  }
+  .vp-item p { font-size: 16px; color: #94a3b8; line-height: 1.65; margin: 0; }
+  .vp-connector {
+    font-family: var(--display); font-style: italic;
+    font-size: 32px; color: var(--emerald); opacity: 0.45; text-align: center; line-height: 1;
+  }
+  .vp-result {
+    background: rgba(16,185,129,0.07); border: 1px solid rgba(16,185,129,0.25);
+    border-radius: 6px; padding: 28px 24px;
+  }
+  .vp-result .vp-badge { background: rgba(16,185,129,0.12); border-color: rgba(16,185,129,0.35); }
+  .vp-result p { font-size: 16px; color: #cbd5e1; line-height: 1.65; margin: 0; }
+
   /* ============ PRINT ============ */
   @media print {
     @page { margin: 18mm 20mm; }
@@ -810,6 +898,7 @@
       <li><a href="#shift">The shift</a></li>
       <li><a href="#proposal">Proposal</a></li>
       <li><a href="#demo">Demo</a></li>
+      <li><a href="#readiness">Data gap</a></li>
       <li><a href="#next">Next step</a></li>
       <li><a href="#contact" class="cta">Get in touch</a></li>
     </ul>
@@ -820,15 +909,13 @@
 <section class="hero">
   <div class="corner-mark"><span class="dot"></span>Proposal · Q2 2026</div>
   <div class="container">
-    <div class="eyebrow">For EarthDaily Analytics</div>
+    <div class="eyebrow">For EarthDaily</div>
     <h1 class="reveal">
       Making EarthDaily<br/>
       <span class="accent">AI-Agent</span> <span class="sans">Ready.</span>
     </h1>
     <p class="lede reveal d1">
-      A partnership proposal to position EarthDaily's geospatial data layer at the
-      center of the agentic AI era — built on the emerging Model Context Protocol (MCP) standard,
-      and demonstrated with a working prototype you can already explore.
+      A proposal to position EarthDaily's geospatial data layer at the center of the agentic AI era — built on the Model Context Protocol (MCP) standard.
     </p>
     <div class="meta-row reveal d2">
       <div class="meta-item">
@@ -837,7 +924,7 @@
       </div>
       <div class="meta-item">
         <div class="label">For</div>
-        <div class="value">EarthDaily Analytics</div>
+        <div class="value">EarthDaily</div>
       </div>
       <div class="meta-item">
         <div class="label">Scope</div>
@@ -845,7 +932,7 @@
       </div>
     </div>
   </div>
-  <div class="slide-num">01 / 09</div>
+  <div class="slide-num">01 / 10</div>
 </section>
 
 <!-- ============ THE SHIFT ============ -->
@@ -855,8 +942,7 @@
       <div class="section-label">The shift</div>
       <h2>AI agents are becoming the <em>primary interface</em> to data.</h2>
       <p class="sub">
-        Analysts and domain experts increasingly interact with data through AI agents rather than dashboards and SDKs.
-        The connection layer between agents and external data is consolidating around one open standard.
+        AI agents are replacing dashboards and SDKs. The connection layer between agents and external data is consolidating around one open standard.
       </p>
     </div>
     <div class="shift-grid">
@@ -871,27 +957,27 @@
           <div class="num">01 /</div>
           <div>
             <h3>Agents replace dashboards.</h3>
-            <p>Users ask questions in plain language. Whoever owns the agent connection owns the workflow that follows from the answer.</p>
+            <p>Users ask questions in plain language. Whoever owns the agent connection owns the workflow.</p>
           </div>
         </div>
         <div class="shift-point reveal d2">
           <div class="num">02 /</div>
           <div>
             <h3>MCP is consolidating fast.</h3>
-            <p>Adopted across Claude, ChatGPT, and enterprise copilots. Custom one-off integrations are becoming legacy work.</p>
+            <p>Already adopted across Claude, ChatGPT, and enterprise copilots. One-off integrations are becoming legacy.</p>
           </div>
         </div>
         <div class="shift-point reveal d3">
           <div class="num">03 /</div>
           <div>
             <h3>First-mover advantage is real.</h3>
-            <p>Geospatial providers haven't moved yet. EarthDaily can define the category before competitors are even aware of it.</p>
+            <p>Geospatial providers haven't moved yet. EarthDaily can define the category before competitors catch up.</p>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="slide-num">02 / 09</div>
+  <div class="slide-num">02 / 10</div>
 </section>
 
 <!-- ============ PROPOSAL ============ -->
@@ -916,7 +1002,7 @@
       <div class="pillar v reveal d1">
         <div class="tag">Pillar 02</div>
         <h3>Client Data Connector Framework</h3>
-        <p class="desc">An interface that lets EarthDaily's customers easily expose their own internal data — field boundaries, yield records, claims data, asset registries — as MCP connectors.</p>
+        <p class="desc">An interface that lets EarthDaily's customers expose their own internal data — field boundaries, yield records, claims data — as MCP connectors the agent can reason across.</p>
         <ul>
           <li><svg class="check" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-8" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Vertical-specific templates (ag, insurance, mining, forestry)</span></li>
           <li><svg class="check" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-8" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Schema-agnostic semantic mapping layer</span></li>
@@ -925,7 +1011,7 @@
       </div>
     </div>
   </div>
-  <div class="slide-num">03 / 09</div>
+  <div class="slide-num">03 / 10</div>
 </section>
 
 <!-- ============ WHY THIS MATTERS ============ -->
@@ -940,21 +1026,21 @@
       <div class="outcome o1 reveal">
         <div class="big-num">01</div>
         <h3>Lower integration friction</h3>
-        <p>Customers no longer need to write custom integration code. They connect EarthDaily to their AI workflow in minutes — not weeks of engineering.</p>
+        <p>Customers connect EarthDaily to their AI workflow in minutes, not weeks of engineering.</p>
       </div>
       <div class="outcome o2 reveal d1">
         <div class="big-num">02</div>
         <h3>Increased stickiness</h3>
-        <p>Once a client's internal data also flows through the same agent, EarthDaily becomes the core of their AI workflow — not just one API among many.</p>
+        <p>Once a client's data flows through the same agent, EarthDaily becomes the core of their workflow — not just one API among many.</p>
       </div>
       <div class="outcome o3 reveal d2">
         <div class="big-num">03</div>
         <h3>Strategic positioning</h3>
-        <p>EarthDaily becomes one of the first geospatial data providers natively designed for the agentic AI era — defining the category before competitors catch up.</p>
+        <p>One of the first geospatial data providers natively designed for the agentic AI era — defining the category before competitors catch up.</p>
       </div>
     </div>
   </div>
-  <div class="slide-num">04 / 09</div>
+  <div class="slide-num">04 / 10</div>
 </section>
 
 <!-- ============ DEMO ============ -->
@@ -986,12 +1072,12 @@
       </div>
       <div class="demo-callout reveal d3">
         <div class="ck">— 04</div>
-        <h4>Add Data Source flow</h4>
-        <p>Three-step wizard: Postgres, S3, REST, CSV, Salesforce, SAP. Clients onboard their own data.</p>
+        <h4>CSV drag-and-drop</h4>
+        <p>Sample CSVs prepared per vertical. Drop one into the app and immediately ask cross-data questions — no setup required.</p>
       </div>
     </div>
   </div>
-  <div class="slide-num">05 / 09</div>
+  <div class="slide-num">05 / 10</div>
 </section>
 
 <!-- ============ DIVERSITY ============ -->
@@ -1006,7 +1092,7 @@
       <div class="verticals-block reveal">
         <div class="label">— The challenge</div>
         <h3>Every vertical brings its own data shape.</h3>
-        <p>EarthDaily's customers span industries with radically different data structures. A one-size-fits-all schema doesn't work. A fully bespoke build per client doesn't scale.</p>
+        <p>EarthDaily's customers span industries with radically different data structures. A one-size-fits-all schema doesn't work, and fully bespoke builds don't scale.</p>
         <div class="vert-list">
           <span class="pill">Agriculture</span>
           <span class="pill">Insurance</span>
@@ -1020,27 +1106,110 @@
           <div class="lnum">01</div>
           <div>
             <h4>Vertical-specific connector templates</h4>
-            <p>Pre-built templates for each industry segment, with sensible defaults for common data structures.</p>
+            <p>Pre-built templates for each industry segment with sensible defaults for common data structures.</p>
           </div>
         </div>
         <div class="layer l2 reveal d2">
           <div class="lnum">02</div>
           <div>
             <h4>Schema-agnostic access layer</h4>
-            <p>A configurable semantic mapping that lets clients describe their data in plain terms, which the agent then understands.</p>
+            <p>A configurable semantic mapping that lets clients describe their data in plain terms the agent understands.</p>
           </div>
         </div>
         <div class="layer l3 reveal d3">
           <div class="lnum">03</div>
           <div>
             <h4>Agent-side reasoning</h4>
-            <p>Leveraging our ML expertise so the agent introspects schemas, asks clarifying questions, and adapts to client-specific data on the fly.</p>
+            <p>Our ML expertise lets the agent introspect schemas, ask clarifying questions, and adapt to client-specific data on the fly.</p>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="slide-num">06 / 09</div>
+  <div class="slide-num">06 / 10</div>
+</section>
+
+<!-- ============ DATA READINESS GAP ============ -->
+<section class="s dark" id="readiness">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-label">The gap nobody talks about</div>
+      <h2>Most clients can't get their data <em>ready</em> — that's where we come in.</h2>
+      <p class="sub">Many of EarthDaily's clients won't have the technical capability to get their data into CSV, JSON, or API form. Their data lives somewhere messier.</p>
+    </div>
+    <div class="gap-grid">
+      <div class="gap-reality reveal">
+        <div class="gap-reality-label">— Where client data actually lives</div>
+        <div class="data-sources">
+          <div class="data-source">
+            <div class="ds-title">Spreadsheets</div>
+            <p class="ds-desc">Excel files emailed between teams — inconsistent columns, manual entry errors, no version control.</p>
+          </div>
+          <div class="data-source">
+            <div class="ds-title">Legacy farm management &amp; field systems</div>
+            <p class="ds-desc">Closed software with no API, proprietary formats, or data locked behind a vendor login.</p>
+          </div>
+          <div class="data-source">
+            <div class="ds-title">Paper records &amp; siloed tools</div>
+            <p class="ds-desc">Field notes, scanned PDFs, and internal tools no one maintains anymore.</p>
+          </div>
+        </div>
+      </div>
+      <div class="gap-solution reveal d1">
+        <div class="gap-solution-head">
+          <div class="section-label" style="color:var(--emerald)">— Our answer</div>
+          <h3>Custom data-bridging — not just a file uploader.</h3>
+        </div>
+        <p style="font-size:15.5px;line-height:1.65;color:#cbd5e1;margin-bottom:32px;">We provide immediate on-ramps alongside deeper data-bridging for clients who need it.</p>
+        <div class="bridge-items">
+          <div class="bridge-item">
+            <div class="bi-num">01 /</div>
+            <div>
+              <strong>CSV drag-and-drop (immediate)</strong>
+              <p>Drop a prepared CSV into the web app and immediately ask cross-data questions — the first concrete step of the Client Data Connector Framework.</p>
+            </div>
+          </div>
+          <div class="bridge-item">
+            <div class="bi-num">02 /</div>
+            <div>
+              <strong>Data cleaning &amp; schema mapping</strong>
+              <p>We map messy client data to the connector schema so the agent can reason across it alongside EarthDaily data — no manual prep from the client's team.</p>
+            </div>
+          </div>
+          <div class="bridge-item">
+            <div class="bi-num">03 /</div>
+            <div>
+              <strong>Lightweight connectors to existing tools</strong>
+              <p>For clients locked in legacy systems, we build minimal connectors that extract and pipe data without changing their existing workflows.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="value-prop reveal">
+      <div class="vp-label">— The combined value for EarthDaily</div>
+      <div class="vp-grid">
+        <div class="vp-item">
+          <div class="vp-badge">Pillar 01</div>
+          <h4>Agent-ready platform</h4>
+          <p>MCP server connecting EarthDaily's APIs to any AI agent — analysts query satellite data through natural language.</p>
+        </div>
+        <div class="vp-connector">+</div>
+        <div class="vp-item">
+          <div class="vp-badge">Pillar 02 +</div>
+          <h4>Client data-readiness</h4>
+          <p>Real data-bridging from wherever client data actually lives — not just file uploads.</p>
+        </div>
+        <div class="vp-connector">=</div>
+        <div class="vp-result">
+          <div class="vp-badge">Result</div>
+          <h4>A much larger addressable market</h4>
+          <p>Clients who previously couldn't adopt EarthDaily's analytics because their data wasn't ready now have a viable path in. The addressable market grows significantly.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-num">07 / 10</div>
 </section>
 
 <!-- ============ WHY ALGO-RYTHMN ============ -->
@@ -1054,7 +1223,7 @@
     <div class="why-us">
       <div class="why-text reveal">
         <h3>Deep <em>ML + Agentic AI</em> expertise.</h3>
-        <p>We bring deep expertise in ML and agentic AI workflows — not just API engineering. This is where a pure data company typically lacks bandwidth, and where we can move fastest.</p>
+        <p>We bring deep expertise in ML and agentic AI — not just API engineering. This is where a pure data company typically lacks bandwidth, and where we move fastest.</p>
         <p>Our team has shipped agentic middleware across agriculture, energy, and sports analytics — closing the loop between data and action.</p>
         <div class="focus-row">
           <div class="focus"><span class="dot"></span>Agent behavior design</div>
@@ -1068,20 +1237,20 @@
         <h4>Why we're the right partner.</h4>
         <div class="cred-item">
           <div class="title">Agentic middleware specialists</div>
-          <p>We've closed the loop between data and action across agriculture, energy, and sports analytics — production agents, not demos.</p>
+          <p>Production agents across agriculture, energy, and sports analytics — not demos.</p>
         </div>
         <div class="cred-item">
           <div class="title">Working demo already built</div>
-          <p>You've seen it — a mock EarthDaily AI platform with MCP servers, layer toggles, and cross-source prompts. Zero ramp time.</p>
+          <p>A mock EarthDaily AI platform with MCP servers, layer toggles, and cross-source prompts — zero ramp time.</p>
         </div>
         <div class="cred-item">
           <div class="title">Small team, fast cycles</div>
-          <p>No layers of process between you and the people writing the code. We move at startup velocity with senior depth.</p>
+          <p>No layers of process between you and the people writing the code. Startup velocity with senior depth.</p>
         </div>
       </div>
     </div>
   </div>
-  <div class="slide-num">07 / 09</div>
+  <div class="slide-num">08 / 10</div>
 </section>
 
 <!-- ============ NEXT STEP ============ -->
@@ -1092,7 +1261,7 @@
         <div>
           <div class="ns-label">— Suggested next step</div>
           <h3>Let's build a working demo together — <em style="font-style:italic;color:var(--emerald);font-family:var(--display)">not just talk about it</em>.</h3>
-          <p>Rather than discussing this purely in concept, we propose building a small MCP server covering a subset of EarthDaily's APIs, plus a mock client dataset — demonstrating an agent answering a realistic cross-data question.</p>
+          <p>Rather than discussing in concept, we propose building a small MCP server covering a subset of EarthDaily's APIs plus a mock client dataset — demonstrating an agent answering a realistic cross-data question.</p>
           <div class="question-card">
             My field's yield has dropped over the last three years — is rainfall the driver?
           </div>
@@ -1111,14 +1280,14 @@
               <div class="snum">2</div>
               <div>
                 <h5>Build the MCP server + mock data</h5>
-                <p>Real protocol, real agent, mock client data simulating a target vertical.</p>
+                <p>Real protocol, real agent, mock client data for a target vertical.</p>
               </div>
             </div>
             <div class="step">
               <div class="snum">3</div>
               <div>
                 <h5>Demo & evaluate</h5>
-                <p>Run realistic prompts. Decide what to harden into production.</p>
+                <p>Run realistic prompts, then decide what to harden into production.</p>
               </div>
             </div>
           </div>
@@ -1126,7 +1295,7 @@
       </div>
     </div>
   </div>
-  <div class="slide-num">08 / 09</div>
+  <div class="slide-num">09 / 10</div>
 </section>
 
 <!-- ============ CLOSING ============ -->
@@ -1153,7 +1322,7 @@
       </div>
     </div>
   </div>
-  <div class="slide-num">09 / 09</div>
+  <div class="slide-num">10 / 10</div>
 </section>
 
 <footer>
