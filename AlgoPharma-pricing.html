@@ -65,9 +65,9 @@
   }
 
   /* ───── TIER CARDS ───── */
-  .tiers{display:grid;grid-template-columns:1fr 1fr 1.08fr 1fr;gap:18px;margin-bottom:64px;animation:fadeUp .6s ease .1s both;}
+  .tiers{display:grid;grid-template-columns:1fr 1fr 1fr 1.08fr 1fr;gap:16px;margin-bottom:64px;animation:fadeUp .6s ease .1s both;}
   .tier{
-    background:var(--card);border-radius:18px;padding:30px 26px 28px;
+    background:var(--card);border-radius:18px;padding:26px 18px 22px;
     border:1px solid var(--rule);
     display:flex;flex-direction:column;
     transition:transform .25s,box-shadow .25s;
@@ -107,11 +107,6 @@
     font-size:13px;color:var(--ink2);line-height:1.55;
     padding:7px 0 7px 26px;position:relative;
   }
-  .tier-list li::before{
-    content:'';position:absolute;left:0;top:11px;
-    width:16px;height:16px;border-radius:50%;
-    background:var(--brand-soft);
-  }
   .tier-list li::after{
     content:'';position:absolute;left:5px;top:14.5px;
     width:6px;height:3px;
@@ -130,6 +125,22 @@
     line-height:1;
   }
   .tier-list li strong{color:var(--ink);font-weight:600;}
+  .tier-list li.inherit{
+      color:var(--brand); /* Brand color for emphasis */
+      font-size:13px;
+      font-weight:700;
+      background:linear-gradient(90deg,var(--brand-soft2),var(--brand-tint));
+      border-left:4px solid var(--brand);
+      border-bottom:1px solid var(--rule2);
+      margin-bottom:4px;
+      padding:8px 0 8px 18px;
+      position:relative;
+      font-style:normal;
+      display:flex;
+      align-items:center;
+      gap:7px;
+    }
+    .tier-list li.inherit::after{display:none;}
 
   .tier-cta{
     display:block;text-align:center;
@@ -146,9 +157,10 @@
   .tier-cta.primary:hover{background:var(--brand-dark);box-shadow:0 6px 18px -4px rgba(13,138,114,.5);}
   .trial-note{font-size:11.5px;color:var(--ink3);text-align:center;margin-top:9px;}
 
-  @media(max-width:1100px){.tiers{grid-template-columns:1fr 1fr;gap:18px;}}
-  @media(max-width:680px){.tiers{grid-template-columns:1fr;gap:24px;}}
-  @media(max-width:1100px){.tier.featured{transform:none;}.tier.featured:hover{transform:translateY(-2px);}}
+  @media(max-width:1360px){.tiers{grid-template-columns:repeat(3,1fr);gap:16px;}}
+  @media(max-width:900px){.tiers{grid-template-columns:1fr 1fr;gap:16px;}}
+  @media(max-width:580px){.tiers{grid-template-columns:1fr;gap:20px;}}
+  @media(max-width:1360px){.tier.featured{transform:none;}.tier.featured:hover{transform:translateY(-2px);}}
 
   /* ───── FEATURE COMPARISON BOX ───── */
   .compare-section{margin-bottom:64px;animation:fadeUp .6s ease .15s both;}
@@ -164,7 +176,7 @@
   .compare-table .feat-name .feat-desc{display:block;font-weight:400;font-size:11.5px;color:var(--ink3);margin-top:2px;}
   .compare-table .check{color:var(--brand);font-weight:600;}
   .compare-table .dash{color:var(--ink4);}
-  @media(max-width:860px){.compare-card{overflow-x:auto;}.compare-table{min-width:780px;}}
+  @media(max-width:960px){.compare-card{overflow-x:auto;}.compare-table{min-width:1020px;}}
 
   /* ───── CREDITS ───── */
   .credits-section{margin-bottom:64px;animation:fadeUp .6s ease .2s both;}
@@ -373,11 +385,28 @@
   <!-- ───── TIER CARDS ───── -->
   <div class="tiers">
 
+    <!-- FREE / COMMUNITY -->
+    <div class="tier">
+      <div class="tier-headline">Free Plan</div>
+      <div class="tier-tagline">Community access to PharmaForum for any registered pharmacist to read, post, and connect.</div>
+      <div class="price-block">
+        <div class="price-row">
+          <span class="price-num">$0</span>
+          <span class="price-unit">forever</span>
+        </div>
+        <div class="price-alt">No credit card required</div>
+      </div>
+      <ul class="tier-list">
+        <li><strong>PharmaForum</strong> — read, post, comment, and connect with the Alberta pharmacist community</li>
+      </ul>
+      <a href="#" class="tier-cta secondary">Create Free Account</a>
+      <p class="trial-note">No credit card &nbsp;&middot;&nbsp; no expiry</p>
+    </div>
+
     <!-- BASIC -->
     <div class="tier">
-      <div class="tier-name">Basic</div>
-      <div class="tier-headline">Get the lay of the land</div>
-      <div class="tier-tagline">For pharmacists exploring AlgoPharma™ before their next inspection.</div>
+      <div class="tier-headline">Basic Plan</div>
+      <div class="tier-tagline">Essential pre-inspection intelligence and AI Q&amp;A designed for individual pharmacists.</div>
       <div class="price-block">
         <div class="price-row">
           <span class="price-num">$500</span>
@@ -386,92 +415,81 @@
         <div class="price-alt">Annual subscription only</div>
       </div>
       <ul class="tier-list">
-        <li><strong>50 credits / month</strong> — 1 credit = 10,000 tokens; roll credits across everything with no per-tool query caps</li>
-        <li><strong>AI Q&amp;A</strong> — ask compliance questions on the Commons Pre-Inspection page, drawn from anonymized Alberta-wide inspection data</li>
-        <li><strong>Commons Pre-Inspection Intelligence</strong> — see what Alberta College of Pharmacy (ACP) inspectors typically focus on, what historical trends suggest, and how to prepare accordingly.</li>
-        <li><strong>My Library</strong> — upload your inspection reports to our anonymized knowledge base and directly shape what every Alberta pharmacist sees on the Commons Pre-Inspection page.</li>
-        <li><strong>Email support</strong> — 2 business days response</li>
-
-        <li class="muted">Your own SOPs &amp; uploads — not included</li>
-        <li class="muted">SOP / Inspection Report tools — not included</li>
+        <li><strong>50 credits / month</strong> — 1 credit = 10,000 tokens; rolls across all tools, no per-tool caps</li>
+        <li><strong>AI Q&amp;A</strong> — compliance questions grounded in anonymized Alberta-wide inspection data</li>
+        <li><strong>Commons Pre-Inspection Intelligence</strong> — what ACP inspectors focus on and how to prepare</li>
+        <li><strong>My Library</strong> — upload inspection reports to shape the shared knowledge base</li>
+        <li><strong>PharmaForum</strong> — full access with AI answers on any post</li>
+        <li><strong>Email support</strong> — 2 business day response</li>
       </ul>
-      <a href="#" class="tier-cta secondary">Try Basic free</a>
+      <a href="#" class="tier-cta secondary">Start Free Trial</a>
       <p class="trial-note">7-day free trial &nbsp;&middot;&nbsp; <strong>10 trial credits</strong> included</p>
     </div>
 
     <!-- PROFESSIONAL MONTHLY -->
     <div class="tier">
-      <div class="tier-name">Professional</div>
-      <div class="tier-headline">Monthly</div>
-      <div class="tier-tagline">Full access, no commitment. Cancel any time.</div>
+      <div class="tier-headline">Professional Monthly</div>
+      <div class="tier-tagline">Full access to SOP Generation, My Library, and team logins with no long-term commitment.</div>
       <div class="price-block">
         <div class="price-row">
           <span class="price-num">$100</span>
           <span class="price-unit">CAD / month</span>
         </div>
-        <div class="price-alt">Switch to annual and <strong>save $200 / year</strong></div>
+          <div class="price-alt">Monthly flexibility</div>
       </div>
       <ul class="tier-list">
-        <li><strong>150 credits / month</strong> — 1 credit = 10,000 tokens; roll across all tools with no per-tool caps</li>
-        <li><strong>AI Q&amp;A</strong> — across ACP &amp; regulatory data, your inspection reports, and uploaded SOPs</li>
-        <li><strong>SOP Generation</strong> — generate new SOPs, scan and update existing ones against current ACP standards</li>
-        <li><strong>Full Pre-Inspection Intelligence</strong> — your own inspection patterns and anonymized commons inspection patterns</li>
-        <li><strong>My Library</strong> — upload your SOPs and inspection reports; AI answers from your documents</li>
+        <li class="inherit">Everything in Basic, plus:</li>
+        <li><strong>150 credits / month</strong> — 3× more credits, same rollover model</li>
+        <li><strong>SOP Generation</strong> — generate new SOPs and update existing ones against current ACP standards</li>
+        <li><strong>Personal Pre-Inspection Intelligence</strong> — your own patterns layered over the anonymized commons</li>
+        <li><strong>My Library expanded</strong> — upload SOPs too; AI answers cite your own documents</li>
         <li><strong>Multi-user access</strong> — team logins with role-based access rights</li>
         <li><strong>Email + chat support</strong> — 1 business day response</li>
-        <li class="muted">Inspection Report Intelligence — auto-generate compliant responses · <strong>switch to annual to unlock</strong></li>
       </ul>
-      <a href="#" class="tier-cta secondary">Start Pro Monthly</a>
+      <a href="#" class="tier-cta secondary">Start Free Trial</a>
       <p class="trial-note">7-day free trial &nbsp;&middot;&nbsp; <strong>15 trial credits</strong> included</p>
     </div>
 
     <!-- PROFESSIONAL ANNUAL -->
     <div class="tier featured">
-      <div class="tier-name">Professional</div>
-      <div class="tier-headline">Annual</div>
-      <div class="tier-tagline">Everything in Monthly, plus Inspection Report Intelligence — the marquee feature, included only on annual.</div>
+      <div class="tier-headline">Professional Annual</div>
+      <div class="tier-tagline">Our complete suite, including exclusive Inspection Report Intelligence, at our best value.</div>
       <div class="price-block">
         <div class="price-row">
           <span class="price-num">$1,000</span>
           <span class="price-unit">CAD / year</span>
         </div>
-        <div class="price-alt highlight">Save $200 — and unlock Inspection Report Intelligence</div>
+          <div class="price-alt highlight">Annual savings</div>
       </div>
       <ul class="tier-list">
-        <li><strong>150 credits / month</strong> — 1 credit = 10,000 tokens; roll across all tools with no per-tool caps</li>
-        <li><strong>AI Q&amp;A</strong> — across ACP &amp; regulatory data, your inspection reports, and uploaded SOPs</li>
-        <li><strong>SOP Generation</strong> — generate new SOPs, scan and update existing ones against current ACP standards</li>
-        <li><strong>Inspection Report Intelligence</strong> — upload inspection reports, auto-generate compliant responses, SOPs, Policies, Checklists, and Log Tables per finding</li>
-        <li><strong>Full Pre-Inspection Intelligence</strong> — your own inspection patterns and anonymized commons inspection patterns</li>
-        <li><strong>My Library</strong> — upload your SOPs and inspection reports; AI answers from your documents</li>
-        <li><strong>Multi-user access</strong> — team logins with role-based access rights</li>
-        <li><strong>Email + chat support</strong> — 1 business day response</li>
+        <li class="inherit">Everything in Professional Monthly, plus:</li>
+        <li><strong>Inspection Report Intelligence</strong> — upload reports; auto-generate compliant responses, SOPs, Policies, Checklists, and Log Tables per finding</li>
+        <li><strong>Save $200 / year</strong> vs monthly billing</li>
       </ul>
-      <a href="#" class="tier-cta primary">Get Pro Annual</a>
+      <a href="#" class="tier-cta primary">Start Free Trial</a>
       <p class="trial-note">7-day free trial &nbsp;&middot;&nbsp; <strong>25 trial credits</strong> included</p>
     </div>
 
     <!-- ENTERPRISE -->
     <div class="tier">
-      <div class="tier-name">Enterprise</div>
-      <div class="tier-headline">Built for chains &amp; banner groups</div>
-      <div class="tier-tagline">For multi-location operators and corporate compliance teams.</div>
+      <div class="tier-headline">Enterprise Plan</div>
+      <div class="tier-tagline">Custom credits, multi-location benchmarks, and dedicated support for corporate compliance teams.</div>
       <div class="price-block">
         <div class="price-row">
           <span class="price-num">Custom</span>
         </div>
-        <div class="price-alt">Volume-based quote</div>
+          <div class="price-alt">Custom pricing for organizations</div>
       </div>
       <ul class="tier-list">
-        <li><strong>Customized credits</strong> across all sections under a pre-paid credit pool</li>
-        <li><strong>Compliance that answers in 30 seconds</strong> — at any location, any time</li>
+        <li class="inherit">Everything in Professional Annual, plus:</li>
+        <li><strong>Customized credit pool</strong> — pre-paid, shared across all locations</li>
         <li><strong>Multi-location namespaces</strong> — each site isolated, with optional cross-site rollups</li>
         <li><strong>Cross-site benchmarks</strong> — compare compliance posture across locations</li>
         <li><strong>Dedicated Customer Success Manager</strong> + structured onboarding</li>
-        <li><strong>Phone-based SLA</strong> · priority response</li>
+        <li><strong>Phone-based SLA</strong> — priority response</li>
       </ul>
       <a href="mailto:support@algo-rythmn.ai" class="tier-cta secondary">Contact Sales</a>
-      <div class="trial-note">14-day pilot &nbsp;&middot;&nbsp; <strong>custom trial credits</strong> scoped to your volume &nbsp;&middot;&nbsp; dedicated onboarding</div>
+      <div class="trial-note">14-day pilot &nbsp;&middot;&nbsp; <strong>custom trial credits</strong></div>
     </div>
 
   </div>
@@ -484,6 +502,7 @@
         <thead>
           <tr>
             <th>Feature</th>
+            <th>Free</th>
             <th>Basic</th>
             <th>Pro Monthly</th>
             <th class="featured-col">Pro Annual</th>
@@ -495,6 +514,7 @@
             <td class="feat-name">Included credits
               <span class="feat-desc">1 credit = 10,000 tokens</span>
             </td>
+            <td><span class="dash">—</span></td>
             <td>50 / mo · top up at $0.69</td>
             <td>150 / mo · top up at $0.68</td>
             <td class="featured-col">150 / mo · top up at $0.68</td>
@@ -504,6 +524,7 @@
             <td class="feat-name">Home — AI chatbot
               <span class="feat-desc">Ask compliance questions in plain language</span>
             </td>
+            <td><span class="dash">—</span></td>
             <td>Commons only</td>
             <td>Commons + Vault</td>
             <td class="featured-col">Commons + Vault</td>
@@ -514,6 +535,7 @@
               <span class="feat-desc">Scan, update, generate SOPs</span>
             </td>
             <td><span class="dash">—</span></td>
+            <td><span class="dash">—</span></td>
             <td><span class="check">✓</span></td>
             <td class="featured-col"><span class="check">✓</span></td>
             <td><span class="check">✓</span></td>
@@ -522,6 +544,7 @@
             <td class="feat-name">Multi-user access
               <span class="feat-desc">Team logins per pharmacy</span>
             </td>
+            <td><span class="dash">—</span></td>
             <td><span class="dash">—</span></td>
             <td><span class="check">✓</span></td>
             <td class="featured-col"><span class="check">✓</span></td>
@@ -533,6 +556,7 @@
             </td>
             <td><span class="dash">—</span></td>
             <td><span class="dash">—</span></td>
+            <td><span class="dash">—</span></td>
             <td class="featured-col"><span class="check">✓</span></td>
             <td><span class="check">✓</span></td>
           </tr>
@@ -540,6 +564,7 @@
             <td class="feat-name">Pre-Inspection Intelligence
               <span class="feat-desc">Commons + Vault patterns</span>
             </td>
+            <td><span class="dash">—</span></td>
             <td>Commons only</td>
             <td>Commons + Vault</td>
             <td class="featured-col">Commons + Vault</td>
@@ -547,15 +572,27 @@
           </tr>
           <tr>
             <td class="feat-name">My Library
-              <span class="feat-desc">Upload your SOPs &amp; Inspection Reports & Regulation Search</span>
+              <span class="feat-desc">Upload your SOPs &amp; Inspection Reports &amp; Regulation Search</span>
             </td>
+            <td><span class="dash">—</span></td>
             <td><span class="featured-col">Upload inspection reports only</span></td>
             <td><span class="check">✓</span></td>
             <td class="featured-col"><span class="check">✓</span></td>
             <td>Shared across locations</td>
           </tr>
           <tr>
+            <td class="feat-name">PharmaForum
+              <span class="feat-desc">Community posts, comments &amp; AI answers</span>
+            </td>
+            <td><span class="feat-desc">View &amp; post</span></td>
+            <td><span class="feat-desc">View &amp; post + AI answers</span></td>
+            <td><span class="feat-desc">View &amp; post + AI answers</span></td>
+            <td class="featured-col"><span class="feat-desc">View &amp; post + AI answers</span></td>
+            <td><span class="feat-desc">View &amp; post + AI answers</span></td>
+          </tr>
+          <tr>
             <td class="feat-name">Support</td>
+            <td>Community forum</td>
             <td>Email · 2 bus. days</td>
             <td>Email + chat · NBD</td>
             <td class="featured-col">Email + chat · NBD</td>
