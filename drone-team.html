@@ -210,7 +210,7 @@ body{
 .sh{
   margin-bottom:48px;
   display:grid;
-  grid-template-columns:80px 1fr;
+  grid-template-columns:160px 1fr;
   gap:32px;
   align-items:start;
 }
@@ -220,6 +220,9 @@ body{
   font-weight:600;
   padding-top:8px;
   position:relative;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
 }
 .sh-num::after{
   content:'';
