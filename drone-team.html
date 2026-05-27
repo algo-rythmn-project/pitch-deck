@@ -1,0 +1,1487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Algo-Rythmn — Weekly Drone Scouting for Your Field</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ───────────────────────── TOKENS ───────────────────────── */
+:root{
+  /* Backgrounds */
+  --bg:        #0d1117;
+  --bg2:       #161b22;
+  --bg3:       #1c232d;
+  --panel:     #ffffff;
+  --panel2:    #f6f8fa;
+  --panel3:    #eef1f4;
+
+  /* Text */
+  --ink:       #0d1117;
+  --ink2:      #4a5260;
+  --ink3:      #8a92a0;
+  --ink-on:    #e6edf3;
+  --ink-on2:   #adb5bd;
+  --ink-on3:   #a2a8b3;
+
+  /* Rules */
+  --rule:      rgba(13,17,23,0.08);
+  --rule2:     rgba(13,17,23,0.16);
+  --rule-on:   rgba(230,237,243,0.10);
+  --rule-on2:  rgba(230,237,243,0.20);
+
+  /* Accents — tech blue + agtech green */
+  --primary:   #0b6cf2;
+  --primary-d: #0853bd;
+  --primary-l: #e7f0fe;
+  --accent:    #00b896;
+  --accent-d:  #018a72;
+  --accent-l:  #e0f7f1;
+  --warn:      #d97706;
+  --warn-l:    #fef3e2;
+  --danger:    #dc2626;
+  --danger-l:  #fde8e8;
+
+  --serif:     'Space Grotesk', sans-serif;
+  --sans:      'Inter', sans-serif;
+  --mono:      'JetBrains Mono', monospace;
+  --r:         6px;
+  --r2:        10px;
+  --r3:        16px;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--sans);
+  background:var(--panel2);
+  color:var(--ink);
+  font-size:16.5px;
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+
+/* ───────────────────────── NAV ───────────────────────── */
+.nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(13,17,23,0.92);
+  backdrop-filter:blur(14px) saturate(140%);
+  border-bottom:1px solid var(--rule-on);
+  height:56px;
+  display:flex;align-items:center;
+  padding:0 40px;
+  overflow-x:auto;
+}
+.nav-brand{
+  font-family:var(--serif);
+  font-size:15px;font-weight:700;
+  color:var(--ink-on);
+  margin-right:24px;padding-right:24px;
+  border-right:1px solid var(--rule-on2);
+  flex-shrink:0;white-space:nowrap;
+  letter-spacing:-0.01em;
+  display:flex;align-items:center;gap:10px;
+}
+.nav-brand::before{
+  content:'';
+  width:8px;height:8px;border-radius:50%;
+  background:var(--accent);
+  box-shadow:0 0 12px var(--accent);
+}
+.nav a{
+  font-family:var(--mono);
+  font-size:13px;font-weight:500;
+  letter-spacing:.02em;
+  color:var(--ink-on2);text-decoration:none;
+  padding:0 14px;height:56px;
+  display:flex;align-items:center;
+  border-bottom:2px solid transparent;
+  white-space:nowrap;
+  transition:color .2s,border-color .2s;
+}
+.nav a:hover{color:var(--ink-on);border-bottom-color:var(--accent)}
+.nav-cta{
+  margin-left:auto;
+  font-family:var(--sans);font-size:12px;font-weight:600;
+  background:var(--accent);color:var(--bg) !important;
+  padding:9px 18px;border-radius:6px;
+  text-decoration:none;flex-shrink:0;
+  border-bottom:none !important;height:auto !important;
+  letter-spacing:0;
+  transition:background .2s;
+}
+.nav-cta:hover{background:var(--accent-d) !important;color:#fff !important}
+
+/* ───────────────────────── HERO ───────────────────────── */
+.hero{
+  background:var(--bg);
+  color:var(--ink-on);
+  padding:96px 40px 80px;
+  position:relative;overflow:hidden;
+  border-bottom:1px solid var(--rule-on);
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(230,237,243,0.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(230,237,243,0.025) 1px,transparent 1px);
+  background-size:48px 48px;
+  pointer-events:none;
+}
+.hero::after{
+  content:'';position:absolute;right:-200px;top:-200px;
+  width:700px;height:700px;
+  background:radial-gradient(circle,rgba(0,184,150,0.18) 0%,transparent 60%);
+  pointer-events:none;
+}
+.hero-inner{
+  max-width:1200px;margin:0 auto;
+  position:relative;z-index:2;
+}
+.hero-label{
+  font-family:var(--mono);
+  font-size:11px;font-weight:500;
+  letter-spacing:.08em;
+  color:var(--accent);
+  margin-bottom:24px;
+  display:flex;align-items:center;gap:12px;
+  text-transform:uppercase;
+}
+.hero-label::before{
+  content:'';width:32px;height:1px;background:var(--accent);
+}
+.hero h1{
+  font-family:var(--serif);
+  font-size:clamp(40px,5.4vw,68px);
+  font-weight:600;
+  line-height:1.08;
+  margin-bottom:24px;
+  color:var(--ink-on);
+  letter-spacing:-0.025em;
+  max-width:960px;
+}
+.hero h1 .em{color:var(--accent)}
+.hero h1 .warn{color:var(--warn)}
+.hero-sub{
+  font-family:var(--sans);
+  font-size:clamp(17px,1.8vw,20px);
+  color:var(--ink-on2);
+  max-width:780px;
+  line-height:1.55;
+  margin-bottom:48px;
+  font-weight:400;
+}
+.hero-meta{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:1px;
+  background:var(--rule-on2);
+  border:1px solid var(--rule-on2);
+  border-radius:var(--r2);
+  overflow:hidden;
+}
+.hero-meta-item{
+  background:var(--bg);
+  padding:20px 22px;
+}
+.hero-meta-item .lbl{
+  font-family:var(--mono);font-size:10px;
+  font-weight:500;letter-spacing:.06em;
+  text-transform:uppercase;
+  color:var(--ink-on3);
+  margin-bottom:8px;
+}
+.hero-meta-item .val{
+  font-family:var(--serif);
+  font-size:18px;font-weight:600;
+  color:var(--ink-on);
+  letter-spacing:-0.01em;
+}
+
+/* ───────────────────────── LAYOUT ───────────────────────── */
+.wrap{max-width:1200px;margin:0 auto;padding:0 40px}
+.section{padding:80px 0}
+.section + .section{border-top:1px solid var(--rule)}
+
+/* ───────────────────────── SECTION HEAD ───────────────────────── */
+.sh{
+  margin-bottom:48px;
+  display:grid;
+  grid-template-columns:80px 1fr;
+  gap:32px;
+  align-items:start;
+}
+.sh-num{
+  font-family:var(--mono);font-size:12px;
+  color:var(--accent-d);letter-spacing:.04em;
+  font-weight:600;
+  padding-top:8px;
+  position:relative;
+}
+.sh-num::after{
+  content:'';
+  position:absolute;
+  left:0;top:32px;
+  width:48px;height:2px;
+  background:var(--accent);
+}
+.sh-title{
+  font-family:var(--serif);
+  font-size:clamp(28px,3vw,42px);
+  font-weight:600;color:var(--ink);
+  line-height:1.15;letter-spacing:-0.02em;
+}
+.sh-title .em{color:var(--accent-d)}
+.sh-title .warn{color:var(--warn)}
+.sh-sub{
+  grid-column:2;
+  margin-top:16px;
+  font-size:18.5px;color:var(--ink2);
+  max-width:820px;line-height:1.65;
+}
+
+/* ───────────────────────── PROBLEM 3-CARD ───────────────────────── */
+.prob{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+.pcard{
+  background:var(--panel);
+  border:1px solid var(--rule);
+  border-radius:var(--r2);
+  overflow:hidden;
+  display:flex;flex-direction:column;
+  transition:transform .2s,box-shadow .2s;
+}
+.pcard:hover{
+  transform:translateY(-2px);
+  box-shadow:0 8px 24px rgba(13,17,23,0.06);
+}
+.pcard-bar{
+  height:4px;
+  display:flex;
+}
+.pcard-bar::before{content:'';flex:1}
+.pcard.a .pcard-bar{background:var(--danger)}
+.pcard.b .pcard-bar{background:var(--warn)}
+.pcard.c .pcard-bar{background:var(--accent)}
+.pcard-body{padding:28px 28px 32px;flex:1}
+.pcard-tag{
+  font-family:var(--mono);font-size:11px;
+  letter-spacing:.04em;text-transform:uppercase;
+  margin-bottom:16px;font-weight:600;
+}
+.pcard.a .pcard-tag{color:var(--danger)}
+.pcard.b .pcard-tag{color:var(--warn)}
+.pcard.c .pcard-tag{color:var(--accent-d)}
+.pcard-title{
+  font-family:var(--serif);font-size:23px;
+  font-weight:600;line-height:1.3;
+  margin-bottom:14px;color:var(--ink);
+  letter-spacing:-0.015em;
+}
+.pcard-title .em{color:var(--accent-d)}
+.pcard-body p{font-size:16px;color:var(--ink2);line-height:1.7}
+
+/* ───────────────────────── BIG STAT BAND ───────────────────────── */
+.band{
+  background:var(--bg);
+  color:var(--ink-on);
+  border-radius:var(--r2);
+  padding:48px 56px;
+  display:grid;grid-template-columns:1.4fr 1fr;
+  gap:48px;align-items:center;
+  position:relative;overflow:hidden;
+  margin-top:32px;
+}
+.band::before{
+  content:'';position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(230,237,243,0.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(230,237,243,0.04) 1px,transparent 1px);
+  background-size:32px 32px;pointer-events:none;
+}
+.band::after{
+  content:'';position:absolute;right:-100px;top:-100px;
+  width:400px;height:400px;
+  background:radial-gradient(circle,rgba(0,184,150,0.22) 0%,transparent 65%);
+  pointer-events:none;
+}
+.band-l{position:relative;z-index:2}
+.band-tag{
+  font-family:var(--mono);font-size:11px;
+  font-weight:500;letter-spacing:.04em;
+  text-transform:uppercase;
+  color:var(--accent);margin-bottom:16px;
+}
+.band-h{
+  font-family:var(--serif);
+  font-size:32px;font-weight:600;color:var(--ink-on);
+  line-height:1.25;letter-spacing:-0.02em;
+}
+.band-h .em{color:var(--accent)}
+.band-r{position:relative;z-index:2;text-align:right}
+.band-r .num{
+  font-family:var(--serif);font-size:96px;
+  font-weight:700;color:var(--accent);
+  line-height:1;letter-spacing:-0.04em;
+}
+.band-r .sub{
+  font-family:var(--mono);font-size:11px;
+  color:var(--ink-on2);
+  letter-spacing:.04em;text-transform:uppercase;
+  margin-top:14px;
+}
+
+/* ───────────────────────── HOW IT WORKS / FLOW ───────────────────────── */
+.flow{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:16px;position:relative;
+}
+.fstep{
+  background:var(--panel);
+  border:1px solid var(--rule);
+  border-radius:var(--r2);
+  padding:28px 26px 28px;
+  position:relative;
+  display:flex;flex-direction:column;
+}
+.fstep-num{
+  font-family:var(--mono);font-size:11px;font-weight:600;
+  color:var(--accent-d);background:var(--accent-l);
+  padding:4px 10px;border-radius:4px;
+  display:inline-block;align-self:flex-start;
+  letter-spacing:.04em;
+  margin-bottom:20px;
+}
+.fstep-icon{
+  width:44px;height:44px;border-radius:var(--r);
+  background:var(--bg);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--accent);margin-bottom:18px;
+}
+.fstep-icon svg{width:22px;height:22px}
+.fstep-title{
+  font-family:var(--serif);font-size:20px;font-weight:600;
+  color:var(--ink);line-height:1.3;margin-bottom:12px;
+  letter-spacing:-0.01em;
+}
+.fstep-body{
+  font-size:15.5px;color:var(--ink2);
+  line-height:1.65;flex:1;
+}
+.fstep-when{
+  font-family:var(--mono);font-size:10px;
+  color:var(--ink3);letter-spacing:.04em;
+  text-transform:uppercase;margin-top:18px;
+  padding-top:14px;border-top:1px solid var(--rule);
+  font-weight:500;
+}
+
+/* ───────────────────────── COMPARE NAIVE vs SMART ───────────────────────── */
+.compare{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:20px;
+}
+.compare-col{
+  border-radius:var(--r2);
+  padding:36px 36px;
+  border:1px solid var(--rule);
+}
+.compare-col.old{background:var(--panel)}
+.compare-col.new{background:var(--bg);color:var(--ink-on);border-color:var(--rule-on)}
+.compare-tag{
+  font-family:var(--mono);font-size:11px;
+  letter-spacing:.04em;text-transform:uppercase;
+  margin-bottom:20px;font-weight:600;
+}
+.compare-col.old .compare-tag{color:var(--ink3)}
+.compare-col.new .compare-tag{color:var(--accent)}
+.compare-headline{
+  font-family:var(--serif);
+  font-size:24px;font-weight:600;
+  line-height:1.3;margin-bottom:24px;letter-spacing:-0.015em;
+}
+.compare-col.old .compare-headline{color:var(--ink)}
+.compare-col.new .compare-headline{color:var(--ink-on)}
+.compare-list{list-style:none}
+.compare-list li{
+  padding:10px 0 10px 22px;
+  font-size:16px;line-height:1.6;position:relative;
+}
+.compare-col.old .compare-list li{color:var(--ink2)}
+.compare-col.new .compare-list li{color:var(--ink-on2)}
+.compare-list li::before{
+  content:'';position:absolute;left:0;top:18px;
+  width:6px;height:6px;border-radius:1px;
+}
+.compare-col.old .compare-list li::before{background:var(--ink3)}
+.compare-col.new .compare-list li::before{background:var(--accent)}
+.compare-col.new .compare-list li b{
+  color:var(--accent);font-weight:600;
+  font-family:var(--mono);font-size:13.5px;
+}
+.kicker{
+  text-align:center;
+  font-family:var(--serif);font-weight:500;
+  font-size:18px;color:var(--accent-d);
+  margin-top:24px;
+}
+
+/* ───────────────────────── THE NUMBERS / WEEKLY TABLE ───────────────────────── */
+.numbers-wrap{
+  background:var(--panel);
+  border:1px solid var(--rule);
+  border-radius:var(--r2);
+  padding:36px 40px;
+  margin-bottom:24px;
+}
+.nw-head{
+  display:flex;justify-content:space-between;align-items:baseline;
+  margin-bottom:24px;flex-wrap:wrap;gap:12px;
+  padding-bottom:20px;border-bottom:1px solid var(--rule);
+}
+.nw-title{
+  font-family:var(--serif);font-size:22px;font-weight:600;
+  color:var(--ink);letter-spacing:-0.01em;
+}
+.nw-sub{
+  font-family:var(--mono);font-size:11px;
+  color:var(--ink3);text-transform:uppercase;letter-spacing:.04em;
+}
+.weekly{
+  width:100%;border-collapse:collapse;
+  font-size:16px;
+}
+.weekly thead th{
+  font-family:var(--mono);font-size:10.5px;
+  letter-spacing:.04em;text-transform:uppercase;
+  color:var(--ink3);font-weight:600;
+  text-align:right;padding:12px 14px;
+  border-bottom:2px solid var(--rule2);
+}
+.weekly thead th:first-child,
+.weekly thead th:nth-child(2){text-align:left}
+.weekly tbody td{
+  padding:16px 14px;
+  border-bottom:1px solid var(--rule);
+  text-align:right;color:var(--ink2);
+  font-family:var(--sans);
+  font-variant-numeric:tabular-nums;
+}
+.weekly tbody td:first-child{
+  font-family:var(--mono);font-size:12px;
+  color:var(--accent-d);letter-spacing:.04em;
+  text-align:left;font-weight:600;
+}
+.weekly tbody td:nth-child(2){
+  text-align:left;color:var(--ink);font-weight:500;
+  font-family:var(--mono);font-size:13px;
+}
+.weekly tbody td.recover{color:var(--accent-d);font-weight:600}
+.weekly tbody td.gone{color:var(--danger);font-weight:600}
+.weekly tbody tr:last-child td{border-bottom:none}
+
+/* ───────────────────────── COST OF WAITING (chart) ───────────────────────── */
+.wait-grid{
+  display:grid;grid-template-columns:1.3fr 1fr;
+  gap:24px;
+}
+.wait-chart{
+  background:var(--panel);
+  border:1px solid var(--rule);
+  border-radius:var(--r2);
+  padding:32px 36px;
+}
+.wait-chart-title{
+  font-family:var(--serif);font-size:18px;font-weight:600;
+  color:var(--ink);margin-bottom:6px;letter-spacing:-0.01em;
+}
+.wait-chart-sub{
+  font-family:var(--mono);font-size:10.5px;
+  color:var(--ink3);text-transform:uppercase;
+  letter-spacing:.04em;margin-bottom:24px;
+}
+.wait-svg{width:100%;height:auto;display:block}
+.wait-side{
+  background:var(--bg);color:var(--ink-on);
+  border-radius:var(--r2);
+  padding:36px 36px;
+  display:flex;flex-direction:column;justify-content:center;
+  position:relative;overflow:hidden;
+}
+.wait-side::before{
+  content:'';position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(230,237,243,0.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(230,237,243,0.04) 1px,transparent 1px);
+  background-size:24px 24px;pointer-events:none;
+}
+.wait-side > *{position:relative;z-index:2}
+.wait-side-tag{
+  font-family:var(--mono);font-size:11px;
+  letter-spacing:.04em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:16px;font-weight:600;
+}
+.wait-side h3{
+  font-family:var(--serif);
+  font-size:26px;font-weight:600;color:var(--ink-on);
+  line-height:1.3;margin-bottom:18px;letter-spacing:-0.015em;
+}
+.wait-side h3 .em{color:var(--accent)}
+.wait-side h3 .warn{color:var(--warn)}
+.wait-side p{
+  font-size:15.5px;color:var(--ink-on2);
+  line-height:1.7;
+}
+
+/* ───────────────────────── HOW WE CALCULATE — Trust ───────────────────────── */
+.calc-intro{
+  background:var(--accent-l);
+  border:1px solid rgba(0,184,150,0.2);
+  border-left:4px solid var(--accent);
+  border-radius:var(--r2);
+  padding:24px 28px;
+  margin-bottom:32px;
+}
+.calc-intro-tag{
+  font-family:var(--mono);font-size:11px;font-weight:600;
+  color:var(--accent-d);letter-spacing:.04em;
+  text-transform:uppercase;margin-bottom:8px;
+}
+.calc-intro p{
+  font-size:16.5px;color:var(--ink);
+  line-height:1.7;font-weight:400;
+}
+.calc-intro p strong{font-weight:600;color:var(--ink)}
+
+.calc-steps{
+  display:flex;flex-direction:column;gap:18px;
+  margin-bottom:32px;
+}
+.cstep{
+  background:var(--panel);
+  border:1px solid var(--rule);
+  border-radius:var(--r2);
+  padding:28px 32px;
+  display:grid;
+  grid-template-columns:60px 1fr 1fr;
+  gap:32px;
+  align-items:start;
+}
+.cstep-num{
+  font-family:var(--serif);
+  font-size:36px;font-weight:700;
+  color:var(--accent);
+  line-height:1;letter-spacing:-0.03em;
+}
+.cstep-text h3{
+  font-family:var(--serif);font-size:19px;font-weight:600;
+  color:var(--ink);margin-bottom:10px;line-height:1.3;
+  letter-spacing:-0.01em;
+}
+.cstep-text p{
+  font-size:14.5px;color:var(--ink2);line-height:1.7;
+}
+.cstep-text p strong{color:var(--ink);font-weight:600}
+.cstep-example{
+  background:var(--panel2);
+  border:1px solid var(--rule);
+  border-radius:var(--r);
+  padding:18px 20px;
+  font-family:var(--mono);font-size:12.5px;
+  color:var(--ink2);line-height:1.75;
+}
+.cstep-example .ex-label{
+  display:block;
+  font-size:10px;font-weight:600;
+  color:var(--accent-d);letter-spacing:.04em;
+  text-transform:uppercase;margin-bottom:10px;
+}
+.cstep-example .ex-line{
+  display:flex;justify-content:space-between;
+  padding:3px 0;
+  border-bottom:1px dashed var(--rule);
+}
+.cstep-example .ex-line:last-child{border-bottom:none}
+.cstep-example .ex-line.sum{
+  margin-top:6px;padding-top:10px;
+  border-top:2px solid var(--rule2);
+  border-bottom:none;
+  font-weight:600;color:var(--ink);
+}
+.cstep-example .ex-val{color:var(--ink);font-weight:600}
+.cstep-example .ex-val.green{color:var(--accent-d)}
+.cstep-example .ex-val.red{color:var(--danger)}
+
+.calc-foot{
+  background:var(--bg);
+  color:var(--ink-on);
+  border-radius:var(--r2);
+  padding:32px 36px;
+  display:grid;grid-template-columns:1fr 1fr 1fr;
+  gap:32px;
+}
+.cfoot-item .cf-num{
+  font-family:var(--serif);font-size:32px;font-weight:700;
+  color:var(--accent);line-height:1;
+  margin-bottom:8px;letter-spacing:-0.02em;
+}
+.cfoot-item .cf-label{
+  font-family:var(--sans);font-size:16px;font-weight:600;
+  color:var(--ink-on);margin-bottom:4px;
+}
+.cfoot-item .cf-sub{
+  font-family:var(--mono);font-size:14px;
+  color:var(--ink-on3);letter-spacing:.04em;
+  line-height:1.5;
+}
+
+/* ───────────────────────── PROOF / VALIDATION ───────────────────────── */
+.val-stats{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:16px;margin-bottom:32px;
+}
+.vstat{
+  background:var(--bg);color:var(--ink-on);
+  border-radius:var(--r2);
+  padding:36px 28px;text-align:left;
+  position:relative;overflow:hidden;
+}
+.vstat::before{
+  content:'';position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(230,237,243,0.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(230,237,243,0.04) 1px,transparent 1px);
+  background-size:20px 20px;pointer-events:none;
+}
+.vstat > *{position:relative;z-index:2}
+.vstat-num{
+  font-family:var(--serif);font-size:56px;font-weight:700;
+  color:var(--accent);line-height:1;
+  margin-bottom:14px;letter-spacing:-0.03em;
+}
+.vstat-label{
+  font-family:var(--sans);font-size:16px;font-weight:600;
+  color:var(--ink-on);margin-bottom:6px;
+}
+.vstat-sub{
+  font-family:var(--mono);font-size:14px;
+  color:var(--ink-on3);letter-spacing:.04em;
+  line-height:1.5;
+}
+
+.proof-2{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:20px;
+}
+.proof-card{
+  background:var(--panel);
+  border:1px solid var(--rule);
+  border-radius:var(--r2);
+  padding:32px 34px;
+}
+.proof-tag{
+  font-family:var(--mono);font-size:11px;
+  letter-spacing:.04em;text-transform:uppercase;
+  color:var(--accent-d);margin-bottom:14px;font-weight:600;
+}
+.proof-title{
+  font-family:var(--serif);font-size:22px;font-weight:600;
+  color:var(--ink);margin-bottom:12px;line-height:1.3;
+  letter-spacing:-0.01em;
+}
+.proof-body{
+  font-size:16px;color:var(--ink2);line-height:1.7;
+}
+.proof-body strong{color:var(--ink);font-weight:600}
+
+/* ───────────────────────── REPORTS DELIVERED ───────────────────────── */
+.reports{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:16px;
+}
+.rcard{
+  background:var(--panel);
+  border:1px solid var(--rule);
+  border-radius:var(--r2);
+  padding:28px 28px 26px;
+  position:relative;overflow:hidden;
+  display:flex;flex-direction:column;
+}
+.rcard::before{
+  content:'';position:absolute;left:0;top:0;right:0;
+  height:3px;background:var(--accent);
+}
+.rcard-num{
+  font-family:var(--mono);font-size:11px;
+  color:var(--accent-d);font-weight:600;
+  margin-bottom:14px;
+  letter-spacing:.04em;
+}
+.rcard-title{
+  font-family:var(--serif);font-size:20px;font-weight:600;
+  color:var(--ink);margin-bottom:8px;line-height:1.3;
+  letter-spacing:-0.01em;
+}
+.rcard-for{
+  font-family:var(--mono);font-size:11px;
+  color:var(--ink3);letter-spacing:.04em;
+  text-transform:uppercase;margin-bottom:16px;
+  padding-bottom:14px;border-bottom:1px solid var(--rule);
+  font-weight:500;
+}
+.rcard p{
+  font-size:15.5px;color:var(--ink2);line-height:1.7;flex:1;
+}
+
+/* ───────────────────────── BENEFITS ───────────────────────── */
+.bens{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.ben{
+  background:var(--panel);
+  border:1px solid var(--rule);
+  border-radius:var(--r2);
+  padding:26px 28px;
+  display:grid;
+  grid-template-columns:48px 1fr;
+  gap:20px;align-items:flex-start;
+}
+.ben-icon{
+  width:44px;height:44px;border-radius:var(--r);
+  background:var(--bg);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--accent);
+}
+.ben-icon svg{width:22px;height:22px}
+.ben-title{
+  font-family:var(--serif);font-size:19px;font-weight:600;
+  color:var(--ink);margin-bottom:6px;line-height:1.3;
+  letter-spacing:-0.01em;
+}
+.ben p{font-size:15.5px;color:var(--ink2);line-height:1.65}
+
+/* ───────────────────────── FAQ (click to expand) ───────────────────────── */
+.faq{display:flex;flex-direction:column;gap:12px}
+.faq-item{
+  background:var(--panel);
+  border:1px solid var(--rule);
+  border-radius:var(--r2);
+  overflow:hidden;
+  transition:border-color .2s,box-shadow .2s;
+}
+.faq-item[open]{
+  border-color:rgba(0,184,150,0.35);
+  box-shadow:0 4px 18px rgba(13,17,23,0.04);
+}
+.faq-q{
+  font-family:var(--serif);font-size:18.5px;font-weight:600;
+  color:var(--ink);line-height:1.4;
+  letter-spacing:-0.01em;
+  padding:22px 28px;
+  cursor:pointer;
+  display:flex;align-items:center;gap:14px;
+  list-style:none;
+  user-select:none;
+  transition:color .2s;
+}
+.faq-q::-webkit-details-marker{display:none}
+.faq-q:hover{color:var(--accent-d)}
+.faq-q::before{
+  content:'Q';
+  font-family:var(--mono);font-size:12px;
+  color:var(--bg);background:var(--accent);
+  padding:3px 9px;border-radius:4px;
+  font-weight:600;
+  flex-shrink:0;
+}
+.faq-q-text{flex:1}
+.faq-chevron{
+  width:24px;height:24px;
+  flex-shrink:0;
+  color:var(--ink3);
+  transition:transform .25s ease, color .2s;
+}
+.faq-item[open] .faq-chevron{
+  transform:rotate(180deg);
+  color:var(--accent-d);
+}
+.faq-a{
+  font-size:16px;color:var(--ink2);line-height:1.75;
+  padding:0 28px 24px 28px;
+  margin-left:38px;
+  border-top:1px dashed var(--rule);
+  padding-top:18px;
+}
+.faq-a strong{color:var(--ink);font-weight:600}
+
+/* ───────────────────────── THE ASK / NEXT STEPS ───────────────────────── */
+.next{
+  background:var(--bg);
+  color:var(--ink-on);
+  padding:88px 40px;
+  position:relative;overflow:hidden;
+}
+.next::before{
+  content:'';position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(230,237,243,0.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(230,237,243,0.025) 1px,transparent 1px);
+  background-size:48px 48px;pointer-events:none;
+}
+.next::after{
+  content:'';position:absolute;right:-150px;bottom:-150px;
+  width:560px;height:560px;
+  background:radial-gradient(circle,rgba(0,184,150,0.18) 0%,transparent 65%);
+  pointer-events:none;
+}
+.next-inner{
+  max-width:1200px;margin:0 auto;
+  position:relative;z-index:2;
+}
+.next-label{
+  font-family:var(--mono);font-size:11px;
+  font-weight:500;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--accent);
+  margin-bottom:20px;
+  display:flex;align-items:center;gap:12px;
+}
+.next-label::before{content:'';width:32px;height:1px;background:var(--accent)}
+.next h2{
+  font-family:var(--serif);
+  font-size:clamp(36px,4.5vw,54px);
+  font-weight:600;line-height:1.1;
+  color:var(--ink-on);margin-bottom:20px;
+  letter-spacing:-0.025em;max-width:900px;
+}
+.next h2 .em{color:var(--accent)}
+.next-sub{
+  font-family:var(--sans);
+  font-size:18px;color:var(--ink-on2);
+  max-width:760px;line-height:1.55;
+  margin-bottom:48px;
+}
+.steps{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:18px;margin-bottom:52px;
+}
+.step{
+  background:var(--bg2);
+  border:1px solid var(--rule-on2);
+  border-radius:var(--r2);
+  padding:30px 30px;
+}
+.step-num{
+  font-family:var(--mono);font-size:11px;font-weight:600;
+  color:var(--accent);background:rgba(0,184,150,0.12);
+  padding:4px 10px;border-radius:4px;
+  display:inline-block;
+  letter-spacing:.04em;
+  margin-bottom:18px;
+}
+.step-title{
+  font-family:var(--serif);font-size:20px;font-weight:600;
+  color:var(--ink-on);margin-bottom:10px;
+  letter-spacing:-0.01em;
+}
+.step p{
+  font-size:14px;color:var(--ink-on2);
+  line-height:1.65;
+}
+.next-foot{
+  display:flex;justify-content:space-between;align-items:center;
+  padding-top:36px;
+  border-top:1px solid var(--rule-on2);
+  flex-wrap:wrap;gap:20px;
+}
+.next-foot-l{
+  font-family:var(--serif);
+  font-size:18px;color:var(--ink-on);font-weight:500;
+  letter-spacing:-0.01em;
+}
+.next-foot-r a{
+  font-family:var(--mono);font-size:12px;font-weight:500;
+  color:var(--accent);text-decoration:none;
+  letter-spacing:.02em;
+  border-bottom:1px solid rgba(0,184,150,0.3);
+  padding-bottom:2px;
+  margin-left:14px;
+}
+.next-foot-r a:first-child{margin-left:0}
+.next-foot-r a:hover{color:var(--ink-on);border-bottom-color:var(--ink-on)}
+
+/* ───────────────────────── FOOTER ───────────────────────── */
+.footer{
+  padding:28px 40px;
+  border-top:1px solid var(--rule-on);
+  background:var(--bg2);
+  font-family:var(--mono);font-size:11px;
+  color:var(--ink-on3);
+  display:flex;justify-content:space-between;
+  letter-spacing:.04em;
+  flex-wrap:wrap;gap:12px;
+}
+
+/* ───────────────────────── RESPONSIVE ───────────────────────── */
+@media(max-width:980px){
+  .nav,.hero,.next,.footer{padding-left:24px;padding-right:24px}
+  .wrap{padding:0 24px}
+  .sh{grid-template-columns:1fr;gap:16px}
+  .sh-sub{grid-column:1}
+  .hero-meta,.prob,.flow,.reports,.steps,.val-stats,.bens,.calc-foot{
+    grid-template-columns:1fr
+  }
+  .compare,.wait-grid,.proof-2,.band{grid-template-columns:1fr}
+  .band{gap:24px;padding:36px 30px}
+  .band-r{text-align:left}
+  .band-r .num{font-size:64px}
+  .cstep{grid-template-columns:1fr;gap:18px}
+  .cstep-num{font-size:28px}
+  .ben{grid-template-columns:44px 1fr;gap:16px;padding:20px 22px}
+  .hero h1{font-size:36px}
+}
+</style>
+</head>
+<body>
+
+<!-- ───────────── NAV ───────────── -->
+<nav class="nav">
+  <span class="nav-brand">Algo-Rythmn</span>
+  <a href="#why">Why</a>
+  <a href="#how">How it works</a>
+  <a href="#numbers">The numbers</a>
+  <a href="#math">How we calculate</a>
+  <a href="#proof">Proof</a>
+  <a href="#reports">Reports</a>
+  <a href="#faq">FAQ</a>
+  <a href="#next" class="nav-cta">Book a pilot</a>
+</nav>
+
+<!-- ───────────── HERO ───────────── -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-label">For growers · Spring 2026</div>
+    <h1>Catch crop problems while they're <span class="em">small.</span><br>Before they cost you <span class="warn">the season.</span></h1>
+    <p class="hero-sub">The drone team visits your field every week, spots trouble early, and delivers a one-page report telling you exactly where to walk, what to check, and how much money is on the line if you wait.</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <div class="lbl">Field tested</div>
+        <div class="val">234-acre Illinois corn</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="lbl">Cadence</div>
+        <div class="val">Weekly · 40 min/flight</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="lbl">Detection accuracy</div>
+        <div class="val">99.7%</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="lbl">Validated on</div>
+        <div class="val">University benchmark</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+
+  <!-- ───────────── 01 · THE PROBLEM ───────────── -->
+  <section class="section" id="why">
+    <header class="sh">
+      <span class="sh-num">01 / Why</span>
+      <h2 class="sh-title">By the time you <span class="em">see it</span> from the truck, it's already cost you money.</h2>
+      <p class="sh-sub">Most crop trouble — disease pockets, nutrient gaps, water stress — starts in small patches you can't see from the road. By the time it's visible across the field, the patch has spread, the window to react has closed, and a chunk of your yield is already gone for good.</p>
+    </header>
+    <div class="prob">
+      <div class="pcard a">
+        <div class="pcard-bar"></div>
+        <div class="pcard-body">
+          <div class="pcard-tag">The lag</div>
+          <h3 class="pcard-title">A week of waiting costs real money.</h3>
+          <p>Disease and stress don't pause between scouting trips. Every week you wait to spot a problem, more of the loss becomes permanent — you can't get it back, even if you treat the patch later.</p>
+        </div>
+      </div>
+      <div class="pcard b">
+        <div class="pcard-bar"></div>
+        <div class="pcard-body">
+          <div class="pcard-tag">The blind spots</div>
+          <h3 class="pcard-title">A truck and a pair of boots can't cover 200+ acres.</h3>
+          <p>Walking the field is slow. Driving the field misses the inside. By the time you spot the trouble from the headlands, the problem patch is usually 2–3× larger than when it started.</p>
+        </div>
+      </div>
+      <div class="pcard c">
+        <div class="pcard-bar"></div>
+        <div class="pcard-body">
+          <div class="pcard-tag">The opportunity</div>
+          <h3 class="pcard-title">Most of the loss is still <span class="em">recoverable</span> — if you catch it in time.</h3>
+          <p>Across our test field, roughly 70% of the patch loss was still recoverable in week one. By week four, that share had dropped sharply. Early information is the difference between a fix and a write-off.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="band">
+      <div class="band-l">
+        <div class="band-tag">What waiting costs · 234 acres · 4 weeks</div>
+        <div class="band-h">Wait until <span class="em">Week 4</span> to react, and the recoverable loss has grown <span class="em">nearly 5×.</span></div>
+      </div>
+      <div class="band-r">
+        <div class="num">4.8×</div>
+        <div class="sub">growth in recoverable loss · weeks 1 → 4</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────── 02 · HOW IT WORKS ───────────── -->
+  <section class="section" id="how">
+    <header class="sh">
+      <span class="sh-num">02 / How</span>
+      <h2 class="sh-title">Four drones. <span class="em">Forty minutes.</span> One report on your phone.</h2>
+      <p class="sh-sub">No complicated software for you to learn. No tablet to carry into the field. Once a week, our drone team flies your field, processes the images, and sends you a short report.</p>
+    </header>
+    <div class="flow">
+      <div class="fstep">
+        <div class="fstep-num">STEP 01</div>
+        <div class="fstep-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L3 7v6c0 5 4 9 9 9s9-4 9-9V7l-9-5z"/><path d="M8 12l3 3 5-5"/></svg>
+        </div>
+        <h3 class="fstep-title">Drones launch from the edge of your field.</h3>
+        <p class="fstep-body">Four small drones, one operator. They lift off, do their work, and land themselves. No disruption to anything happening on the ground.</p>
+        <div class="fstep-when">~5 min setup</div>
+      </div>
+      <div class="fstep">
+        <div class="fstep-num">STEP 02</div>
+        <div class="fstep-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3v18"/><path d="M5.6 5.6l12.8 12.8M18.4 5.6L5.6 18.4"/></svg>
+        </div>
+        <h3 class="fstep-title">They focus on the suspicious zones first.</h3>
+        <p class="fstep-body">Instead of mowing back-and-forth blindly, the drones spend their time on parts of the field that look like they might be in trouble. Same coverage in less time.</p>
+        <div class="fstep-when">~40 min flight</div>
+      </div>
+      <div class="fstep">
+        <div class="fstep-num">STEP 03</div>
+        <div class="fstep-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 10h18M8 4v14"/></svg>
+        </div>
+        <h3 class="fstep-title">The images become a map of problem patches.</h3>
+        <p class="fstep-body">Every patch the drones find gets a location, a size, a severity level, and a best-guess at what's wrong — disease, water, nutrient. Plain English. No jargon.</p>
+        <div class="fstep-when">Same day</div>
+      </div>
+      <div class="fstep">
+        <div class="fstep-num">STEP 04</div>
+        <div class="fstep-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8z"/></svg>
+        </div>
+        <h3 class="fstep-title">You get a one-page report. With dollar figures.</h3>
+        <p class="fstep-body">"Here are the patches that matter this week. Here's how much yield they could cost you. Here's how much you can still save if you act now." Sent to your phone.</p>
+        <div class="fstep-when">Within 24 h</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────── 03 · WHY SMARTER, NOT MORE ───────────── -->
+  <section class="section">
+    <header class="sh">
+      <span class="sh-num">03 / Method</span>
+      <h2 class="sh-title">Why our drones find more, <span class="em">in less time.</span></h2>
+    </header>
+    <div class="compare">
+      <div class="compare-col old">
+        <div class="compare-tag">Standard drone scouting</div>
+        <h3 class="compare-headline">A drone that mows back-and-forth, treating every square foot the same.</h3>
+        <ul class="compare-list">
+          <li>Burns flight time on the boring, healthy parts of the field</li>
+          <li>Misses early-stage patches that are only a few square metres</li>
+          <li>Long flights, more batteries, more pilot time, more cost</li>
+          <li>You get a pretty picture, not an answer</li>
+        </ul>
+      </div>
+      <div class="compare-col new">
+        <div class="compare-tag">Our drone team</div>
+        <h3 class="compare-headline">Drones that spend their battery where the trouble actually is.</h3>
+        <ul class="compare-list">
+          <li>Same patches found in <b>~40% less flight time</b></li>
+          <li>Or in the same flight time, <b>more patches found</b></li>
+          <li>Fewer batteries, less labour, lower cost per acre</li>
+          <li>You get a short report telling you <b>what to do</b></li>
+        </ul>
+      </div>
+    </div>
+    <p class="kicker">It's not about more drones. It's about smarter ones.</p>
+  </section>
+
+  <!-- ───────────── 04 · THE NUMBERS ───────────── -->
+  <section class="section" id="numbers">
+    <header class="sh">
+      <span class="sh-num">04 / Results</span>
+      <h2 class="sh-title">A real field. A real season. <span class="em">Real dollars.</span></h2>
+      <p class="sh-sub">We ran the system on a 234-acre Illinois corn field for four weeks. Here is what weekly drone scouting found, week by week — and what waiting would have cost.</p>
+    </header>
+
+    <div class="numbers-wrap">
+      <div class="nw-head">
+        <div class="nw-title">234-acre Illinois corn · 4 weekly flights</div>
+        <div class="nw-sub">All figures CAD · spring 2026</div>
+      </div>
+      <table class="weekly">
+        <thead>
+          <tr>
+            <th>Week</th>
+            <th>Date</th>
+            <th>Problem patches found</th>
+            <th>Potential loss</th>
+            <th>Still recoverable</th>
+            <th>Permanently lost</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>W1</td>
+            <td>May 14</td>
+            <td>25</td>
+            <td>$1,295</td>
+            <td class="recover">$960</td>
+            <td class="gone">$335</td>
+          </tr>
+          <tr>
+            <td>W2</td>
+            <td>May 21</td>
+            <td>25</td>
+            <td>$1,919</td>
+            <td class="recover">$1,383</td>
+            <td class="gone">$536</td>
+          </tr>
+          <tr>
+            <td>W3</td>
+            <td>May 28</td>
+            <td>29</td>
+            <td>$3,671</td>
+            <td class="recover">$2,584</td>
+            <td class="gone">$1,087</td>
+          </tr>
+          <tr>
+            <td>W4</td>
+            <td>Jun 4</td>
+            <td>31</td>
+            <td>$6,588</td>
+            <td class="recover">$4,570</td>
+            <td class="gone">$2,018</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="wait-grid">
+      <div class="wait-chart">
+        <div class="wait-chart-title">The cost of waiting one more week</div>
+        <div class="wait-chart-sub">Recoverable (green) vs. permanently lost (red) · CAD</div>
+        <svg class="wait-svg" viewBox="0 0 600 320" xmlns="http://www.w3.org/2000/svg">
+          <!-- Grid lines -->
+          <line x1="60" y1="40"  x2="580" y2="40"  stroke="#0d1117" stroke-opacity="0.06"/>
+          <line x1="60" y1="100" x2="580" y2="100" stroke="#0d1117" stroke-opacity="0.06"/>
+          <line x1="60" y1="160" x2="580" y2="160" stroke="#0d1117" stroke-opacity="0.06"/>
+          <line x1="60" y1="220" x2="580" y2="220" stroke="#0d1117" stroke-opacity="0.06"/>
+          <line x1="60" y1="280" x2="580" y2="280" stroke="#0d1117" stroke-opacity="0.20"/>
+
+          <!-- Y-axis labels -->
+          <g font-family="JetBrains Mono" font-size="12" fill="#8a92a0">
+            <text x="50" y="44"  text-anchor="end">$7,000</text>
+            <text x="50" y="104" text-anchor="end">$5,250</text>
+            <text x="50" y="164" text-anchor="end">$3,500</text>
+            <text x="50" y="224" text-anchor="end">$1,750</text>
+            <text x="50" y="284" text-anchor="end">$0</text>
+          </g>
+
+          <!-- Bars: Week 1 -->
+          <g>
+            <rect x="100" y="247.1" width="50" height="32.9" fill="#00b896" rx="2"/>
+            <rect x="100" y="235.6" width="50" height="11.5" fill="#dc2626" rx="2"/>
+            <text x="125" y="298" font-family="Inter" font-size="11" fill="#0d1117" text-anchor="middle" font-weight="600">W1</text>
+          </g>
+          <!-- Bars: Week 2 -->
+          <g>
+            <rect x="220" y="232.6" width="50" height="47.4" fill="#00b896" rx="2"/>
+            <rect x="220" y="214.2" width="50" height="18.4" fill="#dc2626" rx="2"/>
+            <text x="245" y="298" font-family="Inter" font-size="11" fill="#0d1117" text-anchor="middle" font-weight="600">W2</text>
+          </g>
+          <!-- Bars: Week 3 -->
+          <g>
+            <rect x="340" y="191.4" width="50" height="88.6" fill="#00b896" rx="2"/>
+            <rect x="340" y="154.1" width="50" height="37.3" fill="#dc2626" rx="2"/>
+            <text x="365" y="298" font-family="Inter" font-size="11" fill="#0d1117" text-anchor="middle" font-weight="600">W3</text>
+          </g>
+          <!-- Bars: Week 4 -->
+          <g>
+            <rect x="460" y="123.3" width="50" height="156.7" fill="#00b896" rx="2"/>
+            <rect x="460" y="54.1"  width="50" height="69.2"  fill="#dc2626" rx="2"/>
+            <text x="485" y="298" font-family="Inter" font-size="11" fill="#0d1117" text-anchor="middle" font-weight="600">W4</text>
+          </g>
+
+          <!-- Value annotations above each green bar -->
+          <text x="125" y="230" font-family="JetBrains Mono" font-size="12" fill="#4a5260" text-anchor="middle" font-weight="600">$960</text>
+          <text x="245" y="207" font-family="JetBrains Mono" font-size="12" fill="#4a5260" text-anchor="middle" font-weight="600">$1,383</text>
+          <text x="365" y="146" font-family="JetBrains Mono" font-size="12" fill="#4a5260" text-anchor="middle" font-weight="600">$2,584</text>
+          <text x="485" y="46"  font-family="JetBrains Mono" font-size="12" fill="#4a5260" text-anchor="middle" font-weight="600">$4,570</text>
+
+          <!-- Legend -->
+          <g transform="translate(60, 12)">
+            <rect x="0"   y="0" width="10" height="10" fill="#00b896" rx="2"/>
+            <text x="16"  y="9" font-family="JetBrains Mono" font-size="12" fill="#4a5260">Still recoverable if you act now</text>
+            <rect x="280" y="0" width="10" height="10" fill="#dc2626" rx="2"/>
+            <text x="296" y="9" font-family="JetBrains Mono" font-size="12" fill="#4a5260">Already permanently lost</text>
+          </g>
+        </svg>
+      </div>
+      <div class="wait-side">
+        <div class="wait-side-tag">The headline</div>
+        <h3>Catch it in Week 1 — save <span class="em">$960.</span><br>Wait until Week 4 — chase <span class="em">$4,570</span>, and <span class="warn">$2,018</span> is already gone.</h3>
+        <p>The longer a patch sits untreated, the more of its damage becomes permanent — even if you eventually treat it. Weekly scouting is what keeps the recoverable share large and the permanently-gone share small.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────── 05 · HOW WE CALCULATE ───────────── -->
+  <section class="section" id="math">
+    <header class="sh">
+      <span class="sh-num">05 / Transparency</span>
+      <h2 class="sh-title">Where the <span class="em">dollar figures</span> come from.</h2>
+      <p class="sh-sub">No black box. The loss numbers in your report are built on the same approach your agronomist already knows — and calibrated to your specific field.</p>
+    </header>
+
+    <div class="calc-intro">
+      <div class="calc-intro-tag">The short version</div>
+      <p><strong>Patch size × severity × your crop price = potential loss.</strong> That's the industry-standard damage-function approach used by university extension services and the Crop Protection Network. We then split that loss into "still recoverable" and "already permanent" using a recovery model that we <strong>calibrate against your own field</strong> over the first 1–2 flights.</p>
+    </div>
+
+    <div class="calc-foot">
+      <div class="cfoot-item">
+        <div class="cf-num">Standard</div>
+        <div class="cf-label">Industry-recognized core</div>
+        <div class="cf-sub">Severity × area × price — the damage-function approach used by APS and the Crop Protection Network</div>
+      </div>
+      <div class="cfoot-item">
+        <div class="cf-num">Yours</div>
+        <div class="cf-label">Calibrated to your field</div>
+        <div class="cf-sub">Crop price, yield baseline, and the recoverable / permanent split are tuned to your operation, not a textbook</div>
+      </div>
+      <div class="cfoot-item">
+        <div class="cf-num">Open</div>
+        <div class="cf-label">Auditable on request</div>
+        <div class="cf-sub">Every dollar figure traces back to one GPS-tagged patch; model details available to your agronomist anytime</div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ───────────── 06 · PROOF ───────────── -->
+  <section class="section" id="proof">
+    <header class="sh">
+      <span class="sh-num">06 / Proof</span>
+      <h2 class="sh-title">Does it actually find the problems? <span class="em">Yes.</span></h2>
+      <p class="sh-sub">We tested the detection on a public, independently-labelled crop dataset where the correct answer for every section of the field was already known. Here is how often the drone team got it right.</p>
+    </header>
+    <div class="val-stats">
+      <div class="vstat">
+        <div class="vstat-num">99.7%</div>
+        <div class="vstat-label">Detection accuracy</div>
+        <div class="vstat-sub">Average across 4 scouting periods on the benchmark dataset</div>
+      </div>
+      <div class="vstat">
+        <div class="vstat-num">~40%</div>
+        <div class="vstat-label">Less flight time</div>
+        <div class="vstat-sub">vs. a back-and-forth drone sweep at the same detection rate</div>
+      </div>
+      <div class="vstat">
+        <div class="vstat-num">25+</div>
+        <div class="vstat-label">Patches per flight</div>
+        <div class="vstat-sub">Found, mapped, severity-ranked on the 234-acre field</div>
+      </div>
+    </div>
+    <div class="proof-2">
+      <div class="proof-card">
+        <div class="proof-tag">Proof set 1 · The algorithm</div>
+        <h3 class="proof-title">Tested on a published university dataset.</h3>
+        <p class="proof-body">We ran the drone team's logic on the <strong>Indian Pines</strong> crop dataset (Purdue University), where independent researchers have already labelled every section of the field. We hit <strong>99.7%</strong> accuracy across four scouting rounds. That's the science: the detection works.</p>
+      </div>
+      <div class="proof-card">
+        <div class="proof-tag">Proof set 2 · A real field</div>
+        <h3 class="proof-title">Mapped onto a real 234-acre Illinois farm.</h3>
+        <p class="proof-body">We then dropped the system onto the real GPS boundary of an Illinois corn field (the <strong>Mildreds field</strong>) and simulated realistic disease pressure to show you what a real season would look like. The field is real. The dollars are real. The disease will become real the first time we fly your field.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────── 07 · WHAT YOU GET ───────────── -->
+  <section class="section" id="reports">
+    <header class="sh">
+      <span class="sh-num">07 / Deliverables</span>
+      <h2 class="sh-title">What lands in your inbox <span class="em">after every flight.</span></h2>
+      <p class="sh-sub">No software to log into. No dashboard to babysit. After each weekly flight, three things show up — sized for however you like to work.</p>
+    </header>
+    <div class="reports">
+      <div class="rcard">
+        <div class="rcard-num">REPORT 01</div>
+        <h3 class="rcard-title">The one-page flight report</h3>
+        <div class="rcard-for">For the agronomist or operator</div>
+        <p>The patches we found this week, ranked by severity. Each one with a GPS pin, a size, a likely cause, and a recommended action. PDF or printable.</p>
+      </div>
+      <div class="rcard">
+        <div class="rcard-num">REPORT 02</div>
+        <h3 class="rcard-title">The week-over-week trend</h3>
+        <div class="rcard-for">For the farm manager</div>
+        <p>How the field is changing across the season. Which patches are growing, which are healing, which are new. One scroll, one screen — your season at a glance.</p>
+      </div>
+      <div class="rcard">
+        <div class="rcard-num">REPORT 03</div>
+        <h3 class="rcard-title">The map of your field</h3>
+        <div class="rcard-for">For walking the field</div>
+        <p>An interactive map on your phone, with every problem patch dropped onto your real field boundary. Tap a patch, see the photo, see the recommendation, drive there.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────── 08 · BENEFITS ───────────── -->
+  <section class="section">
+    <header class="sh">
+      <span class="sh-num">08 / Benefits</span>
+      <h2 class="sh-title">What this means for <span class="em">your operation.</span></h2>
+    </header>
+    <div class="bens">
+      <div class="ben">
+        <div class="ben-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        </div>
+        <div>
+          <h3 class="ben-title">Find trouble a week earlier — and a week earlier saves real money.</h3>
+          <p>Disease and stress compound. Each week you wait, less of the damage is recoverable. Weekly drone visits keep you on the early side of every problem.</p>
+        </div>
+      </div>
+      <div class="ben">
+        <div class="ben-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12l3 3 6-6"/><path d="M14 7h7M14 12h7M14 17h7"/></svg>
+        </div>
+        <div>
+          <h3 class="ben-title">Walk the field with a plan, not a hunch.</h3>
+          <p>The report tells you exactly where to walk and what to look at. You stop spending hours scouting and start spending minutes confirming.</p>
+        </div>
+      </div>
+      <div class="ben">
+        <div class="ben-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2v20M4 7h8M4 12h8M4 17h8M14 5h6M14 10h6M14 19h6"/></svg>
+        </div>
+        <div>
+          <h3 class="ben-title">Spray and treat only where it matters.</h3>
+          <p>Patch-level maps mean patch-level treatment. Less product on healthy crop, more focus where there's actually trouble. Lower input cost per acre, less environmental load.</p>
+        </div>
+      </div>
+      <div class="ben">
+        <div class="ben-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <div>
+          <h3 class="ben-title">Have the conversation with the numbers in hand.</h3>
+          <p>Whether it's an agronomist, a landlord, a banker, or an insurer — show up with a weekly trend, a patch map, and dollar figures. Not opinions. Evidence.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────── 09 · FAQ ───────────── -->
+  <section class="section" id="faq">
+    <header class="sh">
+      <span class="sh-num">09 / FAQ</span>
+      <h2 class="sh-title">A few of the <span class="em">questions you might have.</span></h2>
+    </header>
+    <div class="faq">
+      <details class="faq-item">
+        <summary class="faq-q">
+          <span class="faq-q-text">Do I need to learn any software?</span>
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </summary>
+        <div class="faq-a">No. We fly the drones, we process the images, we send you the report. You get a PDF, a map link, and a phone number to call if anything needs explaining.</div>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">
+          <span class="faq-q-text">How long does a weekly flight take?</span>
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </summary>
+        <div class="faq-a">About 40 minutes of flight time for a field around the size of our test field (234 acres). The drones land themselves, and nothing on the ground has to stop or move.</div>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">
+          <span class="faq-q-text">What kind of "problems" can it actually spot?</span>
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </summary>
+        <div class="faq-a">Disease pockets, water stress, nutrient deficiency, and unusual growth patterns. Every patch comes with a best-guess at the cause and a severity score, so you and your agronomist can decide what to do.</div>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">
+          <span class="faq-q-text">How are the "potential loss" and "recoverable" numbers calculated?</span>
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </summary>
+        <div class="faq-a">The core — patch size × severity × your crop price — is the <strong>standard damage-function approach</strong> used by university extension services and the Crop Protection Network. Your agronomist will recognize it. The recoverable / permanent split uses our own recovery model, which we calibrate to your own field over the first 1–2 flights. We're happy to share the model details with your agronomist on request.</div>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">
+          <span class="faq-q-text">What if my crop price or yield baseline changes mid-season?</span>
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </summary>
+        <div class="faq-a">We refresh those inputs every flight. The recovery curves are also recalibrated against ground-truth from your own field after the first 1–2 visits, so the dollar figures get more accurate to your operation, not less, as the season progresses.</div>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">
+          <span class="faq-q-text">What's a realistic starting point?</span>
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </summary>
+        <div class="faq-a">A one-field, four-week pilot during your most pressure-sensitive part of the season. You get four weekly reports, a season-end summary, and a side-by-side comparison with your usual scouting. No multi-year commitment.</div>
+      </details>
+    </div>
+  </section>
+
+</div><!-- /.wrap -->
+
+<!-- ───────────── 10 · NEXT STEPS ───────────── -->
+<section class="next" id="next">
+  <div class="next-inner">
+    <div class="next-label">Next steps · Spring 2026</div>
+    <h2>Pick a field. <span class="em">Try a season.</span><br>Decide for yourself.</h2>
+    <p class="next-sub">Three simple steps. One field. One season. Real reports, real numbers, real decisions you can make from them.</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">STEP 01</div>
+        <div class="step-title">Pick the field</div>
+        <p>Tell us which field, and when in the season pressure usually shows up. We map the boundary from your existing records — no surveys needed.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">STEP 02</div>
+        <div class="step-title">We fly it weekly</div>
+        <p>Four-week pilot. One flight per week. One report per week. A season-end summary and a comparison with your usual scouting at the end.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">STEP 03</div>
+        <div class="step-title">You decide</div>
+        <p>Keep going next season, expand to more fields, or walk away — no commitment beyond the pilot. The reports are yours to keep either way.</p>
+      </div>
+    </div>
+
+    <div class="next-foot">
+      <div class="next-foot-l">Let's catch it while it's still small.</div>
+      <div class="next-foot-r">
+        <a href="https://algo-rythmn.ai">algo-rythmn.ai</a>
+        <a href="mailto:support@algo-rythmn.ai">support@algo-rythmn.ai</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────── FOOTER ───────────── -->
+<footer class="footer">
+  <div>© 2026 Algo-Rythmn. All rights reserved.</div>
+  <div>Drone Team · May 2026</div>
+</footer>
+
+</body>
+</html>
