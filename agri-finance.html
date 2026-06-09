@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Algo-Rythmn — Agriculture Financial Products</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0d0b;
+    --bg-2:#0f140f;
+    --surface:#131a13;
+    --surface-2:#19211807;
+    --fg:#eef1e6;
+    --muted:#97a08c;
+    --faint:#97a08c;
+    --canola:#f3c623;
+    --canola-deep:#d9a90f;
+    --signal:#6fcf85;
+    --grain:#d8b25c;
+    --line:rgba(243,198,35,.14);
+    --line-soft:rgba(238,241,230,.08);
+    --maxw:1120px;
+    --ease:cubic-bezier(.2,.7,.2,1);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Hanken Grotesk',sans-serif;
+    background:var(--bg);
+    color:var(--fg);
+    font-size:17px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  /* texture + atmosphere */
+  body::before{
+    content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+    background:
+      radial-gradient(900px 600px at 80% -10%, rgba(243,198,35,.10), transparent 60%),
+      radial-gradient(700px 700px at -10% 110%, rgba(111,207,133,.08), transparent 60%);
+  }
+  body::after{
+    content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.04;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* ---- deck mechanics ---- */
+  .deck{position:relative;z-index:1;scroll-snap-type:y mandatory;height:100vh;overflow-y:scroll;scroll-behavior:smooth}
+  .slide{
+    scroll-snap-align:start;min-height:100vh;width:100%;
+    display:flex;align-items:center;justify-content:center;
+    padding:96px 48px 80px;position:relative;
+  }
+  .wrap{width:100%;max-width:var(--maxw);position:relative;z-index:2}
+
+  /* kickers + labels */
+  .kicker{
+    font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.22em;
+    text-transform:uppercase;color:var(--canola);display:flex;gap:14px;align-items:center;
+    margin-bottom:26px;
+  }
+  .kicker .num{color:var(--faint)}
+  .kicker .bar{flex:0 0 42px;height:1px;background:var(--canola);opacity:.6}
+
+  h1{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;line-height:.98;letter-spacing:-.02em}
+  h2{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:clamp(40px,5.4vw,64px);line-height:1.02;letter-spacing:-.02em;margin-bottom:8px}
+  h3{font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:21px;letter-spacing:-.01em}
+  p.lead{font-size:clamp(18px,1.8vw,22px);color:var(--muted);max-width:62ch;line-height:1.55}
+  .accent{color:var(--canola)}
+  .grn{color:var(--signal)}
+  strong{color:var(--fg);font-weight:600}
+  em{font-style:normal}
+
+  /* reveal animation */
+  .rv{opacity:0;transform:translateY(26px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+  .slide.in .rv{opacity:1;transform:none}
+  .slide.in .rv:nth-child(2){transition-delay:.08s}
+  .slide.in .rv:nth-child(3){transition-delay:.16s}
+  .slide.in .rv:nth-child(4){transition-delay:.24s}
+  .slide.in .rv:nth-child(5){transition-delay:.32s}
+  .d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}.d5{transition-delay:.5s}
+
+  /* fixed UI */
+  .topbar{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;
+    padding:22px 32px;mix-blend-mode:difference;pointer-events:none}
+  .brand{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:17px;letter-spacing:-.01em;color:#fff}
+  .brand .dot{color:var(--canola)}
+  .brand-tag{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.2em;color:#fff;text-transform:uppercase;opacity:.8}
+  .progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--canola),var(--signal));z-index:60;width:0;transition:width .25s ease}
+  .counter{position:fixed;bottom:24px;right:30px;z-index:50;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.15em;color:var(--muted)}
+  .counter b{color:var(--canola);font-weight:600}
+  .nav-dots{position:fixed;right:26px;top:50%;transform:translateY(-50%);z-index:50;display:flex;flex-direction:column;gap:13px}
+  .nav-dots button{width:8px;height:8px;border-radius:50%;border:1px solid var(--faint);background:transparent;cursor:pointer;padding:0;transition:all .3s var(--ease)}
+  .nav-dots button.active{background:var(--canola);border-color:var(--canola);transform:scale(1.35)}
+  .hint{position:fixed;bottom:24px;left:30px;z-index:50;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;color:var(--faint);display:flex;align-items:center;gap:8px}
+  .hint .key{border:1px solid var(--line-soft);border-radius:4px;padding:1px 6px}
+
+  /* cards / grids */
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .card{
+    background:linear-gradient(180deg,rgba(255,255,255,.025),rgba(255,255,255,.008));
+    border:1px solid var(--line-soft);border-radius:16px;padding:28px;position:relative;overflow:hidden;
+    transition:border-color .4s var(--ease),transform .4s var(--ease);
+  }
+  .card:hover{border-color:var(--line);transform:translateY(-4px)}
+  .card .tag{font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--canola);margin-bottom:14px;display:block}
+  .card h3{margin-bottom:10px}
+  .card p{color:var(--muted);font-size:18px;line-height:1.55}
+  .card.accent-edge::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--canola)}
+  .card.signal-edge::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--signal)}
+
+  ul.clean{list-style:none;display:flex;flex-direction:column;gap:16px;margin-top:8px}
+  ul.clean li{display:flex;gap:14px;color:var(--muted);font-size:20px;line-height:1.5}
+  ul.clean li .mk{flex:0 0 auto;width:22px;height:22px;border-radius:6px;background:rgba(243,198,35,.12);
+    display:grid;place-items:center;font-family:'JetBrains Mono',monospace;font-size:15px;color:var(--canola);margin-top:3px}
+
+  .stat{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:clamp(34px,4vw,52px);line-height:1;color:var(--fg);letter-spacing:-.02em}
+  .stat small{display:block;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:400;margin-top:10px;line-height:1.5}
+
+  /* signal waveform */
+  .wave{position:absolute;inset:0;width:100%;height:100%;z-index:0;opacity:.5;pointer-events:none}
+  .wave path{fill:none;stroke-width:1.4}
+  .field-grid{position:absolute;inset:0;z-index:0;opacity:.35;pointer-events:none;
+    background-image:radial-gradient(circle, var(--line-soft) 1px, transparent 1px);
+    background-size:34px 34px;mask-image:linear-gradient(180deg,transparent,#000 30%,#000 70%,transparent)}
+
+  /* cover */
+  .cover-art{position:absolute;right:15%;top:60%;transform:translateY(-50%);width:48%;max-width:560px;z-index:0;opacity:.9}
+  .cover h1{font-size:clamp(46px,8.5vw,108px)}
+  .cover .sub{font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:30px}
+  .pill{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:999px;padding:7px 15px;
+    font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--canola);margin-bottom:30px}
+  .pill .live{width:7px;height:7px;border-radius:50%;background:var(--signal);box-shadow:0 0 0 0 rgba(111,207,133,.6);animation:pulse 2s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(111,207,133,.5)}70%{box-shadow:0 0 0 9px rgba(111,207,133,0)}100%{box-shadow:0 0 0 0 rgba(111,207,133,0)}}
+
+  /* split layout */
+  .split{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+  .split.rev{grid-template-columns:.95fr 1.05fr}
+
+  /* chart */
+  .chartbox{background:rgba(255,255,255,.02);border:1px solid var(--line-soft);border-radius:18px;padding:26px 26px 18px}
+  .chart-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px}
+  .chart-head .ttl{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+  .legend{display:flex;gap:20px;margin-top:14px;font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--muted)}
+  .legend span{display:flex;align-items:center;gap:7px}
+  .legend .sw{width:16px;height:3px;border-radius:2px}
+
+  /* flow connector */
+  .flow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:stretch;gap:14px;margin-top:8px}
+  .flow .node{background:rgba(255,255,255,.02);border:1px solid var(--line-soft);border-radius:14px;padding:20px}
+  .flow .node .n-tag{font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--canola);margin-bottom:9px;display:block}
+  .flow .node strong{display:block;font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:16px;margin-bottom:6px}
+  .flow .node span.d{color:var(--muted);font-size:18px;line-height:1.45}
+  .flow .arrow{display:grid;place-items:center;color:var(--faint);font-size:20px}
+
+  .quote-big{font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:clamp(36px,4.6vw,56px);line-height:1.18;letter-spacing:-.015em;max-width:20ch}
+  .quote-big em{font-style:normal;color:var(--canola)}
+
+  .footnote{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--faint);letter-spacing:.04em;margin-top:18px}
+
+  .audience-row{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:8px}
+  .aud{border:1px solid var(--line-soft);border-radius:16px;padding:26px;background:rgba(255,255,255,.015)}
+  .aud .who{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:14px;display:block}
+  .aud.p1 .who{color:var(--canola)} .aud.p2 .who{color:var(--signal)}
+  .aud h3{margin-bottom:12px}
+  .aud p{color:var(--muted);font-size:19px}
+
+  .aims{display:flex;flex-direction:column;gap:0}
+  .aim{display:grid;grid-template-columns:64px 1fr;gap:24px;padding:26px 0;border-bottom:1px solid var(--line-soft);align-items:start}
+  .aim:last-child{border-bottom:none}
+  .aim .anum{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:40px;color:var(--canola);line-height:1;letter-spacing:-.03em}
+  .aim h3{margin-bottom:6px}
+  .aim p{color:var(--muted);font-size:18px}
+
+  /* contact */
+  .contact-grid{display:flex;gap:40px;flex-wrap:wrap;margin-top:30px;font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.06em}
+  .contact-grid a{color:var(--canola);text-decoration:none;border-bottom:1px solid transparent;transition:border-color .3s}
+  .contact-grid a:hover{border-color:var(--canola)}
+  .contact-grid .lbl{display:block;color:var(--faint);font-size:12px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:7px}
+
+  @media (max-width:880px){
+    body{font-size:16px}
+    .slide{padding:90px 24px 76px}
+    .split,.split.rev{grid-template-columns:1fr;gap:32px}
+    .grid-2,.grid-3,.audience-row{grid-template-columns:1fr}
+    .flow{grid-template-columns:1fr;gap:10px}
+    .flow .arrow{transform:rotate(90deg)}
+    .cover-art{display:none}
+    .nav-dots{display:none}.hint{display:none}
+    .aim{grid-template-columns:48px 1fr;gap:16px}
+  }
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+<div class="topbar">
+  <div class="brand">ALGO<span class="dot">·</span>RYTHMN</div>
+  <div class="brand-tag">Math That Acts</div>
+</div>
+<div class="counter"><b id="cur">01</b> / <span id="tot">11</span></div>
+<div class="hint"><span class="key">↓</span> scroll &nbsp;·&nbsp; <span class="key">→</span> next</div>
+<div class="nav-dots" id="dots"></div>
+
+<div class="deck" id="deck">
+
+  <!-- 01 COVER -->
+  <section class="slide cover" data-label="Cover">
+    <svg class="cover-art" viewBox="0 0 500 400" preserveAspectRatio="xMidYMid meet">
+      <defs>
+        <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#f3c623"/><stop offset="1" stop-color="#d9a90f"/>
+        </linearGradient>
+      </defs>
+      <!-- field rows -->
+      <g stroke="rgba(238,241,230,.10)" stroke-width="1">
+        <path d="M40 300 L300 220"/><path d="M40 320 L320 240"/><path d="M40 340 L340 260"/>
+        <path d="M40 360 L360 280"/><path d="M40 380 L380 300"/>
+      </g>
+      <!-- yield signal line -->
+      <path d="M30 230 C 90 180, 130 250, 180 200 S 270 120, 320 150 S 410 60, 470 90"
+            fill="none" stroke="url(#g1)" stroke-width="3" stroke-linecap="round"/>
+      <path d="M30 270 C 90 250, 130 280, 180 255 S 270 240, 320 250 S 410 230, 470 235"
+            fill="none" stroke="#6fcf85" stroke-width="2" stroke-dasharray="5 6" opacity=".8"/>
+      <circle cx="320" cy="150" r="5" fill="#f3c623"/>
+      <circle cx="470" cy="90" r="6" fill="#f3c623"/>
+    </svg>
+    <div class="field-grid"></div>
+    <div class="wrap">
+      <div class="pill rv"><span class="live"></span> Agri-Finance · Powered by Algo-Rythmn</div>
+      <h1 class="rv">Read the harvest<br>before the market<br><span class="accent">prices it.</span></h1>
+      <p class="sub rv">An early-yield-signal platform for grain markets — turning satellite, weather, and agentic AI into a sharper forward curve and a stronger revenue shield.</p>
+    </div>
+  </section>
+
+  <!-- 02 PROBLEM -->
+  <section class="slide" data-label="The Opportunity">
+    <div class="field-grid"></div>
+    <div class="wrap">
+      <div class="kicker rv"><span class="bar"></span>The opportunity</div>
+      <h2 class="rv">In grain, the money follows<br>whoever sees <span class="accent">yield first.</span></h2>
+      <p class="lead rv" style="margin:18px 0 40px">Today's market runs on numbers that arrive late and models that watch only price. Meanwhile a farm's income is hostage to <strong>two</strong> forces — price and yield — and almost everyone insures against just one. That blind spot is worth billions.</p>
+      <div class="grid-3">
+        <div class="card accent-edge rv d1">
+          <span class="tag">Late information</span>
+          <p>Official figures land long after the field has shown its hand. Capital gets deployed on last month's reality.</p>
+        </div>
+        <div class="card accent-edge rv d2">
+          <span class="tag">Price-blind models</span>
+          <p>Conventional forward curves track price and ignore the yield shock that hits revenue just as hard.</p>
+        </div>
+        <div class="card accent-edge rv d3">
+          <span class="tag">Half-covered farms</span>
+          <p>Growers hedge price or yield — rarely both — and the worst-case year is exactly the one left exposed.</p>
+        </div>
+      </div>
+      <p class="footnote rv d4">The space between what the field already knows and what the market has priced — that is where we win.</p>
+    </div>
+  </section>
+
+  <!-- 03 OUR EDGE -->
+  <section class="slide" data-label="Our Edge">
+    <svg class="wave" viewBox="0 0 1200 600" preserveAspectRatio="none">
+      <path d="M0 380 C 200 320, 300 440, 500 360 S 800 240, 1000 300 S 1150 220, 1200 250" stroke="rgba(243,198,35,.25)"/>
+      <path d="M0 420 C 200 400, 300 440, 500 410 S 800 380, 1000 400 S 1150 370, 1200 385" stroke="rgba(111,207,133,.18)" stroke-dasharray="6 8"/>
+    </svg>
+    <div class="wrap">
+      <div class="split">
+        <div>
+          <div class="kicker rv"><span class="bar"></span>Our edge</div>
+          <h2 class="rv">We know the yield<br>before the <span class="accent">print lands.</span></h2>
+          <p class="lead rv" style="margin-top:20px">At the core is one proprietary asset: an <strong>early yield signal</strong> that fuses satellite imagery, live weather, and agentic AI into a harvest estimate weeks ahead of the official number. Build it once — monetize it twice.</p>
+        </div>
+        <div class="grid-2 rv d2" style="gap:16px">
+          <div class="card"><span class="tag">Input</span><h3>Satellite imagery</h3><p>Continuous, field-level reads on crop condition all season long.</p></div>
+          <div class="card"><span class="tag">Input</span><h3>Live weather</h3><p>The conditions that pull actual yield away from expectation.</p></div>
+          <div class="card"><span class="tag">Input</span><h3>Agentic AI</h3><p>Models that don't just watch the data — they turn it into a call.</p></div>
+          <div class="card signal-edge"><span class="tag" style="color:var(--signal)">Output</span><h3 class="grn">Early yield signal</h3><p>The harvest, quantified before the market has priced it in.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 TWO PRODUCTS -->
+  <section class="slide" data-label="Two Products">
+    <div class="wrap">
+      <div class="kicker rv"><span class="bar"></span>The platform</div>
+      <h2 class="rv">One signal. <span class="accent">Two ways to win.</span></h2>
+      <p class="lead rv" style="margin:16px 0 38px">The same yield estimate becomes an alpha source for the trading desk and an income shield for the field — two markets, one engine.</p>
+      <div class="grid-2">
+        <div class="card accent-edge rv d1" style="padding:34px">
+          <span class="tag">Product 01 · For the market</span>
+          <h3 style="font-size:25px">Forward-Curve Intelligence</h3>
+          <p style="margin:12px 0 18px">A grain forward curve built to beat the desk-standard models — measurable alpha, net of costs.</p>
+          <p style="color:var(--grain);font-size:13.5px;font-family:'JetBrains Mono',monospace;letter-spacing:.04em">FOR — funds · CTAs · trading houses</p>
+        </div>
+        <div class="card signal-edge rv d2" style="padding:34px">
+          <span class="tag" style="color:var(--signal)">Product 02 · For the field</span>
+          <h3 style="font-size:25px">Full-Season Revenue Suite</h3>
+          <p style="margin:12px 0 18px">One suite that guards income end to end — <strong>in-season</strong> protection against price and yield, then <strong>post-season</strong> storage-and-sale optimization.</p>
+          <p style="color:var(--signal);font-size:13.5px;font-family:'JetBrains Mono',monospace;letter-spacing:.04em">FOR — lenders · insurers · cooperatives · trading firms</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 PRODUCT 1 DETAIL -->
+  <section class="slide" data-label="Product 1">
+    <div class="wrap">
+      <div class="split">
+        <div>
+          <div class="kicker rv"><span class="bar"></span>Product 01 · Forward-Curve Intelligence</div>
+          <h2 class="rv" style="font-size:clamp(38px,4.6vw,54px)">The edge, proven<br>on your own data.</h2>
+          <p class="lead rv" style="margin:18px 0 26px;font-size:18px">We don't ask you to trust a claim. We rebuild the model your desk runs today, layer our yield signal on top, and let the backtest settle it — out-of-sample, after costs. The number speaks for itself.</p>
+          <div class="flow rv d2">
+            <div class="node"><span class="n-tag">Baseline</span><strong>Desk standard</strong><span class="d">Rebuild the forward curve the market runs today.</span></div>
+            <div class="arrow">→</div>
+            <div class="node"><span class="n-tag">Our layer</span><strong>+ Yield signal</strong><span class="d">Add the early yield read to the curve.</span></div>
+            <div class="arrow">→</div>
+            <div class="node"><span class="n-tag">Verdict</span><strong>Backtest</strong><span class="d">Out-of-sample, net of costs.</span></div>
+          </div>
+        </div>
+        <div class="chartbox rv d3">
+          <div class="chart-head"><span class="ttl">Backtest — illustrative</span><span class="ttl" style="color:var(--canola)">edge = Δ</span></div>
+          <svg viewBox="0 0 420 240" width="100%" preserveAspectRatio="xMidYMid meet">
+            <g stroke="rgba(238,241,230,.07)"><line x1="0" y1="60" x2="420" y2="60"/><line x1="0" y1="120" x2="420" y2="120"/><line x1="0" y1="180" x2="420" y2="180"/></g>
+            <path d="M10 175 C 80 165, 140 178, 200 150 S 320 145, 410 120" fill="none" stroke="#97a08c" stroke-width="2"/>
+            <path d="M10 170 C 80 130, 140 150, 200 95 S 320 80, 410 45" fill="none" stroke="#f3c623" stroke-width="3" stroke-linecap="round"/>
+            <line x1="410" y1="45" x2="410" y2="120" stroke="#6fcf85" stroke-width="1.5" stroke-dasharray="3 3"/>
+            <circle cx="410" cy="45" r="4" fill="#f3c623"/><circle cx="410" cy="120" r="4" fill="#97a08c"/>
+            <text x="372" y="35" fill="#6fcf85" font-family="JetBrains Mono" font-size="13" font-weight="600">+X%</text>
+          </svg>
+          <div class="legend">
+            <span><span class="sw" style="background:#f3c623"></span> Signal-enhanced</span>
+            <span><span class="sw" style="background:#97a08c"></span> Desk standard</span>
+          </div>
+          <p class="footnote">Illustrative — replaced with live backtest figures in client diligence.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 PRODUCT 2 · IN-SEASON -->
+  <section class="slide" data-label="Product 2 · In-Season">
+    <div class="wrap">
+      <div class="split rev">
+        <div class="grid-2 rv d2" style="gap:16px">
+          <div class="card"><span class="tag" style="color:var(--signal)">Price risk</span><h3>Futures & options</h3><p>Set a floor under the price while keeping the upside open.</p></div>
+          <div class="card"><span class="tag" style="color:var(--signal)">Yield risk</span><h3>Revenue insurance</h3><p>Make the grower whole when the field comes up short.</p></div>
+          <div class="card"><span class="tag" style="color:var(--signal)">The model</span><h3>Research-grade</h3><p>Sharper methodology, algorithms, and data than off-the-shelf cover.</p></div>
+          <div class="card signal-edge"><span class="tag" style="color:var(--signal)">The proof</span><h3 class="grn">Backtested, not assumed</h3><p>We show the dollars protected — the part most products never quantify.</p></div>
+        </div>
+        <div>
+          <div class="kicker rv"><span class="bar"></span>Product 02 · Full-season suite — In-season</div>
+          <h2 class="rv" style="font-size:clamp(38px,4.6vw,54px)">Cover the whole<br>risk, not <span class="grn">half</span> of it.</h2>
+          <p class="lead rv" style="margin-top:19px;font-size:18px">In season, the suite defends income against <span class="grn">price and yield</span> in a single position — and the very yield estimate that drives the forecast now sets the <strong>optimal hedge</strong> for each grower.</p>
+          <p class="footnote rv d3" style="color:var(--signal);opacity:.85">Full-season suite · Phase 1</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 PRODUCT 2 · POST-SEASON -->
+  <section class="slide" data-label="Product 2 · Post-Season">
+    <div class="wrap">
+      <div class="kicker rv"><span class="bar"></span>Product 02 · Full-season suite — Post-season</div>
+      <h2 class="rv">After harvest, turn the grain<br>bin into a <span class="accent">managed portfolio.</span></h2>
+      <p class="lead rv" style="margin:16px 0 32px">Most growers still decide sell-or-store on instinct and a basis chart. The suite replaces the guesswork with a model — and gives insurers a brand-new product to underwrite around it.</p>
+      <div class="grid-3">
+        <div class="card signal-edge rv d1">
+          <span class="tag" style="color:var(--signal)">Inputs</span>
+          <h3>What it reads</h3>
+          <p>Our forward-curve forecast, the carry in the futures market, the full cost of storing, and each grower's cash-flow calendar.</p>
+        </div>
+        <div class="card signal-edge rv d2">
+          <span class="tag" style="color:var(--signal)">Output</span>
+          <h3>What it decides</h3>
+          <p>An allocation, not a coin flip — sell now, store for later, or defer delivery — then a hedge laid over the stored bushels to lock the floor.</p>
+        </div>
+        <div class="card accent-edge rv d3">
+          <span class="tag">New revenue line</span>
+          <h3 class="accent">Storage Revenue Guarantee</h3>
+          <p>An insurable product that pays out if price at final sale falls below target — priced by our forward-curve model. A new line for insurers and co-ops.</p>
+        </div>
+      </div>
+      <p class="footnote rv d4" style="color:var(--signal);opacity:.85">Full-season suite · Phase 2 — one relationship, from planting to final sale.</p>
+    </div>
+  </section>
+
+  <!-- 07 VALUE PROP -->
+  <section class="slide" data-label="Value">
+    <div class="wrap">
+      <div class="kicker rv"><span class="bar"></span>What you get</div>
+      <h2 class="rv">Value you can <span class="accent">measure</span> —<br>before you commit a dollar.</h2>
+      <div class="audience-row rv d2" style="margin-top:34px">
+        <div class="aud p1">
+          <span class="who">Funds · CTAs · Trading houses — Product 01</span>
+          <h3>Alpha you can audit</h3>
+          <p>A better risk-adjusted return than your current curve, net of costs — demonstrated out-of-sample on your own book.</p>
+        </div>
+        <div class="aud p2">
+          <span class="who">Farmers · Co-ops · Lenders · Insurers — Product 02</span>
+          <h3>More certainty per premium dollar</h3>
+          <p>Tighter income swings and smaller worst-case losses — safer loan books, sharper-priced products, steadier farm cash flow.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 08 GO TO MARKET -->
+  <section class="slide" data-label="Go to Market">
+    <div class="field-grid"></div>
+    <div class="wrap">
+      <div class="kicker rv"><span class="bar"></span>How we earn your business</div>
+      <h2 class="rv">Proof first.<br><span class="accent">Commitment later.</span></h2>
+      <ul class="clean rv d2" style="margin-top:30px;max-width:780px">
+        <li><span class="mk">01</span><div><strong>See the edge before you pay for it.</strong> We run the head-to-head on your data — the result, out-of-sample and after costs, is the whole pitch.</div></li>
+        <li><span class="mk">02</span><div><strong>Start where it's sharpest.</strong> Canola in Canada is the proving ground, with soybeans and corn for Brazil's desks next — one flagship client per product, then scale.</div></li>
+        <li><span class="mk">03</span><div><strong>Plug into your channels.</strong> We reach the field through the partners who already own the relationship — brokers and trading houses for the forecast, lenders and insurers (white-label) for the suite.</div></li>
+        <li><span class="mk">04</span><div><strong>Begin with a low-risk pilot.</strong> A trial forecast or a pilot hedge program lets you watch the value land on real numbers before anything's locked in.</div></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 09 ONE STORY -->
+  <section class="slide" data-label="One Signal">
+    <svg class="wave" viewBox="0 0 1200 600" preserveAspectRatio="none">
+      <path d="M0 300 C 300 200, 500 400, 700 280 S 1000 180, 1200 240" stroke="rgba(243,198,35,.2)"/>
+    </svg>
+    <div class="wrap" style="text-align:left">
+      <div class="kicker rv"><span class="bar"></span>One signal. Proven once. Sold twice.</div>
+      <p class="quote-big rv" style="margin:10px 0 30px">Product 1 is the <em>hardest possible test</em> of our signal — and the proof everything else stands on.</p>
+      <p class="lead rv d2" style="font-size:20px">Beat the desk on the forward curve, and the IP is validated, the suite is de-risked, and the same yield estimate that won the trade now sets the optimal hedge. <strong>One signal — proven once, sold twice.</strong></p>
+    </div>
+  </section>
+
+  <!-- AIMS + CONTACT -->
+  <section class="slide" data-label="The Payoff">
+    <div class="field-grid"></div>
+    <div class="wrap">
+      <div class="split">
+        <div>
+          <div class="kicker rv"><span class="bar"></span>Next steps</div>
+          <h2 class="rv" style="margin-bottom:20px">The next move<br>starts with a number.</h2>
+          <div class="aims rv d2">
+            <div class="aim"><span class="anum">→</span><div><h3>Request the backtest</h3><p>Share your current model and data. We show you the out-of-sample edge, net of costs — no commitment required.</p></div></div>
+            <div class="aim"><span class="anum">→</span><div><h3>Start a pilot</h3><p>A trial forecast or a pilot hedge program on live numbers. Watch the signal work before anything is locked in.</p></div></div>
+          </div>
+        </div>
+        <div class="rv d3">
+          <p class="quote-big" style="font-size:clamp(24px,3vw,38px)">Math that <em>acts</em> —<br>from the soil to the<br>forward curve.</p>
+          <div class="contact-grid">
+            <div><span class="lbl">Web</span><a href="https://algo-rythmn.ai/" target="_blank">algo-rythmn.ai</a></div>
+            <div><span class="lbl">Connect</span><a href="https://www.linkedin.com/company/algo-rythmn-corp" target="_blank">LinkedIn ↗</a></div>
+          </div>
+          <p class="footnote" style="margin-top:34px">Algo-Rythmn Corp · Agriculture · Energy · Finance</p>
+          <p class="footnote" style="margin-top:10px;opacity:.5">© 2026 Algo-Rythmn Corp. All rights reserved.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+  const deck=document.getElementById('deck');
+  const slides=[...document.querySelectorAll('.slide')];
+  const dotsWrap=document.getElementById('dots');
+  const cur=document.getElementById('cur'),tot=document.getElementById('tot'),prog=document.getElementById('progress');
+  tot.textContent=String(slides.length).padStart(2,'0');
+
+  // build nav dots
+  slides.forEach((s,i)=>{
+    const b=document.createElement('button');
+    b.title=s.dataset.label||('Slide '+(i+1));
+    b.addEventListener('click',()=>slides[i].scrollIntoView({behavior:'smooth'}));
+    dotsWrap.appendChild(b);
+  });
+  const dots=[...dotsWrap.children];
+
+  // reveal + active tracking
+  const io=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting && e.intersectionRatio>0.55){
+        e.target.classList.add('in');
+        const i=slides.indexOf(e.target);
+        dots.forEach((d,k)=>d.classList.toggle('active',k===i));
+        cur.textContent=String(i+1).padStart(2,'0');
+      }
+    });
+  },{threshold:[0,.55,1]});
+  slides.forEach(s=>io.observe(s));
+
+  // progress bar
+  deck.addEventListener('scroll',()=>{
+    const p=deck.scrollTop/(deck.scrollHeight-deck.clientHeight);
+    prog.style.width=(p*100)+'%';
+  });
+
+  // keyboard nav
+  function currentIndex(){
+    const st=deck.scrollTop;
+    return Math.round(st/deck.clientHeight);
+  }
+  window.addEventListener('keydown',(e)=>{
+    const i=currentIndex();
+    if(['ArrowDown','ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();slides[Math.min(i+1,slides.length-1)].scrollIntoView({behavior:'smooth'});}
+    if(['ArrowUp','ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();slides[Math.max(i-1,0)].scrollIntoView({behavior:'smooth'});}
+    if(e.key==='Home'){e.preventDefault();slides[0].scrollIntoView({behavior:'smooth'});}
+    if(e.key==='End'){e.preventDefault();slides[slides.length-1].scrollIntoView({behavior:'smooth'});}
+  });
+
+  slides[0].classList.add('in');
+</script>
+</body>
+</html>
