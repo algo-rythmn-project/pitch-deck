@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document Intelligence — Platform Feature List · Algo-Rythmn</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Inter+Tight:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  :root {
+    --page:    #f7f7f8;
+    --white:   #ffffff;
+    --gray-50:  #f9f9fa;
+    --gray-100: #f0f0f2;
+    --gray-200: #e2e2e6;
+    --gray-300: #c8c8cf;
+    --gray-500: #8a8a96;
+    --gray-700: #3d3d47;
+    --gray-900: #16161d;
+    --indigo:        #4f46e5;
+    --indigo-dark:   #3730a3;
+    --indigo-mid:    #6366f1;
+    --indigo-soft:   #eef2ff;
+    --indigo-border: #c7d2fe;
+    --green-soft:   #f0fdf4;
+    --green-text:   #15803d;
+    --amber-soft:   #fffbeb;
+    --amber-text:   #b45309;
+    --blue-soft:    #eff6ff;
+    --blue-text:    #1d4ed8;
+    --pink-soft:    #fdf2f8;
+    --pink-text:    #9d174d;
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 14px;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+    --shadow-md: 0 4px 14px rgba(0,0,0,.09), 0 2px 4px rgba(0,0,0,.05);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--page);
+    color: var(--gray-900);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    font-size: 15px;
+  }
+
+  /* ── COVER ── */
+  .cover {
+    background: var(--white);
+    border-bottom: 1px solid var(--gray-200);
+    padding: 72px 0 64px;
+  }
+  .cover-inner { max-width: 1100px; margin: 0 auto; padding: 0 60px; }
+  .cover-label {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 11.5px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase;
+    color: var(--indigo); background: var(--indigo-soft); border: 1px solid var(--indigo-border);
+    border-radius: 100px; padding: 5px 14px; margin-bottom: 28px;
+  }
+  .cover-label .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--indigo); }
+  h1 {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: clamp(30px, 4.5vw, 52px);
+    font-weight: 700; line-height: 1.1; letter-spacing: -.03em;
+    color: var(--gray-900); margin-bottom: 16px;
+  }
+  h1 span { color: var(--indigo); }
+  .cover-sub {
+    font-size: 17px; color: var(--gray-500); line-height: 1.75;
+    max-width: 580px; margin-bottom: 48px;
+  }
+  .stats-row {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 1px; background: var(--gray-200);
+    border: 1px solid var(--gray-200); border-radius: var(--radius-lg); overflow: hidden;
+  }
+  .stat { background: var(--white); padding: 22px 24px; }
+  .stat-n {
+    font-family: 'Inter Tight', sans-serif; font-size: 32px; font-weight: 700;
+    color: var(--gray-900); letter-spacing: -.025em; line-height: 1;
+  }
+  .stat-l { font-size: 12.5px; color: var(--gray-500); margin-top: 5px; }
+
+  /* ── PAGE BODY ── */
+  .page-body { max-width: 1100px; margin: 0 auto; padding: 0 60px 80px; }
+
+  /* ── SECTION ── */
+  .section { margin-top: 64px; }
+  .section-tag {
+    display: inline-block; font-size: 11px; font-weight: 600;
+    letter-spacing: .08em; text-transform: uppercase; color: var(--indigo); margin-bottom: 8px;
+  }
+  h2 {
+    font-family: 'Inter Tight', sans-serif; font-size: 24px; font-weight: 700;
+    color: var(--gray-900); letter-spacing: -.02em; line-height: 1.2;
+  }
+  .section-desc {
+    font-size: 15px; color: var(--gray-500); line-height: 1.75;
+    max-width: 700px; margin-top: 8px; margin-bottom: 28px;
+  }
+
+  /* ── VALUE CARDS ── */
+  .value-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .value-card {
+    background: var(--white); border: 1px solid var(--gray-200);
+    border-radius: var(--radius-lg); padding: 24px; box-shadow: var(--shadow-sm);
+  }
+  .value-eyebrow { font-size: 13px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--gray-500); margin-bottom: 10px; }
+  .value-title { font-size: 15px; font-weight: 600; color: var(--gray-900); margin-bottom: 8px; line-height: 1.35; }
+  .value-body  { font-size: 15px; color: var(--gray-500); line-height: 1.65; }
+
+  /* ── ADVANTAGES SECTION ── */
+  .adv-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+  .adv-card {
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius-lg);
+    padding: 24px 26px;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+    transition: box-shadow .15s, border-color .15s;
+  }
+  .adv-card:hover { box-shadow: var(--shadow-md); border-color: var(--indigo-border); }
+  .adv-icon-wrap {
+    width: 44px; height: 44px; border-radius: var(--radius-md);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .adv-indigo { background: var(--indigo-soft); color: var(--indigo); }
+  .adv-green  { background: var(--green-soft);  color: var(--green-text); }
+  .adv-amber  { background: var(--amber-soft);  color: var(--amber-text); }
+  .adv-blue   { background: var(--blue-soft);   color: var(--blue-text); }
+  .adv-pink   { background: var(--pink-soft);   color: var(--pink-text); }
+  .adv-gray   { background: var(--gray-100);    color: var(--gray-700); }
+  .adv-text {}
+  .adv-metric {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 22px; font-weight: 700;
+    color: var(--gray-900); letter-spacing: -.02em;
+    line-height: 1; margin-bottom: 4px;
+  }
+  .adv-metric span { color: var(--indigo); }
+  .adv-title { font-size: 15px; font-weight: 600; color: var(--gray-900); margin-bottom: 4px; }
+  .adv-desc  { font-size: 14px; color: var(--gray-500); line-height: 1.6; }
+
+  /* ── INDUSTRY CHART ── */
+  .chart-wrap {
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius-lg);
+    padding: 32px 36px;
+    box-shadow: var(--shadow-sm);
+  }
+  .chart-top {
+    display: flex; align-items: flex-start; justify-content: space-between;
+    margin-bottom: 28px; gap: 24px;
+  }
+  .chart-legend {
+    display: flex; flex-wrap: wrap; gap: 8px 20px;
+    margin-top: 6px;
+  }
+  .legend-item {
+    display: flex; align-items: center; gap: 7px;
+    font-size: 12px; color: var(--gray-700);
+  }
+  .legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+  .chart-canvas-wrap { position: relative; height: 420px; }
+
+  /* ── INDUSTRY CARD GRID ── */
+  .industry-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .ind-card {
+    background: var(--white); border: 1px solid var(--gray-200);
+    border-radius: var(--radius-lg); padding: 20px; box-shadow: var(--shadow-sm);
+    transition: border-color .15s, box-shadow .15s;
+  }
+  .ind-card:hover { border-color: var(--indigo-border); box-shadow: var(--shadow-md); }
+  .ind-icon {
+    width: 36px; height: 36px; background: var(--indigo-soft);
+    border-radius: var(--radius-md); display: flex; align-items: center;
+    justify-content: center; font-size: 17px; color: var(--indigo); margin-bottom: 12px;
+  }
+  .ind-name { font-size: 13.5px; font-weight: 600; color: var(--gray-900); margin-bottom: 6px; line-height: 1.3; }
+  .ind-pain { font-size: 12.5px; color: var(--gray-500); line-height: 1.55; margin-bottom: 10px; }
+  .ind-corpus {
+    font-size: 11.5px; font-weight: 500; color: var(--indigo);
+    background: var(--indigo-soft); border: 1px solid var(--indigo-border);
+    border-radius: var(--radius-sm); padding: 5px 9px; line-height: 1.45;
+  }
+
+  /* ── MODULE ACCORDION ── */
+  .module {
+    background: var(--white); border: 1px solid var(--gray-200);
+    border-radius: var(--radius-lg); margin-bottom: 10px;
+    box-shadow: var(--shadow-sm); overflow: hidden;
+  }
+  .module-trigger {
+    width: 100%; display: flex; align-items: center;
+    justify-content: space-between; padding: 20px 24px;
+    cursor: pointer; background: none; border: none; text-align: left; gap: 16px;
+    transition: background .12s;
+  }
+  .module-trigger:hover { background: var(--gray-50); }
+  .module-left  { display: flex; align-items: center; gap: 14px; flex: 1; }
+  .module-right { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+  .mod-icon {
+    width: 38px; height: 38px; border-radius: var(--radius-md);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .mi-indigo { background: var(--indigo-soft); color: var(--indigo); }
+  .mi-green  { background: var(--green-soft);  color: var(--green-text); }
+  .mi-amber  { background: var(--amber-soft);  color: var(--amber-text); }
+  .mi-blue   { background: var(--blue-soft);   color: var(--blue-text); }
+  .mi-pink   { background: var(--pink-soft);   color: var(--pink-text); }
+  .mi-gray   { background: var(--gray-100);    color: var(--gray-700); }
+  .mod-lbl  { font-size: 10.5px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--gray-500); margin-bottom: 2px; }
+  .mod-name { font-size: 15px; font-weight: 600; color: var(--gray-900); line-height: 1.3; }
+  .mod-count {
+    font-size: 12px; font-weight: 500; color: var(--gray-500);
+    background: var(--gray-100); border-radius: 100px; padding: 3px 11px;
+  }
+  .mod-chevron { font-size: 17px; color: var(--gray-300); transition: transform .22s ease; display: block; }
+  .mod-chevron.open { transform: rotate(180deg); }
+  .module-body { max-height: 0; overflow: hidden; transition: max-height .38s ease; }
+  .module-body.open { max-height: 3000px; }
+  .divider-line { border: none; border-top: 1px solid var(--gray-100); }
+
+  /* ── FEATURE TABLE ── */
+  .ftable { width: 100%; border-collapse: collapse; table-layout: fixed; }
+  .ftable thead tr { background: var(--gray-50); }
+  .ftable th {
+    font-size: 11px; font-weight: 600; letter-spacing: .07em; text-transform: uppercase;
+    color: var(--gray-500); padding: 10px 20px; text-align: left;
+    border-bottom: 1px solid var(--gray-200);
+  }
+  .ftable td {
+    padding: 16px 20px; font-size: 13.5px; line-height: 1.6;
+    vertical-align: top; border-bottom: 1px solid var(--gray-100);
+    color: var(--gray-700); word-wrap: break-word;
+  }
+  .ftable tr:last-child td { border-bottom: none; }
+  .ftable tbody tr:hover td { background: var(--gray-50); }
+  .fn { font-size: 13.5px; font-weight: 600; color: var(--gray-900); margin-bottom: 4px; }
+  .fd { font-size: 13px; color: var(--gray-500); line-height: 1.65; }
+  .ftags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
+  .ftag {
+    font-size: 11px; font-weight: 500; padding: 2px 8px; border-radius: 100px;
+    background: var(--gray-100); color: var(--gray-700); letter-spacing: .01em;
+  }
+
+  /* ── STEPS ── */
+  .steps-row {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 0;
+    background: var(--white); border: 1px solid var(--gray-200);
+    border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-sm);
+  }
+  .step { padding: 28px; border-right: 1px solid var(--gray-100); }
+  .step:last-child { border-right: none; }
+  .step-num {
+    font-family: 'Inter Tight', sans-serif; font-size: 34px; font-weight: 700;
+    color: var(--gray-200); line-height: 1; margin-bottom: 14px; letter-spacing: -.03em;
+  }
+  .step-title { font-size: 14.5px; font-weight: 600; color: var(--gray-900); margin-bottom: 8px; }
+  .step-desc  { font-size: 13px; color: var(--gray-500); line-height: 1.65; }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: var(--gray-900); padding: 28px 60px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .footer-l { font-size: 13px; font-weight: 500; color: rgba(255,255,255,.42); }
+  .footer-r  { font-size: 12px; color: rgba(255,255,255,.26); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 780px) {
+    .cover-inner, .page-body { padding: 0 24px; }
+    .cover { padding: 48px 0 40px; }
+    .stats-row { grid-template-columns: repeat(2, 1fr); }
+    .value-grid, .steps-row, .adv-grid { grid-template-columns: 1fr; }
+    .industry-grid { grid-template-columns: repeat(2, 1fr); }
+    .footer { padding: 20px 24px; flex-direction: column; gap: 6px; text-align: center; }
+    .step { border-right: none; border-bottom: 1px solid var(--gray-100); }
+    .step:last-child { border-bottom: none; }
+    .chart-top { flex-direction: column; }
+  }
+  @media (max-width: 460px) { .industry-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-inner">
+    <div class="cover-label"><span class="dot"></span>Algo-Rythmn · Document Intelligence · General Platform</div>
+    <h1>Every industry with<br>document burden.<br><span>One intelligence layer.</span></h1>
+    <p class="cover-sub">A cross-industry capability map and pitch foundation. All modules deploy as-is — customized per client by loading the right regulatory corpus and document taxonomy.</p>
+    <div class="stats-row">
+      <div class="stat"><div class="stat-n">6</div><div class="stat-l">Core modules</div></div>
+      <div class="stat"><div class="stat-n">30+</div><div class="stat-l">Platform features</div></div>
+      <div class="stat"><div class="stat-n">10+</div><div class="stat-l">Target industries</div></div>
+      <div class="stat"><div class="stat-n">1</div><div class="stat-l">Live — AlgoPharma™</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="page-body">
+
+  <!-- ══ WHY ══ -->
+  <div class="section">
+    <div class="section-tag">The pitch</div>
+    <h2>The same problem across every regulated industry</h2>
+    <p class="section-desc">Organizations drown in documents they can't search intelligently, can't cross-reference against regulation, and can't update without expensive professional help. Document Intelligence replaces that bottleneck with a cited, always-current AI layer grounded in the client's own files.</p>
+    <div class="value-grid">
+      <div class="value-card">
+        <div class="value-eyebrow">The problem</div>
+        <div class="value-title">Documents exist. Answers don't.</div>
+        <div class="value-body">Every organization has the records. None have a way to ask them a plain-language question and get a cited answer in seconds.</div>
+      </div>
+      <div class="value-card">
+        <div class="value-eyebrow">The cost today</div>
+        <div class="value-title">Lawyers and consultants at $500–$2,000/hr.</div>
+        <div class="value-body">The knowledge work Document Intelligence replaces is expensive, slow, and lost when the professional moves on.</div>
+      </div>
+      <div class="value-card">
+        <div class="value-eyebrow">Our edge</div>
+        <div class="value-title">Cited answers from the client's own files.</div>
+        <div class="value-body">Not general AI. Every answer is grounded in the client's documents plus their specific regulatory corpus — with source citations.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ ADVANTAGES ══ -->
+  <div class="section">
+    <div class="section-tag">Why Document Intelligence</div>
+    <h2>Built for regulated industries. Trusted by the numbers.</h2>
+    <p class="section-desc">Every design decision in the platform addresses a real failure mode of generic AI tools in compliance contexts.</p>
+    <div class="adv-grid">
+
+      <div class="adv-card">
+        <div class="adv-text">
+          <div class="adv-metric"><span>Zero</span> AI hallucination</div>
+          <div class="adv-title">Answers grounded only in your documents</div>
+          <div class="adv-desc">Retrieved only from your uploaded files and regulatory corpus. If the answer isn't there, the platform says so.</div>
+        </div>
+      </div>
+
+      <div class="adv-card">
+        <div class="adv-text">
+          <div class="adv-metric"><span>100%</span> regulation-aligned</div>
+          <div class="adv-title">Every answer cites the exact rule</div>
+          <div class="adv-desc">Grounded in your industry's actual rulebook — AER, CFIA, OHS Act, ACP, and others. No drift, no generic advice.</div>
+        </div>
+      </div>
+
+      <div class="adv-card">
+        <div class="adv-text">
+          <div class="adv-metric"><span>70%+</span> less paperwork time</div>
+          <div class="adv-title">Hours of manual review reduced to minutes</div>
+          <div class="adv-desc">Gap analysis, inspection prep, SOP updates, report drafting — done in one session, citations included.</div>
+        </div>
+      </div>
+
+      <div class="adv-card">
+        <div class="adv-text">
+          <div class="adv-metric"><span>100%</span> Canadian data residency</div>
+          <div class="adv-title">Your data never leaves Canada</div>
+          <div class="adv-desc">Storage, processing, and AI inference all within Canadian borders. Meets provincial privacy law and federal procurement requirements.</div>
+        </div>
+      </div>
+
+      <div class="adv-card">
+        <div class="adv-text">
+          <div class="adv-metric"><span>Full</span> audit trail</div>
+          <div class="adv-title">Every change, every query, timestamped</div>
+          <div class="adv-desc">Every document version, every AI query, every approval — logged and timestamped. Walk into any inspection ready.</div>
+        </div>
+      </div>
+
+      <div class="adv-card">
+        <div class="adv-text">
+          <div class="adv-metric"><span>Days</span> to go live</div>
+          <div class="adv-title">No IT project. No transformation programme.</div>
+          <div class="adv-desc">Upload documents in any format. The platform ingests, classifies, and connects your corpus to the rulebook. Cited answers within days.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══ MODULES ══ -->
+  <div class="section">
+    <div class="section-tag">Core modules</div>
+    <h2>Platform features</h2>
+    <p class="section-desc">Six modules that form the complete Document Intelligence platform. Each deploys independently — clients start with one corpus, prove the value, then expand.</p>
+
+    <div class="module">
+      <button class="module-trigger" onclick="toggle(this)" aria-expanded="false">
+        <div class="module-left">
+          <div class="mod-icon mi-indigo"><i class="ti ti-files" aria-hidden="true"></i></div>
+          <div><div class="mod-lbl">Module 1</div><div class="mod-name">Document Ingestion &amp; Library</div></div>
+        </div>
+        <div class="module-right">
+          <span class="mod-count">6 features</span>
+          <i class="ti ti-chevron-down mod-chevron" aria-hidden="true"></i>
+        </div>
+      </button>
+      <div class="module-body">
+        <hr class="divider-line">
+        <table class="ftable">
+          <thead><tr><th style="width:31%">Feature</th><th style="width:54%">What it does</th><th style="width:15%">Best for</th></tr></thead>
+          <tbody>
+            <tr><td><div class="fn">Multi-format upload</div></td><td><div class="fd">Ingest PDF, Word, Excel, scanned images, and HTML. Any format the client already produces — no conversion required.<div class="ftags"><span class="ftag">PDF</span><span class="ftag">DOCX</span><span class="ftag">Scanned</span><span class="ftag">XLSX</span></div></div></td><td><div class="fd">All industries</div></td></tr>
+            <tr><td><div class="fn">Document classification &amp; tagging</div></td><td><div class="fd">AI-assisted classification by type (SOP, policy, permit, contract), domain, and status. Taxonomies fully configurable per industry.</div></td><td><div class="fd">All industries</div></td></tr>
+            <tr><td><div class="fn">Version control &amp; audit trail</div></td><td><div class="fd">Full version history on every document — who changed what, when. Prior versions always accessible. Audit-ready from day one.</div></td><td><div class="fd">All industries</div></td></tr>
+            <tr><td><div class="fn">Document status lifecycle</div></td><td><div class="fd">Track documents through Draft → Active → Under Review → Archived. Status gates drive downstream workflows and approval routing.</div></td><td><div class="fd">Compliance-heavy sectors</div></td></tr>
+            <tr><td><div class="fn">In-app document editor</div></td><td><div class="fd">Edit any document — uploaded or AI-generated — directly in the platform. All changes versioned automatically.</div></td><td><div class="fd">All industries</div></td></tr>
+            <tr><td><div class="fn">Continuous ingestion</div></td><td><div class="fd">New filings and regulatory updates ingest automatically via scheduled sync or API feed. The corpus stays current — not a static snapshot.<div class="ftags"><span class="ftag">Scheduled sync</span><span class="ftag">API feed</span></div></div></td><td><div class="fd">Energy, Mining, Municipal</div></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="module">
+      <button class="module-trigger" onclick="toggle(this)" aria-expanded="false">
+        <div class="module-left">
+          <div class="mod-icon mi-indigo"><i class="ti ti-message-chatbot" aria-hidden="true"></i></div>
+          <div><div class="mod-lbl">Module 2</div><div class="mod-name">AI Q&amp;A — Ask Your Documents</div></div>
+        </div>
+        <div class="module-right">
+          <span class="mod-count">5 features</span>
+          <i class="ti ti-chevron-down mod-chevron" aria-hidden="true"></i>
+        </div>
+      </button>
+      <div class="module-body">
+        <hr class="divider-line">
+        <table class="ftable">
+          <thead><tr><th style="width:31%">Feature</th><th style="width:54%">What it does</th><th style="width:15%">Best for</th></tr></thead>
+          <tbody>
+            <tr><td><div class="fn">Grounded document Q&amp;A</div></td><td><div class="fd">Ask any question in plain language. Every answer is grounded in the client's uploaded documents plus the applicable regulatory corpus — not general AI knowledge.</div></td><td><div class="fd">All industries</div></td></tr>
+            <tr><td><div class="fn">Inline source citations</div></td><td><div class="fd">Every answer returns citations to the exact document, section, and page number. Defensible, auditable, and traceable back to source.</div></td><td><div class="fd">All industries</div></td></tr>
+            <tr><td><div class="fn">Cross-document reasoning</div></td><td><div class="fd">Questions spanning multiple documents — "Does our SOP meet the permit condition in Schedule B?" — answered by cross-referencing the full corpus simultaneously.</div></td><td><div class="fd">Mining, Energy, Healthcare, Legal</div></td></tr>
+            <tr><td><div class="fn">Regulatory knowledge base search</div></td><td><div class="fd">AI-powered search across the applicable regulatory corpus for the client's industry and jurisdiction. Surface the exact standard and requirement — with direct citations.<div class="ftags"><span class="ftag">Industry-specific</span><span class="ftag">Jurisdiction-aware</span></div></div></td><td><div class="fd">All industries</div></td></tr>
+            <tr><td><div class="fn">Saved queries &amp; history</div></td><td><div class="fd">Save frequent questions as pinned queries. Full conversation history so team members can review prior AI interactions, answers, and cited sources.</div></td><td><div class="fd">All industries</div></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="module">
+      <button class="module-trigger" onclick="toggle(this)" aria-expanded="false">
+        <div class="module-left">
+          <div class="mod-icon mi-indigo"><i class="ti ti-zoom-scan" aria-hidden="true"></i></div>
+          <div><div class="mod-lbl">Module 3</div><div class="mod-name">Gap Analysis &amp; Compliance Intelligence</div></div>
+        </div>
+        <div class="module-right">
+          <span class="mod-count">5 features</span>
+          <i class="ti ti-chevron-down mod-chevron" aria-hidden="true"></i>
+        </div>
+      </button>
+      <div class="module-body">
+        <hr class="divider-line">
+        <table class="ftable">
+          <thead><tr><th style="width:31%">Feature</th><th style="width:54%">What it does</th><th style="width:15%">Best for</th></tr></thead>
+          <tbody>
+            <tr><td><div class="fn">Regulation-to-document gap mapping</div></td><td><div class="fd">Automatically cross-reference the client's document library against applicable regulations. Surface every requirement that is unaddressed, outdated, or contradicted.</div></td><td><div class="fd">All industries</div></td></tr>
+            <tr><td><div class="fn">Gap prioritization &amp; risk scoring</div></td><td><div class="fd">Rank identified gaps by regulatory risk level. Focus remediation where exposure is highest — not just where documents are messiest.</div></td><td><div class="fd">All industries</div></td></tr>
+            <tr><td><div class="fn">Audit readiness score</div></td><td><div class="fd">A live readiness score across all compliance domains. Gives teams an at-a-glance status before any scheduled inspection or regulatory visit.</div></td><td><div class="fd">Pharmacy, Healthcare, Food, Manufacturing</div></td></tr>
+            <tr><td><div class="fn">Commitment tracking</div></td><td><div class="fd">Track commitments made in permits, contracts, or EA filings — mapped to evidence of fulfilment. Flag drift before it becomes a violation.<div class="ftags"><span class="ftag">Permits</span><span class="ftag">EA commitments</span><span class="ftag">Contracts</span></div></div></td><td><div class="fd">Mining, Energy, Municipal, Indigenous</div></td></tr>
+            <tr><td><div class="fn">Regulatory change alerts</div></td><td><div class="fd">Automated notifications when regulations affecting the client's corpus are updated. Surfaces which existing documents are now impacted.</div></td><td><div class="fd">All industries</div></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="module">
+      <button class="module-trigger" onclick="toggle(this)" aria-expanded="false">
+        <div class="module-left">
+          <div class="mod-icon mi-indigo"><i class="ti ti-sparkles" aria-hidden="true"></i></div>
+          <div><div class="mod-lbl">Module 4</div><div class="mod-name">AI Document Generation &amp; Updating</div></div>
+        </div>
+        <div class="module-right">
+          <span class="mod-count">6 features</span>
+          <i class="ti ti-chevron-down mod-chevron" aria-hidden="true"></i>
+        </div>
+      </button>
+      <div class="module-body">
+        <hr class="divider-line">
+        <table class="ftable">
+          <thead><tr><th style="width:31%">Feature</th><th style="width:54%">What it does</th><th style="width:15%">Best for</th></tr></thead>
+          <tbody>
+            <tr><td><div class="fn">AI document drafting</div></td><td><div class="fd">Generate new SOPs, policies, reports, or procedures from a prompt — grounded in existing documents and the regulatory corpus. Writes in the client's voice and structure.</div></td><td><div class="fd">All industries</div></td></tr>
+            <tr><td><div class="fn">SOP / policy update suggestions</div></td><td><div class="fd">When a gap is identified, the platform proposes the specific language change needed to close it. Users review, edit, and accept — not rewriting from scratch.</div></td><td><div class="fd">All industries</div></td></tr>
+            <tr><td><div class="fn">Inspection response drafting</div></td><td><div class="fd">After an audit finding, generate a formal response document including root cause, corrective actions, and timelines — grounded in actual evidence from the document library.</div></td><td><div class="fd">Pharmacy, Healthcare, Food, Manufacturing</div></td></tr>
+            <tr><td><div class="fn">Multi-audience report generation</div></td><td><div class="fd">One source of truth, multiple outputs. Generate regulator submissions, board packs, ESG disclosures, and client-facing reports from the same data.<div class="ftags"><span class="ftag">Regulator</span><span class="ftag">Board</span><span class="ftag">ESG</span><span class="ftag">Client</span></div></div></td><td><div class="fd">Mining, Energy, Financial, Legal</div></td></tr>
+            <tr><td><div class="fn">Document summarization</div></td><td><div class="fd">Auto-summarize any uploaded document into an executive briefing with key obligations, dates, and action items extracted.</div></td><td><div class="fd">All industries</div></td></tr>
+            <tr><td><div class="fn">Template library</div></td><td><div class="fd">Pre-built, industry-specific document templates that meet regulatory formatting expectations. Start from a compliant baseline rather than a blank page.</div></td><td><div class="fd">All industries</div></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="module">
+      <button class="module-trigger" onclick="toggle(this)" aria-expanded="false">
+        <div class="module-left">
+          <div class="mod-icon mi-indigo"><i class="ti ti-users" aria-hidden="true"></i></div>
+          <div><div class="mod-lbl">Module 5</div><div class="mod-name">Team, Access &amp; Workflow</div></div>
+        </div>
+        <div class="module-right">
+          <span class="mod-count">5 features</span>
+          <i class="ti ti-chevron-down mod-chevron" aria-hidden="true"></i>
+        </div>
+      </button>
+      <div class="module-body">
+        <hr class="divider-line">
+        <table class="ftable">
+          <thead><tr><th style="width:31%">Feature</th><th style="width:54%">What it does</th><th style="width:15%">Best for</th></tr></thead>
+          <tbody>
+            <tr><td><div class="fn">Role-based access control</div></td><td><div class="fd">Granular permissions — viewer, editor, approver, admin. Control who can read, edit, or approve which document types and modules.</div></td><td><div class="fd">All industries</div></td></tr>
+            <tr><td><div class="fn">Review &amp; approval workflow</div></td><td><div class="fd">Assign documents for review. Approvers receive tasks, comment inline, and approve or reject — with a full audit trail of every decision.</div></td><td><div class="fd">All industries</div></td></tr>
+            <tr><td><div class="fn">Task &amp; action item tracking</div></td><td><div class="fd">Every gap identified or corrective action required generates an assignable task. Tracked to completion with due dates, owners, and status.</div></td><td><div class="fd">All industries</div></td></tr>
+            <tr><td><div class="fn">Activity feed &amp; notifications</div></td><td><div class="fd">Team-level feed showing who uploaded, edited, approved, or queried what. Email and in-app notifications for key events and deadlines.</div></td><td><div class="fd">All industries</div></td></tr>
+            <tr><td><div class="fn">Multi-site / multi-entity accounts</div></td><td><div class="fd">Organizations with multiple locations manage separate document libraries under one account — with cross-entity search when needed.</div></td><td><div class="fd">Mining, Municipal, Healthcare</div></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="module">
+      <button class="module-trigger" onclick="toggle(this)" aria-expanded="false">
+        <div class="module-left">
+          <div class="mod-icon mi-indigo"><i class="ti ti-shield-check" aria-hidden="true"></i></div>
+          <div><div class="mod-lbl">Module 6</div><div class="mod-name">Platform &amp; Trust Infrastructure</div></div>
+        </div>
+        <div class="module-right">
+          <span class="mod-count">4 features</span>
+          <i class="ti ti-chevron-down mod-chevron" aria-hidden="true"></i>
+        </div>
+      </button>
+      <div class="module-body">
+        <hr class="divider-line">
+        <table class="ftable">
+          <thead><tr><th style="width:31%">Feature</th><th style="width:54%">What it does</th><th style="width:15%">Best for</th></tr></thead>
+          <tbody>
+            <tr><td><div class="fn">Canadian data residency</div></td><td><div class="fd">All data stored and processed in Canada. Satisfies provincial privacy requirements and government procurement policies without exception.</div></td><td><div class="fd">All Canadian clients</div></td></tr>
+            <tr><td><div class="fn">Enterprise security posture</div></td><td><div class="fd">Encryption at rest and in transit, SSO support, and enterprise security controls. Suitable for regulated industries with strict vendor requirements.</div></td><td><div class="fd">Government, Financial, Healthcare</div></td></tr>
+            <tr><td><div class="fn">Custom regulatory corpus loading</div></td><td><div class="fd">Each client deployment is grounded in the specific regulatory body, standards, and jurisdiction for their industry. The AI answers from the right rulebook — not a generic one.</div></td><td><div class="fd">All industries</div></td></tr>
+            <tr><td><div class="fn">API &amp; integration layer</div></td><td><div class="fd">Integrate with existing document management systems, ERP, and EHS platforms. Documents flow in automatically; compliance signals flow out.<div class="ftags"><span class="ftag">REST API</span><span class="ftag">SharePoint</span><span class="ftag">EHS platforms</span><span class="ftag">OpenText</span></div></div></td><td><div class="fd">Enterprise clients</div></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ══ INDUSTRY CHART ══ -->
+  <div class="section">
+    <div class="section-tag">Target markets</div>
+    <h2>Document burden across industries</h2>
+    <p class="section-desc">Every industry below carries a significant document burden — in volume, in regulatory complexity, and in the cost of getting it wrong. The chart maps each sector by these two dimensions.</p>
+
+    <div class="chart-wrap">
+      <div class="chart-top">
+        <div>
+          <div style="font-size:13.5px;font-weight:600;color:var(--gray-900);margin-bottom:6px;">Bubble size = estimated paperwork hours saved per year per organization</div>
+        </div>
+        <div class="chart-legend" id="chart-legend"></div>
+      </div>
+      <div class="chart-canvas-wrap">
+        <canvas id="industryChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ DEPLOYMENT ══ -->
+  <div class="section">
+    <div class="section-tag">Deployment model</div>
+    <h2>The platform doesn't change. The corpus does.</h2>
+    <p class="section-desc">Document Intelligence deploys identically across every industry. A pilot requires one document set and delivers cited answers within days.</p>
+    <div class="steps-row">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-title">Pick a pilot corpus</div>
+        <div class="step-desc">One high-pain document set — 50 or more files in any format. Narrow, real, and measurable. No IT project required to start.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-title">Prove the query layer</div>
+        <div class="step-desc">We ingest the corpus, load the regulatory rulebook, and answer the questions your team asks every day. Measure time saved against the manual baseline.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-title">Scale the library</div>
+        <div class="step-desc">Once proven on one domain, the platform extends across the full compliance library. Each domain adds a corpus — not a rebuild.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-l">Algo-Rythmn · Document Intelligence · General Platform Feature List · June 2026</div>
+  <div class="footer-r">&copy; 2026 Algo-Rythmn Corp. All rights reserved.</div>
+</div>
+
+<script>
+  function toggle(btn) {
+    var body = btn.parentElement.querySelector('.module-body');
+    var chevron = btn.querySelector('.mod-chevron');
+    var isOpen = body.classList.contains('open');
+    body.classList.toggle('open', !isOpen);
+    chevron.classList.toggle('open', !isOpen);
+    btn.setAttribute('aria-expanded', String(!isOpen));
+  }
+
+  /* ── INDUSTRY BUBBLE CHART ── */
+  var industries = [
+    { label: 'Mining & Resources',           x: 82, y: 90, r: 28, color: '#4f46e5' },
+    { label: 'Energy & Utilities',           x: 78, y: 88, r: 26, color: '#7c3aed' },
+    { label: 'Healthcare & LTC',             x: 70, y: 92, r: 30, color: '#0891b2' },
+    { label: 'Pharmacy',                     x: 58, y: 95, r: 24, color: '#0d9488' },
+    { label: 'Financial Services',           x: 88, y: 85, r: 27, color: '#059669' },
+    { label: 'Legal Services',               x: 90, y: 80, r: 20, color: '#d97706' },
+    { label: 'Agriculture & Food',           x: 65, y: 75, r: 22, color: '#dc2626' },
+    { label: 'Manufacturing',                x: 72, y: 78, r: 23, color: '#db2777' },
+    { label: 'Construction',                 x: 60, y: 70, r: 19, color: '#7c3aed' },
+    { label: 'Municipalities',               x: 55, y: 82, r: 21, color: '#2563eb' },
+    { label: 'Indigenous Governments',       x: 45, y: 88, r: 18, color: '#0891b2' },
+    { label: 'Post-Secondary & Research',    x: 50, y: 72, r: 17, color: '#059669' },
+  ];
+
+  var ctx = document.getElementById('industryChart').getContext('2d');
+
+  var datasets = industries.map(function(ind) {
+    return {
+      label: ind.label,
+      data: [{ x: ind.x, y: ind.y, r: ind.r }],
+      backgroundColor: ind.color + '22',
+      borderColor: ind.color,
+      borderWidth: 2,
+      hoverBackgroundColor: ind.color + '44',
+    };
+  });
+
+  new Chart(ctx, {
+    type: 'bubble',
+    data: { datasets: datasets },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: function(ctx) {
+              var d = ctx.raw;
+              return [
+                ctx.dataset.label,
+                'Document volume: ' + d.x + '/100',
+                'Regulatory complexity: ' + d.y + '/100',
+                'Paperwork hours saved: ' + Math.round(d.r * 60) + '+ hrs/yr'
+              ];
+            }
+          },
+          backgroundColor: '#16161d',
+          titleColor: '#ffffff',
+          bodyColor: 'rgba(255,255,255,0.7)',
+          padding: 12,
+          cornerRadius: 8,
+          titleFont: { family: 'Inter', size: 13, weight: '600' },
+          bodyFont: { family: 'Inter', size: 12 },
+        }
+      },
+      scales: {
+        x: {
+          title: {
+            display: true,
+            text: 'Document Volume',
+            color: '#8a8a96',
+            font: { family: 'Inter', size: 12, weight: '500' },
+            padding: { top: 12 }
+          },
+          min: 30, max: 100,
+          grid: { color: '#f0f0f2' },
+          ticks: {
+            color: '#8a8a96',
+            font: { family: 'Inter', size: 11 },
+            callback: function(v) { return v === 40 ? 'Lower' : v === 90 ? 'Higher' : ''; }
+          }
+        },
+        y: {
+          title: {
+            display: true,
+            text: 'Regulatory Complexity',
+            color: '#8a8a96',
+            font: { family: 'Inter', size: 12, weight: '500' },
+            padding: { bottom: 12 }
+          },
+          min: 55, max: 100,
+          grid: { color: '#f0f0f2' },
+          ticks: {
+            color: '#8a8a96',
+            font: { family: 'Inter', size: 11 },
+            callback: function(v) { return v === 60 ? 'Lower' : v === 95 ? 'Higher' : ''; }
+          }
+        }
+      }
+    },
+    plugins: [{
+      afterDraw: function(chart) {
+        var ctx2 = chart.ctx;
+        chart.data.datasets.forEach(function(ds, i) {
+          var meta = chart.getDatasetMeta(i);
+          if (!meta.hidden && meta.data[0]) {
+            var pt = meta.data[0];
+            var label = ds.label;
+            var shortLabel = label.length > 18 ? label.substring(0, 16) + '…' : label;
+            ctx2.save();
+            ctx2.font = '500 11px Inter, sans-serif';
+            ctx2.fillStyle = ds.borderColor;
+            ctx2.textAlign = 'center';
+            ctx2.textBaseline = 'middle';
+            ctx2.fillText(shortLabel, pt.x, pt.y);
+            ctx2.restore();
+          }
+        });
+      }
+    }]
+  });
+
+  /* ── BUILD LEGEND ── */
+  var legendEl = document.getElementById('chart-legend');
+  industries.forEach(function(ind) {
+    var item = document.createElement('div');
+    item.className = 'legend-item';
+    item.innerHTML = '<div class="legend-dot" style="background:' + ind.color + '"></div><span>' + ind.label + '</span>';
+    legendEl.appendChild(item);
+  });
+</script>
+</body>
+</html>
