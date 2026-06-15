@@ -137,6 +137,15 @@
     font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--canola);margin-bottom:30px}
   .pill .live{width:7px;height:7px;border-radius:50%;background:var(--signal);box-shadow:0 0 0 0 rgba(111,207,133,.6);animation:pulse 2s infinite}
   @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(111,207,133,.5)}70%{box-shadow:0 0 0 9px rgba(111,207,133,0)}100%{box-shadow:0 0 0 0 rgba(111,207,133,0)}}
+  @keyframes glow-pulse{0%,100%{filter:drop-shadow(0 0 4px rgba(243,198,35,.3))}50%{filter:drop-shadow(0 0 14px rgba(243,198,35,.75))}}
+  .signal-glow{animation:glow-pulse 2.8s ease-in-out infinite}
+
+  /* supply chain graph box */
+  .scgraph{width:100%;overflow:hidden;border-radius:16px;border:1px solid var(--line-soft);background:rgba(255,255,255,.012);padding:22px 18px 16px}
+  .sclegend{display:flex;gap:22px;margin-top:14px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);flex-wrap:wrap}
+  .sclegend span{display:flex;align-items:center;gap:8px}
+  .sclegend .ln{display:inline-block;height:2px;border-radius:2px;width:22px}
+  .sclegend .ln-dash{display:inline-block;height:0;border-top:2px dashed;border-radius:2px;width:22px}
 
   /* split layout */
   .split{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
@@ -182,6 +191,18 @@
   .contact-grid a{color:var(--canola);text-decoration:none;border-bottom:1px solid transparent;transition:border-color .3s}
   .contact-grid a:hover{border-color:var(--canola)}
   .contact-grid .lbl{display:block;color:var(--faint);font-size:12px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:7px}
+
+  /* data stack table */
+  .ds-grid{display:grid;grid-template-columns:110px repeat(3,1fr);gap:2px;margin-top:22px}
+  .ds-h{font-family:'JetBrains Mono',monospace;font-size:9.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:10px 14px;text-align:center;color:var(--fg);opacity:.75}
+  .ds-h.usa{color:var(--canola)}.ds-h.can{color:var(--signal)}.ds-h.bra{color:var(--grain)}
+  .ds-cat{font-family:'JetBrains Mono',monospace;font-size:8.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--canola);padding:14px 10px;display:flex;align-items:center;justify-content:flex-end;text-align:right;background:rgba(243,198,35,.04);border-radius:8px 0 0 8px;border:1px solid rgba(243,198,35,.12);border-right:none}
+  .ds-cell{padding:11px 13px;background:rgba(255,255,255,.018);border:1px solid var(--line-soft);line-height:1.4}
+  .ds-cell:last-child{border-radius:0 8px 8px 0}
+  .ds-cell strong{display:block;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;margin-bottom:3px;letter-spacing:.02em}
+  .ds-cell small{color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.02em}
+  .ok strong{color:var(--signal)}.warn strong{color:var(--grain)}.na strong{color:var(--muted)}.bad strong{color:#dd544d}
+  .ok strong::before{content:"✓  "}.warn strong::before{content:"⚠  "}.na strong::before{content:"—  "}.bad strong::before{content:"✗  "}
 
   @media (max-width:880px){
     body{font-size:16px}
@@ -263,90 +284,219 @@
     </div>
   </section>
 
-  <!-- 03 OUR EDGE -->
-  <section class="slide" data-label="Our Edge">
+  <!-- 03 THREE PRODUCTS -->
+  <section class="slide" data-label="Three Products">
+    <div class="wrap">
+      <div class="kicker rv"><span class="bar"></span>The platform</div>
+      <h2 class="rv">One engine. <span class="accent">Three products.</span></h2>
+      <p class="lead rv" style="margin:16px 0 38px">Each product builds on the last — from a raw harvest estimate to a precision forward curve to a full income shield. One signal chain, three ways to win.</p>
+      <div class="grid-3">
+        <div class="card accent-edge rv d1" style="padding:30px">
+          <span class="tag">Product 01 · The signal</span>
+          <h3 style="font-size:22px">Early Yield Signal</h3>
+          <p style="margin:12px 0 18px">Satellite imagery, live weather, and agentic AI fused into a harvest estimate weeks ahead of the official print.</p>
+          <p style="color:var(--grain);font-size:13px;font-family:'JetBrains Mono',monospace;letter-spacing:.04em">POWERS — Products 02 &amp; 03</p>
+        </div>
+        <div class="card accent-edge rv d2" style="padding:30px">
+          <span class="tag">Product 02 · For the market</span>
+          <h3 style="font-size:22px">Grain Forward Curve Forecast</h3>
+          <p style="margin:12px 0 18px">The yield signal translated into a full grain forward curve forecast — contract-by-contract, crop district by crop district — ready to plug directly into your risk workflow, analytics platform, or client data feed.</p>
+          <p style="color:var(--grain);font-size:13px;font-family:'JetBrains Mono',monospace;letter-spacing:.04em">FOR — funds · CTAs · trading houses</p>
+        </div>
+        <div class="card signal-edge rv d3" style="padding:30px">
+          <span class="tag" style="color:var(--signal)">Product 03 · For the field</span>
+          <h3 style="font-size:22px">Full-Season Revenue Suite</h3>
+          <p style="margin:12px 0 18px">The forward-curve forecast turned into optimal hedges and a storage portfolio — full income protection from planting to final sale.</p>
+          <p style="color:var(--signal);font-size:13px;font-family:'JetBrains Mono',monospace;letter-spacing:.04em">FOR — lenders · insurers · cooperatives · trading firms</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 SUPPLY CHAIN GRAPH -->
+  <section class="slide" data-label="Supply Chain" style="padding:72px 40px 52px">
+    <div class="field-grid"></div>
+    <div class="wrap">
+      <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:22px">
+        <div>
+          <div class="kicker rv"><span class="bar"></span>The full picture</div>
+          <h2 class="rv" style="font-size:clamp(28px,3vw,44px);line-height:1.05">One signal. An entire <span class="accent">supply chain</span> connected.</h2>
+        </div>
+        <p class="lead rv d2" style="font-size:16px;max-width:26ch;line-height:1.5;text-align:right;color:var(--muted)">Every node in agri-finance runs through the same yield intelligence.</p>
+      </div>
+
+      <!-- 5-column flow: Data+AI | Intelligence | Physical Chain | Products | End Users -->
+      <div id="sc-flow" class="rv d2" style="position:relative;display:grid;grid-template-columns:1fr 0.9fr 1fr 1.1fr 1fr;gap:32px;align-items:start">
+        <!-- SVG arrow overlay — positions computed by JS after layout -->
+        <svg id="sc-arrows" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible;z-index:10" aria-hidden="true"></svg>
+
+        <!-- COL 1: Data Sources + AI Engine -->
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);text-align:center;padding-bottom:8px;border-bottom:1px solid var(--line-soft);margin-bottom:4px">Data Sources · AI</div>
+          <div id="n-satellite" style="border:1px solid rgba(243,198,35,.28);border-radius:10px;padding:10px 13px;background:rgba(243,198,35,.05)">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--canola);display:block;margin-bottom:4px">VEGETATION</span>
+            <strong style="font-size:16px">Satellite Imagery</strong>
+          </div>
+          <div id="n-climate" style="border:1px solid rgba(243,198,35,.28);border-radius:10px;padding:10px 13px;background:rgba(243,198,35,.05)">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--canola);display:block;margin-bottom:4px">WEATHER</span>
+            <strong style="font-size:16px">Climate Data</strong>
+          </div>
+          <div id="n-yield-records" style="border:1px solid rgba(243,198,35,.28);border-radius:10px;padding:10px 13px;background:rgba(243,198,35,.05)">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--canola);display:block;margin-bottom:4px">GROUND TRUTH</span>
+            <strong style="font-size:16px">Yield Records</strong>
+          </div>
+          <div id="n-agentic-ai" style="border:2px solid var(--canola);border-radius:12px;padding:14px 13px;background:rgba(243,198,35,.12);text-align:center;margin-top:4px">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--canola);display:block;margin-bottom:5px">ENGINE</span>
+            <strong style="font-size:20px;font-family:'Bricolage Grotesque',sans-serif;color:var(--fg)">Agentic AI</strong>
+          </div>
+        </div>
+
+        <!-- COL 2: P01 Intelligence -->
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--canola);text-align:center;padding-bottom:8px;border-bottom:1px solid rgba(243,198,35,.3);margin-bottom:4px">Intelligence</div>
+          <div id="n-early-yield" style="border:2px solid var(--canola);border-radius:14px;padding:18px 14px;background:rgba(243,198,35,.13);text-align:center">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--canola);display:block;margin-bottom:6px">PRODUCT 01</span>
+            <strong style="font-size:20px;font-family:'Bricolage Grotesque',sans-serif;color:var(--canola);display:block;line-height:1.15">Early Yield<br>Signal</strong>
+            <p style="color:var(--muted);font-size:14px;margin-top:9px;line-height:1.4">Harvest estimate weeks ahead of the official print</p>
+          </div>
+          <div id="n-yield-surprise" style="border:1px solid rgba(122,173,238,.4);border-radius:10px;padding:11px 13px;background:rgba(122,173,238,.07);text-align:center">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#7aadee;display:block;margin-bottom:4px">YIELD SURPRISE</span>
+            <strong style="font-size:16px">signal − consensus</strong>
+          </div>
+        </div>
+
+        <!-- COL 3: Physical Chain -->
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--signal);text-align:center;padding-bottom:8px;border-bottom:1px solid rgba(111,207,133,.35);margin-bottom:4px">Physical Chain</div>
+          <div id="n-upstream" style="border:1px solid rgba(111,207,133,.38);border-radius:10px;padding:10px 13px;background:rgba(111,207,133,.07)">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--signal);display:block;margin-bottom:4px">UPSTREAM</span>
+            <strong style="font-size:16px">Farms &amp; Suppliers</strong>
+          </div>
+          <div id="n-storage" style="border:1px solid rgba(111,207,133,.38);border-radius:10px;padding:10px 13px;background:rgba(111,207,133,.07)">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--signal);display:block;margin-bottom:4px">STORAGE</span>
+            <strong style="font-size:16px">Grain Bins</strong>
+          </div>
+          <div id="n-logistics" style="border:1px solid rgba(111,207,133,.38);border-radius:10px;padding:10px 13px;background:rgba(111,207,133,.07)">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--signal);display:block;margin-bottom:4px">LOGISTICS</span>
+            <strong style="font-size:16px">Transportation</strong>
+          </div>
+          <div id="n-spot-market" style="border:2px solid var(--signal);border-radius:10px;padding:10px 13px;background:rgba(111,207,133,.14)">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--signal);display:block;margin-bottom:4px">MARKET</span>
+            <strong style="font-size:16px;color:var(--signal)">Spot Market</strong>
+          </div>
+        </div>
+
+        <!-- COL 4: Products -->
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);text-align:center;padding-bottom:8px;border-bottom:1px solid var(--line-soft);margin-bottom:4px">Products</div>
+          <div id="n-product02" style="border:1px solid rgba(243,198,35,.5);border-radius:12px;padding:16px 14px;background:rgba(243,198,35,.08)">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--canola);display:block;margin-bottom:6px">PRODUCT 02</span>
+            <strong style="font-size:18px;font-family:'Bricolage Grotesque',sans-serif;display:block;line-height:1.2">Forward-Curve Intelligence</strong>
+            <p style="color:var(--muted);font-size:14px;margin-top:8px;line-height:1.4">Funds · CTAs · Trading houses</p>
+          </div>
+          <div id="n-product03" style="border:1px solid rgba(111,207,133,.5);border-radius:12px;padding:16px 14px;background:rgba(111,207,133,.08)">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--signal);display:block;margin-bottom:6px">PRODUCT 03</span>
+            <strong style="font-size:18px;font-family:'Bricolage Grotesque',sans-serif;display:block;line-height:1.2">Full-Season Revenue Suite</strong>
+            <p style="color:var(--muted);font-size:14px;margin-top:8px;line-height:1.4">Lenders · Insurers · Growers</p>
+          </div>
+        </div>
+
+        <!-- COL 5: End Users -->
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);text-align:center;padding-bottom:8px;border-bottom:1px solid var(--line-soft);margin-bottom:4px">End Users</div>
+          <div id="n-funds-ctas" style="border:1px solid rgba(243,198,35,.28);border-radius:10px;padding:10px 13px;background:rgba(243,198,35,.05)">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--canola);display:block;margin-bottom:4px">MARKET</span>
+            <strong style="font-size:16px">Funds &amp; CTAs</strong>
+          </div>
+          <div id="n-trading-houses" style="border:1px solid rgba(243,198,35,.28);border-radius:10px;padding:10px 13px;background:rgba(243,198,35,.05)">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--canola);display:block;margin-bottom:4px">TRADE</span>
+            <strong style="font-size:16px">Trading Houses</strong>
+          </div>
+          <div id="n-lenders" style="border:1px solid rgba(111,207,133,.28);border-radius:10px;padding:10px 13px;background:rgba(111,207,133,.05)">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--signal);display:block;margin-bottom:4px">FINANCE</span>
+            <strong style="font-size:16px">Lenders</strong>
+          </div>
+          <div id="n-insurers" style="border:1px solid rgba(111,207,133,.28);border-radius:10px;padding:10px 13px;background:rgba(111,207,133,.05)">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--signal);display:block;margin-bottom:4px">INSURE</span>
+            <strong style="font-size:16px">Insurers &amp; Co-ops</strong>
+          </div>
+          <div id="n-growers" style="border:2px solid var(--signal);border-radius:10px;padding:10px 13px;background:rgba(111,207,133,.12)">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--signal);display:block;margin-bottom:4px">FIELD</span>
+            <strong style="font-size:16px;color:var(--signal)">Growers</strong>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+    <!-- 05 PRODUCT 1 -->
+  <section class="slide" data-label="Product 1">
     <svg class="wave" viewBox="0 0 1200 600" preserveAspectRatio="none">
       <path d="M0 380 C 200 320, 300 440, 500 360 S 800 240, 1000 300 S 1150 220, 1200 250" stroke="rgba(243,198,35,.25)"/>
       <path d="M0 420 C 200 400, 300 440, 500 410 S 800 380, 1000 400 S 1150 370, 1200 385" stroke="rgba(111,207,133,.18)" stroke-dasharray="6 8"/>
     </svg>
     <div class="wrap">
-      <div class="split">
-        <div>
-          <div class="kicker rv"><span class="bar"></span>Our edge</div>
-          <h2 class="rv">We know the yield<br>before the <span class="accent">print lands.</span></h2>
-          <p class="lead rv" style="margin-top:20px">At the core is one proprietary asset: an <strong>early yield signal</strong> that fuses satellite imagery, live weather, and agentic AI into a harvest estimate weeks ahead of the official number. Build it once — monetize it twice.</p>
+      <div class="kicker rv"><span class="bar"></span>Product 01 · Early Yield Signal</div>
+      <h2 class="rv">We know the yield<br>before the <span class="accent">print lands.</span></h2>
+      <p class="lead rv" style="margin:18px 0 34px">An <strong>early yield signal</strong> that fuses satellite imagery, live weather, and agentic AI into a harvest estimate weeks ahead of the official number — the hardest test in the chain, and the IP every downstream product stands on.</p>
+      <div class="grid-3 rv d2">
+        <div class="card accent-edge" style="padding:32px">
+          <span class="tag">Pillar 01 · Vegetation</span>
+          <h3 style="margin-bottom:12px">Field-level crop stress, every two weeks</h3>
+          <p>Earth-observation satellites measure how each crop is developing continuously across the season — peak greenness, cumulative vigour, and the precise day the canopy turns. This is the primary predictive signal in every market we cover.</p>
         </div>
-        <div class="grid-2 rv d2" style="gap:16px">
-          <div class="card"><span class="tag">Input</span><h3>Satellite imagery</h3><p>Continuous, field-level reads on crop condition all season long.</p></div>
-          <div class="card"><span class="tag">Input</span><h3>Live weather</h3><p>The conditions that pull actual yield away from expectation.</p></div>
-          <div class="card"><span class="tag">Input</span><h3>Agentic AI</h3><p>Models that don't just watch the data — they turn it into a call.</p></div>
-          <div class="card signal-edge"><span class="tag" style="color:var(--signal)">Output</span><h3 class="grn">Early yield signal</h3><p>The harvest, quantified before the market has priced it in.</p></div>
+        <div class="card accent-edge" style="padding:32px">
+          <span class="tag">Pillar 02 · Weather &amp; Climate</span>
+          <h3 style="margin-bottom:12px">The conditions that move yield away from expectation</h3>
+          <p>High-resolution daily climate reanalysis delivers temperature, precipitation, growing-degree days, extreme heat events, and soil moisture at field scale — the variables that explain why a crop outperforms or falls short of what the satellite sees.</p>
+        </div>
+        <div class="card signal-edge" style="padding:32px">
+          <span class="tag" style="color:var(--signal)">Pillar 03 · Ground Truth</span>
+          <h3 style="margin-bottom:12px">Official government yield records as the benchmark</h3>
+          <p>Every model is validated against the authoritative national yield series in each market, ensuring the signal is measured against the same number the market ultimately prices — not a proxy.</p>
         </div>
       </div>
+      <p class="footnote rv d3" style="margin-top:18px">All data sourced from public, auditable repositories. Crop-specific field masks applied in each market. The signal Products 02 &amp; 03 run on.</p>
     </div>
   </section>
 
-  <!-- 04 TWO PRODUCTS -->
-  <section class="slide" data-label="Two Products">
-    <div class="wrap">
-      <div class="kicker rv"><span class="bar"></span>The platform</div>
-      <h2 class="rv">One signal. <span class="accent">Two ways to win.</span></h2>
-      <p class="lead rv" style="margin:16px 0 38px">The same yield estimate becomes an alpha source for the trading desk and an income shield for the field — two markets, one engine.</p>
-      <div class="grid-2">
-        <div class="card accent-edge rv d1" style="padding:34px">
-          <span class="tag">Product 01 · For the market</span>
-          <h3 style="font-size:25px">Forward-Curve Intelligence</h3>
-          <p style="margin:12px 0 18px">A grain forward curve built to beat the desk-standard models — measurable alpha, net of costs.</p>
-          <p style="color:var(--grain);font-size:13.5px;font-family:'JetBrains Mono',monospace;letter-spacing:.04em">FOR — funds · CTAs · trading houses</p>
-        </div>
-        <div class="card signal-edge rv d2" style="padding:34px">
-          <span class="tag" style="color:var(--signal)">Product 02 · For the field</span>
-          <h3 style="font-size:25px">Full-Season Revenue Suite</h3>
-          <p style="margin:12px 0 18px">One suite that guards income end to end — <strong>in-season</strong> protection against price and yield, then <strong>post-season</strong> storage-and-sale optimization.</p>
-          <p style="color:var(--signal);font-size:13.5px;font-family:'JetBrains Mono',monospace;letter-spacing:.04em">FOR — lenders · insurers · cooperatives · trading firms</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 05 PRODUCT 1 DETAIL -->
-  <section class="slide" data-label="Product 1">
+  <!-- 05 PRODUCT 2 DETAIL -->
+  <section class="slide" data-label="Product 2">
     <div class="wrap">
       <div class="split">
         <div>
-          <div class="kicker rv"><span class="bar"></span>Product 01 · Forward-Curve Intelligence</div>
-          <h2 class="rv" style="font-size:clamp(38px,4.6vw,54px)">The edge, proven<br>on your own data.</h2>
-          <p class="lead rv" style="margin:18px 0 26px;font-size:18px">We don't ask you to trust a claim. We rebuild the model your desk runs today, layer our yield signal on top, and let the backtest settle it — out-of-sample, after costs. The number speaks for itself.</p>
+          <div class="kicker rv"><span class="bar"></span>Product 02 · Forward-Curve Intelligence</div>
+          <h2 class="rv" style="font-size:clamp(38px,4.6vw,54px)">Three inputs.<br>One sharper <span class="accent">forward curve.</span></h2>
+          <p class="lead rv" style="margin:18px 0 26px;font-size:18px">Product 02 fuses three independent input streams into a grain forward curve forecast: the early yield signal from Product 01, financial market factors, and physical supply-chain fundamentals. We deliver the forecast — how you act on it is entirely your call.</p>
           <div class="flow rv d2">
-            <div class="node"><span class="n-tag">Baseline</span><strong>Desk standard</strong><span class="d">Rebuild the forward curve the market runs today.</span></div>
+            <div class="node"><span class="n-tag">Input 01</span><strong>Yield Signal</strong><span class="d">P01's early harvest estimate — the primary driver, weeks before the official print.</span></div>
             <div class="arrow">→</div>
-            <div class="node"><span class="n-tag">Our layer</span><strong>+ Yield signal</strong><span class="d">Add the early yield read to the curve.</span></div>
+            <div class="node"><span class="n-tag">Input 02</span><strong>Financial &amp; Physical</strong><span class="d">Futures carry, basis, open interest, supply-chain flows, export demand, storage levels.</span></div>
             <div class="arrow">→</div>
-            <div class="node"><span class="n-tag">Verdict</span><strong>Backtest</strong><span class="d">Out-of-sample, net of costs.</span></div>
+            <div class="node"><span class="n-tag">Output</span><strong>Forward Curve Forecast</strong><span class="d">Grain prices across delivery months — delivered as a data product, yours to use.</span></div>
           </div>
         </div>
         <div class="chartbox rv d3">
-          <div class="chart-head"><span class="ttl">Backtest — illustrative</span><span class="ttl" style="color:var(--canola)">edge = Δ</span></div>
+          <div class="chart-head"><span class="ttl">Forecast vs. Actual — illustrative</span><span class="ttl" style="color:var(--canola)">accuracy = Δ</span></div>
           <svg viewBox="0 0 420 240" width="100%" preserveAspectRatio="xMidYMid meet">
             <g stroke="rgba(238,241,230,.07)"><line x1="0" y1="60" x2="420" y2="60"/><line x1="0" y1="120" x2="420" y2="120"/><line x1="0" y1="180" x2="420" y2="180"/></g>
-            <path d="M10 175 C 80 165, 140 178, 200 150 S 320 145, 410 120" fill="none" stroke="#97a08c" stroke-width="2"/>
             <path d="M10 170 C 80 130, 140 150, 200 95 S 320 80, 410 45" fill="none" stroke="#f3c623" stroke-width="3" stroke-linecap="round"/>
-            <line x1="410" y1="45" x2="410" y2="120" stroke="#6fcf85" stroke-width="1.5" stroke-dasharray="3 3"/>
-            <circle cx="410" cy="45" r="4" fill="#f3c623"/><circle cx="410" cy="120" r="4" fill="#97a08c"/>
-            <text x="372" y="35" fill="#6fcf85" font-family="JetBrains Mono" font-size="13" font-weight="600">+X%</text>
+            <path d="M10 172 C 80 135, 140 154, 200 99 S 320 84, 410 50" fill="none" stroke="#6fcf85" stroke-width="2" stroke-dasharray="5 5" opacity=".9"/>
+            <circle cx="410" cy="45" r="4" fill="#f3c623"/><circle cx="410" cy="50" r="4" fill="#6fcf85"/>
           </svg>
           <div class="legend">
-            <span><span class="sw" style="background:#f3c623"></span> Signal-enhanced</span>
-            <span><span class="sw" style="background:#97a08c"></span> Desk standard</span>
+            <span><span class="sw" style="background:#f3c623"></span> Our Forecast</span>
+            <span><span class="sw" style="background:#6fcf85"></span> Actual Outcome</span>
           </div>
-          <p class="footnote">Illustrative — replaced with live backtest figures in client diligence.</p>
+          <p class="footnote">Illustrative — replaced with live forecast accuracy figures in client diligence.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 06 PRODUCT 2 · IN-SEASON -->
-  <section class="slide" data-label="Product 2 · In-Season">
+  <!-- 06 PRODUCT 3 · IN-SEASON -->
+  <section class="slide" data-label="Product 3 · In-Season">
     <div class="wrap">
       <div class="split rev">
         <div class="grid-2 rv d2" style="gap:16px">
@@ -356,19 +506,19 @@
           <div class="card signal-edge"><span class="tag" style="color:var(--signal)">The proof</span><h3 class="grn">Backtested, not assumed</h3><p>We show the dollars protected — the part most products never quantify.</p></div>
         </div>
         <div>
-          <div class="kicker rv"><span class="bar"></span>Product 02 · Full-season suite — In-season</div>
+          <div class="kicker rv"><span class="bar"></span>Product 03 · Full-season suite — In-season</div>
           <h2 class="rv" style="font-size:clamp(38px,4.6vw,54px)">Cover the whole<br>risk, not <span class="grn">half</span> of it.</h2>
-          <p class="lead rv" style="margin-top:19px;font-size:18px">In season, the suite defends income against <span class="grn">price and yield</span> in a single position — and the very yield estimate that drives the forecast now sets the <strong>optimal hedge</strong> for each grower.</p>
-          <p class="footnote rv d3" style="color:var(--signal);opacity:.85">Full-season suite · Phase 1</p>
+          <p class="lead rv" style="margin-top:19px;font-size:18px">In season, the suite defends income against <span class="grn">price and yield</span> in a single position — the forward-curve forecast from Product 02 now sets the <strong>optimal hedge</strong> for each grower.</p>
+          <p class="footnote rv d3" style="color:var(--signal);opacity:.85">Product 03 · Full-season suite · Phase 1</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 07 PRODUCT 2 · POST-SEASON -->
-  <section class="slide" data-label="Product 2 · Post-Season">
+  <!-- 07 PRODUCT 3 · POST-SEASON -->
+  <section class="slide" data-label="Product 3 · Post-Season">
     <div class="wrap">
-      <div class="kicker rv"><span class="bar"></span>Product 02 · Full-season suite — Post-season</div>
+      <div class="kicker rv"><span class="bar"></span>Product 03 · Full-season suite — Post-season</div>
       <h2 class="rv">After harvest, turn the grain<br>bin into a <span class="accent">managed portfolio.</span></h2>
       <p class="lead rv" style="margin:16px 0 32px">Most growers still decide sell-or-store on instinct and a basis chart. The suite replaces the guesswork with a model — and gives insurers a brand-new product to underwrite around it.</p>
       <div class="grid-3">
@@ -388,7 +538,7 @@
           <p>An insurable product that pays out if price at final sale falls below target — priced by our forward-curve model. A new line for insurers and co-ops.</p>
         </div>
       </div>
-      <p class="footnote rv d4" style="color:var(--signal);opacity:.85">Full-season suite · Phase 2 — one relationship, from planting to final sale.</p>
+      <p class="footnote rv d4" style="color:var(--signal);opacity:.85">Product 03 · Full-season suite · Phase 2 — one relationship, from planting to final sale.</p>
     </div>
   </section>
 
@@ -397,14 +547,19 @@
     <div class="wrap">
       <div class="kicker rv"><span class="bar"></span>What you get</div>
       <h2 class="rv">Value you can <span class="accent">measure</span> —<br>before you commit a dollar.</h2>
-      <div class="audience-row rv d2" style="margin-top:34px">
+      <div class="audience-row rv d2" style="margin-top:34px;grid-template-columns:repeat(3,1fr)">
         <div class="aud p1">
-          <span class="who">Funds · CTAs · Trading houses — Product 01</span>
-          <h3>Alpha you can audit</h3>
-          <p>A better risk-adjusted return than your current curve, net of costs — demonstrated out-of-sample on your own book.</p>
+          <span class="who">All downstream — Product 01</span>
+          <h3>The signal that starts it all</h3>
+          <p>A harvest estimate weeks early — proprietary IP that every downstream product is built on and validated by.</p>
+        </div>
+        <div class="aud p1">
+          <span class="who">Funds · CTAs · Trading houses — Product 02</span>
+          <h3>A forecast you can validate</h3>
+          <p>A demonstrably sharper forward curve, accuracy-proven out-of-sample — yours to use in trading, procurement, or risk management.</p>
         </div>
         <div class="aud p2">
-          <span class="who">Farmers · Co-ops · Lenders · Insurers — Product 02</span>
+          <span class="who">Farmers · Co-ops · Lenders · Insurers — Product 03</span>
           <h3>More certainty per premium dollar</h3>
           <p>Tighter income swings and smaller worst-case losses — safer loan books, sharper-priced products, steadier farm cash flow.</p>
         </div>
@@ -434,12 +589,13 @@
       <path d="M0 300 C 300 200, 500 400, 700 280 S 1000 180, 1200 240" stroke="rgba(243,198,35,.2)"/>
     </svg>
     <div class="wrap" style="text-align:left">
-      <div class="kicker rv"><span class="bar"></span>One signal. Proven once. Sold twice.</div>
-      <p class="quote-big rv" style="margin:10px 0 30px">Product 1 is the <em>hardest possible test</em> of our signal — and the proof everything else stands on.</p>
-      <p class="lead rv d2" style="font-size:20px">Beat the desk on the forward curve, and the IP is validated, the suite is de-risked, and the same yield estimate that won the trade now sets the optimal hedge. <strong>One signal — proven once, sold twice.</strong></p>
+      <div class="kicker rv"><span class="bar"></span>One engine. Three products. One chain.</div>
+      <p class="quote-big rv" style="margin:10px 0 30px">Product 01 is the <em>hardest possible test</em> — and the proof Products 02 &amp; 03 stand on.</p>
+      <p class="lead rv d2" style="font-size:20px">Validate the yield signal on the forward curve (Product 02), and the IP is proven. The forward curve that beats the desk now sets the optimal portfolio for every grower (Product 03). <strong>One engine — proven step by step, sold three ways.</strong></p>
     </div>
   </section>
 
+  <!-- AIMS + CONTACT PLACEHOLDER -->
   <!-- AIMS + CONTACT -->
   <section class="slide" data-label="The Payoff">
     <div class="field-grid"></div>
@@ -517,6 +673,85 @@
   });
 
   slides[0].classList.add('in');
+
+  // ---- Supply Chain SVG arrows ----
+  function drawSCArrows(){
+    const container=document.getElementById('sc-flow');
+    const svg=document.getElementById('sc-arrows');
+    if(!container||!svg)return;
+    svg.innerHTML='';
+    const cr=container.getBoundingClientRect();
+    if(cr.width===0)return;
+    function box(id){
+      const el=document.getElementById(id);
+      if(!el)return null;
+      const r=el.getBoundingClientRect();
+      return{
+        mL:{x:r.left-cr.left, y:r.top+r.height/2-cr.top},
+        mR:{x:r.right-cr.left, y:r.top+r.height/2-cr.top},
+        mT:{x:r.left+r.width/2-cr.left, y:r.top-cr.top},
+        mB:{x:r.left+r.width/2-cr.left, y:r.bottom-cr.top}
+      };
+    }
+    const ns='http://www.w3.org/2000/svg';
+    function mkArrow(x1,y1,x2,y2,color){
+      const dx=x2-x1, dy=y2-y1;
+      const path=document.createElementNS(ns,'path');
+      path.setAttribute('d',`M${x1},${y1} C${x1+dx*.45},${y1} ${x2-dx*.45},${y2} ${x2},${y2}`);
+      path.setAttribute('fill','none');
+      path.setAttribute('stroke',color);
+      path.setAttribute('stroke-width','1.5');
+      path.setAttribute('opacity','.65');
+      const dot=document.createElementNS(ns,'circle');
+      dot.setAttribute('cx',x2);dot.setAttribute('cy',y2);
+      dot.setAttribute('r','3');dot.setAttribute('fill',color);dot.setAttribute('opacity','.85');
+      svg.appendChild(path);svg.appendChild(dot);
+    }
+    const Y='#f3c623',G='#6fcf85';
+    const ai=box('n-agentic-ai'),eys=box('n-early-yield'),ys=box('n-yield-surprise');
+    const sat=box('n-satellite'),clim=box('n-climate'),yr=box('n-yield-records');
+    const up=box('n-upstream'),st=box('n-storage'),lg=box('n-logistics'),sm=box('n-spot-market');
+    const p02=box('n-product02'),p03=box('n-product03');
+    const fc=box('n-funds-ctas'),th=box('n-trading-houses');
+    const ld=box('n-lenders'),ins=box('n-insurers'),gr=box('n-growers');
+    // 0. Satellite Imagery, Climate Data, Yield Records → Early Yield Signal
+    if(sat&&eys)mkArrow(sat.mR.x,sat.mR.y,eys.mL.x,eys.mL.y,Y);
+    if(clim&&eys)mkArrow(clim.mR.x,clim.mR.y,eys.mL.x,eys.mL.y,Y);
+    if(yr&&eys)mkArrow(yr.mR.x,yr.mR.y,eys.mL.x,eys.mL.y,Y);
+    // 1. Agentic AI → Early Yield Signal
+    if(ai&&eys)mkArrow(ai.mR.x,ai.mR.y,eys.mL.x,eys.mL.y,Y);
+    // 2. Early Yield Signal → Yield Surprise
+    if(eys&&ys)mkArrow(eys.mB.x,eys.mB.y,ys.mT.x,ys.mT.y,Y);
+    // 3. Yield Surprise → Spot Market
+    if(ys&&sm)mkArrow(ys.mR.x,ys.mR.y,sm.mL.x,sm.mL.y,Y);
+    // 4. Physical chain vertical: Upstream → Storage → Logistics → Spot Market
+    if(up&&st)mkArrow(up.mB.x,up.mB.y,st.mT.x,st.mT.y,G);
+    if(st&&lg)mkArrow(st.mB.x,st.mB.y,lg.mT.x,lg.mT.y,G);
+    if(lg&&sm)mkArrow(lg.mB.x,lg.mB.y,sm.mT.x,sm.mT.y,G);
+    // 4. Each physical chain node → Product 02
+    if(up&&p02)mkArrow(up.mR.x,up.mR.y,p02.mL.x,p02.mL.y,G);
+    if(st&&p02)mkArrow(st.mR.x,st.mR.y,p02.mL.x,p02.mL.y,G);
+    if(lg&&p02)mkArrow(lg.mR.x,lg.mR.y,p02.mL.x,p02.mL.y,G);
+    if(sm&&p02)mkArrow(sm.mR.x,sm.mR.y,p02.mL.x,p02.mL.y,G);
+    // 5. Product 02 → Product 03
+    if(p02&&p03)mkArrow(p02.mB.x,p02.mB.y,p03.mT.x,p03.mT.y,Y);
+    // 6. Product 02 → Funds & CTAs, Trading Houses
+    if(p02&&fc)mkArrow(p02.mR.x,p02.mR.y,fc.mL.x,fc.mL.y,Y);
+    if(p02&&th)mkArrow(p02.mR.x,p02.mR.y,th.mL.x,th.mL.y,Y);
+    // 7. Product 03 → Lenders, Insurers & Co-ops, Growers
+    if(p03&&ld)mkArrow(p03.mR.x,p03.mR.y,ld.mL.x,ld.mL.y,G);
+    if(p03&&ins)mkArrow(p03.mR.x,p03.mR.y,ins.mL.x,ins.mL.y,G);
+    if(p03&&gr)mkArrow(p03.mR.x,p03.mR.y,gr.mL.x,gr.mL.y,G);
+  }
+  window.addEventListener('load',()=>setTimeout(drawSCArrows,200));
+  window.addEventListener('resize',drawSCArrows);
+  const scSlide=document.querySelector('[data-label="Supply Chain"]');
+  if(scSlide){
+    const scObs=new IntersectionObserver(entries=>{
+      entries.forEach(e=>{if(e.isIntersecting)setTimeout(drawSCArrows,150);});
+    },{threshold:.1});
+    scObs.observe(scSlide);
+  }
 </script>
 </body>
 </html>
