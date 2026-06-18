@@ -14,8 +14,8 @@
     --gray-50:  #f9f9fa;
     --gray-100: #f0f0f2;
     --gray-200: #e2e2e6;
-    --gray-300: #c8c8cf;
-    --gray-500: #8a8a96;
+    --gray-300: #bcbcc2;
+    --gray-500: #81818b;
     --gray-700: #3d3d47;
     --gray-900: #16161d;
     --indigo:        #4f46e5;
@@ -282,6 +282,27 @@
   .footer-r  { font-size: 12px; color: rgba(255,255,255,.26); }
 
   /* ── RESPONSIVE ── */
+  /* ── ESG SCALE LEGEND ── */
+  .esg-scale {
+    display: flex; align-items: center; gap: 14px;
+    margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--gray-100);
+  }
+  .esg-scale-lbl {
+    font-size: 12px; font-weight: 600; color: var(--gray-700);
+    white-space: nowrap; flex-shrink: 0;
+  }
+  .esg-bar-wrap { flex: 1; }
+  .esg-gradient-bar {
+    height: 10px; border-radius: 100px;
+    background: linear-gradient(to right, #eef2ff, #c7d2fe 40%, #4f46e5 70%, #1e1b4b);
+    margin-bottom: 4px;
+  }
+  .esg-bar-ends {
+    display: flex; justify-content: space-between;
+    font-size: 10.5px; color: var(--gray-500);
+  }
+  .esg-note { font-size: 11px; color: var(--gray-500); margin-top: 10px; font-style: italic; }
+
   @media (max-width: 780px) {
     .cover-inner, .page-body { padding: 0 24px; }
     .cover { padding: 48px 0 40px; }
@@ -542,7 +563,7 @@
           <div><div class="mod-lbl">Module 6</div><div class="mod-name">Platform &amp; Trust Infrastructure</div></div>
         </div>
         <div class="module-right">
-          <span class="mod-count">4 features</span>
+          <span class="mod-count">6 features</span>
           <i class="ti ti-chevron-down mod-chevron" aria-hidden="true"></i>
         </div>
       </button>
@@ -555,6 +576,8 @@
             <tr><td><div class="fn">Enterprise security posture</div></td><td><div class="fd">Encryption at rest and in transit, SSO support, and enterprise security controls. Suitable for regulated industries with strict vendor requirements.</div></td><td><div class="fd">Government, Financial, Healthcare</div></td></tr>
             <tr><td><div class="fn">Custom regulatory corpus loading</div></td><td><div class="fd">Each client deployment is grounded in the specific regulatory body, standards, and jurisdiction for their industry. The AI answers from the right rulebook — not a generic one.</div></td><td><div class="fd">All industries</div></td></tr>
             <tr><td><div class="fn">API &amp; integration layer</div></td><td><div class="fd">Integrate with existing document management systems, ERP, and EHS platforms. Documents flow in automatically; compliance signals flow out.<div class="ftags"><span class="ftag">REST API</span><span class="ftag">SharePoint</span><span class="ftag">EHS platforms</span><span class="ftag">OpenText</span></div></div></td><td><div class="fd">Enterprise clients</div></td></tr>
+            <tr><td><div class="fn">Commons Knowledge Base</div></td><td><div class="fd">An opt-in, aggregated corpus built from anonymized, consented contributions across participating clients in the same industry. Surfaces cross-sector regulatory precedents, benchmark SOPs, and industry-wide best practices — without exposing any individual client's private data.<div class="ftags"><span class="ftag">Aggregated</span><span class="ftag">Anonymized</span><span class="ftag">Opt-in</span><span class="ftag">Benchmarking</span></div></div></td><td><div class="fd">All industries</div></td></tr>
+            <tr><td><div class="fn">Vault Knowledge Base</div></td><td><div class="fd">Each client's documents, queries, and AI interactions are stored in a fully isolated, encrypted vault — zero cross-contamination with any other client or Commons data. Meets data sovereignty requirements and supports air-gapped deployment for the most sensitive environments.<div class="ftags"><span class="ftag">Isolated</span><span class="ftag">Encrypted</span><span class="ftag">Sovereign</span><span class="ftag">Air-gap ready</span></div></div></td><td><div class="fd">Government, Healthcare, Indigenous</div></td></tr>
           </tbody>
         </table>
       </div>
@@ -571,13 +594,25 @@
     <div class="chart-wrap">
       <div class="chart-top">
         <div>
-          <div style="font-size:13.5px;font-weight:600;color:var(--gray-900);margin-bottom:6px;">Bubble size = estimated paperwork hours saved per year per organization</div>
+          <div style="font-size:12px;color:var(--gray-500);margin-top:2px;display:flex;flex-wrap:wrap;gap:16px;">
+            <span><span style="color:var(--gray-900);font-weight:600;">X-axis</span>&nbsp; Document Volume</span>
+            <span><span style="color:var(--gray-900);font-weight:600;">Y-axis</span>&nbsp; Regulatory Complexity</span>
+            <span><span style="color:var(--gray-900);font-weight:600;">Colour</span>&nbsp; ESG Reporting Burden</span></span>
+            <span><span style="color:var(--gray-900);font-weight:600;">Bubble size</span>&nbsp; Paperwork hours saved / yr</span>
+          </div>
         </div>
-        <div class="chart-legend" id="chart-legend"></div>
       </div>
       <div class="chart-canvas-wrap">
         <canvas id="industryChart"></canvas>
       </div>
+      <div class="esg-scale">
+        <span class="esg-scale-lbl" style="color:var(--indigo);">ESG Burden</span>
+        <div class="esg-bar-wrap">
+          <div class="esg-gradient-bar"></div>
+          <div class="esg-bar-ends"><span>Low</span><span>High</span></div>
+        </div>
+      </div>
+      <p class="esg-note">ESG score reflects mandatory disclosure intensity: climate risk reporting (TCFD/ISSB), emissions accounting, social impact obligations, and governance disclosure requirements per sector.</p>
     </div>
   </div>
 
@@ -623,128 +658,129 @@
     btn.setAttribute('aria-expanded', String(!isOpen));
   }
 
-  /* ── INDUSTRY BUBBLE CHART ── */
+  /* ── INDUSTRY BUBBLE CHART (Chart.js — indigo colour = ESG) ── */
   var industries = [
-    { label: 'Mining & Resources',           x: 82, y: 90, r: 28, color: '#4f46e5' },
-    { label: 'Energy & Utilities',           x: 78, y: 88, r: 26, color: '#7c3aed' },
-    { label: 'Healthcare & LTC',             x: 70, y: 92, r: 30, color: '#0891b2' },
-    { label: 'Pharmacy',                     x: 58, y: 95, r: 24, color: '#0d9488' },
-    { label: 'Financial Services',           x: 88, y: 85, r: 27, color: '#059669' },
-    { label: 'Legal Services',               x: 90, y: 80, r: 20, color: '#d97706' },
-    { label: 'Agriculture & Food',           x: 65, y: 75, r: 22, color: '#dc2626' },
-    { label: 'Manufacturing',                x: 72, y: 78, r: 23, color: '#db2777' },
-    { label: 'Construction',                 x: 60, y: 70, r: 19, color: '#7c3aed' },
-    { label: 'Municipalities',               x: 55, y: 82, r: 21, color: '#2563eb' },
-    { label: 'Indigenous Governments',       x: 45, y: 88, r: 18, color: '#0891b2' },
-    { label: 'Post-Secondary & Research',    x: 50, y: 72, r: 17, color: '#059669' },
+    { label: 'Mining & Resources',        x: 82, y: 90, esg: 88, r: 28 },
+    { label: 'Energy & Utilities',        x: 78, y: 88, esg: 92, r: 26 },
+    { label: 'Healthcare & LTC',          x: 70, y: 92, esg: 65, r: 30 },
+    { label: 'Pharmacy',                  x: 58, y: 95, esg: 60, r: 24 },
+    { label: 'Financial Services',        x: 88, y: 85, esg: 85, r: 27 },
+    { label: 'Legal Services',            x: 90, y: 80, esg: 40, r: 20 },
+    { label: 'Agriculture & Food',        x: 65, y: 75, esg: 72, r: 22 },
+    { label: 'Manufacturing',             x: 72, y: 78, esg: 78, r: 23 },
+    { label: 'Construction',              x: 60, y: 70, esg: 62, r: 19 },
+    { label: 'Municipalities',            x: 55, y: 82, esg: 70, r: 21 },
+    { label: 'Indigenous Governments',    x: 45, y: 88, esg: 75, r: 18 },
+    { label: 'Post-Secondary & Research', x: 50, y: 72, esg: 55, r: 17 },
   ];
 
-  var ctx = document.getElementById('industryChart').getContext('2d');
+  /* Indigo colour ramp — 4 stops for clear ESG contrast */
+  var ESG_STOPS = [
+    { t: 0,    rgb: [238, 242, 255] }, /* #eef2ff — pale indigo-soft */
+    { t: 0.4,  rgb: [199, 210, 254] }, /* #c7d2fe — indigo-border    */
+    { t: 0.7,  rgb: [79,  70,  229] }, /* #4f46e5 — indigo           */
+    { t: 1,    rgb: [30,  27,  75]  }, /* #1e1b4b — very deep indigo */
+  ];
+  function esgColor(esg, alpha) {
+    var t = Math.max(0, Math.min(1, (esg - 30) / 70));
+    var lo, hi;
+    for (var k = 0; k < ESG_STOPS.length - 1; k++) {
+      if (t <= ESG_STOPS[k + 1].t) { lo = ESG_STOPS[k]; hi = ESG_STOPS[k + 1]; break; }
+    }
+    var span = hi.t - lo.t;
+    var tt   = (t - lo.t) / span;
+    var r = Math.round(lo.rgb[0] + (hi.rgb[0] - lo.rgb[0]) * tt);
+    var g = Math.round(lo.rgb[1] + (hi.rgb[1] - lo.rgb[1]) * tt);
+    var b = Math.round(lo.rgb[2] + (hi.rgb[2] - lo.rgb[2]) * tt);
+    return 'rgba(' + r + ',' + g + ',' + b + ',' + alpha + ')';
+  }
 
   var datasets = industries.map(function(ind) {
     return {
       label: ind.label,
       data: [{ x: ind.x, y: ind.y, r: ind.r }],
-      backgroundColor: ind.color + '22',
-      borderColor: ind.color,
-      borderWidth: 2,
-      hoverBackgroundColor: ind.color + '44',
+      backgroundColor: esgColor(ind.esg, 0.72),
+      borderColor:     esgColor(ind.esg, 1),
+      borderWidth: 1.5,
     };
   });
 
-  new Chart(ctx, {
+  var chartCtx = document.getElementById('industryChart').getContext('2d');
+  new Chart(chartCtx, {
     type: 'bubble',
     data: { datasets: datasets },
     options: {
       responsive: true,
       maintainAspectRatio: false,
+      animation: false,
       plugins: {
         legend: { display: false },
         tooltip: {
           callbacks: {
-            label: function(ctx) {
-              var d = ctx.raw;
+            title: function(items) { return items[0].dataset.label; },
+            label: function(item) {
+              var ind = industries[item.datasetIndex];
               return [
-                ctx.dataset.label,
-                'Document volume: ' + d.x + '/100',
-                'Regulatory complexity: ' + d.y + '/100',
-                'Paperwork hours saved: ' + Math.round(d.r * 60) + '+ hrs/yr'
+                'Document Volume: '      + ind.x   + '/100',
+                'Regulatory Complexity: '+ ind.y   + '/100',
+                'ESG Reporting Burden: ' + ind.esg + '/100',
+                'Hours saved / yr: '     + Math.round(ind.r * 60) + '+',
               ];
             }
           },
           backgroundColor: '#16161d',
           titleColor: '#ffffff',
-          bodyColor: 'rgba(255,255,255,0.7)',
-          padding: 12,
-          cornerRadius: 8,
+          bodyColor: 'rgba(255,255,255,0.72)',
+          padding: 12, cornerRadius: 8,
           titleFont: { family: 'Inter', size: 13, weight: '600' },
-          bodyFont: { family: 'Inter', size: 12 },
+          bodyFont:  { family: 'Inter', size: 12 },
         }
       },
       scales: {
         x: {
           title: {
-            display: true,
-            text: 'Document Volume',
-            color: '#8a8a96',
+            display: true, text: 'Document Volume',
+            color: '#3d3d47',
             font: { family: 'Inter', size: 12, weight: '500' },
-            padding: { top: 12 }
+            padding: { top: 8 }
           },
-          min: 30, max: 100,
-          grid: { color: '#f0f0f2' },
-          ticks: {
-            color: '#8a8a96',
-            font: { family: 'Inter', size: 11 },
-            callback: function(v) { return v === 40 ? 'Lower' : v === 90 ? 'Higher' : ''; }
-          }
+          min: 35, max: 98,
+          grid: { color: '#e2e2e6' },
+          ticks: { color: '#6e6e78', font: { family: 'Inter', size: 12 } }
         },
         y: {
           title: {
-            display: true,
-            text: 'Regulatory Complexity',
-            color: '#8a8a96',
+            display: true, text: 'Regulatory Complexity',
+            color: '#3d3d47',
             font: { family: 'Inter', size: 12, weight: '500' },
-            padding: { bottom: 12 }
+            padding: { bottom: 8 }
           },
-          min: 55, max: 100,
-          grid: { color: '#f0f0f2' },
-          ticks: {
-            color: '#8a8a96',
-            font: { family: 'Inter', size: 11 },
-            callback: function(v) { return v === 60 ? 'Lower' : v === 95 ? 'Higher' : ''; }
-          }
+          min: 62, max: 104,
+          grid: { color: '#e2e2e6' },
+          ticks: { color: '#6e6e78', font: { family: 'Inter', size: 12 } }
         }
       }
     },
     plugins: [{
       afterDraw: function(chart) {
-        var ctx2 = chart.ctx;
+        var c = chart.ctx;
         chart.data.datasets.forEach(function(ds, i) {
           var meta = chart.getDatasetMeta(i);
           if (!meta.hidden && meta.data[0]) {
-            var pt = meta.data[0];
-            var label = ds.label;
-            var shortLabel = label.length > 18 ? label.substring(0, 16) + '…' : label;
-            ctx2.save();
-            ctx2.font = '500 11px Inter, sans-serif';
-            ctx2.fillStyle = ds.borderColor;
-            ctx2.textAlign = 'center';
-            ctx2.textBaseline = 'middle';
-            ctx2.fillText(shortLabel, pt.x, pt.y);
-            ctx2.restore();
+            var pt  = meta.data[0];
+            var ind = industries[i];
+            var lbl = ind.label.length > 19 ? ind.label.substring(0, 17) + '…' : ind.label;
+            c.save();
+            c.font      = '500 12px Inter, sans-serif';
+            c.fillStyle = '#16161d';
+            c.textAlign = 'center';
+            c.textBaseline = 'middle';
+            c.fillText(lbl, pt.x, pt.y);
+            c.restore();
           }
         });
       }
     }]
-  });
-
-  /* ── BUILD LEGEND ── */
-  var legendEl = document.getElementById('chart-legend');
-  industries.forEach(function(ind) {
-    var item = document.createElement('div');
-    item.className = 'legend-item';
-    item.innerHTML = '<div class="legend-dot" style="background:' + ind.color + '"></div><span>' + ind.label + '</span>';
-    legendEl.appendChild(item);
   });
 </script>
 </body>
