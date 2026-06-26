@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AgroMind — The Governed Analyst</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+  :root{
+    --bg:#F7F5F0;
+    --bg-panel:#FFFFFF;
+    --ink:#1B2430;
+    --ink-soft:#677891;
+    --ink-faint:#8A94A3;
+    --line:#DDD9CF;
+    --line-soft:#E8E5DD;
+    --navy:#1E3A5F;
+    --navy-deep:#152C49;
+    --slate:#5C7290;
+    --gold:#9C7A3C;
+    --gold-soft:#EFE6D3;
+    --sage:#5C7A63;
+    --sage-soft:#E4EBE3;
+    --rose:#8C4A5A;
+    --rose-soft:#F0E4E7;
+    --serif: 'Source Serif 4', serif;
+    --sans: 'Inter', sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--sans);
+    line-height:1.55;
+  }
+  ::selection{background:var(--gold-soft); color:var(--navy-deep);}
+
+  #progress{
+    position:fixed; top:0; left:0; height:3px; width:0%;
+    background:var(--navy); z-index:1000; transition:width .1s linear;
+  }
+
+  .navdots{
+    position:fixed; right:22px; top:50%; transform:translateY(-50%);
+    display:flex; flex-direction:column; gap:10px; z-index:900;
+  }
+  .navdots a{
+    width:8px; height:8px; border-radius:50%;
+    background:var(--line); display:block; transition:background .25s, transform .25s;
+  }
+  .navdots a.active{background:var(--navy); transform:scale(1.3);}
+  @media (max-width:880px){ .navdots{display:none;} }
+
+  section{
+    min-height:100vh; display:flex; flex-direction:column; justify-content:center;
+    padding:100px 10vw; position:relative; border-bottom:1px solid var(--line-soft);
+  }
+
+  .eyebrow{
+    font-family:var(--mono); font-size:13px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--gold); margin-bottom:20px; display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{content:''; width:18px; height:1px; background:var(--gold); display:inline-block;}
+
+  h1{
+    font-family:var(--serif); font-weight:600;
+    font-size:clamp(2.3rem, 5vw, 4rem); line-height:1.12; letter-spacing:-.01em;
+    color:var(--navy-deep);
+  }
+  h1 em{color:var(--gold); font-style:normal;}
+
+  h2{
+    font-family:var(--serif); font-weight:600;
+    font-size:clamp(1.7rem, 3vw, 2.4rem); line-height:1.22; color:var(--navy-deep);
+    margin-bottom:18px;
+  }
+
+  p.lead{ font-size:clamp(1.05rem,1.3vw,1.25rem); color:var(--ink-soft); max-width:740px; line-height:1.65; margin-top:22px;}
+  p.body{ color:var(--ink-soft); font-size:1.02rem; line-height:1.7; max-width:680px;}
+
+  .reveal{opacity:0; transform:translateY(22px); transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+  .reveal-delay-1{transition-delay:.08s;} .reveal-delay-2{transition-delay:.16s;}
+  .reveal-delay-3{transition-delay:.24s;} .reveal-delay-4{transition-delay:.32s;}
+  .reveal-delay-5{transition-delay:.40s;}
+
+  .footnote{font-family:var(--mono); font-size:12.5px; color:var(--ink-soft); margin-top:20px; line-height:1.6;}
+
+  /* ============ PAGE FOOTER ============ */
+  .slide-foot{
+    position:absolute; bottom:30px; left:10vw; right:10vw;
+    display:flex; justify-content:space-between; align-items:center;
+    font-family:var(--mono); font-size:11px; color:var(--ink-faint);
+    pointer-events:none;
+  }
+  #capabilities .slide-foot, #cta .slide-foot{ color:rgba(255,255,255,.35); }
+  .slide-foot .copy{ letter-spacing:.04em; }
+  .slide-foot .pnum{ letter-spacing:.1em; }
+
+  /* ============ COVER ============ */
+  #cover{
+    background:
+      radial-gradient(900px 500px at 90% 5%, rgba(30,58,95,.07), transparent 60%),
+      var(--bg);
+  }
+  .cover-mark{
+    position:absolute; top:90px; right:8vw; width:180px; height:180px;
+    border:1px solid var(--line); border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    opacity:.7;
+  }
+  .cover-mark .ring{position:absolute; border:1px solid var(--line); border-radius:50%;}
+  .cover-mark .ring.r1{width:130px; height:130px;}
+  .cover-mark .ring.r2{width:80px; height:80px;}
+  .cover-mark .core{width:10px; height:10px; border-radius:50%; background:var(--navy);}
+  @media (max-width:880px){ .cover-mark{display:none;} }
+
+  .cover-stats{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:16px;
+    margin-top:50px;
+  }
+  @media (max-width:1000px){ .cover-stats{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:600px){ .cover-stats{grid-template-columns:1fr;} }
+
+  .cover-stat{
+    background:var(--bg-panel); border:1px solid var(--line); border-radius:4px;
+    padding:22px 20px;
+  }
+  .cover-stat .num{font-family:var(--serif); font-size:2.1rem; font-weight:600; color:var(--navy);}
+  .cover-stat .lbl{font-size:.88rem; color:var(--ink-soft); margin-top:6px; line-height:1.45;}
+
+  .cover-foot{
+    position:absolute; bottom:40px; left:10vw; right:10vw;
+    display:flex; justify-content:space-between; align-items:flex-end;
+    font-family:var(--mono); font-size:11.5px; color:var(--ink-faint);
+  }
+  .scroll-cue{display:flex; flex-direction:column; align-items:center; gap:8px;}
+  .scroll-cue .arrow{width:1px; height:26px; background:linear-gradient(var(--navy), transparent); animation:scrollpulse 1.8s infinite;}
+  @keyframes scrollpulse{0%,100%{opacity:.2;} 50%{opacity:1;}}
+
+  /* ============ PROBLEM ============ */
+  .problem-layout{
+    display:grid; grid-template-columns:1fr 400px; gap:52px;
+    margin-top:40px; align-items:start;
+  }
+  @media (max-width:1060px){ .problem-layout{grid-template-columns:1fr;} }
+
+  .row-list{border-top:1px solid var(--line);}
+  .row-item{display:flex; gap:30px; padding:26px 0; border-bottom:1px solid var(--line); align-items:flex-start;}
+  .row-tag{font-family:var(--mono); font-size:11.5px; color:var(--gold); text-transform:uppercase; letter-spacing:.06em; width:140px; flex-shrink:0; padding-top:3px;}
+  .row-body{flex:1;}
+  .row-body h4{font-family:var(--serif); font-size:1.15rem; font-weight:600; color:var(--navy-deep); margin-bottom:6px;}
+  .row-body p{color:var(--ink-soft); font-size:1rem;}
+
+  /* ---- chart panel ---- */
+  .chart-panel{
+    background:var(--bg-panel); border:1px solid var(--line); border-radius:6px;
+    padding:26px 24px; position:sticky; top:100px;
+  }
+  .chart-title{font-family:var(--mono); font-size:11.5px; text-transform:uppercase; letter-spacing:.1em; color:var(--ink-faint); margin-bottom:20px;}
+
+  .bar-row{display:flex; align-items:center; gap:10px; margin-bottom:11px;}
+  .bar-label{font-family:var(--mono); font-size:.78rem; color:var(--ink-soft); width:42px; flex-shrink:0;}
+  .bar-track{flex:1; height:22px; background:var(--line-soft); border-radius:3px; overflow:hidden;}
+  .bar-fill{
+    height:100%; border-radius:3px; width:0;
+    display:flex; align-items:center; justify-content:flex-end; padding-right:8px;
+    font-family:var(--mono); font-size:.68rem; color:#fff; font-weight:600;
+    transition:width 1s cubic-bezier(.22,1,.36,1);
+  }
+  .bar-fill.pos{background:var(--gold);}
+  .bar-fill.neg{background:var(--rose); justify-content:flex-start; padding-right:0; padding-left:8px;}
+
+  .chart-legend{display:flex; gap:16px; margin-top:16px; padding-top:14px; border-top:1px solid var(--line-soft);}
+  .legend-item{display:flex; align-items:center; gap:6px; font-family:var(--mono); font-size:.78rem; color:var(--ink-soft);}
+  .legend-dot{width:10px; height:10px; border-radius:2px;}
+
+  /* ============ ARCHITECTURE ============ */
+  .arch-v2{
+    margin-top:44px;
+    display:grid;
+    grid-template-columns:200px 48px 1fr;
+    align-items:center;
+  }
+  @media (max-width:900px){ .arch-v2{display:flex; flex-direction:column; gap:16px;} .arch-connector{display:none;} }
+
+  .arch-input{
+    background:var(--bg-panel); border:1px solid var(--line); border-radius:6px;
+    padding:22px 20px;
+  }
+  .arch-input .lbl{font-family:var(--serif); font-weight:600; font-size:.97rem; color:var(--navy-deep); margin-bottom:6px;}
+  .arch-input .eg{font-size:.84rem; color:var(--ink-soft); font-style:italic; line-height:1.45;}
+
+  .arch-connector{
+    height:1px; background:var(--line); position:relative;
+  }
+  .arch-connector::after{content:'→'; position:absolute; right:-6px; top:-11px; color:var(--ink-faint); font-size:14px;}
+
+  .arch-engine{border:1px solid var(--navy); border-radius:6px; overflow:hidden;}
+  .arch-engine-head{
+    background:var(--navy-deep); padding:16px 22px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .arch-engine-head .name{font-family:var(--serif); font-weight:600; font-size:1.02rem; color:#fff;}
+  .arch-engine-head .sub{font-size:.76rem; color:rgba(255,255,255,.6);}
+  .arch-engine-body{
+    background:var(--bg-panel); padding:14px 18px;
+    display:grid; grid-template-columns:repeat(3,1fr); gap:10px;
+  }
+  @media (max-width:700px){ .arch-engine-body{grid-template-columns:1fr;} }
+
+  .agent-chip{
+    background:var(--bg); border:1px solid var(--line); border-radius:4px;
+    padding:13px 14px;
+  }
+  .agent-chip .name{font-family:var(--mono); font-size:.72rem; color:var(--navy); text-transform:uppercase; letter-spacing:.06em; margin-bottom:4px;}
+  .agent-chip .desc{font-size:.84rem; color:var(--ink-soft); line-height:1.4;}
+  .agent-chip.building{opacity:.65; border-style:dashed;}
+  .agent-chip.building .name{color:var(--gold);}
+
+  /* ============ CAPABILITIES ============ */
+  #capabilities{background:var(--navy-deep); color:#F3F1EC;}
+  #capabilities .eyebrow{color:#D9C896;}
+  #capabilities .eyebrow::before{background:#D9C896;}
+  #capabilities h2{color:#fff;}
+  #capabilities p.lead{color:rgba(255,255,255,.72);}
+
+  .cap-grid{
+    display:grid; grid-template-columns:repeat(3,1fr);
+    gap:1px; background:rgba(255,255,255,.1);
+    border:1px solid rgba(255,255,255,.1); border-radius:6px;
+    overflow:hidden; margin-top:44px;
+  }
+  @media (max-width:960px){ .cap-grid{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:560px){ .cap-grid{grid-template-columns:1fr;} }
+
+  .cap-cell{
+    background:rgba(255,255,255,.03); padding:24px 22px;
+    transition:background .2s; position:relative; overflow:hidden;
+  }
+  .cap-cell:hover{background:rgba(255,255,255,.07);}
+  .cap-cell::before{
+    content:''; position:absolute; top:0; left:0; width:3px; height:100%;
+    background:var(--gold); transform:scaleY(0); transform-origin:top; transition:transform .3s;
+  }
+  .cap-cell:hover::before{transform:scaleY(1);}
+  .cap-num{font-family:var(--mono); font-size:10px; color:rgba(255,255,255,.4); letter-spacing:.1em; margin-bottom:10px;}
+  .cap-cell h4{font-family:var(--serif); font-size:1.03rem; font-weight:600; color:#fff; margin-bottom:7px; line-height:1.35;}
+  .cap-cell p{font-size:.83rem; color:rgba(255,255,255,.75); line-height:1.55;}
+
+  /* ============ GOVERNANCE ============ */
+  .gov-layout{
+    display:grid; grid-template-columns:1fr 340px; gap:52px;
+    margin-top:40px; align-items:start;
+  }
+  @media (max-width:1060px){ .gov-layout{grid-template-columns:1fr;} }
+
+  .gov-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:var(--line); border:1px solid var(--line);}
+  .gov-cell{background:var(--bg-panel); padding:26px 28px;}
+  .gov-cell .icon-tag{font-family:var(--mono); font-size:11px; color:var(--gold); text-transform:uppercase; letter-spacing:.08em; margin-bottom:10px;}
+  .gov-cell h4{font-family:var(--serif); font-weight:600; font-size:1.08rem; color:var(--navy-deep); margin-bottom:6px;}
+  .gov-cell p{font-size:.97rem; color:var(--ink-soft);}
+  @media (max-width:700px){ .gov-grid{grid-template-columns:1fr;} }
+
+  .trust-tiers{
+    background:var(--bg-panel); border:1px solid var(--line); border-radius:6px;
+    overflow:hidden; position:sticky; top:100px;
+  }
+  .trust-tiers-head{
+    padding:16px 22px; border-bottom:1px solid var(--line);
+    font-family:var(--mono); font-size:12px; text-transform:uppercase; letter-spacing:.1em; color:var(--ink-faint);
+  }
+  .trust-tier{display:flex; align-items:flex-start; gap:14px; padding:20px 22px; border-bottom:1px solid var(--line-soft);}
+  .trust-tier:last-child{border-bottom:none;}
+  .tier-num{
+    width:34px; height:34px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+    font-family:var(--mono); font-size:.72rem; font-weight:600; flex-shrink:0;
+  }
+  .tier-num.t1{background:var(--navy-deep); color:#fff;}
+  .tier-num.t2{background:var(--navy); color:#fff;}
+  .tier-num.t3{background:var(--slate); color:#fff;}
+  .tier-num.t4{background:var(--gold-soft); color:var(--gold);}
+  .tier-content h5{font-family:var(--serif); font-weight:600; font-size:1rem; color:var(--navy-deep); margin-bottom:4px;}
+  .tier-content p{font-size:.88rem; color:var(--ink-soft); line-height:1.5;}
+
+  /* ============ BUILD STATUS ============ */
+  .build-layout{
+    display:grid; grid-template-columns:1fr;
+    align-items:start; margin-top:40px;
+  }
+
+  table.status{width:100%; border-collapse:collapse; font-size:.95rem;}
+  table.status th{text-align:left; padding:13px 18px; background:var(--navy-deep); color:#fff; font-weight:600; font-size:.83rem;}
+  table.status td{padding:16px 18px; border-bottom:1px solid var(--line); color:var(--ink); vertical-align:top;}
+  table.status td:last-child{font-size:.93rem; color:var(--ink-soft);}
+  table.status tr:nth-child(even) td{background:rgba(0,0,0,.013);}
+  .pill{display:inline-block; font-family:var(--mono); font-size:.72rem; padding:4px 10px; border-radius:20px; text-transform:uppercase; letter-spacing:.04em; white-space:nowrap;}
+  .pill.live{background:var(--sage-soft); color:var(--sage);}
+  .pill.build{background:var(--gold-soft); color:var(--gold);}
+
+  .progress-ring-panel{
+    background:var(--bg-panel); border:1px solid var(--line); border-radius:6px;
+    padding:26px; text-align:center; position:sticky; top:100px;
+  }
+  .prp-label{font-family:var(--mono); font-size:11.5px; text-transform:uppercase; letter-spacing:.1em; color:var(--ink-soft); margin-bottom:22px;}
+  .prp-ring{display:flex; justify-content:center; margin-bottom:24px;}
+  .prp-list{border-top:1px solid var(--line); text-align:left;}
+  .prp-item{display:flex; justify-content:space-between; align-items:center; padding:11px 0; border-bottom:1px solid var(--line-soft);}
+  .prp-item:last-child{border-bottom:none;}
+  .prp-item .name{font-size:.9rem; color:var(--ink);}
+
+  /* ============ CTA ============ */
+  #cta{background:var(--navy-deep); color:#F3F1EC;}
+  #cta .eyebrow{color:#D9C896;}
+  #cta .eyebrow::before{background:#D9C896;}
+  #cta h2{color:#fff;}
+  #cta p.lead{color:rgba(255,255,255,.72);}
+
+  .compare-table{width:100%; border-collapse:collapse; margin-top:42px; font-size:.9rem;}
+  .compare-table th{
+    padding:15px 20px; font-family:var(--mono); font-size:.76rem; text-transform:uppercase; letter-spacing:.06em; font-weight:600;
+  }
+  .compare-table th:first-child{text-align:left; color:rgba(255,255,255,.4); background:rgba(255,255,255,.02); width:30%;}
+  .compare-table th.without{text-align:center; color:rgba(255,255,255,.45); background:rgba(255,255,255,.04);}
+  .compare-table th.with{text-align:center; color:#D9C896; background:rgba(255,255,255,.07);}
+  .compare-table td{padding:15px 20px; border-bottom:1px solid rgba(255,255,255,.07); vertical-align:middle;}
+  .compare-table td:first-child{color:rgba(255,255,255,.88); background:rgba(255,255,255,.02); font-size:.88rem;}
+  .compare-table td.without{text-align:center; color:rgba(255,255,255,.55); background:rgba(255,255,255,.04); font-size:.85rem;}
+  .compare-table td.with{text-align:center; color:#C8DCB5; background:rgba(255,255,255,.05); font-size:.85rem;}
+  .check{font-size:1.05rem;}
+  .cross{opacity:.3; font-size:1.05rem;}
+
+  .badge-row{display:flex; gap:10px; flex-wrap:wrap; margin-top:30px;}
+  .badge{font-family:var(--mono); font-size:11px; padding:7px 13px; border:1px solid rgba(255,255,255,.2); border-radius:20px; color:rgba(255,255,255,.72);}
+
+  .pagefoot{
+    position:absolute; bottom:36px; left:8vw; right:8vw; display:flex; justify-content:space-between;
+    font-family:var(--mono); font-size:11.5px;
+  }
+  #cta .pagefoot{color:rgba(255,255,255,.4);}
+
+  @media (max-width:880px){
+    section{padding:70px 6vw;}
+    .row-item{flex-direction:column; gap:8px;}
+    .row-tag{width:auto;}
+    .compare-table th:first-child,.compare-table td:first-child{display:none;}
+    .compare-table th.without,.compare-table td.without{display:none;}
+  }
+  /* ============ FLOWCHART (slide 3) ============ */
+  .flow{margin-top:44px; display:flex; flex-direction:column; align-items:center; gap:0;}
+
+  .flow-row{width:100%; display:flex; justify-content:center; gap:14px;}
+
+  .flow-node{
+    background:var(--bg-panel); border:1px solid var(--line); border-radius:8px;
+    padding:20px 28px; text-align:center; position:relative;
+  }
+  .input-node, .output-node{max-width:560px; width:100%;}
+  .supervisor-node{max-width:560px; width:100%; border-color:var(--navy); background:var(--navy-deep);}
+  .supervisor-node .flow-title{color:#fff;}
+  .supervisor-node .flow-tag{color:rgba(255,255,255,.5);}
+
+  .flow-tag{font-family:var(--mono); font-size:10.5px; text-transform:uppercase; letter-spacing:.1em; color:var(--gold); margin-bottom:8px;}
+  .flow-title{font-family:var(--serif); font-weight:600; font-size:1.1rem; color:var(--navy-deep); margin-bottom:6px;}
+  .flow-sub{font-size:.85rem; color:var(--ink-soft); font-style:italic; line-height:1.4;}
+
+  .flow-badges{display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin-top:10px;}
+  .flow-badge{font-family:var(--mono); font-size:.7rem; padding:4px 11px; border:1px solid rgba(255,255,255,.2); border-radius:20px; color:rgba(255,255,255,.75);}
+
+  .flow-arrow-down{
+    display:flex; align-items:center; justify-content:center;
+    height:36px; width:100%;
+  }
+  .flow-chevron{font-size:1.3rem; color:var(--ink-faint); line-height:1;}
+
+  .agents-row{
+    display:grid; grid-template-columns:repeat(5,1fr); gap:10px;
+    width:100%; align-items:stretch;
+  }
+  @media (max-width:1000px){ .agents-row{grid-template-columns:repeat(3,1fr);} }
+  @media (max-width:680px){ .agents-row{grid-template-columns:1fr;} }
+
+  .agent-node{padding:18px 14px; text-align:center;}
+  .agent-chip-icon{font-size:1.5rem; margin-bottom:8px; line-height:1;}
+  .agent-node .flow-title{font-size:.92rem; margin-bottom:4px;}
+  .agent-node .flow-sub{font-size:.78rem;}
+  .flow-connector-h{display:none;}
+
+  .output-node{border-color:var(--sage); background:var(--sage-soft);}
+  .output-node .flow-tag{color:var(--sage);}
+  .output-node .flow-title{color:var(--navy-deep);}
+  .output-pills{display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin-top:10px;}
+  .out-pill{font-family:var(--mono); font-size:.72rem; padding:4px 11px; border:1px solid var(--sage); border-radius:20px; color:var(--sage); background:#fff;}
+
+
+
+  /* ============ CLOSING SLIDE ============ */
+  #closing{
+    background:var(--bg);
+    justify-content:center; align-items:center;
+  }
+  .closing-inner{
+    width:100%;
+    display:grid; grid-template-columns:1fr 480px; gap:30px;
+    align-items:center;
+  }
+  .closing-left{ display:flex; flex-direction:column; }
+  .closing-right{ display:flex; flex-direction:column; align-items:stretch; align-self:center; justify-content:center; }
+  @media(max-width:960px){
+    .closing-inner{ grid-template-columns:1fr; }
+  }
+  .closing-mark{margin-bottom:28px;}
+
+  .closing-points{margin-top:36px; display:flex; flex-direction:column; gap:14px;}
+  .closing-point{
+    display:flex; gap:14px; align-items:flex-start;
+    font-size:1rem; color:var(--ink-soft); line-height:1.55;
+  }
+  .cp-dot{
+    width:8px; height:8px; border-radius:50%; background:var(--navy);
+    flex-shrink:0; margin-top:7px;
+  }
+
+  .contact-box{
+    padding:32px 36px;
+    background:var(--navy-deep); border-radius:8px;
+    display:flex; flex-direction:column; gap:0;
+    width:100%; border:1px solid rgba(255,255,255,.08);
+    border-top:3px solid var(--gold);
+  }
+  .contact-label{font-family:var(--mono); font-size:11px; text-transform:uppercase; letter-spacing:.12em; color:rgba(255,255,255,.45);}
+  .contact-email{
+    font-family:var(--serif); font-size:1.55rem; font-weight:600; color:#fff;
+    text-decoration:none; letter-spacing:-.01em;
+  }
+  .contact-email:hover{color:var(--gold);}
+  .contact-sub{font-size:.88rem; color:rgba(255,255,255,.55); max-width:380px; line-height:1.5;}
+
+  .cb-section{ padding:20px 0; border-bottom:1px solid rgba(255,255,255,.08); }
+  .cb-section:last-child{ border-bottom:none; padding-bottom:0; }
+  .cb-section:first-child{ padding-top:0; }
+  .cb-label{ font-family:var(--mono); font-size:10px; text-transform:uppercase; letter-spacing:.13em; color:var(--gold); margin-bottom:12px; }
+  .cb-stat-row{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .cb-stat{ display:flex; flex-direction:column; gap:3px; }
+  .cb-stat-num{ font-family:var(--serif); font-size:1.5rem; font-weight:600; color:#fff; line-height:1; }
+  .cb-stat-lbl{ font-size:.78rem; color:rgba(255,255,255,.5); line-height:1.4; }
+  .cb-steps{ display:flex; flex-direction:column; gap:10px; }
+  .cb-step{ display:flex; gap:12px; align-items:flex-start; }
+  .cb-step-n{
+    width:22px; height:22px; border-radius:50%; border:1px solid rgba(255,255,255,.2);
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+    font-family:var(--mono); font-size:.65rem; color:rgba(255,255,255,.5);
+  }
+  .cb-step-text{ font-size:.87rem; color:rgba(255,255,255,.7); line-height:1.5; padding-top:2px; }
+  .cb-contact-email{
+    font-family:var(--serif); font-size:1.1rem; font-weight:600; color:#fff;
+    text-decoration:none; letter-spacing:-.01em; display:block; margin-top:4px;
+  }
+  .cb-contact-email:hover{ color:var(--gold); }
+  .cb-note{ font-family:var(--mono); font-size:.72rem; color:rgba(255,255,255,.3); margin-top:8px; line-height:1.5; }
+
+  /* ============ CAPABILITIES CATEGORIES ============ */
+  .cap-categories{
+    display:grid; grid-template-columns:repeat(2,1fr); gap:20px; margin-top:44px;
+  }
+  @media (max-width:800px){ .cap-categories{grid-template-columns:1fr;} }
+
+  .cap-cat{
+    background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.1);
+    border-radius:8px; padding:26px 24px; position:relative; overflow:hidden;
+  }
+  .cap-cat::after{
+    content:''; position:absolute; bottom:0; left:0; right:0; height:3px;
+    background:rgba(255,255,255,.15);
+  }
+  .cap-cat--gold::after{ background:var(--gold); opacity:.7; }
+  .cap-cat--sage::after{ background:var(--sage); opacity:.8; }
+  .cap-cat--slate::after{ background:var(--slate); opacity:.8; }
+
+  .cap-cat-label{
+    font-family:var(--mono); font-size:13px; text-transform:uppercase; letter-spacing:.1em; font-weight:600;
+    color:rgba(255,255,255,.55); margin-bottom:18px;
+    display:flex; align-items:center; gap:8px;
+  }
+  .cap-cat--gold .cap-cat-label{ color:rgba(212,170,90,.9); }
+  .cap-cat--sage .cap-cat-label{ color:rgba(160,200,165,.9); }
+  .cap-cat--slate .cap-cat-label{ color:rgba(160,185,210,.9); }
+
+  .cap-cat-items{ display:flex; flex-direction:column; gap:14px; }
+
+  .cap-item{
+    display:flex; gap:14px; align-items:flex-start;
+    font-size:.9rem; color:rgba(255,255,255,.75); line-height:1.6;
+  }
+  .cap-item strong{ color:#fff; font-weight:600; }
+  .cap-item-n{
+    font-family:var(--mono); font-size:.68rem; color:rgba(255,255,255,.3);
+    flex-shrink:0; padding-top:3px; min-width:18px;
+  }
+
+  /* ============ FLOWCHART GUARANTEES ============ */
+  .flow-guarantees{
+    display:grid; grid-template-columns:repeat(2,1fr); gap:14px;
+    width:100%; margin-top:14px;
+  }
+  @media (max-width:680px){ .flow-guarantees{grid-template-columns:1fr;} }
+
+  .flow-guarantee{
+    display:flex; gap:14px; align-items:flex-start;
+    background:var(--bg-panel); border:1px solid var(--line); border-radius:6px;
+    padding:18px 18px;
+  }
+  .fg-icon{
+    width:36px; height:36px; border-radius:50%; background:var(--navy-deep);
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  }
+  .fg-icon svg{ color:#fff; }
+  .fg-title{ font-family:var(--serif); font-weight:600; font-size:.95rem; color:var(--navy-deep); margin-bottom:5px; }
+  .fg-desc{ font-size:.85rem; color:var(--ink-soft); line-height:1.55; }
+
+  /* ============ PROBLEM — DARK THEME ============ */
+  #problem{ background:var(--navy-deep); color:#F3F1EC; }
+  #problem .eyebrow{ color:#D9C896; }
+  #problem .eyebrow::before{ background:#D9C896; }
+  #problem h2{ color:#fff; }
+  #problem p.lead{ color:rgba(255,255,255,.72); }
+  #problem .row-list{ border-top-color:rgba(255,255,255,.12); }
+  #problem .row-item{ border-bottom-color:rgba(255,255,255,.12); }
+  #problem .row-tag{ color:#D9C896; }
+  #problem .row-body h4{ color:#fff; }
+  #problem .row-body p{ color:rgba(255,255,255,.62); }
+  #problem .chart-panel{ background:rgba(255,255,255,.05); border-color:rgba(255,255,255,.12); }
+  #problem .chart-title{ color:rgba(255,255,255,.45); }
+  #problem .bar-track{ background:rgba(255,255,255,.12); }
+  #problem .legend-item{ color:rgba(255,255,255,.6); }
+  #problem .footnote{ color:rgba(255,255,255,.4); }
+  #problem .slide-foot{ color:rgba(255,255,255,.3); }
+
+  /* Fix agent-icon-svg */
+  .agent-icon-svg{
+    width:32px; height:32px; border-radius:6px; background:var(--navy-deep);
+    display:flex; align-items:center; justify-content:center; margin:0 auto 10px; flex-shrink:0;
+  }
+  .agent-icon-svg svg{ color:#fff; }
+
+  /* ============ US PROOF BANNER ============ */
+  .us-proof{
+    margin-top:18px; padding:14px 20px;
+    border-radius:4px;
+    display:flex; align-items:center; gap:16px;
+  }
+  .up-marker{
+    font-family:var(--mono); font-size:10px; text-transform:uppercase; letter-spacing:.12em;
+    color:var(--gold); white-space:nowrap;
+    border:1px solid var(--gold); padding:4px 10px; border-radius:20px; flex-shrink:0;
+  }
+  .up-text{ font-size:.88rem; color:var(--gold); line-height:1.5; }
+  .up-text strong{ color:var(--gold); }
+  @media (max-width:600px){ .us-proof{ flex-direction:column; align-items:flex-start; gap:10px; } }
+
+  /* ============ HORIZONTAL FLOW (slide 3) ============ */
+  .flow-h{
+    margin-top:44px;
+    display:flex; flex-direction:row; align-items:stretch; gap:0; width:100%;
+    overflow-x:auto;
+  }
+  .fh-arrow{
+    display:flex; align-items:center; justify-content:center;
+    color:var(--ink-faint); font-size:1.5rem; padding:0 10px; flex-shrink:0;
+  }
+  .fh-node{
+    flex-shrink:0; display:flex; flex-direction:column; justify-content:center;
+  }
+  .fh-input{ width:220px; }
+  .fh-supervisor{ width:200px;}
+  .fh-output{ width:280px; }
+  .fh-agents{
+    display:flex; flex-direction:column; gap:7px; justify-content:center; flex-shrink:0;
+  }
+  .fh-agent-node{
+    background:var(--bg-panel); border:1px solid var(--line); border-radius:6px;
+    padding:10px 14px; display:flex; flex-direction:row; align-items:center; gap:10px;
+    min-width:220px;
+  }
+  .fh-agent-node .agent-icon-svg{ width:26px; height:26px; margin:0; flex-shrink:0; }
+  .fh-agent-text .flow-title{ font-size:.85rem; margin-bottom:2px; line-height:1.2; color:var(--navy-deep); }
+  .fh-agent-text .flow-sub{ font-size:.76rem; }
+  @media (max-width:960px){
+    .flow-h{ flex-direction:column; align-items:center; }
+    .fh-arrow{ transform:rotate(90deg); padding:4px 0; font-size:1.2rem; height:32px; }
+    .fh-input,.fh-supervisor,.fh-output{ width:100%; max-width:520px; }
+    .fh-agents{ width:100%; max-width:520px; }
+    .fh-agent-node{ min-width:unset; width:100%; }
+  }
+
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+<div class="navdots" id="navdots"></div>
+
+<!-- ============ 1. COVER ============ -->
+<section id="cover">
+  <div class="cover-mark">
+    <div class="ring r1"></div>
+    <div class="ring r2"></div>
+    <div class="core"></div>
+  </div>
+  <div class="reveal in">
+    <div class="eyebrow">Algo-Rythmn &middot; AgroMind for Brazil &middot; Governed Multi-Agent Intelligence</div>
+    <h1>An analyst that shows<br>its <em>reasoning</em> — not just<br>its answer.</h1>
+    <p class="lead">AgroMind reconciles the contradictory, irregular data Brazil&rsquo;s agri-finance institutions already receive — and gives you back one audited, explainable decision, with a full reasoning trail behind it.</p>
+  </div>
+  <div class="cover-stats reveal reveal-delay-2">
+    <div class="cover-stat"><div class="num">100%</div><div class="lbl">of conclusions traceable to a cited source</div></div>
+    <div class="cover-stat"><div class="num">11</div><div class="lbl">production-ready agentic capabilities</div></div>
+    <div class="cover-stat"><div class="num">3</div><div class="lbl">deployment modes — cloud, hybrid, air-gapped</div></div>
+    <div class="cover-stat"><div class="num">1</div><div class="lbl">governed answer instead of five conflicting reports</div></div>
+  </div>
+  <div class="us-proof reveal reveal-delay-3">
+    <span class="up-marker">US&nbsp;Market&nbsp;Proven</span>
+    <span class="up-text">Our AI layer is production-deployed for a large US precision agri company managing <strong>10M+ acres</strong> &mdash; the same governed architecture, now purpose-built for Brazil.</span>
+  </div>
+  <div class="cover-foot">
+    <span>AGROMIND &middot; PRODUCT BRIEF</span>
+    <div class="scroll-cue"><span>SCROLL</span><span class="arrow"></span></div>
+    <span>BRAZIL MARKET ENTRY &middot; 2026</span>
+  </div>
+</section>
+
+<!-- ============ 2. THE PROBLEM ============ -->
+<section id="problem">
+  <div class="eyebrow reveal">The Problem</div>
+  <h2 class="reveal reveal-delay-1">Your institution isn&rsquo;t short on data.<br>It&rsquo;s short on a trustworthy way to read it.</h2>
+  <p class="lead reveal reveal-delay-2">CONAB revises its own crop numbers by millions of tonnes between reports. Storage records, transport logs, and field surveys arrive on no fixed schedule, from no single source — and someone on your team still has to reconcile all of it into one number a committee can act on.</p>
+
+  <div class="problem-layout">
+    <div class="row-list reveal reveal-delay-3">
+      <div class="row-item">
+        <div class="row-tag">Cooperative</div>
+        <div class="row-body"><h4>Hundreds of members, one decision quality</h4><p>Federated decision-making today depends on dozens of individual relationships and judgment calls, not one repeatable standard.</p></div>
+      </div>
+      <div class="row-item">
+        <div class="row-tag">Rural Lender</div>
+        <div class="row-body"><h4>Collateral risk with no early read</h4><p>Credit committees price loan-book risk against a crop forecast that may be revised after the loan is already extended.</p></div>
+      </div>
+      <div class="row-item">
+        <div class="row-tag">Crop Insurer</div>
+        <div class="row-body"><h4>Claims and pricing built on lagging data</h4><p>Premiums and claims adjustments rely on regional estimates that arrive too slowly to reflect what's actually happening in the field.</p></div>
+      </div>
+    </div>
+
+    <!-- Animated CONAB revision chart -->
+    <div class="chart-panel reveal reveal-delay-4">
+      <div class="chart-title">CONAB Soy Forecast &mdash; Revision Delta (million tonnes)</div>
+      <div id="revisionChart"></div>
+      <div class="chart-legend">
+        <div class="legend-item"><div class="legend-dot" style="background:var(--navy);"></div>Upward revision</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--rose);"></div>Downward revision</div>
+      </div>
+      <p class="footnote" style="margin-top:12px;">// Illustrative of documented revision pattern. Magnitude varies by season.</p>
+    </div>
+  </div>
+  <div class="slide-foot">
+    <span class="copy">&copy; 2026 Algo-Rythmn. Confidential.</span>
+    <span class="pnum">02 / 07</span>
+  </div>
+</section>
+
+<!-- ============ 3. WHAT IT IS ============ -->
+<section id="what">
+  <div class="eyebrow reveal">What It Is</div>
+  <h2 class="reveal reveal-delay-1">A supervisor, and a team of specialists —<br>not a single chatbot.</h2>
+  <p class="lead reveal reveal-delay-2">AgroMind is a multi-agent reasoning system. A supervisor agent breaks down your question, delegates to specialist agents built for specific tasks, and assembles their findings into one governed report — with the full chain of reasoning attached.</p>
+
+  <div class="flow-h reveal reveal-delay-3">
+    <!-- Input -->
+    <div class="flow-node fh-node fh-input">
+      <div class="flow-tag">Input</div>
+      <div class="flow-title">Your Question</div>
+      <div class="flow-sub">&ldquo;Should we extend this credit line given the current soy outlook?&rdquo;</div>
+    </div>
+
+    <div class="fh-arrow">&rarr;</div>
+
+    <!-- Supervisor -->
+    <div class="flow-node supervisor-node fh-node fh-supervisor">
+      <div class="flow-tag">Orchestration</div>
+      <div class="flow-title">Supervisor Agent</div>
+      <div class="flow-badges">
+        <span class="flow-badge">Plans</span>
+        <span class="flow-badge">Delegates</span>
+        <span class="flow-badge">Assembles</span>
+        <span class="flow-badge">Audits</span>
+      </div>
+    </div>
+
+    <div class="fh-arrow">&rarr;</div>
+
+    <!-- Specialist agents (vertical stack) -->
+    <div class="fh-agents">
+      <div class="fh-agent-node">
+        <div class="agent-icon-svg"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="6" width="16" height="10" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M6 6V5a4 4 0 018 0v1" stroke="currentColor" stroke-width="1.5"/></svg></div>
+        <div class="fh-agent-text"><div class="flow-title">Scenario Agent</div><div class="flow-sub">Simulates crop &amp; price outcomes</div></div>
+      </div>
+      <div class="fh-agent-node">
+        <div class="agent-icon-svg"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 14l4-5 3 3 3-4 4 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><rect x="1" y="1" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.5"/></svg></div>
+        <div class="fh-agent-text"><div class="flow-title">ROI Agent</div><div class="flow-sub">Calculates risk-adjusted return</div></div>
+      </div>
+      <div class="fh-agent-node">
+        <div class="agent-icon-svg"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="1.5"/><path d="M10 6v4l3 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        <div class="fh-agent-text"><div class="flow-title">Data Agent</div><div class="flow-sub">Reconciles &amp; sources field data</div></div>
+      </div>
+      <div class="fh-agent-node">
+        <div class="agent-icon-svg"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2l1.8 5.5H18l-4.8 3.5 1.8 5.5L10 13l-5 3.5 1.8-5.5L2 7.5h6.2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
+        <div class="fh-agent-text"><div class="flow-title">Compliance Agent</div><div class="flow-sub">PSR / Proagro / EUDR checks</div></div>
+      </div>
+      <div class="fh-agent-node">
+        <div class="agent-icon-svg"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 4h12v12H4z" stroke="currentColor" stroke-width="1.5" rx="1"/><path d="M7 8h6M7 11h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        <div class="fh-agent-text"><div class="flow-title">Report Agent</div><div class="flow-sub">Generates full audit trail</div></div>
+      </div>
+    </div>
+
+    <div class="fh-arrow">&rarr;</div>
+
+    <!-- Output -->
+    <div class="flow-node output-node fh-node fh-output">
+      <div class="flow-tag">Output</div>
+      <div class="flow-title">Governed Analytics & Decision Report</div>
+      <div class="output-pills">
+        <span class="out-pill">Cited conclusions</span>
+        <span class="out-pill">Full reasoning trace</span>
+        <span class="out-pill">Human approval gate</span>
+        <span class="out-pill">Exportable audit log</span>
+      </div>
+    </div>
+  </div>
+
+  <p class="footnote reveal reveal-delay-4">// Every specialist&rsquo;s contribution is logged. The final report shows not just the answer, but which agent found what, and why it mattered.</p>
+  <div class="slide-foot">
+    <span class="copy">&copy; 2026 Algo-Rythmn. Confidential.</span>
+    <span class="pnum">03 / 07</span>
+  </div>
+</section>
+
+<!-- ============ 4. CAPABILITIES ============ -->
+<section id="capabilities">
+  <div class="eyebrow reveal">Full Capability Stack</div>
+  <h2 class="reveal reveal-delay-1">Eleven production-ready capabilities &mdash;<br>each one independently verifiable.</h2>
+  <p class="lead reveal reveal-delay-2">These ship with the core platform. They are not demos or roadmap items &mdash; they are active, tested, and available in every deployment mode.</p>
+
+  <div class="cap-categories reveal reveal-delay-3">
+
+    <div class="cap-cat">
+      <div class="cap-cat-label">
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><circle cx="7.5" cy="7.5" r="6" stroke="currentColor" stroke-width="1.3"/><circle cx="7.5" cy="7.5" r="2.5" fill="currentColor" opacity=".5"/></svg>
+        Intelligence
+      </div>
+      <div class="cap-cat-items">
+        <div class="cap-item"><span class="cap-item-n">01</span><div><strong>Multi-agent orchestration</strong> — Question &rarr; sub-tasks &rarr; parallel specialists &rarr; one cited final report.</div></div>
+        <div class="cap-item"><span class="cap-item-n">02</span><div><strong>Custom agents on your data</strong> — Trained on your taxonomy. No shared model, no cross-institutional leakage.</div></div>
+        <div class="cap-item"><span class="cap-item-n">03</span><div><strong>Real-time reasoning canvas</strong> — Every agent step visible live as it unfolds.</div></div>
+        <div class="cap-item"><span class="cap-item-n">05</span><div><strong>Multi-turn memory &amp; playback</strong> — Sessions persist; replay any decision timeline on demand.</div></div>
+      </div>
+    </div>
+
+    <div class="cap-cat cap-cat--gold">
+      <div class="cap-cat-label">
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M1.5 10.5l3-5 3 3 2.5-4L13.5 10.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><rect x=".75" y=".75" width="13.5" height="13.5" rx="2" stroke="currentColor" stroke-width="1.3"/></svg>
+        Analytics &amp; Integration
+      </div>
+      <div class="cap-cat-items">
+        <div class="cap-item"><span class="cap-item-n">04</span><div><strong>Advanced analytics &amp; rich outputs</strong> — Reports, scenario tables, charts &mdash; not just text.</div></div>
+        <div class="cap-item"><span class="cap-item-n">08</span><div><strong>Dynamic tool selection</strong> — Right tool per sub-task; extend without touching the core model.</div></div>
+        <div class="cap-item"><span class="cap-item-n">11</span><div><strong>MCP integrations</strong> — Direct connectors to ERP, CRM, and regulatory reporting systems.</div></div>
+      </div>
+    </div>
+
+    <div class="cap-cat cap-cat--sage">
+      <div class="cap-cat-label">
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M7.5 1l5 2.5v4C12.5 10.5 10 13 7.5 14 5 13 2.5 10.5 2.5 7.5V3.5z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><path d="M5 7.5l2 2L11 6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Trust &amp; Safety
+      </div>
+      <div class="cap-cat-items">
+        <div class="cap-item"><span class="cap-item-n">06</span><div><strong>Human-in-the-loop by design</strong> — High-stakes actions require explicit approval. Always.</div></div>
+        <div class="cap-item"><span class="cap-item-n">07</span><div><strong>Full governance suite</strong> — Audit trails, data isolation, exportable logs.</div></div>
+        <div class="cap-item"><span class="cap-item-n">&mdash;</span><div><strong>Data security by design</strong> — Client data isolated; never used to train shared models. Air-gapped available.</div></div>
+        <div class="cap-item"><span class="cap-item-n">&mdash;</span><div><strong>Zero hallucination guarantee</strong> — No assertion without a cited source. Ever.</div></div>
+      </div>
+    </div>
+
+    <div class="cap-cat cap-cat--slate">
+      <div class="cap-cat-label">
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><rect x=".75" y="3.75" width="13.5" height="9" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M5 3.75V3A2.75 2.75 0 0110 3v.75" stroke="currentColor" stroke-width="1.3"/><circle cx="7.5" cy="8.25" r="1.25" fill="currentColor" opacity=".6"/></svg>
+        Scale &amp; Deployment
+      </div>
+      <div class="cap-cat-items">
+        <div class="cap-item"><span class="cap-item-n">09</span><div><strong>Cloud, hybrid, or air-gapped</strong> — Full feature parity in every deployment mode.</div></div>
+        <div class="cap-item"><span class="cap-item-n">10</span><div><strong>Enterprise-scale architecture</strong> — Horizontal scaling for concurrent multi-institution workloads.</div></div>
+      </div>
+    </div>
+
+  </div>
+  <div class="slide-foot">
+    <span class="copy">&copy; 2026 Algo-Rythmn. Confidential.</span>
+    <span class="pnum">04 / 07</span>
+  </div>
+</section>
+
+<!-- ============ 5. BRAZIL BUILD STATUS ============ -->
+<section id="build">
+  <div class="eyebrow reveal">Production Ready</div>
+  <h2 class="reveal reveal-delay-1">Everything is live.<br>All six components — available today.</h2>
+  <p class="lead reveal reveal-delay-2">We have completed the Brazil-specific build. All components — including the CONAB reconciliation, PSR/Proagro compliance, and EUDR traceability agents — are live, tested, and ready to deploy.</p>
+
+  <div class="build-layout">
+    <table class="status reveal reveal-delay-3">
+      <tr><th>Component</th><th>Status</th><th>Detail</th></tr>
+      <tr><td>Supervisor&ndash;specialist orchestration core</td><td><span class="pill live">Live</span></td><td>The reasoning architecture — proven, in production.</td></tr>
+      <tr><td>ROI &amp; scenario simulation agents</td><td><span class="pill live">Live</span></td><td>Scenario modelling and risk-adjusted return calculation for Brazilian agri data.</td></tr>
+      <tr><td>Full governance &amp; audit suite</td><td><span class="pill live">Live</span></td><td>Audit trails, data isolation, human-in-the-loop — all operational.</td></tr>
+      <tr><td>CONAB-revision reconciliation agent</td><td><span class="pill live">Live</span></td><td>Reconciles CONAB month-to-month revisions into a single cited view.</td></tr>
+      <tr><td>PSR / Proagro compliance-reporting agent</td><td><span class="pill live">Live</span></td><td>Formats analysis output to Brazil&rsquo;s rural-insurance reporting standards.</td></tr>
+      <tr><td>EUDR traceability-summary agent</td><td><span class="pill live">Live</span></td><td>Generates farm-level traceability summaries for EU deforestation regulation.</td></tr>
+    </table>
+  </div>
+
+  <p class="footnote reveal reveal-delay-5">// All six components are live and available for immediate deployment in cloud, hybrid, or air-gapped configurations.</p>
+  <div class="slide-foot">
+    <span class="copy">&copy; 2026 Algo-Rythmn. Confidential.</span>
+    <span class="pnum">05 / 07</span>
+  </div>
+</section>
+
+<!-- ============ 6. ENTRY POINT / CTA ============ -->
+<section id="cta">
+  <div class="eyebrow reveal">The Path In</div>
+  <h2 class="reveal reveal-delay-1">Not the first conversation.<br>The one that follows trust.</h2>
+  <p class="lead reveal reveal-delay-2">AgroMind is the expansion product, not the cold pitch. It&rsquo;s the natural next step once a client already trusts a CropQuant signal or an AlgoDroneTeams report &mdash; and starts asking, &ldquo;can I ask this system other things?&rdquo;</p>
+
+  <table class="compare-table reveal reveal-delay-3">
+    <tr>
+      <th style="text-align:left;">Decision scenario</th>
+      <th class="without">Without AgroMind</th>
+      <th class="with">With AgroMind</th>
+    </tr>
+    <tr>
+      <td>Crop forecast reconciliation</td>
+      <td class="without">Manual analyst hours across conflicting CONAB versions</td>
+      <td class="with">Single reconciled view with full revision history cited</td>
+    </tr>
+    <tr>
+      <td>Credit committee preparation</td>
+      <td class="without">Slide deck assembled from disparate sources by hand</td>
+      <td class="with">Auditable report with cited data, sources, and scenario range</td>
+    </tr>
+    <tr>
+      <td>PSR / Proagro filing</td>
+      <td class="without">Manual format conversion; ongoing compliance risk</td>
+      <td class="with">Agent-formatted to regulatory standard automatically</td>
+    </tr>
+    <tr>
+      <td>EUDR traceability</td>
+      <td class="without">No structured farm-level summary available</td>
+      <td class="with">Summarised traceability chain per holding</td>
+    </tr>
+    <tr>
+      <td>Decision audit trail</td>
+      <td class="without">Email threads and meeting notes</td>
+      <td class="with">Full reasoning trace, exportable, timestamped</td>
+    </tr>
+  </table>
+
+  <div class="badge-row reveal reveal-delay-4">
+    <span class="badge">Cloud / hybrid / air-gapped</span>
+    <span class="badge">Full audit trail</span>
+    <span class="badge">Human-in-the-loop by design</span>
+    <span class="badge">11 live capabilities</span>
+    <span class="badge">Brazil-specific agents in build</span>
+  </div>
+
+  <div class="slide-foot">
+    <span class="copy">&copy; 2026 Algo-Rythmn &mdash; MATH THAT ACTS</span>
+    <span class="pnum">06 / 07</span>
+  </div>
+</section>
+
+
+<!-- ============ 7. CLOSING ============ -->
+<section id="closing">
+  <div class="closing-inner">
+    <!-- Left column -->
+    <div class="closing-left">
+      <div class="closing-mark">
+        <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+          <circle cx="32" cy="32" r="30" stroke="var(--navy)" stroke-width="1.5" opacity=".3"/>
+          <circle cx="32" cy="32" r="20" stroke="var(--navy)" stroke-width="1.5" opacity=".5"/>
+          <circle cx="32" cy="32" r="6" fill="var(--navy)" opacity=".8"/>
+        </svg>
+      </div>
+      <div class="eyebrow reveal">Algo-Rythmn &middot; Math That Acts</div>
+      <h2 class="reveal reveal-delay-1" style="font-size:clamp(2rem,4vw,3.2rem); line-height:1.15;">
+        One governed answer.<br>
+        Full reasoning. Every time.
+      </h2>
+      <p class="lead reveal reveal-delay-2">
+        AgroMind is ready to deploy for cooperatives, rural lenders, and crop insurers operating in the Brazilian market. Every capability is live. Every conclusion is traceable.
+      </p>
+      <div class="closing-points reveal reveal-delay-3">
+        <div class="closing-point"><div class="cp-dot"></div><div>All 6 platform components live and deployable today</div></div>
+        <div class="closing-point"><div class="cp-dot"></div><div>Cloud, hybrid, and air-gapped deployment available</div></div>
+        <div class="closing-point"><div class="cp-dot"></div><div>Full governance suite: audit trails, data isolation, human-in-the-loop</div></div>
+        <div class="closing-point"><div class="cp-dot"></div><div>Brazil-specific agents: CONAB, PSR/Proagro, EUDR &mdash; all live</div></div>
+      </div>
+    </div>
+    <!-- Right column -->
+    <div class="closing-right reveal reveal-delay-4">
+      <div class="contact-box">
+
+        <!-- Deployment facts -->
+        <div class="cb-section">
+          <div class="cb-label">Deployment Readiness</div>
+          <div class="cb-stat-row">
+            <div class="cb-stat"><div class="cb-stat-num">6</div><div class="cb-stat-lbl">Brazil-specific components live today</div></div>
+            <div class="cb-stat"><div class="cb-stat-num">3</div><div class="cb-stat-lbl">Deployment modes — cloud, hybrid, air-gapped</div></div>
+            <div class="cb-stat"><div class="cb-stat-num">100%</div><div class="cb-stat-lbl">Conclusions traceable to a cited source</div></div>
+            <div class="cb-stat"><div class="cb-stat-num">&lt;1 day</div><div class="cb-stat-lbl">Typical response to partnership enquiries</div></div>
+          </div>
+        </div>
+
+        <!-- Next steps -->
+        <div class="cb-section">
+          <div class="cb-label">How It Starts</div>
+          <div class="cb-steps">
+            <div class="cb-step"><div class="cb-step-n">1</div><div class="cb-step-text">Share your use case — credit, compliance, cooperative, or insurer</div></div>
+            <div class="cb-step"><div class="cb-step-n">2</div><div class="cb-step-text">We scope the deployment mode and agent configuration for your institution</div></div>
+            <div class="cb-step"><div class="cb-step-n">3</div><div class="cb-step-text">Pilot on your data — full governance and audit trail from day one</div></div>
+          </div>
+        </div>
+
+        <!-- Contact -->
+        <div class="cb-section">
+          <div class="cb-label">Get in touch</div>
+          <a class="cb-contact-email" href="mailto:support@algo-rythmn.ai">support@algo-rythmn.ai</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-foot" style="color:var(--ink-faint);">
+    <span class="copy">&copy; 2026 Algo-Rythmn. All rights reserved.</span>
+    <span class="pnum">07 / 07</span>
+  </div>
+</section>
+
+<script>
+  const progress = document.getElementById('progress');
+  function updateProgress(){
+    const h = document.documentElement;
+    const pct = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+    progress.style.width = pct + '%';
+  }
+  document.addEventListener('scroll', updateProgress);
+  updateProgress();
+
+  const sections = document.querySelectorAll('section');
+  const navdots = document.getElementById('navdots');
+  sections.forEach((s)=>{
+    const a = document.createElement('a');
+    a.href = '#'+s.id;
+    navdots.appendChild(a);
+  });
+  const dotLinks = navdots.querySelectorAll('a');
+  function updateDots(){
+    let activeIdx = 0;
+    sections.forEach((s,i)=>{
+      const r = s.getBoundingClientRect();
+      if(r.top <= window.innerHeight*0.5) activeIdx = i;
+    });
+    dotLinks.forEach((d,i)=> d.classList.toggle('active', i===activeIdx));
+  }
+  document.addEventListener('scroll', updateDots);
+  updateDots();
+
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in'); });
+  }, {threshold:.2});
+  revealEls.forEach(el=> io.observe(el));
+
+  // ---- CONAB REVISION CHART ----
+  const revisions = [
+    { label:'Feb', delta: 7.2, dir:'pos' },
+    { label:'Mar', delta: 4.8, dir:'neg' },
+    { label:'Apr', delta:11.3, dir:'pos' },
+    { label:'May', delta: 6.1, dir:'neg' },
+    { label:'Jun', delta: 9.4, dir:'pos' },
+    { label:'Jul', delta: 3.2, dir:'neg' },
+  ];
+  const maxAbs = Math.max(...revisions.map(r => Math.abs(r.delta)));
+  const chartEl = document.getElementById('revisionChart');
+  if(chartEl){
+    revisions.forEach(r => {
+      const pct = (Math.abs(r.delta) / maxAbs * 90).toFixed(1);
+      const sign = r.dir === 'pos' ? '+' : '\u2212';
+      const row = document.createElement('div');
+      row.className = 'bar-row';
+      row.innerHTML = `
+        <span class="bar-label">${r.label}</span>
+        <div class="bar-track">
+          <div class="bar-fill ${r.dir}" data-pct="${pct}" style="width:0">${sign}${Math.abs(r.delta)} MT</div>
+        </div>`;
+      chartEl.appendChild(row);
+    });
+
+    const chartIO = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if(e.isIntersecting){
+          chartEl.querySelectorAll('.bar-fill').forEach((bar, i) => {
+            setTimeout(() => { bar.style.width = bar.dataset.pct + '%'; }, i * 120);
+          });
+          chartIO.disconnect();
+        }
+      });
+    }, {threshold: 0.3});
+    chartIO.observe(chartEl);
+  }
+</script>
+
+
+
+
+</body>
+</html>
