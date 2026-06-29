@@ -204,6 +204,53 @@
   .ok strong{color:var(--signal)}.warn strong{color:var(--grain)}.na strong{color:var(--muted)}.bad strong{color:#dd544d}
   .ok strong::before{content:"✓  "}.warn strong::before{content:"⚠  "}.na strong::before{content:"—  "}.bad strong::before{content:"✗  "}
 
+  /* ---- insurer payout structure ---- */
+  .ins-roi-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:20px 0 0}
+  .ins-roi{background:rgba(255,255,255,.018);border:1px solid var(--line-soft);border-radius:12px;padding:14px 16px}
+  .ins-roi .roi-label{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:7px;display:block}
+  .ins-roi h4{font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:15px;margin-bottom:5px;letter-spacing:-.01em}
+  .ins-roi p{color:var(--muted);font-size:13px;line-height:1.5}
+  .ins-list{display:flex;flex-direction:column;gap:0}
+  .ins-item{padding:16px 0 16px 20px;border-left:2px solid var(--line-soft);border-bottom:1px solid var(--line-soft);position:relative}
+  .ins-item:last-child{border-bottom:none}
+  .ins-item .ins-num{position:absolute;left:-13px;top:19px;width:24px;height:24px;border-radius:50%;background:var(--bg);border:1px solid var(--line-soft);display:grid;place-items:center;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted)}
+  .ins-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:9px}
+  .ins-head h3{font-size:16px;margin:0;letter-spacing:-.01em}
+  .ins-badge{flex:0 0 auto;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;border-radius:4px;padding:3px 8px;white-space:nowrap}
+  .ins-badge.static{background:rgba(243,198,35,.1);color:var(--canola)}
+  .ins-badge.lag{background:rgba(216,178,92,.1);color:var(--grain)}
+  .ins-badge.snap{background:rgba(221,84,77,.08);color:#dd544d}
+  .ins-badge.stale{background:rgba(216,178,92,.1);color:var(--grain)}
+  .flaw-box,.impr-box{border-radius:7px;padding:9px 13px;margin-bottom:7px;display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start}
+  .flaw-box{background:rgba(243,198,35,.05);border:1px solid rgba(243,198,35,.14)}
+  .impr-box{background:rgba(111,207,133,.05);border:1px solid rgba(111,207,133,.16)}
+  .fb-label{font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.18em;text-transform:uppercase;padding-top:1px;white-space:nowrap}
+  .flaw-box .fb-label{color:var(--canola)}.impr-box .fb-label{color:var(--signal)}
+  .flaw-box p,.impr-box p{color:var(--muted);font-size:13px;line-height:1.5;margin:0}
+  /* ---- mispricing / actuarial edge ---- */
+  .msp-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:20px 0 0}
+  .msp-card{background:rgba(255,255,255,.018);border:1px solid var(--line-soft);border-radius:12px;padding:14px 16px}
+  .msp-card .mc-label{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:7px;display:block}
+  .msp-card h4{font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:15px;margin-bottom:5px;letter-spacing:-.01em}
+  .msp-card p{color:var(--muted);font-size:13px;line-height:1.5}
+  .msp-layers{display:flex;flex-direction:column;gap:0}
+  .msp-layer{display:grid;grid-template-columns:36px 1fr;gap:14px;padding:13px 0;border-bottom:1px solid var(--line-soft);align-items:start}
+  .msp-layer:last-child{border-bottom:none}
+  .msp-lnum{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.06em;color:var(--canola);background:rgba(243,198,35,.08);border-radius:6px;width:32px;height:32px;display:grid;place-items:center;border:1px solid rgba(243,198,35,.16);flex-shrink:0}
+  .msp-layer h4{font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:18px;margin-bottom:4px;letter-spacing:-.01em}
+  .msp-layer p{color:var(--muted);font-size:16px;line-height:1.5}
+  .msp-formula{background:rgba(8,18,9,.7);border:1px solid rgba(111,207,133,.2);border-radius:9px;padding:13px 17px;margin:10px 0 0;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--signal);line-height:1.7}
+  .msp-formula .msp-sub{color:var(--faint);font-size:10.5px;display:block;margin-top:6px;line-height:1.6}
+  .strategy-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px}
+  .strategy{border-radius:10px;padding:14px 16px}
+  .strategy.s-a{background:rgba(243,198,35,.05);border:1px solid rgba(243,198,35,.16)}
+  .strategy.s-b{background:rgba(111,207,133,.05);border:1px solid rgba(111,207,133,.16)}
+  .strategy .s-label{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.2em;text-transform:uppercase;margin-bottom:7px;display:block}
+  .strategy.s-a .s-label{color:var(--canola)}
+  .strategy.s-b .s-label{color:var(--signal)}
+  .strategy h4{font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:18px;margin-bottom:5px;letter-spacing:-.01em}
+  .strategy p{color:var(--muted);font-size:16px;line-height:1.5}
+
   @media (max-width:880px){
     body{font-size:16px}
     .slide{padding:90px 24px 76px}
@@ -214,6 +261,8 @@
     .cover-art{display:none}
     .nav-dots{display:none}.hint{display:none}
     .aim{grid-template-columns:48px 1fr;gap:16px}
+    .ins-roi-row,.msp-cards{grid-template-columns:1fr}
+    .strategy-row{grid-template-columns:1fr}
   }
 </style>
 </head>
@@ -346,7 +395,7 @@
             <strong style="font-size:16px">Yield Records</strong>
           </div>
           <div id="n-agentic-ai" style="border:2px solid var(--canola);border-radius:12px;padding:14px 13px;background:rgba(243,198,35,.12);text-align:center;margin-top:4px">
-            <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--canola);display:block;margin-bottom:5px">ENGINE</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--canola);display:block;margin-bottom:5px">ENGINE - AlgoMind</span>
             <strong style="font-size:20px;font-family:'Bricolage Grotesque',sans-serif;color:var(--fg)">Agentic AI</strong>
           </div>
         </div>
@@ -355,7 +404,7 @@
         <div style="display:flex;flex-direction:column;gap:16px">
           <div style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--canola);text-align:center;padding-bottom:8px;border-bottom:1px solid rgba(243,198,35,.3);margin-bottom:4px">Intelligence</div>
           <div id="n-early-yield" style="border:2px solid var(--canola);border-radius:14px;padding:18px 14px;background:rgba(243,198,35,.13);text-align:center">
-            <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--canola);display:block;margin-bottom:6px">PRODUCT 01</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--canola);display:block;margin-bottom:6px">PRODUCT 01 - HarvestAlpha</span>
             <strong style="font-size:20px;font-family:'Bricolage Grotesque',sans-serif;color:var(--canola);display:block;line-height:1.15">Early Yield<br>Signal</strong>
             <p style="color:var(--muted);font-size:14px;margin-top:9px;line-height:1.4">Harvest estimate weeks ahead of the official print</p>
           </div>
@@ -390,12 +439,12 @@
         <div style="display:flex;flex-direction:column;gap:16px">
           <div style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);text-align:center;padding-bottom:8px;border-bottom:1px solid var(--line-soft);margin-bottom:4px">Products</div>
           <div id="n-product02" style="border:1px solid rgba(243,198,35,.5);border-radius:12px;padding:16px 14px;background:rgba(243,198,35,.08)">
-            <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--canola);display:block;margin-bottom:6px">PRODUCT 02</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--canola);display:block;margin-bottom:6px">PRODUCT 02 - CropQuant</span>
             <strong style="font-size:18px;font-family:'Bricolage Grotesque',sans-serif;display:block;line-height:1.2">Forward-Curve Intelligence</strong>
             <p style="color:var(--muted);font-size:14px;margin-top:8px;line-height:1.4">Funds · CTAs · Trading houses</p>
           </div>
           <div id="n-product03" style="border:1px solid rgba(111,207,133,.5);border-radius:12px;padding:16px 14px;background:rgba(111,207,133,.08)">
-            <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--signal);display:block;margin-bottom:6px">PRODUCT 03</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--signal);display:block;margin-bottom:6px">PRODUCT 03 - AgRisk</span>
             <strong style="font-size:18px;font-family:'Bricolage Grotesque',sans-serif;display:block;line-height:1.2">Full-Season Revenue Suite</strong>
             <p style="color:var(--muted);font-size:14px;margin-top:8px;line-height:1.4">Lenders · Insurers · Growers</p>
           </div>
@@ -495,21 +544,84 @@
     </div>
   </section>
 
-  <!-- 06 PRODUCT 3 · IN-SEASON -->
-  <section class="slide" data-label="Product 3 · In-Season">
+  <!-- 06 PRODUCT 3 · IN-SEASON — INSURER PAYOUT STRUCTURE -->
+  <section class="slide" data-label="Insurer — Payout Structure">
+    <div class="field-grid"></div>
     <div class="wrap">
-      <div class="split rev">
-        <div class="grid-2 rv d2" style="gap:16px">
-          <div class="card"><span class="tag" style="color:var(--signal)">Price risk</span><h3>Futures & options</h3><p>Set a floor under the price while keeping the upside open.</p></div>
-          <div class="card"><span class="tag" style="color:var(--signal)">Yield risk</span><h3>Revenue insurance</h3><p>Make the grower whole when the field comes up short.</p></div>
-          <div class="card"><span class="tag" style="color:var(--signal)">The model</span><h3>Research-grade</h3><p>Sharper methodology, algorithms, and data than off-the-shelf cover.</p></div>
-          <div class="card signal-edge"><span class="tag" style="color:var(--signal)">The proof</span><h3 class="grn">Backtested, not assumed</h3><p>We show the dollars protected — the part most products never quantify.</p></div>
+      <div class="kicker rv"><span class="bar"></span>Product 03 · In-Season — Insurer Value</div>
+      <h2 class="rv">Upgrade <span class="grn">four payout structures</span><br>with dynamic monitoring</h2>
+      <p class="lead rv" style="margin:16px 0 32px">Crop insurance payouts are locked to static, lagging, or self-reported data. We replace each static input with a live, auditable field-level read — tightening loss ratios for insurers and improving coverage quality for growers.</p>
+      <div class="grid-2 rv d2" style="gap:16px">
+        <div class="card signal-edge">
+          <span class="tag" style="color:var(--signal)">Yield shortfall trigger</span>
+          <h3>Dynamic yield benchmark</h3>
+          <p>We: deliver a field-level yield estimate mid-season via NDVI + weather signal.<br>Outcome: reserve requirements set months early; coverage tracks actual field potential, not a stale rolling average.</p>
+        </div>
+        <div class="card signal-edge">
+          <span class="tag" style="color:var(--signal)">Damage claim — hail / drought</span>
+          <h3>SAR-timestamped damage record</h3>
+          <p>We: map canopy damage within 24–48 hours of any weather event via satellite.<br>Outcome: objective, time-stamped baseline for every claim — faster settlement, lower loss-adjustment cost.</p>
+        </div>
+        <div class="card signal-edge">
+          <span class="tag" style="color:var(--signal)">Revenue guarantee — post-season</span>
+          <h3>In-season revenue forecast</h3>
+          <p>We: combine yield signal with forward-curve price to produce a revenue estimate by mid-season.<br>Outcome: insurers pre-reserve accurately months before final filings; lenders manage exposure in real time.</p>
+        </div>
+        <div class="card accent-edge">
+          <span class="tag">Price loss coverage</span>
+          <h3>Live forward-curve trigger</h3>
+          <p>We: publish a real-time price distribution at each delivery month throughout the season.<br>Outcome: dynamic trigger re-setting tied to the live forward curve — both parties know exposure before physical sales.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06b PRODUCT 3 · IN-SEASON — ACTUARIAL EDGE / MISPRICING -->
+  <section class="slide" data-label="Insurer — Mispricing">
+    <div class="field-grid"></div>
+    <div class="wrap">
+      <div class="split">
+        <div>
+          <div class="kicker rv"><span class="bar"></span>Product 03 · In-Season — Actuarial Edge</div>
+          <h2 class="rv">Premium mispricing<br>hiding inside every<br><span class="accent">risk-rated zone</span></h2>
+          <p class="lead rv" style="margin-top:16px;font-size:17px;max-width:40ch">Every field in a zone pays the same premium. Actual field-level risk varies enormously within that zone. We score each field, surface the gap, and give two types of clients a way to act on it.</p>
+          <div class="msp-formula rv d3" style="margin-top:24px">Mispricing_i = r_z × Liability_i  −  FairPremium_i<span class="msp-sub">Mispricing_i &gt; 0  →  field overpays (low-risk; profitable to attract)<br>Mispricing_i &lt; 0  →  field underpays (high-risk; adverse selection magnet)</span></div>
         </div>
         <div>
-          <div class="kicker rv"><span class="bar"></span>Product 03 · Full-season suite — In-season</div>
-          <h2 class="rv" style="font-size:clamp(38px,4.6vw,54px)">Cover the whole<br>risk, not <span class="grn">half</span> of it.</h2>
-          <p class="lead rv" style="margin-top:19px;font-size:18px">In season, the suite defends income against <span class="grn">price and yield</span> in a single position — the forward-curve forecast from Product 02 now sets the <strong>optimal hedge</strong> for each grower.</p>
-          <p class="footnote rv d3" style="color:var(--signal);opacity:.85">Product 03 · Full-season suite · Phase 1</p>
+          <div class="msp-layers rv d2">
+            <div class="msp-layer">
+              <div class="msp-lnum">L1</div>
+              <div>
+                <h4>Score every field</h4>
+                <p>Stack soil index, topographic wetness, historical NDVI deviation, and our in-season signal into a field-level coefficient of variation (CV_i) — the actuarially correct premium input.</p>
+              </div>
+            </div>
+            <div class="msp-layer">
+              <div class="msp-lnum">L2</div>
+              <div>
+                <h4>Build the adverse selection map</h4>
+                <p>Compare each field's CV_i to the zone average CV_z. The resulting mispricing map shows exactly which fields are over- or under-charged relative to their true risk.</p>
+              </div>
+            </div>
+            <div class="msp-layer">
+              <div class="msp-lnum">L3</div>
+              <div>
+                <h4>Deliver it two ways</h4>
+                <div class="strategy-row" style="margin-top:10px">
+                  <div class="strategy s-a">
+                    <span class="s-label">Insurer partner</span>
+                    <h4>White-label risk scoring</h4>
+                    <p>Re-rate within the zone. Attract low-risk farmers; shed adverse selection. No regulatory rate change required.</p>
+                  </div>
+                  <div class="strategy s-b">
+                    <span class="s-label">Lender / trading client</span>
+                    <h4>Information arbitrage</h4>
+                    <p>Identify farmers who overpay for zonal cover and replace it with a bespoke hedge at the correct field-level risk.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -733,6 +845,11 @@
     if(st&&p02)mkArrow(st.mR.x,st.mR.y,p02.mL.x,p02.mL.y,G);
     if(lg&&p02)mkArrow(lg.mR.x,lg.mR.y,p02.mL.x,p02.mL.y,G);
     if(sm&&p02)mkArrow(sm.mR.x,sm.mR.y,p02.mL.x,p02.mL.y,G);
+    // 4b. Each physical chain node → Product 03
+    if(up&&p03)mkArrow(up.mR.x,up.mR.y,p03.mL.x,p03.mL.y,G);
+    if(st&&p03)mkArrow(st.mR.x,st.mR.y,p03.mL.x,p03.mL.y,G);
+    if(lg&&p03)mkArrow(lg.mR.x,lg.mR.y,p03.mL.x,p03.mL.y,G);
+    if(sm&&p03)mkArrow(sm.mR.x,sm.mR.y,p03.mL.x,p03.mL.y,G);
     // 5. Product 02 → Product 03
     if(p02&&p03)mkArrow(p02.mB.x,p02.mB.y,p03.mT.x,p03.mT.y,Y);
     // 6. Product 02 → Funds & CTAs, Trading Houses
