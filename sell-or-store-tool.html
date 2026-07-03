@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Post-Season Decision — Linkage Tool</title>
+<style>
+  :root{
+    --bg:#f4f5f7; --card:#ffffff; --border:#e6e8eb; --ink:#0f172a; --muted:#64748b;
+    --accent:#2563eb; --sell:#e08a2b; --hedge:#2f6fb0; --naked:#cf4b3e;
+    --flip:#334155; --today:#16a34a; --shadow:0 1px 2px rgba(15,23,42,.04),0 8px 24px rgba(15,23,42,.06);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+       font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans SC","Microsoft YaHei",sans-serif;
+       font-feature-settings:"tnum" 1;-webkit-font-smoothing:antialiased;line-height:1.5}
+  .wrap{max-width:1140px;margin:0 auto;padding:28px 22px 48px}
+  header{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:20px}
+  .brand{display:flex;gap:12px;align-items:center}
+  .mark{width:38px;height:38px;flex:0 0 38px}
+  h1{font-size:20px;margin:0;letter-spacing:-.01em}
+  .sub{color:var(--muted);font-size:13.5px;margin-top:3px;max-width:640px}
+  .seg{display:inline-flex;border:1px solid var(--border);border-radius:9px;overflow:hidden;background:#fff}
+  .seg button{border:0;background:#fff;color:var(--muted);padding:7px 13px;font-size:13px;cursor:pointer}
+  .seg button.on{background:var(--ink);color:#fff}
+  .grid{display:grid;grid-template-columns:340px 1fr;gap:18px}
+  @media(max-width:900px){.grid{grid-template-columns:1fr}}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow);padding:20px}
+  .card h2{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:0 0 16px;font-weight:600}
+  .ctrl{margin-bottom:20px}
+  .ctrl:last-child{margin-bottom:0}
+  .lab{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px}
+  .lab .name{font-size:13.5px;font-weight:600}
+  .lab .val{font-size:14px;font-variant-numeric:tabular-nums;color:var(--ink)}
+  .lab .hint{font-size:11.5px;color:var(--muted);font-weight:400}
+  input[type=range]{width:100%;accent-color:var(--accent);height:22px}
+  .toggle{display:flex;gap:6px}
+  .toggle button{flex:1;border:1px solid var(--border);background:#fff;color:var(--ink);padding:8px 6px;
+       border-radius:9px;font-size:12.5px;cursor:pointer;transition:.12s}
+  .toggle button.on{background:var(--accent);border-color:var(--accent);color:#fff}
+  .demo{display:flex;gap:6px;margin-top:6px}
+  .demo button{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;border:1px solid var(--border);
+       background:#fff;color:var(--ink);padding:9px 6px;border-radius:9px;font-size:12.5px;cursor:pointer;font-weight:600}
+  .demo button:hover{border-color:var(--accent);color:var(--accent)}
+  .demo button svg{width:14px;height:14px}
+  .reset{margin-top:6px;width:100%;border:1px dashed var(--border);background:#fff;color:var(--muted);
+       padding:8px;border-radius:9px;font-size:12px;cursor:pointer}
+  .chartwrap{width:100%}
+  svg.chart{width:100%;height:auto;display:block}
+  .legend{display:flex;gap:16px;margin-top:12px;flex-wrap:wrap}
+  .legend span{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;color:var(--muted)}
+  .readhint{margin-top:10px;font-size:12px;color:var(--muted);line-height:1.55}
+  .sw{width:11px;height:11px;border-radius:3px;display:inline-block}
+  .readout{margin-top:18px;border-top:1px solid var(--border);padding-top:18px}
+  .bar{display:flex;height:34px;border-radius:8px;overflow:hidden;border:1px solid var(--border)}
+  .bar div{display:flex;align-items:center;justify-content:center;color:#fff;font-size:12.5px;font-weight:600;transition:width .18s}
+  .tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
+  .tile{border:1px solid var(--border);border-radius:11px;padding:13px 14px}
+  .tile .t{font-size:11.5px;color:var(--muted);display:flex;align-items:center;gap:7px}
+  .tile .n{font-size:26px;font-weight:700;font-variant-numeric:tabular-nums;margin-top:4px;letter-spacing:-.02em}
+  .tile .m{font-size:11px;color:var(--muted);margin-top:2px}
+  .verdict{margin-top:16px;font-size:14px;background:#f8fafc;border:1px solid var(--border);border-radius:11px;padding:13px 15px}
+  .verdict b{color:var(--ink)}
+  .note{margin-top:18px;display:flex;gap:11px;font-size:12.5px;color:var(--muted);line-height:1.6}
+  .note svg{flex:0 0 16px;width:16px;height:16px;margin-top:2px;color:var(--accent)}
+  .knobs{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
+  .knob{border:1px solid var(--border);border-radius:11px;padding:13px 14px}
+  .knob .k{font-size:12px;font-weight:700;margin-bottom:4px}
+  .knob .d{font-size:11.5px;color:var(--muted);line-height:1.55}
+  .foot{margin-top:22px;font-size:11.5px;color:#94a3b8;text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brand">
+      <svg class="mark" viewBox="0 0 40 40" fill="none">
+        <rect width="40" height="40" rx="9" fill="#0f172a"/>
+        <path d="M8 27 L15 20 L21 24 L32 12" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="32" cy="12" r="2.6" fill="#e08a2b"/>
+      </svg>
+      <div>
+        <h1 id="t-title">Post-Season Decision — Linkage Tool</h1>
+        <div class="sub" id="t-sub">Any forward curve maps to one allocation. Turn the knobs and watch the sell / store / lock split change. We do not forecast the curve; it is the input.</div>
+      </div>
+    </div>
+  </header>
+
+  <div class="grid">
+    <!-- CONTROLS -->
+    <div class="card">
+      <h2 id="t-controls">Inputs</h2>
+
+      <div class="ctrl">
+        <div class="lab"><span class="name" id="t-carry">Carry (F − S)</span><span class="val" id="v-carry">+31</span></div>
+        <input type="range" id="s-carry" min="-40" max="90" step="1" value="31">
+        <div class="lab"><span class="hint" id="t-carry-lo">← backwardation</span><span class="hint" id="t-carry-hi">steeper contango →</span></div>
+      </div>
+
+      <div class="ctrl">
+        <div class="lab"><span class="name" id="t-view">View (E[S_T] − F)</span><span class="val" id="v-view">0</span></div>
+        <input type="range" id="s-view" min="-60" max="120" step="5" value="0">
+        <div class="lab"><span class="hint" id="t-view-lo">← bearish</span><span class="hint" id="t-view-hi">bullish →</span></div>
+      </div>
+
+      <div class="ctrl">
+        <div class="lab"><span class="name" id="t-risk">Risk appetite (λ)</span></div>
+        <div class="toggle" id="g-risk">
+          <button data-lam="0.0025" id="t-aggr">Aggressive</button>
+          <button data-lam="0.005" class="on" id="t-mod">Moderate</button>
+          <button data-lam="0.01" id="t-cons">Conservative</button>
+        </div>
+      </div>
+
+      <div class="ctrl">
+        <div class="lab"><span class="name" id="t-bin">Storage (U)</span></div>
+        <div class="toggle" id="g-bin">
+          <button data-cost="33" class="on" id="t-farm">On-farm (~1/mo)</button>
+          <button data-cost="75" id="t-comm">Commercial (4.5/mo)</button>
+        </div>
+      </div>
+
+      <div class="ctrl">
+        <div class="lab"><span class="name" id="t-cash">Cash-flow need (min sell)</span><span class="val" id="v-cash">0%</span></div>
+        <input type="range" id="s-cash" min="0" max="80" step="10" value="0">
+        <div class="lab"><span class="hint" id="t-cash-lo">← loose</span><span class="hint" id="t-cash-hi">tight →</span></div>
+      </div>
+
+      <div class="ctrl">
+        <div class="lab"><span class="name" id="t-demo">Plug in a curve forecast</span></div>
+        <div class="demo">
+          <button onclick="nudge(-30)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 8l-6 6-6-6" stroke-linecap="round" stroke-linejoin="round"/></svg><span id="t-narrow">NARROW</span></button>
+          <button onclick="nudge(30)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 16l6-6 6 6" stroke-linecap="round" stroke-linejoin="round"/></svg><span id="t-widen">WIDEN</span></button>
+        </div>
+        <button class="reset" onclick="resetToday()" id="t-reset">Reset to market today (carry +31)</button>
+      </div>
+    </div>
+
+    <!-- VISUAL -->
+    <div class="card">
+      <h2 id="t-chart">Curve shape → allocation</h2>
+      <div class="chartwrap"><svg class="chart" id="chart" viewBox="0 0 760 380" preserveAspectRatio="xMidYMid meet"></svg></div>
+      <div class="readhint" id="t-read">How to read: each x-position is a hypothetical carry. A vertical slice gives the sell / hedge / naked split at that carry; the black line is the current input.</div>
+      <div class="legend">
+        <span><i class="sw" style="background:var(--sell)"></i><span id="t-lg-sell">Sell now (X)</span></span>
+        <span><i class="sw" style="background:var(--hedge)"></i><span id="t-lg-hedge">Lock / hedge (Z)</span></span>
+        <span><i class="sw" style="background:var(--naked)"></i><span id="t-lg-naked">Store naked (Y)</span></span>
+        <span><i class="sw" style="background:var(--flip);border-radius:1px;width:14px;height:0;border-top:2px dashed var(--flip)"></i><span id="t-lg-flip">Flip point</span></span>
+        <span><i class="sw" style="background:var(--today);width:14px;height:3px"></i><span id="t-lg-today">Market today</span></span>
+      </div>
+
+      <div class="readout">
+        <div class="bar" id="bar"></div>
+        <div class="tiles">
+          <div class="tile"><div class="t"><i class="sw" style="background:var(--sell)"></i><span id="t-ti-sell">Sell now (X)</span></div><div class="n" id="n-sell">0%</div><div class="m" id="m-sell">at today's spot</div></div>
+          <div class="tile"><div class="t"><i class="sw" style="background:var(--naked)"></i><span id="t-ti-naked">Store naked (Y)</span></div><div class="n" id="n-naked">0%</div><div class="m" id="m-naked">sell later at S_T</div></div>
+          <div class="tile"><div class="t"><i class="sw" style="background:var(--hedge)"></i><span id="t-ti-hedge">Deferred / hedge (Z)</span></div><div class="n" id="n-hedge">100%</div><div class="m" id="m-hedge">deferred delivery at F</div></div>
+        </div>
+        <div class="verdict" id="verdict"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EXPLAINER -->
+  <div class="card" style="margin-top:18px">
+    <h2 id="t-how">How it reads</h2>
+    <div class="knobs">
+      <div class="knob"><div class="k" id="t-k1">Knob ① — Carry (F − S)</div><div class="d" id="t-k1d">The shape of the curve, read straight off it and certain today. It sets sell against hedge. Above the flip point (carry = holding cost) storing to a locked forward beats selling; below it, sell.</div></div>
+      <div class="knob"><div class="k" id="t-k2">Knob ② — View (E[S_T] − F)</div><div class="d" id="t-k2d">A bullish opinion about the future, supplied by whoever holds one. It sets the naked fraction. Under the neutral (martingale) benchmark it is zero, and the model stores nothing naked.</div></div>
+    </div>
+    <div class="note">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 7.5v.5" stroke-linecap="round"/></svg>
+      <span id="t-note">The curve is an input, not something we predict. It can be today's market curve or anyone's forecast of it, for example a WIDEN / NARROW signal. The market has already priced in public fundamentals, so we sit downstream as the decision layer and translate a curve into an allocation, rather than compete on forecasting it. One identity keeps the two knobs honest: carry + view = E[S_T] − S. They split the total expected price move into a lockable part (carry) and a bet (view), so contango plus a bullish view is no contradiction; it means expecting the spot to rise by more than the curve already pays.</span>
+    </div>
+  </div>
+
+  <div class="foot" id="t-foot">Illustrative, calibrated to the 2024-10-15 canola curve (S≈598, σ≈172 CAD/t). Hold ≈ 1 year, on-farm cost ≈ 33, commercial ≈ 75 CAD/t/yr.</div>
+</div>
+
+<script>
+// ---- constants (2024-10-15 canola calibration) ----
+const S = 598, SIGMA = 172, SIG2 = 172*172, TODAY = 31;
+const state = { carry: 31, view: 0, lam: 0.005, cost: 33, xmin: 0, lang: 'en' };
+const clamp = (v,a,b) => Math.max(a, Math.min(b, v));
+
+// ---- core allocator (mirror of optimal_alloc in the notebook) ----
+function alloc(carry, view, lam, cost, xmin){
+  const ng = carry - cost;
+  let x,y,z;
+  if(ng >= 0){ y = clamp(view/(lam*SIG2),0,1-xmin); x = xmin; z = 1 - xmin - y; }
+  else       { y = clamp((ng+view)/(lam*SIG2),0,1-xmin); x = 1 - y; z = 0; }
+  return {x,y,z};
+}
+
+// ---- chart geometry ----
+const CW=760, CH=380, mL=48, mR=18, mT=18, mB=46, pW=CW-mL-mR, pH=CH-mT-mB;
+const cMin=-40, cMax=90;
+const px = c => mL + (c-cMin)/(cMax-cMin)*pW;
+const py = p => mT + (100-p)/100*pH;
+
+function areaPath(cs, top, bot){
+  let d = "M "+px(cs[0]).toFixed(1)+","+py(top[0]).toFixed(1);
+  for(let i=1;i<cs.length;i++) d += " L "+px(cs[i]).toFixed(1)+","+py(top[i]).toFixed(1);
+  for(let i=cs.length-1;i>=0;i--) d += " L "+px(cs[i]).toFixed(1)+","+py(bot[i]).toFixed(1);
+  return d+" Z";
+}
+
+function renderChart(){
+  const cs=[], X=[], Y=[], Z=[];
+  for(let c=cMin;c<=cMax;c+=2){ cs.push(c);
+    const a=alloc(c,state.view,state.lam,state.cost,state.xmin);
+    X.push(a.x*100); Y.push(a.y*100); Z.push(a.z*100);
+  }
+  const sellTop=X, hedgeBot=X, hedgeTop=X.map((v,i)=>v+Z[i]), nakedBot=hedgeTop, nakedTop=cs.map(_=>100);
+  const zero=cs.map(_=>0);
+  let s='';
+  // gridlines
+  for(const p of [0,25,50,75,100]) s+=`<line x1="${px(cMin)}" y1="${py(p)}" x2="${px(cMax)}" y2="${py(p)}" stroke="#eef0f3" stroke-width="1"/>`+
+      `<text x="${mL-8}" y="${py(p)+4}" text-anchor="end" font-size="11" fill="#94a3b8">${p}</text>`;
+  for(const c of [-40,-20,0,20,40,60,80]) s+=`<text x="${px(c)}" y="${CH-mB+20}" text-anchor="middle" font-size="11" fill="#94a3b8">${c}</text>`;
+  // areas
+  s+=`<path d="${areaPath(cs,sellTop,zero)}" fill="var(--sell)" fill-opacity="0.9"/>`;
+  s+=`<path d="${areaPath(cs,hedgeTop,hedgeBot)}" fill="var(--hedge)" fill-opacity="0.9"/>`;
+  s+=`<path d="${areaPath(cs,nakedTop,nakedBot)}" fill="var(--naked)" fill-opacity="0.9"/>`;
+  // flip point (carry = cost)
+  const fx=px(state.cost);
+  s+=`<line x1="${fx}" y1="${py(0)}" x2="${fx}" y2="${py(100)}" stroke="var(--flip)" stroke-width="1.4" stroke-dasharray="5 4"/>`;
+  s+=`<text x="${fx}" y="${py(100)-6}" text-anchor="middle" font-size="10.5" fill="var(--flip)">${T[state.lang].flip} · ${state.cost}</text>`;
+  // market today
+  const tx=px(TODAY);
+  s+=`<line x1="${tx}" y1="${py(0)}" x2="${tx}" y2="${py(100)}" stroke="var(--today)" stroke-width="1.4"/>`;
+  s+=`<text x="${tx}" y="${py(0)+16}" text-anchor="middle" font-size="10.5" fill="var(--today)">${T[state.lang].today}</text>`;
+  // current carry marker
+  const cx=px(state.carry);
+  s+=`<line x1="${cx}" y1="${py(0)}" x2="${cx}" y2="${py(100)}" stroke="#0f172a" stroke-width="2"/>`;
+  s+=`<circle cx="${cx}" cy="${py(100)}" r="4" fill="#0f172a"/>`;
+  s+=`<rect x="${cx-30}" y="${py(100)-2}" width="60" height="18" rx="4" fill="#0f172a"/>`;
+  s+=`<text x="${cx}" y="${py(100)+11}" text-anchor="middle" font-size="11" fill="#fff" font-weight="600">carry ${state.carry>=0?'+':''}${state.carry}</text>`;
+  // numeric labels on the current slice (X / Z / Y pills)
+  const cur=alloc(state.carry,state.view,state.lam,state.cost,state.xmin);
+  const cxs=Math.round(cur.x*100), cys=Math.round(cur.y*100), czs=Math.round(cur.z*100);
+  const bands=[[0,cxs,'X',cxs,'#e08a2b'],[cxs,cxs+czs,'Z',czs,'#2f6fb0'],[cxs+czs,cxs+czs+cys,'Y',cys,'#cf4b3e']];
+  const onLeft = cx > mL+pW-100;
+  for(const b of bands){
+    if(b[3]<5) continue;
+    const yMid=py((b[0]+b[1])/2), bx=onLeft? cx-92 : cx+12;
+    s+=`<rect x="${bx}" y="${yMid-11}" width="80" height="22" rx="11" fill="#ffffff" fill-opacity="0.95" style="stroke:${b[4]};stroke-width:1.4"/>`;
+    s+=`<text x="${bx+40}" y="${yMid+4}" text-anchor="middle" font-size="11.5" font-weight="700" style="fill:${b[4]}">${b[2]} ${b[3]}%</text>`;
+  }
+  // axis title
+  s+=`<text x="${mL+pW/2}" y="${CH-6}" text-anchor="middle" font-size="11.5" fill="#64748b">${T[state.lang].xaxis}</text>`;
+  document.getElementById('chart').innerHTML=s;
+}
+
+function renderReadout(){
+  const a=alloc(state.carry,state.view,state.lam,state.cost,state.xmin);
+  const xs=Math.round(a.x*100), ys=Math.round(a.y*100), zs=Math.round(a.z*100);
+  const bar=document.getElementById('bar');
+  bar.innerHTML =
+    (xs>0?`<div style="width:${xs}%;background:var(--sell)">${xs>7?xs+'%':''}</div>`:'')+
+    (ys>0?`<div style="width:${ys}%;background:var(--naked)">${ys>7?ys+'%':''}</div>`:'')+
+    (zs>0?`<div style="width:${zs}%;background:var(--hedge)">${zs>7?zs+'%':''}</div>`:'');
+  document.getElementById('n-sell').textContent=xs+'%';
+  document.getElementById('n-naked').textContent=ys+'%';
+  document.getElementById('n-hedge').textContent=zs+'%';
+  const L=T[state.lang];
+  const reasons=[ state.carry>=state.cost ? L.rCover : L.rNoCover ];
+  if(ys>0) reasons.push(L.rView);
+  if(state.xmin>0) reasons.push(L.rCash);
+  document.getElementById('verdict').innerHTML =
+    `<b>${L.vLead}:</b> ${L.vAlloc(xs,ys,zs)}<br><span style="color:var(--muted)">${reasons.join(' · ')}</span>`;
+}
+
+function render(){ renderChart(); renderReadout(); }
+
+// ---- events ----
+const sc=document.getElementById('s-carry'), sv=document.getElementById('s-view');
+sc.oninput=()=>{ state.carry=+sc.value; document.getElementById('v-carry').textContent=(state.carry>=0?'+':'')+state.carry; render(); };
+sv.oninput=()=>{ state.view=+sv.value; document.getElementById('v-view').textContent=(state.view>0?'+':'')+state.view; render(); };
+const scash=document.getElementById('s-cash');
+scash.oninput=()=>{ state.xmin=+scash.value/100; document.getElementById('v-cash').textContent=scash.value+'%'; render(); };
+document.querySelectorAll('#g-risk button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('#g-risk button').forEach(x=>x.classList.remove('on')); b.classList.add('on');
+  state.lam=+b.dataset.lam; render();
+});
+document.querySelectorAll('#g-bin button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('#g-bin button').forEach(x=>x.classList.remove('on')); b.classList.add('on');
+  state.cost=+b.dataset.cost; render();
+});
+function nudge(d){ state.carry=clamp(state.carry+d,-40,90); sc.value=state.carry;
+  document.getElementById('v-carry').textContent=(state.carry>=0?'+':'')+state.carry; render(); }
+function resetToday(){ state.carry=TODAY; sc.value=TODAY;
+  document.getElementById('v-carry').textContent='+'+TODAY; render(); }
+
+// ---- i18n ----
+const T={
+ en:{
+  title:"Post-Season Decision — Linkage Tool",
+  sub:"Any forward curve maps to one allocation. Turn the knobs and watch the sell / store / lock split change. We do not forecast the curve; it is the input.",
+  controls:"Inputs", carry:"Carry (F − S)", carryLo:"← backwardation", carryHi:"steeper contango →",
+  view:"View (E[S_T] − F)", viewLo:"← bearish", viewHi:"bullish →", risk:"Risk appetite (λ)",
+  aggr:"Aggressive", mod:"Moderate", cons:"Conservative", bin:"Storage (U)", farm:"On-farm (~1/mo)", comm:"Commercial (4.5/mo)",
+  cash:"Cash-flow need (min sell)", cashLo:"← loose", cashHi:"tight →",
+  demo:"Plug in a curve forecast", narrow:"NARROW", widen:"WIDEN", reset:"Reset to market today (carry +31)",
+  chart:"Curve shape → allocation", lgSell:"Sell now (X)", lgHedge:"Lock / hedge (Z)", lgNaked:"Store naked (Y)",
+  lgFlip:"Flip point", lgToday:"Market today", flip:"flip", today:"today",
+  xaxis:"carry = F − S   (← backwardation      steeper contango →)",
+  tiSell:"Sell now (X)", tiNaked:"Store naked (Y)", tiHedge:"Deferred / hedge (Z)", mSell:"at today's spot", mNaked:"sell later at S_T", mHedge:"deferred delivery at F",
+  read:"How to read: each x-position is a hypothetical carry. A vertical slice gives the sell / hedge / naked split at that carry; the black line is the current input.",
+  how:"How it reads", k1:"Knob ① — Carry (F − S)",
+  k1d:"The shape of the curve, read straight off it and certain today. It sets sell against hedge. Above the flip point (carry = holding cost) storing to a locked forward beats selling; below it, sell.",
+  k2:"Knob ② — View (E[S_T] − F)",
+  k2d:"A bullish opinion about the future, supplied by whoever holds one. It sets the naked fraction. Under the neutral (martingale) benchmark it is zero, and the model stores nothing naked.",
+  note:"The curve is an input, not something we predict. It can be today's market curve or anyone's forecast of it, for example a WIDEN / NARROW signal. The market has already priced in public fundamentals, so we sit downstream as the decision layer and translate a curve into an allocation, rather than compete on forecasting it. One identity keeps the two knobs honest: carry + view = E[S_T] − S. They split the total expected price move into a lockable part (carry) and a bet (view), so contango plus a bullish view is no contradiction; it means expecting the spot to rise by more than the curve already pays.",
+  foot:"Illustrative, calibrated to the 2024-10-15 canola curve (S≈598, σ≈172 CAD/t). Hold ≈ 1 year, on-farm cost ≈ 33, commercial ≈ 75 CAD/t/yr.",
+  vLead:"Recommendation",
+  vAlloc:(x,y,z)=>`sell now <b>X ${x}%</b> · store naked <b>Y ${y}%</b> · deferred / hedge <b>Z ${z}%</b>`,
+  rCover:"carry clears the holding cost, storage is on",
+  rNoCover:"carry does not clear the holding cost, selling dominates",
+  rView:"the bullish view sizes the naked leg",
+  rCash:"cash-flow floor forces a minimum sale"
+ }
+/* Chinese (中文) UI removed for the English build; the bilingual version remains in linkage_tool.html
+ ,zh:{
+  title:"收割后决策 — 联动器",
+  sub:"任意一条 forward curve 对应一套配置。拖动旋钮，看现卖 / 存 / 锁的比例实时变化。我们不预测曲线；曲线是输入。",
+  controls:"输入", carry:"Carry (F − S)", carryLo:"← 倒挂", carryHi:"越陡 contango →",
+  view:"View (E[S_T] − F)", viewLo:"← 看跌", viewHi:"看涨 →", risk:"风险偏好 (λ)",
+  aggr:"激进", mod:"中等", cons:"保守", bin:"仓储 (U)", farm:"农场仓 (~1/月)", comm:"商业仓 (4.5/月)",
+  cash:"现金流需求 (最少现卖)", cashLo:"← 松", cashHi:"紧 →",
+  demo:"接入一个曲线预测", narrow:"NARROW 变平", widen:"WIDEN 变陡", reset:"回到市场今天 (carry +31)",
+  chart:"曲线形状 → 配置", lgSell:"现卖 (X)", lgHedge:"锁价 / 对冲 (Z)", lgNaked:"裸存 (Y)",
+  lgFlip:"翻转点", lgToday:"市场今天", flip:"翻转点", today:"今天",
+  xaxis:"carry = F − S   (← 倒挂      越陡 contango →)",
+  tiSell:"现卖 (X)", tiNaked:"裸存 (Y)", tiHedge:"远期锁价 (Z)", mSell:"按今日现货价卖", mNaked:"到期按市价 S_T 卖", mHedge:"远期合约按 F 交割",
+  read:"读法: 横轴每个位置是一个假设的 carry。竖直切一刀，三种颜色的高度就是那个 carry 下的三腿配置；黑线 = 当前输入。",
+  how:"怎么读", k1:"旋钮 ① — Carry (F − S)",
+  k1d:"曲线的形状，今天直接读、确定。它决定现卖还是对冲。高于翻转点（carry = 持有成本）时，锁远期存储比现卖划算；低于翻转点，现卖。",
+  k2:"旋钮 ② — View (E[S_T] − F)",
+  k2d:"对未来的看涨观点，谁有谁给。它决定裸存比例。中性（鞅）基准下为零，模型不做任何裸存。",
+  note:"曲线是输入，不是我们预测的。它可以是市场今天的曲线，也可以是任何人的预测，比如 WIDEN / NARROW 信号。市场已经把公开基本面定进价格，所以我们处在下游作为决策层，把一条曲线翻译成配置，而不是去和它抢预测。一个恒等式把两个旋钮钉死：carry + view = E[S_T] − S，它们只是把预期总涨幅拆成「可锁定的部分 (carry)」和「赌的部分 (view)」，所以 contango 同时看涨并不矛盾，只是你预期涨得比曲线已付的更多。",
+  foot:"示例，按 2024-10-15 canola 曲线标定（S≈598，σ≈172 CAD/吨）。持有约 1 年，农场仓成本≈33，商业仓≈75 CAD/吨/年。",
+  vLead:"建议",
+  vAlloc:(x,y,z)=>`现卖 <b>X ${x}%</b> · 裸存 <b>Y ${y}%</b> · 远期锁价 <b>Z ${z}%</b>`,
+  rCover:"carry 盖过持有成本，存储成立",
+  rNoCover:"carry 盖不过持有成本，现卖占优",
+  rView:"看涨 view 决定裸存规模",
+  rCash:"现金流下限强制最少现卖"
+ }
+*/
+};
+
+function setLang(l){
+  state.lang=l;
+  document.documentElement.lang = l==='zh'?'zh':'en';
+  document.getElementById('lang-en').classList.toggle('on',l==='en');
+  document.getElementById('lang-zh').classList.toggle('on',l==='zh');
+  const L=T[l];
+  const map={'t-title':L.title,'t-sub':L.sub,'t-controls':L.controls,'t-carry':L.carry,'t-carry-lo':L.carryLo,
+   't-carry-hi':L.carryHi,'t-view':L.view,'t-view-lo':L.viewLo,'t-view-hi':L.viewHi,'t-risk':L.risk,
+   't-aggr':L.aggr,'t-mod':L.mod,'t-cons':L.cons,'t-bin':L.bin,'t-farm':L.farm,'t-comm':L.comm,
+   't-cash':L.cash,'t-cash-lo':L.cashLo,'t-cash-hi':L.cashHi,
+   't-demo':L.demo,'t-narrow':L.narrow,'t-widen':L.widen,'t-reset':L.reset,'t-chart':L.chart,
+   't-lg-sell':L.lgSell,'t-lg-hedge':L.lgHedge,'t-lg-naked':L.lgNaked,'t-lg-flip':L.lgFlip,'t-lg-today':L.lgToday,
+   't-ti-sell':L.tiSell,'t-ti-naked':L.tiNaked,'t-ti-hedge':L.tiHedge,'m-sell':L.mSell,'m-naked':L.mNaked,'m-hedge':L.mHedge,
+   't-read':L.read,'t-how':L.how,'t-k1':L.k1,'t-k1d':L.k1d,'t-k2':L.k2,'t-k2d':L.k2d,'t-note':L.note,'t-foot':L.foot};
+  for(const id in map){ const el=document.getElementById(id); if(el) el.textContent=map[id]; }
+  render();
+}
+
+render();
+</script>
+</body>
+</html>
