@@ -391,6 +391,10 @@
 <body>
 
 <div id="progress"></div>
+<div id="lang-switcher" style="position:fixed;top:16px;right:20px;z-index:1001;display:flex;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;border-radius:6px;overflow:hidden;border:1px solid var(--line);box-shadow:0 2px 12px rgba(0,0,0,.4);">
+  <button id="btn-en" onclick="setLang('en')" style="padding:6px 13px;background:var(--amber);color:var(--ink);border:none;cursor:pointer;font-family:inherit;font-size:inherit;letter-spacing:inherit;font-weight:700;transition:background .2s,color .2s;">EN</button>
+  <button id="btn-pt" onclick="setLang('pt')" style="padding:6px 13px;background:var(--panel-2);color:var(--text-faint);border:none;border-left:1px solid var(--line);cursor:pointer;font-family:inherit;font-size:inherit;letter-spacing:inherit;font-weight:600;transition:background .2s,color .2s;">PT</button>
+</div>
 <div class="navdots" id="navdots"></div>
 
 <!-- ============ 1. COVER ============ -->
@@ -398,22 +402,22 @@
   <div class="cover-grid"></div>
   <div class="cover-inner">
     <div class="cover-content reveal in">
-      <div class="eyebrow">Algo-Rythmn &middot; Brazil &middot; Forward-Curve Intelligence</div>
-      <h1>The curve moves<br>before the headline.<br><span class="hl">We call it</span> <span class="hl2">first.</span></h1>
-      <p class="lead">CropQuant fuses an early yield signal, spot price, and market fundamentals into one call: is the calendar spread about to widen or narrow — and how sure should you be right now.</p>
+      <div class="eyebrow" data-i18n="cover-eyebrow">Algo-Rythmn &middot; Brazil &middot; Forward-Curve Intelligence</div>
+      <h1 data-i18n="cover-h1">The curve moves<br>before the headline.<br><span class="hl">We call it</span> <span class="hl2">first.</span></h1>
+      <p class="lead" data-i18n="cover-lead">CropQuant fuses an early yield signal, spot price, and market fundamentals into one call: is the calendar spread about to widen or narrow — and how sure should you be right now.</p>
       <div class="ticker">
-        <span><span class="dot"></span>BRAZIL &middot; Commodity &middot; Forward Curve</span>
-        <span><span class="dot"></span>SOYBEANS &middot; 65&ndash;66% accuracy</span>
-        <span><span class="dot" style="background:var(--amber)"></span>SRW WHEAT &middot; 73% accuracy</span>
-        <span><span class="dot" style="background:var(--amber)"></span>CANOLA &middot; 71% accuracy</span>
+        <span><span class="dot"></span><span data-i18n="ticker-t0">BRAZIL &middot; Commodity &middot; Forward Curve</span></span>
+        <span><span class="dot"></span><span data-i18n="ticker-t1">SOYBEANS &middot; 65&ndash;66% accuracy</span></span>
+        <span><span class="dot" style="background:var(--amber)"></span><span data-i18n="ticker-t2">SRW WHEAT &middot; 73% accuracy</span></span>
+        <span><span class="dot" style="background:var(--amber)"></span><span data-i18n="ticker-t3">CANOLA &middot; 71% accuracy</span></span>
       </div>
     </div>
 
     <div class="cover-chart-panel">
       <div class="fwd-curve-card">
         <div class="fwd-curve-top">
-          <span>Soybean Forward Curve &middot; BRL/bu</span>
-          <span class="fwd-widen-pill"><span class="wdot"></span>&#x25B2;&thinsp;WIDEN SIGNAL</span>
+          <span data-i18n="fwd-curve-title">Soybean Forward Curve &middot; BRL/bu</span>
+          <span class="fwd-widen-pill"><span class="wdot"></span><span data-i18n="fwd-widen-text">&#x25B2;&thinsp;WIDEN SIGNAL</span></span>
         </div>
         <svg viewBox="0 0 640 270" style="width:100%;height:auto;display:block;" id="fwdCurveChart">
           <defs>
@@ -484,16 +488,16 @@
           <line x1="549" y1="178" x2="557" y2="178" stroke="var(--green)" stroke-width="1.2" opacity="0.55"/>
           <line x1="553" y1="162" x2="553" y2="130" stroke="var(--green)" stroke-width="1.3"
             marker-end="url(#fwdArrowG)"/>
-          <text x="561" y="134" style="font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;fill:var(--green);">Spread</text>
-          <text x="561" y="158" style="font-family:var(--mono);font-size:9.5px;font-weight:700;fill:var(--green);">&#x25B2; widen</text>
+          <text x="561" y="134" style="font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;fill:var(--green);" data-i18n="fwd-svg-spread">Spread</text>
+          <text x="561" y="158" style="font-family:var(--mono);font-size:9.5px;font-weight:700;fill:var(--green);" data-i18n="fwd-svg-widen">&#x25B2; widen</text>
 
           <!-- === SIGNAL ANNOTATION BOX (top-right inside chart) === -->
           <rect x="348" y="36" width="140" height="34" rx="5"
             fill="rgba(10,18,28,.82)" stroke="rgba(245,166,35,.22)" stroke-width="1"/>
           <text x="418" y="49" text-anchor="middle"
-            style="font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;fill:var(--text-faint);">CropQuant Signal</text>
+            style="font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;fill:var(--text-faint);" data-i18n="fwd-svg-signal-label">CropQuant Signal</text>
           <text x="418" y="63" text-anchor="middle"
-            style="font-family:var(--mono);font-size:11.5px;font-weight:700;fill:var(--amber);">WIDEN &middot; 73% conf.</text>
+            style="font-family:var(--mono);font-size:11.5px;font-weight:700;fill:var(--amber);" data-i18n="fwd-svg-signal-val">WIDEN &middot; 73% conf.</text>
 
           <!-- === X-AXIS CONTRACT MONTH LABELS === -->
           <g style="font-family:var(--mono);font-size:10px;fill:var(--text-faint);" text-anchor="middle">
@@ -504,7 +508,7 @@
             <text x="546" y="248">Nov&rsquo;26</text>
           </g>
           <text x="296" y="262" text-anchor="middle"
-            style="font-family:var(--mono);font-size:10px;fill:var(--text-faint);letter-spacing:.1em;text-transform:uppercase;">Contract Month</text>
+            style="font-family:var(--mono);font-size:10px;fill:var(--text-faint);letter-spacing:.1em;text-transform:uppercase;" data-i18n="fwd-svg-xaxis">Contract Month</text>
 
           <!-- === TRAVELING DOT along NOW curve === -->
           <circle r="4.5" fill="var(--amber)" filter="url(#fwdGlow)" opacity="0.95">
@@ -517,9 +521,9 @@
           </circle>
         </svg>
         <div class="fwd-curve-legend">
-          <span class="item"><span class="sw" style="background:rgba(180,187,194,.3);"></span>90d ago</span>
-          <span class="item"><span class="sw" style="background:rgba(245,166,35,.4);"></span>30d ago</span>
-          <span class="item"><span class="sw" style="background:var(--amber);height:3px;"></span>NOW &mdash; live signal</span>
+          <span class="item"><span class="sw" style="background:rgba(180,187,194,.3);"></span><span data-i18n="fwd-leg-0">90d ago</span></span>
+          <span class="item"><span class="sw" style="background:rgba(245,166,35,.4);"></span><span data-i18n="fwd-leg-1">30d ago</span></span>
+          <span class="item"><span class="sw" style="background:var(--amber);height:3px;"></span><span data-i18n="fwd-leg-2">NOW &mdash; live signal</span></span>
         </div>
       </div>
     </div>
@@ -528,22 +532,22 @@
 
 <!-- ============ 2. THE PROBLEM ============ -->
 <section id="problem">
-  <div class="eyebrow reveal">The Problem</div>
-  <h2 class="reveal reveal-delay-1">Brazil’s market moves daily.<br>Its only public yardstick moves monthly.</h2>
-  <p class="lead reveal reveal-delay-2">CONAB — the government crop agency everyone reads from — revises its own soybean and corn numbers by millions of tonnes, report to report. Everyone downstream is pricing risk off a number that is already out of date by the time it’s published.</p>
+  <div class="eyebrow reveal" data-i18n="problem-eyebrow">The Problem</div>
+  <h2 class="reveal reveal-delay-1" data-i18n="problem-h2">Brazil’s market moves daily.<br>Its only public yardstick moves monthly.</h2>
+  <p class="lead reveal reveal-delay-2" data-i18n="problem-lead">CONAB — the government crop agency everyone reads from — revises its own soybean and corn numbers by millions of tonnes, report to report. Everyone downstream is pricing risk off a number that is already out of date by the time it’s published.</p>
 
   <div class="grid-3 reveal reveal-delay-3">
     <div class="card">
-      <div class="card-head">Producers &amp; co-ops</div>
-      <div class="problem-text">Decide when to sell stored grain off a forecast that may revise next month.</div>
+      <div class="card-head" data-i18n="problem-c1-head">Producers &amp; co-ops</div>
+      <div class="problem-text" data-i18n="problem-c1-body">Decide when to sell stored grain off a forecast that may revise next month.</div>
     </div>
     <div class="card">
-      <div class="card-head">Trading desks</div>
-      <div class="problem-text">Price calendar spreads and basis trades on the same lagging signal as everyone else.</div>
+      <div class="card-head" data-i18n="problem-c2-head">Trading desks</div>
+      <div class="problem-text" data-i18n="problem-c2-body">Price calendar spreads and basis trades on the same lagging signal as everyone else.</div>
     </div>
     <div class="card">
-      <div class="card-head">Lenders &amp; insurers</div>
-      <div class="problem-text">Underwrite and extend credit against a crop book with no early read on direction.</div>
+      <div class="card-head" data-i18n="problem-c3-head">Lenders &amp; insurers</div>
+      <div class="problem-text" data-i18n="problem-c3-body">Underwrite and extend credit against a crop book with no early read on direction.</div>
     </div>
   </div>
   <div class="pagefoot">
@@ -556,18 +560,18 @@
 <section id="network">
   <div class="slide-split split-wide">
   <div class="slide-split-left">
-    <div class="eyebrow reveal">The Solution</div>
-    <h2 class="reveal reveal-delay-1">Five data streams in.<br>One signal out. Four desks acting on it.</h2>
-    <p class="lead reveal reveal-delay-2" style="margin-top:8px;">CropQuant sits in the middle of Brazil&rsquo;s physical-commodity chain &mdash; pulling from the same fragmented sources everyone already has, and routing one governed signal back out to the desks that trade, lend against, and insure the crop.</p>
-    <p class="footnote reveal reveal-delay-4" style="margin-top:18px;">// No single stakeholder owns or sees all five data streams today. CropQuant is the layer that reconciles them into one number anyone downstream can act on.</p>
+    <div class="eyebrow reveal" data-i18n="network-eyebrow">The Solution</div>
+    <h2 class="reveal reveal-delay-1" data-i18n="network-h2">Five data streams in.<br>One signal out. Four desks acting on it.</h2>
+    <p class="lead reveal reveal-delay-2" style="margin-top:8px;" data-i18n="network-lead">CropQuant sits in the middle of Brazil&rsquo;s physical-commodity chain &mdash; pulling from the same fragmented sources everyone already has, and routing one governed signal back out to the desks that trade, lend against, and insure the crop.</p>
+    <p class="footnote reveal reveal-delay-4" style="margin-top:18px;" data-i18n="network-footnote">// No single stakeholder owns or sees all five data streams today. CropQuant is the layer that reconciles them into one number anyone downstream can act on.</p>
   </div><!-- slide-split-left -->
   <div class="slide-split-right">
   <div class="network-wrap reveal reveal-delay-3">
     <svg viewBox="0 0 1000 480" style="width:100%; height:auto; overflow:visible;" id="networkSvg">
       <!-- column labels -->
-      <text x="130" y="28" text-anchor="middle" class="network-col-label">Data Sources</text>
-      <text x="500" y="28" text-anchor="middle" class="network-col-label">CropQuant Engine</text>
-      <text x="870" y="28" text-anchor="middle" class="network-col-label">Who Acts On It</text>
+      <text x="130" y="28" text-anchor="middle" class="network-col-label" data-i18n="svg-net-col1">Data Sources</text>
+      <text x="500" y="28" text-anchor="middle" class="network-col-label" data-i18n="svg-net-col2">CropQuant Engine</text>
+      <text x="870" y="28" text-anchor="middle" class="network-col-label" data-i18n="svg-net-col3">Who Acts On It</text>
 
       <!-- ===== EDGES (drawn first, under nodes) ===== -->
       <g id="edgesIn">
@@ -604,43 +608,43 @@
       <!-- ===== COLUMN 1: DATA SOURCES ===== -->
       <g>
         <rect class="net-node" x="20" y="70" width="220" height="40" rx="8"/>
-        <text x="34" y="95" class="net-label-main">Satellite &amp; weather</text>
+        <text x="34" y="95" class="net-label-main" data-i18n="svg-net-d1">Satellite &amp; weather</text>
         <rect class="net-node" x="20" y="140" width="220" height="40" rx="8"/>
-        <text x="34" y="165" class="net-label-main">Storage reports</text>
+        <text x="34" y="165" class="net-label-main" data-i18n="svg-net-d2">Storage reports</text>
         <rect class="net-node" x="20" y="210" width="220" height="40" rx="8"/>
-        <text x="34" y="235" class="net-label-main">Transport &amp; logistics</text>
+        <text x="34" y="235" class="net-label-main" data-i18n="svg-net-d3">Transport &amp; logistics</text>
         <rect class="net-node" x="20" y="280" width="220" height="40" rx="8"/>
-        <text x="34" y="305" class="net-label-main">Field yield surveys</text>
+        <text x="34" y="305" class="net-label-main" data-i18n="svg-net-d4">Field yield surveys</text>
         <rect class="net-node" x="20" y="340" width="220" height="40" rx="8"/>
-        <text x="34" y="365" class="net-label-main">Spot price &amp; fundamentals</text>
+        <text x="34" y="365" class="net-label-main" data-i18n="svg-net-d5">Spot price &amp; fundamentals</text>
       </g>
 
       <!-- ===== COLUMN 2: ENGINE ===== -->
       <g>
-        <rect class="net-node engine" x="420" y="180" width="160" height="100" rx="10"/>
+        <rect class="net-node engine" x="395" y="180" width="210" height="100" rx="10"/>
         <text x="500" y="218" text-anchor="middle" class="net-label-main engine">CropQuant</text>
-        <text x="500" y="238" text-anchor="middle" class="net-label-sub">structural prior +</text>
-        <text x="500" y="252" text-anchor="middle" class="net-label-sub">probabilistic update</text>
-        <text x="500" y="270" text-anchor="middle" class="net-label-sub" style="fill:var(--green);">NARROW / WIDEN</text>
+        <text x="500" y="238" text-anchor="middle" class="net-label-sub" data-i18n="svg-net-eng1">structural prior +</text>
+        <text x="500" y="252" text-anchor="middle" class="net-label-sub" data-i18n="svg-net-eng2">probabilistic update</text>
+        <text x="500" y="270" text-anchor="middle" class="net-label-sub" style="fill:var(--green);" data-i18n="svg-net-eng3">NARROW / WIDEN</text>
       </g>
 
       <!-- ===== COLUMN 3: STAKEHOLDERS ===== -->
       <g>
         <rect class="net-node stakeholder" x="770" y="70" width="210" height="40" rx="8"/>
-        <text x="784" y="95" class="net-label-main">Producer / Co-op</text>
+        <text x="784" y="95" class="net-label-main" data-i18n="svg-net-s1">Producer / Co-op</text>
         <rect class="net-node stakeholder" x="770" y="170" width="210" height="40" rx="8"/>
-        <text x="784" y="195" class="net-label-main">Trading Desk</text>
+        <text x="784" y="195" class="net-label-main" data-i18n="svg-net-s2">Trading Desk</text>
         <rect class="net-node stakeholder" x="770" y="270" width="210" height="40" rx="8"/>
-        <text x="784" y="295" class="net-label-main">Hedge Desk / Importer</text>
+        <text x="784" y="295" class="net-label-main" data-i18n="svg-net-s3">Hedge Desk / Importer</text>
         <rect class="net-node stakeholder" x="770" y="370" width="210" height="40" rx="8"/>
-        <text x="784" y="395" class="net-label-main">Lender / Insurer</text>
+        <text x="784" y="395" class="net-label-main" data-i18n="svg-net-s4">Lender / Insurer</text>
       </g>
     </svg>
 
     <div class="network-legend">
-      <span class="item"><span class="dot" style="background:var(--panel-2); border:1px solid var(--line);"></span>Raw, fragmented data &mdash; irregular and asynchronous</span>
-      <span class="item"><span class="dot" style="background:#1A2230; border:1px solid var(--amber);"></span>One governed engine, continuously updating</span>
-      <span class="item"><span class="dot" style="background:var(--panel-2); border:1px solid var(--green);"></span>One signal, four different trades</span>
+      <span class="item"><span class="dot" style="background:var(--panel-2); border:1px solid var(--line);"></span><span data-i18n="network-leg1">Raw, fragmented data &mdash; irregular and asynchronous</span></span>
+      <span class="item"><span class="dot" style="background:#1A2230; border:1px solid var(--amber);"></span><span data-i18n="network-leg2">One governed engine, continuously updating</span></span>
+      <span class="item"><span class="dot" style="background:var(--panel-2); border:1px solid var(--green);"></span><span data-i18n="network-leg3">One signal, four different trades</span></span>
     </div>
   </div>
   </div><!-- slide-split-right -->
@@ -653,31 +657,31 @@
 
 <!-- ============ 4. THE PROOF ============ -->
 <section id="proof">
-  <div class="eyebrow reveal">The Proof</div>
-  <h2 class="reveal reveal-delay-1">Validated on real, out-of-sample data —<br>including Brazil’s own #1 crop.</h2>
-  <p class="lead reveal reveal-delay-2" style="margin-top:14px;">Not a backtest dressed up as a forecast. CropQuant’s directional accuracy is measured under a strict real-time rolling framework with no hindsight, across hundreds of out-of-sample trading days.</p>
+  <div class="eyebrow reveal" data-i18n="proof-eyebrow">The Proof</div>
+  <h2 class="reveal reveal-delay-1" data-i18n="proof-h2">Validated on real, out-of-sample data —<br>including Brazil’s own #1 crop.</h2>
+  <p class="lead reveal reveal-delay-2" style="margin-top:14px;" data-i18n="proof-lead">Not a backtest dressed up as a forecast. CropQuant’s directional accuracy is measured under a strict real-time rolling framework with no hindsight, across hundreds of out-of-sample trading days.</p>
 
   <div class="proof-wrap reveal reveal-delay-3">
   <table class="proof">
-    <tr><th>Commodity</th><th>Out-of-sample dates</th><th>Accuracy, high-confidence days</th></tr>
+    <tr><th data-i18n="proof-th1">Commodity</th><th data-i18n="proof-th2">Out-of-sample dates</th><th data-i18n="proof-th3">Accuracy, high-confidence days</th></tr>
     <tr class="hero">
       <td>Soybeans — Brazil's #1 crop</td>
-      <td>~700 test dates</td>
-      <td class="num">65&ndash;66% at 1-month horizon</td>
+      <td data-i18n="proof-r1c2">~700 test dates</td>
+      <td class="num" data-i18n="proof-r1c3">65&ndash;66% at 1-month horizon</td>
     </tr>
     <tr>
-      <td>SRW wheat (world benchmark)</td>
-      <td>~700 test dates</td>
-      <td class="num">73% at 1-month horizon</td>
+      <td data-i18n="proof-r2c1">SRW wheat (world benchmark)</td>
+      <td data-i18n="proof-r2c2">~700 test dates</td>
+      <td class="num" data-i18n="proof-r2c3">73% at 1-month horizon</td>
     </tr>
     <tr>
-      <td>Canola (proof-of-concept)</td>
-      <td>~250 test dates</td>
-      <td class="num">71% at 1-month horizon</td>
+      <td data-i18n="proof-r3c1">Canola (proof-of-concept)</td>
+      <td data-i18n="proof-r3c2">~250 test dates</td>
+      <td class="num" data-i18n="proof-r3c3">71% at 1-month horizon</td>
     </tr>
   </table>
   </div>
-  <p class="footnote reveal reveal-delay-4">// Tested under an expanding rolling window using only information available up to that point. HRW wheat shows no meaningful edge (~50%) — an honest negative control that argues against curve-fitting. Soybean and corn results are processed; final consolidated figures pending verification.</p>
+  <p class="footnote reveal reveal-delay-4" data-i18n="proof-footnote">// Tested under an expanding rolling window using only information available up to that point. HRW wheat shows no meaningful edge (~50%) — an honest negative control that argues against curve-fitting. Soybean and corn results are processed; final consolidated figures pending verification.</p>
   <div class="pagefoot">
     <span>© 2026 ALGO-RYTHMN · ALL RIGHTS RESERVED</span>
     <span>04 / 08</span>
@@ -688,22 +692,22 @@
 <section id="edge">
   <div class="slide-split" style="grid-template-columns:48% 52%;">
   <div class="slide-split-left">
-    <div class="eyebrow reveal">The Edge, Explained</div>
-    <h2 class="reveal reveal-delay-1">We don&rsquo;t trade every day.<br>We trade the days we&rsquo;re actually right.</h2>
-    <p class="lead reveal reveal-delay-2">Across all days, raw accuracy sits near 58% — a coin flip with a thumb on the scale. But the model knows when its own signal is strong. Acted on only the highest-confidence ~20&ndash;30% of days, accuracy on SRW wheat climbs to 73&ndash;80%.</p>
-    <p class="footnote reveal reveal-delay-4" style="margin-top:18px;">// Accuracy rises as the model trades only its highest-confidence days. Both curves start near the 50% coin-flip baseline at full coverage and climb sharply in the top decile.</p>
+    <div class="eyebrow reveal" data-i18n="edge-eyebrow">The Edge, Explained</div>
+    <h2 class="reveal reveal-delay-1" data-i18n="edge-h2">We don&rsquo;t trade every day.<br>We trade the days we&rsquo;re actually right.</h2>
+    <p class="lead reveal reveal-delay-2" data-i18n="edge-lead">Across all days, raw accuracy sits near 58% — a coin flip with a thumb on the scale. But the model knows when its own signal is strong. Acted on only the highest-confidence ~20&ndash;30% of days, accuracy on SRW wheat climbs to 73&ndash;80%.</p>
+    <p class="footnote reveal reveal-delay-4" style="margin-top:18px;" data-i18n="edge-footnote">// Accuracy rises as the model trades only its highest-confidence days. Both curves start near the 50% coin-flip baseline at full coverage and climb sharply in the top decile.</p>
   </div><!-- slide-split-left -->
   <div class="slide-split-right">
   <div class="acc-chart-wrap reveal reveal-delay-3">
     <div style="font-family:var(--mono); font-size:9.5px; color:var(--text-faint); margin-bottom:10px; letter-spacing:.08em; text-transform:uppercase; display:flex; justify-content:space-between; align-items:center;">
-      <span>SRW WHEAT &mdash; Accuracy when acting only on the most confident days</span>
-      <span style="font-size:8.5px; color:var(--blue);">699 out-of-sample test days</span>
+      <span data-i18n="edge-chart-title">SRW WHEAT &mdash; Accuracy when acting only on the most confident days</span>
+      <span style="font-size:8.5px; color:var(--blue);" data-i18n="edge-chart-sub">699 out-of-sample test days</span>
     </div>
     <div class="acc-chart-legend">
-      <span class="item"><span class="sw" style="background:var(--amber); height:3px;"></span>Causal real-time (B)</span>
-      <span class="item"><span class="sw" style="background:var(--blue); height:3px;"></span>Ex-post descriptive (A)</span>
-      <span class="item"><span class="sw" style="background:var(--text-faint); height:1.5px; opacity:.5;"></span>All days 58%</span>
-      <span class="item"><span class="sw" style="background:var(--amber); height:1.5px;"></span>Act zone</span>
+      <span class="item"><span class="sw" style="background:var(--amber); height:3px;"></span><span data-i18n="edge-leg1">Causal real-time (B)</span></span>
+      <span class="item"><span class="sw" style="background:var(--blue); height:3px;"></span><span data-i18n="edge-leg2">Ex-post descriptive (A)</span></span>
+      <span class="item"><span class="sw" style="background:var(--text-faint); height:1.5px; opacity:.5;"></span><span data-i18n="edge-leg3">All days 58%</span></span>
+      <span class="item"><span class="sw" style="background:var(--amber); height:1.5px;"></span><span data-i18n="edge-leg4">Act zone</span></span>
     </div>
     <svg viewBox="0 0 700 318" style="width:100%; height:auto; display:block;" id="accChartSvg">
       <defs>
@@ -757,7 +761,7 @@
       <line x1="55" y1="252" x2="685" y2="252" stroke="var(--text-faint)" stroke-width="1.2" opacity="0.4"/>
 
       <!-- top x-axis: number of days -->
-      <text x="370" y="15" text-anchor="middle" class="acc-svg-label">Number of days (of 699 total test days)</text>
+      <text x="370" y="15" text-anchor="middle" class="acc-svg-label" data-i18n="svg-acc-xtitle">Number of days (of 699 total test days)</text>
       <g class="acc-svg-label" style="font-family:var(--mono); font-size:11px; fill:var(--text-faint);">
         <text x="55"  y="30" text-anchor="middle">700</text>
         <text x="181" y="30" text-anchor="middle">560</text>
@@ -778,11 +782,11 @@
 
       <!-- Random (50%) dotted baseline -->
       <line x1="55" y1="252" x2="685" y2="252" stroke="var(--text-faint)" stroke-width="1" stroke-dasharray="2,5" opacity="0.35"/>
-      <text x="683" y="262" text-anchor="end" class="acc-svg-label" opacity="0.88">Random (50%)</text>
+      <text x="683" y="262" text-anchor="end" class="acc-svg-label" opacity="0.88" data-i18n="svg-acc-random">Random (50%)</text>
 
       <!-- 58% all-days dashed baseline -->
       <line x1="55" y1="209" x2="685" y2="209" stroke="var(--text-faint)" stroke-width="1.2" stroke-dasharray="6,4" opacity="0.65"/>
-      <text x="62" y="225" class="acc-svg-label" opacity="0.85">All days (58%, n=699)</text>
+      <text x="62" y="225" class="acc-svg-label" opacity="0.85" data-i18n="svg-acc-alldays">All days (58%, n=699)</text>
 
       <!-- gradient area under blue curve (clipped) -->
       <path clip-path="url(#chartClip)"
@@ -813,7 +817,7 @@
       <circle cx="546" cy="92" r="2.5" fill="var(--amber)"/>
       <line x1="542" y1="88" x2="510" y2="56" stroke="var(--amber)" stroke-width="0.9" stroke-dasharray="2,2" opacity="0.6"/>
       <rect x="464" y="40" width="90" height="28" rx="4" fill="rgba(245,166,35,.08)" stroke="rgba(245,166,35,.2)" stroke-width="0.8"/>
-      <text x="509" y="52" text-anchor="middle" class="acc-svg-label" style="fill:var(--amber); font-weight:600;">acted on</text>
+      <text x="509" y="52" text-anchor="middle" class="acc-svg-label" style="fill:var(--amber); font-weight:600;" data-i18n="svg-acc-acted">acted on</text>
       <text x="509" y="64" text-anchor="middle" class="acc-svg-label" style="fill:var(--amber);">151 days · 80%</text>
 
       <!-- annotation: acted on 62 days -->
@@ -822,7 +826,7 @@
       <circle cx="628" cy="70" r="2.5" fill="var(--amber)"/>
       <!-- peak badge -->
       <rect x="576" y="280" width="120" height="32" rx="5" fill="rgba(245,166,35,.1)" stroke="var(--amber)" stroke-width="1.2"/>
-      <text x="642" y="292" text-anchor="middle" style="font-family:var(--mono); font-size:9px; fill:var(--amber); opacity:.9; letter-spacing:.06em; text-transform:uppercase;">Peak accuracy</text>
+      <text x="642" y="292" text-anchor="middle" style="font-family:var(--mono); font-size:9px; fill:var(--amber); opacity:.9; letter-spacing:.06em; text-transform:uppercase;" data-i18n="svg-acc-peak">Peak accuracy</text>
       <text x="642" y="304" text-anchor="middle" style="font-family:var(--mono); font-size:12px; font-weight:700; fill:var(--amber);">~89% · 62 days</text>
 
       <!-- terminal dots -->
@@ -839,7 +843,7 @@
         <text x="685" y="270">0</text>
       </g>
       <!-- bottom x-axis title -->
-      <text x="370" y="300" text-anchor="middle" class="acc-svg-label">Act on top X% by confidence &#x2192;</text>
+      <text x="370" y="300" text-anchor="middle" class="acc-svg-label" data-i18n="svg-acc-xbottom">Act on top X% by confidence &#x2192;</text>
     </svg>
   </div>
   </div><!-- slide-split-right -->
@@ -854,34 +858,34 @@
 <section id="mechanism">
   <div class="slide-split">
   <div class="slide-split-left">
-    <div class="eyebrow reveal">How It Works</div>
-    <h2 class="reveal reveal-delay-1">Not a single forecast.<br>A belief that sharpens with every new fact.</h2>
-    <p class="lead reveal reveal-delay-2" style="margin-top:10px;">CropQuant starts from a structural yield-curve prior, then runs a continuous probabilistic update every time real-world data arrives — narrowing the probability distribution from a wide guess to a sharp, high-confidence call.</p>
+    <div class="eyebrow reveal" data-i18n="mech-eyebrow">How It Works</div>
+    <h2 class="reveal reveal-delay-1" data-i18n="mech-h2">Not a single forecast.<br>A belief that sharpens with every new fact.</h2>
+    <p class="lead reveal reveal-delay-2" style="margin-top:10px;" data-i18n="mech-lead">CropQuant starts from a structural yield-curve prior, then runs a continuous probabilistic update every time real-world data arrives — narrowing the probability distribution from a wide guess to a sharp, high-confidence call.</p>
 
     <div class="timeline reveal reveal-delay-3">
       <div class="tl-line"></div>
       <div class="tl-item">
         <div class="tl-dot">P</div>
         <div class="tl-body">
-          <div class="tl-tag">Day 0&ndash;2 &middot; Prior</div>
-          <h4>Structural base signal sets the starting belief</h4>
-          <p>A structural curve prior generates a wide, honestly uncertain initial distribution — no field data yet, no false confidence.</p>
+          <div class="tl-tag" data-i18n="mech-tl1-tag">Day 0&ndash;2 &middot; Prior</div>
+          <h4 data-i18n="mech-tl1-h">Structural base signal sets the starting belief</h4>
+          <p data-i18n="mech-tl1-p">A structural curve prior generates a wide, honestly uncertain initial distribution — no field data yet, no false confidence.</p>
         </div>
       </div>
       <div class="tl-item">
         <div class="tl-dot mono">U2</div>
         <div class="tl-body">
-          <div class="tl-tag">Day 3&ndash;10 &middot; Update</div>
-          <h4>Storage, transport, and logistics data tighten the curve</h4>
-          <p>Storage reports, transport logs, and dispatch data feed a probabilistic update — and the distribution visibly narrows.</p>
+          <div class="tl-tag" data-i18n="mech-tl2-tag">Day 3&ndash;10 &middot; Update</div>
+          <h4 data-i18n="mech-tl2-h">Storage, transport, and logistics data tighten the curve</h4>
+          <p data-i18n="mech-tl2-p">Storage reports, transport logs, and dispatch data feed a probabilistic update — and the distribution visibly narrows.</p>
         </div>
       </div>
       <div class="tl-item">
         <div class="tl-dot">U5</div>
         <div class="tl-body">
-          <div class="tl-tag">Day 11&ndash;20 &middot; Convergence</div>
-          <h4>Yield surveys and satellite data sharpen the final call</h4>
-          <p>Field yield surveys and weather/satellite reads drive the last updates — belief converges to a tall, narrow, high-confidence peak you can act on.</p>
+          <div class="tl-tag" data-i18n="mech-tl3-tag">Day 11&ndash;20 &middot; Convergence</div>
+          <h4 data-i18n="mech-tl3-h">Weather data and satellite imagery sharpen the final call</h4>
+          <p data-i18n="mech-tl3-p">Weather data and satellite reads drive the last updates — belief converges to a tall, narrow, high-confidence peak you can act on.</p>
         </div>
       </div>
     </div>
@@ -902,9 +906,9 @@
       </defs>
 
       <!-- ===== PANEL LABELS ===== -->
-      <text x="90" y="22" text-anchor="middle" class="dist-svg-label" style="letter-spacing:.07em; text-transform:uppercase;">Prior &middot; Day 0&ndash;2</text>
-      <text x="270" y="22" text-anchor="middle" class="dist-svg-label" style="letter-spacing:.07em; text-transform:uppercase;">Update &middot; Day 3&ndash;10</text>
-      <text x="450" y="22" text-anchor="middle" class="dist-svg-label" style="fill:var(--green); letter-spacing:.07em; text-transform:uppercase;">Final &middot; Day 11&ndash;20</text>
+      <text x="90" y="22" text-anchor="middle" class="dist-svg-label" style="letter-spacing:.07em; text-transform:uppercase;" data-i18n="svg-dist-p1">Prior &middot; Day 0&ndash;2</text>
+      <text x="270" y="22" text-anchor="middle" class="dist-svg-label" style="letter-spacing:.07em; text-transform:uppercase;" data-i18n="svg-dist-p2">Update &middot; Day 3&ndash;10</text>
+      <text x="450" y="22" text-anchor="middle" class="dist-svg-label" style="fill:var(--green); letter-spacing:.07em; text-transform:uppercase;" data-i18n="svg-dist-p3">Final &middot; Day 11&ndash;20</text>
 
       <!-- ===== BAR 1: Prior — 52% WIDEN / 48% NARROW ===== -->
       <rect x="40" y="38" width="100" height="200" rx="6" fill="var(--panel-2)" stroke="var(--line)" stroke-width="1.2"/>
@@ -915,8 +919,8 @@
       <text x="90" y="98" text-anchor="middle" class="dist-svg-label" style="fill:var(--green); opacity:.5;">WIDEN</text>
       <text x="90" y="180" text-anchor="middle" style="font-family:var(--mono); font-size:17px; font-weight:700; fill:#EE9FA4; opacity:.45;">48%</text>
       <text x="90" y="196" text-anchor="middle" class="dist-svg-label" style="fill:#EE9FA4; opacity:.45;">NARROW</text>
-      <text x="90" y="256" text-anchor="middle" class="dist-svg-label">uncertain</text>
-      <text x="90" y="270" text-anchor="middle" class="dist-svg-label">~50 / 50</text>
+      <text x="90" y="256" text-anchor="middle" class="dist-svg-label" data-i18n="svg-dist-unc1">uncertain</text>
+      <text x="90" y="270" text-anchor="middle" class="dist-svg-label" data-i18n="svg-dist-unc2">~50 / 50</text>
 
       <!-- ===== BAR 2: Update — 65% WIDEN / 35% NARROW ===== -->
       <rect x="220" y="38" width="100" height="200" rx="6" fill="var(--panel-2)" stroke="rgba(245,166,35,.35)" stroke-width="1.3"/>
@@ -927,8 +931,8 @@
       <text x="270" y="112" text-anchor="middle" class="dist-svg-label" style="fill:var(--green); opacity:.78;">WIDEN</text>
       <text x="270" y="196" text-anchor="middle" style="font-family:var(--mono); font-size:16px; font-weight:700; fill:#EE9FA4; opacity:.6;">35%</text>
       <text x="270" y="212" text-anchor="middle" class="dist-svg-label" style="fill:#EE9FA4; opacity:.6;">NARROW</text>
-      <text x="270" y="256" text-anchor="middle" class="dist-svg-label" style="fill:var(--amber);">building</text>
-      <text x="270" y="270" text-anchor="middle" class="dist-svg-label" style="fill:var(--amber);">confidence</text>
+      <text x="270" y="256" text-anchor="middle" class="dist-svg-label" style="fill:var(--amber);" data-i18n="svg-dist-bld1">building</text>
+      <text x="270" y="270" text-anchor="middle" class="dist-svg-label" style="fill:var(--amber);" data-i18n="svg-dist-bld2">confidence</text>
 
       <!-- ===== BAR 3: Final — 78% WIDEN / 22% NARROW ===== -->
       <rect x="400" y="38" width="100" height="200" rx="6" fill="var(--panel-2)" stroke="var(--green)" stroke-width="1.8"/>
@@ -941,19 +945,19 @@
       <text x="450" y="230" text-anchor="middle" class="dist-svg-label" style="fill:#EE9FA4; opacity:.7;">NARROW</text>
       <!-- Signal output badge -->
       <rect x="392" y="248" width="116" height="36" rx="6" fill="var(--green-glow)" stroke="var(--green)" stroke-width="1.3"/>
-      <text x="450" y="261" text-anchor="middle" style="font-family:var(--mono); font-size:8px; letter-spacing:.12em; text-transform:uppercase; fill:var(--green); opacity:.8;">SIGNAL OUTPUT</text>
+      <text x="450" y="261" text-anchor="middle" style="font-family:var(--mono); font-size:8px; letter-spacing:.12em; text-transform:uppercase; fill:var(--green); opacity:.8;" data-i18n="svg-dist-sigout">SIGNAL OUTPUT</text>
       <text x="450" y="276" text-anchor="middle" style="font-family:var(--mono); font-size:10.5px; font-weight:700; fill:var(--green);">WIDEN &middot; 78% conf.</text>
 
       <!-- ===== CONNECTING ARROWS ===== -->
       <line x1="148" y1="138" x2="212" y2="138" stroke="var(--line)" stroke-width="1.3" marker-end="url(#mGray)"/>
-      <text x="180" y="125" text-anchor="middle" class="dist-svg-label" style="font-size:9px;">+ Storage</text>
-      <text x="180" y="136" text-anchor="middle" class="dist-svg-label" style="font-size:9px;">+ Transport</text>
+      <text x="180" y="125" text-anchor="middle" class="dist-svg-label" style="font-size:9px;" data-i18n="svg-dist-arr1a">+ Storage</text>
+      <text x="180" y="136" text-anchor="middle" class="dist-svg-label" style="font-size:9px;" data-i18n="svg-dist-arr1b">+ Transport</text>
       <line x1="328" y1="138" x2="392" y2="138" stroke="var(--amber)" stroke-width="1.5" marker-end="url(#mAmber)"/>
-      <text x="360" y="125" text-anchor="middle" class="dist-svg-label" style="fill:var(--amber); font-size:9px;">+ Satellite</text>
-      <text x="360" y="136" text-anchor="middle" class="dist-svg-label" style="fill:var(--amber); font-size:9px;">+ Surveys</text>
+      <text x="360" y="125" text-anchor="middle" class="dist-svg-label" style="fill:var(--amber); font-size:9px;" data-i18n="svg-dist-arr2a">+ Satellite</text>
+      <text x="360" y="136" text-anchor="middle" class="dist-svg-label" style="fill:var(--amber); font-size:9px;" data-i18n="svg-dist-arr2b">+ Weather</text>
     </svg>
   </div>
-    <p class="footnote reveal reveal-delay-4" style="margin-top:16px;">// The output at every stage is a directional call &mdash; WIDEN or NARROW &mdash; with an explicit confidence score. Probabilistic updating means the model tells you not just its answer but how sure it is right now, so a trader, lender, or insurer can size the decision proportionally. Built for Brazil&rsquo;s actual data reality: irregular satellite passes, inconsistent reporting, no fixed survey schedule.</p>
+    <p class="footnote reveal reveal-delay-4" style="margin-top:16px;" data-i18n="mech-footnote">// The output at every stage is a directional call &mdash; WIDEN or NARROW &mdash; with an explicit confidence score. Probabilistic updating means the model tells you not just its answer but how sure it is right now, so a trader, lender, or insurer can size the decision proportionally. Built for Brazil&rsquo;s actual data reality: irregular satellite passes, inconsistent reporting, no fixed survey schedule.</p>
   </div><!-- slide-split-right -->
   </div><!-- slide-split -->
   <div class="pagefoot">
@@ -964,32 +968,32 @@
 
 <!-- ============ 7. WHO USES THE SIGNAL ============ -->
 <section id="buyers">
-  <div class="eyebrow reveal">Who Acts On It</div>
-  <h2 class="reveal reveal-delay-1">One signal. Three very different trades.</h2>
+  <div class="eyebrow reveal" data-i18n="buyers-eyebrow">Who Acts On It</div>
+  <h2 class="reveal reveal-delay-1" data-i18n="buyers-h2">One signal. Three very different trades.</h2>
 
   <div class="grid-3 reveal reveal-delay-2">
     <div class="buyer-card">
-      <div class="role">Producer / Co-op</div>
-      <p class="body" style="font-size:.95rem;">Decide whether to sell stored grain now or hold for carry. The signal tells you whether the forward premium is likely to grow — so you're not guessing based on last month's CONAB report while the market has already moved.</p>
+      <div class="role" data-i18n="buyers-c1-role">Producer / Co-op</div>
+      <p class="body" style="font-size:.95rem;" data-i18n="buyers-c1-body">Decide whether to sell stored grain now or hold for carry. The signal tells you whether the forward premium is likely to grow — so you're not guessing based on last month's CONAB report while the market has already moved.</p>
       <div class="signal-pair">
-        <div class="signal-pill narrow"><b>NARROW</b>Sell sooner</div>
-        <div class="signal-pill widen"><b>WIDEN</b>Store longer</div>
+        <div class="signal-pill narrow"><b data-i18n="sig-narrow">NARROW</b><span data-i18n="buyers-c1-narrow">Sell sooner</span></div>
+        <div class="signal-pill widen"><b data-i18n="sig-widen">WIDEN</b><span data-i18n="buyers-c1-widen">Store longer</span></div>
       </div>
     </div>
     <div class="buyer-card">
-      <div class="role">Trading Desk</div>
-      <p class="body" style="font-size:.95rem;">Position the calendar spread with a confidence-scored directional call. Know before the crowd whether the Nov–Mar spread is tightening or opening up — and size the position to match the model's confidence on that specific day.</p>
+      <div class="role" data-i18n="buyers-c2-role">Trading Desk</div>
+      <p class="body" style="font-size:.95rem;" data-i18n="buyers-c2-body">Position the calendar spread with a confidence-scored directional call. Know before the crowd whether the Nov–Mar spread is tightening or opening up — and size the position to match the model's confidence on that specific day.</p>
       <div class="signal-pair">
-        <div class="signal-pill narrow"><b>NARROW</b>Short the spread</div>
-        <div class="signal-pill widen"><b>WIDEN</b>Long the spread</div>
+        <div class="signal-pill narrow"><b data-i18n="sig-narrow">NARROW</b><span data-i18n="buyers-c2-narrow">Short the spread</span></div>
+        <div class="signal-pill widen"><b data-i18n="sig-widen">WIDEN</b><span data-i18n="buyers-c2-widen">Long the spread</span></div>
       </div>
     </div>
     <div class="buyer-card">
-      <div class="role">Hedge Desk / Importer</div>
-      <p class="body" style="font-size:.95rem;">Time the futures roll or forward coverage window. When the signal says the curve is about to steepen, pulling cover forward before that move is priced in can meaningfully reduce your average hedge cost over the season.</p>
+      <div class="role" data-i18n="buyers-c3-role">Hedge Desk / Importer</div>
+      <p class="body" style="font-size:.95rem;" data-i18n="buyers-c3-body">Time the futures roll or forward coverage window. When the signal says the curve is about to steepen, pulling cover forward before that move is priced in can meaningfully reduce your average hedge cost over the season.</p>
       <div class="signal-pair">
-        <div class="signal-pill narrow"><b>NARROW</b>Roll hedge early</div>
-        <div class="signal-pill widen"><b>WIDEN</b>Pull cover forward</div>
+        <div class="signal-pill narrow"><b data-i18n="sig-narrow">NARROW</b><span data-i18n="buyers-c3-narrow">Roll hedge early</span></div>
+        <div class="signal-pill widen"><b data-i18n="sig-widen">WIDEN</b><span data-i18n="buyers-c3-widen">Pull cover forward</span></div>
       </div>
     </div>
   </div>
@@ -1001,27 +1005,27 @@
 
 <!-- ============ 7. ENTRY POINT / CTA ============ -->
 <section id="cta">
-  <div class="eyebrow reveal">The Offer</div>
-  <h2 class="reveal reveal-delay-1">A data feed. Not a deployment.</h2>
-  <p class="lead reveal reveal-delay-2">The lowest-friction way to bring CropQuant into your desk: a signal feed with a confidence score attached, evaluated against your own basis and spread positions before any larger commitment.</p>
+  <div class="eyebrow reveal" data-i18n="cta-eyebrow">The Offer</div>
+  <h2 class="reveal reveal-delay-1" data-i18n="cta-h2">A data feed. Not a deployment.</h2>
+  <p class="lead reveal reveal-delay-2" data-i18n="cta-lead">The lowest-friction way to bring CropQuant into your desk: a signal feed with a confidence score attached, evaluated against your own basis and spread positions before any larger commitment.</p>
 
   <div class="cta-box reveal reveal-delay-3">
     <div class="left">
-      <h3>Start with a 2&ndash;3 desk pilot</h3>
-      <p>We deliver the NARROW/WIDEN signal and confidence score on a live feed. You evaluate it against your own positions — no platform to learn, no long-term contract to sign first.</p>
+      <h3 data-i18n="cta-box-h3">Start with a 2&ndash;3 desk pilot</h3>
+      <p data-i18n="cta-box-p">We deliver the NARROW/WIDEN signal and confidence score on a live feed. You evaluate it against your own positions — no platform to learn, no long-term contract to sign first.</p>
       <div class="badge-row">
-        <span class="badge">Soybean-led</span>
-        <span class="badge">Confidence-scored</span>
-        <span class="badge">Real out-of-sample track record</span>
+        <span class="badge" data-i18n="cta-badge1">Soybean-led</span>
+        <span class="badge" data-i18n="cta-badge2">Confidence-scored</span>
+        <span class="badge" data-i18n="cta-badge3">Real out-of-sample track record</span>
       </div>
     </div>
     <div style="display:flex; align-items:center; gap:12px;">
       <div class="pulse-dot"></div>
-      <span class="mono" style="color:var(--text-dim); font-size:.9rem;">Ready to pilot</span>
+      <span class="mono" style="color:var(--text-dim); font-size:.9rem;" data-i18n="cta-ready">Ready to pilot</span>
     </div>
   </div>
 
-  <p style="margin-top:28px; font-family:var(--mono); font-size:.88rem; color:var(--text-dim);">Get in touch: <a href="mailto:support@algo-rythmn.ai" style="color:var(--amber); text-decoration:none; border-bottom:1px solid rgba(245,166,35,.3); padding-bottom:1px;">support@algo-rythmn.ai</a></p>
+  <p style="margin-top:28px; font-family:var(--mono); font-size:.88rem; color:var(--text-dim);" data-i18n="cta-contact">Get in touch: <a href="mailto:support@algo-rythmn.ai" style="color:var(--amber); text-decoration:none; border-bottom:1px solid rgba(245,166,35,.3); padding-bottom:1px;">support@algo-rythmn.ai</a></p>
 
   <div class="pagefoot">
     <span>© 2026 ALGO-RYTHMN · ALL RIGHTS RESERVED</span>
@@ -1066,6 +1070,306 @@
     entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in'); });
   }, {threshold:.2});
   revealEls.forEach(el=> io.observe(el));
+
+  // ---- language switcher ----
+  const i18n = {
+    en: {
+      // Cover
+      'cover-eyebrow': 'Algo-Rythmn &middot; Brazil &middot; Forward-Curve Intelligence',
+      'cover-h1': 'The curve moves<br>before the headline.<br><span class="hl">We call it</span> <span class="hl2">first.</span>',
+      'cover-lead': 'CropQuant fuses an early yield signal, spot price, and market fundamentals into one call: is the calendar spread about to widen or narrow \u2014 and how sure should you be right now.',
+      'ticker-t0': 'BRAZIL &middot; Commodity &middot; Forward Curve',
+      'ticker-t1': 'SOYBEANS &middot; 65\u201366% accuracy',
+      'ticker-t2': 'SRW WHEAT &middot; 73% accuracy',
+      'ticker-t3': 'CANOLA &middot; 71% accuracy',
+      'fwd-curve-title': 'Soybean Forward Curve &middot; BRL/bu',
+      'fwd-widen-text': '&#x25B2;&thinsp;WIDEN SIGNAL',
+      'fwd-leg-0': '90d ago',
+      'fwd-leg-1': '30d ago',
+      'fwd-leg-2': 'NOW \u2014 live signal',
+      'fwd-svg-spread': 'Spread',
+      'fwd-svg-widen': '&#x25B2; widen',
+      'fwd-svg-signal-label': 'CropQuant Signal',
+      'fwd-svg-signal-val': 'WIDEN &middot; 73% conf.',
+      'fwd-svg-xaxis': 'Contract Month',
+      // Problem
+      'problem-eyebrow': 'The Problem',
+      'problem-h2': "Brazil\u2019s market moves daily.<br>Its only public yardstick moves monthly.",
+      'problem-lead': 'CONAB \u2014 the government crop agency everyone reads from \u2014 revises its own soybean and corn numbers by millions of tonnes, report to report. Everyone downstream is pricing risk off a number that is already out of date by the time it\u2019s published.',
+      'problem-c1-head': 'Producers &amp; co-ops',
+      'problem-c1-body': 'Decide when to sell stored grain off a forecast that may revise next month.',
+      'problem-c2-head': 'Trading desks',
+      'problem-c2-body': 'Price calendar spreads and basis trades on the same lagging signal as everyone else.',
+      'problem-c3-head': 'Lenders &amp; insurers',
+      'problem-c3-body': 'Underwrite and extend credit against a crop book with no early read on direction.',
+      // Network / Solution
+      'network-eyebrow': 'The Solution',
+      'network-h2': 'Five data streams in.<br>One signal out. Four desks acting on it.',
+      'network-lead': "CropQuant sits in the middle of Brazil\u2019s physical-commodity chain \u2014 pulling from the same fragmented sources everyone already has, and routing one governed signal back out to the desks that trade, lend against, and insure the crop.",
+      'network-footnote': '// No single stakeholder owns or sees all five data streams today. CropQuant is the layer that reconciles them into one number anyone downstream can act on.',
+      'svg-net-col1': 'Data Sources',
+      'svg-net-col2': 'CropQuant Engine',
+      'svg-net-col3': 'Who Acts On It',
+      'svg-net-d1': 'Satellite &amp; weather',
+      'svg-net-d2': 'Storage reports',
+      'svg-net-d3': 'Transport &amp; logistics',
+      'svg-net-d4': 'Field yield surveys',
+      'svg-net-d5': 'Spot price &amp; fundamentals',
+      'svg-net-eng1': 'structural prior +',
+      'svg-net-eng2': 'probabilistic update',
+      'svg-net-eng3': 'NARROW / WIDEN',
+      'svg-net-s1': 'Producer / Co-op',
+      'svg-net-s2': 'Trading Desk',
+      'svg-net-s3': 'Hedge Desk / Importer',
+      'svg-net-s4': 'Lender / Insurer',
+      'network-leg1': 'Raw, fragmented data \u2014 irregular and asynchronous',
+      'network-leg2': 'One governed engine, continuously updating',
+      'network-leg3': 'One signal, four different trades',
+      // Proof
+      'proof-eyebrow': 'The Proof',
+      'proof-h2': "Validated on real, out-of-sample data \u2014<br>including Brazil\u2019s own #1 crop.",
+      'proof-lead': "Not a backtest dressed up as a forecast. CropQuant\u2019s directional accuracy is measured under a strict real-time rolling framework with no hindsight, across hundreds of out-of-sample trading days.",
+      'proof-th1': 'Commodity',
+      'proof-th2': 'Out-of-sample dates',
+      'proof-th3': 'Accuracy, high-confidence days',
+      'proof-r1c1': "Soybeans \u2014 Brazil\u2019s #1 crop",
+      'proof-r1c2': '~700 test dates',
+      'proof-r1c3': '65\u201366% at 1-month horizon',
+      'proof-r2c1': 'SRW wheat (world benchmark)',
+      'proof-r2c2': '~700 test dates',
+      'proof-r2c3': '73% at 1-month horizon',
+      'proof-r3c1': 'Canola (proof-of-concept)',
+      'proof-r3c2': '~250 test dates',
+      'proof-r3c3': '71% at 1-month horizon',
+      'proof-footnote': '// Tested under an expanding rolling window using only information available up to that point. HRW wheat shows no meaningful edge (~50%) \u2014 an honest negative control that argues against curve-fitting. Soybean and corn results are processed; final consolidated figures pending verification.',
+      // Edge
+      'edge-eyebrow': 'The Edge, Explained',
+      'edge-h2': "We don\u2019t trade every day.<br>We trade the days we\u2019re actually right.",
+      'edge-lead': "Across all days, raw accuracy sits near 58% \u2014 a coin flip with a thumb on the scale. But the model knows when its own signal is strong. Acted on only the highest-confidence ~20\u201330% of days, accuracy on SRW wheat climbs to 73\u201380%.",
+      'edge-footnote': '// Accuracy rises as the model trades only its highest-confidence days. Both curves start near the 50% coin-flip baseline at full coverage and climb sharply in the top decile.',
+      'edge-chart-title': 'SRW WHEAT \u2014 Accuracy when acting only on the most confident days',
+      'edge-chart-sub': '699 out-of-sample test days',
+      'edge-leg1': 'Causal real-time (B)',
+      'edge-leg2': 'Ex-post descriptive (A)',
+      'edge-leg3': 'All days 58%',
+      'edge-leg4': 'Act zone',
+      'svg-acc-xtitle': 'Number of days (of 699 total test days)',
+      'svg-acc-random': 'Random (50%)',
+      'svg-acc-alldays': 'All days (58%, n=699)',
+      'svg-acc-acted': 'acted on',
+      'svg-acc-peak': 'Peak accuracy',
+      'svg-acc-xbottom': 'Act on top X% by confidence \u2192',
+      // Mechanism
+      'mech-eyebrow': 'How It Works',
+      'mech-h2': 'Not a single forecast.<br>A belief that sharpens with every new fact.',
+      'mech-lead': 'CropQuant starts from a structural yield-curve prior, then runs a continuous probabilistic update every time real-world data arrives \u2014 narrowing the probability distribution from a wide guess to a sharp, high-confidence call.',
+      'mech-tl1-tag': 'Day 0\u20132 \u00b7 Prior',
+      'mech-tl1-h': 'Structural base signal sets the starting belief',
+      'mech-tl1-p': 'A structural curve prior generates a wide, honestly uncertain initial distribution \u2014 no field data yet, no false confidence.',
+      'mech-tl2-tag': 'Day 3\u201310 \u00b7 Update',
+      'mech-tl2-h': 'Storage, transport, and logistics data tighten the curve',
+      'mech-tl2-p': 'Storage reports, transport logs, and dispatch data feed a probabilistic update \u2014 and the distribution visibly narrows.',
+      'mech-tl3-tag': 'Day 11\u201320 \u00b7 Convergence',
+      'mech-tl3-h': 'Weather data and satellite imagery sharpen the final call',
+      'mech-tl3-p': 'Weather data and satellite reads drive the last updates \u2014 belief converges to a tall, narrow, high-confidence peak you can act on.',
+      'svg-dist-p1': 'Prior \u00b7 Day 0\u20132',
+      'svg-dist-p2': 'Update \u00b7 Day 3\u201310',
+      'svg-dist-p3': 'Final \u00b7 Day 11\u201320',
+      'svg-dist-unc1': 'uncertain',
+      'svg-dist-unc2': '~50 / 50',
+      'svg-dist-bld1': 'building',
+      'svg-dist-bld2': 'confidence',
+      'svg-dist-sigout': 'SIGNAL OUTPUT',
+      'svg-dist-arr1a': '+ Storage',
+      'svg-dist-arr1b': '+ Transport',
+      'svg-dist-arr2a': '+ Satellite',
+      'svg-dist-arr2b': '+ Weather Data',
+      'mech-footnote': "// The output at every stage is a directional call \u2014 WIDEN or NARROW \u2014 with an explicit confidence score. Probabilistic updating means the model tells you not just its answer but how sure it is right now, so a trader, lender, or insurer can size the decision proportionally. Built for Brazil\u2019s actual data reality: irregular satellite passes, inconsistent reporting, no fixed survey schedule.",
+      // Buyers
+      'buyers-eyebrow': 'Who Acts On It',
+      'buyers-h2': 'One signal. Three very different trades.',
+      'buyers-c1-role': 'Producer / Co-op',
+      'buyers-c1-body': "Decide whether to sell stored grain now or hold for carry. The signal tells you whether the forward premium is likely to grow \u2014 so you\u2019re not guessing based on last month\u2019s CONAB report while the market has already moved.",
+      'buyers-c1-narrow': 'Sell sooner',
+      'buyers-c1-widen': 'Store longer',
+      'buyers-c2-role': 'Trading Desk',
+      'buyers-c2-body': "Position the calendar spread with a confidence-scored directional call. Know before the crowd whether the Nov\u2013Mar spread is tightening or opening up \u2014 and size the position to match the model\u2019s confidence on that specific day.",
+      'buyers-c2-narrow': 'Short the spread',
+      'buyers-c2-widen': 'Long the spread',
+      'buyers-c3-role': 'Hedge Desk / Importer',
+      'buyers-c3-body': 'Time the futures roll or forward coverage window. When the signal says the curve is about to steepen, pulling cover forward before that move is priced in can meaningfully reduce your average hedge cost over the season.',
+      'buyers-c3-narrow': 'Roll hedge early',
+      'buyers-c3-widen': 'Pull cover forward',
+      'sig-narrow': 'NARROW',
+      'sig-widen': 'WIDEN',
+      // CTA
+      'cta-eyebrow': 'The Offer',
+      'cta-h2': 'A data feed. Not a deployment.',
+      'cta-lead': 'The lowest-friction way to bring CropQuant into your desk: a signal feed with a confidence score attached, evaluated against your own basis and spread positions before any larger commitment.',
+      'cta-box-h3': 'Start with a 2\u20133 desk pilot',
+      'cta-box-p': 'We deliver the NARROW/WIDEN signal and confidence score on a live feed. You evaluate it against your own positions \u2014 no platform to learn, no long-term contract to sign first.',
+      'cta-badge1': 'Soybean-led',
+      'cta-badge2': 'Confidence-scored',
+      'cta-badge3': 'Real out-of-sample track record',
+      'cta-ready': 'Ready to pilot',
+      'cta-contact': 'Get in touch: <a href="mailto:support@algo-rythmn.ai" style="color:var(--amber);text-decoration:none;border-bottom:1px solid rgba(245,166,35,.3);padding-bottom:1px;">support@algo-rythmn.ai</a>',
+    },
+    pt: {
+      // Cover
+      'cover-eyebrow': 'Algo-Rythmn &middot; Brasil &middot; Intelig\u00eancia de Curva a Termo',
+      'cover-h1': 'A curva se move<br>antes da manchete.<br><span class="hl">N\u00f3s sinalizamos</span> <span class="hl2">primeiro.</span>',
+      'cover-lead': 'O CropQuant combina sinal antecipado de produtividade, pre\u00e7o \u00e0 vista e fundamentos de mercado em uma \u00fanica indica\u00e7\u00e3o: o diferencial de contratos est\u00e1 prestes a ampliar ou estreitar \u2014 e com que grau de certeza agora.',
+      'ticker-t0': 'BRASIL &middot; Commodity &middot; Curva a Termo',
+      'ticker-t1': 'SOJA &middot; 65\u201366% de acur\u00e1cia',
+      'ticker-t2': 'TRIGO SRW &middot; 73% de acur\u00e1cia',
+      'ticker-t3': 'CANOLA &middot; 71% de acur\u00e1cia',
+      'fwd-curve-title': 'Curva a Termo de Soja &middot; BRL/bu',
+      'fwd-widen-text': '&#x25B2;&thinsp;SINAL DE AMPLIA\u00c7\u00c3O',
+      'fwd-leg-0': '90 dias atr\u00e1s',
+      'fwd-leg-1': '30 dias atr\u00e1s',
+      'fwd-leg-2': 'AGORA \u2014 sinal ao vivo',
+      'fwd-svg-spread': 'Diferencial',
+      'fwd-svg-widen': '&#x25B2; ampliar',
+      'fwd-svg-signal-label': 'Sinal CropQuant',
+      'fwd-svg-signal-val': 'AMPLIAR &middot; 73% conf.',
+      'fwd-svg-xaxis': 'Mês do Contrato',
+      // Problem
+      'problem-eyebrow': 'O Problema',
+      'problem-h2': 'O mercado brasileiro se move todo dia.<br>Seu \u00fanico par\u00e2metro p\u00fablico se move mensalmente.',
+      'problem-lead': 'A CONAB \u2014 a ag\u00eancia governamental de referencia \u2014 revisa seus pr\u00f3prios n\u00fameros de soja e milho em milh\u00f5es de toneladas de relat\u00f3rio para relat\u00f3rio. Toda a cadeia precifica risco com base em um n\u00famero que j\u00e1 est\u00e1 desatualizado quando \u00e9 publicado.',
+      'problem-c1-head': 'Produtores e cooperativas',
+      'problem-c1-body': 'Decidem quando vender o gr\u00e3o armazenado com base em uma previs\u00e3o que pode ser revisada no m\u00eas seguinte.',
+      'problem-c2-head': 'Mesas de opera\u00e7\u00f5es',
+      'problem-c2-body': 'Precificam spreads de calend\u00e1rio e opera\u00e7\u00f5es de base com o mesmo sinal defasado que todos os demais.',
+      'problem-c3-head': 'Credores e seguradoras',
+      'problem-c3-body': 'Subscrevem e concedem cr\u00e9dito contra uma carteira agr\u00edcola sem nenhuma leitura antecipada da dire\u00e7\u00e3o do mercado.',
+      // Network / Solution
+      'network-eyebrow': 'A Solu\u00e7\u00e3o',
+      'network-h2': 'Cinco fluxos de dados de entrada.<br>Um sinal de sa\u00edda. Quatro mesas agindo sobre ele.',
+      'network-lead': 'O CropQuant est\u00e1 no centro da cadeia f\u00edsica de commodities do Brasil \u2014 agregando as mesmas fontes fragmentadas que todos j\u00e1 possuem e encaminhando um \u00fanico sinal gerenciado para as mesas que negociam, concedem cr\u00e9dito e seguram a safra.',
+      'network-footnote': '// Nenhum participante \u00fanico possui ou v\u00ea os cinco fluxos de dados hoje. O CropQuant \u00e9 a camada que os reconcilia em um \u00fanico n\u00famero sobre o qual qualquer agente da cadeia pode agir.',
+      'svg-net-col1': 'Fontes de Dados',
+      'svg-net-col2': 'Motor CropQuant',
+      'svg-net-col3': 'Quem Age',
+      'svg-net-d1': 'Sat\u00e9lite e clima',
+      'svg-net-d2': 'Relat\u00f3rios de estoque',
+      'svg-net-d3': 'Transporte e log\u00edstica',
+      'svg-net-d4': 'Levantamentos de safra',
+      'svg-net-d5': 'Pre\u00e7o \u00e0 vista e fundamentos',
+      'svg-net-eng1': 'probabilidade a priori +',
+      'svg-net-eng2': 'atualiza\u00e7\u00e3o probabil\u00edstica',
+      'svg-net-eng3': 'ESTREITAR / AMPLIAR',
+      'svg-net-s1': 'Produtor / Cooperativa',
+      'svg-net-s2': 'Mesa de Opera\u00e7\u00f5es',
+      'svg-net-s3': 'Mesa de Hedge / Importador',
+      'svg-net-s4': 'Credor / Seguradora',
+      'network-leg1': 'Dados brutos e fragmentados \u2014 irregulares e ass\u00edncronos',
+      'network-leg2': 'Um motor gerenciado, continuamente atualizado',
+      'network-leg3': 'Um sinal, quatro opera\u00e7\u00f5es distintas',
+      // Proof
+      'proof-eyebrow': 'A Comprova\u00e7\u00e3o',
+      'proof-h2': 'Validado em dados reais fora da amostra \u2014<br>incluindo a principal cultura do Brasil.',
+      'proof-lead': 'N\u00e3o \u00e9 um backtest apresentado como previs\u00e3o. A acur\u00e1cia direcional do CropQuant \u00e9 medida por uma estrutura rigorosa de janela m\u00f3vel em tempo real, sem uso de informa\u00e7\u00f5es futuras, ao longo de centenas de dias de opera\u00e7\u00f5es fora da amostra.',
+      'proof-th1': 'Commodity',
+      'proof-th2': 'Datas fora da amostra',
+      'proof-th3': 'Acur\u00e1cia em dias de alta confian\u00e7a',
+      'proof-r1c1': 'Soja \u2014 principal cultura do Brasil',
+      'proof-r1c2': '~700 datas de teste',
+      'proof-r1c3': '65\u201366% em horizonte de 1 m\u00eas',
+      'proof-r2c1': 'Trigo SRW (refer\u00eancia mundial)',
+      'proof-r2c2': '~700 datas de teste',
+      'proof-r2c3': '73% em horizonte de 1 m\u00eas',
+      'proof-r3c1': 'Canola (prova de conceito)',
+      'proof-r3c2': '~250 datas de teste',
+      'proof-r3c3': '71% em horizonte de 1 m\u00eas',
+      'proof-footnote': '// Testado com janela m\u00f3vel expansiva usando apenas informa\u00e7\u00f5es dispon\u00edveis at\u00e9 aquele momento. O trigo HRW n\u00e3o apresenta vantagem significativa (~50%) \u2014 um controle negativo honesto que argumenta contra o ajuste excessivo. Resultados de soja e milho est\u00e3o em processamento; n\u00fameros consolidados finais pendentes de verifica\u00e7\u00e3o.',
+      // Edge
+      'edge-eyebrow': 'A Vantagem Explicada',
+      'edge-h2': 'N\u00e3o operamos todos os dias.<br>Operamos nos dias em que realmente acertamos.',
+      'edge-lead': 'Em todos os dias, a acur\u00e1cia bruta fica pr\u00f3xima de 58% \u2014 um cara ou coroa com leve vantagem. Mas o modelo sabe quando seu pr\u00f3prio sinal \u00e9 forte. Ao agir apenas nos ~20\u201330% de dias com maior confian\u00e7a, a acur\u00e1cia no trigo SRW sobe para 73\u201380%.',
+      'edge-footnote': '// A acur\u00e1cia aumenta \u00e0 medida que o modelo opera apenas em seus dias de maior confian\u00e7a. Ambas as curvas partem pr\u00f3ximo da linha base de 50% (cara ou coroa) com cobertura total e sobem acentuadamente no dec\u00edl superior.',
+      'edge-chart-title': 'TRIGO SRW \u2014 Acur\u00e1cia ao agir apenas nos dias mais confiantes',
+      'edge-chart-sub': '699 dias de teste fora da amostra',
+      'edge-leg1': 'Causal em tempo real (B)',
+      'edge-leg2': 'Descritivo ex-post (A)',
+      'edge-leg3': 'Todos os dias 58%',
+      'edge-leg4': 'Zona de a\u00e7\u00e3o',
+      'svg-acc-xtitle': 'N\u00famero de dias (de 699 dias de teste no total)',
+      'svg-acc-random': 'Aleat\u00f3rio (50%)',
+      'svg-acc-alldays': 'Todos os dias (58%, n=699)',
+      'svg-acc-acted': 'operado em',
+      'svg-acc-peak': 'Pico de acur\u00e1cia',
+      'svg-acc-xbottom': 'Agir no top X% por confian\u00e7a \u2192',
+      // Mechanism
+      'mech-eyebrow': 'Como Funciona',
+      'mech-h2': 'N\u00e3o \u00e9 uma previs\u00e3o \u00fanica.<br>Uma cren\u00e7a que se afina a cada novo fato.',
+      'mech-lead': 'O CropQuant parte de uma probabilidade a priori estrutural da curva de produtividade e executa uma atualiza\u00e7\u00e3o probabil\u00edstica cont\u00ednua cada vez que dados do mundo real chegam \u2014 estreitando a distribui\u00e7\u00e3o de probabilidade de um palpite amplo para uma indica\u00e7\u00e3o precisa e de alta confian\u00e7a.',
+      'mech-tl1-tag': 'Dias 0\u20132 \u00b7 A Priori',
+      'mech-tl1-h': 'Sinal base estrutural define a cren\u00e7a inicial',
+      'mech-tl1-p': 'Uma probabilidade a priori estrutural gera uma distribui\u00e7\u00e3o inicial ampla e honestamente incerta \u2014 sem dados de campo ainda, sem falsa confian\u00e7a.',
+      'mech-tl2-tag': 'Dias 3\u201310 \u00b7 Atualiza\u00e7\u00e3o',
+      'mech-tl2-h': 'Dados de estoque, transporte e log\u00edstica refinam a curva',
+      'mech-tl2-p': 'Relat\u00f3rios de estoque, registros de transporte e dados de despacho alimentam uma atualiza\u00e7\u00e3o probabil\u00edstica \u2014 e a distribui\u00e7\u00e3o se estreita visivelmente.',
+      'mech-tl3-tag': 'Dias 11\u201320 \u00b7 Converg\u00eancia',
+      'mech-tl3-h': 'Dados meteorol\u00f3gicos e imagens de sat\u00e9lite afiam a indica\u00e7\u00e3o final',
+      'mech-tl3-p': 'Dados meteorol\u00f3gicos e leituras de sat\u00e9lite conduzem as \u00faltimas atualiza\u00e7\u00f5es \u2014 a cren\u00e7a converge para um pico alto, estreito e de alta confian\u00e7a sobre o qual voc\u00ea pode agir.',
+      'svg-dist-p1': 'A Priori \u00b7 Dias 0\u20132',
+      'svg-dist-p2': 'Atualiza\u00e7\u00e3o \u00b7 Dias 3\u201310',
+      'svg-dist-p3': 'Final \u00b7 Dias 11\u201320',
+      'svg-dist-unc1': 'incerto',
+      'svg-dist-unc2': '~50 / 50',
+      'svg-dist-bld1': 'construindo',
+      'svg-dist-bld2': 'confian\u00e7a',
+      'svg-dist-sigout': 'SA\u00cdDA DO SINAL',
+      'svg-dist-arr1a': '+ Estoque',
+      'svg-dist-arr1b': '+ Transporte',
+      'svg-dist-arr2a': '+ Sat\u00e9lite',
+      'svg-dist-arr2b': '+ Meteorol\u00f3gicos',
+      'mech-footnote': '// A sa\u00edda em cada etapa \u00e9 uma indica\u00e7\u00e3o direcional \u2014 AMPLIAR ou ESTREITAR \u2014 com uma pontua\u00e7\u00e3o expl\u00edcita de confian\u00e7a. A atualiza\u00e7\u00e3o probabil\u00edstica significa que o modelo n\u00e3o informa apenas sua resposta, mas tamb\u00e9m o qu\u00e3o certo est\u00e1 agora, para que um trader, credor ou seguradora possa dimensionar a decis\u00e3o proporcionalmente. Desenvolvido para a realidade de dados do Brasil: passagens de sat\u00e9lite irregulares, relat\u00f3rios inconsistentes, sem cronograma fixo de levantamentos.',
+      // Buyers
+      'buyers-eyebrow': 'Quem Age Sobre Ele',
+      'buyers-h2': 'Um sinal. Tr\u00eas opera\u00e7\u00f5es muito diferentes.',
+      'buyers-c1-role': 'Produtor / Cooperativa',
+      'buyers-c1-body': 'Decida se vende o gr\u00e3o armazenado agora ou mant\u00e9m para carry. O sinal indica se o pr\u00eamio a termo deve crescer \u2014 para voc\u00ea n\u00e3o adivinhar com base no relat\u00f3rio da CONAB do m\u00eas passado enquanto o mercado j\u00e1 se moveu.',
+      'buyers-c1-narrow': 'Vender antes',
+      'buyers-c1-widen': 'Armazenar mais',
+      'buyers-c2-role': 'Mesa de Opera\u00e7\u00f5es',
+      'buyers-c2-body': 'Posicione o spread de calend\u00e1rio com uma indica\u00e7\u00e3o direcional pontuada por confian\u00e7a. Saiba antes do mercado se o spread Nov\u2013Mar est\u00e1 se estreitando ou abrindo \u2014 e dimensione a posi\u00e7\u00e3o de acordo com a confian\u00e7a do modelo naquele dia espec\u00edfico.',
+      'buyers-c2-narrow': 'Vender o spread',
+      'buyers-c2-widen': 'Comprar o spread',
+      'buyers-c3-role': 'Mesa de Hedge / Importador',
+      'buyers-c3-body': 'Escolha o momento do roll de futuros ou da janela de cobertura a termo. Quando o sinal indica que a curva est\u00e1 prestes a inclinar, antecipar a cobertura antes que esse movimento seja precificado pode reduzir significativamente o custo m\u00e9dio de hedge na temporada.',
+      'buyers-c3-narrow': 'Rolar hedge antecipado',
+      'buyers-c3-widen': 'Antecipar cobertura',
+      'sig-narrow': 'ESTREITAR',
+      'sig-widen': 'AMPLIAR',
+      // CTA
+      'cta-eyebrow': 'A Proposta',
+      'cta-h2': 'Um feed de dados. N\u00e3o uma implanta\u00e7\u00e3o.',
+      'cta-lead': 'A forma de menor atrito para trazer o CropQuant para sua mesa: um feed de sinal com pontua\u00e7\u00e3o de confian\u00e7a, avaliado contra suas pr\u00f3prias posi\u00e7\u00f5es de base e spread antes de qualquer compromisso maior.',
+      'cta-box-h3': 'Comece com um piloto de 2\u20133 mesas',
+      'cta-box-p': 'Entregamos o sinal ESTREITAR/AMPLIAR e a pontua\u00e7\u00e3o de confian\u00e7a em um feed ao vivo. Voc\u00ea o avalia contra suas pr\u00f3prias posi\u00e7\u00f5es \u2014 sem plataforma para aprender, sem contrato de longo prazo para assinar primeiro.',
+      'cta-badge1': 'Liderado pela soja',
+      'cta-badge2': 'Pontuado por confian\u00e7a',
+      'cta-badge3': 'Hist\u00f3rico real fora da amostra',
+      'cta-ready': 'Pronto para piloto',
+      'cta-contact': 'Entre em contato: <a href="mailto:support@algo-rythmn.ai" style="color:var(--amber);text-decoration:none;border-bottom:1px solid rgba(245,166,35,.3);padding-bottom:1px;">support@algo-rythmn.ai</a>',
+    }
+  };
+  function setLang(lang){
+    var t = i18n[lang];
+    // HTML elements with data-i18n
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var key = el.getAttribute('data-i18n');
+      if(t[key] !== undefined) el.innerHTML = t[key];
+    });
+    var btnEn = document.getElementById('btn-en');
+    var btnPt = document.getElementById('btn-pt');
+    btnEn.style.background = lang==='en' ? 'var(--amber)' : 'var(--panel-2)';
+    btnEn.style.color      = lang==='en' ? 'var(--ink)'   : 'var(--text-faint)';
+    btnPt.style.background = lang==='pt' ? 'var(--amber)' : 'var(--panel-2)';
+    btnPt.style.color      = lang==='pt' ? 'var(--ink)'   : 'var(--text-faint)';
+  }
 </script>
 
 </body>

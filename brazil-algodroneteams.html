@@ -422,42 +422,53 @@ table.weekly td:first-child{font-family:var(--mono);font-weight:600;color:var(--
   border-bottom:1px dotted var(--ink3);
   cursor:help;
 }
+/* ─────────── LANG TOGGLE ─────────── */
+.nav-lang{margin-left:auto;display:flex;align-items:center;border:1px solid var(--rule-on2);border-radius:4px;overflow:hidden;font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.07em;flex-shrink:0;}
+.nav-lang button{background:transparent;color:var(--ink-on2);border:none;padding:6px 14px;cursor:pointer;text-transform:uppercase;transition:background .15s,color .15s;line-height:1;height:38px;}
+.nav-lang button.active{background:var(--gold);color:var(--bg-deep);cursor:default;}
+.nav-lang button:hover:not(.active){background:rgba(245,236,220,0.08);color:var(--ink-on);}
+.nav-lang .divider{width:1px;background:var(--rule-on2);align-self:stretch;}
 </style>
 </head>
 <body>
 
 <nav class="nav">
   <div class="nav-brand">AlgoDroneTeams</div>
-  <a href="#why">Why</a>
-  <a href="#how">How It Works</a>
-  <a href="#numbers">Results</a>
-  <a href="#proof">Evidence</a>
-  <a href="#bridge">US → Brazil</a>
-  <a href="#faq">FAQ</a>
+  <a href="#why" data-i18n="nav.why">Why</a>
+  <a href="#how" data-i18n="nav.how">How It Works</a>
+  <a href="#numbers" data-i18n="nav.results">Results</a>
+  <a href="#proof" data-i18n="nav.evidence">Evidence</a>
+  <a href="#bridge" data-i18n="nav.bridge">US → Brazil</a>
+  <a href="#faq" data-i18n="nav.faq">FAQ</a>
+  <div class="nav-lang" id="langToggle">
+    <button id="btnEN" class="active" onclick="setLang('en')">EN</button>
+    <div class="divider"></div>
+    <button id="btnPT" onclick="setLang('pt')">PT</button>
+  </div>
 </nav>
 
 <!-- ───────────── HERO ───────────── -->
 <section class="hero">
   <div class="hero-inner">
-    <div class="hero-label">Algo-Rythmn · Mato Grosso · 2026/27 Safra</div>
-    <h1>Your lavoura has <span class="em">millions more square metres</span> than eyes to watch them all <span class="soy">in time.</span></h1>
-    <p class="hero-sub">AlgoDroneTeams flies the field weekly, spots pest, disease, and water-stress patches before they're visible to the naked eye, and delivers a one-page report: where the trouble is, how big it is, and how much is still recoverable — in dollars, not gut feel.</p>
+    <div class="hero-label" data-i18n="hero.label">Algo-Rythmn · Mato Grosso · 2026/27 Safra</div>
+    <h1 data-i18n="hero.h1">Your lavoura has <span class="em">millions more square metres</span> than eyes to watch them all <span class="soy">in time.</span></h1>
+    <p class="hero-sub" data-i18n="hero.sub">AlgoDroneTeams flies the field weekly, spots pest, disease, and water-stress patches before they're visible to the naked eye, and delivers a one-page report: where the trouble is, how big it is, and how much is still recoverable — in dollars, not gut feel.</p>
     <div class="hero-meta">
       <div class="hero-meta-item">
-        <div class="lbl">Field tested</div>
-        <div class="val">US corn field</div>
+        <div class="lbl" data-i18n="hero.m1.lbl">Field tested</div>
+        <div class="val" data-i18n="hero.m1.val">US corn field</div>
       </div>
       <div class="hero-meta-item">
-        <div class="lbl">Cadence</div>
-        <div class="val">Weekly · ~40 min/flight</div>
+        <div class="lbl" data-i18n="hero.m2.lbl">Cadence</div>
+        <div class="val" data-i18n="hero.m2.val">Weekly · ~40 min/flight</div>
       </div>
       <div class="hero-meta-item">
-        <div class="lbl">Detection accuracy</div>
+        <div class="lbl" data-i18n="hero.m3.lbl">Detection accuracy</div>
         <div class="val">99.7%</div>
       </div>
       <div class="hero-meta-item">
-        <div class="lbl">Validated on</div>
-        <div class="val">International academic dataset</div>
+        <div class="lbl" data-i18n="hero.m4.lbl">Validated on</div>
+        <div class="val" data-i18n="hero.m4.val">International academic dataset</div>
       </div>
     </div>
   </div>
@@ -468,45 +479,45 @@ table.weekly td:first-child{font-family:var(--mono);font-weight:600;color:var(--
   <!-- ───────────── 01 · THE PROBLEM ───────────── -->
   <section class="section" id="why">
     <header class="sh">
-      <span class="sh-num">01 / Why</span>
-      <h2 class="sh-title">By the time a problem is <span class="em">visible from the road,</span> it has already cost you money.</h2>
-      <p class="sh-sub">Most crop trouble — disease, nutrient deficiency, water stress — starts in small patches nobody sees on foot or from a truck. By the time the whole field shows a sign, the patch has spread, the window to react has closed, and part of the yield is already gone.</p>
+      <span class="sh-num" data-i18n="s01.num">01 / Why</span>
+      <h2 class="sh-title" data-i18n="s01.title">By the time a problem is <span class="em">visible from the road,</span> it has already cost you money.</h2>
+      <p class="sh-sub" data-i18n="s01.sub">Most crop trouble — disease, nutrient deficiency, water stress — starts in small patches nobody sees on foot or from a truck. By the time the whole field shows a sign, the patch has spread, the window to react has closed, and part of the yield is already gone.</p>
     </header>
     <div class="prob">
       <div class="pcard a">
         <div class="pcard-bar"></div>
         <div class="pcard-body">
-          <div class="pcard-tag">The lag</div>
-          <h3 class="pcard-title">A week of waiting costs real money.</h3>
-          <p>Disease and stress don't pause between scouting visits. Every week without detection, more of the loss becomes permanent — even if the patch is treated later.</p>
+          <div class="pcard-tag" data-i18n="s01.pc1.tag">The lag</div>
+          <h3 class="pcard-title" data-i18n="s01.pc1.title">A week of waiting costs real money.</h3>
+          <p data-i18n="s01.pc1.p">Disease and stress don't pause between scouting visits. Every week without detection, more of the loss becomes permanent — even if the patch is treated later.</p>
         </div>
       </div>
       <div class="pcard b">
         <div class="pcard-bar"></div>
         <div class="pcard-body">
-          <div class="pcard-tag">The blind spots</div>
-          <h3 class="pcard-title">A ground crew can't cover a property of thousands of hectares.</h3>
-          <p>Walking the field is slow. Looking from the headland doesn't reveal the centre of the field. By the time a patch is visible, it's usually <span class="em">2 to 3 times larger</span> than when it started.</p>
+          <div class="pcard-tag" data-i18n="s01.pc2.tag">The blind spots</div>
+          <h3 class="pcard-title" data-i18n="s01.pc2.title">A ground crew can't cover a property of thousands of hectares.</h3>
+          <p data-i18n="s01.pc2.p">Walking the field is slow. Looking from the headland doesn't reveal the centre of the field. By the time a patch is visible, it's usually <span class="em">2 to 3 times larger</span> than when it started.</p>
         </div>
       </div>
       <div class="pcard c">
         <div class="pcard-bar"></div>
         <div class="pcard-body">
-          <div class="pcard-tag">The opportunity</div>
-          <h3 class="pcard-title">Most of the loss is still <span class="em">recoverable</span> — if caught in time.</h3>
-          <p>In our test field, roughly 70% of the projected loss was still recoverable in week one. By week four, that share had already dropped sharply.</p>
+          <div class="pcard-tag" data-i18n="s01.pc3.tag">The opportunity</div>
+          <h3 class="pcard-title" data-i18n="s01.pc3.title">Most of the loss is still <span class="em">recoverable</span> — if caught in time.</h3>
+          <p data-i18n="s01.pc3.p">In our test field, roughly 70% of the projected loss was still recoverable in week one. By week four, that share had already dropped sharply.</p>
         </div>
       </div>
     </div>
 
     <div class="band">
       <div class="band-l">
-        <div class="band-tag">The cost of waiting · test field · 4 weeks</div>
-        <div class="band-h">Wait until <span class="em">Week 4</span> to act, and the recoverable loss grew <span class="em">almost 5×.</span></div>
+        <div class="band-tag" data-i18n="s01.band.tag">The cost of waiting · test field · 4 weeks</div>
+        <div class="band-h" data-i18n="s01.band.h">Wait until <span class="em">Week 4</span> to act, and the recoverable loss grew <span class="em">almost 5×.</span></div>
       </div>
       <div class="band-r">
         <div class="num">4.8×</div>
-        <div class="sub">growth in recoverable loss · week 1 → 4</div>
+        <div class="sub" data-i18n="s01.band.sub">growth in recoverable loss · week 1 → 4</div>
       </div>
     </div>
   </section>
@@ -514,46 +525,46 @@ table.weekly td:first-child{font-family:var(--mono);font-weight:600;color:var(--
   <!-- ───────────── 02 · HOW IT WORKS ───────────── -->
   <section class="section" id="how">
     <header class="sh">
-      <span class="sh-num">02 / How It Works</span>
-      <h2 class="sh-title">Four drones. <span class="em">Forty minutes.</span> One report on your phone.</h2>
-      <p class="sh-sub">No complicated software to learn. No dashboard to babysit. Once a week, our team flies the field, processes the images, and sends a short report.</p>
+      <span class="sh-num" data-i18n="s02.num">02 / How It Works</span>
+      <h2 class="sh-title" data-i18n="s02.title">Four drones. <span class="em">Forty minutes.</span> One report on your phone.</h2>
+      <p class="sh-sub" data-i18n="s02.sub">No complicated software to learn. No dashboard to babysit. Once a week, our team flies the field, processes the images, and sends a short report.</p>
     </header>
     <div class="flow">
       <div class="fstep">
-        <div class="fstep-num">STEP 01</div>
+        <div class="fstep-num" data-i18n="s02.f1.num">STEP 01</div>
         <div class="fstep-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L3 7v6c0 5 4 9 9 9s9-4 9-9V7l-9-5z"/><path d="M8 12l3 3 5-5"/></svg>
         </div>
-        <h3 class="fstep-title">Drones launch from the edge of the field.</h3>
-        <p class="fstep-body">Four small drones, one operator. They lift off, do the work, and land themselves. No disruption to whatever's happening on the ground.</p>
-        <div class="fstep-when">~5 min setup</div>
+        <h3 class="fstep-title" data-i18n="s02.f1.title">Drones launch from the edge of the field.</h3>
+        <p class="fstep-body" data-i18n="s02.f1.body">Four small drones, one operator. They lift off, do the work, and land themselves. No disruption to whatever's happening on the ground.</p>
+        <div class="fstep-when" data-i18n="s02.f1.when">~5 min setup</div>
       </div>
       <div class="fstep">
-        <div class="fstep-num">STEP 02</div>
+        <div class="fstep-num" data-i18n="s02.f2.num">STEP 02</div>
         <div class="fstep-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3v18"/><path d="M5.6 5.6l12.8 12.8M18.4 5.6L5.6 18.4"/></svg>
         </div>
-        <h3 class="fstep-title">They prioritize the suspicious zones first.</h3>
-        <p class="fstep-body">Instead of sweeping back-and-forth with no judgment, the drones spend flight time on the parts of the field most likely to have a problem. Same coverage, less time.</p>
-        <div class="fstep-when">~40 min flight</div>
+        <h3 class="fstep-title" data-i18n="s02.f2.title">They prioritize the suspicious zones first.</h3>
+        <p class="fstep-body" data-i18n="s02.f2.body">Instead of sweeping back-and-forth with no judgment, the drones spend flight time on the parts of the field most likely to have a problem. Same coverage, less time.</p>
+        <div class="fstep-when" data-i18n="s02.f2.when">~40 min flight</div>
       </div>
       <div class="fstep">
-        <div class="fstep-num">STEP 03</div>
+        <div class="fstep-num" data-i18n="s02.f3.num">STEP 03</div>
         <div class="fstep-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 10h18M8 4v14"/></svg>
         </div>
-        <h3 class="fstep-title">The images become a map of problem patches.</h3>
-        <p class="fstep-body">Every patch gets a location, a size, a severity level, and a best-guess cause — disease, water, or nutrient. Plain language, no jargon.</p>
-        <div class="fstep-when">Same day</div>
+        <h3 class="fstep-title" data-i18n="s02.f3.title">The images become a map of problem patches.</h3>
+        <p class="fstep-body" data-i18n="s02.f3.body">Every patch gets a location, a size, a severity level, and a best-guess cause — disease, water, or nutrient. Plain language, no jargon.</p>
+        <div class="fstep-when" data-i18n="s02.f3.when">Same day</div>
       </div>
       <div class="fstep">
-        <div class="fstep-num">STEP 04</div>
+        <div class="fstep-num" data-i18n="s02.f4.num">STEP 04</div>
         <div class="fstep-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8z"/></svg>
         </div>
-        <h3 class="fstep-title">You get a one-page report. With dollar figures.</h3>
-        <p class="fstep-body">"Here are the patches that matter this week. Here's what they could cost you. Here's how much you can still save if you act now." Sent to your phone.</p>
-        <div class="fstep-when">Within 24h</div>
+        <h3 class="fstep-title" data-i18n="s02.f4.title">You get a one-page report. With dollar figures.</h3>
+        <p class="fstep-body" data-i18n="s02.f4.body">"Here are the patches that matter this week. Here's what they could cost you. Here's how much you can still save if you act now." Sent to your phone.</p>
+        <div class="fstep-when" data-i18n="s02.f4.when">Within 24h</div>
       </div>
     </div>
   </section>
@@ -561,56 +572,56 @@ table.weekly td:first-child{font-family:var(--mono);font-weight:600;color:var(--
   <!-- ───────────── 03 · SMARTER, NOT MORE ───────────── -->
   <section class="section">
     <header class="sh">
-      <span class="sh-num">03 / Method</span>
-      <h2 class="sh-title">Why our drones find more, <span class="em">in less time.</span></h2>
+      <span class="sh-num" data-i18n="s03.num">03 / Method</span>
+      <h2 class="sh-title" data-i18n="s03.title">Why our drones find more, <span class="em">in less time.</span></h2>
     </header>
     <div class="compare">
       <div class="compare-col old">
-        <div class="compare-tag">Standard drone scouting</div>
-        <h3 class="compare-headline">A drone that sweeps line by line, treating every square metre the same.</h3>
+        <div class="compare-tag" data-i18n="s03.old.tag">Standard drone scouting</div>
+        <h3 class="compare-headline" data-i18n="s03.old.h">A drone that sweeps line by line, treating every square metre the same.</h3>
         <ul class="compare-list">
-          <li>Burns flight time on the obviously healthy parts of the field</li>
-          <li>Misses early-stage patches that are still too small to notice</li>
-          <li>Long flights, more batteries, more pilot time, more cost</li>
-          <li>You get a pretty picture, not an answer</li>
+          <li data-i18n="s03.old.li1">Burns flight time on the obviously healthy parts of the field</li>
+          <li data-i18n="s03.old.li2">Misses early-stage patches that are still too small to notice</li>
+          <li data-i18n="s03.old.li3">Long flights, more batteries, more pilot time, more cost</li>
+          <li data-i18n="s03.old.li4">You get a pretty picture, not an answer</li>
         </ul>
       </div>
       <div class="compare-col new">
-        <div class="compare-tag">Our drone team</div>
-        <h3 class="compare-headline">Drones that spend their battery where the trouble actually is.</h3>
+        <div class="compare-tag" data-i18n="s03.new.tag">Our drone team</div>
+        <h3 class="compare-headline" data-i18n="s03.new.h">Drones that spend their battery where the trouble actually is.</h3>
         <ul class="compare-list">
-          <li>Same patches found in <b>~40% less flight time</b></li>
-          <li>Or, in the same flight time, <b>more patches found</b></li>
-          <li>Fewer batteries, less labour, lower cost per hectare</li>
-          <li>You get a short report telling you <b>what to do</b></li>
+          <li data-i18n="s03.new.li1">Same patches found in <b>~40% less flight time</b></li>
+          <li data-i18n="s03.new.li2">Or, in the same flight time, <b>more patches found</b></li>
+          <li data-i18n="s03.new.li3">Fewer batteries, less labour, lower cost per hectare</li>
+          <li data-i18n="s03.new.li4">You get a short report telling you <b>what to do</b></li>
         </ul>
       </div>
     </div>
-    <p class="kicker">It's not about more drones. It's about smarter ones.</p>
+    <p class="kicker" data-i18n="s03.kicker">It's not about more drones. It's about smarter ones.</p>
   </section>
 
   <!-- ───────────── 04 · THE NUMBERS ───────────── -->
   <section class="section" id="numbers">
     <header class="sh">
-      <span class="sh-num">04 / Results</span>
-      <h2 class="sh-title">A real field. A real season. <span class="em">Real dollars.</span></h2>
-      <p class="sh-sub">We ran the system on a ~95-hectare US corn field for four consecutive weeks. Here's what weekly aerial scouting found, week by week — and what waiting would have cost.</p>
+      <span class="sh-num" data-i18n="s04.num">04 / Results</span>
+      <h2 class="sh-title" data-i18n="s04.title">A real field. A real season. <span class="em">Real dollars.</span></h2>
+      <p class="sh-sub" data-i18n="s04.sub">We ran the system on a ~95-hectare US corn field for four consecutive weeks. Here's what weekly aerial scouting found, week by week — and what waiting would have cost.</p>
     </header>
 
     <div class="numbers-wrap">
       <div class="nw-head">
-        <div class="nw-title">~95 ha US corn · 4 weekly flights</div>
-        <div class="nw-sub">Figures in CAD · reference season, 2026</div>
+        <div class="nw-title" data-i18n="s04.nw.title">~95 ha US corn · 4 weekly flights</div>
+        <div class="nw-sub" data-i18n="s04.nw.sub">Figures in CAD · reference season, 2026</div>
       </div>
       <table class="weekly">
         <thead>
           <tr>
-            <th>Week</th>
-            <th>Date</th>
-            <th>Problem patches found</th>
-            <th>Potential loss</th>
-            <th>Still recoverable</th>
-            <th>Permanently lost</th>
+            <th data-i18n="s04.th1">Week</th>
+            <th data-i18n="s04.th2">Date</th>
+            <th data-i18n="s04.th3">Problem patches found</th>
+            <th data-i18n="s04.th4">Potential loss</th>
+            <th data-i18n="s04.th5">Still recoverable</th>
+            <th data-i18n="s04.th6">Permanently lost</th>
           </tr>
         </thead>
         <tbody>
@@ -652,8 +663,8 @@ table.weekly td:first-child{font-family:var(--mono);font-weight:600;color:var(--
 
     <div class="wait-grid">
       <div class="wait-chart">
-        <div class="wait-chart-title">The cost of waiting one more week</div>
-        <div class="wait-chart-sub">Recoverable (green) vs. permanently lost (red) · CAD</div>
+        <div class="wait-chart-title" data-i18n="s04.chart.title">The cost of waiting one more week</div>
+        <div class="wait-chart-sub" data-i18n="s04.chart.sub">Recoverable (green) vs. permanently lost (red) · CAD</div>
         <svg class="wait-svg" viewBox="0 0 600 320" xmlns="http://www.w3.org/2000/svg">
           <line x1="60" y1="40"  x2="580" y2="40"  stroke="#221710" stroke-opacity="0.06"/>
           <line x1="60" y1="100" x2="580" y2="100" stroke="#221710" stroke-opacity="0.06"/>
@@ -704,42 +715,42 @@ table.weekly td:first-child{font-family:var(--mono);font-weight:600;color:var(--
         </svg>
       </div>
       <div class="wait-side">
-        <div class="wait-side-tag">The headline</div>
-        <h3>Catch it in Week 1 — save <span class="em">$960.</span><br>Wait until Week 4 — chase <span class="em">$4,570,</span> and <span class="warn">$2,018</span> is already gone.</h3>
-        <p>The longer a patch sits untreated, the more of its damage becomes permanent — even if it's eventually treated. Weekly scouting is what keeps the recoverable share large and the permanently-gone share small.</p>
+        <div class="wait-side-tag" data-i18n="s04.side.tag">The headline</div>
+        <h3 data-i18n="s04.side.h3">Catch it in Week 1 — save <span class="em">$960.</span><br>Wait until Week 4 — chase <span class="em">$4,570,</span> and <span class="warn">$2,018</span> is already gone.</h3>
+        <p data-i18n="s04.side.p">The longer a patch sits untreated, the more of its damage becomes permanent — even if it's eventually treated. Weekly scouting is what keeps the recoverable share large and the permanently-gone share small.</p>
       </div>
     </div>
-    <div class="fx-note">// Figures shown in CAD, as measured on the US test field. As an illustrative conversion (CAD→BRL ≈ 4.0), the Week 4 potential-loss range equates to roughly R$ 19,000–26,000 on a ~95 ha field — an order-of-magnitude reference, not a projection for Brazilian soil, climate, or crop.</div>
+    <div class="fx-note" data-i18n="s04.fx">// Figures shown in CAD, as measured on the US test field. As an illustrative conversion (CAD→BRL ≈ 4.0), the Week 4 potential-loss range equates to roughly R$ 19,000–26,000 on a ~95 ha field — an order-of-magnitude reference, not a projection for Brazilian soil, climate, or crop.</div>
   </section>
 
   <!-- ───────────── 05 · TRANSPARENCY ───────────── -->
   <section class="section" id="math">
     <header class="sh">
-      <span class="sh-num">05 / Transparency</span>
-      <h2 class="sh-title">Where the <span class="em">dollar figures</span> come from.</h2>
-      <p class="sh-sub">No black box. The loss numbers in the report follow the same logic your agronomist already knows — and are calibrated to your specific field.</p>
+      <span class="sh-num" data-i18n="s05.num">05 / Transparency</span>
+      <h2 class="sh-title" data-i18n="s05.title">Where the <span class="em">dollar figures</span> come from.</h2>
+      <p class="sh-sub" data-i18n="s05.sub">No black box. The loss numbers in the report follow the same logic your agronomist already knows — and are calibrated to your specific field.</p>
     </header>
 
     <div class="calc-intro">
-      <div class="calc-intro-tag">The short version</div>
-      <p><strong>Patch size × severity × crop price = potential loss.</strong> That's the internationally recognized damage-function approach used by university extension services and crop-protection networks. We then split that loss into "still recoverable" and "already permanent" using a recovery model that we <strong>calibrate to your own field</strong> over the first 1–2 flights.</p>
+      <div class="calc-intro-tag" data-i18n="s05.intro.tag">The short version</div>
+      <p data-i18n="s05.intro.p"><strong>Patch size × severity × crop price = potential loss.</strong> That's the internationally recognized damage-function approach used by university extension services and crop-protection networks. We then split that loss into "still recoverable" and "already permanent" using a recovery model that we <strong>calibrate to your own field</strong> over the first 1–2 flights.</p>
     </div>
 
     <div class="calc-foot">
       <div class="cfoot-item">
-        <div class="cf-num">Standard</div>
-        <div class="cf-label">Industry-recognized core</div>
-        <div class="cf-sub">Severity × area × price — the same damage-function approach used by agricultural research institutions and crop-protection networks</div>
+        <div class="cf-num" data-i18n="s05.c1.num">Standard</div>
+        <div class="cf-label" data-i18n="s05.c1.lbl">Industry-recognized core</div>
+        <div class="cf-sub" data-i18n="s05.c1.sub">Severity × area × price — the same damage-function approach used by agricultural research institutions and crop-protection networks</div>
       </div>
       <div class="cfoot-item">
-        <div class="cf-num">Yours</div>
-        <div class="cf-label">Calibrated to your field</div>
-        <div class="cf-sub">Crop price, expected yield, and the recoverable/permanent split are tuned to your operation, not a generic manual</div>
+        <div class="cf-num" data-i18n="s05.c2.num">Yours</div>
+        <div class="cf-label" data-i18n="s05.c2.lbl">Calibrated to your field</div>
+        <div class="cf-sub" data-i18n="s05.c2.sub">Crop price, expected yield, and the recoverable/permanent split are tuned to your operation, not a generic manual</div>
       </div>
       <div class="cfoot-item">
-        <div class="cf-num">Open</div>
-        <div class="cf-label">Auditable on request</div>
-        <div class="cf-sub">Every dollar figure traces back to one GPS-tagged patch; model details available to your agronomist anytime</div>
+        <div class="cf-num" data-i18n="s05.c3.num">Open</div>
+        <div class="cf-label" data-i18n="s05.c3.lbl">Auditable on request</div>
+        <div class="cf-sub" data-i18n="s05.c3.sub">Every dollar figure traces back to one GPS-tagged patch; model details available to your agronomist anytime</div>
       </div>
     </div>
   </section>
@@ -747,37 +758,37 @@ table.weekly td:first-child{font-family:var(--mono);font-weight:600;color:var(--
   <!-- ───────────── 06 · PROOF / EVIDENCE ───────────── -->
   <section class="section" id="proof">
     <header class="sh">
-      <span class="sh-num">06 / Evidence</span>
-      <h2 class="sh-title">Does the detection actually work? <span class="em">Yes.</span></h2>
-      <p class="sh-sub">We tested detection on a public, independently labelled crop dataset where the correct answer for every section of the field was already known. Here's how often the system got it right.</p>
+      <span class="sh-num" data-i18n="s06.num">06 / Evidence</span>
+      <h2 class="sh-title" data-i18n="s06.title">Does the detection actually work? <span class="em">Yes.</span></h2>
+      <p class="sh-sub" data-i18n="s06.sub">We tested detection on a public, independently labelled crop dataset where the correct answer for every section of the field was already known. Here's how often the system got it right.</p>
     </header>
     <div class="val-stats">
       <div class="vstat">
         <div class="vstat-num">99.7%</div>
-        <div class="vstat-label">Detection accuracy</div>
-        <div class="vstat-sub">Average across 4 scouting rounds on the academic benchmark dataset</div>
+        <div class="vstat-label" data-i18n="s06.vs1.lbl">Detection accuracy</div>
+        <div class="vstat-sub" data-i18n="s06.vs1.sub">Average across 4 scouting rounds on the academic benchmark dataset</div>
       </div>
       <div class="vstat">
         <div class="vstat-num">~40%</div>
-        <div class="vstat-label">Less flight time</div>
-        <div class="vstat-sub">vs. a standard back-and-forth flight sweep, at the same detection rate</div>
+        <div class="vstat-label" data-i18n="s06.vs2.lbl">Less flight time</div>
+        <div class="vstat-sub" data-i18n="s06.vs2.sub">vs. a standard back-and-forth flight sweep, at the same detection rate</div>
       </div>
       <div class="vstat">
         <div class="vstat-num">25+</div>
-        <div class="vstat-label">Patches per flight</div>
-        <div class="vstat-sub">Found, mapped, and severity-ranked on the test field</div>
+        <div class="vstat-label" data-i18n="s06.vs3.lbl">Patches per flight</div>
+        <div class="vstat-sub" data-i18n="s06.vs3.sub">Found, mapped, and severity-ranked on the test field</div>
       </div>
     </div>
     <div class="proof-2">
       <div class="proof-card">
-        <div class="proof-tag">Evidence set 1 · The algorithm</div>
-        <h3 class="proof-title">Tested on a published academic dataset.</h3>
-        <p class="proof-body">We ran the AlgoDroneTeams detection logic on the <strong>Indian Pines</strong> dataset (Purdue University), where independent researchers had already labelled every section of the field. We hit <strong>99.7%</strong> accuracy across four scouting rounds. That's the science: the detection works.</p>
+        <div class="proof-tag" data-i18n="s06.pc1.tag">Evidence set 1 · The algorithm</div>
+        <h3 class="proof-title" data-i18n="s06.pc1.title">Tested on a published academic dataset.</h3>
+        <p class="proof-body" data-i18n="s06.pc1.body">We ran the AlgoDroneTeams detection logic on the <strong>Indian Pines</strong> dataset (Purdue University), where independent researchers had already labelled every section of the field. We hit <strong>99.7%</strong> accuracy across four scouting rounds. That's the science: the detection works.</p>
       </div>
       <div class="proof-card">
-        <div class="proof-tag">Evidence set 2 · A real field</div>
-        <h3 class="proof-title">Applied to a real ~95-hectare Illinois farm.</h3>
-        <p class="proof-body">We then ran the system on the real GPS boundary of an Illinois corn field and simulated realistic disease pressure to show what a real season would look like. The field is real. The dollars are real. The disease will become real the first time we fly your field.</p>
+        <div class="proof-tag" data-i18n="s06.pc2.tag">Evidence set 2 · A real field</div>
+        <h3 class="proof-title" data-i18n="s06.pc2.title">Applied to a real ~95-hectare Illinois farm.</h3>
+        <p class="proof-body" data-i18n="s06.pc2.body">We then ran the system on the real GPS boundary of an Illinois corn field and simulated realistic disease pressure to show what a real season would look like. The field is real. The dollars are real. The disease will become real the first time we fly your field.</p>
       </div>
     </div>
   </section>
@@ -785,27 +796,27 @@ table.weekly td:first-child{font-family:var(--mono);font-weight:600;color:var(--
   <!-- ───────────── HONEST BRIDGE: US → BRAZIL ───────────── -->
   <section class="section" id="bridge">
     <header class="sh">
-      <span class="sh-num">— / The Honest Part</span>
-      <h2 class="sh-title">We haven't flown a field in Brazil yet. <span class="em">You should know that before anything else here.</span></h2>
-      <p class="sh-sub">The numbers above are real — they come from an independent academic dataset and a real US corn field. But they come from different soil, climate, and crop than yours. This document exists to present the technology honestly, not to oversell proof we don't yet have here.</p>
+      <span class="sh-num" data-i18n="bridge.num">— / The Honest Part</span>
+      <h2 class="sh-title" data-i18n="bridge.title">We haven't flown a field in Brazil yet. <span class="em">You should know that before anything else here.</span></h2>
+      <p class="sh-sub" data-i18n="bridge.sub">The numbers above are real — they come from an independent academic dataset and a real US corn field. But they come from different soil, climate, and crop than yours. This document exists to present the technology honestly, not to oversell proof we don't yet have here.</p>
     </header>
 
     <div class="bridge">
-      <div class="bridge-tag">What we have, and what we don't</div>
-      <h3>Real technology. <span class="em">No local proof, yet.</span></h3>
-      <p>The detection behind AlgoDroneTeams has been validated at 99.7% accuracy on a recognized academic benchmark, and the flight routing is roughly 40% more efficient than a standard sweep. Those are real, verifiable numbers — but they're not the same as a documented result on Mato Grosso soy or cotton, under tropical conditions, against the pests and diseases typical of the region (Asian soybean rust, stink bugs, cotton boll weevil). The loss-calculation methodology — area × severity × price — is the same one used globally; what still needs calibrating is the recovery model for your crop and your region.</p>
+      <div class="bridge-tag" data-i18n="bridge.btag">What we have, and what we don't</div>
+      <h3 data-i18n="bridge.h3">Real technology. <span class="em">No local proof, yet.</span></h3>
+      <p data-i18n="bridge.p">The detection behind AlgoDroneTeams has been validated at 99.7% accuracy on a recognized academic benchmark, and the flight routing is roughly 40% more efficient than a standard sweep. Those are real, verifiable numbers — but they're not the same as a documented result on Mato Grosso soy or cotton, under tropical conditions, against the pests and diseases typical of the region (Asian soybean rust, stink bugs, cotton boll weevil). The loss-calculation methodology — area × severity × price — is the same one used globally; what still needs calibrating is the recovery model for your crop and your region.</p>
       <div class="bridge-grid">
         <div class="bridge-col">
-          <div class="lbl">What this document is NOT</div>
-          <div class="bridge-item weak">A commercial proposal</div>
-          <div class="bridge-item weak">A proven use case in Brazil</div>
-          <div class="bridge-item weak">A promise of identical results in soy or cotton</div>
+          <div class="lbl" data-i18n="bridge.lbl1">What this document is NOT</div>
+          <div class="bridge-item weak" data-i18n="bridge.w1">A commercial proposal</div>
+          <div class="bridge-item weak" data-i18n="bridge.w2">A proven use case in Brazil</div>
+          <div class="bridge-item weak" data-i18n="bridge.w3">A promise of identical results in soy or cotton</div>
         </div>
         <div class="bridge-col">
-          <div class="lbl">What this document IS</div>
-          <div class="bridge-item strong">The technology, explained clearly</div>
-          <div class="bridge-item strong">The real results we already have, undressed</div>
-          <div class="bridge-item strong">An honest basis for the next conversation</div>
+          <div class="lbl" data-i18n="bridge.lbl2">What this document IS</div>
+          <div class="bridge-item strong" data-i18n="bridge.s1">The technology, explained clearly</div>
+          <div class="bridge-item strong" data-i18n="bridge.s2">The real results we already have, undressed</div>
+          <div class="bridge-item strong" data-i18n="bridge.s3">An honest basis for the next conversation</div>
         </div>
       </div>
     </div>
@@ -814,28 +825,28 @@ table.weekly td:first-child{font-family:var(--mono);font-weight:600;color:var(--
   <!-- ───────────── 07 · WHAT YOU GET ───────────── -->
   <section class="section" id="reports">
     <header class="sh">
-      <span class="sh-num">07 / Deliverables</span>
-      <h2 class="sh-title">What lands on your phone <span class="em">after every flight.</span></h2>
-      <p class="sh-sub">No software to log into. No dashboard to babysit. After each weekly flight, three things show up — sized for however you like to work.</p>
+      <span class="sh-num" data-i18n="s07.num">07 / Deliverables</span>
+      <h2 class="sh-title" data-i18n="s07.title">What lands on your phone <span class="em">after every flight.</span></h2>
+      <p class="sh-sub" data-i18n="s07.sub">No software to log into. No dashboard to babysit. After each weekly flight, three things show up — sized for however you like to work.</p>
     </header>
     <div class="reports">
       <div class="rcard">
-        <div class="rcard-num">REPORT 01</div>
-        <h3 class="rcard-title">The one-page flight report</h3>
-        <div class="rcard-for">For the agronomist or operator</div>
-        <p>The patches found this week, ranked by severity. Each one with a GPS pin, a size, a likely cause, and a recommended action. PDF or printable.</p>
+        <div class="rcard-num" data-i18n="s07.r1.num">REPORT 01</div>
+        <h3 class="rcard-title" data-i18n="s07.r1.title">The one-page flight report</h3>
+        <div class="rcard-for" data-i18n="s07.r1.for">For the agronomist or operator</div>
+        <p data-i18n="s07.r1.p">The patches found this week, ranked by severity. Each one with a GPS pin, a size, a likely cause, and a recommended action. PDF or printable.</p>
       </div>
       <div class="rcard">
-        <div class="rcard-num">REPORT 02</div>
-        <h3 class="rcard-title">The week-over-week trend</h3>
-        <div class="rcard-for">For the farm manager</div>
-        <p>How the field is changing across the season. Which patches are growing, which are healing, which are new. The whole season, one screen.</p>
+        <div class="rcard-num" data-i18n="s07.r2.num">REPORT 02</div>
+        <h3 class="rcard-title" data-i18n="s07.r2.title">The week-over-week trend</h3>
+        <div class="rcard-for" data-i18n="s07.r2.for">For the farm manager</div>
+        <p data-i18n="s07.r2.p">How the field is changing across the season. Which patches are growing, which are healing, which are new. The whole season, one screen.</p>
       </div>
       <div class="rcard">
-        <div class="rcard-num">REPORT 03</div>
-        <h3 class="rcard-title">The map of your field</h3>
-        <div class="rcard-for">For walking the field</div>
-        <p>An interactive map on your phone, with every problem patch dropped onto your real field boundary. Tap a patch, see the photo, see the recommendation, drive there.</p>
+        <div class="rcard-num" data-i18n="s07.r3.num">REPORT 03</div>
+        <h3 class="rcard-title" data-i18n="s07.r3.title">The map of your field</h3>
+        <div class="rcard-for" data-i18n="s07.r3.for">For walking the field</div>
+        <p data-i18n="s07.r3.p">An interactive map on your phone, with every problem patch dropped onto your real field boundary. Tap a patch, see the photo, see the recommendation, drive there.</p>
       </div>
     </div>
   </section>
@@ -843,8 +854,8 @@ table.weekly td:first-child{font-family:var(--mono);font-weight:600;color:var(--
   <!-- ───────────── 08 · BENEFITS ───────────── -->
   <section class="section">
     <header class="sh">
-      <span class="sh-num">08 / Benefits</span>
-      <h2 class="sh-title">What this means for <span class="em">your operation.</span></h2>
+      <span class="sh-num" data-i18n="s08.num">08 / Benefits</span>
+      <h2 class="sh-title" data-i18n="s08.title">What this means for <span class="em">your operation.</span></h2>
     </header>
     <div class="bens">
       <div class="ben">
@@ -852,8 +863,8 @@ table.weekly td:first-child{font-family:var(--mono);font-weight:600;color:var(--
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
         </div>
         <div>
-          <h3 class="ben-title">Find trouble a week earlier — and a week earlier saves real money.</h3>
-          <p>Disease and stress compound. Each week you wait, less of the damage is recoverable. Weekly drone visits keep you on the early side of every problem.</p>
+          <h3 class="ben-title" data-i18n="s08.b1.title">Find trouble a week earlier — and a week earlier saves real money.</h3>
+          <p data-i18n="s08.b1.p">Disease and stress compound. Each week you wait, less of the damage is recoverable. Weekly drone visits keep you on the early side of every problem.</p>
         </div>
       </div>
       <div class="ben">
@@ -861,8 +872,8 @@ table.weekly td:first-child{font-family:var(--mono);font-weight:600;color:var(--
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12l3 3 6-6"/><path d="M14 7h7M14 12h7M14 17h7"/></svg>
         </div>
         <div>
-          <h3 class="ben-title">Walk the field with a plan, not a hunch.</h3>
-          <p>The report tells you exactly where to look and what to check. You stop spending hours scouting and start spending minutes confirming.</p>
+          <h3 class="ben-title" data-i18n="s08.b2.title">Walk the field with a plan, not a hunch.</h3>
+          <p data-i18n="s08.b2.p">The report tells you exactly where to look and what to check. You stop spending hours scouting and start spending minutes confirming.</p>
         </div>
       </div>
       <div class="ben">
@@ -870,8 +881,8 @@ table.weekly td:first-child{font-family:var(--mono);font-weight:600;color:var(--
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2v20M4 7h8M4 12h8M4 17h8M14 5h6M14 10h6M14 19h6"/></svg>
         </div>
         <div>
-          <h3 class="ben-title">Spray and treat only where it matters.</h3>
-          <p>Patch-level maps mean patch-level treatment. Less product on healthy crop, more focus where there's actually trouble. Lower input cost per hectare, less environmental load.</p>
+          <h3 class="ben-title" data-i18n="s08.b3.title">Spray and treat only where it matters.</h3>
+          <p data-i18n="s08.b3.p">Patch-level maps mean patch-level treatment. Less product on healthy crop, more focus where there's actually trouble. Lower input cost per hectare, less environmental load.</p>
         </div>
       </div>
       <div class="ben">
@@ -879,8 +890,8 @@ table.weekly td:first-child{font-family:var(--mono);font-weight:600;color:var(--
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
         </div>
         <div>
-          <h3 class="ben-title">Have the conversation with numbers in hand.</h3>
-          <p>Whether it's an agronomist, a landlord, a bank, or an insurer — show up with a weekly trend, a patch map, and dollar figures. Not opinions. Evidence.</p>
+          <h3 class="ben-title" data-i18n="s08.b4.title">Have the conversation with numbers in hand.</h3>
+          <p data-i18n="s08.b4.p">Whether it's an agronomist, a landlord, a bank, or an insurer — show up with a weekly trend, a patch map, and dollar figures. Not opinions. Evidence.</p>
         </div>
       </div>
     </div>
@@ -889,51 +900,51 @@ table.weekly td:first-child{font-family:var(--mono);font-weight:600;color:var(--
   <!-- ───────────── 09 · FAQ ───────────── -->
   <section class="section" id="faq">
     <header class="sh">
-      <span class="sh-num">09 / FAQ</span>
-      <h2 class="sh-title">A few of the <span class="em">questions you might have.</span></h2>
+      <span class="sh-num" data-i18n="s09.num">09 / FAQ</span>
+      <h2 class="sh-title" data-i18n="s09.title">A few of the <span class="em">questions you might have.</span></h2>
     </header>
     <div class="faq">
       <details class="faq-item">
         <summary class="faq-q">
-          <span class="faq-q-text">Do I need to learn any software?</span>
+          <span class="faq-q-text" data-i18n="s09.q1">Do I need to learn any software?</span>
           <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
         </summary>
-        <div class="faq-a">No. We fly the drones, we process the images, we send you the report. You get a PDF, a map link, and a direct contact for any questions.</div>
+        <div class="faq-a" data-i18n="s09.a1">No. We fly the drones, we process the images, we send you the report. You get a PDF, a map link, and a direct contact for any questions.</div>
       </details>
       <details class="faq-item">
         <summary class="faq-q">
-          <span class="faq-q-text">How long does a weekly flight take?</span>
+          <span class="faq-q-text" data-i18n="s09.q2">How long does a weekly flight take?</span>
           <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
         </summary>
-        <div class="faq-a">About 40 minutes of flight time for a field around the size of our test field (~95 hectares). The drones land themselves, and nothing on the ground has to stop or move.</div>
+        <div class="faq-a" data-i18n="s09.a2">About 40 minutes of flight time for a field around the size of our test field (~95 hectares). The drones land themselves, and nothing on the ground has to stop or move.</div>
       </details>
       <details class="faq-item">
         <summary class="faq-q">
-          <span class="faq-q-text">What kind of "problems" can it actually spot?</span>
+          <span class="faq-q-text" data-i18n="s09.q3">What kind of "problems" can it actually spot?</span>
           <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
         </summary>
-        <div class="faq-a">Disease pockets, water stress, nutrient deficiency, and unusual growth patterns. Every patch comes with a best-guess cause and a severity score, so you and your agronomist can decide what to do.</div>
+        <div class="faq-a" data-i18n="s09.a3">Disease pockets, water stress, nutrient deficiency, and unusual growth patterns. Every patch comes with a best-guess cause and a severity score, so you and your agronomist can decide what to do.</div>
       </details>
       <details class="faq-item">
         <summary class="faq-q">
-          <span class="faq-q-text">How are the "potential loss" and "recoverable" numbers calculated?</span>
+          <span class="faq-q-text" data-i18n="s09.q4">How are the "potential loss" and "recoverable" numbers calculated?</span>
           <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
         </summary>
-        <div class="faq-a">The core — patch size × severity × crop price — is the <strong>standard damage-function approach</strong> used by agricultural extension institutions worldwide. Your agronomist will recognize the logic. The recoverable/permanent split uses our own recovery model, calibrated to your field over the first 1–2 flights. Model details available to your agronomist on request.</div>
+        <div class="faq-a" data-i18n="s09.a4">The core — patch size × severity × crop price — is the <strong>standard damage-function approach</strong> used by agricultural extension institutions worldwide. Your agronomist will recognize the logic. The recoverable/permanent split uses our own recovery model, calibrated to your field over the first 1–2 flights. Model details available to your agronomist on request.</div>
       </details>
       <details class="faq-item">
         <summary class="faq-q">
-          <span class="faq-q-text">Has this been used on soy or cotton in Brazil?</span>
+          <span class="faq-q-text" data-i18n="s09.q5">Has this been used on soy or cotton in Brazil?</span>
           <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
         </summary>
-        <div class="faq-a">Not yet. The results in this document come from an international academic dataset and a real US corn field. The detection and the loss-calculation methodology are the same across any crop, but the recovery model needs to be calibrated specifically for soy, cotton, and Mato Grosso's climate — something that only happens with real flights here.</div>
+        <div class="faq-a" data-i18n="s09.a5">Not yet. The results in this document come from an international academic dataset and a real US corn field. The detection and the loss-calculation methodology are the same across any crop, but the recovery model needs to be calibrated specifically for soy, cotton, and Mato Grosso's climate — something that only happens with real flights here.</div>
       </details>
       <details class="faq-item">
         <summary class="faq-q">
-          <span class="faq-q-text">What would a realistic starting point look like?</span>
+          <span class="faq-q-text" data-i18n="s09.q6">What would a realistic starting point look like?</span>
           <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
         </summary>
-        <div class="faq-a">This document is informational only for now — there's no formal proposal here. If it's a fit for your operation, the natural next conversation would be designing, together, what a first field trial would look like.</div>
+        <div class="faq-a" data-i18n="s09.a6">This document is informational only for now — there's no formal proposal here. If it's a fit for your operation, the natural next conversation would be designing, together, what a first field trial would look like.</div>
       </details>
     </div>
   </section>
@@ -943,30 +954,30 @@ table.weekly td:first-child{font-family:var(--mono);font-weight:600;color:var(--
 <!-- ───────────── CLOSING ───────────── -->
 <section class="next" id="next">
   <div class="next-inner">
-    <div class="next-label">Summary · Informational document</div>
-    <h2>Technology proven in the US. <span class="em">Not yet tested in Brazil.</span> That's the honest baseline.</h2>
-    <p class="next-sub">This material exists to present clearly what AlgoDroneTeams has already demonstrated, and what still needs to be proven on Brazilian soil — without inflating one to hide the other.</p>
+    <div class="next-label" data-i18n="next.label">Summary · Informational document</div>
+    <h2 data-i18n="next.h2">Technology proven in the US. <span class="em">Not yet tested in Brazil.</span> That's the honest baseline.</h2>
+    <p class="next-sub" data-i18n="next.sub">This material exists to present clearly what AlgoDroneTeams has already demonstrated, and what still needs to be proven on Brazilian soil — without inflating one to hide the other.</p>
 
     <div class="summary-grid">
       <div class="sitem">
-        <div class="st">What's real</div>
-        <h4>99.7% accuracy, ~40% less flight time</h4>
-        <p>Measured on an independent academic benchmark and replicated on a real US corn field.</p>
+        <div class="st" data-i18n="next.s1.st">What's real</div>
+        <h4 data-i18n="next.s1.h4">99.7% accuracy, ~40% less flight time</h4>
+        <p data-i18n="next.s1.p">Measured on an independent academic benchmark and replicated on a real US corn field.</p>
       </div>
       <div class="sitem">
-        <div class="st">What's still missing</div>
-        <h4>Calibration for soy, cotton, and tropical climate</h4>
-        <p>The financial-recovery model needs Mato Grosso field data to become accurate here.</p>
+        <div class="st" data-i18n="next.s2.st">What's still missing</div>
+        <h4 data-i18n="next.s2.h4">Calibration for soy, cotton, and tropical climate</h4>
+        <p data-i18n="next.s2.p">The financial-recovery model needs Mato Grosso field data to become accurate here.</p>
       </div>
       <div class="sitem">
-        <div class="st">What this means</div>
-        <h4>Real technology, at an early stage of arriving in Brazil</h4>
-        <p>Worth knowing about now — and worth watching as local proof gets built.</p>
+        <div class="st" data-i18n="next.s3.st">What this means</div>
+        <h4 data-i18n="next.s3.h4">Real technology, at an early stage of arriving in Brazil</h4>
+        <p data-i18n="next.s3.p">Worth knowing about now — and worth watching as local proof gets built.</p>
       </div>
     </div>
 
     <div class="next-foot">
-      <div class="next-foot-l">Real technology, honest about where it still needs to prove its value.</div>
+      <div class="next-foot-l" data-i18n="next.foot">Real technology, honest about where it still needs to prove its value.</div>
       <div class="next-foot-r">
         <a href="https://algo-rythmn.ai">algo-rythmn.ai</a>
         <a href="mailto:support@algo-rythmn.ai">support@algo-rythmn.ai</a>
@@ -977,9 +988,312 @@ table.weekly td:first-child{font-family:var(--mono);font-weight:600;color:var(--
 
 <!-- ───────────── FOOTER ───────────── -->
 <footer class="footer">
-  <div>© 2026 Algo-Rythmn. All rights reserved.</div>
-  <div>AlgoDroneTeams · Mato Grosso · June 2026</div>
+  <div data-i18n="footer.copy">© 2026 Algo-Rythmn. All rights reserved.</div>
+  <div data-i18n="footer.sub">AlgoDroneTeams · Mato Grosso · June 2026</div>
 </footer>
 
+<script>
+// ─────────── LANGUAGE TOGGLE ───────────
+const i18n = {
+  en: {
+    'nav.why':'Why','nav.how':'How It Works','nav.results':'Results',
+    'nav.evidence':'Evidence','nav.bridge':'US \u2192 Brazil','nav.faq':'FAQ',
+    'hero.label':'Algo-Rythmn \u00b7 Mato Grosso \u00b7 2026/27 Safra',
+    'hero.h1':'Your lavoura has <span class="em">millions more square metres</span> than eyes to watch them all <span class="soy">in time.</span>',
+    'hero.sub':'AlgoDroneTeams flies the field weekly, spots pest, disease, and water-stress patches before they\u2019re visible to the naked eye, and delivers a one-page report: where the trouble is, how big it is, and how much is still recoverable \u2014 in dollars, not gut feel.',
+    'hero.m1.lbl':'Field tested','hero.m1.val':'US corn field',
+    'hero.m2.lbl':'Cadence','hero.m2.val':'Weekly \u00b7 ~40 min/flight',
+    'hero.m3.lbl':'Detection accuracy',
+    'hero.m4.lbl':'Validated on','hero.m4.val':'International academic dataset',
+    's01.num':'01 / Why',
+    's01.title':'By the time a problem is <span class="em">visible from the road,</span> it has already cost you money.',
+    's01.sub':'Most crop trouble \u2014 disease, nutrient deficiency, water stress \u2014 starts in small patches nobody sees on foot or from a truck. By the time the whole field shows a sign, the patch has spread, the window to react has closed, and part of the yield is already gone.',
+    's01.pc1.tag':'The lag','s01.pc1.title':'A week of waiting costs real money.',
+    's01.pc1.p':'Disease and stress don\u2019t pause between scouting visits. Every week without detection, more of the loss becomes permanent \u2014 even if the patch is treated later.',
+    's01.pc2.tag':'The blind spots','s01.pc2.title':'A ground crew can\u2019t cover a property of thousands of hectares.',
+    's01.pc2.p':'Walking the field is slow. Looking from the headland doesn\u2019t reveal the centre of the field. By the time a patch is visible, it\u2019s usually <span class="em">2 to 3 times larger</span> than when it started.',
+    's01.pc3.tag':'The opportunity','s01.pc3.title':'Most of the loss is still <span class="em">recoverable</span> \u2014 if caught in time.',
+    's01.pc3.p':'In our test field, roughly 70% of the projected loss was still recoverable in week one. By week four, that share had already dropped sharply.',
+    's01.band.tag':'The cost of waiting \u00b7 test field \u00b7 4 weeks',
+    's01.band.h':'Wait until <span class="em">Week 4</span> to act, and the recoverable loss grew <span class="em">almost 5\u00d7.</span>',
+    's01.band.sub':'growth in recoverable loss \u00b7 week 1 \u2192 4',
+    's02.num':'02 / How It Works',
+    's02.title':'Four drones. <span class="em">Forty minutes.</span> One report on your phone.',
+    's02.sub':'No complicated software to learn. No dashboard to babysit. Once a week, our team flies the field, processes the images, and sends a short report.',
+    's02.f1.num':'STEP 01','s02.f1.title':'Drones launch from the edge of the field.',
+    's02.f1.body':'Four small drones, one operator. They lift off, do the work, and land themselves. No disruption to whatever\u2019s happening on the ground.',
+    's02.f1.when':'~5 min setup',
+    's02.f2.num':'STEP 02','s02.f2.title':'They prioritize the suspicious zones first.',
+    's02.f2.body':'Instead of sweeping back-and-forth with no judgment, the drones spend flight time on the parts of the field most likely to have a problem. Same coverage, less time.',
+    's02.f2.when':'~40 min flight',
+    's02.f3.num':'STEP 03','s02.f3.title':'The images become a map of problem patches.',
+    's02.f3.body':'Every patch gets a location, a size, a severity level, and a best-guess cause \u2014 disease, water, or nutrient. Plain language, no jargon.',
+    's02.f3.when':'Same day',
+    's02.f4.num':'STEP 04','s02.f4.title':'You get a one-page report. With dollar figures.',
+    's02.f4.body':'\u201cHere are the patches that matter this week. Here\u2019s what they could cost you. Here\u2019s how much you can still save if you act now.\u201d Sent to your phone.',
+    's02.f4.when':'Within 24h',
+    's03.num':'03 / Method',
+    's03.title':'Why our drones find more, <span class="em">in less time.</span>',
+    's03.old.tag':'Standard drone scouting',
+    's03.old.h':'A drone that sweeps line by line, treating every square metre the same.',
+    's03.old.li1':'Burns flight time on the obviously healthy parts of the field',
+    's03.old.li2':'Misses early-stage patches that are still too small to notice',
+    's03.old.li3':'Long flights, more batteries, more pilot time, more cost',
+    's03.old.li4':'You get a pretty picture, not an answer',
+    's03.new.tag':'Our drone team',
+    's03.new.h':'Drones that spend their battery where the trouble actually is.',
+    's03.new.li1':'Same patches found in <b>~40% less flight time</b>',
+    's03.new.li2':'Or, in the same flight time, <b>more patches found</b>',
+    's03.new.li3':'Fewer batteries, less labour, lower cost per hectare',
+    's03.new.li4':'You get a short report telling you <b>what to do</b>',
+    's03.kicker':'It\u2019s not about more drones. It\u2019s about smarter ones.',
+    's04.num':'04 / Results',
+    's04.title':'A real field. A real season. <span class="em">Real dollars.</span>',
+    's04.sub':'We ran the system on a ~95-hectare US corn field for four consecutive weeks. Here\u2019s what weekly aerial scouting found, week by week \u2014 and what waiting would have cost.',
+    's04.nw.title':'~95 ha US corn \u00b7 4 weekly flights','s04.nw.sub':'Figures in CAD \u00b7 reference season, 2026',
+    's04.th1':'Week','s04.th2':'Date','s04.th3':'Problem patches found','s04.th4':'Potential loss','s04.th5':'Still recoverable','s04.th6':'Permanently lost',
+    's04.chart.title':'The cost of waiting one more week',
+    's04.chart.sub':'Recoverable (green) vs. permanently lost (red) \u00b7 CAD',
+    's04.side.tag':'The headline',
+    's04.side.h3':'Catch it in Week 1 \u2014 save <span class="em">$960.</span><br>Wait until Week 4 \u2014 chase <span class="em">$4,570,</span> and <span class="warn">$2,018</span> is already gone.',
+    's04.side.p':'The longer a patch sits untreated, the more of its damage becomes permanent \u2014 even if it\u2019s eventually treated. Weekly scouting is what keeps the recoverable share large and the permanently-gone share small.',
+    's04.fx':'// Figures shown in CAD, as measured on the US test field. As an illustrative conversion (CAD\u2192BRL \u2248 4.0), the Week 4 potential-loss range equates to roughly R$ 19,000\u201326,000 on a ~95 ha field \u2014 an order-of-magnitude reference, not a projection for Brazilian soil, climate, or crop.',
+    's05.num':'05 / Transparency',
+    's05.title':'Where the <span class="em">dollar figures</span> come from.',
+    's05.sub':'No black box. The loss numbers in the report follow the same logic your agronomist already knows \u2014 and are calibrated to your specific field.',
+    's05.intro.tag':'The short version',
+    's05.intro.p':'<strong>Patch size \u00d7 severity \u00d7 crop price = potential loss.</strong> That\u2019s the internationally recognized damage-function approach used by university extension services and crop-protection networks. We then split that loss into \u201cstill recoverable\u201d and \u201calready permanent\u201d using a recovery model that we <strong>calibrate to your own field</strong> over the first 1\u20132 flights.',
+    's05.c1.num':'Standard','s05.c1.lbl':'Industry-recognized core',
+    's05.c1.sub':'Severity \u00d7 area \u00d7 price \u2014 the same damage-function approach used by agricultural research institutions and crop-protection networks',
+    's05.c2.num':'Yours','s05.c2.lbl':'Calibrated to your field',
+    's05.c2.sub':'Crop price, expected yield, and the recoverable/permanent split are tuned to your operation, not a generic manual',
+    's05.c3.num':'Open','s05.c3.lbl':'Auditable on request',
+    's05.c3.sub':'Every dollar figure traces back to one GPS-tagged patch; model details available to your agronomist anytime',
+    's06.num':'06 / Evidence',
+    's06.title':'Does the detection actually work? <span class="em">Yes.</span>',
+    's06.sub':'We tested detection on a public, independently labelled crop dataset where the correct answer for every section of the field was already known. Here\u2019s how often the system got it right.',
+    's06.vs1.lbl':'Detection accuracy','s06.vs1.sub':'Average across 4 scouting rounds on the academic benchmark dataset',
+    's06.vs2.lbl':'Less flight time','s06.vs2.sub':'vs. a standard back-and-forth flight sweep, at the same detection rate',
+    's06.vs3.lbl':'Patches per flight','s06.vs3.sub':'Found, mapped, and severity-ranked on the test field',
+    's06.pc1.tag':'Evidence set 1 \u00b7 The algorithm','s06.pc1.title':'Tested on a published academic dataset.',
+    's06.pc1.body':'We ran the AlgoDroneTeams detection logic on the <strong>Indian Pines</strong> dataset (Purdue University), where independent researchers had already labelled every section of the field. We hit <strong>99.7%</strong> accuracy across four scouting rounds. That\u2019s the science: the detection works.',
+    's06.pc2.tag':'Evidence set 2 \u00b7 A real field','s06.pc2.title':'Applied to a real ~95-hectare Illinois farm.',
+    's06.pc2.body':'We then ran the system on the real GPS boundary of an Illinois corn field and simulated realistic disease pressure to show what a real season would look like. The field is real. The dollars are real. The disease will become real the first time we fly your field.',
+    'bridge.num':'\u2014 / The Honest Part',
+    'bridge.title':'We haven\u2019t flown a field in Brazil yet. <span class="em">You should know that before anything else here.</span>',
+    'bridge.sub':'The numbers above are real \u2014 they come from an independent academic dataset and a real US corn field. But they come from different soil, climate, and crop than yours. This document exists to present the technology honestly, not to oversell proof we don\u2019t yet have here.',
+    'bridge.btag':'What we have, and what we don\u2019t',
+    'bridge.h3':'Real technology. <span class="em">No local proof, yet.</span>',
+    'bridge.p':'The detection behind AlgoDroneTeams has been validated at 99.7% accuracy on a recognized academic benchmark, and the flight routing is roughly 40% more efficient than a standard sweep. Those are real, verifiable numbers \u2014 but they\u2019re not the same as a documented result on Mato Grosso soy or cotton, under tropical conditions, against the pests and diseases typical of the region (Asian soybean rust, stink bugs, cotton boll weevil). The loss-calculation methodology \u2014 area \u00d7 severity \u00d7 price \u2014 is the same one used globally; what still needs calibrating is the recovery model for your crop and your region.',
+    'bridge.lbl1':'What this document is NOT','bridge.w1':'A commercial proposal','bridge.w2':'A proven use case in Brazil','bridge.w3':'A promise of identical results in soy or cotton',
+    'bridge.lbl2':'What this document IS','bridge.s1':'The technology, explained clearly','bridge.s2':'The real results we already have, undressed','bridge.s3':'An honest basis for the next conversation',
+    's07.num':'07 / Deliverables',
+    's07.title':'What lands on your phone <span class="em">after every flight.</span>',
+    's07.sub':'No software to log into. No dashboard to babysit. After each weekly flight, three things show up \u2014 sized for however you like to work.',
+    's07.r1.num':'REPORT 01','s07.r1.title':'The one-page flight report','s07.r1.for':'For the agronomist or operator',
+    's07.r1.p':'The patches found this week, ranked by severity. Each one with a GPS pin, a size, a likely cause, and a recommended action. PDF or printable.',
+    's07.r2.num':'REPORT 02','s07.r2.title':'The week-over-week trend','s07.r2.for':'For the farm manager',
+    's07.r2.p':'How the field is changing across the season. Which patches are growing, which are healing, which are new. The whole season, one screen.',
+    's07.r3.num':'REPORT 03','s07.r3.title':'The map of your field','s07.r3.for':'For walking the field',
+    's07.r3.p':'An interactive map on your phone, with every problem patch dropped onto your real field boundary. Tap a patch, see the photo, see the recommendation, drive there.',
+    's08.num':'08 / Benefits',
+    's08.title':'What this means for <span class="em">your operation.</span>',
+    's08.b1.title':'Find trouble a week earlier \u2014 and a week earlier saves real money.',
+    's08.b1.p':'Disease and stress compound. Each week you wait, less of the damage is recoverable. Weekly drone visits keep you on the early side of every problem.',
+    's08.b2.title':'Walk the field with a plan, not a hunch.',
+    's08.b2.p':'The report tells you exactly where to look and what to check. You stop spending hours scouting and start spending minutes confirming.',
+    's08.b3.title':'Spray and treat only where it matters.',
+    's08.b3.p':'Patch-level maps mean patch-level treatment. Less product on healthy crop, more focus where there\u2019s actually trouble. Lower input cost per hectare, less environmental load.',
+    's08.b4.title':'Have the conversation with numbers in hand.',
+    's08.b4.p':'Whether it\u2019s an agronomist, a landlord, a bank, or an insurer \u2014 show up with a weekly trend, a patch map, and dollar figures. Not opinions. Evidence.',
+    's09.num':'09 / FAQ',
+    's09.title':'A few of the <span class="em">questions you might have.</span>',
+    's09.q1':'Do I need to learn any software?',
+    's09.a1':'No. We fly the drones, we process the images, we send you the report. You get a PDF, a map link, and a direct contact for any questions.',
+    's09.q2':'How long does a weekly flight take?',
+    's09.a2':'About 40 minutes of flight time for a field around the size of our test field (~95 hectares). The drones land themselves, and nothing on the ground has to stop or move.',
+    's09.q3':'What kind of \u201cproblems\u201d can it actually spot?',
+    's09.a3':'Disease pockets, water stress, nutrient deficiency, and unusual growth patterns. Every patch comes with a best-guess cause and a severity score, so you and your agronomist can decide what to do.',
+    's09.q4':'How are the \u201cpotential loss\u201d and \u201crecoverable\u201d numbers calculated?',
+    's09.a4':'The core \u2014 patch size \u00d7 severity \u00d7 crop price \u2014 is the <strong>standard damage-function approach</strong> used by agricultural extension institutions worldwide. Your agronomist will recognize the logic. The recoverable/permanent split uses our own recovery model, calibrated to your field over the first 1\u20132 flights. Model details available to your agronomist on request.',
+    's09.q5':'Has this been used on soy or cotton in Brazil?',
+    's09.a5':'Not yet. The results in this document come from an international academic dataset and a real US corn field. The detection and the loss-calculation methodology are the same across any crop, but the recovery model needs to be calibrated specifically for soy, cotton, and Mato Grosso\u2019s climate \u2014 something that only happens with real flights here.',
+    's09.q6':'What would a realistic starting point look like?',
+    's09.a6':'This document is informational only for now \u2014 there\u2019s no formal proposal here. If it\u2019s a fit for your operation, the natural next conversation would be designing, together, what a first field trial would look like.',
+    'next.label':'Summary \u00b7 Informational document',
+    'next.h2':'Technology proven in the US. <span class="em">Not yet tested in Brazil.</span> That\u2019s the honest baseline.',
+    'next.sub':'This material exists to present clearly what AlgoDroneTeams has already demonstrated, and what still needs to be proven on Brazilian soil \u2014 without inflating one to hide the other.',
+    'next.s1.st':'What\u2019s real','next.s1.h4':'99.7% accuracy, ~40% less flight time',
+    'next.s1.p':'Measured on an independent academic benchmark and replicated on a real US corn field.',
+    'next.s2.st':'What\u2019s still missing','next.s2.h4':'Calibration for soy, cotton, and tropical climate',
+    'next.s2.p':'The financial-recovery model needs Mato Grosso field data to become accurate here.',
+    'next.s3.st':'What this means','next.s3.h4':'Real technology, at an early stage of arriving in Brazil',
+    'next.s3.p':'Worth knowing about now \u2014 and worth watching as local proof gets built.',
+    'next.foot':'Real technology, honest about where it still needs to prove its value.',
+    'footer.copy':'\u00a9 2026 Algo-Rythmn. All rights reserved.',
+    'footer.sub':'AlgoDroneTeams \u00b7 Mato Grosso \u00b7 June 2026'
+  },
+  pt: {
+    'nav.why':'Por Qu\u00ea','nav.how':'Como Funciona','nav.results':'Resultados',
+    'nav.evidence':'Evid\u00eancias','nav.bridge':'EUA \u2192 Brasil','nav.faq':'FAQ',
+    'hero.label':'Algo-Rythmn \u00b7 Mato Grosso \u00b7 Safra 2026/27',
+    'hero.h1':'Sua lavoura tem <span class="em">milh\u00f5es de metros quadrados a mais</span> do que olhos para monitorar todos <span class="soy">a tempo.</span>',
+    'hero.sub':'O AlgoDroneTeams sobrevoa o campo semanalmente, detecta manchas de pragas, doen\u00e7as e estresse h\u00eddrico antes de serem vis\u00edveis a olho nu, e entrega um relat\u00f3rio de uma p\u00e1gina: onde est\u00e1 o problema, qual \u00e9 o tamanho e quanto ainda \u00e9 recuper\u00e1vel \u2014 em valores reais, n\u00e3o em sensa\u00e7\u00f5es.',
+    'hero.m1.lbl':'Testado em campo','hero.m1.val':'Campo de milho nos EUA',
+    'hero.m2.lbl':'Cad\u00eancia','hero.m2.val':'Semanal \u00b7 ~40 min/voo',
+    'hero.m3.lbl':'Precis\u00e3o de detec\u00e7\u00e3o',
+    'hero.m4.lbl':'Validado em','hero.m4.val':'Dataset acad\u00eamico internacional',
+    's01.num':'01 / Por Qu\u00ea',
+    's01.title':'Quando o problema fica <span class="em">vis\u00edvel da estrada,</span> j\u00e1 custou dinheiro.',
+    's01.sub':'A maioria dos problemas na lavoura \u2014 doen\u00e7as, defici\u00eancia nutricional, estresse h\u00eddrico \u2014 come\u00e7a em manchas pequenas que ningu\u00e9m v\u00ea a p\u00e9 ou de dentro de um caminh\u00e3o. Quando o campo inteiro d\u00e1 sinal, a mancha j\u00e1 se alastrou, a janela de rea\u00e7\u00e3o fechou e parte da produ\u00e7\u00e3o j\u00e1 est\u00e1 perdida.',
+    's01.pc1.tag':'O atraso','s01.pc1.title':'Uma semana de espera custa dinheiro de verdade.',
+    's01.pc1.p':'Doen\u00e7as e estresses n\u00e3o param entre visitas de monitoramento. A cada semana sem detec\u00e7\u00e3o, mais da perda se torna permanente \u2014 mesmo que a mancha seja tratada depois.',
+    's01.pc2.tag':'Os pontos cegos','s01.pc2.title':'Uma equipe terrestre n\u00e3o consegue cobrir uma propriedade de milhares de hectares.',
+    's01.pc2.p':'Percorrer o campo a p\u00e9 \u00e9 lento. Olhar da cabeceira n\u00e3o revela o centro do talh\u00e3o. Quando uma mancha fica vis\u00edvel, ela normalmente j\u00e1 tem <span class="em">2 a 3 vezes</span> o tamanho inicial.',
+    's01.pc3.tag':'A oportunidade','s01.pc3.title':'A maior parte da perda ainda \u00e9 <span class="em">recuper\u00e1vel</span> \u2014 se detectada a tempo.',
+    's01.pc3.p':'No nosso campo de teste, cerca de 70% da perda projetada ainda era recuper\u00e1vel na primeira semana. Na quarta semana, essa propor\u00e7\u00e3o j\u00e1 havia ca\u00eddo acentuadamente.',
+    's01.band.tag':'O custo de esperar \u00b7 campo de teste \u00b7 4 semanas',
+    's01.band.h':'Espere at\u00e9 a <span class="em">Semana 4</span> para agir, e a perda recuper\u00e1vel cresceu <span class="em">quase 5\u00d7.</span>',
+    's01.band.sub':'crescimento da perda recuper\u00e1vel \u00b7 semana 1 \u2192 4',
+    's02.num':'02 / Como Funciona',
+    's02.title':'Quatro drones. <span class="em">Quarenta minutos.</span> Um relat\u00f3rio no seu celular.',
+    's02.sub':'Nenhum software complicado para aprender. Nenhum painel para ficar vigiando. Uma vez por semana, nossa equipe sobrevoa o campo, processa as imagens e envia um relat\u00f3rio resumido.',
+    's02.f1.num':'PASSO 01','s02.f1.title':'Os drones decolam da borda do campo.',
+    's02.f1.body':'Quatro pequenos drones, um operador. Eles decolam, fazem o trabalho e pousam sozinhos. Sem interrup\u00e7\u00e3o para o que estiver acontecendo no campo.',
+    's02.f1.when':'~5 min de prepara\u00e7\u00e3o',
+    's02.f2.num':'PASSO 02','s02.f2.title':'Eles priorizam primeiro as zonas suspeitas.',
+    's02.f2.body':'Em vez de varrer linha por linha sem crit\u00e9rio, os drones concentram o tempo de voo nas partes do campo com maior probabilidade de problema. Mesma cobertura, menos tempo.',
+    's02.f2.when':'~40 min de voo',
+    's02.f3.num':'PASSO 03','s02.f3.title':'As imagens viram um mapa de manchas problem\u00e1ticas.',
+    's02.f3.body':'Cada mancha recebe uma localiza\u00e7\u00e3o, um tamanho, um n\u00edvel de severidade e a causa mais prov\u00e1vel \u2014 doen\u00e7a, \u00e1gua ou nutri\u00e7\u00e3o. Linguagem simples, sem jarg\u00e3o.',
+    's02.f3.when':'Mesmo dia',
+    's02.f4.num':'PASSO 04','s02.f4.title':'Voc\u00ea recebe um relat\u00f3rio de uma p\u00e1gina. Com valores em reais.',
+    's02.f4.body':'\u201cAqui est\u00e3o as manchas que importam esta semana. Veja o que podem custar. Veja quanto ainda pode ser salvo se voc\u00ea agir agora.\u201d Enviado para o seu celular.',
+    's02.f4.when':'Em at\u00e9 24h',
+    's03.num':'03 / M\u00e9todo',
+    's03.title':'Por que nossos drones encontram mais, <span class="em">em menos tempo.</span>',
+    's03.old.tag':'Monitoramento com drone padr\u00e3o',
+    's03.old.h':'Um drone que varre linha por linha, tratando cada metro quadrado da mesma forma.',
+    's03.old.li1':'Desperdi\u00e7a tempo de voo nas partes visivelmente saud\u00e1veis do campo',
+    's03.old.li2':'Perde manchas em est\u00e1gio inicial que ainda s\u00e3o pequenas demais para notar',
+    's03.old.li3':'Voos longos, mais baterias, mais tempo de piloto, mais custo',
+    's03.old.li4':'Voc\u00ea recebe uma imagem bonita, n\u00e3o uma resposta',
+    's03.new.tag':'Nossa equipe de drones',
+    's03.new.h':'Drones que gastam a bateria onde o problema realmente est\u00e1.',
+    's03.new.li1':'Mesmas manchas encontradas em <b>~40% menos tempo de voo</b>',
+    's03.new.li2':'Ou, no mesmo tempo de voo, <b>mais manchas encontradas</b>',
+    's03.new.li3':'Menos baterias, menos m\u00e3o de obra, menor custo por hectare',
+    's03.new.li4':'Voc\u00ea recebe um relat\u00f3rio curto dizendo <b>o que fazer</b>',
+    's03.kicker':'N\u00e3o se trata de mais drones. Trata-se de drones mais inteligentes.',
+    's04.num':'04 / Resultados',
+    's04.title':'Um campo real. Uma safra real. <span class="em">Valores reais.</span>',
+    's04.sub':'Rodamos o sistema em um campo de milho de ~95 ha nos EUA por quatro semanas consecutivas. Veja o que o monitoramento a\u00e9reo semanal encontrou, semana a semana \u2014 e o que a espera teria custado.',
+    's04.nw.title':'~95 ha milho EUA \u00b7 4 voos semanais','s04.nw.sub':'Valores em CAD \u00b7 safra de refer\u00eancia, 2026',
+    's04.th1':'Semana','s04.th2':'Data','s04.th3':'Manchas encontradas','s04.th4':'Perda potencial','s04.th5':'Ainda recuper\u00e1vel','s04.th6':'Perdido permanentemente',
+    's04.chart.title':'O custo de esperar mais uma semana',
+    's04.chart.sub':'Recuper\u00e1vel (verde) vs. perdido permanentemente (vermelho) \u00b7 CAD',
+    's04.side.tag':'O destaque',
+    's04.side.h3':'Detecte na Semana 1 \u2014 economize <span class="em">$960.</span><br>Espere at\u00e9 a Semana 4 \u2014 persiga <span class="em">$4.570,</span> e <span class="warn">$2.018</span> j\u00e1 est\u00e3o perdidos.',
+    's04.side.p':'Quanto mais tempo uma mancha fica sem tratamento, mais o dano se torna permanente \u2014 mesmo que seja tratada depois. O monitoramento semanal \u00e9 o que mant\u00e9m a parcela recuper\u00e1vel grande e a perdida permanentemente pequena.',
+    's04.fx':'// Valores mostrados em CAD, medidos no campo de teste nos EUA. Como convers\u00e3o ilustrativa (CAD\u2192BRL \u2248 4,0), o intervalo de perda potencial da Semana 4 equivale a aproximadamente R$ 19.000\u201326.000 em um campo de ~95 ha \u2014 uma refer\u00eancia de ordem de grandeza, n\u00e3o uma proje\u00e7\u00e3o para solo, clima ou cultura brasileiros.',
+    's05.num':'05 / Transpar\u00eancia',
+    's05.title':'De onde v\u00eam os <span class="em">valores em reais.</span>',
+    's05.sub':'Sem caixa preta. Os n\u00fameros de perda no relat\u00f3rio seguem a mesma l\u00f3gica que seu agr\u00f4nomo j\u00e1 conhece \u2014 e s\u00e3o calibrados para o seu campo espec\u00edfico.',
+    's05.intro.tag':'A vers\u00e3o resumida',
+    's05.intro.p':'<strong>Tamanho da mancha \u00d7 severidade \u00d7 pre\u00e7o da cultura = perda potencial.</strong> Essa \u00e9 a abordagem de fun\u00e7\u00e3o de dano reconhecida internacionalmente, usada por servi\u00e7os de extens\u00e3o universit\u00e1ria e redes de prote\u00e7\u00e3o de culturas. Em seguida, dividimos essa perda em \u201cainda recuper\u00e1vel\u201d e \u201cj\u00e1 permanente\u201d usando um modelo de recupera\u00e7\u00e3o que <strong>calibramos para o seu campo</strong> nos primeiros 1 a 2 voos.',
+    's05.c1.num':'Padr\u00e3o','s05.c1.lbl':'Base reconhecida pela ind\u00fastria',
+    's05.c1.sub':'Severidade \u00d7 \u00e1rea \u00d7 pre\u00e7o \u2014 a mesma abordagem de fun\u00e7\u00e3o de dano usada por institui\u00e7\u00f5es de pesquisa agron\u00f4mica e redes de prote\u00e7\u00e3o de culturas',
+    's05.c2.num':'Seu','s05.c2.lbl':'Calibrado para o seu campo',
+    's05.c2.sub':'Pre\u00e7o da cultura, produtividade esperada e a divis\u00e3o recuper\u00e1vel/permanente s\u00e3o ajustados \u00e0 sua opera\u00e7\u00e3o, n\u00e3o a um manual gen\u00e9rico',
+    's05.c3.num':'Aberto','s05.c3.lbl':'Audit\u00e1vel mediante solicita\u00e7\u00e3o',
+    's05.c3.sub':'Cada valor remonta a uma mancha com marca\u00e7\u00e3o GPS; detalhes do modelo dispon\u00edveis ao seu agr\u00f4nomo a qualquer momento',
+    's06.num':'06 / Evid\u00eancias',
+    's06.title':'A detec\u00e7\u00e3o realmente funciona? <span class="em">Sim.</span>',
+    's06.sub':'Testamos a detec\u00e7\u00e3o em um dataset p\u00fablico de culturas com r\u00f3tulos independentes, onde a resposta correta para cada se\u00e7\u00e3o do campo j\u00e1 era conhecida. Veja com que frequ\u00eancia o sistema acertou.',
+    's06.vs1.lbl':'Precis\u00e3o de detec\u00e7\u00e3o','s06.vs1.sub':'M\u00e9dia de 4 rodadas de monitoramento no dataset de refer\u00eancia acad\u00eamica',
+    's06.vs2.lbl':'Menos tempo de voo','s06.vs2.sub':'vs. uma varredura padr\u00e3o de ida e volta, com a mesma taxa de detec\u00e7\u00e3o',
+    's06.vs3.lbl':'Manchas por voo','s06.vs3.sub':'Encontradas, mapeadas e classificadas por severidade no campo de teste',
+    's06.pc1.tag':'Evid\u00eancia 1 \u00b7 O algoritmo','s06.pc1.title':'Testado em um dataset acad\u00eamico publicado.',
+    's06.pc1.body':'Rodamos a l\u00f3gica de detec\u00e7\u00e3o do AlgoDroneTeams no dataset <strong>Indian Pines</strong> (Universidade Purdue), onde pesquisadores independentes j\u00e1 tinham rotulado cada se\u00e7\u00e3o do campo. Atingimos <strong>99,7%</strong> de precis\u00e3o em quatro rodadas de monitoramento. \u00c9 a ci\u00eancia: a detec\u00e7\u00e3o funciona.',
+    's06.pc2.tag':'Evid\u00eancia 2 \u00b7 Um campo real','s06.pc2.title':'Aplicado a uma fazenda real de ~95 hectares no Illinois.',
+    's06.pc2.body':'Em seguida, rodamos o sistema no limite GPS real de um campo de milho no Illinois e simulamos press\u00e3o realista de doen\u00e7as para mostrar como seria uma safra real. O campo \u00e9 real. Os valores s\u00e3o reais. A doen\u00e7a vai se tornar real na primeira vez que sobrevoarmos o seu campo.',
+    'bridge.num':'\u2014 / A Parte Honesta',
+    'bridge.title':'Ainda n\u00e3o sobrevoamos um campo no Brasil. <span class="em">Voc\u00ea precisa saber disso antes de qualquer outra coisa aqui.</span>',
+    'bridge.sub':'Os n\u00fameros acima s\u00e3o reais \u2014 v\u00eam de um dataset acad\u00eamico independente e de um campo real nos EUA. Mas v\u00eam de solo, clima e cultura diferentes dos seus. Este documento existe para apresentar a tecnologia de forma honesta, n\u00e3o para superestimar provas que ainda n\u00e3o temos aqui.',
+    'bridge.btag':'O que temos, e o que n\u00e3o temos',
+    'bridge.h3':'Tecnologia real. <span class="em">Sem prova local, ainda.</span>',
+    'bridge.p':'A detec\u00e7\u00e3o por tr\u00e1s do AlgoDroneTeams foi validada com 99,7% de precis\u00e3o em um benchmark acad\u00eamico reconhecido, e o roteamento de voo \u00e9 cerca de 40% mais eficiente que uma varredura padr\u00e3o. Esses s\u00e3o n\u00fameros reais e verific\u00e1veis \u2014 mas n\u00e3o s\u00e3o equivalentes a um resultado documentado na soja ou algod\u00e3o do Mato Grosso, em condi\u00e7\u00f5es tropicais, contra as pragas e doen\u00e7as t\u00edpicas da regi\u00e3o (ferrugem asi\u00e1tica da soja, percevejos, bicudo do algodoeiro). A metodologia de c\u00e1lculo de perdas \u2014 \u00e1rea \u00d7 severidade \u00d7 pre\u00e7o \u2014 \u00e9 a mesma usada globalmente; o que ainda precisa ser calibrado \u00e9 o modelo de recupera\u00e7\u00e3o para a sua cultura e regi\u00e3o.',
+    'bridge.lbl1':'O que este documento N\u00c3O \u00c9','bridge.w1':'Uma proposta comercial','bridge.w2':'Um caso de uso comprovado no Brasil','bridge.w3':'Uma promessa de resultados id\u00eanticos em soja ou algod\u00e3o',
+    'bridge.lbl2':'O que este documento \u00c9','bridge.s1':'A tecnologia, explicada claramente','bridge.s2':'Os resultados reais que j\u00e1 temos, sem ornamentos','bridge.s3':'Uma base honesta para a pr\u00f3xima conversa',
+    's07.num':'07 / Entregas',
+    's07.title':'O que chega no seu celular <span class="em">ap\u00f3s cada voo.</span>',
+    's07.sub':'Nenhum software para acessar. Nenhum painel para monitorar. Ap\u00f3s cada voo semanal, tr\u00eas coisas aparecem \u2014 no formato que voc\u00ea prefere trabalhar.',
+    's07.r1.num':'RELAT\u00d3RIO 01','s07.r1.title':'O relat\u00f3rio de voo de uma p\u00e1gina','s07.r1.for':'Para o agr\u00f4nomo ou operador',
+    's07.r1.p':'As manchas encontradas esta semana, ordenadas por severidade. Cada uma com um pino de GPS, tamanho, causa prov\u00e1vel e a\u00e7\u00e3o recomendada. PDF ou imprim\u00edvel.',
+    's07.r2.num':'RELAT\u00d3RIO 02','s07.r2.title':'A tend\u00eancia semana a semana','s07.r2.for':'Para o gerente da fazenda',
+    's07.r2.p':'Como o campo est\u00e1 mudando ao longo da safra. Quais manchas est\u00e3o crescendo, quais est\u00e3o cicatrizando, quais s\u00e3o novas. A safra inteira, em uma tela.',
+    's07.r3.num':'RELAT\u00d3RIO 03','s07.r3.title':'O mapa do seu campo','s07.r3.for':'Para percorrer o campo',
+    's07.r3.p':'Um mapa interativo no seu celular, com cada mancha problem\u00e1tica sobre o limite real do seu campo. Toque em uma mancha, veja a foto, veja a recomenda\u00e7\u00e3o, v\u00e1 at\u00e9 l\u00e1.',
+    's08.num':'08 / Benef\u00edcios',
+    's08.title':'O que isso significa para <span class="em">a sua opera\u00e7\u00e3o.</span>',
+    's08.b1.title':'Encontre o problema uma semana antes \u2014 e uma semana antes salva dinheiro de verdade.',
+    's08.b1.p':'Doen\u00e7as e estresses se acumulam. Cada semana que voc\u00ea espera, menos do dano \u00e9 recuper\u00e1vel. Visitas semanais de drone mant\u00eam voc\u00ea no lado adiantado de cada problema.',
+    's08.b2.title':'Percorra o campo com um plano, n\u00e3o com um palpite.',
+    's08.b2.p':'O relat\u00f3rio diz exatamente onde olhar e o que verificar. Voc\u00ea para de gastar horas em monitoramento e passa a gastar minutos confirmando.',
+    's08.b3.title':'Aplique e trate apenas onde importa.',
+    's08.b3.p':'Mapas no n\u00edvel de mancha significam tratamento no n\u00edvel de mancha. Menos produto na cultura saud\u00e1vel, mais foco onde h\u00e1 problema real. Menor custo de insumos por hectare, menor carga ambiental.',
+    's08.b4.title':'Tenha a conversa com n\u00fameros em m\u00e3os.',
+    's08.b4.p':'Seja com um agr\u00f4nomo, arrendador, banco ou seguradora \u2014 appare\u00e7a com uma tend\u00eancia semanal, um mapa de manchas e valores reais. N\u00e3o opini\u00f5es. Evid\u00eancias.',
+    's09.num':'09 / FAQ',
+    's09.title':'Algumas das <span class="em">perguntas que voc\u00ea pode ter.</span>',
+    's09.q1':'Preciso aprender algum software?',
+    's09.a1':'N\u00e3o. N\u00f3s pilotamos os drones, processamos as imagens, enviamos o relat\u00f3rio. Voc\u00ea recebe um PDF, um link para o mapa e um contato direto para d\u00favidas.',
+    's09.q2':'Quanto tempo dura um voo semanal?',
+    's09.a2':'Cerca de 40 minutos de tempo de voo para um campo do tamanho do nosso campo de teste (~95 hectares). Os drones pousam sozinhos e nada no campo precisa parar ou se mover.',
+    's09.q3':'Que tipo de \u201cproblemas\u201d ele consegue identificar?',
+    's09.a3':'Focos de doen\u00e7a, estresse h\u00eddrico, defici\u00eancia nutricional e padr\u00f5es de crescimento incomuns. Cada mancha vem com uma causa mais prov\u00e1vel e uma pontua\u00e7\u00e3o de severidade, para que voc\u00ea e seu agr\u00f4nomo decidam o que fazer.',
+    's09.q4':'Como os n\u00fameros de \u201cperda potencial\u201d e \u201crecuper\u00e1vel\u201d s\u00e3o calculados?',
+    's09.a4':'O n\u00facleo \u2014 tamanho da mancha \u00d7 severidade \u00d7 pre\u00e7o da cultura \u2014 \u00e9 a <strong>abordagem padr\u00e3o de fun\u00e7\u00e3o de dano</strong> usada por institui\u00e7\u00f5es de extens\u00e3o agr\u00edcola em todo o mundo. Seu agr\u00f4nomo vai reconhecer a l\u00f3gica. A divis\u00e3o recuper\u00e1vel/permanente usa nosso pr\u00f3prio modelo de recupera\u00e7\u00e3o, calibrado para o seu campo nos primeiros 1 a 2 voos. Detalhes do modelo dispon\u00edveis ao seu agr\u00f4nomo mediante solicita\u00e7\u00e3o.',
+    's09.q5':'Isso j\u00e1 foi usado em soja ou algod\u00e3o no Brasil?',
+    's09.a5':'Ainda n\u00e3o. Os resultados neste documento v\u00eam de um dataset acad\u00eamico internacional e de um campo real nos EUA. A detec\u00e7\u00e3o e a metodologia de c\u00e1lculo de perdas s\u00e3o as mesmas para qualquer cultura, mas o modelo de recupera\u00e7\u00e3o precisa ser calibrado especificamente para soja, algod\u00e3o e o clima do Mato Grosso \u2014 algo que s\u00f3 acontece com voos reais aqui.',
+    's09.q6':'Como seria um ponto de partida realista?',
+    's09.a6':'Este documento \u00e9 apenas informativo por enquanto \u2014 n\u00e3o h\u00e1 proposta formal aqui. Se fizer sentido para a sua opera\u00e7\u00e3o, a pr\u00f3xima conversa natural seria desenhar juntos como seria um primeiro piloto de campo.',
+    'next.label':'Resumo \u00b7 Documento informativo',
+    'next.h2':'Tecnologia comprovada nos EUA. <span class="em">Ainda n\u00e3o testada no Brasil.</span> Essa \u00e9 a linha de base honesta.',
+    'next.sub':'Este material existe para apresentar claramente o que o AlgoDroneTeams j\u00e1 demonstrou e o que ainda precisa ser comprovado em solo brasileiro \u2014 sem inflar um para esconder o outro.',
+    'next.s1.st':'O que \u00e9 real','next.s1.h4':'99,7% de precis\u00e3o, ~40% menos tempo de voo',
+    'next.s1.p':'Medido em um benchmark acad\u00eamico independente e replicado em um campo real nos EUA.',
+    'next.s2.st':'O que ainda falta','next.s2.h4':'Calibra\u00e7\u00e3o para soja, algod\u00e3o e clima tropical',
+    'next.s2.p':'O modelo de recupera\u00e7\u00e3o financeira precisa de dados de campo do Mato Grosso para ser preciso aqui.',
+    'next.s3.st':'O que isso significa','next.s3.h4':'Tecnologia real, em fase inicial de chegada ao Brasil',
+    'next.s3.p':'Vale conhecer agora \u2014 e vale acompanhar enquanto as provas locais s\u00e3o constru\u00eddas.',
+    'next.foot':'Tecnologia real, honesta sobre onde ainda precisa provar seu valor.',
+    'footer.copy':'\u00a9 2026 Algo-Rythmn. Todos os direitos reservados.',
+    'footer.sub':'AlgoDroneTeams \u00b7 Mato Grosso \u00b7 Junho 2026'
+  }
+};
+
+function applyLang(lang) {
+  document.querySelectorAll('[data-i18n]').forEach(function(el) {
+    const key = el.getAttribute('data-i18n');
+    if (i18n[lang] && i18n[lang][key] !== undefined) {
+      el.innerHTML = i18n[lang][key];
+    }
+  });
+}
+
+function setLang(lang) {
+  document.getElementById('btnEN').classList.toggle('active', lang === 'en');
+  document.getElementById('btnPT').classList.toggle('active', lang === 'pt');
+  applyLang(lang);
+  try { localStorage.setItem('algodroneteams-lang', lang); } catch(e) {}
+}
+
+(function() {
+  var saved = 'en';
+  try { saved = localStorage.getItem('algodroneteams-lang') || 'en'; } catch(e) {}
+  if (saved === 'pt') setLang('pt');
+})();
+</script>
 </body>
 </html>
