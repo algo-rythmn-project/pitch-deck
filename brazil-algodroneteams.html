@@ -583,7 +583,7 @@ table.weekly td:first-child{font-family:var(--mono);font-weight:600;color:var(--
           <li data-i18n="s03.old.li1">Burns flight time on the obviously healthy parts of the field</li>
           <li data-i18n="s03.old.li2">Misses early-stage patches that are still too small to notice</li>
           <li data-i18n="s03.old.li3">Long flights, more batteries, more pilot time, more cost</li>
-          <li data-i18n="s03.old.li4">You get a pretty picture, not an answer</li>
+          <li data-i18n="s03.old.li4">You get a map of the field, but no clear action to take</li>
         </ul>
       </div>
       <div class="compare-col new">
@@ -759,7 +759,7 @@ table.weekly td:first-child{font-family:var(--mono);font-weight:600;color:var(--
   <section class="section" id="proof">
     <header class="sh">
       <span class="sh-num" data-i18n="s06.num">06 / Evidence</span>
-      <h2 class="sh-title" data-i18n="s06.title">Does the detection actually work? <span class="em">Yes.</span></h2>
+      <h2 class="sh-title" data-i18n="s06.title">How well does the detection actually work? <span class="em">Here are the numbers.</span></h2>
       <p class="sh-sub" data-i18n="s06.sub">We tested detection on a public, independently labelled crop dataset where the correct answer for every section of the field was already known. Here's how often the system got it right.</p>
     </header>
     <div class="val-stats">
@@ -783,7 +783,7 @@ table.weekly td:first-child{font-family:var(--mono);font-weight:600;color:var(--
       <div class="proof-card">
         <div class="proof-tag" data-i18n="s06.pc1.tag">Evidence set 1 · The algorithm</div>
         <h3 class="proof-title" data-i18n="s06.pc1.title">Tested on a published academic dataset.</h3>
-        <p class="proof-body" data-i18n="s06.pc1.body">We ran the AlgoDroneTeams detection logic on the <strong>Indian Pines</strong> dataset (Purdue University), where independent researchers had already labelled every section of the field. We hit <strong>99.7%</strong> accuracy across four scouting rounds. That's the science: the detection works.</p>
+        <p class="proof-body" data-i18n="s06.pc1.body">We ran the AlgoDroneTeams detection logic on the <strong>Indian Pines</strong> dataset (Purdue University), where independent researchers had already labelled every section of the field. We hit <strong>99.7%</strong> accuracy across four scouting rounds — on a dataset where the correct answer for every patch was already independently known.</p>
       </div>
       <div class="proof-card">
         <div class="proof-tag" data-i18n="s06.pc2.tag">Evidence set 2 · A real field</div>
@@ -1039,7 +1039,7 @@ const i18n = {
     's03.old.li1':'Burns flight time on the obviously healthy parts of the field',
     's03.old.li2':'Misses early-stage patches that are still too small to notice',
     's03.old.li3':'Long flights, more batteries, more pilot time, more cost',
-    's03.old.li4':'You get a pretty picture, not an answer',
+    's03.old.li4':'You get a map of the field, but no clear action to take',
     's03.new.tag':'Our drone team',
     's03.new.h':'Drones that spend their battery where the trouble actually is.',
     's03.new.li1':'Same patches found in <b>~40% less flight time</b>',
@@ -1071,13 +1071,13 @@ const i18n = {
     's05.c3.num':'Open','s05.c3.lbl':'Auditable on request',
     's05.c3.sub':'Every R$ figure traces back to one GPS-tagged patch; model details available to your agronomist anytime',
     's06.num':'06 / Evidence',
-    's06.title':'Does the detection actually work? <span class="em">Yes.</span>',
+    's06.title':'How well does the detection actually work? <span class="em">Here are the numbers.</span>',
     's06.sub':'We tested detection on a public, independently labelled crop dataset where the correct answer for every section of the field was already known. Here\u2019s how often the system got it right.',
     's06.vs1.lbl':'Detection accuracy','s06.vs1.sub':'Average across 4 scouting rounds on the academic benchmark dataset',
     's06.vs2.lbl':'Less flight time','s06.vs2.sub':'vs. a standard back-and-forth flight sweep, at the same detection rate',
     's06.vs3.lbl':'Patches per flight','s06.vs3.sub':'Found, mapped, and severity-ranked on the test field',
     's06.pc1.tag':'Evidence set 1 \u00b7 The algorithm','s06.pc1.title':'Tested on a published academic dataset.',
-    's06.pc1.body':'We ran the AlgoDroneTeams detection logic on the <strong>Indian Pines</strong> dataset (Purdue University), where independent researchers had already labelled every section of the field. We hit <strong>99.7%</strong> accuracy across four scouting rounds. That\u2019s the science: the detection works.',
+    's06.pc1.body':'We ran the AlgoDroneTeams detection logic on the <strong>Indian Pines</strong> dataset (Purdue University), where independent researchers had already labelled every section of the field. We hit <strong>99.7%</strong> accuracy across four scouting rounds \u2014 on a dataset where the correct answer for every patch was already independently known.',
     's06.pc2.tag':'Evidence set 2 \u00b7 A real field','s06.pc2.title':'Applied to a real ~95-hectare Illinois farm.',
     's06.pc2.body':'We then ran the system on the real GPS boundary of an Illinois corn field and simulated realistic disease pressure to show what a real season would look like. The field is real. The R$ figures are real. The disease will become real the first time we fly your field.',
     'bridge.num':'\u2014 / The Honest Part',
@@ -1178,7 +1178,7 @@ const i18n = {
     's03.old.li1':'Desperdi\u00e7a tempo de voo nas partes visivelmente saud\u00e1veis do campo',
     's03.old.li2':'Perde manchas em est\u00e1gio inicial que ainda s\u00e3o pequenas demais para notar',
     's03.old.li3':'Voos longos, mais baterias, mais tempo de piloto, mais custo',
-    's03.old.li4':'Voc\u00ea recebe uma imagem bonita, n\u00e3o uma resposta',
+    's03.old.li4':'Voc\u00ea recebe um mapa do campo, mas sem uma a\u00e7\u00e3o clara a tomar',
     's03.new.tag':'Nossa equipe de drones',
     's03.new.h':'Drones que gastam a bateria onde o problema realmente est\u00e1.',
     's03.new.li1':'Mesmas manchas encontradas em <b>~40% menos tempo de voo</b>',
@@ -1216,7 +1216,7 @@ const i18n = {
     's06.vs2.lbl':'Menos tempo de voo','s06.vs2.sub':'vs. uma varredura padr\u00e3o de ida e volta, com a mesma taxa de detec\u00e7\u00e3o',
     's06.vs3.lbl':'Manchas por voo','s06.vs3.sub':'Encontradas, mapeadas e classificadas por severidade no campo de teste',
     's06.pc1.tag':'Evid\u00eancia 1 \u00b7 O algoritmo','s06.pc1.title':'Testado em um dataset acad\u00eamico publicado.',
-    's06.pc1.body':'Rodamos a l\u00f3gica de detec\u00e7\u00e3o do AlgoDroneTeams no dataset <strong>Indian Pines</strong> (Universidade Purdue), onde pesquisadores independentes j\u00e1 tinham rotulado cada se\u00e7\u00e3o do campo. Atingimos <strong>99,7%</strong> de precis\u00e3o em quatro rodadas de monitoramento. \u00c9 a ci\u00eancia: a detec\u00e7\u00e3o funciona.',
+    's06.pc1.body':'Rodamos a l\u00f3gica de detec\u00e7\u00e3o do AlgoDroneTeams no dataset <strong>Indian Pines</strong> (Universidade Purdue), onde pesquisadores independentes j\u00e1 tinham rotulado cada se\u00e7\u00e3o do campo. Atingimos <strong>99,7%</strong> de precis\u00e3o em quatro rodadas de monitoramento \u2014 em um dataset onde a resposta correta para cada se\u00e7\u00e3o j\u00e1 era independentemente conhecida.',
     's06.pc2.tag':'Evid\u00eancia 2 \u00b7 Um campo real','s06.pc2.title':'Aplicado a uma fazenda real de ~95 hectares no Illinois.',
     's06.pc2.body':'Em seguida, rodamos o sistema no limite GPS real de um campo de milho no Illinois e simulamos press\u00e3o realista de doen\u00e7as para mostrar como seria uma safra real. O campo \u00e9 real. Os valores em R$ s\u00e3o reais. A doen\u00e7a vai se tornar real na primeira vez que sobrevoarmos o seu campo.',
     'bridge.num':'\u2014 / A Parte Honesta',
