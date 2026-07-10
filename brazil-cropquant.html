@@ -310,6 +310,19 @@
     font-family:var(--mono); font-size:10.5px; color:var(--text-faint);
   }
 
+  .uc-scenario{
+    margin-top:12px; padding:10px 12px;
+    background:rgba(245,166,35,.05); border-left:2px solid rgba(245,166,35,.35);
+    border-radius:0 var(--r-sm) var(--r-sm) 0;
+    font-size:.83rem; color:var(--text-dim); line-height:1.55;
+  }
+  .uc-scenario b{ color:var(--text); font-weight:600; }
+  .uc-stat{
+    margin-top:10px;
+    font-family:var(--mono); font-size:.78rem; color:var(--text-faint);
+    letter-spacing:.04em;
+  }
+  .uc-stat span{ color:var(--amber); font-weight:700; }
   @media (max-width:880px){
     section{padding:60px 6vw;}
     .cta-box{flex-direction:column; align-items:flex-start; padding:28px;}
@@ -392,7 +405,7 @@
     <div class="cover-content reveal in">
       <div class="eyebrow" data-i18n="cover-eyebrow">Algo-Rythmn &middot; Brazil &middot; Forward-Curve Intelligence</div>
       <h1 data-i18n="cover-h1">The curve moves<br>before the headline.<br><span class="hl">We read it</span> <span class="hl2">early.</span></h1>
-      <p class="lead" data-i18n="cover-lead">CropQuant applies statistical pattern recognition to forward curve price data — identifying systematic signals in how soybean calendar spreads have historically moved, to estimate whether the spread is likely to widen or narrow.</p>
+      <p class="lead" data-i18n="cover-lead">CropQuant is a curve-shape factor model for grain futures &mdash; it reads the steepness of calendar spreads, issues WIDEN or NARROW only on high-confidence days, and uses nothing but publicly available price data.</p>
     </div>
 
     <div class="cover-chart-panel">
@@ -479,15 +492,15 @@
           <text x="418" y="49" text-anchor="middle"
             style="font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;fill:var(--text-faint);" data-i18n="fwd-svg-signal-label">CropQuant Signal</text>
           <text x="418" y="63" text-anchor="middle"
-            style="font-family:var(--mono);font-size:11.5px;font-weight:700;fill:var(--amber);" data-i18n="fwd-svg-signal-val">WIDEN &middot; 73% conf.</text>
+            style="font-family:var(--mono);font-size:11.5px;font-weight:700;fill:var(--amber);" data-i18n="fwd-svg-signal-val">WIDEN &middot; high confidence</text>
 
           <!-- === X-AXIS CONTRACT MONTH LABELS === -->
           <g style="font-family:var(--mono);font-size:10px;fill:var(--text-faint);" text-anchor="middle">
-            <text x="46"  y="248">Nov&rsquo;25</text>
-            <text x="171" y="248">Jan&rsquo;26</text>
-            <text x="296" y="248">Mar&rsquo;26</text>
-            <text x="421" y="248">Jul&rsquo;26</text>
-            <text x="546" y="248">Nov&rsquo;26</text>
+            <text x="46"  y="248">Jul&rsquo;26</text>
+            <text x="171" y="248">Sep&rsquo;26</text>
+            <text x="296" y="248">Nov&rsquo;26</text>
+            <text x="421" y="248">Mar&rsquo;27</text>
+            <text x="546" y="248">Jul&rsquo;27</text>
           </g>
           <text x="296" y="262" text-anchor="middle"
             style="font-family:var(--mono);font-size:10px;fill:var(--text-faint);letter-spacing:.1em;text-transform:uppercase;" data-i18n="fwd-svg-xaxis">Contract Month</text>
@@ -515,21 +528,21 @@
 <!-- ============ 2. THE PROBLEM ============ -->
 <section id="problem">
   <div class="eyebrow reveal" data-i18n="problem-eyebrow">The Problem</div>
-  <h2 class="reveal reveal-delay-1" data-i18n="problem-h2">Brazil’s market moves daily.<br>Its only public yardstick moves monthly.</h2>
-  <p class="lead reveal reveal-delay-2" data-i18n="problem-lead">CONAB — the government crop agency everyone reads from — revises its own soybean and corn numbers by millions of tonnes, report to report. Everyone downstream is pricing risk off a number that is already out of date by the time it’s published.</p>
+  <h2 class="reveal reveal-delay-1" data-i18n="problem-h2">Everyone prices the spread.<br>Nobody knows where it&rsquo;s going.</h2>
+  <p class="lead reveal reveal-delay-2" data-i18n="problem-lead">Calendar spread direction shapes storage, hedging, procurement, and credit decisions across the grain chain. Yet no systematic, confidence-scored signal exists for where it goes next. Most desks navigate this on fundamentals, experience, and public data that every counterparty shares.</p>
 
   <div class="grid-3 reveal reveal-delay-3">
     <div class="card">
       <div class="card-head" data-i18n="problem-c1-head">Producers &amp; co-ops</div>
-      <div class="problem-text" data-i18n="problem-c1-body">Decide when to sell stored grain off a forecast that may revise next month.</div>
+      <div class="problem-text" data-i18n="problem-c1-body">Decide when to sell stored grain with no reliable read on whether the carry spread will grow or collapse before the next contract window.</div>
     </div>
     <div class="card">
       <div class="card-head" data-i18n="problem-c2-head">Trading desks</div>
-      <div class="problem-text" data-i18n="problem-c2-body">Price calendar spreads and basis trades on the same lagging signal as everyone else.</div>
+      <div class="problem-text" data-i18n="problem-c2-body">Price calendar spreads and time basis trades without a systematic, confidence-scored directional signal &mdash; relying instead on qualitative judgment and fundamentals that the whole market can see.</div>
     </div>
     <div class="card">
       <div class="card-head" data-i18n="problem-c3-head">Lenders &amp; insurers</div>
-      <div class="problem-text" data-i18n="problem-c3-body">Underwrite and extend credit against a crop book with no early read on direction.</div>
+      <div class="problem-text" data-i18n="problem-c3-body">Extend credit and underwrite grain books without knowing whether the forward curve is tightening or widening into the repayment window.</div>
     </div>
   </div>
   <div class="pagefoot">
@@ -544,7 +557,7 @@
   <div class="slide-split-left">
     <div class="eyebrow reveal" data-i18n="network-eyebrow">The Solution</div>
     <h2 class="reveal reveal-delay-1" data-i18n="network-h2">Market price data in.<br>One signal out. Four desks acting on it.</h2>
-    <p class="lead reveal reveal-delay-2" style="margin-top:8px;" data-i18n="network-lead">CropQuant is an AI technology company applying statistical pattern recognition to publicly available market price data. We do not claim deep agricultural domain expertise &mdash; we bring the quantitative signal, and your desk applies the domain judgment to act on it.</p>
+    <p class="lead reveal reveal-delay-2" style="margin-top:8px;" data-i18n="network-lead">One signal, four desks. Each desk translates it through its own domain expertise &mdash; for storage decisions, spread trades, procurement timing, or credit underwriting.</p>
     <p class="footnote reveal reveal-delay-4" style="margin-top:18px;" data-i18n="network-footnote">// We use only publicly available market price data &mdash; no satellite feeds, no supply chain logs, no field surveys. The signal is entirely derived from statistical patterns in forward curve price behaviour.</p>
   </div><!-- slide-split-left -->
   <div class="slide-split-right">
@@ -599,8 +612,8 @@
       <g>
         <rect class="net-node engine" x="395" y="180" width="210" height="100" rx="10"/>
         <text x="500" y="218" text-anchor="middle" class="net-label-main engine">CropQuant</text>
-        <text x="500" y="238" text-anchor="middle" class="net-label-sub" data-i18n="svg-net-eng1">statistical prior +</text>
-        <text x="500" y="252" text-anchor="middle" class="net-label-sub" data-i18n="svg-net-eng2">probabilistic update</text>
+        <text x="500" y="238" text-anchor="middle" class="net-label-sub" data-i18n="svg-net-eng1">curve-shape factor</text>
+        <text x="500" y="252" text-anchor="middle" class="net-label-sub" data-i18n="svg-net-eng2">random-walk benchmark</text>
         <text x="500" y="270" text-anchor="middle" class="net-label-sub" style="fill:var(--green);" data-i18n="svg-net-eng3">NARROW / WIDEN</text>
       </g>
 
@@ -657,7 +670,7 @@
     </tr>
   </table>
   </div>
-  <p class="footnote reveal reveal-delay-4" data-i18n="proof-footnote">// Tested under an expanding rolling window using only information available up to that point. HRW wheat shows no meaningful edge (~50%) — an honest negative control that argues against curve-fitting. Soybean and corn results are processed; final consolidated figures pending verification.</p>
+  <p class="footnote reveal reveal-delay-4" data-i18n="proof-footnote">// Tested under an expanding rolling window using only information available up to that point. HRW wheat shows no meaningful edge (~50%) &mdash; an honest negative control that argues against curve-fitting.</p>
   <div class="pagefoot">
     <span>© 2026 ALGO-RYTHMN · ALL RIGHTS RESERVED</span>
     <span>04 / 08</span>
@@ -670,8 +683,8 @@
   <div class="slide-split-left">
     <div class="eyebrow reveal" data-i18n="edge-eyebrow">The Edge, Explained</div>
     <h2 class="reveal reveal-delay-1" data-i18n="edge-h2">We don&rsquo;t act every day.<br>We act on the days confidence is highest.</h2>
-    <p class="lead reveal reveal-delay-2" data-i18n="edge-lead">Across all days, raw accuracy sits near 58% — a coin flip with a thumb on the scale. But the model knows when its own signal is strong. Acted on only the highest-confidence ~20&ndash;30% of days, accuracy on SRW wheat climbs to 73&ndash;80%.</p>
-    <p class="footnote reveal reveal-delay-4" style="margin-top:18px;" data-i18n="edge-footnote">// Accuracy rises as the model trades only its highest-confidence days. Both curves start near the 50% coin-flip baseline at full coverage and climb sharply in the top decile.</p>
+    <p class="lead reveal reveal-delay-2" data-i18n="edge-lead">Across all days, raw accuracy sits near 58% &mdash; a coin flip with a thumb on the scale. The 73% in the proof table is already filtered to high-confidence days. Tighten the filter further and it climbs higher still: acted on the top ~20% of days, SRW wheat reaches 80&ndash;89%.</p>
+    <p class="footnote reveal reveal-delay-4" style="margin-top:18px;" data-i18n="edge-footnote">// Accuracy rises as the model acts only on its highest-confidence days.</p>
   </div><!-- slide-split-left -->
   <div class="slide-split-right">
   <div class="acc-chart-wrap reveal reveal-delay-3">
@@ -835,105 +848,38 @@
   <div class="slide-split">
   <div class="slide-split-left">
     <div class="eyebrow reveal" data-i18n="mech-eyebrow">How It Works</div>
-    <h2 class="reveal reveal-delay-1" data-i18n="mech-h2">Not a crop forecast.<br>A Bayesian signal built on price patterns alone.</h2>
-    <p class="lead reveal reveal-delay-2" style="margin-top:10px;" data-i18n="mech-lead">CropQuant starts from a statistical prior built on historical price patterns, then applies a Bayesian update as new market prices arrive &mdash; progressively narrowing the probability distribution toward a more confident directional call. No crop surveys. No satellite passes. Just price data.</p>
-
+    <h2 class="reveal reveal-delay-1" data-i18n="mech-h2">Not a crop model.<br>A curve-shape signal that reads the storage reward.</h2>
+    <p class="lead reveal reveal-delay-2" style="margin-top:10px;" data-i18n="mech-lead">The futures curve encodes market consensus on supply timing and carry &mdash; relevant to anyone pricing, hedging, or lending against grain. CropQuant reads that shape, quantifies it as a factor, and issues WIDEN or NARROW only when the signal clears a random-walk benchmark.</p>
+  </div><!-- slide-split-left -->
+  <div class="slide-split-right">
     <div class="timeline reveal reveal-delay-3">
       <div class="tl-line"></div>
       <div class="tl-item">
-        <div class="tl-dot">P</div>
+        <div class="tl-dot">1</div>
         <div class="tl-body">
-          <div class="tl-tag" data-i18n="mech-tl1-tag">Step 1 &middot; Prior</div>
-          <h4 data-i18n="mech-tl1-h">Historical price patterns establish the starting belief</h4>
-          <p data-i18n="mech-tl1-p">A statistical prior built from historical spread behaviour generates a wide, honestly uncertain initial distribution &mdash; no crop data, no satellite imagery, no proprietary feeds.</p>
+          <div class="tl-tag" data-i18n="mech-tl1-tag">Step 1 &middot; The Shape</div>
+          <h4 data-i18n="mech-tl1-h">Curve steepness encodes the market&rsquo;s carry signal</h4>
+          <p data-i18n="mech-tl1-p">An upward-sloping curve signals a storage reward &mdash; deferred contracts above nearby. A flat or inverted curve signals the opposite. That deferred-minus-nearby spread is the raw input.</p>
         </div>
       </div>
       <div class="tl-item">
-        <div class="tl-dot mono">U2</div>
+        <div class="tl-dot mono">2</div>
         <div class="tl-body">
-          <div class="tl-tag" data-i18n="mech-tl2-tag">Step 2 &middot; Update</div>
-          <h4 data-i18n="mech-tl2-h">Incoming market prices update the belief</h4>
-          <p data-i18n="mech-tl2-p">New futures prices and spread observations feed the Bayesian update &mdash; the distribution narrows as the price signal strengthens.</p>
+          <div class="tl-tag" data-i18n="mech-tl2-tag">Step 2 &middot; The Factor</div>
+          <h4 data-i18n="mech-tl2-h">A curve-shape factor model, re-estimated as history accumulates</h4>
+          <p data-i18n="mech-tl2-p">The spread becomes a standardised curve-shape factor. A rolling model, re-estimated on all available history, predicts whether that factor grows or shrinks next month &mdash; benchmarked at every step against a random walk.</p>
         </div>
       </div>
       <div class="tl-item">
-        <div class="tl-dot">U5</div>
+        <div class="tl-dot">3</div>
         <div class="tl-body">
-          <div class="tl-tag" data-i18n="mech-tl3-tag">Step 3 &middot; Output</div>
-          <h4 data-i18n="mech-tl3-h">The model outputs a direction and an explicit confidence score</h4>
-          <p data-i18n="mech-tl3-p">Once the statistical signal reaches sufficient strength, the model outputs WIDEN or NARROW with an explicit confidence score &mdash; so you know not just the direction but how much to trust it today.</p>
+          <div class="tl-tag" data-i18n="mech-tl3-tag">Step 3 &middot; The Signal</div>
+          <h4 data-i18n="mech-tl3-h">Fires only on the handful of high-confidence days each year</h4>
+          <p data-i18n="mech-tl3-p">Days are ranked by predicted move size. Only high-confidence days fire &mdash; roughly ~74 across 14 years of out-of-sample soybean history, about 5&ndash;6 per year. Low frequency, high signal-to-noise.</p>
         </div>
       </div>
     </div>
-  </div><!-- slide-split-left -->
-  <div class="slide-split-right">
-  <div class="dist-chart-wrap reveal reveal-delay-3">
-    <svg viewBox="0 0 560 292" style="width:100%; height:auto; display:block;">
-      <defs>
-        <clipPath id="b1"><rect x="40" y="38" width="100" height="200" rx="6"/></clipPath>
-        <clipPath id="b2"><rect x="220" y="38" width="100" height="200" rx="6"/></clipPath>
-        <clipPath id="b3"><rect x="400" y="38" width="100" height="200" rx="6"/></clipPath>
-        <marker id="mGray" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
-          <path d="M0,1 L5,3 L0,5 Z" fill="var(--line)"/>
-        </marker>
-        <marker id="mAmber" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
-          <path d="M0,1 L5,3 L0,5 Z" fill="var(--amber)"/>
-        </marker>
-      </defs>
-
-      <!-- ===== PANEL LABELS ===== -->
-      <text x="90" y="22" text-anchor="middle" class="dist-svg-label" style="letter-spacing:.07em; text-transform:uppercase;" data-i18n="svg-dist-p1">Prior &middot; Step 1</text>
-      <text x="270" y="22" text-anchor="middle" class="dist-svg-label" style="letter-spacing:.07em; text-transform:uppercase;" data-i18n="svg-dist-p2">Update &middot; Step 2</text>
-      <text x="450" y="22" text-anchor="middle" class="dist-svg-label" style="fill:var(--green); letter-spacing:.07em; text-transform:uppercase;" data-i18n="svg-dist-p3">Signal &middot; Step 3</text>
-
-      <!-- ===== BAR 1: Prior — 52% WIDEN / 48% NARROW ===== -->
-      <rect x="40" y="38" width="100" height="200" rx="6" fill="var(--panel-2)" stroke="var(--line)" stroke-width="1.2"/>
-      <rect x="40" y="38" width="100" height="104" fill="rgba(45,214,138,.12)" clip-path="url(#b1)"/>
-      <rect x="40" y="142" width="100" height="96" fill="rgba(232,85,106,.08)" clip-path="url(#b1)"/>
-      <line x1="40" y1="142" x2="140" y2="142" stroke="var(--line)" stroke-width="1" opacity="0.9"/>
-      <text x="90" y="82" text-anchor="middle" style="font-family:var(--mono); font-size:19px; font-weight:700; fill:var(--green); opacity:.5;">52%</text>
-      <text x="90" y="98" text-anchor="middle" class="dist-svg-label" style="fill:var(--green); opacity:.5;">WIDEN</text>
-      <text x="90" y="180" text-anchor="middle" style="font-family:var(--mono); font-size:17px; font-weight:700; fill:#EE9FA4; opacity:.45;">48%</text>
-      <text x="90" y="196" text-anchor="middle" class="dist-svg-label" style="fill:#EE9FA4; opacity:.45;">NARROW</text>
-      <text x="90" y="256" text-anchor="middle" class="dist-svg-label" data-i18n="svg-dist-unc1">uncertain</text>
-      <text x="90" y="270" text-anchor="middle" class="dist-svg-label" data-i18n="svg-dist-unc2">~50 / 50</text>
-
-      <!-- ===== BAR 2: Update — 65% WIDEN / 35% NARROW ===== -->
-      <rect x="220" y="38" width="100" height="200" rx="6" fill="var(--panel-2)" stroke="rgba(245,166,35,.35)" stroke-width="1.3"/>
-      <rect x="220" y="38" width="100" height="130" fill="rgba(45,214,138,.2)" clip-path="url(#b2)"/>
-      <rect x="220" y="168" width="100" height="70" fill="rgba(232,85,106,.1)" clip-path="url(#b2)"/>
-      <line x1="220" y1="168" x2="320" y2="168" stroke="var(--amber)" stroke-width="1" opacity="0.5"/>
-      <text x="270" y="96" text-anchor="middle" style="font-family:var(--mono); font-size:21px; font-weight:700; fill:var(--green); opacity:.78;">65%</text>
-      <text x="270" y="112" text-anchor="middle" class="dist-svg-label" style="fill:var(--green); opacity:.78;">WIDEN</text>
-      <text x="270" y="196" text-anchor="middle" style="font-family:var(--mono); font-size:16px; font-weight:700; fill:#EE9FA4; opacity:.6;">35%</text>
-      <text x="270" y="212" text-anchor="middle" class="dist-svg-label" style="fill:#EE9FA4; opacity:.6;">NARROW</text>
-      <text x="270" y="256" text-anchor="middle" class="dist-svg-label" style="fill:var(--amber);" data-i18n="svg-dist-bld1">building</text>
-      <text x="270" y="270" text-anchor="middle" class="dist-svg-label" style="fill:var(--amber);" data-i18n="svg-dist-bld2">confidence</text>
-
-      <!-- ===== BAR 3: Final — 78% WIDEN / 22% NARROW ===== -->
-      <rect x="400" y="38" width="100" height="200" rx="6" fill="var(--panel-2)" stroke="var(--green)" stroke-width="1.8"/>
-      <rect x="400" y="38" width="100" height="156" fill="rgba(45,214,138,.28)" clip-path="url(#b3)"/>
-      <rect x="400" y="194" width="100" height="44" fill="rgba(232,85,106,.14)" clip-path="url(#b3)"/>
-      <line x1="400" y1="194" x2="500" y2="194" stroke="var(--green)" stroke-width="1" opacity="0.6"/>
-      <text x="450" y="108" text-anchor="middle" style="font-family:var(--mono); font-size:26px; font-weight:700; fill:var(--green);">78%</text>
-      <text x="450" y="126" text-anchor="middle" class="dist-svg-label" style="fill:var(--green); font-weight:700; font-size:12px;">WIDEN</text>
-      <text x="450" y="215" text-anchor="middle" style="font-family:var(--mono); font-size:14px; font-weight:700; fill:#EE9FA4; opacity:.7;">22%</text>
-      <text x="450" y="230" text-anchor="middle" class="dist-svg-label" style="fill:#EE9FA4; opacity:.7;">NARROW</text>
-      <!-- Signal output badge -->
-      <rect x="392" y="248" width="116" height="36" rx="6" fill="var(--green-glow)" stroke="var(--green)" stroke-width="1.3"/>
-      <text x="450" y="261" text-anchor="middle" style="font-family:var(--mono); font-size:8px; letter-spacing:.12em; text-transform:uppercase; fill:var(--green); opacity:.8;" data-i18n="svg-dist-sigout">SIGNAL OUTPUT</text>
-      <text x="450" y="276" text-anchor="middle" style="font-family:var(--mono); font-size:10.5px; font-weight:700; fill:var(--green);">WIDEN &middot; 78% conf.</text>
-
-      <!-- ===== CONNECTING ARROWS ===== -->
-      <line x1="148" y1="138" x2="212" y2="138" stroke="var(--line)" stroke-width="1.3" marker-end="url(#mGray)"/>
-      <text x="180" y="125" text-anchor="middle" class="dist-svg-label" style="font-size:9px;" data-i18n="svg-dist-arr1a">+ Futures</text>
-      <text x="180" y="136" text-anchor="middle" class="dist-svg-label" style="font-size:9px;" data-i18n="svg-dist-arr1b">+ Spreads</text>
-      <line x1="328" y1="138" x2="392" y2="138" stroke="var(--amber)" stroke-width="1.5" marker-end="url(#mAmber)"/>
-      <text x="360" y="125" text-anchor="middle" class="dist-svg-label" style="fill:var(--amber); font-size:9px;" data-i18n="svg-dist-arr2a">+ Price</text>
-      <text x="360" y="136" text-anchor="middle" class="dist-svg-label" style="fill:var(--amber); font-size:9px;" data-i18n="svg-dist-arr2b">+ Volatility</text>
-    </svg>
-  </div>
-    <p class="footnote reveal reveal-delay-4" style="margin-top:16px;" data-i18n="mech-footnote">// The output is a directional call &mdash; WIDEN or NARROW &mdash; with an explicit confidence score. We are a quantitative technology company: the signal is derived entirely from price data patterns. Your team brings the agricultural domain knowledge to translate the signal into action.</p>
+    <p class="footnote reveal reveal-delay-4" style="margin-top:16px;" data-i18n="mech-footnote">// Output: WIDEN or NARROW with a confidence score, issued only when the signal clears the random-walk benchmark. Your team applies domain knowledge to act on it.</p>
   </div><!-- slide-split-right -->
   </div><!-- slide-split -->
   <div class="pagefoot">
@@ -945,32 +891,33 @@
 <!-- ============ 7. WHO USES THE SIGNAL ============ -->
 <section id="buyers">
   <div class="eyebrow reveal" data-i18n="buyers-eyebrow">Who Acts On It</div>
-  <h2 class="reveal reveal-delay-1" data-i18n="buyers-h2">One signal. Three very different trades.</h2>
+  <h2 class="reveal reveal-delay-1" data-i18n="buyers-h2">One signal. Four very different uses.</h2>
 
-  <div class="grid-3 reveal reveal-delay-2">
+  <div class="grid-2 reveal reveal-delay-2">
     <div class="buyer-card">
-      <div class="role" data-i18n="buyers-c1-role">Producer / Co-op</div>
-      <p class="body" style="font-size:.95rem;" data-i18n="buyers-c1-body">A quantitative read on whether the forward premium in market prices is likely to grow &mdash; a data point to weigh alongside your own market knowledge and operational constraints.</p>
-      <div class="signal-pair">
-        <div class="signal-pill narrow"><b data-i18n="sig-narrow">NARROW</b><span data-i18n="buyers-c1-narrow">Sell sooner</span></div>
-        <div class="signal-pill widen"><b data-i18n="sig-widen">WIDEN</b><span data-i18n="buyers-c1-widen">Store longer</span></div>
-      </div>
+      <div class="role" data-i18n="buyers-c1-role">Cooperatives &amp; producers</div>
+      <p class="body" style="font-size:.9rem;" data-i18n="buyers-c1-body">You have stored soy and need to decide when to sell. Waiting too long costs you if the spread collapses; selling too early leaves money on the table.</p>
+      <div class="uc-scenario"><b data-i18n="buyers-c1-sc-b">Signal says WIDEN &rarr;</b> <span data-i18n="buyers-c1-sc">The Jul/Nov spread is historically likely to grow. Hold stored grain &mdash; deferred prices are moving in your favour.</span></div>
+      <div class="uc-stat" data-i18n="buyers-c1-stat">CBOT soy 2011&ndash;2024 &middot; <span>64%</span> direction correct &middot; avg <span>+28&cent;/bu</span> captured</div>
     </div>
     <div class="buyer-card">
-      <div class="role" data-i18n="buyers-c2-role">Trading Desk</div>
-      <p class="body" style="font-size:.95rem;" data-i18n="buyers-c2-body">A confidence-scored directional call on the calendar spread, derived purely from statistical price pattern analysis. Size the position in proportion to the model&rsquo;s stated confidence &mdash; your desk applies its own risk framework on top.</p>
-      <div class="signal-pair">
-        <div class="signal-pill narrow"><b data-i18n="sig-narrow">NARROW</b><span data-i18n="buyers-c2-narrow">Short the spread</span></div>
-        <div class="signal-pill widen"><b data-i18n="sig-widen">WIDEN</b><span data-i18n="buyers-c2-widen">Long the spread</span></div>
-      </div>
+      <div class="role" data-i18n="buyers-c2-role">Grain buyers &amp; processors</div>
+      <p class="body" style="font-size:.9rem;" data-i18n="buyers-c2-body">You buy grain forward to lock in supply costs. Buying too far out when the curve is about to flatten is expensive; staying spot when it widens leaves you exposed.</p>
+      <div class="uc-scenario"><b data-i18n="buyers-c2-sc-b">Signal says NARROW &rarr;</b> <span data-i18n="buyers-c2-sc">Deferred prices are likely to fall relative to nearby. Pull forward purchases now &mdash; the carry premium is about to shrink.</span></div>
+      <div class="uc-stat" data-i18n="buyers-c2-stat">CBOT SRW wheat 2011&ndash;2024 &middot; <span>86%</span> direction correct &middot; avg <span>+15.5&cent;/bu</span> cost avoided</div>
+      <div class="footnote" style="margin-top:8px; font-size:10.5px;" data-i18n="buyers-c2-fn">// 86% reflects the top ~10% highest-confidence days (vs. 73% across all high-confidence days in the proof table).</div>
     </div>
     <div class="buyer-card">
-      <div class="role" data-i18n="buyers-c3-role">Hedge Desk / Importer</div>
-      <p class="body" style="font-size:.95rem;" data-i18n="buyers-c3-body">A directional read on curve shape based on price signal analysis. How you apply it to roll timing or coverage windows requires your own desk&rsquo;s hedging expertise &mdash; the signal is one quantitative input, not a complete hedging strategy.</p>
-      <div class="signal-pair">
-        <div class="signal-pill narrow"><b data-i18n="sig-narrow">NARROW</b><span data-i18n="buyers-c3-narrow">Roll hedge early</span></div>
-        <div class="signal-pill widen"><b data-i18n="sig-widen">WIDEN</b><span data-i18n="buyers-c3-widen">Pull cover forward</span></div>
-      </div>
+      <div class="role" data-i18n="buyers-c3-role">Agri-tech platforms &amp; researchers</div>
+      <p class="body" style="font-size:.9rem;" data-i18n="buyers-c3-body">You run an advisory platform or academic model. You need a market-structure signal that is transparent, independent of crop models, and causally validated.</p>
+      <div class="uc-scenario"><b data-i18n="buyers-c3-sc-b">Daily alert feed &rarr;</b> <span data-i18n="buyers-c3-sc">Embed the WIDEN/NARROW signal alongside your yield, weather and remote-sensing modules. Only <span style="color:var(--amber);font-weight:700;">14%</span> of days flagged &mdash; low noise, high relevance.</span></div>
+      <div class="uc-stat" data-i18n="buyers-c3-stat">Alert stream &middot; soybean &middot; <span>~2.6</span> distinct episodes/yr &middot; <span>64%</span> directionally correct</div>
+    </div>
+    <div class="buyer-card">
+      <div class="role" data-i18n="buyers-c4-role">Futures &amp; spread traders</div>
+      <p class="body" style="font-size:.9rem;" data-i18n="buyers-c4-body">You trade calendar spreads directly. You want a systematic, confidence-scored directional signal &mdash; tested honestly, including transaction costs and negative controls.</p>
+      <div class="uc-scenario"><b data-i18n="buyers-c4-sc-b">Signal says WIDEN &rarr;</b> <span data-i18n="buyers-c4-sc">Go long the Jul/Nov spread. Size the position to the stated confidence score. Exit at the model&rsquo;s next update or your own stop.</span></div>
+      <div class="uc-stat" data-i18n="buyers-c4-stat">ICE canola 2020&ndash;2024 &middot; <span>74%</span> win rate &middot; profit factor <span>7.1</span> &middot; survives 1&sigma; costs</div>
     </div>
   </div>
   <div class="pagefoot">
@@ -979,7 +926,7 @@
   </div>
 </section>
 
-<!-- ============ 7. ENTRY POINT / CTA ============ -->
+<!-- ============ 8. ENTRY POINT / CTA ============ -->
 <section id="cta">
   <div class="eyebrow reveal" data-i18n="cta-eyebrow">The Offer</div>
   <h2 class="reveal reveal-delay-1" data-i18n="cta-h2">A data feed. Not a deployment.</h2>
@@ -1053,7 +1000,7 @@
       // Cover
       'cover-eyebrow': 'Algo-Rythmn &middot; Brazil &middot; Forward-Curve Intelligence',
       'cover-h1': 'The curve moves<br>before the headline.<br><span class="hl">We read it</span> <span class="hl2">early.</span>',
-      'cover-lead': 'CropQuant applies statistical pattern recognition to forward curve price data \u2014 identifying systematic signals in how soybean calendar spreads have historically moved, to estimate whether the spread is likely to widen or narrow.',
+      'cover-lead': 'CropQuant is a curve-shape factor model for grain futures \u2014 it reads the steepness of calendar spreads, issues WIDEN or NARROW only on high-confidence days, and uses nothing but publicly available price data.',
       'fwd-curve-title': 'Soybean Forward Curve &middot; BRL/bu',
       'fwd-widen-text': '&#x25B2;&thinsp;WIDEN SIGNAL',
       'fwd-leg-0': '90d ago',
@@ -1062,22 +1009,22 @@
       'fwd-svg-spread': 'Spread',
       'fwd-svg-widen': '&#x25B2; widen',
       'fwd-svg-signal-label': 'CropQuant Signal',
-      'fwd-svg-signal-val': 'WIDEN &middot; 73% conf.',
+      'fwd-svg-signal-val': 'WIDEN &middot; high confidence',
       'fwd-svg-xaxis': 'Contract Month',
       // Problem
       'problem-eyebrow': 'The Problem',
-      'problem-h2': "Brazil\u2019s market moves daily.<br>Its only public yardstick moves monthly.",
-      'problem-lead': 'CONAB \u2014 the government crop agency everyone reads from \u2014 revises its own soybean and corn numbers by millions of tonnes, report to report. Everyone downstream is pricing risk off a number that is already out of date by the time it\u2019s published.',
+      'problem-h2': 'Everyone prices the spread.<br>Nobody knows where it\u2019s going.',
+      'problem-lead': 'Calendar spread direction shapes storage, hedging, procurement, and credit decisions across the grain chain. Yet no systematic, confidence-scored signal exists for where it goes next. Most desks navigate this on fundamentals, experience, and public data that every counterparty shares.',
       'problem-c1-head': 'Producers &amp; co-ops',
-      'problem-c1-body': 'Decide when to sell stored grain off a forecast that may revise next month.',
+      'problem-c1-body': 'Decide when to sell stored grain with no reliable read on whether the carry spread will grow or collapse before the next contract window.',
       'problem-c2-head': 'Trading desks',
-      'problem-c2-body': 'Price calendar spreads and basis trades on the same lagging signal as everyone else.',
+      'problem-c2-body': 'Price calendar spreads and time basis trades without a systematic, confidence-scored directional signal \u2014 relying instead on qualitative judgment and fundamentals that the whole market can see.',
       'problem-c3-head': 'Lenders &amp; insurers',
-      'problem-c3-body': 'Underwrite and extend credit against a crop book with no early read on direction.',
+      'problem-c3-body': 'Extend credit and underwrite grain books without knowing whether the forward curve is tightening or widening into the repayment window.',
       // Network / Solution
       'network-eyebrow': 'The Solution',
       'network-h2': 'Market price data in.<br>One signal out. Four desks acting on it.',
-      'network-lead': "CropQuant is an AI technology company applying statistical pattern recognition to publicly available market price data. We do not claim deep agricultural domain expertise \u2014 we bring the quantitative signal, and your desk applies the domain judgment to act on it.",
+      'network-lead': 'One signal, four desks. Each desk translates it through its own domain expertise \u2014 for storage decisions, spread trades, procurement timing, or credit underwriting.',
       'network-footnote': '// We use only publicly available market price data \u2014 no satellite feeds, no supply chain logs, no field surveys. The signal is entirely derived from statistical patterns in forward curve price behaviour.',
       'svg-net-col1': 'Price Inputs',
       'svg-net-col2': 'CropQuant Engine',
@@ -1085,8 +1032,8 @@
       'svg-net-d1': 'Futures price feed',
       'svg-net-d2': 'Historical spread data',
       'svg-net-d3': 'Forward curve structure',
-      'svg-net-eng1': 'statistical prior +',
-      'svg-net-eng2': 'probabilistic update',
+      'svg-net-eng1': 'curve-shape factor',
+      'svg-net-eng2': 'random-walk benchmark',
       'svg-net-eng3': 'NARROW / WIDEN',
       'svg-net-s1': 'Producer / Co-op',
       'svg-net-s2': 'Trading Desk',
@@ -1111,12 +1058,12 @@
       'proof-r3c1': 'Canola (proof-of-concept)',
       'proof-r3c2': '~250 test dates',
       'proof-r3c3': '71% at 1-month horizon',
-      'proof-footnote': '// Tested under an expanding rolling window using only information available up to that point. HRW wheat shows no meaningful edge (~50%) \u2014 an honest negative control that argues against curve-fitting. Soybean and corn results are processed; final consolidated figures pending verification.',
+      'proof-footnote': '// Tested under an expanding rolling window using only information available up to that point. HRW wheat shows no meaningful edge (~50%) \u2014 an honest negative control that argues against curve-fitting.',
       // Edge
       'edge-eyebrow': 'The Edge, Explained',
       'edge-h2': "We don\u2019t act every day.<br>We act on the days confidence is highest.",
-      'edge-lead': "Across all days, raw accuracy sits near 58% \u2014 a coin flip with a thumb on the scale. But the model knows when its own signal is strong. Acted on only the highest-confidence ~20\u201330% of days, accuracy on SRW wheat climbs to 73\u201380%.",
-      'edge-footnote': '// Accuracy rises as the model trades only its highest-confidence days. Both curves start near the 50% coin-flip baseline at full coverage and climb sharply in the top decile.',
+      'edge-lead': 'Across all days, raw accuracy sits near 58% \u2014 a coin flip with a thumb on the scale. The 73% in the proof table is already filtered to high-confidence days. Tighten the filter further and it climbs higher still: acted on the top ~20% of days, SRW wheat reaches 80\u201389%.',
+      'edge-footnote': '// Accuracy rises as the model acts only on its highest-confidence days.',
       'edge-chart-title': 'SRW WHEAT \u2014 Accuracy when acting only on the most confident days',
       'edge-chart-sub': '699 out-of-sample test days',
       'edge-leg1': 'Causal real-time (B)',
@@ -1131,45 +1078,42 @@
       'svg-acc-xbottom': 'Act on top X% by confidence \u2192',
       // Mechanism
       'mech-eyebrow': 'How It Works',
-      'mech-h2': 'Not a crop forecast.<br>A Bayesian signal built on price patterns alone.',
-      'mech-lead': 'CropQuant starts from a statistical prior built on historical price patterns, then applies a Bayesian update as new market prices arrive \u2014 progressively narrowing the probability distribution toward a more confident directional call. No crop surveys. No satellite passes. Just price data.',
-      'mech-tl1-tag': 'Step 1 \u00b7 Prior',
-      'mech-tl1-h': 'Historical price patterns establish the starting belief',
-      'mech-tl1-p': 'A statistical prior built from historical spread behaviour generates a wide, honestly uncertain initial distribution \u2014 no crop data, no satellite imagery, no proprietary feeds.',
-      'mech-tl2-tag': 'Step 2 \u00b7 Update',
-      'mech-tl2-h': 'Incoming market prices update the belief',
-      'mech-tl2-p': 'New futures prices and spread observations feed the Bayesian update \u2014 the distribution narrows as the price signal strengthens.',
-      'mech-tl3-tag': 'Step 3 \u00b7 Output',
-      'mech-tl3-h': 'The model outputs a direction and an explicit confidence score',
-      'mech-tl3-p': 'Once the statistical signal reaches sufficient strength, the model outputs WIDEN or NARROW with an explicit confidence score \u2014 so you know not just the direction but how much to trust it today.',
-      'svg-dist-p1': 'Prior \u00b7 Step 1',
-      'svg-dist-p2': 'Update \u00b7 Step 2',
-      'svg-dist-p3': 'Signal \u00b7 Step 3',
-      'svg-dist-unc1': 'uncertain',
-      'svg-dist-unc2': '~50 / 50',
-      'svg-dist-bld1': 'building',
-      'svg-dist-bld2': 'confidence',
-      'svg-dist-sigout': 'SIGNAL OUTPUT',
-      'svg-dist-arr1a': '+ Futures',
-      'svg-dist-arr1b': '+ Spreads',
-      'svg-dist-arr2a': '+ Price',
-      'svg-dist-arr2b': '+ Volatility',
-      'mech-footnote': '// The output is a directional call \u2014 WIDEN or NARROW \u2014 with an explicit confidence score. We are a quantitative technology company: the signal is derived entirely from price data patterns. Your team brings the agricultural domain knowledge to translate the signal into action.',
+      'mech-h2': 'Not a crop model.<br>A curve-shape signal that reads the storage reward.',
+      'mech-lead': 'The futures curve encodes market consensus on supply timing and carry \u2014 relevant to anyone pricing, hedging, or lending against grain. CropQuant reads that shape, quantifies it as a factor, and issues WIDEN or NARROW only when the signal clears a random-walk benchmark.',
+      'mech-tl1-tag': 'Step 1 \u00b7 The Shape',
+      'mech-tl1-h': 'Curve steepness encodes the market\u2019s carry signal',
+      'mech-tl1-p': 'An upward-sloping curve signals a storage reward \u2014 deferred contracts above nearby. A flat or inverted curve signals the opposite. That deferred-minus-nearby spread is the raw input.',
+      'mech-tl2-tag': 'Step 2 \u00b7 The Factor',
+      'mech-tl2-h': 'A curve-shape factor model, re-estimated as history accumulates',
+      'mech-tl2-p': 'The spread becomes a standardised curve-shape factor. A rolling model, re-estimated on all available history, predicts whether that factor grows or shrinks next month \u2014 benchmarked at every step against a random walk.',
+      'mech-tl3-tag': 'Step 3 \u00b7 The Signal',
+      'mech-tl3-h': 'Fires only on the handful of high-confidence days each year',
+      'mech-tl3-p': 'Days are ranked by predicted move size. Only high-confidence days fire \u2014 roughly ~74 across 14 years of out-of-sample soybean history, about 5\u20136 per year. Low frequency, high signal-to-noise.',
+      'mech-footnote': '// Output: WIDEN or NARROW with a confidence score, issued only when the signal clears the random-walk benchmark. Your team applies domain knowledge to act on it.',
       // Buyers
       'buyers-eyebrow': 'Who Acts On It',
-      'buyers-h2': 'One signal. Three very different trades.',
-      'buyers-c1-role': 'Producer / Co-op',
-      'buyers-c1-body': "A quantitative read on whether the forward premium in market prices is likely to grow \u2014 a data point to weigh alongside your own market knowledge and operational constraints.",
-      'buyers-c1-narrow': 'Sell sooner',
-      'buyers-c1-widen': 'Store longer',
-      'buyers-c2-role': 'Trading Desk',
-      'buyers-c2-body': "A confidence-scored directional call on the calendar spread, derived purely from statistical price pattern analysis. Size the position in proportion to the model\u2019s stated confidence \u2014 your desk applies its own risk framework on top.",
-      'buyers-c2-narrow': 'Short the spread',
-      'buyers-c2-widen': 'Long the spread',
-      'buyers-c3-role': 'Hedge Desk / Importer',
-      'buyers-c3-body': "A directional read on curve shape based on price signal analysis. How you apply it to roll timing or coverage windows requires your own desk\u2019s hedging expertise \u2014 the signal is one quantitative input, not a complete hedging strategy.",
-      'buyers-c3-narrow': 'Roll hedge early',
-      'buyers-c3-widen': 'Pull cover forward',
+      'buyers-h2': 'One signal. Four very different uses.',
+      'buyers-c1-role': 'Cooperatives &amp; producers',
+      'buyers-c1-body': 'You have stored soy and need to decide when to sell. Waiting too long costs you if the spread collapses; selling too early leaves money on the table.',
+      'buyers-c1-sc-b': 'Signal says WIDEN \u2192',
+      'buyers-c1-sc': 'The Jul/Nov spread is historically likely to grow. Hold stored grain \u2014 deferred prices are moving in your favour.',
+      'buyers-c1-stat': 'CBOT soy 2011\u20132024 \u00b7 <span>64%</span> direction correct \u00b7 avg <span>+28\u00a2/bu</span> captured',
+      'buyers-c2-role': 'Grain buyers &amp; processors',
+      'buyers-c2-body': 'You buy grain forward to lock in supply costs. Buying too far out when the curve is about to flatten is expensive; staying spot when it widens leaves you exposed.',
+      'buyers-c2-sc-b': 'Signal says NARROW \u2192',
+      'buyers-c2-sc': 'Deferred prices are likely to fall relative to nearby. Pull forward purchases now \u2014 the carry premium is about to shrink.',
+      'buyers-c2-stat': 'CBOT SRW wheat 2011\u20132024 \u00b7 <span>86%</span> direction correct \u00b7 avg <span>+15.5\u00a2/bu</span> cost avoided',
+      'buyers-c2-fn': '// 86% reflects the top ~10% highest-confidence days (vs. 73% across all high-confidence days in the proof table).',
+      'buyers-c3-role': 'Agri-tech platforms &amp; researchers',
+      'buyers-c3-body': 'You run an advisory platform or academic model. You need a market-structure signal that is transparent, independent of crop models, and causally validated.',
+      'buyers-c3-sc-b': 'Daily alert feed \u2192',
+      'buyers-c3-sc': 'Embed the WIDEN/NARROW signal alongside your yield, weather and remote-sensing modules. Only <span style="color:var(--amber);font-weight:700;">14%</span> of days flagged \u2014 low noise, high relevance.',
+      'buyers-c3-stat': 'Alert stream \u00b7 soybean \u00b7 <span>~2.6</span> distinct episodes/yr \u00b7 <span>64%</span> directionally correct',
+      'buyers-c4-role': 'Futures &amp; spread traders',
+      'buyers-c4-body': 'You trade calendar spreads directly. You want a systematic, confidence-scored directional signal \u2014 tested honestly, including transaction costs and negative controls.',
+      'buyers-c4-sc-b': 'Signal says WIDEN \u2192',
+      'buyers-c4-sc': 'Go long the Jul/Nov spread. Size the position to the stated confidence score. Exit at the model\u2019s next update or your own stop.',
+      'buyers-c4-stat': 'ICE canola 2020\u20132024 \u00b7 <span>74%</span> win rate \u00b7 profit factor <span>7.1</span> \u00b7 survives 1\u03c3 costs',
       'sig-narrow': 'NARROW',
       'sig-widen': 'WIDEN',
       // CTA
@@ -1188,7 +1132,7 @@
       // Cover
       'cover-eyebrow': 'Algo-Rythmn &middot; Brasil &middot; Intelig\u00eancia de Curva a Termo',
       'cover-h1': 'A curva se move<br>antes da manchete.<br><span class="hl">N\u00f3s sinalizamos</span> <span class="hl2">primeiro.</span>',
-      'cover-lead': 'O CropQuant aplica reconhecimento estat\u00edstico de padr\u00f5es a dados de curva a termo \u2014 identificando sinais sistem\u00e1ticos em como os spreads de calend\u00e1rio de soja hist\u00f3ricamente se moveram, para estimar se o spread tende a ampliar ou estreitar.',
+      'cover-lead': 'O CropQuant \u00e9 um modelo de fator de formato de curva para futuros de gr\u00e3os \u2014 l\u00ea a inclina\u00e7\u00e3o dos spreads de calend\u00e1rio, emite AMPLIAR ou ESTREITAR apenas nos dias de alta confian\u00e7a e usa apenas dados de pre\u00e7o publicamente dispon\u00edveis.',
       'fwd-curve-title': 'Curva a Termo de Soja &middot; BRL/bu',
       'fwd-widen-text': '&#x25B2;&thinsp;SINAL DE AMPLIA\u00c7\u00c3O',
       'fwd-leg-0': '90 dias atr\u00e1s',
@@ -1197,22 +1141,22 @@
       'fwd-svg-spread': 'Diferencial',
       'fwd-svg-widen': '&#x25B2; ampliar',
       'fwd-svg-signal-label': 'Sinal CropQuant',
-      'fwd-svg-signal-val': 'AMPLIAR &middot; 73% conf.',
+      'fwd-svg-signal-val': 'AMPLIAR &middot; alta confian\u00e7a',
       'fwd-svg-xaxis': 'Mês do Contrato',
       // Problem
       'problem-eyebrow': 'O Problema',
-      'problem-h2': 'O mercado brasileiro se move todo dia.<br>Seu \u00fanico par\u00e2metro p\u00fablico se move mensalmente.',
-      'problem-lead': 'A CONAB \u2014 a ag\u00eancia governamental de referencia \u2014 revisa seus pr\u00f3prios n\u00fameros de soja e milho em milh\u00f5es de toneladas de relat\u00f3rio para relat\u00f3rio. Toda a cadeia precifica risco com base em um n\u00famero que j\u00e1 est\u00e1 desatualizado quando \u00e9 publicado.',
+      'problem-h2': 'Todo mundo precifica o spread.<br>Ningu\u00e9m sabe para onde ele vai.',
+      'problem-lead': 'A dire\u00e7\u00e3o do spread de calend\u00e1rio molda decis\u00f5es de armazenamento, hedge, compras e cr\u00e9dito em toda a cadeia de gr\u00e3os. No entanto, n\u00e3o existe um sinal sistem\u00e1tico com pontua\u00e7\u00e3o de confian\u00e7a para onde ele vai a seguir. A maioria das mesas navega com base em fundamentos, experi\u00eancia e dados p\u00fablicos que toda contraparte tamb\u00e9m possui.',
       'problem-c1-head': 'Produtores e cooperativas',
-      'problem-c1-body': 'Decidem quando vender o gr\u00e3o armazenado com base em uma previs\u00e3o que pode ser revisada no m\u00eas seguinte.',
+      'problem-c1-body': 'Decidem quando vender o gr\u00e3o armazenado sem uma leitura confi\u00e1vel de se o spread de carry vai crescer ou colapsar antes da pr\u00f3xima janela de contrato.',
       'problem-c2-head': 'Mesas de opera\u00e7\u00f5es',
-      'problem-c2-body': 'Precificam spreads de calend\u00e1rio e opera\u00e7\u00f5es de base com o mesmo sinal defasado que todos os demais.',
+      'problem-c2-body': 'Precificam spreads de calend\u00e1rio e cronometram opera\u00e7\u00f5es de base sem um sinal direcional sistem\u00e1tico com pontua\u00e7\u00e3o de confian\u00e7a \u2014 apoiando-se em julgamento qualitativo e fundamentos que todo o mercado tamb\u00e9m v\u00ea.',
       'problem-c3-head': 'Credores e seguradoras',
-      'problem-c3-body': 'Subscrevem e concedem cr\u00e9dito contra uma carteira agr\u00edcola sem nenhuma leitura antecipada da dire\u00e7\u00e3o do mercado.',
+      'problem-c3-body': 'Concedem cr\u00e9dito e subscrevem carteiras de gr\u00e3os sem saber se a curva a termo est\u00e1 se estreitando ou ampliando at\u00e9 a janela de reembolso.',
       // Network / Solution
       'network-eyebrow': 'A Solu\u00e7\u00e3o',
       'network-h2': 'Dados de pre\u00e7os de mercado na entrada.<br>Um sinal na sa\u00edda. Quatro mesas agindo sobre ele.',
-      'network-lead': 'O CropQuant \u00e9 uma empresa de tecnologia de IA que aplica reconhecimento estat\u00edstico de padr\u00f5es a dados de pre\u00e7os de mercado de acesso p\u00fablico. N\u00e3o reivindicamos profundo conhecimento do dom\u00ednio agr\u00edcola \u2014 trazemos o sinal quantitativo, e sua mesa aplica o julgamento de dom\u00ednio para agir sobre ele.',
+      'network-lead': 'Um sinal, quatro mesas. Cada mesa o traduz atrav\u00e9s de seu pr\u00f3prio conhecimento de dom\u00ednio \u2014 para decis\u00f5es de armazenamento, opera\u00e7\u00f5es de spread, timing de compras ou an\u00e1lise de cr\u00e9dito.',
       'network-footnote': '// Usamos apenas dados de pre\u00e7os de mercado de acesso p\u00fablico \u2014 sem feeds de sat\u00e9lite, sem registros de cadeia de suprimentos, sem levantamentos de campo. O sinal \u00e9 inteiramente derivado de padr\u00f5es estat\u00edsticos no comportamento de pre\u00e7os da curva a termo.',
       'svg-net-col1': 'Entradas de Pre\u00e7o',
       'svg-net-col2': 'Motor CropQuant',
@@ -1220,8 +1164,8 @@
       'svg-net-d1': 'Feed de pre\u00e7os futuros',
       'svg-net-d2': 'Dados hist\u00f3ricos de spread',
       'svg-net-d3': 'Estrutura da curva a termo',
-      'svg-net-eng1': 'probabilidade a priori estat\u00edstica +',
-      'svg-net-eng2': 'atualiza\u00e7\u00e3o probabil\u00edstica',
+      'svg-net-eng1': 'fator de formato de curva',
+      'svg-net-eng2': 'benchmark de passeio aleat\u00f3rio',
       'svg-net-eng3': 'ESTREITAR / AMPLIAR',
       'svg-net-s1': 'Produtor / Cooperativa',
       'svg-net-s2': 'Mesa de Opera\u00e7\u00f5es',
@@ -1246,12 +1190,12 @@
       'proof-r3c1': 'Canola (prova de conceito)',
       'proof-r3c2': '~250 datas de teste',
       'proof-r3c3': '71% em horizonte de 1 m\u00eas',
-      'proof-footnote': '// Testado com janela m\u00f3vel expansiva usando apenas informa\u00e7\u00f5es dispon\u00edveis at\u00e9 aquele momento. O trigo HRW n\u00e3o apresenta vantagem significativa (~50%) \u2014 um controle negativo honesto que argumenta contra o ajuste excessivo. Resultados de soja e milho est\u00e3o em processamento; n\u00fameros consolidados finais pendentes de verifica\u00e7\u00e3o.',
+      'proof-footnote': '// Testado com janela m\u00f3vel expansiva usando apenas informa\u00e7\u00f5es dispon\u00edveis at\u00e9 aquele momento. O trigo HRW n\u00e3o apresenta vantagem significativa (~50%) \u2014 um controle negativo honesto que argumenta contra o ajuste excessivo.',
       // Edge
       'edge-eyebrow': 'A Vantagem Explicada',
       'edge-h2': 'N\u00e3o operamos todos os dias.<br>Operamos nos dias em que realmente acertamos.',
-      'edge-lead': 'Em todos os dias, a acur\u00e1cia bruta fica pr\u00f3xima de 58% \u2014 um cara ou coroa com leve vantagem. Mas o modelo sabe quando seu pr\u00f3prio sinal \u00e9 forte. Ao agir apenas nos ~20\u201330% de dias com maior confian\u00e7a, a acur\u00e1cia no trigo SRW sobe para 73\u201380%.',
-      'edge-footnote': '// A acur\u00e1cia aumenta \u00e0 medida que o modelo opera apenas em seus dias de maior confian\u00e7a. Ambas as curvas partem pr\u00f3ximo da linha base de 50% (cara ou coroa) com cobertura total e sobem acentuadamente no dec\u00edl superior.',
+      'edge-lead': 'Em todos os dias, a acur\u00e1cia bruta fica pr\u00f3xima de 58% \u2014 um cara ou coroa com leve vantagem. Os 73% da tabela de comprova\u00e7\u00e3o j\u00e1 est\u00e3o filtrados para dias de alta confian\u00e7a. Ao apertar ainda mais o filtro, sobe mais: atuando no top ~20% dos dias, o trigo SRW chega a 80\u201389%.',
+      'edge-footnote': '// A acur\u00e1cia aumenta \u00e0 medida que o modelo age apenas nos dias de maior confian\u00e7a.',
       'edge-chart-title': 'TRIGO SRW \u2014 Acur\u00e1cia ao agir apenas nos dias mais confiantes',
       'edge-chart-sub': '699 dias de teste fora da amostra',
       'edge-leg1': 'Causal em tempo real (B)',
@@ -1266,45 +1210,42 @@
       'svg-acc-xbottom': 'Agir no top X% por confian\u00e7a \u2192',
       // Mechanism
       'mech-eyebrow': 'Como Funciona',
-      'mech-h2': 'N\u00e3o uma previs\u00e3o agr\u00edcola.<br>Um sinal Bayesiano constru\u00eddo apenas em padr\u00f5es de pre\u00e7o.',
-      'mech-lead': 'O CropQuant parte de uma probabilidade a priori estat\u00edstica constru\u00edda em padr\u00f5es hist\u00f3ricos de pre\u00e7o, e aplica uma atualiza\u00e7\u00e3o Bayesiana \u00e0 medida que novos pre\u00e7os de mercado chegam \u2014 estreitando progressivamente a distribui\u00e7\u00e3o de probabilidade em dire\u00e7\u00e3o a uma indica\u00e7\u00e3o direcional mais confiante. Sem levantamentos de safra. Sem passagens de sat\u00e9lite. Apenas dados de pre\u00e7o.',
-      'mech-tl1-tag': 'Etapa 1 \u00b7 A Priori',
-      'mech-tl1-h': 'Padr\u00f5es hist\u00f3ricos de pre\u00e7o estabelecem a cren\u00e7a inicial',
-      'mech-tl1-p': 'Uma probabilidade a priori estat\u00edstica constru\u00edda a partir do comportamento hist\u00f3rico de spreads gera uma distribui\u00e7\u00e3o inicial ampla e honestamente incerta \u2014 sem dados de safra, sem imagens de sat\u00e9lite, sem feeds propriet\u00e1rios.',
-      'mech-tl2-tag': 'Etapa 2 \u00b7 Atualiza\u00e7\u00e3o',
-      'mech-tl2-h': 'Pre\u00e7os de mercado atualizados alimentam a atualiza\u00e7\u00e3o da cren\u00e7a',
-      'mech-tl2-p': 'Novos pre\u00e7os futuros e observa\u00e7\u00f5es de spread alimentam a atualiza\u00e7\u00e3o Bayesiana \u2014 a distribui\u00e7\u00e3o se estreita \u00e0 medida que o sinal de pre\u00e7o se fortalece.',
-      'mech-tl3-tag': 'Etapa 3 \u00b7 Sa\u00edda',
-      'mech-tl3-h': 'O modelo gera uma dire\u00e7\u00e3o e uma pontua\u00e7\u00e3o expl\u00edcita de confian\u00e7a',
-      'mech-tl3-p': 'Quando o sinal estat\u00edstico atinge for\u00e7a suficiente, o modelo gera AMPLIAR ou ESTREITAR com uma pontua\u00e7\u00e3o expl\u00edcita de confian\u00e7a \u2014 para que voc\u00ea saiba n\u00e3o apenas a dire\u00e7\u00e3o, mas o quanto confiar nela hoje.',
-      'svg-dist-p1': 'A Priori \u00b7 Etapa 1',
-      'svg-dist-p2': 'Atualiza\u00e7\u00e3o \u00b7 Etapa 2',
-      'svg-dist-p3': 'Sinal \u00b7 Etapa 3',
-      'svg-dist-unc1': 'incerto',
-      'svg-dist-unc2': '~50 / 50',
-      'svg-dist-bld1': 'construindo',
-      'svg-dist-bld2': 'confian\u00e7a',
-      'svg-dist-sigout': 'SA\u00cdDA DO SINAL',
-      'svg-dist-arr1a': '+ Futuros',
-      'svg-dist-arr1b': '+ Spreads',
-      'svg-dist-arr2a': '+ Pre\u00e7o',
-      'svg-dist-arr2b': '+ Volatilidade',
-      'mech-footnote': '// A sa\u00edda \u00e9 uma indica\u00e7\u00e3o direcional \u2014 AMPLIAR ou ESTREITAR \u2014 com uma pontua\u00e7\u00e3o expl\u00edcita de confian\u00e7a. Somos uma empresa de tecnologia quantitativa: o sinal \u00e9 derivado inteiramente de padr\u00f5es de dados de pre\u00e7o. Sua equipe traz o conhecimento do dom\u00ednio agr\u00edcola para traduzir o sinal em a\u00e7\u00e3o.',
+      'mech-h2': 'N\u00e3o um modelo agron\u00f4mico.<br>Um sinal de formato de curva que l\u00ea o pr\u00eamio de armazenamento.',
+      'mech-lead': 'A curva de futuros codifica o consenso do mercado sobre timing de oferta e carry \u2014 relevante para quem precifica, faz hedge ou concede cr\u00e9dito sobre gr\u00e3os. O CropQuant l\u00ea esse formato, quantifica-o como um fator e emite AMPLIAR ou ESTREITAR apenas quando o sinal supera o benchmark de passeio aleat\u00f3rio.',
+      'mech-tl1-tag': 'Etapa 1 \u00b7 O Formato',
+      'mech-tl1-h': 'A inclina\u00e7\u00e3o da curva codifica o sinal de carry do mercado',
+      'mech-tl1-p': 'Uma curva ascendente sinaliza pr\u00eamio de armazenamento \u2014 diferidos acima dos pr\u00f3ximos. Uma curva plana ou invertida sinaliza o oposto. Esse spread diferido-menos-pr\u00f3ximo \u00e9 o insumo bruto.',
+      'mech-tl2-tag': 'Etapa 2 \u00b7 O Fator',
+      'mech-tl2-h': 'Um modelo de fator de formato de curva, re-estimado \u00e0 medida que a hist\u00f3ria se acumula',
+      'mech-tl2-p': 'O spread torna-se um fator de formato de curva padronizado. Um modelo rotativo, re-estimado em todo o hist\u00f3rico dispon\u00edvel, prev\u00ea se esse fator cresce ou diminu\u00ed no pr\u00f3ximo m\u00eas \u2014 benchmarkado a cada passo contra um passeio aleat\u00f3rio.',
+      'mech-tl3-tag': 'Etapa 3 \u00b7 O Sinal',
+      'mech-tl3-h': 'Dispara apenas nos poucos dias de alta confian\u00e7a a cada ano',
+      'mech-tl3-p': 'Os dias s\u00e3o classificados pelo tamanho do movimento previsto. Apenas os de alta confian\u00e7a disparam \u2014 cerca de ~74 em 14 anos de hist\u00f3rico de soja fora da amostra, uns 5\u20136 por ano. Baixa frequ\u00eancia, alto sinal-ru\u00eddo.',
+      'mech-footnote': '// Sa\u00edda: AMPLIAR ou ESTREITAR com pontua\u00e7\u00e3o de confian\u00e7a, emitida apenas quando o sinal supera o benchmark de passeio aleat\u00f3rio. Sua equipe aplica o conhecimento de dom\u00ednio para agir.',
       // Buyers
       'buyers-eyebrow': 'Quem Age Sobre Ele',
-      'buyers-h2': 'Um sinal. Tr\u00eas opera\u00e7\u00f5es muito diferentes.',
-      'buyers-c1-role': 'Produtor / Cooperativa',
-      'buyers-c1-body': 'Uma leitura quantitativa sobre se o pr\u00eamio a termo nos pre\u00e7os de mercado tende a crescer \u2014 um dado a ponderar junto com seu pr\u00f3prio conhecimento de mercado e restri\u00e7\u00f5es operacionais.',
-      'buyers-c1-narrow': 'Vender antes',
-      'buyers-c1-widen': 'Armazenar mais',
-      'buyers-c2-role': 'Mesa de Opera\u00e7\u00f5es',
-      'buyers-c2-body': 'Uma indica\u00e7\u00e3o direcional pontuada por confian\u00e7a sobre o spread de calend\u00e1rio, derivada puramente de an\u00e1lise estat\u00edstica de padr\u00f5es de pre\u00e7o. Dimensione a posi\u00e7\u00e3o em propor\u00e7\u00e3o \u00e0 confian\u00e7a declarada pelo modelo \u2014 sua mesa aplica seu pr\u00f3prio framework de risco por cima.',
-      'buyers-c2-narrow': 'Vender o spread',
-      'buyers-c2-widen': 'Comprar o spread',
-      'buyers-c3-role': 'Mesa de Hedge / Importador',
-      'buyers-c3-body': 'Uma leitura direcional sobre a forma da curva baseada em an\u00e1lise de sinais de pre\u00e7o. Como aplic\u00e1-la ao timing de roll ou janelas de cobertura exige a expertise de hedge da sua pr\u00f3pria mesa \u2014 o sinal \u00e9 uma entrada quantitativa, n\u00e3o uma estrat\u00e9gia de hedge completa.',
-      'buyers-c3-narrow': 'Rolar hedge antecipado',
-      'buyers-c3-widen': 'Antecipar cobertura',
+      'buyers-h2': 'Um sinal. Quatro usos muito diferentes.',
+      'buyers-c1-role': 'Cooperativas e produtores',
+      'buyers-c1-body': 'Voc\u00ea tem soja armazenada e precisa decidir quando vender. Esperar demais custa se o spread colapsar; vender cedo demais deixa dinheiro na mesa.',
+      'buyers-c1-sc-b': 'Sinal diz AMPLIAR \u2192',
+      'buyers-c1-sc': 'O spread Jul/Nov historicamente tende a crescer. Mantenha o gr\u00e3o armazenado \u2014 os pre\u00e7os diferidos est\u00e3o se movendo a seu favor.',
+      'buyers-c1-stat': 'CBOT soja 2011\u20132024 \u00b7 <span>64%</span> dire\u00e7\u00e3o correta \u00b7 m\u00e9dia <span>+28\u00a2/bu</span> capturado',
+      'buyers-c2-role': 'Compradores e processadores de gr\u00e3os',
+      'buyers-c2-body': 'Voc\u00ea compra gr\u00e3os a termo para fixar custos de abastecimento. Comprar muito adiante quando a curva est\u00e1 prestes a achatar sai caro; ficar no spot quando ela amplia te deixa exposto.',
+      'buyers-c2-sc-b': 'Sinal diz ESTREITAR \u2192',
+      'buyers-c2-sc': 'Os pre\u00e7os diferidos provavelmente v\u00e3o cair em rela\u00e7\u00e3o aos pr\u00f3ximos. Antecipe compras agora \u2014 o pr\u00eamio de carregamento est\u00e1 prestes a encolher.',
+      'buyers-c2-stat': 'CBOT trigo SRW 2011\u20132024 \u00b7 <span>86%</span> dire\u00e7\u00e3o correta \u00b7 m\u00e9dia <span>+15,5\u00a2/bu</span> de custo evitado',
+      'buyers-c2-fn': '// 86% reflete os ~10% dias de maior confian\u00e7a (vs. 73% em todos os dias de alta confian\u00e7a na tabela de comprova\u00e7\u00e3o).',
+      'buyers-c3-role': 'Plataformas agri-tech e pesquisadores',
+      'buyers-c3-body': 'Voc\u00ea opera uma plataforma de consultoria ou modelo acad\u00eamico. Precisa de um sinal de estrutura de mercado transparente, independente de modelos agr\u00edcolas e validado causalmente.',
+      'buyers-c3-sc-b': 'Feed di\u00e1rio de alertas \u2192',
+      'buyers-c3-sc': 'Incorpore o sinal AMPLIAR/ESTREITAR junto aos seus m\u00f3dulos de produtividade, clima e sensoriamento remoto. Apenas <span style="color:var(--amber);font-weight:700;">14%</span> dos dias sinalizados \u2014 baixo ru\u00eddo, alta relev\u00e2ncia.',
+      'buyers-c3-stat': 'Stream de alertas \u00b7 soja \u00b7 <span>~2,6</span> epis\u00f3dios distintos/ano \u00b7 <span>64%</span> direcionalmente correto',
+      'buyers-c4-role': 'Traders de futuros e spreads',
+      'buyers-c4-body': 'Voc\u00ea negocia spreads de calend\u00e1rio diretamente. Quer um sinal direcional sistem\u00e1tico com pontua\u00e7\u00e3o de confian\u00e7a \u2014 testado de forma honesta, incluindo custos de transa\u00e7\u00e3o e controles negativos.',
+      'buyers-c4-sc-b': 'Sinal diz AMPLIAR \u2192',
+      'buyers-c4-sc': 'Compre o spread Jul/Nov. Dimensione a posi\u00e7\u00e3o conforme a pontua\u00e7\u00e3o de confian\u00e7a. Saia na pr\u00f3xima atualiza\u00e7\u00e3o do modelo ou no seu pr\u00f3prio stop.',
+      'buyers-c4-stat': 'ICE canola 2020\u20132024 \u00b7 <span>74%</span> taxa de acerto \u00b7 fator de lucro <span>7,1</span> \u00b7 sobrevive a custos 1\u03c3',
       'sig-narrow': 'ESTREITAR',
       'sig-widen': 'AMPLIAR',
       // CTA

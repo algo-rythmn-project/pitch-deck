@@ -97,7 +97,7 @@
     font-family:var(--mono); font-size:11px; color:var(--ink-faint);
     pointer-events:none;
   }
-  #capabilities .slide-foot, #cta .slide-foot{ color:rgba(255,255,255,.35); }
+  #build .slide-foot, #cta .slide-foot{ color:rgba(255,255,255,.35); }
   .slide-foot .copy{ letter-spacing:.04em; }
   .slide-foot .pnum{ letter-spacing:.1em; }
 
@@ -223,11 +223,19 @@
   .agent-chip.building .name{color:var(--gold);}
 
   /* ============ CAPABILITIES ============ */
-  #capabilities{background:var(--navy-deep); color:#F3F1EC;}
-  #capabilities .eyebrow{color:#D9C896;}
-  #capabilities .eyebrow::before{background:#D9C896;}
-  #capabilities h2{color:#fff;}
-  #capabilities p.lead{color:rgba(255,255,255,.72);}
+  #capabilities{background:var(--bg);}
+
+  /* ============ BUILD STATUS — DARK ============ */
+  #build{background:var(--navy-deep); color:#F3F1EC;}
+  #build .eyebrow{color:#D9C896;}
+  #build .eyebrow::before{background:#D9C896;}
+  #build h2{color:#fff;}
+  #build p.lead{color:rgba(255,255,255,.72);}
+  #build .footnote{color:rgba(255,255,255,.4);}
+  #build table.status th{background:rgba(255,255,255,.1); color:#fff;}
+  #build table.status td{border-bottom-color:rgba(255,255,255,.1); color:rgba(255,255,255,.88);}
+  #build table.status td:last-child{color:rgba(255,255,255,.62);}
+  #build table.status tr:nth-child(even) td{background:rgba(255,255,255,.04);}
 
   .cap-grid{
     display:grid; grid-template-columns:repeat(3,1fr);
@@ -488,12 +496,12 @@
   @media (max-width:800px){ .cap-categories{grid-template-columns:1fr;} }
 
   .cap-cat{
-    background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.1);
+    background:var(--bg-panel); border:1px solid var(--line);
     border-radius:8px; padding:26px 24px; position:relative; overflow:hidden;
   }
   .cap-cat::after{
     content:''; position:absolute; bottom:0; left:0; right:0; height:3px;
-    background:rgba(255,255,255,.15);
+    background:var(--line);
   }
   .cap-cat--gold::after{ background:var(--gold); opacity:.7; }
   .cap-cat--sage::after{ background:var(--sage); opacity:.8; }
@@ -501,22 +509,22 @@
 
   .cap-cat-label{
     font-family:var(--mono); font-size:13px; text-transform:uppercase; letter-spacing:.1em; font-weight:600;
-    color:rgba(255,255,255,.55); margin-bottom:18px;
+    color:var(--ink-faint); margin-bottom:18px;
     display:flex; align-items:center; gap:8px;
   }
-  .cap-cat--gold .cap-cat-label{ color:rgba(212,170,90,.9); }
-  .cap-cat--sage .cap-cat-label{ color:rgba(160,200,165,.9); }
-  .cap-cat--slate .cap-cat-label{ color:rgba(160,185,210,.9); }
+  .cap-cat--gold .cap-cat-label{ color:var(--gold); }
+  .cap-cat--sage .cap-cat-label{ color:var(--sage); }
+  .cap-cat--slate .cap-cat-label{ color:var(--slate); }
 
   .cap-cat-items{ display:flex; flex-direction:column; gap:14px; }
 
   .cap-item{
     display:flex; gap:14px; align-items:flex-start;
-    font-size:.9rem; color:rgba(255,255,255,.75); line-height:1.6;
+    font-size:.9rem; color:var(--ink-soft); line-height:1.6;
   }
-  .cap-item strong{ color:#fff; font-weight:600; }
+  .cap-item strong{ color:var(--navy-deep); font-weight:600; }
   .cap-item-n{
-    font-family:var(--mono); font-size:.68rem; color:rgba(255,255,255,.3);
+    font-family:var(--mono); font-size:.68rem; color:var(--ink-faint);
     flex-shrink:0; padding-top:3px; min-width:18px;
   }
 
@@ -636,57 +644,57 @@
   </div>
   <div class="reveal in">
     <div class="eyebrow" data-i18n="cover.eyebrow">Algo-Rythmn &middot; AgroMind for Brazil &middot; Governed Multi-Agent Intelligence</div>
-    <h1 data-i18n="cover.h1">An analyst that shows<br>its <em>reasoning</em> — not just<br>its answer.</h1>
-    <p class="lead" data-i18n="cover.lead">An AI platform for structured, traceable analysis. We bring the reasoning infrastructure; your team brings the domain knowledge.</p>
+    <h1 data-i18n="cover.h1">An analyst that shows<br>its <em>reasoning</em>, not just<br>its answer.</h1>
+    <p class="lead" data-i18n="cover.lead">An agentic AI layer for large precision agriculture companies in Brazil. You already have the data: satellite imagery, sensors, field history. We make it answerable.</p>
   </div>
   <div class="cover-stats reveal reveal-delay-2">
     <div class="cover-stat"><div class="num">100%</div><div class="lbl" data-i18n="cover.stat1">of conclusions traceable to a cited source</div></div>
     <div class="cover-stat"><div class="num">10+</div><div class="lbl" data-i18n="cover.stat2">agentic capabilities across the platform</div></div>
-    <div class="cover-stat"><div class="num">0</div><div class="lbl" data-i18n="cover.stat3">uncited claims &mdash; every output is source-backed, not generated</div></div>
-    <div class="cover-stat"><div class="num">0</div><div class="lbl" data-i18n="cover.stat4">shared model training &mdash; your data stays yours, always</div></div>
+    <div class="cover-stat"><div class="num">5</div><div class="lbl" data-i18n="cover.stat3">specialist agents: field intelligence, yield simulation, compliance, ROI &amp; reporting</div></div>
+    <div class="cover-stat"><div class="num">0</div><div class="lbl" data-i18n="cover.stat4">shared model training. Your data stays yours, always</div></div>
   </div>
   <div class="us-proof reveal reveal-delay-3">
     <span class="up-marker" data-i18n="cover.upmarker">US&nbsp;Market&nbsp;Proven</span>
-    <span class="up-text" data-i18n="cover.uptext">Our AI layer is production-deployed for a large US precision agri company managing <strong>10M+ acres</strong> &mdash; the same governed architecture, now being applied to the Brazilian agri-finance market.</span>
+    <span class="up-text" data-i18n="cover.uptext">Our AI layer is production-deployed for a large US precision agriculture company managing <strong>10M+ acres</strong>. The same governed architecture, now being applied to Brazil&rsquo;s largest precision ag operations.</span>
   </div>
   <div class="cover-foot">
     <span data-i18n="cover.foot.left">AGROMIND &middot; PRODUCT BRIEF</span>
     <div class="scroll-cue"><span data-i18n="cover.scroll">SCROLL</span><span class="arrow"></span></div>
-    <span data-i18n="cover.foot.right">BRAZIL MARKET ENTRY &middot; 2026</span>
+    <span data-i18n="cover.foot.right">BRAZIL PRECISION AG &middot; 2026</span>
   </div>
 </section>
 
 <!-- ============ 2. THE PROBLEM ============ -->
 <section id="problem">
   <div class="eyebrow reveal" data-i18n="prob.eyebrow">The Problem</div>
-  <h2 class="reveal reveal-delay-1" data-i18n="prob.h2">Agri-finance teams handle a lot of data &mdash;<br>much of it contradictory and delayed.</h2>
-  <p class="lead reveal reveal-delay-2" data-i18n="prob.lead">CONAB revises crop numbers between reports. Data arrives from multiple sources on no fixed schedule. We don&rsquo;t claim deep agri-finance expertise &mdash; but we build systems that make contradictory data more manageable.</p>
+  <h2 class="reveal reveal-delay-1" data-i18n="prob.h2">Large precision ag operations are data-rich,<br>but the intelligence layer is missing.</h2>
+  <p class="lead reveal reveal-delay-2" data-i18n="prob.lead">Satellite passes, IoT sensors, weather feeds, equipment telemetry, most of it sits in silos. The data exists. What&rsquo;s missing is a system that can reason across it and return a cited, auditable answer.</p>
 
   <div class="problem-layout">
     <div class="row-list reveal reveal-delay-3">
       <div class="row-item">
-        <div class="row-tag" data-i18n="prob.tag1">Cooperative</div>
-        <div class="row-body"><h4 data-i18n="prob.h4.1">Many members, inconsistent analysis</h4><p data-i18n="prob.p1">Decisions vary across members when there&rsquo;s no shared, repeatable standard for reading the same data.</p></div>
+        <div class="row-tag" data-i18n="prob.tag1">Operations</div>
+        <div class="row-body"><h4 data-i18n="prob.h4.1">Data silos, decisions by instinct</h4><p data-i18n="prob.p1">Field data, satellite imagery, and equipment logs rarely speak to each other. Decisions get made on incomplete, unreconciled pictures.</p></div>
       </div>
       <div class="row-item">
-        <div class="row-tag" data-i18n="prob.tag2">Rural Lender</div>
-        <div class="row-body"><h4 data-i18n="prob.h4.2">Loan risk priced on forecasts that get revised</h4><p data-i18n="prob.p2">Crop forecasts can be revised after a loan is extended &mdash; making early signal useful even when imperfect.</p></div>
+        <div class="row-tag" data-i18n="prob.tag2">Agronomy</div>
+        <div class="row-body"><h4 data-i18n="prob.h4.2">No traceable reasoning across data sources</h4><p data-i18n="prob.p2">Agronomists pull from multiple systems but can&rsquo;t produce a cited, auditable answer. Analysis stays locked in individual expertise.</p></div>
       </div>
       <div class="row-item">
-        <div class="row-tag" data-i18n="prob.tag3">Crop Insurer</div>
-        <div class="row-body"><h4 data-i18n="prob.h4.3">Slow data, time-sensitive decisions</h4><p data-i18n="prob.p3">Regional estimates often arrive after the window to act. Faster reconciliation means less reliance on lagging figures.</p></div>
+        <div class="row-tag" data-i18n="prob.tag3">Leadership</div>
+        <div class="row-body"><h4 data-i18n="prob.h4.3">Strategic calls without interrogatable evidence</h4><p data-i18n="prob.p3">Yield forecasts and resource plans are built on static reports that can&rsquo;t be queried, updated, or audited in real time.</p></div>
       </div>
     </div>
 
     <!-- Animated CONAB revision chart -->
     <div class="chart-panel reveal reveal-delay-4">
-      <div class="chart-title" data-i18n="prob.chart">CONAB Soy Forecast &mdash; Revision Delta (million tonnes)</div>
+      <div class="chart-title" data-i18n="prob.chart">Illustrative: Data Sources Per Field Decision</div>
       <div id="revisionChart"></div>
       <div class="chart-legend">
-        <div class="legend-item"><div class="legend-dot" style="background:var(--navy);"></div><span data-i18n="prob.legend1">Upward revision</span></div>
-        <div class="legend-item"><div class="legend-dot" style="background:var(--rose);"></div><span data-i18n="prob.legend2">Downward revision</span></div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--navy);"></div><span data-i18n="prob.legend1">Multiple sources</span></div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--rose);"></div><span data-i18n="prob.legend2">Unreconciled</span></div>
       </div>
-      <p class="footnote" style="margin-top:12px;" data-i18n="prob.footnote">// Illustrative of documented revision pattern. Magnitude varies by season.</p>
+      <p class="footnote" style="margin-top:12px;" data-i18n="prob.footnote">// Illustrative of the data reconciliation challenge in large-scale precision ag operations.</p>
     </div>
   </div>
   <div class="slide-foot" style="color:var(--ink-faint);">
@@ -698,15 +706,15 @@
 <!-- ============ 3. WHAT IT IS ============ -->
 <section id="what">
   <div class="eyebrow reveal" data-i18n="what.eyebrow">What It Is</div>
-  <h2 class="reveal reveal-delay-1" data-i18n="what.h2">A supervisor, and a team of specialists —<br>not a single chatbot.</h2>
-  <p class="lead reveal reveal-delay-2" data-i18n="what.lead">AgroMind routes your question to specialist agents, each focused on a different task. A supervisor assembles their outputs into one cited, auditable report.</p>
+  <h2 class="reveal reveal-delay-1" data-i18n="what.h2">A supervisor, and a team of specialists.<br>Not a single chatbot.</h2>
+  <p class="lead reveal reveal-delay-2" data-i18n="what.lead">AgroMind sits on top of your existing data layer. Specialist agents handle different tasks. A supervisor assembles their outputs into one cited, auditable report.</p>
 
   <div class="flow-h reveal reveal-delay-3">
     <!-- Input -->
     <div class="flow-node fh-node fh-input">
       <div class="flow-tag" data-i18n="what.in.tag">Input</div>
       <div class="flow-title" data-i18n="what.in.title">Your Question</div>
-      <div class="flow-sub" data-i18n="what.in.sub">&ldquo;Should we extend this credit line given the current soy outlook?&rdquo;</div>
+      <div class="flow-sub" data-i18n="what.in.sub">&ldquo;Which fields show early stress signals that could affect Q3 yield targets?&rdquo;</div>
     </div>
 
     <div class="fh-arrow">&rarr;</div>
@@ -741,7 +749,7 @@
       </div>
       <div class="fh-agent-node">
         <div class="agent-icon-svg"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2l1.8 5.5H18l-4.8 3.5 1.8 5.5L10 13l-5 3.5 1.8-5.5L2 7.5h6.2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
-        <div class="fh-agent-text"><div class="flow-title" data-i18n="what.agent4.title">Compliance Agent</div><div class="flow-sub" data-i18n="what.agent4.sub">PSR / Proagro / EUDR checks</div></div>
+        <div class="fh-agent-text"><div class="flow-title" data-i18n="what.agent4.title">Compliance Agent</div><div class="flow-sub" data-i18n="what.agent4.sub">EUDR / sustainability checks</div></div>
       </div>
       <div class="fh-agent-node">
         <div class="agent-icon-svg"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 4h12v12H4z" stroke="currentColor" stroke-width="1.5" rx="1"/><path d="M7 8h6M7 11h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
@@ -771,12 +779,33 @@
   </div>
 </section>
 
-<!-- ============ 4. CAPABILITIES ============ -->
+<!-- ============ 4. BUILD STATUS ============ -->
+<section id="build">
+  <div class="eyebrow reveal" data-i18n="build.eyebrow">Platform Readiness</div>
+  <h2 class="reveal reveal-delay-1" data-i18n="build.h2">Three components live.<br>Custom agents delivered in 4 weeks.</h2>
+  <p class="lead reveal reveal-delay-2" data-i18n="build.lead">The core platform is production-ready today. Brazil-specific agents for field intelligence, yield simulation, and EUDR traceability are built and tailored to your data and workflows, delivered within 4 weeks of engagement.</p>
+
+  <div class="build-layout">
+    <table class="status reveal reveal-delay-3">
+      <tr><th data-i18n="build.th1">Component</th><th data-i18n="build.th2">Status</th><th data-i18n="build.th3">Detail</th></tr>
+      <tr><td data-i18n="build.r1.td1">Supervisor &amp; specialist orchestration core</td><td><span class="pill live" data-i18n="pill.live">Live</span></td><td data-i18n="build.r1.td3">Core reasoning architecture, live and deployable today.</td></tr>
+      <tr><td data-i18n="build.r2.td1">ROI &amp; scenario simulation agents</td><td><span class="pill live" data-i18n="pill.live">Live</span></td><td data-i18n="build.r2.td3">Scenario modelling and risk-adjusted return calculation, configured for agri data inputs.</td></tr>
+      <tr><td data-i18n="build.r3.td1">Full governance &amp; audit suite</td><td><span class="pill live" data-i18n="pill.live">Live</span></td><td data-i18n="build.r3.td3">Audit trails, data isolation, and human-in-the-loop controls, all operational.</td></tr>
+      <tr><td data-i18n="build.r4.td1">Custom agents for your operation</td><td><span class="pill build" data-i18n="pill.build">4 Weeks</span></td><td data-i18n="build.r4.td3">Field intelligence, yield simulation, and EUDR traceability agents built and tailored to your specific data sources, workflows, and team needs.</td></tr>
+    </table>
+  </div>
+
+  <p class="footnote reveal reveal-delay-5" data-i18n="build.footnote">// Core platform is live today. Custom agents are scoped, built, and tailored to your operation and delivered within 4 weeks of engagement.</p>
+  <div class="slide-foot">
+    <span class="copy" data-i18n="foot.copy3">&copy; 2026 Algo-Rythmn. All rights reserved.</span>
+    <span class="pnum">04 / 07</span>
+  </div>
+</section>
+
+<!-- ============ 5. CAPABILITIES ============ -->
 <section id="capabilities">
   <div class="eyebrow reveal" data-i18n="cap.eyebrow">Full Capability Stack</div>
-  <h2 class="reveal reveal-delay-1" data-i18n="cap.h2">What the platform can do &mdash;<br>core live, Brazil agents coming soon.</h2>
-  <p class="lead reveal reveal-delay-2" data-i18n="cap.lead">Core capabilities are live. Brazil-specific agents are in active build.</p>
-
+  <h2 class="reveal reveal-delay-1" data-i18n="cap.h2">Everything AgroMind can do.</h2>
   <div class="cap-categories reveal reveal-delay-3">
 
     <div class="cap-cat">
@@ -785,10 +814,10 @@
         <span data-i18n="cap.cat1">Intelligence</span>
       </div>
       <div class="cap-cat-items">
-        <div class="cap-item"><span class="cap-item-n">&mdash;</span><div data-i18n="cap.item1"><strong>Multi-agent orchestration</strong> — Question &rarr; sub-tasks &rarr; parallel specialists &rarr; one cited final report.</div></div>
-        <div class="cap-item"><span class="cap-item-n">&mdash;</span><div data-i18n="cap.item2"><strong>Custom agents on your data</strong> — Trained on your taxonomy. No shared model, no cross-institutional leakage.</div></div>
-        <div class="cap-item"><span class="cap-item-n">&mdash;</span><div data-i18n="cap.item3"><strong>Real-time reasoning canvas</strong> — Every agent step visible live as it unfolds.</div></div>
-        <div class="cap-item"><span class="cap-item-n">&mdash;</span><div data-i18n="cap.item4"><strong>Multi-turn memory &amp; playback</strong> — Sessions persist; replay any decision timeline on demand.</div></div>
+        <div class="cap-item"><span class="cap-item-n">·</span><div data-i18n="cap.item1"><strong>Multi-agent orchestration</strong>: Question &rarr; sub-tasks &rarr; parallel specialists &rarr; one cited final report.</div></div>
+        <div class="cap-item"><span class="cap-item-n">·</span><div data-i18n="cap.item2"><strong>Custom agents on your data</strong>: Trained on your taxonomy. No shared model, no cross-institutional leakage.</div></div>
+        <div class="cap-item"><span class="cap-item-n">·</span><div data-i18n="cap.item3"><strong>Real-time reasoning canvas</strong>: Every agent step visible live as it unfolds.</div></div>
+        <div class="cap-item"><span class="cap-item-n">·</span><div data-i18n="cap.item4"><strong>Multi-turn memory &amp; playback</strong>: Sessions persist; replay any decision timeline on demand.</div></div>
       </div>
     </div>
 
@@ -798,9 +827,9 @@
         <span data-i18n="cap.cat2">Analytics &amp; Integration</span>
       </div>
       <div class="cap-cat-items">
-        <div class="cap-item"><span class="cap-item-n">&mdash;</span><div data-i18n="cap.item5"><strong>Advanced analytics &amp; rich outputs</strong> — Reports, scenario tables, charts &mdash; not just text.</div></div>
-        <div class="cap-item"><span class="cap-item-n">&mdash;</span><div data-i18n="cap.item6"><strong>Dynamic tool selection</strong> — Right tool per sub-task; extend without touching the core model.</div></div>
-        <div class="cap-item"><span class="cap-item-n">&mdash;</span><div data-i18n="cap.item7"><strong>MCP integrations</strong> — Direct connectors to ERP, CRM, and regulatory reporting systems.</div></div>
+        <div class="cap-item"><span class="cap-item-n">·</span><div data-i18n="cap.item5"><strong>Advanced analytics &amp; rich outputs</strong>: Reports, scenario tables, charts, not just text.</div></div>
+        <div class="cap-item"><span class="cap-item-n">·</span><div data-i18n="cap.item6"><strong>Dynamic tool selection</strong>: Right tool per sub-task; extend without touching the core model.</div></div>
+        <div class="cap-item"><span class="cap-item-n">·</span><div data-i18n="cap.item7"><strong>MCP integrations</strong>: Direct connectors to ERP, CRM, and regulatory reporting systems.</div></div>
       </div>
     </div>
 
@@ -810,10 +839,10 @@
         <span data-i18n="cap.cat3">Trust &amp; Safety</span>
       </div>
       <div class="cap-cat-items">
-        <div class="cap-item"><span class="cap-item-n">&mdash;</span><div data-i18n="cap.item8"><strong>Human-in-the-loop by design</strong> — High-stakes actions require explicit approval — no silent automation.</div></div>
-        <div class="cap-item"><span class="cap-item-n">&mdash;</span><div data-i18n="cap.item9"><strong>Full governance suite</strong> — Audit trails, data isolation, exportable logs.</div></div>
-        <div class="cap-item"><span class="cap-item-n">&mdash;</span><div data-i18n="cap.item10"><strong>Data security by design</strong> — Your data is isolated to your deployment. It is never used to train shared models, never exposed to other clients, and available fully air-gapped.</div></div>
-        <div class="cap-item"><span class="cap-item-n">&mdash;</span><div data-i18n="cap.item11"><strong>Zero hallucination by design</strong> — The system cannot assert something it cannot cite. Every output traces back to a source &mdash; no generated facts, no silent gaps.</div></div>
+        <div class="cap-item"><span class="cap-item-n">·</span><div data-i18n="cap.item8"><strong>Human-in-the-loop by design</strong>: High-stakes actions require explicit approval, with no silent automation.</div></div>
+        <div class="cap-item"><span class="cap-item-n">·</span><div data-i18n="cap.item9"><strong>Full governance suite</strong>: Audit trails, data isolation, exportable logs.</div></div>
+        <div class="cap-item"><span class="cap-item-n">·</span><div data-i18n="cap.item10"><strong>Data security by design</strong>: Your data is isolated to your deployment. It is never used to train shared models, never exposed to other clients, and available fully air-gapped.</div></div>
+        <div class="cap-item"><span class="cap-item-n">·</span><div data-i18n="cap.item11"><strong>Zero hallucination by design</strong>: The system cannot assert something it cannot cite. Every output traces back to a source, with no generated facts and no silent gaps.</div></div>
       </div>
     </div>
 
@@ -823,37 +852,12 @@
         <span data-i18n="cap.cat4">Scale &amp; Deployment</span>
       </div>
       <div class="cap-cat-items">
-        <div class="cap-item"><span class="cap-item-n">&mdash;</span><div data-i18n="cap.item12"><strong>Cloud, hybrid, or air-gapped</strong> — Full feature parity in every deployment mode.</div></div>
-        <div class="cap-item"><span class="cap-item-n">&mdash;</span><div data-i18n="cap.item13"><strong>Enterprise-scale architecture</strong> — Horizontal scaling for concurrent multi-institution workloads.</div></div>
+        <div class="cap-item"><span class="cap-item-n">·</span><div data-i18n="cap.item12"><strong>Cloud, hybrid, or air-gapped</strong>: Full feature parity in every deployment mode.</div></div>
+        <div class="cap-item"><span class="cap-item-n">·</span><div data-i18n="cap.item13"><strong>Enterprise-scale architecture</strong>: Horizontal scaling for concurrent multi-institution workloads.</div></div>
       </div>
     </div>
 
   </div>
-  <div class="slide-foot">
-    <span class="copy" data-i18n="foot.copy3">&copy; 2026 Algo-Rythmn. All rights reserved.</span>
-    <span class="pnum">04 / 07</span>
-  </div>
-</section>
-
-<!-- ============ 5. BRAZIL BUILD STATUS ============ -->
-<section id="build">
-  <div class="eyebrow reveal" data-i18n="build.eyebrow">Build Status</div>
-  <h2 class="reveal reveal-delay-1" data-i18n="build.h2">Three components live.<br>Three more coming soon.</h2>
-  <p class="lead reveal reveal-delay-2" data-i18n="build.lead">The core platform is in production. The Brazil-specific agents — CONAB reconciliation, PSR/Proagro compliance, and EUDR traceability — are in active build and coming soon.</p>
-
-  <div class="build-layout">
-    <table class="status reveal reveal-delay-3">
-      <tr><th data-i18n="build.th1">Component</th><th data-i18n="build.th2">Status</th><th data-i18n="build.th3">Detail</th></tr>
-      <tr><td data-i18n="build.r1.td1">Supervisor&ndash;specialist orchestration core</td><td><span class="pill live" data-i18n="pill.live">Live</span></td><td data-i18n="build.r1.td3">The core reasoning architecture &mdash; live and deployable today.</td></tr>
-      <tr><td data-i18n="build.r2.td1">ROI &amp; scenario simulation agents</td><td><span class="pill live" data-i18n="pill.live">Live</span></td><td data-i18n="build.r2.td3">Scenario modelling and risk-adjusted return calculation &mdash; configured for agri data inputs.</td></tr>
-      <tr><td data-i18n="build.r3.td1">Full governance &amp; audit suite</td><td><span class="pill live" data-i18n="pill.live">Live</span></td><td data-i18n="build.r3.td3">Audit trails, data isolation, human-in-the-loop — all operational.</td></tr>
-      <tr><td data-i18n="build.r4.td1">CONAB-revision reconciliation agent</td><td><span class="pill build" data-i18n="pill.build">Coming Soon</span></td><td data-i18n="build.r4.td3">Reconciles CONAB month-to-month revisions into a single cited view.</td></tr>
-      <tr><td data-i18n="build.r5.td1">PSR / Proagro compliance-reporting agent</td><td><span class="pill build" data-i18n="pill.build">Coming Soon</span></td><td data-i18n="build.r5.td3">Formats analysis output to Brazil&rsquo;s rural-insurance reporting standards.</td></tr>
-      <tr><td data-i18n="build.r6.td1">EUDR traceability-summary agent</td><td><span class="pill build" data-i18n="pill.build">Coming Soon</span></td><td data-i18n="build.r6.td3">Generates farm-level traceability summaries for EU deforestation regulation.</td></tr>
-    </table>
-  </div>
-
-  <p class="footnote reveal reveal-delay-5" data-i18n="build.footnote">// First three components are live and available for immediate deployment. Brazil-specific agents are in active build and coming soon.</p>
   <div class="slide-foot" style="color:var(--ink-faint);">
     <span class="copy" data-i18n="foot.copy3">&copy; 2026 Algo-Rythmn. All rights reserved.</span>
     <span class="pnum">05 / 07</span>
@@ -862,9 +866,9 @@
 
 <!-- ============ 6. ENTRY POINT / CTA ============ -->
 <section id="cta">
-  <div class="eyebrow reveal" data-i18n="cta.eyebrow">The Path In</div>
-  <h2 class="reveal reveal-delay-1" data-i18n="cta.h2">The natural next step<br>once the first signal has earned trust.</h2>
-  <p class="lead reveal reveal-delay-2" data-i18n="cta.lead">Works best as an expansion layer once a client has seen our signals in action. We&rsquo;re AI engineers &mdash; we build the reasoning infrastructure; domain knowledge stays with you.</p>
+  <div class="eyebrow reveal" data-i18n="cta.eyebrow">What Changes</div>
+  <h2 class="reveal reveal-delay-1" data-i18n="cta.h2">From data you already have to decisions you can defend.</h2>
+  <p class="lead reveal reveal-delay-2" data-i18n="cta.lead">We build the reasoning architecture; your agronomic expertise drives the questions. Every answer is cited, auditable, and yours to interrogate.</p>
 
   <table class="compare-table reveal reveal-delay-3">
     <tr>
@@ -873,24 +877,24 @@
       <th class="with" data-i18n="cta.th3">With AgroMind</th>
     </tr>
     <tr>
-      <td data-i18n="cta.r1.td1">Crop forecast reconciliation</td>
-      <td class="without" data-i18n="cta.r1.td2">Manual analyst hours across conflicting CONAB versions</td>
-      <td class="with" data-i18n="cta.r1.td3">Single reconciled view with full revision history cited</td>
+      <td data-i18n="cta.r1.td1">Field stress detection</td>
+      <td class="without" data-i18n="cta.r1.td2">Manual review of satellite layers by agronomist, slow and uncited</td>
+      <td class="with" data-i18n="cta.r1.td3">Agentic query across satellite, sensor &amp; weather data, with a cited answer in minutes</td>
     </tr>
     <tr>
-      <td data-i18n="cta.r2.td1">Credit committee preparation</td>
-      <td class="without" data-i18n="cta.r2.td2">Slide deck assembled from disparate sources by hand</td>
-      <td class="with" data-i18n="cta.r2.td3">Auditable report with cited data, sources, and scenario range</td>
+      <td data-i18n="cta.r2.td1">Yield forecast interrogation</td>
+      <td class="without" data-i18n="cta.r2.td2">Static BI report; can&rsquo;t ask follow-up questions or audit the logic</td>
+      <td class="with" data-i18n="cta.r2.td3">Multi-turn reasoning: ask follow-ups, get cited answers with full trace</td>
     </tr>
     <tr>
-      <td data-i18n="cta.r3.td1">PSR / Proagro filing</td>
-      <td class="without" data-i18n="cta.r3.td2">Manual format conversion; ongoing compliance risk</td>
-      <td class="with" data-i18n="cta.r3.td3">Agent-formatted to regulatory standard automatically</td>
+      <td data-i18n="cta.r3.td1">Input optimisation decision</td>
+      <td class="without" data-i18n="cta.r3.td2">Spreadsheet models with manual data pull from disconnected systems</td>
+      <td class="with" data-i18n="cta.r3.td3">Scenario agent runs trade-offs across fields with cited, auditable outputs</td>
     </tr>
     <tr>
       <td data-i18n="cta.r4.td1">EUDR traceability</td>
       <td class="without" data-i18n="cta.r4.td2">No structured farm-level summary available</td>
-      <td class="with" data-i18n="cta.r4.td3">Summarised traceability chain per holding</td>
+      <td class="with" data-i18n="cta.r4.td3">Summarised traceability chain per holding, ready for export</td>
     </tr>
     <tr>
       <td data-i18n="cta.r5.td1">Decision audit trail</td>
@@ -949,7 +953,7 @@
           <div class="cb-label" data-i18n="closing.cblabel1">Deployment Readiness</div>
           <div class="cb-stat-row">
             <div class="cb-stat"><div class="cb-stat-num">3</div><div class="cb-stat-lbl" data-i18n="closing.stat1">core components live today</div></div>
-            <div class="cb-stat"><div class="cb-stat-num">3</div><div class="cb-stat-lbl" data-i18n="closing.stat2">Deployment modes — cloud, hybrid, air-gapped</div></div>
+            <div class="cb-stat"><div class="cb-stat-num">3</div><div class="cb-stat-lbl" data-i18n="closing.stat2">Deployment modes: cloud, hybrid, air-gapped</div></div>
             <div class="cb-stat"><div class="cb-stat-num">100%</div><div class="cb-stat-lbl" data-i18n="closing.stat3">Conclusions traceable to a cited source</div></div>
             <div class="cb-stat"><div class="cb-stat-num">&lt;1 day</div><div class="cb-stat-lbl" data-i18n="closing.stat4">Typical response to partnership enquiries</div></div>
           </div>
@@ -959,9 +963,9 @@
         <div class="cb-section">
           <div class="cb-label" data-i18n="closing.cblabel2">How It Starts</div>
           <div class="cb-steps">
-            <div class="cb-step"><div class="cb-step-n">1</div><div class="cb-step-text" data-i18n="closing.step1">Share your use case — credit, compliance, cooperative, or insurer</div></div>
-            <div class="cb-step"><div class="cb-step-n">2</div><div class="cb-step-text" data-i18n="closing.step2">We scope the deployment mode and agent configuration for your institution</div></div>
-            <div class="cb-step"><div class="cb-step-n">3</div><div class="cb-step-text" data-i18n="closing.step3">Pilot on your data — full governance and audit trail from day one</div></div>
+            <div class="cb-step"><div class="cb-step-n">1</div><div class="cb-step-text" data-i18n="closing.step1">Share your data landscape: what sources you have, what decisions you need to make</div></div>
+            <div class="cb-step"><div class="cb-step-n">2</div><div class="cb-step-text" data-i18n="closing.step2">We scope the agent configuration and deployment mode for your operation</div></div>
+            <div class="cb-step"><div class="cb-step-n">3</div><div class="cb-step-text" data-i18n="closing.step3">Pilot on your data, with full governance and audit trail from day one</div></div>
           </div>
         </div>
 
@@ -1020,37 +1024,37 @@
   const i18n = {
     en: {
       'cover.eyebrow': 'Algo-Rythmn &middot; AgroMind for Brazil &middot; Governed Multi-Agent Intelligence',
-      'cover.h1': 'An analyst that shows<br>its <em>reasoning</em> \u2014 not just<br>its answer.',
-      'cover.lead': 'An AI platform for structured, traceable analysis. We bring the reasoning infrastructure; your team brings the domain knowledge.',
+      'cover.h1': 'An analyst that shows<br>its <em>reasoning</em>, not just<br>its answer.',
+      'cover.lead': 'An agentic AI layer for large precision agriculture companies in Brazil. You already have the data: satellite imagery, sensors, field history. We make it answerable.',
       'cover.stat1': 'of conclusions traceable to a cited source',
       'cover.stat2': 'agentic capabilities across the platform',
-      'cover.stat3': 'uncited claims \u2014 every output is source-backed, not generated',
-      'cover.stat4': 'shared model training \u2014 your data stays yours, always',
+      'cover.stat3': 'specialist agents: field intelligence, yield simulation, compliance, ROI & reporting',
+      'cover.stat4': 'shared model training. Your data stays yours, always',
       'cover.upmarker': 'US\u00a0Market\u00a0Proven',
-      'cover.uptext': 'Our AI layer is production-deployed for a large US precision agri company managing <strong>10M+ acres</strong> &mdash; the same governed architecture, now being applied to the Brazilian agri-finance market.',
+      'cover.uptext': 'Our AI layer is production-deployed for a large US precision agriculture company managing <strong>10M+ acres</strong>. The same governed architecture, now being applied to Brazil’s largest precision ag operations.',
       'cover.foot.left': 'AGROMIND &middot; PRODUCT BRIEF',
       'cover.scroll': 'SCROLL',
-      'cover.foot.right': 'BRAZIL MARKET ENTRY &middot; 2026',
+      'cover.foot.right': 'BRAZIL PRECISION AG &middot; 2026',
       'prob.eyebrow': 'The Problem',
-      'prob.h2': 'Agri-finance teams handle a lot of data \u2014<br>much of it contradictory and delayed.',
-      'prob.lead': 'CONAB revises crop numbers between reports. Data arrives from multiple sources on no fixed schedule. We don\u2019t claim deep agri-finance expertise \u2014 but we build systems that make contradictory data more manageable.',
-      'prob.tag1': 'Cooperative',
-      'prob.h4.1': 'Many members, inconsistent analysis',
-      'prob.p1': 'Decisions vary across members when there\u2019s no shared, repeatable standard for reading the same data.',
-      'prob.tag2': 'Rural Lender',
-      'prob.h4.2': 'Loan risk priced on forecasts that get revised',
-      'prob.p2': 'Crop forecasts can be revised after a loan is extended \u2014 making early signal useful even when imperfect.',
-      'prob.tag3': 'Crop Insurer',
-      'prob.h4.3': 'Slow data, time-sensitive decisions',
-      'prob.p3': 'Regional estimates often arrive after the window to act. Faster reconciliation means less reliance on lagging figures.',
-      'prob.chart': 'CONAB Soy Forecast \u2014 Revision Delta (million tonnes)',
-      'prob.footnote': '// Illustrative of documented revision pattern. Magnitude varies by season.',
+      'prob.h2': 'Large precision ag operations are data-rich,<br>but the intelligence layer is missing.',
+      'prob.lead': 'Satellite passes, IoT sensors, weather feeds, equipment telemetry, most of it sits in silos. The data exists. What\u2019s missing is a system that can reason across it and return a cited, auditable answer.',
+      'prob.tag1': 'Operations',
+      'prob.h4.1': 'Data silos, decisions by instinct',
+      'prob.p1': 'Field data, satellite imagery, and equipment logs rarely speak to each other. Decisions get made on incomplete, unreconciled pictures.',
+      'prob.tag2': 'Agronomy',
+      'prob.h4.2': 'No traceable reasoning across data sources',
+      'prob.p2': 'Agronomists pull from multiple systems but can\u2019t produce a cited, auditable answer. Analysis stays locked in individual expertise.',
+      'prob.tag3': 'Leadership',
+      'prob.h4.3': 'Strategic calls without interrogatable evidence',
+      'prob.p3': 'Yield forecasts and resource plans are built on static reports that can\u2019t be queried, updated, or audited in real time.',
+      'prob.chart': 'Illustrative: Data Sources Per Field Decision',
+      'prob.footnote': '// Illustrative of the data reconciliation challenge in large-scale precision ag operations.',
       'what.eyebrow': 'What It Is',
-      'what.h2': 'A supervisor, and a team of specialists \u2014<br>not a single chatbot.',
-      'what.lead': 'AgroMind routes your question to specialist agents, each focused on a different task. A supervisor assembles their outputs into one cited, auditable report.',
+      'what.h2': 'A supervisor, and a team of specialists.<br>Not a single chatbot.',
+      'what.lead': 'AgroMind sits on top of your existing data layer. Specialist agents handle different tasks. A supervisor assembles their outputs into one cited, auditable report.',
       'what.in.tag': 'Input',
       'what.in.title': 'Your Question',
-      'what.in.sub': '\u201cShould we extend this credit line given the current soy outlook?\u201d',
+      'what.in.sub': '\u201cWhich fields show early stress signals that could affect Q3 yield targets?\u201d',
       'what.sup.tag': 'Orchestration',
       'what.sup.title': 'Supervisor Agent',
       'what.out.tag': 'Output',
@@ -1067,63 +1071,58 @@
       'what.agent3.title': 'Data Agent',
       'what.agent3.sub': 'Reconciles &amp; sources field data',
       'what.agent4.title': 'Compliance Agent',
-      'what.agent4.sub': 'PSR / Proagro / EUDR checks',
+      'what.agent4.sub': 'EUDR / sustainability checks',
       'what.agent5.title': 'Report Agent',
       'what.agent5.sub': 'Generates full audit trail',
       'cap.eyebrow': 'Full Capability Stack',
-      'cap.h2': 'What the platform can do &mdash;<br>core live, Brazil agents coming soon.',
-      'cap.lead': 'Core capabilities are live. Brazil-specific agents are in active build.',
+      'cap.h2': 'Everything AgroMind can do.',
       'cap.cat1': 'Intelligence',
-      'cap.item1': '<strong>Multi-agent orchestration</strong> \u2014 Question &rarr; sub-tasks &rarr; parallel specialists &rarr; one cited final report.',
-      'cap.item2': '<strong>Custom agents on your data</strong> \u2014 Trained on your taxonomy. No shared model, no cross-institutional leakage.',
-      'cap.item3': '<strong>Real-time reasoning canvas</strong> \u2014 Every agent step visible live as it unfolds.',
-      'cap.item4': '<strong>Multi-turn memory &amp; playback</strong> \u2014 Sessions persist; replay any decision timeline on demand.',
+      'cap.item1': '<strong>Multi-agent orchestration</strong>: Question &rarr; sub-tasks &rarr; parallel specialists &rarr; one cited final report.',
+      'cap.item2': '<strong>Custom agents on your data</strong>: Trained on your taxonomy. No shared model, no cross-institutional leakage.',
+      'cap.item3': '<strong>Real-time reasoning canvas</strong>: Every agent step visible live as it unfolds.',
+      'cap.item4': '<strong>Multi-turn memory &amp; playback</strong>: Sessions persist; replay any decision timeline on demand.',
       'cap.cat2': 'Analytics &amp; Integration',
-      'cap.item5': '<strong>Advanced analytics &amp; rich outputs</strong> \u2014 Reports, scenario tables, charts \u2014 not just text.',
-      'cap.item6': '<strong>Dynamic tool selection</strong> \u2014 Right tool per sub-task; extend without touching the core model.',
-      'cap.item7': '<strong>MCP integrations</strong> \u2014 Direct connectors to ERP, CRM, and regulatory reporting systems.',
+      'cap.item5': '<strong>Advanced analytics &amp; rich outputs</strong>: Reports, scenario tables, charts, not just text.',
+      'cap.item6': '<strong>Dynamic tool selection</strong>: Right tool per sub-task; extend without touching the core model.',
+      'cap.item7': '<strong>MCP integrations</strong>: Direct connectors to ERP, CRM, and regulatory reporting systems.',
       'cap.cat3': 'Trust &amp; Safety',
-      'cap.item8': '<strong>Human-in-the-loop by design</strong> \u2014 High-stakes actions require explicit approval \u2014 no silent automation.',
-      'cap.item9': '<strong>Full governance suite</strong> \u2014 Audit trails, data isolation, exportable logs.',
-      'cap.item10': '<strong>Data security by design</strong> \u2014 Your data is isolated to your deployment. Never used to train shared models, never exposed to other clients, and available fully air-gapped.',
-      'cap.item11': '<strong>Zero hallucination by design</strong> \u2014 The system cannot assert something it cannot cite. Every output traces back to a source \u2014 no generated facts, no silent gaps.',
+      'cap.item8': '<strong>Human-in-the-loop by design</strong>: High-stakes actions require explicit approval, with no silent automation.',
+      'cap.item9': '<strong>Full governance suite</strong>: Audit trails, data isolation, exportable logs.',
+      'cap.item10': '<strong>Data security by design</strong>: Your data is isolated to your deployment. Never used to train shared models, never exposed to other clients, and available fully air-gapped.',
+      'cap.item11': '<strong>Zero hallucination by design</strong>: The system cannot assert something it cannot cite. Every output traces back to a source, with no generated facts and no silent gaps.',
       'cap.cat4': 'Scale &amp; Deployment',
-      'cap.item12': '<strong>Cloud, hybrid, or air-gapped</strong> \u2014 Full feature parity in every deployment mode.',
-      'cap.item13': '<strong>Enterprise-scale architecture</strong> \u2014 Horizontal scaling for concurrent multi-institution workloads.',
-      'build.eyebrow': 'Build Status',
-      'build.h2': 'Three components live.<br>Three more coming soon.',
-      'build.lead': 'The core platform is in production. The Brazil-specific agents \u2014 CONAB reconciliation, PSR/Proagro compliance, and EUDR traceability \u2014 are in active build and coming soon.',
-      'pill.build': 'Coming Soon',
+      'cap.item12': '<strong>Cloud, hybrid, or air-gapped</strong>: Full feature parity in every deployment mode.',
+      'cap.item13': '<strong>Enterprise-scale architecture</strong>: Horizontal scaling for concurrent multi-institution workloads.',
+      'build.eyebrow': 'Platform Readiness',
+      'build.h2': 'Three components live.<br>Custom agents delivered in 4 weeks.',
+      'build.lead': 'The core platform is production-ready today. Brazil-specific agents for field intelligence, yield simulation, and EUDR traceability are built and tailored to your data and workflows, delivered within 4 weeks of engagement.',
+      'pill.build': '4 Weeks',
       'build.th1': 'Component', 'build.th2': 'Status', 'build.th3': 'Detail',
-      'build.r1.td1': 'Supervisor\u2013specialist orchestration core',
-      'build.r1.td3': 'The core reasoning architecture \u2014 live and deployable today.',
+      'build.r1.td1': 'Supervisor & specialist orchestration core',
+      'build.r1.td3': 'Core reasoning architecture, live and deployable today.',
       'build.r2.td1': 'ROI &amp; scenario simulation agents',
-      'build.r2.td3': 'Scenario modelling and risk-adjusted return calculation \u2014 configured for agri data inputs.',
+      'build.r2.td3': 'Scenario modelling and risk-adjusted return calculation, configured for agri data inputs.',
       'build.r3.td1': 'Full governance &amp; audit suite',
-      'build.r3.td3': 'Audit trails, data isolation, human-in-the-loop \u2014 all operational.',
-      'build.r4.td1': 'CONAB-revision reconciliation agent',
-      'build.r4.td3': 'Reconciles CONAB month-to-month revisions into a single cited view.',
-      'build.r5.td1': 'PSR / Proagro compliance-reporting agent',
-      'build.r5.td3': 'Formats analysis output to Brazil\u2019s rural-insurance reporting standards.',
-      'build.r6.td1': 'EUDR traceability-summary agent',
-      'build.r6.td3': 'Generates farm-level traceability summaries for EU deforestation regulation.',
-      'build.footnote': '// First three components are live and available for immediate deployment. Brazil-specific agents are in active build and coming soon.',
-      'cta.eyebrow': 'The Path In',
-      'cta.h2': 'The natural next step<br>once the first signal has earned trust.',
-      'cta.lead': 'Works best as an expansion layer once a client has seen our signals in action. We\u2019re AI engineers \u2014 we build the reasoning infrastructure; domain knowledge stays with you.',
+      'build.r3.td3': 'Audit trails, data isolation, and human-in-the-loop controls, all operational.',
+      'build.r4.td1': 'Custom agents for your operation',
+      'build.r4.td3': 'Field intelligence, yield simulation, and EUDR traceability agents built and tailored to your specific data sources, workflows, and team needs.',
+      'build.footnote': '// Core platform is live today. Custom agents are scoped, built, and tailored to your operation and delivered within 4 weeks of engagement.',
+      'cta.eyebrow': 'What Changes',
+      'cta.h2': 'From data you already have to decisions you can defend.',
+      'cta.lead': 'We build the reasoning architecture; your agronomic expertise drives the questions. Every answer is cited, auditable, and yours to interrogate.',
       'cta.th1': 'Decision scenario', 'cta.th2': 'Without AgroMind', 'cta.th3': 'With AgroMind',
-      'cta.r1.td1': 'Crop forecast reconciliation',
-      'cta.r1.td2': 'Manual analyst hours across conflicting CONAB versions',
-      'cta.r1.td3': 'Single reconciled view with full revision history cited',
-      'cta.r2.td1': 'Credit committee preparation',
-      'cta.r2.td2': 'Slide deck assembled from disparate sources by hand',
-      'cta.r2.td3': 'Auditable report with cited data, sources, and scenario range',
-      'cta.r3.td1': 'PSR / Proagro filing',
-      'cta.r3.td2': 'Manual format conversion; ongoing compliance risk',
-      'cta.r3.td3': 'Agent-formatted to regulatory standard automatically',
+      'cta.r1.td1': 'Field stress detection',
+      'cta.r1.td2': 'Manual review of satellite layers by agronomist, slow and uncited',
+      'cta.r1.td3': 'Agentic query across satellite, sensor & weather data, with a cited answer in minutes',
+      'cta.r2.td1': 'Yield forecast interrogation',
+      'cta.r2.td2': 'Static BI report; can\u2019t ask follow-up questions or audit the logic',
+      'cta.r2.td3': 'Multi-turn reasoning: ask follow-ups, get cited answers with full trace',
+      'cta.r3.td1': 'Input optimisation decision',
+      'cta.r3.td2': 'Spreadsheet models with manual data pull from disconnected systems',
+      'cta.r3.td3': 'Scenario agent runs trade-offs across fields with cited, auditable outputs',
       'cta.r4.td1': 'EUDR traceability',
       'cta.r4.td2': 'No structured farm-level summary available',
-      'cta.r4.td3': 'Summarised traceability chain per holding',
+      'cta.r4.td3': 'Summarised traceability chain per holding, ready for export',
       'cta.r5.td1': 'Decision audit trail',
       'cta.r5.td2': 'Email threads and meeting notes',
       'cta.r5.td3': 'Full reasoning trace, exportable, timestamped',
@@ -1141,16 +1140,16 @@
       'closing.p4': 'Data security: your data is isolated and never used to train shared models',
       'closing.cblabel1': 'Deployment Readiness',
       'closing.stat1': 'core components live today',
-      'closing.stat2': 'Deployment modes \u2014 cloud, hybrid, air-gapped',
+      'closing.stat2': 'Deployment modes: cloud, hybrid, air-gapped',
       'closing.stat3': 'Conclusions traceable to a cited source',
       'closing.stat4': 'Typical response to partnership enquiries',
       'closing.cblabel2': 'How It Starts',
-      'closing.step1': 'Share your use case \u2014 credit, compliance, cooperative, or insurer',
-      'closing.step2': 'We scope the deployment mode and agent configuration for your institution',
-      'closing.step3': 'Pilot on your data \u2014 full governance and audit trail from day one',
+      'closing.step1': 'Share your data landscape: what sources you have, what decisions you need to make',
+      'closing.step2': 'We scope the agent configuration and deployment mode for your operation',
+      'closing.step3': 'Pilot on your data, with full governance and audit trail from day one',
       'closing.cblabel3': 'Get in touch',
-      'prob.legend1': 'Upward revision',
-      'prob.legend2': 'Downward revision',
+      'prob.legend1': 'Multiple sources',
+      'prob.legend2': 'Unreconciled',
       'what.badge1': 'Plans',
       'what.badge2': 'Delegates',
       'what.badge3': 'Assembles',
@@ -1162,37 +1161,36 @@
     },
     pt: {
       'cover.eyebrow': 'Algo-Rythmn &middot; AgroMind para o Brasil &middot; Intelig\u00eancia Multi-Agente com Governan\u00e7a',
-      'cover.h1': 'Um analista que mostra<br>seu <em>racioc\u00ednio</em> \u2014 n\u00e3o apenas<br>sua resposta.',
-      'cover.lead': 'Uma plataforma de IA para an\u00e1lise estruturada e rastravel. Trazemos a infraestrutura de racioc\u00ednio; sua equipe traz o conhecimento do dom\u00ednio.',
+      'cover.h1': 'Um analista que mostra<br>seu <em>racioc\u00ednio</em>, n\u00e3o apenas<br>sua resposta.',
+      'cover.lead': 'Uma camada de IA ag\u00eantica para grandes empresas de agricultura de precis\u00e3o no Brasil. Voc\u00ea j\u00e1 tem os dados: imagens de sat\u00e9lite, sensores, hist\u00f3rico de campo. N\u00f3s tornamos tudo isso consult\u00e1vel.',
       'cover.stat1': 'das conclus\u00f5es rastreáveis at\u00e9 uma fonte citada',
       'cover.stat2': 'capacidades ag\u00eanticas na plataforma',
-      'cover.stat3': 'afirma\u00e7\u00f5es sem cita\u00e7\u00e3o \u2014 toda sa\u00edda \u00e9 baseada em fonte, nunca gerada',
-      'cover.stat4': 'treinamento em modelos compartilhados \u2014 seus dados ficam com voc\u00ea, sempre',
+      'cover.stat3': 'agentes especialistas: intelig\u00eancia de campo, simula\u00e7\u00e3o de produtividade, conformidade, ROI e relat\u00f3rios',
+      'cover.stat4': 'treinamento em modelos compartilhados. Seus dados ficam com voc\u00ea, sempre',
       'cover.upmarker': 'Comprovado\u00a0nos\u00a0EUA',
-      'cover.uptext': 'Nossa camada de IA est\u00e1 em produ\u00e7\u00e3o para uma grande empresa americana de agricultura de precis\u00e3o gerenciando <strong>mais de 10 milh\u00f5es de acres</strong> &mdash; a mesma arquitetura governada, agora sendo aplicada ao mercado de agri-finan\u00e7as brasileiro.',
+      'cover.uptext': 'Nossa camada de IA est\u00e1 em produ\u00e7\u00e3o para uma grande empresa americana de agricultura de precis\u00e3o gerenciando <strong>mais de 10 milh\u00f5es de acres</strong>. A mesma arquitetura governada, agora sendo aplicada \u00e0s maiores opera\u00e7\u00f5es de agricultura de precis\u00e3o do Brasil.',
       'cover.foot.left': 'AGROMIND &middot; RESUMO DO PRODUTO',
       'cover.scroll': 'ROLAR',
-      'cover.foot.right': 'ENTRADA NO MERCADO BRASILEIRO &middot; 2026',
+      'cover.foot.right': 'AGRICULTURA DE PRECISÃO BRASIL &middot; 2026',
       'prob.eyebrow': 'O Problema',
-      'prob.h2': 'Equipes de agri-finan\u00e7as lidam com muitos dados \u2014<br>grande parte contradit\u00f3ria e defasada.',
-      'prob.lead': 'O CONAB revisa os n\u00fameros de safra entre relat\u00f3rios. Os dados chegam de m\u00faltiplas fontes sem cronograma fixo. N\u00e3o alegamos profundo conhecimento em agri-finan\u00e7as \u2014 mas construimos sistemas que tornam dados contradit\u00f3rios mais gerenci\u00e1veis.',
-      'prob.tag1': 'Cooperativa',
-      'prob.h4.1': 'Muitos membros, an\u00e1lise inconsistente',
-      'prob.p1': 'As decis\u00f5es variam entre membros quando n\u00e3o h\u00e1 um padr\u00e3o compartilhado e reproduz\u00edvel para interpretar os mesmos dados.',
-      'prob.tag2': 'Credor Rural',
-      'prob.h4.2': 'Risco do empr\u00e9stimo precificado em previs\u00f5es que s\u00e3o revisadas',
-      'prob.p2': 'Previs\u00f5es de safra podem ser revisadas ap\u00f3s a concess\u00e3o do empr\u00e9stimo \u2014 tornando o sinal antecipado \u00fatil mesmo quando imperfeito.',
-      'prob.tag3': 'Seguradora Rural',
-      'prob.h4.3': 'Dados lentos, decis\u00f5es urgentes',
-      'prob.p3': 'Estimativas regionais frequentemente chegam ap\u00f3s a janela de a\u00e7\u00e3o. Reconcilia\u00e7\u00e3o mais r\u00e1pida reduz a depend\u00eancia de dados defasados.',
-      'prob.chart': 'Previs\u00e3o de Soja do CONAB \u2014 Delta de Revis\u00e3o (milh\u00f5es de toneladas)',
-      'prob.footnote': '// Ilustrativo do padr\u00e3o de revis\u00e3o documentado. A magnitude varia por safra.',
+      'prob.h2': 'Grandes opera\u00e7\u00f5es de agricultura de precis\u00e3o s\u00e3o ricas em dados,<br>mas a camada de intelig\u00eancia est\u00e1 faltando.',
+      'prob.tag1': 'Operações',
+      'prob.h4.1': 'Silos de dados, decisões por instinto',
+      'prob.p1': 'Dados de campo, imagens de satélite e registros de equipamentos raramente se comunicam. Decisões são tomadas com base em imagens incompletas e não reconciliadas.',
+      'prob.tag2': 'Agronomia',
+      'prob.h4.2': 'Sem raciocínio rastreável entre fontes de dados',
+      'prob.p2': 'Agr\u00f4nomos consultam m\u00faltiplos sistemas, mas n\u00e3o conseguem produzir uma resposta citada e audit\u00e1vel. A an\u00e1lise fica presa na expertise individual.',
+      'prob.tag3': 'Liderança',
+      'prob.h4.3': 'Decisões estratégicas sem evidência interrogável',
+      'prob.p3': 'Previsões de produtividade e planos de recursos são construídos sobre relatórios estáticos que não podem ser consultados, atualizados ou auditados em tempo real.',
+      'prob.chart': 'Ilustrativo: Fontes de Dados por Decisão de Campo',
+      'prob.footnote': '// Ilustrativo do desafio de reconciliação de dados em operações de agricultura de precisão em larga escala.',
       'what.eyebrow': 'O Que \u00c9',
-      'what.h2': 'Um supervisor e uma equipe de especialistas \u2014<br>n\u00e3o um \u00fanico chatbot.',
-      'what.lead': 'O AgroMind direciona sua pergunta para agentes especialistas, cada um focado em uma tarefa diferente. Um supervisor re\u00fane as sa\u00eddas em um \u00fanico relat\u00f3rio citado e audit\u00e1vel.',
+      'what.h2': 'Um supervisor e uma equipe de especialistas.<br>N\u00e3o um \u00fanico chatbot.',
+      'what.lead': 'O AgroMind fica sobre sua camada de dados existente. Agentes especialistas cuidam de tarefas diferentes. Um supervisor re\u00fane as sa\u00eddas em um \u00fanico relat\u00f3rio citado e audit\u00e1vel.',
       'what.in.tag': 'Entrada',
       'what.in.title': 'Sua Pergunta',
-      'what.in.sub': '\u201cDevemos ampliar essa linha de cr\u00e9dito dado o cen\u00e1rio atual da soja?\u201d',
+      'what.in.sub': '\u201cQuais talh\u00f5es apresentam sinais de estresse precoce que podem afetar as metas de produtividade do T3?\u201d',
       'what.sup.tag': 'Orquestra\u00e7\u00e3o',
       'what.sup.title': 'Agente Supervisor',
       'what.out.tag': 'Sa\u00edda',
@@ -1209,63 +1207,58 @@
       'what.agent3.title': 'Agente de Dados',
       'what.agent3.sub': 'Reconcilia e rastreia dados de campo',
       'what.agent4.title': 'Agente de Conformidade',
-      'what.agent4.sub': 'Verifica\u00e7\u00f5es PSR / Proagro / EUDR',
+      'what.agent4.sub': 'Verifica\u00e7\u00f5es EUDR / sustentabilidade',
       'what.agent5.title': 'Agente de Relat\u00f3rios',
       'what.agent5.sub': 'Gera trilha de auditoria completa',
       'cap.eyebrow': 'Pilha Completa de Capacidades',
-      'cap.h2': 'O que a plataforma pode fazer \u2014<br>n\u00facleo ativo, agentes para o Brasil em breve.',
-      'cap.lead': 'Capacidades principais est\u00e3o ativas. Agentes espec\u00edficos para o Brasil est\u00e3o em desenvolvimento.',
+      'cap.h2': 'Tudo o que o AgroMind pode fazer.',
       'cap.cat1': 'Intelig\u00eancia',
-      'cap.item1': '<strong>Orquestra\u00e7\u00e3o multi-agente</strong> \u2014 Pergunta &rarr; subtarefas &rarr; especialistas em paralelo &rarr; um \u00fanico relat\u00f3rio citado.',
-      'cap.item2': '<strong>Agentes personalizados nos seus dados</strong> \u2014 Treinados na sua taxonomia. Sem modelo compartilhado, sem vazamento entre institui\u00e7\u00f5es.',
-      'cap.item3': '<strong>Canvas de racioc\u00ednio em tempo real</strong> \u2014 Cada etapa do agente vis\u00edvel ao vivo conforme se desdobra.',
-      'cap.item4': '<strong>Mem\u00f3ria multi-turno e reposi\u00e7\u00e3o</strong> \u2014 Sess\u00f5es persistem; reproduza qualquer linha do tempo de decis\u00e3o sob demanda.',
+      'cap.item1': '<strong>Orquestra\u00e7\u00e3o multi-agente</strong>: Pergunta &rarr; subtarefas &rarr; especialistas em paralelo &rarr; um \u00fanico relat\u00f3rio citado.',
+      'cap.item2': '<strong>Agentes personalizados nos seus dados</strong>: Treinados na sua taxonomia. Sem modelo compartilhado, sem vazamento entre institui\u00e7\u00f5es.',
+      'cap.item3': '<strong>Canvas de racioc\u00ednio em tempo real</strong>: Cada etapa do agente vis\u00edvel ao vivo conforme se desdobra.',
+      'cap.item4': '<strong>Mem\u00f3ria multi-turno e reposi\u00e7\u00e3o</strong>: Sess\u00f5es persistem; reproduza qualquer linha do tempo de decis\u00e3o sob demanda.',
       'cap.cat2': 'An\u00e1lise e Integra\u00e7\u00e3o',
-      'cap.item5': '<strong>An\u00e1lise avan\u00e7ada e sa\u00eddas ricas</strong> \u2014 Relat\u00f3rios, tabelas de cen\u00e1rios, gr\u00e1ficos \u2014 n\u00e3o apenas texto.',
-      'cap.item6': '<strong>Sele\u00e7\u00e3o din\u00e2mica de ferramentas</strong> \u2014 Ferramenta certa por subtarefa; expanda sem alterar o modelo central.',
-      'cap.item7': '<strong>Integra\u00e7\u00f5es MCP</strong> \u2014 Conectores diretos para ERP, CRM e sistemas de relat\u00f3rios regulat\u00f3rios.',
+      'cap.item5': '<strong>An\u00e1lise avan\u00e7ada e sa\u00eddas ricas</strong>: Relat\u00f3rios, tabelas de cen\u00e1rios, gr\u00e1ficos, n\u00e3o apenas texto.',
+      'cap.item6': '<strong>Sele\u00e7\u00e3o din\u00e2mica de ferramentas</strong>: Ferramenta certa por subtarefa; expanda sem alterar o modelo central.',
+      'cap.item7': '<strong>Integra\u00e7\u00f5es MCP</strong>: Conectores diretos para ERP, CRM e sistemas de relat\u00f3rios regulat\u00f3rios.',
       'cap.cat3': 'Confian\u00e7a e Seguran\u00e7a',
-      'cap.item8': '<strong>Humano no ciclo por design</strong> \u2014 A\u00e7\u00f5es de alto risco requerem aprova\u00e7\u00e3o expl\u00edcita \u2014 sem automa\u00e7\u00e3o silenciosa.',
-      'cap.item9': '<strong>Suite completa de governan\u00e7a</strong> \u2014 Trilhas de auditoria, isolamento de dados, logs export\u00e1veis.',
-      'cap.item10': '<strong>Seguran\u00e7a de dados por design</strong> \u2014 Seus dados ficam isolados na sua implanta\u00e7\u00e3o. Nunca usados para treinar modelos compartilhados, nunca expostos a outros clientes, e dispon\u00edvel totalmente air-gapped.',
-      'cap.item11': '<strong>Zero alucina\u00e7\u00e3o por design</strong> \u2014 O sistema n\u00e3o pode afirmar algo que n\u00e3o consiga citar. Toda sa\u00edda \u00e9 rastravel \u2014 sem fatos gerados, sem lacunas silenciosas.',
+      'cap.item8': '<strong>Humano no ciclo por design</strong>: A\u00e7\u00f5es de alto risco requerem aprova\u00e7\u00e3o expl\u00edcita, sem automa\u00e7\u00e3o silenciosa.',
+      'cap.item9': '<strong>Suite completa de governan\u00e7a</strong>: Trilhas de auditoria, isolamento de dados, logs export\u00e1veis.',
+      'cap.item10': '<strong>Seguran\u00e7a de dados por design</strong>: Seus dados ficam isolados na sua implanta\u00e7\u00e3o. Nunca usados para treinar modelos compartilhados, nunca expostos a outros clientes, e dispon\u00edvel totalmente air-gapped.',
+      'cap.item11': '<strong>Zero alucina\u00e7\u00e3o por design</strong>: O sistema n\u00e3o pode afirmar algo que n\u00e3o consiga citar. Toda sa\u00edda \u00e9 rastravel, sem fatos gerados e sem lacunas silenciosas.',
       'cap.cat4': 'Escala e Implanta\u00e7\u00e3o',
-      'cap.item12': '<strong>Nuvem, h\u00edbrido ou air-gapped</strong> \u2014 Paridade total de recursos em todos os modos de implanta\u00e7\u00e3o.',
-      'cap.item13': '<strong>Arquitetura de escala empresarial</strong> \u2014 Escalonamento horizontal para cargas de trabalho multi-institucionais simult\u00e2neas.',
-      'build.eyebrow': 'Status de Desenvolvimento',
-      'build.h2': 'Tr\u00eas componentes ativos.<br>Mais tr\u00eas em breve.',
-      'build.lead': 'A plataforma principal est\u00e1 em produ\u00e7\u00e3o. Os agentes espec\u00edficos para o Brasil \u2014 reconcilia\u00e7\u00e3o CONAB, conformidade PSR/Proagro e rastreabilidade EUDR \u2014 est\u00e3o em desenvolvimento ativo e em breve estar\u00e3o dispon\u00edveis.',
-      'pill.build': 'Em Breve',
+      'cap.item12': '<strong>Nuvem, h\u00edbrido ou air-gapped</strong>: Paridade total de recursos em todos os modos de implanta\u00e7\u00e3o.',
+      'cap.item13': '<strong>Arquitetura de escala empresarial</strong>: Escalonamento horizontal para cargas de trabalho multi-institucionais simult\u00e2neas.',
+      'build.eyebrow': 'Prontid\u00e3o da Plataforma',
+      'build.h2': 'Tr\u00eas componentes ativos.<br>Agentes personalizados entregues em 4 semanas.',
+      'build.lead': 'A plataforma principal est\u00e1 pronta para produ\u00e7\u00e3o hoje. Os agentes espec\u00edficos para o Brasil para intelig\u00eancia de campo, simula\u00e7\u00e3o de produtividade e rastreabilidade EUDR s\u00e3o constru\u00eddos e configurados para seus dados e fluxos de trabalho, entregues em at\u00e9 4 semanas ap\u00f3s o in\u00edcio do engajamento.',
+      'pill.build': '4 Semanas',
       'build.th1': 'Componente', 'build.th2': 'Status', 'build.th3': 'Detalhe',
-      'build.r1.td1': 'N\u00facleo de orquestra\u00e7\u00e3o supervisor\u2013especialista',
-      'build.r1.td3': 'A arquitetura central de racioc\u00ednio \u2014 ativa e implement\u00e1vel hoje.',
+      'build.r1.td1': 'N\u00facleo de orquestra\u00e7\u00e3o supervisor e especialista',
+      'build.r1.td3': 'Arquitetura central de racioc\u00ednio, ativa e implement\u00e1vel hoje.',
       'build.r2.td1': 'Agentes de simula\u00e7\u00e3o de ROI e cen\u00e1rios',
-      'build.r2.td3': 'Modelagem de cen\u00e1rios e c\u00e1lculo de retorno ajustado ao risco \u2014 configurado para dados agr\u00edcolas.',
+      'build.r2.td3': 'Modelagem de cen\u00e1rios e c\u00e1lculo de retorno ajustado ao risco, configurado para dados agr\u00edcolas.',
       'build.r3.td1': 'Suite completa de governan\u00e7a e auditoria',
-      'build.r3.td3': 'Trilhas de auditoria, isolamento de dados, humano no ciclo \u2014 tudo operacional.',
-      'build.r4.td1': 'Agente de reconcilia\u00e7\u00e3o de revis\u00f5es CONAB',
-      'build.r4.td3': 'Reconcilia as revis\u00f5es mensais do CONAB em uma \u00fanica vis\u00e3o citada.',
-      'build.r5.td1': 'Agente de relat\u00f3rios de conformidade PSR / Proagro',
-      'build.r5.td3': 'Formata a sa\u00edda de an\u00e1lise para os padr\u00f5es de relat\u00f3rios do seguro rural brasileiro.',
-      'build.r6.td1': 'Agente de resumo de rastreabilidade EUDR',
-      'build.r6.td3': 'Gera resumos de rastreabilidade em n\u00edvel de propriedade para o regulamento europeu de desmatamento.',
-      'build.footnote': '// Os primeiros tr\u00eas componentes est\u00e3o ativos e dispon\u00edveis para implanta\u00e7\u00e3o imediata. Os agentes espec\u00edficos para o Brasil est\u00e3o em desenvolvimento ativo e em breve estar\u00e3o dispon\u00edveis.',
-      'cta.eyebrow': 'O Caminho de Entrada',
-      'cta.h2': 'O pr\u00f3ximo passo natural<br>depois que o primeiro sinal conquistou confian\u00e7a.',
-      'cta.lead': 'Funciona melhor como camada de expans\u00e3o quando um cliente j\u00e1 viu nossos sinais em a\u00e7\u00e3o. Somos engenheiros de IA \u2014 construimos a infraestrutura de racioc\u00ednio; o conhecimento do dom\u00ednio fica com voc\u00ea.',
+      'build.r3.td3': 'Trilhas de auditoria, isolamento de dados e controles humano no ciclo, tudo operacional.',
+      'build.r4.td1': 'Agentes personalizados para sua opera\u00e7\u00e3o',
+      'build.r4.td3': 'Agentes de intelig\u00eancia de campo, simula\u00e7\u00e3o de produtividade e rastreabilidade EUDR constru\u00eddos e configurados para suas fontes de dados, fluxos de trabalho e necessidades espec\u00edficas.',
+      'build.footnote': '// A plataforma principal est\u00e1 ativa hoje. Os agentes personalizados s\u00e3o definidos, constru\u00eddos e configurados para sua opera\u00e7\u00e3o e entregues em at\u00e9 4 semanas ap\u00f3s o in\u00edcio do engajamento.',
+      'cta.eyebrow': 'O Que Muda',
+      'cta.h2': 'Com os dados que voc\u00ea j\u00e1 tem,<br>para decis\u00f5es que voc\u00ea pode defender.',
+      'cta.lead': 'Constru\u00edmos a arquitetura de racioc\u00ednio; a expertise agron\u00f4mica da sua equipe conduz as perguntas. Cada resposta \u00e9 citada, audit\u00e1vel e sua para interrogar.',
       'cta.th1': 'Cen\u00e1rio de Decis\u00e3o', 'cta.th2': 'Sem AgroMind', 'cta.th3': 'Com AgroMind',
-      'cta.r1.td1': 'Reconcilia\u00e7\u00e3o de previs\u00e3o de safra',
-      'cta.r1.td2': 'Horas de analista manual entre vers\u00f5es conflitantes do CONAB',
-      'cta.r1.td3': 'Vis\u00e3o \u00fanica reconciliada com hist\u00f3rico completo de revis\u00f5es citado',
-      'cta.r2.td1': 'Prepara\u00e7\u00e3o de comit\u00ea de cr\u00e9dito',
-      'cta.r2.td2': 'Apresenta\u00e7\u00e3o montada manualmente a partir de fontes dispersas',
-      'cta.r2.td3': 'Relat\u00f3rio audit\u00e1vel com dados citados, fontes e intervalo de cen\u00e1rios',
-      'cta.r3.td1': 'Registro PSR / Proagro',
-      'cta.r3.td2': 'Convers\u00e3o manual de formato; risco cont\u00ednuo de conformidade',
-      'cta.r3.td3': 'Formatado pelo agente para o padr\u00e3o regulat\u00f3rio automaticamente',
+      'cta.r1.td1': 'Detec\u00e7\u00e3o de estresse em campo',
+      'cta.r1.td2': 'Revis\u00e3o manual de camadas de sat\u00e9lite pelo agr\u00f4nomo, lenta e sem cita\u00e7\u00e3o',
+      'cta.r1.td3': 'Consulta ag\u00eantica em sat\u00e9lite, sensores e dados clim\u00e1ticos, com resposta citada em minutos',
+      'cta.r2.td1': 'Interroga\u00e7\u00e3o de previs\u00e3o de produtividade',
+      'cta.r2.td2': 'Relat\u00f3rio est\u00e1tico de BI; n\u00e3o \u00e9 poss\u00edvel fazer perguntas de acompanhamento ou auditar a l\u00f3gica',
+      'cta.r2.td3': 'Racioc\u00ednio multi-turno: fa\u00e7a perguntas de acompanhamento, obtenha respostas citadas com trilha completa',
+      'cta.r3.td1': 'Decis\u00e3o de otimiza\u00e7\u00e3o de insumos',
+      'cta.r3.td2': 'Modelos em planilha com coleta manual de dados de sistemas desconectados',
+      'cta.r3.td3': 'Agente de cen\u00e1rios compara op\u00e7\u00f5es entre talh\u00f5es com sa\u00eddas citadas e audit\u00e1veis',
       'cta.r4.td1': 'Rastreabilidade EUDR',
       'cta.r4.td2': 'Nenhum resumo estruturado em n\u00edvel de propriedade dispon\u00edvel',
-      'cta.r4.td3': 'Cadeia de rastreabilidade resumida por propriedade',
+      'cta.r4.td3': 'Cadeia de rastreabilidade resumida por propriedade, pronta para exporta\u00e7\u00e3o',
       'cta.r5.td1': 'Trilha de auditoria de decis\u00f5es',
       'cta.r5.td2': 'Threads de e-mail e anota\u00e7\u00f5es de reuni\u00f5es',
       'cta.r5.td3': 'Trilha completa de racioc\u00ednio, export\u00e1vel, com carimbo de data',
@@ -1283,16 +1276,16 @@
       'closing.p4': 'Seguran\u00e7a de dados: seus dados s\u00e3o isolados e nunca usados para treinar modelos compartilhados',
       'closing.cblabel1': 'Prontid\u00e3o para Implanta\u00e7\u00e3o',
       'closing.stat1': 'componentes n\u00facleos ativos hoje',
-      'closing.stat2': 'Modos de implanta\u00e7\u00e3o \u2014 nuvem, h\u00edbrido, air-gapped',
+      'closing.stat2': 'Modos de implanta\u00e7\u00e3o: nuvem, h\u00edbrido, air-gapped',
       'closing.stat3': 'Conclus\u00f5es rastreable\u00eds at\u00e9 uma fonte citada',
       'closing.stat4': 'Tempo de resposta t\u00edpico para consultas de parceria',
       'closing.cblabel2': 'Como Come\u00e7a',
-      'closing.step1': 'Compartilhe seu caso de uso \u2014 cr\u00e9dito, conformidade, cooperativa ou seguradora',
-      'closing.step2': 'Definimos o modo de implanta\u00e7\u00e3o e a configura\u00e7\u00e3o de agentes para sua institui\u00e7\u00e3o',
-      'closing.step3': 'Piloto nos seus dados \u2014 governan\u00e7a completa e trilha de auditoria desde o primeiro dia',
+      'closing.step1': 'Compartilhe seu ambiente de dados: quais fontes voc\u00ea tem e quais decis\u00f5es precisa tomar',
+      'closing.step2': 'Definimos a configura\u00e7\u00e3o de agentes e o modo de implanta\u00e7\u00e3o para sua opera\u00e7\u00e3o',
+      'closing.step3': 'Piloto nos seus dados, com governan\u00e7a completa e trilha de auditoria desde o primeiro dia',
       'closing.cblabel3': 'Entre em Contato',
-      'prob.legend1': 'Revis\u00e3o para cima',
-      'prob.legend2': 'Revis\u00e3o para baixo',
+      'prob.legend1': 'M\u00faltiplas fontes',
+      'prob.legend2': 'N\u00e3o reconciliado',
       'what.badge1': 'Planeja',
       'what.badge2': 'Delega',
       'what.badge3': 'Consolida',
