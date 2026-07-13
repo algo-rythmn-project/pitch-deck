@@ -688,11 +688,11 @@
 
     <!-- Animated CONAB revision chart -->
     <div class="chart-panel reveal reveal-delay-4">
-      <div class="chart-title" data-i18n="prob.chart">Illustrative: Data Sources Per Field Decision</div>
+      <div class="chart-title" data-i18n="prob.chart">Illustrative: Data Sources Per Field Decision Type</div>
       <div id="revisionChart"></div>
       <div class="chart-legend">
-        <div class="legend-item"><div class="legend-dot" style="background:var(--navy);"></div><span data-i18n="prob.legend1">Multiple sources</span></div>
-        <div class="legend-item"><div class="legend-dot" style="background:var(--rose);"></div><span data-i18n="prob.legend2">Unreconciled</span></div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--gold);"></div><span data-i18n="prob.legend1">6–7 sources</span></div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--rose);"></div><span data-i18n="prob.legend2">4–5 sources</span></div>
       </div>
       <p class="footnote" style="margin-top:12px;" data-i18n="prob.footnote">// Illustrative of the data reconciliation challenge in large-scale precision ag operations.</p>
     </div>
@@ -1047,8 +1047,8 @@
       'prob.tag3': 'Leadership',
       'prob.h4.3': 'Strategic calls without interrogatable evidence',
       'prob.p3': 'Yield forecasts and resource plans are built on static reports that can\u2019t be queried, updated, or audited in real time.',
-      'prob.chart': 'Illustrative: Data Sources Per Field Decision',
-      'prob.footnote': '// Illustrative of the data reconciliation challenge in large-scale precision ag operations.',
+      'prob.chart': 'Illustrative: Data Sources Per Field Decision Type',
+      'prob.footnote': '// Each field decision draws from multiple disconnected sources. None of them speak to each other.',
       'what.eyebrow': 'What It Is',
       'what.h2': 'A supervisor, and a team of specialists.<br>Not a single chatbot.',
       'what.lead': 'AgroMind sits on top of your existing data layer. Specialist agents handle different tasks. A supervisor assembles their outputs into one cited, auditable report.',
@@ -1148,8 +1148,8 @@
       'closing.step2': 'We scope the agent configuration and deployment mode for your operation',
       'closing.step3': 'Pilot on your data, with full governance and audit trail from day one',
       'closing.cblabel3': 'Get in touch',
-      'prob.legend1': 'Multiple sources',
-      'prob.legend2': 'Unreconciled',
+      'prob.legend1': '6–7 sources',
+      'prob.legend2': '4–5 sources',
       'what.badge1': 'Plans',
       'what.badge2': 'Delegates',
       'what.badge3': 'Assembles',
@@ -1183,8 +1183,8 @@
       'prob.tag3': 'Liderança',
       'prob.h4.3': 'Decisões estratégicas sem evidência interrogável',
       'prob.p3': 'Previsões de produtividade e planos de recursos são construídos sobre relatórios estáticos que não podem ser consultados, atualizados ou auditados em tempo real.',
-      'prob.chart': 'Ilustrativo: Fontes de Dados por Decisão de Campo',
-      'prob.footnote': '// Ilustrativo do desafio de reconciliação de dados em operações de agricultura de precisão em larga escala.',
+      'prob.chart': 'Ilustrativo: Fontes de Dados por Tipo de Decisão de Campo',
+      'prob.footnote': '// Cada decisão de campo depende de múltiplas fontes desconectadas. Nenhuma delas se comunica entre si.',
       'what.eyebrow': 'O Que \u00c9',
       'what.h2': 'Um supervisor e uma equipe de especialistas.<br>N\u00e3o um \u00fanico chatbot.',
       'what.lead': 'O AgroMind fica sobre sua camada de dados existente. Agentes especialistas cuidam de tarefas diferentes. Um supervisor re\u00fane as sa\u00eddas em um \u00fanico relat\u00f3rio citado e audit\u00e1vel.',
@@ -1284,8 +1284,8 @@
       'closing.step2': 'Definimos a configura\u00e7\u00e3o de agentes e o modo de implanta\u00e7\u00e3o para sua opera\u00e7\u00e3o',
       'closing.step3': 'Piloto nos seus dados, com governan\u00e7a completa e trilha de auditoria desde o primeiro dia',
       'closing.cblabel3': 'Entre em Contato',
-      'prob.legend1': 'M\u00faltiplas fontes',
-      'prob.legend2': 'N\u00e3o reconciliado',
+      'prob.legend1': '6–7 fontes',
+      'prob.legend2': '4–5 fontes',
       'what.badge1': 'Planeja',
       'what.badge2': 'Delega',
       'what.badge3': 'Consolida',
@@ -1320,27 +1320,26 @@
     if (saved === 'pt') setLang('pt');
   })();
 
-  // ---- CONAB REVISION CHART ----
+  // ---- DATA SOURCES PER FIELD DECISION CHART ----
   const revisions = [
-    { label:'Feb', delta: 7.2, dir:'pos' },
-    { label:'Mar', delta: 4.8, dir:'neg' },
-    { label:'Apr', delta:11.3, dir:'pos' },
-    { label:'May', delta: 6.1, dir:'neg' },
-    { label:'Jun', delta: 9.4, dir:'pos' },
-    { label:'Jul', delta: 3.2, dir:'neg' },
+    { label:'Yield', delta: 7, dir:'pos' },
+    { label:'Stress', delta: 6, dir:'pos' },
+    { label:'Input', delta: 5, dir:'neg' },
+    { label:'EUDR', delta: 4, dir:'neg' },
+    { label:'ROI', delta: 6, dir:'pos' },
+    { label:'Report', delta: 5, dir:'neg' },
   ];
   const maxAbs = Math.max(...revisions.map(r => Math.abs(r.delta)));
   const chartEl = document.getElementById('revisionChart');
   if(chartEl){
     revisions.forEach(r => {
       const pct = (Math.abs(r.delta) / maxAbs * 90).toFixed(1);
-      const sign = r.dir === 'pos' ? '+' : '\u2212';
       const row = document.createElement('div');
       row.className = 'bar-row';
       row.innerHTML = `
         <span class="bar-label">${r.label}</span>
         <div class="bar-track">
-          <div class="bar-fill ${r.dir}" data-pct="${pct}" style="width:0">${sign}${Math.abs(r.delta)} MT</div>
+          <div class="bar-fill ${r.dir}" data-pct="${pct}" style="width:0">${r.delta} sources</div>
         </div>`;
       chartEl.appendChild(row);
     });
