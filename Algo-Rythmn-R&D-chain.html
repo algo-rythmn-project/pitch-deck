@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>The Algo-Rythmn Chain</title>
+<style>
+  :root{
+    --ink:#0E1B2A; --muted:#5B6B7C; --line:#DCE3EA; --paper:#FFFFFF;
+    --l1:#2B5CE6; --l1bg:#EEF3FF;
+    --l2:#0E8C6E; --l2bg:#EAF7F2;
+    --l3:#C2851A; --l3bg:#FDF4E3;
+    --red:#C8102E;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:"Inter","Segoe UI","Helvetica Neue",Arial,sans-serif;
+    color:var(--ink); background:#EEF1F4; -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+  .page{
+    width:210mm; min-height:297mm; margin:0 auto; background:var(--paper);
+    padding:12mm 13mm 10mm; display:flex; flex-direction:column; gap:5.5mm;
+  }
+
+  /* ---------- header ---------- */
+  header{display:flex; align-items:flex-end; justify-content:space-between;
+         border-bottom:2.5px solid var(--ink); padding-bottom:3mm}
+  .brand{font-size:9.5pt; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); font-weight:600}
+  h1{font-size:25pt; line-height:1.05; letter-spacing:-.02em; margin-top:1.5mm}
+  h1 em{font-style:normal; color:var(--l2)}
+  .tag{text-align:right; font-size:8.5pt; color:var(--muted); line-height:1.5}
+  .tag b{display:block; color:var(--ink); font-size:10pt; letter-spacing:.02em}
+  .maple{color:var(--red); font-weight:700}
+
+  .lede{font-size:10pt; line-height:1.5; color:var(--muted); max-width:172mm}
+  .lede b{color:var(--ink)}
+
+  /* ---------- chain diagram ---------- */
+  .chain{display:grid; grid-template-columns:1fr 9mm 1fr 9mm 1fr; align-items:stretch}
+  .link{border:1.4px solid var(--line); border-top-width:5px; border-radius:3.5mm;
+        padding:4.5mm 4.5mm 5mm; display:flex; flex-direction:column; gap:2mm; position:relative}
+  .link.one{border-top-color:var(--l1); background:linear-gradient(180deg,var(--l1bg),#fff 55%)}
+  .link.two{border-top-color:var(--l2); background:linear-gradient(180deg,var(--l2bg),#fff 55%)}
+  .link.three{border-top-color:var(--l3); background:linear-gradient(180deg,var(--l3bg),#fff 55%)}
+  .num{font-size:8pt; font-weight:700; letter-spacing:.18em; text-transform:uppercase}
+  .one .num{color:var(--l1)} .two .num{color:var(--l2)} .three .num{color:var(--l3)}
+  .link h2{font-size:13.5pt; line-height:1.15; letter-spacing:-.01em}
+  .link .what{font-size:9pt; line-height:1.45; color:var(--muted)}
+  .link ul{list-style:none; margin-top:1mm; display:flex; flex-direction:column; gap:1.3mm}
+  .link li{font-size:8.6pt; line-height:1.35; padding-left:4.2mm; position:relative; color:var(--ink)}
+  .link li::before{content:""; position:absolute; left:0; top:1.45mm; width:2mm; height:2mm; border-radius:50%}
+  .one li::before{background:var(--l1)} .two li::before{background:var(--l2)} .three li::before{background:var(--l3)}
+  .out{margin-top:auto; padding-top:2.5mm; border-top:1px dashed var(--line);
+       font-size:8pt; color:var(--muted); letter-spacing:.04em; text-transform:uppercase; font-weight:600}
+  .out span{display:block; text-transform:none; letter-spacing:0; font-weight:600; font-size:9pt; color:var(--ink); margin-top:.8mm}
+
+  .joint{display:flex; align-items:center; justify-content:center}
+  .joint svg{width:9mm; height:9mm}
+
+  /* ---------- proof rows ---------- */
+  .sec-title{font-size:8.5pt; font-weight:700; letter-spacing:.16em; text-transform:uppercase;
+             color:var(--muted); display:flex; align-items:center; gap:3mm}
+  .sec-title::after{content:""; flex:1; height:1px; background:var(--line)}
+
+  table{width:100%; border-collapse:collapse; margin-top:2.5mm}
+  th{font-size:7.8pt; text-transform:uppercase; letter-spacing:.1em; color:var(--muted);
+     text-align:left; padding:0 3mm 1.8mm 0; font-weight:700}
+  th.c1{color:var(--l1)} th.c2{color:var(--l2)} th.c3{color:var(--l3)}
+  td{font-size:8.8pt; line-height:1.4; padding:3mm 3mm 3mm 0; vertical-align:top;
+     border-top:1px solid var(--line)}
+  td.dom{font-weight:700; font-size:9.2pt; width:26mm; letter-spacing:-.01em}
+  td.dom small{display:block; font-weight:500; font-size:7.8pt; color:var(--muted); margin-top:.8mm; letter-spacing:0}
+  td b{font-weight:700}
+  .pill{display:inline-block; font-size:7.6pt; font-weight:700; padding:.6mm 1.8mm; border-radius:1.2mm; margin-top:1.2mm}
+  .pill.live{background:var(--l3bg); color:var(--l3)}
+
+  /* ---------- brazil band ---------- */
+  .brazil{border:1.4px solid var(--line); border-left:5px solid var(--l2); border-radius:3mm;
+          background:#F7FAF9; padding:4.5mm 5mm; display:grid; grid-template-columns:52mm 1fr; gap:6mm; align-items:center}
+  .brazil h3{font-size:12pt; line-height:1.2; letter-spacing:-.01em}
+  .brazil h3 small{display:block; font-size:8pt; font-weight:600; color:var(--l2);
+                   text-transform:uppercase; letter-spacing:.14em; margin-bottom:1.2mm}
+  .brazil p{font-size:8.8pt; line-height:1.5; color:var(--muted)}
+  .brazil p b{color:var(--ink)}
+  .steps{display:flex; gap:2mm; margin-top:2mm; flex-wrap:wrap}
+  .step{font-size:8pt; background:#fff; border:1px solid var(--line); border-radius:2mm; padding:1.5mm 2.5mm; color:var(--ink)}
+  .step b{color:var(--l2)}
+
+  footer{margin-top:auto; display:flex; justify-content:space-between; align-items:center;
+         border-top:1px solid var(--line); padding-top:2.5mm; font-size:7.8pt; color:var(--muted)}
+  footer b{color:var(--ink)}
+
+  @media print{ body{background:#fff} .page{margin:0; padding:10mm 11mm} @page{size:A4; margin:0} }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div>
+      <div class="brand">Algo-Rythmn &nbsp;·&nbsp; <span class="maple">Canada</span></div>
+      <h1>The Algo-Rythmn <em>Chain</em></h1>
+    </div>
+    <div class="tag">
+      <b>Three links. One operating model.</b>
+      Research &rarr; Validation &rarr; Commercialization
+    </div>
+  </header>
+
+  <p class="lede">
+    We do not sell prototypes, and we do not research in a vacuum. Every Algo-Rythmn product travels the same
+    <b>chain</b>: an idea is researched in-house, proven on a real operating site with a domain partner, then
+    packaged and sold into that industry. <b>Each link de-risks the next</b> — and the chain is repeatable in any market.
+  </p>
+
+  <!-- CHAIN -->
+  <section class="chain">
+    <div class="link one">
+      <div class="num">Link 01</div>
+      <h2>Research &amp; R&amp;D</h2>
+      <div class="what">We build the model before we build the pitch. Multi-source data fusion, agentic AI and domain algorithms, developed in-house in Canada.</div>
+      <ul>
+        <li>Satellite, weather, yield &amp; market data fusion</li>
+        <li>Multi-agent orchestration (AlgoMind™)</li>
+        <li>University &amp; research collaboration</li>
+      </ul>
+      <div class="out">Output<span>A working model, not a slide</span></div>
+    </div>
+
+    <div class="joint">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#94A3B2" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h13"/><path d="M13 6l6 6-6 6"/></svg>
+    </div>
+
+    <div class="link two">
+      <div class="num">Link 02</div>
+      <h2>Validation</h2>
+      <div class="what">The model meets the real world. We embed with an operating partner — a working farm, a working pharmacy, a working mine — and prove the numbers on their ground.</div>
+      <ul>
+        <li>Field trials on real operations</li>
+        <li>Ground-truth data &amp; accuracy benchmarks</li>
+        <li>Regulatory &amp; workflow fit</li>
+      </ul>
+      <div class="out">Output<span>Third-party proof &amp; a reference site</span></div>
+    </div>
+
+    <div class="joint">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#94A3B2" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h13"/><path d="M13 6l6 6-6 6"/></svg>
+    </div>
+
+    <div class="link three">
+      <div class="num">Link 03</div>
+      <h2>Commercialization</h2>
+      <div class="what">The validated model becomes a product: branded, deployable and priced — then replicated across neighbouring industries with the same engine.</div>
+      <ul>
+        <li>Deployed platforms &amp; data products</li>
+        <li>Same engine, new vertical</li>
+        <li>Recurring revenue &amp; managed service</li>
+      </ul>
+      <div class="out">Output<span>Revenue &amp; a repeatable playbook</span></div>
+    </div>
+  </section>
+
+  <!-- PROOF -->
+  <section>
+    <div class="sec-title">The Chain in Action &nbsp;— Canadian Proof Points</div>
+    <table>
+      <thead>
+        <tr>
+          <th>Domain</th>
+          <th class="c1">01 · Research</th>
+          <th class="c2">02 · Validation</th>
+          <th class="c3">03 · Commercialization</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="dom">Ag Intelligence<small>Alberta &amp; Saskatchewan</small></td>
+          <td>Yield prediction from satellite imagery, weather and shock data — <b>HarvestAlpha™</b>, <b>AgroMind™</b></td>
+          <td>Proven on an <b>experimental farm</b> — Olds College Smart Farm and partner field trials supply the ground truth</td>
+          <td><b>AgEinstein™</b> dashboard, <b>AGMRI</b> &amp; <b>New Era Ag</b> AI assistants, <b>AlgoDroneTeams™</b> scouting service <span class="pill live">Deployed</span></td>
+        </tr>
+        <tr>
+          <td class="dom">Document Intelligence<small>Regulated professions</small></td>
+          <td>Retrieval and compliance reasoning over an operator's own regulatory documents</td>
+          <td>Built and tested with <b>Alberta pharmacies</b> — real inspections, real inspector questions, real corrective documents</td>
+          <td><b>AlgoPharma™</b> live; same engine extended to mining, health, safety and environment <span class="pill live">Deployed</span></td>
+        </tr>
+        <tr>
+          <td class="dom">Industrial Intelligence<small>Potash &amp; energy</small></td>
+          <td>Root-cause analysis, predictive maintenance and multi-agent operations models</td>
+          <td>Validated against <b>live plant and well data</b> with operating partners</td>
+          <td><b>Potash Operations Intelligence</b>, <b>ConsultAssist™</b>, <b>AlgoProsp™</b></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- BRAZIL -->
+  <section class="brazil">
+    <div>
+      <h3><small>Why it travels</small>The same chain, built in Brazil</h3>
+    </div>
+    <div>
+      <p>The chain is <b>partner-shaped, not geography-shaped</b>. Canada gave us the engine and the proof; Brazil supplies its own
+      research institutions, its own experimental farms and its own operators. We bring links 01 and 03 — <b>local partners complete link 02</b>,
+      and the reference site they create is what opens the market.</p>
+      <div class="steps">
+        <div class="step"><b>01</b> &nbsp;Proven models, ready today</div>
+        <div class="step"><b>02</b> &nbsp;Brazilian university / experimental farm partner</div>
+        <div class="step"><b>03</b> &nbsp;Local deployment &amp; recurring revenue</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div><b>Algo-Rythmn</b> &nbsp;·&nbsp; algo-rythmn.ai</div>
+    <div>Research &rarr; Validation &rarr; Commercialization &nbsp;·&nbsp; one chain, every product</div>
+  </footer>
+
+</div>
+</body>
+</html>
