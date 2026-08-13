@@ -263,6 +263,10 @@
   .nstep b{font-family:var(--display);font-size:13.5px;color:#fff;display:block;margin-bottom:4px;letter-spacing:-.01em;font-weight:600}
   .nstep span{font-size:13px;color:#80a8d8;line-height:1.45;display:block}
   .nsarrow{font-size:18px;color:rgba(46,184,255,.35);flex-shrink:0;align-self:center}
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+  @keyframes scan-line{0%{width:0}100%{width:100%}}
+  .reg-scan-bar{height:3px;background:rgba(46,184,255,.15);border-radius:2px;overflow:hidden;margin-top:4px}
+  .reg-scan-bar .fill{height:100%;background:linear-gradient(90deg,#0a50a0,#2eb8ff);border-radius:2px;animation:scan-line 2.4s ease-in-out infinite}
   @media(max-width:860px){
     .split,.roigrid,.roi2col,.val2col{grid-template-columns:1fr;gap:20px}
     .sols,.nots{grid-template-columns:1fr}
@@ -323,29 +327,28 @@
       <div class="cover-layout">
         <!-- left: text -->
         <div>
-          <div class="eyebrow rv">Regulatory intelligence &amp; dynamic intake pricing</div>
+          <div class="eyebrow rv">AlgoDoc Intelligence &amp; AlgoPricing</div>
           <h1 class="rv h1-grad">AlgoCavern</h1>
-          <p class="lede rv">Reads AER's public docket and your lab analyticals — flagging competitor cavern applications before they close a window, and pricing each waste stream on its actual hydrocarbon-recovery yield. The reading and arithmetic are handled. Every call stays with your team.</p>
+          <p class="lede rv">Two tools under one platform. AlgoDoc Intelligence checks every incoming load against the rules and flags what is not compliant before you accept it. AlgoPricing prices each load on its true net value to recover, not its volume. The reading and arithmetic are handled. Every call stays with your team.</p>
           <div class="covpills rv">
-            <span class="cpill">AER regulatory monitoring</span>
-            <span class="cpill">Per-stream intake pricing</span>
+            <span class="cpill">Directive 058 compliance checks</span>
+            <span class="cpill">Net-value intake pricing</span>
             <span class="cpill">Alberta · WCSB focus</span>
           </div>
         </div>
         <!-- right: preview cards (hidden below 960px) -->
         <div class="cov-right rv">
           <div class="cov-card grn">
-            <div class="ck">Regulatory Intelligence · live feed</div>
-            <div class="cov-crow"><span class="dot" style="background:#e2745f;box-shadow:0 0 7px rgba(226,116,95,.55)"></span>Disposal well application near catchment</div>
-            <div class="cov-crow"><span class="dot" style="background:#e0a53a;box-shadow:0 0 7px rgba(224,165,58,.5)"></span>AER objection window closing — 14 days</div>
-            <div class="cov-crow"><span class="dot" style="background:#78c8f8;box-shadow:0 0 7px rgba(120,200,248,.4)"></span>Competitor filing detected · Keg River</div>
+            <div class="ck">AlgoDoc Intelligence · compliance check</div>
+            <div class="cov-crow"><span class="dot" style="background:#e0a53a;box-shadow:0 0 7px rgba(224,165,58,.5)"></span>Declared non-DOW, criteria indicate DOW</div>
+            <div class="cov-crow"><span class="dot" style="background:#e2745f;box-shadow:0 0 7px rgba(226,116,95,.55)"></span>NORM present, surcharge applies</div>
+            <div class="cov-crow"><span class="dot" style="background:#78c8f8;box-shadow:0 0 7px rgba(120,200,248,.4)"></span>Compliance report drafted, ready to review</div>
           </div>
           <div class="cov-card amb">
-            <div class="ck">Dynamic Pricing · illustrative</div>
-            <div class="cov-pr"><span class="pl">Drilling waste</span><span class="pv">$22.50/t</span></div>
-            <div class="cov-pr"><span class="pl">Slop oil</span><span class="pv">$6.00/t</span></div>
-            <div class="cov-pr"><span class="pl">Hydrovac</span><span class="pv">$65.00/t</span></div>
-            <div style="margin-top:10px;font-family:var(--mono);font-size:11px;color:#5878a0;line-height:1.45">Flat $22.50 leaves $42.50/t on hydrovac — same volume, opposite margin story.</div>
+            <div class="ck">AlgoPricing · illustrative</div>
+            <div class="cov-pr"><span class="pl">Sample A (oil-rich)</span><span class="pv">$0</span></div>
+            <div class="cov-pr"><span class="pl">Sample B (NORM)</span><span class="pv">$7,872</span></div>
+            <div style="margin-top:10px;font-family:var(--mono);font-size:11px;color:#5878a0;line-height:1.45">Same facility. Net value to Pure sets the gate, floored at $0.</div>
           </div>
         </div>
       </div>
@@ -363,7 +366,7 @@
           <h2 class="rv">We build AI tools.<br>We are not waste experts.</h2>
           <ul class="points">
             <li class="rv"><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span>An AI company focused on <strong>document intelligence and decision support</strong></span></li>
-            <li class="rv"><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span>We have already <strong>built a working demo of AlgoCavern</strong> on Alberta synthetic and public data — you can see it today</span></li>
+            <li class="rv"><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span>We have already <strong>built a working demo of AlgoCavern</strong> on Alberta synthetic and public data, and you can see it today</span></li>
             <li class="rv"><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span>We know software and data. <strong>You know disposal, chemistry, and the field</strong></span></li>
             <li class="rv"><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span>This only works as a <strong>partnership</strong>, and we would rather say that now than pretend otherwise</span></li>
           </ul>
@@ -374,18 +377,18 @@
             <div style="background:rgba(46,184,255,.08);border:1px solid rgba(46,184,255,.2);border-radius:12px;padding:14px 16px">
               <div class="ptag" style="color:#2eb8ff">Algo-Rythmn</div>
               <div class="ptokens">
-                <span class="ptoken">Document reading</span>
-                <span class="ptoken">AER monitoring</span>
+                <span class="ptoken">Document intelligence</span>
+                <span class="ptoken">Compliance checks</span>
                 <span class="ptoken">Pricing models</span>
                 <span class="ptoken">Data pipeline</span>
               </div>
             </div>
-            <div style="text-align:center;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;color:rgba(255, 255, 255, 0.521);padding:2px 0">— PARTNERSHIP —</div>
+            <div style="text-align:center;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;color:rgba(255, 255, 255, 0.521);padding:2px 0">· PARTNERSHIP ·</div>
             <div style="background:rgba(201,155,82,.08);border:1px solid rgba(201,155,82,.22);border-radius:12px;padding:14px 16px">
               <div class="ptag" style="color:#c99b52">Your team</div>
               <div class="ptokens">
                 <span class="ptoken">Chemistry &amp; field</span>
-                <span class="ptoken">Catchment limits</span>
+                <span class="ptoken">Permit limits</span>
                 <span class="ptoken">Rate card</span>
                 <span class="ptoken">Final decisions</span>
               </div>
@@ -406,9 +409,9 @@
       <h2 class="rv">Your people are not the<br>bottleneck. The paperwork is.</h2>
       <p class="lede rv">Approvals, lab reports, regulator filings, and per-load pricing eat hours that could go to judgment. Reading and arithmetic is where software helps. The judgment stays with your team.</p>
       <div class="tasks">
-        <div class="task sw rv"><div class="tl">Software handles</div><h4>Read AER filings</h4></div>
+        <div class="task sw rv"><div class="tl">Software handles</div><h4>Check load compliance</h4></div>
         <div class="task sw rv"><div class="tl">Software handles</div><h4>Parse lab analyticals</h4></div>
-        <div class="task sw rv"><div class="tl">Software handles</div><h4>Run the numbers</h4></div>
+        <div class="task sw rv"><div class="tl">Software handles</div><h4>Price each load</h4></div>
         <div class="task tm rv"><div class="tl">Your team</div><h4>Make the call</h4></div>
       </div>
     </div>
@@ -421,10 +424,10 @@
       <div class="eyebrow rv">The platform</div>
       <h2 class="rv">Two solutions. Your<br>experts in the chair.</h2>
       <div class="sols">
-        <div class="sol rv"><div class="edge"></div><div class="num">SOLUTION 1</div><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg></div><h3>Regulatory intelligence</h3><p>Tracks AER filings, competitor cavern applications, and Keg River capacity allocations — early warning before a siting move becomes a surprise.</p></div>
-        <div class="sol rv"><div class="edge"></div><div class="num">SOLUTION 2</div><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div><h3>Dynamic waste-intake pricing</h3><p>Prices each stream by expected hydrocarbon-recovery yield and treatment cost, moving from flat volume fees to per-stream net-margin pricing.</p></div>
+        <div class="sol rv"><div class="edge"></div><div class="num">SOLUTION 1</div><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg></div><h3>AlgoDoc Intelligence</h3><p>Reads each incoming load's manifest, SDS, and lab report, checks it against Directive 058 and related rules, and flags what is not compliant before you accept it. Drafts the compliance report too.</p></div>
+        <div class="sol rv"><div class="edge"></div><div class="num">SOLUTION 2</div><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div><h3>AlgoPricing</h3><p>Breaks each load into its components, nets recovered-oil value against disposal cost, and prices the gate on what the load is truly worth to recover. Not flat volume fees.</p></div>
       </div>
-      <div class="foundation rv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l9 5-9 5-9-5 9-5zM3 12l9 5 9-5"/></svg><span>Both are built and running on a demo platform seeded with Alberta synthetic and public data. Drop in a lab analytical or AER filing, or ask in plain language — the platform responds today.</span></div>
+      <div class="foundation rv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l9 5-9 5-9-5 9-5zM3 12l9 5 9-5"/></svg><span>Both are built and running on a working demo platform. Drop in a lab analytical or a manifest, or ask in plain language, and it responds today.</span></div>
     </div>
     <div class="foot"><div class="brand">© 2026 Algo-Rythmn Corp. All rights reserved.</div><div class="pgnum"><b>04</b> / 10</div></div>
   </section>
@@ -432,26 +435,83 @@
   <!-- 05 SOLUTION 1 -->
   <section class="slide bg-paper">
     <div class="wrap">
-      <div class="eyebrow rv">Solution 1 · Regulatory intelligence</div>
+      <div class="eyebrow rv">Solution 1 · AlgoDoc Intelligence</div>
       <div class="split">
         <div>
-          <h2 class="rv">Monitors AER's docket<br>before it becomes a surprise.</h2>
+          <h2 class="rv">Checks every load against<br>the rules before you accept it.</h2>
           <ul class="points">
-            <li class="rv"><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span>Tracks competitor cavern applications (Tervita, White Swan) near your catchments</span></li>
-            <li class="rv"><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span>Flags competing disposal-well applications, siting hearings, and objection deadlines</span></li>
-            <li class="rv"><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span>Monitors Keg River Formation capacity filings for threats and openings</span></li>
+            <li class="rv"><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span>Scans each load's manifest, SDS, and lab analytical against Directive 058 and related rules</span></li>
+            <li class="rv"><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span>Flags DOW classification gaps and non-compliance <strong>before a load is accepted</strong></span></li>
+            <li class="rv"><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span>Answers compliance questions in plain language and <strong>drafts the report with suggested fixes</strong></span></li>
           </ul>
-          <div class="honest rv"><b>Plainly:</b> AER public data, read faster and filtered to your catchments. Not private information, and not a crystal ball.</div>
+          <div class="honest rv"><b>Plainly:</b> every flag cites the rule and the source passage. It supports your compliance officer's judgment, it does not replace their sign-off. Not legal advice.</div>
         </div>
-        <div class="panel darkp rv">
-          <div class="vlabel">AER docket · catchment watch</div>
-          <div class="map" id="map">
-            <div class="grid"></div>
+        <!-- Web-interface visual: AI regulation scan + analysis -->
+        <div class="rv" style="border-radius:18px;overflow:hidden;border:1px solid rgba(46,184,255,.22);box-shadow:0 18px 44px rgba(0,0,0,.45),0 0 0 1px rgba(0,0,0,.3)">
+          <!-- Browser chrome -->
+          <div style="background:#06112a;border-bottom:1px solid rgba(46,184,255,.14);padding:9px 14px;display:flex;align-items:center;gap:10px">
+            <div style="display:flex;gap:5px;flex:0 0 auto">
+              <span style="width:10px;height:10px;border-radius:50%;background:#e2745f;display:block"></span>
+              <span style="width:10px;height:10px;border-radius:50%;background:#e0a53a;display:block"></span>
+              <span style="width:10px;height:10px;border-radius:50%;background:#2eb8ff;display:block"></span>
+            </div>
+            <div style="flex:1;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:6px;padding:4px 10px;font-family:var(--mono);font-size:10px;color:#4a6898;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">algocavern.app · compliance · load #2841</div>
           </div>
-          <div class="feedmini">
-            <div class="fmi"><span class="d" style="background:#e2745f"></span>Disposal well near a catchment<span class="dl">threat</span></div>
-            <div class="fmi"><span class="d" style="background:#e0a53a"></span>Landfill amendment, hearing set<span class="dl">watch</span></div>
-            <div class="fmi"><span class="d" style="background:var(--mint)"></span>Facility closure filed<span class="dl">opening</span></div>
+          <!-- Tabs -->
+          <div style="display:flex;background:#040e22;border-bottom:1px solid rgba(46,184,255,.1);padding:0 14px">
+            <div style="font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#2eb8ff;padding:8px 14px;border-bottom:2px solid #2eb8ff;margin-bottom:-1px">Regulation Scan</div>
+            <div style="font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#3a5280;padding:8px 14px">Analysis</div>
+          </div>
+          <!-- Body -->
+          <div style="background:linear-gradient(160deg,#0d2858,#051242);padding:16px 18px;color:#e8f0fb">
+            <!-- Scanning section -->
+            <div style="margin-bottom:14px">
+              <div style="font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#3e6090;margin-bottom:9px;display:flex;align-items:center;gap:7px">
+                <span style="width:6px;height:6px;border-radius:50%;background:#2eb8ff;display:inline-block;animation:blink 1.2s infinite"></span>AI scanning regulations
+              </div>
+              <div style="display:flex;flex-direction:column;gap:6px">
+                <div style="display:flex;align-items:center;gap:9px;background:rgba(46,184,255,.07);border:1px solid rgba(46,184,255,.18);border-radius:8px;padding:8px 11px">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#2eb8ff" stroke-width="2" style="width:13px;height:13px;flex:0 0 13px"><path d="M9 12l2 2 4-4"/><path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                  <span style="font-family:var(--mono);font-size:11px;color:#78c8f8;flex:1">Directive 058 · Waste Management</span>
+                  <span style="font-family:var(--mono);font-size:9px;color:#2eb8ff;background:rgba(46,184,255,.14);padding:2px 7px;border-radius:4px;letter-spacing:.06em">scanned</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:9px;background:rgba(46,184,255,.07);border:1px solid rgba(46,184,255,.18);border-radius:8px;padding:8px 11px">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#2eb8ff" stroke-width="2" style="width:13px;height:13px;flex:0 0 13px"><path d="M9 12l2 2 4-4"/><path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                  <span style="font-family:var(--mono);font-size:11px;color:#78c8f8;flex:1">AER Spec 2 · Lab Analytical</span>
+                  <span style="font-family:var(--mono);font-size:9px;color:#2eb8ff;background:rgba(46,184,255,.14);padding:2px 7px;border-radius:4px;letter-spacing:.06em">scanned</span>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:4px;background:rgba(255,255,255,.03);border:1px solid rgba(46,184,255,.08);border-radius:8px;padding:8px 11px">
+                  <div style="display:flex;align-items:center;gap:9px">
+                    <span style="width:7px;height:7px;border-radius:50%;background:#1a3870;display:inline-block;animation:blink 1.4s .3s infinite;flex:0 0 7px"></span>
+                    <span style="font-family:var(--mono);font-size:11px;color:#3a5888;flex:1">NORM Regs · Activity 9834</span>
+                    <span style="font-family:var(--mono);font-size:9px;color:#2a4070;background:rgba(46,184,255,.05);padding:2px 7px;border-radius:4px;letter-spacing:.06em">reading…</span>
+                  </div>
+                  <div class="reg-scan-bar"><div class="fill"></div></div>
+                </div>
+              </div>
+            </div>
+            <!-- Analysis output -->
+            <div style="border-top:1px solid rgba(46,184,255,.1);padding-top:13px">
+              <div style="font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#3e6090;margin-bottom:9px">Analysis output</div>
+              <div style="background:rgba(224,165,58,.1);border:1px solid rgba(224,165,58,.3);border-radius:9px;padding:10px 12px;margin-bottom:9px">
+                <div style="font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#e0a53a;margin-bottom:4px">&#9651; Flag · review before accept</div>
+                <div style="font-size:12.5px;color:#f5e4c3;font-weight:600;line-height:1.35">Declared non-DOW — Directive 058 criteria indicate DOW</div>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:5px">
+                <div style="display:flex;justify-content:space-between;align-items:center;font-size:11.5px;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.06)">
+                  <span style="color:#8aaad4">NORM surcharge applies</span>
+                  <span style="font-family:var(--mono);font-size:10px;color:#e2745f;letter-spacing:.04em">note</span>
+                </div>
+                <div style="display:flex;justify-content:space-between;align-items:center;font-size:11.5px;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.06)">
+                  <span style="color:#8aaad4">Manifest, SDS, lab cross-checked</span>
+                  <span style="font-family:var(--mono);font-size:10px;color:#78c8f8;letter-spacing:.04em">pass</span>
+                </div>
+                <div style="display:flex;justify-content:space-between;align-items:center;font-size:11.5px;padding:5px 0">
+                  <span style="color:#8aaad4">Compliance report drafted</span>
+                  <span style="font-family:var(--mono);font-size:10px;color:#2eb8ff;letter-spacing:.04em">ready ✓</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -462,26 +522,27 @@
   <!-- 06 SOLUTION 2 -->
   <section class="slide bg-mint">
     <div class="wrap">
-      <div class="eyebrow rv">Solution 2 · Dynamic waste-intake pricing</div>
+      <div class="eyebrow rv">Solution 2 · AlgoPricing</div>
       <div class="split">
         <div>
-          <h2 class="rv">Prices each stream by<br>hydrocarbon-recovery yield.</h2>
+          <h2 class="rv">Prices each load on its<br>net value, not its volume.</h2>
           <ul class="points">
             <li class="rv"><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span>Uses the lab analytical you <strong>already require</strong> on every intake</span></li>
-            <li class="rv"><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span>Prices against expected <strong>recoverable-hydrocarbon yield</strong>, not flat volume</span></li>
-            <li class="rv"><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span>Moves drilling waste, slop oil, and hydrovac to per-stream <strong>net-margin pricing</strong></span></li>
+            <li class="rv"><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span>Values every component: recovered oil at its <strong>WCS netback</strong>, water injection, solids and cavern disposal, NORM surcharge</span></li>
+            <li class="rv"><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span>Nets recovery revenue against disposal cost</span></li>
           </ul>
-          <div class="honest rv"><b>Decision support, not an automatic price.</b> Your team sets the final quote. Each stream priced separately — drilling waste, slop oil, and hydrovac each carry different treatment costs and recovery values.</div>
+          <div class="honest rv"><b>Decision support, not an automatic price.</b> Each load is priced on its own composition and the day's inputs. Your team sets the margin, keeps the floor policy, and signs off on every quote.</div>
         </div>
         <div class="panel darkp rv" id="ppanel">
-          <div class="vlabel">Per-stream quotes · illustrative</div>
-          <div class="stgrid">
-            <div class="sth"></div><div class="sth">Drilling waste</div><div class="sth">Slop oil</div><div class="sth">Hydrovac</div>
-            <div class="stk">Handle cost</div><div class="stv neg">−$48.90</div><div class="stv neg">−$31.20</div><div class="stv neg">−$61.50</div>
-            <div class="stk">Recovery credit</div><div class="stv pos">+$34.40</div><div class="stv pos">+$52.80</div><div class="stv pos">+$9.20</div>
-            <div class="stk gt">Gate price</div><div class="stv gt">$22.50/t</div><div class="stv gt">$6.00/t</div><div class="stv gt">$65.00/t</div>
+          <div class="vlabel">Two loads, same facility · illustrative</div>
+          <div class="stgrid" style="grid-template-columns:auto 1fr 1fr">
+            <div class="sth"></div><div class="sth">Sample A<br><span style="font-weight:400;text-transform:none;letter-spacing:0;color:#5878a0">oil-rich · 23 m³</span></div><div class="sth">Sample B<br><span style="font-weight:400;text-transform:none;letter-spacing:0;color:#5878a0">NORM · 36 m³</span></div>
+            <div class="stk">Recovered oil, netback</div><div class="stv pos">+$3,690</div><div class="stv pos">+$2,079</div>
+            <div class="stk">Disposal + handling</div><div class="stv neg">−$716</div><div class="stv neg">−$9,152</div>
+            <div class="stk">Net value to Pure</div><div class="stv pos">+$2,974</div><div class="stv neg">−$7,073</div>
+            <div class="stk gt">Gate price</div><div class="stv gt">$0</div><div class="stv gt">$7,872</div>
           </div>
-          <div class="stnote">Flat-rate $22.50 leaves $42.50/t on hydrovac and overcharges slop oil by $16.50 — same volume, opposite margin story.</div>
+          <div class="stnote">A tiered card sorts these into broad buckets, but misses the per-load detail and does not move with live prices. Net value shifts daily with the recovered-oil netback, injection and cavern-disposal cost, and the NORM surcharge.</div>
         </div>
       </div>
     </div>
@@ -501,42 +562,40 @@
         <div class="valcol rv">
           <div class="vchead">
             <div class="vctag cost">Solution 1</div>
-            <div class="vcname">Regulatory Intelligence</div>
+            <div class="vcname">AlgoDoc Intelligence</div>
           </div>
-          <div class="vctype">↓ Labour &amp; compliance risk reduction</div>
-          <div class="vcrow"><span class="vcl">AER docket monitoring scope</span><span class="vcv">200–400 hrs/yr</span></div>
-          <div class="vcrow"><span class="vcl">Burdened staff rate (AB)</span><span class="vcv">$80–$120 /hr</span></div>
-          <div class="vcrow"><span class="vcl">Filings monitored</span><span class="vcv">AER, Tervita, White Swan, Keg River</span></div>
-          <div class="vcrow"><span class="vcl">Objection windows tracked</span><span class="vcv">Automated alerts</span></div>
-          <div class="vcrow"><span class="vcl">Risk removed</span><span class="vcv">Missed deadlines &amp; rival moves</span></div>
+          <div class="vctype">↓ Compliance risk on intake</div>
+          <div class="vcrow"><span class="vcl">Manifest, SDS, lab</span><span class="vcv">Cross-checked on intake</span></div>
+          <div class="vcrow"><span class="vcl">Directive 058 / DOW</span><span class="vcv">Classification gaps flagged</span></div>
+          <div class="vcrow"><span class="vcl">Misclassified load accepted</span><span class="vcv">The risk you avoid</span></div>
+          <div class="vcrow"><span class="vcl">Compliance report</span><span class="vcv">Drafted, not hand-built</span></div>
           <div class="vctotal cost">
-            <span class="vtl">Est. annual cost savings</span>
+            <span class="vtl">Labour saved / yr (floor)</span>
             <span class="vtv">~$15–50k</span>
           </div>
-          <div class="vcsrc">4–8 hrs/week: scan, triage, management summary, response support. At $80–$120/hr Alberta env. coordinator burdened rate. Excludes risk value of missed objection windows.</div>
+          <div class="vcsrc">The larger value is the loss you avoid: accepting one misclassified or non-compliant load can mean a rejected shipment, a re-haul, an AER violation, or a contaminated disposal stream. $15–50k is the labour floor for the review AlgoDoc replaces, at Alberta burdened rates.</div>
         </div>
 
         <!-- Right: Solution 2 -->
         <div class="valcol rv">
           <div class="vchead">
             <div class="vctag rev">Solution 2</div>
-            <div class="vcname">Dynamic Waste-Intake Pricing</div>
+            <div class="vcname">AlgoPricing</div>
           </div>
-          <div class="vctype">↑ Revenue lift via per-stream optimisation</div>
-          <div class="vcrow"><span class="vcl">Revenue left on table (flat-rate)</span><span class="vcv">Unpriced per-stream yield</span></div>
-          <div class="vcrow"><span class="vcl">Price improvement range</span><span class="vcv">1–3% per stream</span></div>
-          <div class="vcrow"><span class="vcl">Facility revenue baseline</span><span class="vcv">$5–15M/yr per facility (WCSB)</span></div>
-          <div class="vcrow"><span class="vcl">Profit leverage (McKinsey)</span><span class="vcv">1% price → +8% profit</span></div>
-          <div class="vcrow"><span class="vcl">Granular pricing margin lift</span><span class="vcv">3–8% (McKinsey range)</span></div>
+          <div class="vctype">↑ Margin from composition-aware pricing</div>
+          <div class="vcrow"><span class="vcl">Tiered card prices by</span><span class="vcv">Category, fixed in advance</span></div>
+          <div class="vcrow"><span class="vcl">NORM load (Sample B) costs Pure</span><span class="vcv">−$7,073 net</span></div>
+          <div class="vcrow"><span class="vcl">Net-value gate on that load</span><span class="vcv">$7,872</span></div>
+          <div class="vcrow"><span class="vcl">Oil-rich load (Sample A) gate</span><span class="vcv">$0, wins the volume</span></div>
           <div class="vctotal rev">
-            <span class="vtl">Est. extra revenue per year</span>
-            <span class="vtv">~$100–300k</span>
+            <span class="vtl">Mispricing per load</span>
+            <span class="vtv">$1,000s</span>
           </div>
-          <div class="vcsrc">At $10M/yr mid-point: 1% × $10M = $100k, 3% × $10M = $300k. McKinsey, <em>The Power of Pricing</em>: 1% price rise → ~8% operating profit, no volume loss required.</div>
+          <div class="vcsrc">A tiered rate can miss a load by thousands, since it prices the bucket, not the load. Annual margin is your load mix times these gaps, measured on your real volumes in a pilot. No generic uplift percentage assumed.</div>
         </div>
 
       </div>
-      <div class="vcfoot rv">Illustrative figures based on public benchmarks and WCSB facility averages. Your real numbers come from your volumes and rate card — which is what a pilot establishes.</div>
+      <div class="vcfoot rv">Figures are illustrative and drawn from your own worked samples. Real annual numbers come from your volumes, rate card, and live prices, which is what a pilot establishes.</div>
     </div>
     <div class="foot"><div class="brand">© 2026 Algo-Rythmn Corp. All rights reserved.</div><div class="pgnum"><b>07</b> / 10</div></div>
   </section>
@@ -547,9 +606,9 @@
       <div class="eyebrow rv">How we work together</div>
       <h2 class="rv">See it live. Then we make it yours.</h2>
       <div class="steps">
-        <div class="step rv"><div class="si"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div><div class="sn">01</div><div class="sl"></div><p><strong>See the live demo</strong> on Alberta synthetic data — no prep needed on your side</p></div>
-        <div class="step rv"><div class="si"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg></div><div class="sn">02</div><div class="sl"></div><p>Pick <strong>one workflow to configure</strong> first — pricing or regulatory</p></div>
-        <div class="step rv"><div class="si"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></div><div class="sn">03</div><div class="sl"></div><p>We encode <strong>your limits, costs, and catchments</strong></p></div>
+        <div class="step rv"><div class="si"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div><div class="sn">01</div><div class="sl"></div><p><strong>See the live demo</strong> on Alberta synthetic data, no prep needed on your side</p></div>
+        <div class="step rv"><div class="si"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg></div><div class="sn">02</div><div class="sl"></div><p>Pick <strong>one workflow to configure</strong> first: pricing or compliance checking</p></div>
+        <div class="step rv"><div class="si"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></div><div class="sn">03</div><div class="sl"></div><p>We encode <strong>your rules, costs, and rate card</strong></p></div>
         <div class="step rv"><div class="si"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div><div class="sn">04</div><div class="sl"></div><p>Configure to your data, then a <strong>scoped pilot you can measure</strong></p></div>
         <div class="step rv"><div class="si"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2M12 11a4 4 0 100-8 4 4 0 000 8z"/></svg></div><div class="sn">05</div><div class="sl"></div><p>You keep the <strong>judgment and the final call</strong></p></div>
       </div>
@@ -564,9 +623,9 @@
       <h2 class="rv">What AlgoCavern is not.</h2>
       <div class="nots">
         <div class="not rv"><span class="xi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M18 6L6 18M6 6l12 12"/></svg></span><div><h3>Not a replacement</h3><p>Your officers and estimators stay. The tool takes the reading and the math off their plate.</p></div></div>
-        <div class="not rv"><span class="xi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M18 6L6 18M6 6l12 12"/></svg></span><div><h3>Not a black box</h3><p>Every output cites its source document and passage. When confidence is low the tool flags it rather than guessing — it extracts and verifies, it does not hallucinate answers.</p></div></div>
+        <div class="not rv"><span class="xi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M18 6L6 18M6 6l12 12"/></svg></span><div><h3>Not a black box</h3><p>Every output cites its source document and passage. When confidence is low the tool flags it rather than guessing. It extracts and verifies, it does not invent answers.</p></div></div>
         <div class="not rv"><span class="xi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M18 6L6 18M6 6l12 12"/></svg></span><div><h3>Not an industry expert</h3><p>We defer to your team on the field, the chemistry, and the edge cases we have not seen.</p></div></div>
-        <div class="not rv"><span class="xi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M18 6L6 18M6 6l12 12"/></svg></span><div><h3>Not a data risk</h3><p>The regulatory tool reads only AER public filings — nothing proprietary. Your intake data and rate card stay in your environment and are never used to train or improve any model.</p></div></div>
+        <div class="not rv"><span class="xi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M18 6L6 18M6 6l12 12"/></svg></span><div><h3>Not a data risk</h3><p>AlgoDoc reads your intake documents: manifests, SDS, and lab analyticals. They stay in your environment and are never used to train or improve any model. Nothing leaves your tenancy.</p></div></div>
       </div>
       <p class="kicker rv" style="margin-top:22px">We would rather set this out up front than oversell and disappoint.</p>
     </div>
@@ -586,14 +645,14 @@
       <p class="lede rv" style="margin-top:12px">The paperwork read, the numbers run. The judgment stays yours.</p>
       <div class="close-divider rv"></div>
       <div class="nextsteps rv">
-        <div class="nstep"><div><b><svg viewBox="0 0 16 16" fill="none" width="13" height="13"><rect x="2" y="3" width="12" height="11" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M5 1.5v3M11 1.5v3M2 7h12" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>Live demo</b><span>See the built platform on Alberta synthetic data. No setup or prep needed on your side.</span></div></div>
+        <div class="nstep"><div><b><svg viewBox="0 0 16 16" fill="none" width="13" height="13"><rect x="2" y="3" width="12" height="11" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M5 1.5v3M11 1.5v3M2 7h12" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>Live demo</b><span>See the built platform live. No setup or prep needed on your side.</span></div></div>
         <div class="nsarrow">→</div>
-        <div class="nstep"><div><b><svg viewBox="0 0 16 16" fill="none" width="13" height="13"><path d="M5 4l-3 4 3 4M11 4l3 4-3 4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>Configure</b><span>We encode your rate card, catchments, and limits. You see the platform on your own data.</span></div></div>
+        <div class="nstep"><div><b><svg viewBox="0 0 16 16" fill="none" width="13" height="13"><path d="M5 4l-3 4 3 4M11 4l3 4-3 4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>Configure</b><span>We encode your rate card, permit limits, and costs. You see the platform on your own data.</span></div></div>
         <div class="nsarrow">→</div>
         <div class="nstep"><div><b><svg viewBox="0 0 16 16" fill="none" width="13" height="13"><circle cx="8" cy="8" r="6.2" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="8" r="2.8" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="8" r=".9" fill="currentColor"/></svg>Scoped pilot</b><span>One real workflow, one measured result. No rip-and-replace required.</span></div></div>
       </div>
       <div class="ctab rv">
-        <p>No commitment beyond the first conversation. See the live demo — built on Alberta synthetic and public data — then tell us which workflow to configure first.</p>
+        <p>No commitment beyond the first conversation. See the live demo, then tell us which workflow to configure first.</p>
         <div class="lines">
           <div><div class="k">Company</div><div>Algo-Rythmn Corp · algo-rythmn.ai</div></div>
           <div><div class="k">Contact</div><div>support@algo-rythmn.ai</div></div>
@@ -644,15 +703,6 @@
     const t=setInterval(()=>{v+=6;if(v>=target){v=target;clearInterval(t);}el.textContent=v;},18);
   }
 
-  // build map points
-  const map=document.getElementById('map');
-  const sites=[["Site A",30,32],["Site B",64,58],["Site C",44,78]];
-  sites.forEach(s=>{
-    map.insertAdjacentHTML('beforeend',`<div class="site" style="left:${s[1]}%;top:${s[2]}%"><span class="ring"></span><span class="c"></span><span class="nm">${s[0]}</span></div>`);
-  });
-  [["#e2745f",22,44],["#e0a53a",70,72],["#78c8f8",50,24],["#e2745f",38,64]].forEach(p=>{
-    map.insertAdjacentHTML('beforeend',`<div class="fdot" style="left:${p[1]}%;top:${p[2]}%;background:${p[0]}"></div>`);
-  });
 
   // keyboard still works as a courtesy
   document.addEventListener('keydown',e=>{
