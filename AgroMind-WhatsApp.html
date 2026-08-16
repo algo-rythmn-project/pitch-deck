@@ -97,6 +97,28 @@
     }
     .nav-links a:hover, .nav-links button:hover { color: white; background: rgba(255,255,255,.1); }
 
+    [id] { scroll-margin-top: 86px; }
+    .side-nav {
+      position: fixed;
+      z-index: 40;
+      top: 86px;
+      left: 10px;
+      width: 112px;
+      overflow: hidden;
+      border: 1px solid rgba(35, 103, 71, .17);
+      border-radius: 15px;
+      background: rgba(255, 253, 248, .95);
+      box-shadow: 0 12px 34px rgba(21, 35, 28, .12);
+      backdrop-filter: blur(14px);
+    }
+    .side-nav-title { padding: 11px 10px 8px; color: #809087; font-size: 9px; font-weight: 850; letter-spacing: .13em; text-transform: uppercase; }
+    .side-nav a { min-height: 34px; display: grid; grid-template-columns: 26px minmax(0, 1fr); gap: 3px; align-items: center; padding: 5px 7px; border-left: 3px solid transparent; color: #647269; text-decoration: none; font-size: 10px; font-weight: 700; line-height: 1.15; }
+    .side-nav a:hover { color: var(--forest); background: var(--mist); }
+    .side-nav a.active { color: var(--forest); border-left-color: var(--lime); background: #eaf3dc; }
+    .side-index { width: 23px; height: 23px; display: grid; place-items: center; border-radius: 7px; color: #65766b; background: #edf1eb; font-size: 8px; font-weight: 850; letter-spacing: .03em; }
+    .side-nav a.active .side-index { color: white; background: var(--forest); }
+    .side-label { min-width: 0; }
+
     .container { width: min(1180px, calc(100% - 32px)); margin: auto; }
 
     .hero {
@@ -327,6 +349,18 @@
 
     .button-preview { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 12px 0; }
     .button-preview span { padding: 10px; border: 1px solid #bcd4c5; border-radius: 9px; color: var(--forest-2); background: white; text-align: center; font-size: 13px; font-weight: 750; }
+    .demo-preflight { margin: 18px 28px 0; padding: 15px 17px; border: 1px solid #c9d9cd; border-radius: 13px; background: #f2f8f1; display: grid; grid-template-columns: auto 1fr; gap: 12px; color: #355343; }
+    .demo-preflight > span { width: 28px; height: 28px; display: grid; place-items: center; border-radius: 50%; color: #173b28; background: var(--lime); font-weight: 900; }
+    .demo-preflight strong { display: block; margin-bottom: 3px; font-size: 13px; }
+    .demo-preflight p { margin: 0; color: #637268; font-size: 12px; line-height: 1.55; }
+    .alert-scenarios { display: grid; grid-template-columns: repeat(4, 1fr); gap: 9px; margin: 12px 0; }
+    .alert-scenario { min-height: 105px; padding: 13px; border: 1px solid #d8dfd8; border-radius: 11px; background: white; }
+    .alert-scenario b { display: block; color: var(--forest-2); font-size: 12px; margin-bottom: 6px; }
+    .alert-scenario p { margin: 0; color: #727c74; font-size: 11px; line-height: 1.5; }
+    .alert-scenario em { display: block; margin-top: 8px; color: #a05533; font-size: 10px; font-style: normal; font-weight: 750; }
+    .screen-change { margin: 12px 0; padding: 13px 15px; border-radius: 10px; color: #ecf5ed; background: var(--forest); }
+    .screen-change strong { display: block; margin-bottom: 5px; color: var(--lime); font-size: 12px; text-transform: uppercase; letter-spacing: .08em; }
+    .screen-change code { color: white; }
 
     .timeline { display: grid; grid-template-columns: repeat(7, 1fr); gap: 7px; margin: 16px 0 3px; }
     .timeline span { position: relative; padding: 11px 7px; border-radius: 10px; color: var(--forest); background: var(--mist); text-align: center; font-size: 11px; font-weight: 700; }
@@ -396,17 +430,30 @@
     .toast.show { opacity: 1; transform: translateY(0); }
 
     @media (max-width: 900px) {
+      .side-nav { display: none; }
       .nav-links a { display: none; }
       .hero-grid { grid-template-columns: 1fr; padding: 45px 28px; }
       .phone { margin: 0 auto; transform: none; }
       .value-strip, .runway { grid-template-columns: 1fr 1fr; }
       .section-head { grid-template-columns: 1fr; gap: 14px; }
       .details-row, .future-grid, .voice-grid { grid-template-columns: 1fr; }
+      .alert-scenarios { grid-template-columns: 1fr 1fr; }
       .future-card { border-right: 0; border-bottom: 1px solid var(--line); }
       .act-head { grid-template-columns: 1fr auto; }
       .act-number { grid-column: 1 / -1; }
       .timeline { grid-template-columns: 1fr; }
       .timeline span:not(:last-child)::after { content: "↓"; right: 50%; bottom: -14px; top: auto; }
+    }
+
+    @media (min-width: 901px) and (max-width: 1320px) {
+      .side-nav { width: 46px; transition: width .18s ease; }
+      .side-nav-title { padding-inline: 8px; font-size: 0; }
+      .side-nav-title::after { content: "☰"; font-size: 13px; }
+      .side-label { opacity: 0; white-space: nowrap; }
+      .side-nav:hover, .side-nav:focus-within { width: 160px; }
+      .side-nav:hover .side-nav-title, .side-nav:focus-within .side-nav-title { font-size: 9px; }
+      .side-nav:hover .side-nav-title::after, .side-nav:focus-within .side-nav-title::after { display: none; }
+      .side-nav:hover .side-label, .side-nav:focus-within .side-label { opacity: 1; }
     }
 
     @media (max-width: 620px) {
@@ -420,12 +467,14 @@
       .step { grid-template-columns: 1fr; }
       .step-no { width: 34px; height: 34px; }
       .button-preview { grid-template-columns: 1fr; }
+      .demo-preflight { margin: 16px 18px 0; }
+      .alert-scenarios { grid-template-columns: 1fr; }
       .prompt { align-items: flex-start; }
       .presenter-bar, .footer-grid { flex-direction: column; align-items: flex-start; }
     }
 
     @media print {
-      .topbar, .hero-actions, .copy, .presenter-bar, .filters, .toast { display: none !important; }
+      .topbar, .side-nav, .hero-actions, .copy, .presenter-bar, .filters, .toast { display: none !important; }
       body { background: white; }
       .hero { color: var(--ink); background: white; box-shadow: none; border: 1px solid var(--line); }
       .hero-grid { min-height: auto; display: block; padding: 35px; }
@@ -455,6 +504,21 @@
     </nav>
   </header>
 
+  <aside class="side-nav" aria-label="Presenter section navigation">
+    <div class="side-nav-title">Sections</div>
+    <a class="active" href="#top" data-section="top"><span class="side-index">⌂</span><span class="side-label">Overview</span></a>
+    <a href="#voice-notes" data-section="voice-notes"><span class="side-index">V</span><span class="side-label">Voice</span></a>
+    <a href="#run-of-show" data-section="run-of-show"><span class="side-index">▶</span><span class="side-label">Run of show</span></a>
+    <a href="#act-1" data-section="act-1"><span class="side-index">A1</span><span class="side-label">Investigate</span></a>
+    <a href="#act-2" data-section="act-2"><span class="side-index">A2</span><span class="side-label">Take action</span></a>
+    <a href="#act-3" data-section="act-3"><span class="side-index">A3</span><span class="side-label">Readiness</span></a>
+    <a href="#act-4" data-section="act-4"><span class="side-index">A4</span><span class="side-label">Mission control</span></a>
+    <a href="#act-5" data-section="act-5"><span class="side-index">A5</span><span class="side-label">Live operator</span></a>
+    <a href="#question-bank" data-section="question-bank"><span class="side-index">Q</span><span class="side-label">Questions</span></a>
+    <a href="#roadmap" data-section="roadmap"><span class="side-index">↗</span><span class="side-label">Roadmap</span></a>
+    <a href="#guardrails" data-section="guardrails"><span class="side-index">!</span><span class="side-label">Guardrails</span></a>
+  </aside>
+
   <main id="top">
     <section class="hero container" aria-labelledby="hero-title">
       <div class="hero-grid">
@@ -462,14 +526,14 @@
           <div class="eyebrow"><span class="pulse"></span> Live presenter control room</div>
           <div class="feature-pill">🎙 New live capability · Voice communication</div>
           <h1 id="hero-title">Agricultural intelligence. In one conversation.</h1>
-          <p>Now with voice communication in Cantonese, English, and mixed language. The four-act WhatsApp story moves from field evidence and AI vision to recorded actions, proactive alerts, and operation closure.</p>
+          <p>Now with voice communication and a separate live field-operator simulator. The five-act story moves from evidence and AI vision to recorded actions, proactive alerts, and a field-to-manager operational loop.</p>
           <div class="hero-actions">
             <a class="button" href="#run-of-show">Start the demo →</a>
             <button class="button secondary" type="button" id="copyRunSheet">Copy full run sheet</button>
           </div>
           <div class="hero-stats" aria-label="Demo highlights">
             <div class="stat"><strong>231</strong><span>anonymized fields</span></div>
-            <div class="stat"><strong>4 acts</strong><span>one connected story</span></div>
+            <div class="stat"><strong>5 acts</strong><span>one connected story</span></div>
             <div class="stat"><strong>5 sec</strong><span>compressed alert</span></div>
             <div class="stat"><strong>Voice</strong><span>Cantonese + English</span></div>
           </div>
@@ -667,10 +731,55 @@
           </div></div>
         </div>
       </article>
+      <article class="act" id="act-5" data-act="5">
+        <header class="act-head"><div class="act-number">Act Five</div><div><h3>Live field operator → WhatsApp</h3><p>Let the audience create an operational exception, then close it from WhatsApp.</p></div><div class="act-time">4–6 min</div></header>
+        <div class="transition">“Now we will reverse the direction: the event starts with an operator in the field, and AgroMind brings only the actionable exception to management.”</div>
+        <div class="demo-preflight"><span>✓</span><div><strong>Before presenting</strong><p>Ask both manager test users to send <code>Hello</code> to <code>+1 (555) 204-8866</code>. Give the audience only the active simulator session URL—not the setup key. Keep one manager WhatsApp window visible.</p></div></div>
+        <div class="steps">
+          <div class="step"><div class="step-no">1</div><div><h4>Start the field operation</h4>
+            <div class="details-row">
+              <details open><summary>Say this</summary><div class="detail-body">“You are now the field operator. Select <strong>Start application</strong> and drive the sprayer through Field 081.”</div></details>
+              <details><summary>Expected</summary><div class="detail-body">The sprayer moves, application rate and boom sections become active, and coverage increases.</div></details>
+              <details><summary>Presenter hint</summary><div class="detail-body">The equipment telemetry is simulated, but the event API, WhatsApp delivery, and shared state are live.</div></details>
+            </div>
+          </div></div>
+          <div class="step"><div class="step-no">2</div><div><h4>Invite the audience to create one exception</h4>
+            <div class="alert-scenarios">
+              <div class="alert-scenario"><b>Overspeed</b><p>Move the slider above 14 mph and hold it for two seconds.</p><em>Automatic detection</em></div>
+              <div class="alert-scenario"><b>Machine stopped</b><p>Select Stop machine and wait for the five-second countdown.</p><em>Automatic detection</em></div>
+              <div class="alert-scenario"><b>Lodged crop</b><p>Select Large lodged area to request management review.</p><em>Operator reported</em></div>
+              <div class="alert-scenario"><b>Nozzle issue</b><p>Select Uneven nozzle output to report a possible blockage.</p><em>Operator reported</em></div>
+            </div>
+            <div class="details-row">
+              <details><summary>Expected</summary><div class="detail-body">The event enters the central stream and an interactive alert is sent to both configured WhatsApp managers.</div></details>
+              <details><summary>Say this</summary><div class="detail-body">“Routine telemetry stays with the operator. AgroMind interrupts management only when a decision is needed.”</div></details>
+              <details><summary>Recovery</summary><div class="detail-body">Press <code>Shift + A</code> to open hidden presenter triggers if the audience interaction takes too long.</div></details>
+            </div>
+          </div></div>
+          <div class="step"><div class="step-no">3</div><div><h4>Take management action in WhatsApp</h4>
+            <div class="button-preview"><span>Contact operator</span><span>Call operator</span><span>Acknowledge</span></div>
+            <div class="screen-change"><strong>Recommended sequence</strong>Select <code>Contact operator</code> first. The React event changes from <code>OPEN</code> to <code>OPERATOR CONTACTED</code> and shows “Manager contacted the field operator via WhatsApp.” Then select <code>Acknowledge</code>; the event changes to <code>ACKNOWLEDGED</code>.</div>
+            <div class="details-row">
+              <details><summary>Contact operator</summary><div class="detail-body">Records operator contact, updates the React console, and sends a follow-up Acknowledge button.</div></details>
+              <details><summary>Call operator</summary><div class="detail-body">Displays Carlos Mendes's configured phone number and changes the React event to <code>CALL REQUESTED</code>.</div></details>
+              <details><summary>Acknowledge</summary><div class="detail-body">Closes the management loop and changes the React event to a green <code>ACKNOWLEDGED</code> state.</div></details>
+            </div>
+          </div></div>
+          <div class="step"><div class="step-no">4</div><div><h4>Finish by verifying the shared state</h4>
+            <div class="prompt" data-prompt="What is the latest live field alert status?"><code>What is the latest live field alert status?</code><button class="copy" type="button">Copy</button></div>
+            <div class="timeline"><span>Operate</span><span>Detect</span><span>Centralize</span><span>Notify</span><span>Contact</span><span>Acknowledge</span><span>Confirm</span></div>
+            <div class="details-row">
+              <details><summary>Expected</summary><div class="detail-body">The assistant returns the live simulator alert ID, field, machine, issue, severity, and management status.</div></details>
+              <details><summary>Closing line</summary><div class="detail-body">“The incident is one shared operational object across the field system, AgroMind, and WhatsApp—not a prepared chatbot response.”</div></details>
+              <details><summary>Repeat overspeed</summary><div class="detail-body">Move speed back to 12 mph or below, or pause and restart the application, before pushing above 14 mph again.</div></details>
+            </div>
+          </div></div>
+        </div>
+      </article>
     </section>
 
     <section class="section container" id="question-bank">
-      <div class="section-head"><div><div class="kicker">Copy-ready prompts</div><h2>Question bank</h2></div><p class="section-intro">Use these after the four-act story, or when the audience wants to explore a particular capability. Copy any question—or record it as a voice note.</p></div>
+      <div class="section-head"><div><div class="kicker">Copy-ready prompts</div><h2>Question bank</h2></div><p class="section-intro">Use these after the five-act story, or when the audience wants to explore a particular capability. Copy any question—or record it as a voice note.</p></div>
       <div class="question-shell">
         <div class="filters" role="tablist" aria-label="Question categories">
           <button class="filter active" type="button" data-filter="all">All</button>
@@ -719,6 +828,7 @@
           <div class="prompt" data-prompt="Start tracking today's spraying."><code>Start tracking today's spraying.</code><button class="copy" type="button">Copy</button></div>
           <div class="prompt" data-prompt="Request current tracking status."><code>Request current tracking status.</code><button class="copy" type="button">Copy</button></div>
           <div class="prompt" data-prompt="Generate an operation summary."><code>Generate an operation summary.</code><button class="copy" type="button">Copy</button></div>
+          <div class="prompt" data-prompt="What is the latest live field alert status?"><code>What is the latest live field alert status?</code><button class="copy" type="button">Copy</button></div>
         </div></div>
 
         <div class="question-group" data-category="stress"><h3>Stress tests and guardrails</h3><div class="question-grid">
@@ -810,7 +920,13 @@
         'Start tracking a spraying task.',
         'Wait five seconds → Contact operator → Acknowledge',
         'Request current tracking status.',
-        'Generate an operation summary.'
+        'Generate an operation summary.',
+        '',
+        'ACT FIVE — LIVE FIELD OPERATOR',
+        'Give the audience the active simulator session URL.',
+        'Start application → create one of four field exceptions.',
+        'In WhatsApp: Contact operator → Acknowledge.',
+        'What is the latest live field alert status?'
       ].join('\n');
 
       document.getElementById('copyRunSheet').addEventListener('click', () => copyText(runSheet));
@@ -835,6 +951,32 @@
           groups.forEach((group) => group.hidden = selected !== 'all' && group.dataset.category !== selected);
         });
       });
+
+      const sectionLinks = [...document.querySelectorAll('.side-nav a[data-section]')];
+      const sectionTargets = sectionLinks
+        .map((link) => document.getElementById(link.dataset.section))
+        .filter(Boolean);
+      let navigationTicking = false;
+      function updateSectionNavigation() {
+        let currentSection = 'top';
+        sectionTargets.forEach((section) => {
+          if (section.getBoundingClientRect().top <= 150) currentSection = section.id;
+        });
+        sectionLinks.forEach((link) => {
+          const active = link.dataset.section === currentSection;
+          link.classList.toggle('active', active);
+          if (active) link.setAttribute('aria-current', 'location');
+          else link.removeAttribute('aria-current');
+        });
+        navigationTicking = false;
+      }
+      window.addEventListener('scroll', () => {
+        if (!navigationTicking) {
+          navigationTicking = true;
+          window.requestAnimationFrame(updateSectionNavigation);
+        }
+      }, { passive: true });
+      updateSectionNavigation();
     })();
   </script>
 </body>
