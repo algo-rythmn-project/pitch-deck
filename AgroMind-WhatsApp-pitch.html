@@ -1,0 +1,468 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Two-part AgroMind business story: a WhatsApp channel for existing agricultural operations and a grounded agriculture AI agent.">
+  <title>AgroMind · Channel + Intelligence</title>
+  <style>
+    :root {
+      --ink: #10261b;
+      --forest: #0e3323;
+      --forest-2: #174a31;
+      --lime: #b8ee3d;
+      --lime-soft: #eff9d9;
+      --paper: #f5f6f0;
+      --white: #fff;
+      --muted: #68776e;
+      --line: #d8dfd7;
+      --blue: #5a95d1;
+      --blue-soft: #edf5fc;
+      --amber: #e9b045;
+      --red: #d85f4b;
+      --shadow: 0 18px 55px rgba(17, 56, 37, .10);
+      --nav: 220px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.5;
+    }
+    button { font: inherit; cursor: pointer; }
+    a { color: inherit; }
+
+    .side-nav {
+      position: fixed;
+      inset: 0 auto 0 0;
+      z-index: 20;
+      width: var(--nav);
+      padding: 28px 20px;
+      color: #e9f1eb;
+      background: #0b2b1d;
+      border-right: 1px solid #284a37;
+      display: flex;
+      flex-direction: column;
+    }
+    .brand { display: flex; align-items: center; gap: 11px; margin-bottom: 38px; }
+    .brand-mark {
+      width: 40px; height: 40px; display: grid; place-items: center;
+      color: #17351f; background: var(--lime); border-radius: 10px 10px 10px 3px;
+      font-size: 21px; font-weight: 900; transform: rotate(-3deg);
+    }
+    .brand strong { display: block; font-size: 16px; }
+    .brand small { display: block; margin-top: 2px; color: #82988b; font-size: 8px; letter-spacing: .14em; text-transform: uppercase; }
+    .nav-label { margin: 0 9px 10px; color: #70887a; font-size: 8px; letter-spacing: .15em; text-transform: uppercase; }
+    .side-nav nav { display: grid; gap: 5px; }
+    .side-nav nav a { display: flex; align-items: center; gap: 10px; padding: 10px; color: #a9bbb0; border-radius: 8px; text-decoration: none; font-size: 11px; }
+    .side-nav nav a:hover, .side-nav nav a.active { color: #fff; background: #1d4932; }
+    .side-nav nav b { width: 22px; height: 22px; display: grid; place-items: center; border: 1px solid #3b5d49; border-radius: 50%; font-size: 8px; }
+    .side-nav nav a.active b { color: #17351f; background: var(--lime); border-color: var(--lime); }
+    .nav-footer { margin-top: auto; padding: 16px 8px 0; color: #779083; border-top: 1px solid #294938; font-size: 9px; line-height: 1.6; }
+    .mobile-nav { display: none; }
+
+    .page { margin-left: var(--nav); }
+    .wrap { width: min(1160px, calc(100% - 64px)); margin: auto; }
+    section { scroll-margin-top: 20px; }
+
+    .hero {
+      min-height: 700px;
+      color: #f4f8f4;
+      background:
+        radial-gradient(circle at 80% 25%, rgba(184, 238, 61, .18), transparent 30%),
+        linear-gradient(135deg, #0b2b1e, #123f2a 68%, #0b2c1e);
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      align-items: center;
+    }
+    .hero::after {
+      content: ""; position: absolute; inset: 0 0 0 55%; opacity: .14;
+      background: repeating-linear-gradient(107deg, transparent 0 42px, var(--lime) 43px 45px, transparent 46px 88px);
+      clip-path: polygon(12% 0, 100% 0, 100% 100%, 0 100%);
+    }
+    .hero-inner { position: relative; z-index: 2; }
+    .eyebrow { color: var(--lime); font-size: 10px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; }
+    h1 { max-width: 930px; margin: 17px 0 20px; font-size: clamp(52px, 7vw, 92px); line-height: .96; letter-spacing: -.065em; }
+    h1 span { color: var(--lime); }
+    .hero-lead { max-width: 790px; margin: 0; color: #c4d4ca; font-size: 18px; line-height: 1.75; }
+    .proposal-row { max-width: 960px; margin-top: 38px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .proposal { padding: 20px; border: 1px solid #4c705b; border-radius: 13px; background: #163c2aaa; backdrop-filter: blur(10px); }
+    .proposal small { color: #91aa9b; font-size: 8px; letter-spacing: .14em; text-transform: uppercase; }
+    .proposal h2 { margin: 7px 0 7px; color: #fff; font-size: 18px; }
+    .proposal p { margin: 0; color: #b7c8bd; font-size: 11px; line-height: 1.65; }
+    .proposal strong { color: var(--lime); }
+
+    .section { padding: 90px 0; }
+    .section.white { background: #fff; }
+    .section.dark { color: #eef5ef; background: #102f22; }
+    .section-head { display: grid; grid-template-columns: 1fr .85fr; gap: 70px; align-items: end; margin-bottom: 40px; }
+    .section-no { display: block; margin-bottom: 10px; color: #628b2d; font-size: 9px; font-weight: 800; letter-spacing: .15em; text-transform: uppercase; }
+    .dark .section-no { color: var(--lime); }
+    .section h2 { margin: 0; font-size: clamp(35px, 4.5vw, 59px); line-height: 1.04; letter-spacing: -.05em; }
+    .section-head p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.75; }
+    .dark .section-head p { color: #aabdb1; }
+
+    .positioning {
+      margin-bottom: 22px; padding: 14px 18px; display: flex; gap: 12px; align-items: center;
+      color: #405642; background: var(--lime-soft); border: 1px solid #cadca4; border-radius: 10px; font-size: 11px;
+    }
+    .positioning b { color: #25451f; }
+    .positioning i { color: #5f8829; font-style: normal; }
+
+    .channel-diagram {
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: #fafbf8;
+      box-shadow: var(--shadow);
+    }
+    .channel-flow { display: grid; grid-template-columns: 2.15fr 70px 1fr; align-items: stretch; }
+    .existing-boundary {
+      position: relative;
+      padding: 37px 14px 14px;
+      display: grid;
+      grid-template-columns: 1.05fr 58px 1fr;
+      align-items: stretch;
+      border: 2px dashed #8b9b91;
+      border-radius: 18px;
+      background: #f4f6f2;
+    }
+    .existing-boundary-label {
+      position: absolute; top: 10px; left: 15px;
+      color: #64746b; font-size: 8px; font-weight: 800; letter-spacing: .15em; text-transform: uppercase;
+    }
+    .flow-arrow { display: grid; place-items: center; color: #789084; text-align: center; }
+    .flow-arrow b { display: block; font-size: 27px; font-weight: 400; }
+    .flow-arrow small { display: block; margin-top: -2px; color: #7a8b81; font-size: 7px; letter-spacing: .11em; text-transform: uppercase; }
+    .diagram-box { min-height: 345px; padding: 20px; border: 1px solid #d5ded5; border-radius: 13px; background: #fff; }
+    .box-label { color: #798980; font-size: 8px; letter-spacing: .14em; text-transform: uppercase; }
+    .diagram-box h3 { margin: 9px 0 7px; font-size: 19px; line-height: 1.15; }
+    .diagram-box > p { margin: 0; color: var(--muted); font-size: 10px; line-height: 1.6; }
+
+    .estate { position: relative; overflow: hidden; color: #e8f2e9; border-color: #315c42; background: #143d29; }
+    .estate::after { content: ""; position: absolute; inset: 0; opacity: .13; background: repeating-linear-gradient(105deg, transparent 0 25px, var(--lime) 26px 27px, transparent 28px 53px); }
+    .estate .box-label, .estate > p { color: #9db1a4; position: relative; z-index: 2; }
+    .estate h3 { color: #fff; position: relative; z-index: 2; }
+    .field-map { position: relative; z-index: 2; margin-top: 18px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 7px; }
+    .field { min-height: 60px; padding: 7px; border: 1px solid #4e735c; border-radius: 7px; background: #1c4a32dd; display: flex; align-items: flex-end; justify-content: space-between; color: #bed0c3; font-size: 7px; }
+    .sensor { width: 13px; height: 13px; position: relative; border: 2px solid var(--lime); border-radius: 50%; box-shadow: 0 0 0 4px #b8ee3d14; }
+    .sensor::after { content: ""; position: absolute; inset: 3px; border-radius: 50%; background: var(--lime); }
+    .estate-foot { position: relative; z-index: 2; margin-top: 15px; display: flex; justify-content: space-between; color: #aec1b4; font-size: 8px; }
+    .estate-foot strong { color: var(--lime); }
+
+    .dashboard { border-color: #9fc3e5; background: var(--blue-soft); }
+    .dashboard-screen { margin-top: 17px; padding: 10px; border: 1px solid #b8cfe4; border-radius: 8px; background: #fff; }
+    .screen-top { display: flex; align-items: center; gap: 5px; padding-bottom: 8px; border-bottom: 1px solid #dae5ef; }
+    .screen-top i { width: 6px; height: 6px; border-radius: 50%; background: #9fb1bf; }
+    .screen-top span { margin-left: auto; color: #68829a; font-size: 7px; }
+    .alert-line { display: grid; grid-template-columns: 7px 1fr auto; gap: 7px; align-items: center; padding: 10px 2px; border-bottom: 1px solid #e5edf3; font-size: 8px; }
+    .alert-line:last-child { border: 0; }
+    .alert-line i { width: 7px; height: 7px; border-radius: 50%; background: var(--amber); }
+    .alert-line.high i { background: var(--red); }
+    .alert-line span { color: #374f60; font-weight: 700; }
+    .alert-line small { color: #8295a4; }
+    .existing-user { margin-top: 14px; padding: 10px; display: flex; align-items: center; gap: 9px; color: #466176; background: #dfeefa; border-radius: 8px; font-size: 9px; }
+    .existing-user b { width: 23px; height: 23px; display: grid; place-items: center; border-radius: 50%; background: #fff; }
+
+    .whatsapp { border: 2px solid #91bd48; background: #f7fceb; box-shadow: 0 16px 42px #6f983120; }
+    .phone { max-width: 220px; margin: 17px auto 0; padding: 9px; border: 4px solid #173d2a; border-radius: 20px; background: #eef3eb; box-shadow: 0 10px 28px #173d2a1d; }
+    .phone-top { padding: 5px 8px 10px; display: flex; align-items: center; gap: 7px; color: #405d49; font-size: 8px; font-weight: 800; }
+    .wa-dot { width: 17px; height: 17px; display: grid; place-items: center; color: #fff; border-radius: 50%; background: #25b961; font-size: 9px; }
+    .message { padding: 10px; border-radius: 9px 9px 9px 3px; color: #31493a; background: #fff; font-size: 8px; line-height: 1.55; }
+    .message strong { display: block; margin-bottom: 5px; color: #a73e2d; font-size: 9px; }
+    .wa-actions { margin-top: 7px; display: grid; gap: 4px; }
+    .wa-actions span { padding: 6px; color: #157e42; background: #fff; border-radius: 5px; font-size: 7px; font-weight: 750; text-align: center; }
+    .channel-recipients { margin-top: 17px; display: flex; flex-wrap: wrap; gap: 6px; }
+    .channel-recipients span { padding: 5px 7px; color: #48632c; background: #e4f2c9; border-radius: 20px; font-size: 7px; font-weight: 700; }
+
+    .channel-values { margin-top: 13px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .channel-value { padding: 15px; border: 1px solid var(--line); border-radius: 10px; background: #fff; }
+    .channel-value b { display: block; margin-bottom: 5px; font-size: 11px; }
+    .channel-value p { margin: 0; color: var(--muted); font-size: 9px; line-height: 1.55; }
+
+    .ai-diagram { display: grid; grid-template-columns: 1fr 65px 1.05fr 65px 1fr; align-items: center; }
+    .input-stack, .human-stack { display: grid; gap: 8px; }
+    .input, .human { padding: 17px; border-radius: 10px; }
+    .input { border: 1px solid #47737a; background: #173b40; }
+    .input small { color: #8fb5b8; font-size: 9px; letter-spacing: .13em; text-transform: uppercase; }
+    .input strong { display: block; margin-top: 5px; color: #fff; font-size: 14px; }
+    .input p { margin: 5px 0 0; color: #b5cacc; font-size: 10px; line-height: 1.55; }
+    .human { border: 1px solid #b6d67a; background: #f3f9e6; }
+    .human small { color: #63812d; font-size: 9px; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; }
+    .human strong { display: block; margin-top: 5px; color: #17351f; font-size: 14px; }
+    .human p { margin: 5px 0 0; color: #5b6d60; font-size: 10px; line-height: 1.55; }
+    .ai-arrow { color: #769182; text-align: center; }
+    .ai-arrow b { display: block; color: var(--lime); font-size: 26px; font-weight: 400; }
+    .ai-arrow span { display: block; color: #8ca094; font-size: 7px; letter-spacing: .1em; text-transform: uppercase; }
+    .agent-core { position: relative; min-height: 430px; padding: 34px 23px; text-align: center; border: 1px solid #79a044; border-radius: 22px; background: radial-gradient(circle at 50% 32%, #285f3f, #153e2a 58%); box-shadow: 0 25px 70px #061b11aa; overflow: hidden; }
+    .agent-core::before, .agent-core::after { content: ""; position: absolute; left: 50%; top: 38%; transform: translate(-50%, -50%); border: 1px solid #b8ee3d2b; border-radius: 50%; }
+    .agent-core::before { width: 260px; height: 260px; }
+    .agent-core::after { width: 190px; height: 190px; }
+    .agent-badge { position: relative; z-index: 2; width: 145px; height: 145px; margin: 25px auto 35px; display: grid; place-items: center; border: 1px solid var(--lime); border-radius: 50%; background: #173e2a; box-shadow: 0 0 0 20px #b8ee3d0b; }
+    .agent-badge small { display: block; color: #91a89a; font-size: 7px; letter-spacing: .12em; text-transform: uppercase; }
+    .agent-badge strong { display: block; margin: 4px 0; color: var(--lime); font-size: 20px; }
+    .agent-core > h3 { position: relative; z-index: 2; margin: 0 0 7px; color: #fff; font-size: 17px; }
+    .agent-core > p { position: relative; z-index: 2; margin: 0; color: #aebfb4; font-size: 9px; line-height: 1.6; }
+    .agent-tools { position: relative; z-index: 2; margin-top: 15px; display: flex; justify-content: center; flex-wrap: wrap; gap: 5px; }
+    .agent-tools span { padding: 5px 7px; color: #d8e5dc; border: 1px solid #4a7059; border-radius: 20px; font-size: 7px; }
+
+    .agent-definition { margin: 20px 0 0; padding: 18px 20px; border: 1px solid #466b55; border-radius: 11px; color: #b8c8be; background: #173b2a; font-size: 11px; line-height: 1.7; }
+    .agent-definition strong { color: var(--lime); }
+
+    .example-grid { margin-top: 15px; display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
+    details.example { border: 1px solid #bfd58f; border-radius: 11px; background: #f4f8eb; overflow: hidden; }
+    details.example summary { list-style: none; padding: 18px; cursor: pointer; display: flex; justify-content: space-between; gap: 12px; }
+    details.example summary::-webkit-details-marker { display: none; }
+    details.example summary span { color: #668131; font-size: 9px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+    details.example summary strong { display: block; margin-top: 5px; color: #17351f; font-size: 14px; }
+    details.example summary::after { content: "+"; color: #5e8529; font-size: 18px; }
+    details.example[open] summary::after { content: "−"; }
+    .example-answer { padding: 0 18px 18px; color: #53645a; font-size: 11px; line-height: 1.7; }
+    .example-answer b { color: #456c20; }
+
+    .business-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .business-card { padding: 25px; border: 1px solid var(--line); border-radius: 14px; background: #fff; }
+    .business-card span { color: #668f2f; font-size: 8px; letter-spacing: .14em; text-transform: uppercase; }
+    .business-card h3 { margin: 9px 0 9px; font-size: 22px; }
+    .business-card p { margin: 0; color: var(--muted); font-size: 11px; line-height: 1.7; }
+    .business-card ul { margin: 15px 0 0; padding-left: 17px; color: #4e6256; font-size: 10px; line-height: 1.8; }
+
+    .script-card { margin-top: 15px; padding: 28px; color: #e7f0e9; border-radius: 15px; background: var(--forest); }
+    .script-top { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-bottom: 15px; }
+    .script-top span { color: var(--lime); font-size: 8px; letter-spacing: .14em; text-transform: uppercase; }
+    .copy { padding: 7px 10px; color: #d5e1d8; border: 1px solid #4d6e5a; border-radius: 7px; background: #1d4932; font-size: 8px; }
+    .script { color: #c8d7cd; font-size: 14px; line-height: 1.85; }
+    .script strong { color: #fff; }
+    .script em { color: var(--lime); font-style: normal; }
+    .guardrail { margin-top: 12px; padding: 14px 17px; color: #54655c; border: 1px solid var(--line); border-radius: 10px; background: #fafbf8; font-size: 9px; line-height: 1.6; }
+
+    footer { padding: 28px 0 40px; color: #718078; border-top: 1px solid var(--line); background: #fff; font-size: 9px; }
+    footer .wrap { display: flex; justify-content: space-between; gap: 20px; }
+
+    @media (max-width: 1050px) {
+      :root { --nav: 190px; }
+      .wrap { width: min(100% - 38px, 1000px); }
+      .channel-flow { grid-template-columns: 2fr 38px 1fr; gap: 5px; }
+      .existing-boundary { grid-template-columns: 1fr 32px 1fr; padding-inline: 10px; }
+      .phone { max-width: 330px; }
+      .ai-diagram { grid-template-columns: .9fr 38px 1fr; }
+      .human-stack { grid-column: 1 / -1; grid-template-columns: repeat(4, 1fr); margin-top: 15px; }
+      .ai-diagram .ai-arrow:nth-of-type(2) { display: none; }
+    }
+
+    @media (max-width: 760px) {
+      .side-nav { display: none; }
+      .mobile-nav { position: sticky; top: 0; z-index: 30; display: flex; gap: 13px; align-items: center; padding: 10px 15px; color: #fff; background: #0b2b1dee; backdrop-filter: blur(8px); overflow-x: auto; }
+      .mobile-nav strong { color: var(--lime); font-size: 12px; }
+      .mobile-nav a { flex: 0 0 auto; color: #c2d0c7; text-decoration: none; font-size: 9px; }
+      .page { margin-left: 0; }
+      .wrap { width: min(100% - 30px, 700px); }
+      .hero { min-height: auto; padding: 72px 0; }
+      h1 { font-size: 48px; }
+      .hero-lead { font-size: 15px; }
+      .proposal-row, .section-head, .business-grid { grid-template-columns: 1fr; }
+      .section { padding: 65px 0; }
+      .section-head { gap: 15px; margin-bottom: 28px; }
+      .channel-diagram { padding: 15px; }
+      .channel-flow, .existing-boundary, .ai-diagram { grid-template-columns: 1fr; }
+      .flow-arrow, .ai-arrow { min-height: 48px; transform: rotate(90deg); }
+      .channel-flow .whatsapp, .human-stack { grid-column: auto; }
+      .diagram-box { min-height: auto; }
+      .channel-values, .human-stack, .example-grid { grid-template-columns: 1fr; }
+      .agent-core { min-height: 390px; }
+      footer .wrap { flex-direction: column; }
+    }
+
+    @media print {
+      .side-nav, .mobile-nav, .copy { display: none !important; }
+      .page { margin-left: 0; }
+      .section, .hero { padding: 36px 0; break-inside: avoid; }
+      .hero { min-height: auto; }
+      details:not([open]) > *:not(summary) { display: block; }
+    }
+  </style>
+</head>
+<body>
+  <aside class="side-nav">
+    <div class="brand"><span class="brand-mark">A</span><span><strong>AgroMind</strong><small>Channel + intelligence</small></span></div>
+    <div class="nav-label">Two-part business story</div>
+    <nav>
+      <a href="#overview"><b>01</b> The proposition</a>
+      <a href="#channel"><b>02</b> WhatsApp channel</a>
+      <a href="#agent"><b>03</b> Agriculture AI</a>
+      <a href="#pitch"><b>04</b> Business pitch</a>
+    </nav>
+    <div class="nav-footer">Reusable business pitch · Channel + intelligence</div>
+  </aside>
+
+  <nav class="mobile-nav"><strong>AgroMind</strong><a href="#overview">Idea</a><a href="#channel">WhatsApp</a><a href="#agent">AI Agent</a><a href="#pitch">Pitch</a></nav>
+
+  <main class="page">
+    <section class="hero" id="overview">
+      <div class="wrap hero-inner">
+        <span class="eyebrow">Two clear propositions for agricultural operations</span>
+        <h1>Add a channel.<br>Add <span>intelligence.</span></h1>
+        <p class="hero-lead">Large agricultural companies already connect field sensors to operational dashboards. AgroMind can add a WhatsApp communication channel to that existing flow—and provide a separate agriculture AI experience that helps people understand data, ask questions and make better decisions.</p>
+        <div class="proposal-row">
+          <article class="proposal"><small>Proposition one</small><h2>WhatsApp Channel Extension</h2><p>Reuse existing machine-to-machine alerts. Add targeted notifications and actions for <strong>controllers, managers and authorized teams.</strong></p></article>
+          <article class="proposal"><small>Proposition two</small><h2>AgroMind Agriculture AI</h2><p>A ChatGPT/Claude-like assistant grounded in <strong>agricultural knowledge, weather tools and authorized customer data.</strong></p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section white" id="channel">
+      <div class="wrap">
+        <div class="section-head">
+          <div><span class="section-no">Diagram 01 · Machine-to-machine + WhatsApp</span><h2>Extend the existing alert flow.</h2></div>
+          <p>The field trackers and sensors already report machine and operator exceptions to the customer's operations dashboard. AgroMind does not rebuild that infrastructure. It adds a controlled WhatsApp path from the existing alert/event feed to more of the people who need to know.</p>
+        </div>
+        <div class="positioning"><i>◆</i><span><b>Keep:</b> sensors, trackers, machine-to-machine integration and the customer's dashboard. &nbsp; <b>Add:</b> a WhatsApp notification and action channel.</span></div>
+        <div class="channel-diagram">
+          <div class="channel-flow">
+            <div class="existing-boundary">
+              <span class="existing-boundary-label">Customer's existing environment</span>
+              <article class="diagram-box estate">
+              <span class="box-label">100,000+ hectare field estate</span>
+              <h3>Trackers, sensors &amp; operators</h3>
+              <p>Machines and field teams generate operational signals across a very large production area.</p>
+              <div class="field-map">
+                <div class="field"><span>Field A</span><i class="sensor"></i></div><div class="field"><span>Field B</span><i class="sensor"></i></div><div class="field"><span>Field C</span><i class="sensor"></i></div>
+                <div class="field"><span>Field D</span><i class="sensor"></i></div><div class="field"><span>Field E</span><i class="sensor"></i></div><div class="field"><span>Field F</span><i class="sensor"></i></div>
+              </div>
+              <div class="estate-foot"><span>Speed · stops · dose · flow</span><strong>Live signals</strong></div>
+              </article>
+
+              <div class="flow-arrow"><div><b>→</b><small>Machine-to-machine</small></div></div>
+
+              <article class="diagram-box dashboard">
+                <span class="box-label">Existing operational system</span>
+                <h3>Operations dashboard</h3>
+                <p>The current system remains the detailed monitoring and control environment.</p>
+                <div class="dashboard-screen">
+                  <div class="screen-top"><i></i><i></i><i></i><span>LIVE OPERATIONS</span></div>
+                  <div class="alert-line high"><i></i><span>Application speed exceeded</span><small>18.6 mph</small></div>
+                  <div class="alert-line"><i></i><span>Machine stopped</span><small>5 min</small></div>
+                  <div class="alert-line"><i></i><span>Dose deviation</span><small>Review</small></div>
+                </div>
+                <div class="existing-user"><b>C</b><span><strong>Controllers monitor here today</strong><br>Full operational detail and workflow</span></div>
+              </article>
+            </div>
+
+            <div class="flow-arrow"><div><b>→</b><small>Authorized alert feed</small></div></div>
+
+            <article class="diagram-box whatsapp">
+              <span class="box-label">What we offer · new communication channel</span>
+              <h3>AgroMind → WhatsApp</h3>
+              <p>Relevant alerts reach selected roles without requiring everyone to watch the dashboard continuously.</p>
+              <div class="phone">
+                <div class="phone-top"><span class="wa-dot">W</span> AgroMind Operations</div>
+                <div class="message"><strong>Application speed exceeded</strong>Field 081 · JD-8R-410<br>18.6 mph vs 14 mph threshold</div>
+                <div class="wa-actions"><span>Contact operator</span><span>Acknowledge</span></div>
+              </div>
+              <div class="channel-recipients"><span>Controllers</span><span>Managers</span><span>Maintenance</span><span>Other authorized roles</span></div>
+            </article>
+          </div>
+        </div>
+        <div class="channel-values">
+          <article class="channel-value"><b>More reach</b><p>Managers and other authorized roles can receive selected exceptions outside the control room.</p></article>
+          <article class="channel-value"><b>Faster coordination</b><p>The first message can include the field, machine, issue and immediate action choices.</p></article>
+          <article class="channel-value"><b>Same source of truth</b><p>The dashboard remains operationally authoritative; WhatsApp extends communication around it.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section dark" id="agent">
+      <div class="wrap">
+        <div class="section-head">
+          <div><span class="section-no">Diagram 02 · Human / machine to human</span><h2>AgroMind: an AI agent built for agriculture.</h2></div>
+          <p>Think of the familiar conversational experience of ChatGPT or Claude, enhanced with agricultural knowledge, authorized operational data and tools such as live weather, maps and field systems. It can answer questions and make grounded recommendations for agricultural users.</p>
+        </div>
+
+        <div class="ai-diagram">
+          <div class="input-stack">
+            <article class="input"><small>Human input</small><strong>Grower questions</strong><p>Text, voice, photos and follow-up conversation</p></article>
+            <article class="input"><small>Machine input</small><strong>Operational data</strong><p>Telemetry, alerts, field status and maintenance history</p></article>
+            <article class="input"><small>Knowledge</small><strong>Agricultural context</strong><p>Agronomy, crop stages, application rules and field history</p></article>
+            <article class="input"><small>MCP / tools</small><strong>Live external context</strong><p>Weather, forecasts, maps, imagery and approved APIs</p></article>
+          </div>
+
+          <div class="ai-arrow"><b>→</b><span>Grounded context</span></div>
+
+          <article class="agent-core">
+            <div class="agent-badge"><div><small>Agriculture AI</small><strong>AgroMind</strong><small>Agent</small></div></div>
+            <h3>Understand · reason · recommend</h3>
+            <p>Conversational AI grounded in the customer's authorized agricultural and operational context.</p>
+            <div class="agent-tools"><span>Natural language</span><span>Analytics</span><span>Tool use</span><span>Memory</span><span>Actions</span></div>
+          </article>
+
+          <div class="ai-arrow"><b>→</b><span>Explainable response</span></div>
+
+          <div class="human-stack">
+            <article class="human"><small>Grower</small><strong>Practical recommendation</strong><p>What should I do next and why?</p></article>
+            <article class="human"><small>Agronomist</small><strong>Field decision support</strong><p>Evidence, constraints and crop implications</p></article>
+            <article class="human"><small>Engineer</small><strong>Operational diagnosis</strong><p>Patterns, likely causes and inspection priorities</p></article>
+            <article class="human"><small>Manager</small><strong>Portfolio intelligence</strong><p>Risk, priority, ownership and status</p></article>
+          </div>
+        </div>
+
+        <div class="agent-definition"><strong>Not a generic chatbot:</strong> AgroMind can use the language model for conversation and reasoning, while agriculture knowledge and MCP/API tools ground the answer in live weather, customer policies, field information and machine context. Recommendations should show the evidence used, state uncertainty and keep the final operational decision with the responsible human.</div>
+
+        <div class="example-grid">
+          <details class="example" open><summary><div><span>Grower / agronomist</span><strong>“Is it suitable to spray Field 081 now?”</strong></div></summary><div class="example-answer"><b>AgroMind checks:</b> wind, temperature, humidity, forecast, product constraints and field readiness—then explains whether to proceed, wait or request agronomic approval.</div></details>
+          <details class="example"><summary><div><span>Controller / engineer</span><strong>“Why are machine stops increasing today?”</strong></div></summary><div class="example-answer"><b>AgroMind compares:</b> alert history, stop reasons, machines, fields and maintenance context to identify patterns and recommend the next inspection.</div></details>
+          <details class="example"><summary><div><span>Manager</span><strong>“What requires my attention across the operation?”</strong></div></summary><div class="example-answer"><b>AgroMind prioritizes:</b> unresolved exceptions, affected hectares, duration, operational impact, ownership and escalation status.</div></details>
+          <details class="example"><summary><div><span>Field team</span><strong>“What should I inspect in this field?”</strong></div></summary><div class="example-answer"><b>AgroMind combines:</b> scouting observations, imagery, field history and current conditions into a concise checklist and follow-up action.</div></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="pitch">
+      <div class="wrap">
+        <div class="section-head">
+          <div><span class="section-no">Concise business message</span><h2>Two products that reinforce each other.</h2></div>
+          <p>The WhatsApp proposition creates immediate operational reach. The AgroMind proposition adds longer-term differentiation through agriculture-specific conversation, analytics, recommendations and tool use.</p>
+        </div>
+        <div class="business-grid">
+          <article class="business-card"><span>Immediate proposition</span><h3>Communication channel</h3><p>Extend alerts from the customer's existing operations dashboard into WhatsApp for selected controllers, managers and other authorized roles.</p><ul><li>No replacement of existing sensors or dashboard</li><li>Start with a few high-value alert types</li><li>Add interactive contact and acknowledgement</li></ul></article>
+          <article class="business-card"><span>Strategic proposition</span><h3>Agriculture intelligence</h3><p>Give growers and specialists an agriculture-aware AI assistant that can answer questions using authorized customer data and live tools.</p><ul><li>Natural-language access to complex information</li><li>Contextual recommendations with evidence</li><li>Role-specific analytics and operational actions</li></ul></article>
+        </div>
+
+        <article class="script-card">
+          <div class="script-top"><span>60-second presenter script</span><button class="copy" type="button" data-copy="#pitch-script">Copy script</button></div>
+          <div class="script" id="pitch-script"><strong>“Your existing platform already connects machines and field sensors to a strong operational dashboard.</strong> We are not proposing to replace that. Our first proposition is to add a WhatsApp channel to the existing alert flow, so controllers, managers and other authorized people can receive the right exceptions and take action wherever they are.<br><br><strong>Our second proposition is AgroMind:</strong> a ChatGPT- or Claude-like AI agent designed for agriculture. It combines conversation with agricultural knowledge, customer-authorized data and live tools such as weather and maps. A grower can ask whether conditions are suitable for spraying; an engineer can investigate recurring stops; and a manager can ask what requires attention across the operation.<br><br>Together, the two propositions move the business from <em>machine signals, to human understanding, to faster coordinated action.</em>”</div>
+        </article>
+        <div class="guardrail"><strong>Accuracy note:</strong> the current demo proves the interaction pattern with simulated operational events and snapshot data. A production pitch should describe customer telemetry, weather and operational systems as integration targets until those live connectors, permissions and operational policies are implemented.</div>
+      </div>
+    </section>
+
+    <footer><div class="wrap"><span>AgroMind · Channel + intelligence</span><span>Reusable business pitch material</span></div></footer>
+  </main>
+
+  <script>
+    const links = [...document.querySelectorAll('.side-nav nav a')];
+    const sections = links.map(link => document.querySelector(link.getAttribute('href'))).filter(Boolean);
+    const observer = new IntersectionObserver(entries => {
+      const visible = entries.filter(entry => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if (!visible) return;
+      links.forEach(link => link.classList.toggle('active', link.getAttribute('href') === `#${visible.target.id}`));
+    }, { rootMargin: '-20% 0px -65% 0px', threshold: [0, .15, .5] });
+    sections.forEach(section => observer.observe(section));
+
+    document.querySelectorAll('[data-copy]').forEach(button => {
+      button.addEventListener('click', async () => {
+        const source = document.querySelector(button.dataset.copy);
+        if (!source) return;
+        await navigator.clipboard.writeText(source.innerText.trim());
+        const previous = button.textContent;
+        button.textContent = 'Copied';
+        setTimeout(() => { button.textContent = previous; }, 1400);
+      });
+    });
+  </script>
+</body>
+</html>
