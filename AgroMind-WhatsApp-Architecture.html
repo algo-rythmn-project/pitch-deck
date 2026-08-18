@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AgroMind x Zait — Operational Intelligence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FBFAF7; --ink:#17241E; --deep:#1E4D3A; --mid:#2E6B4F;
+    --sage:#7FA890; --pale:#E7F0EA; --amber:#C8843A;
+    --blue:#DCE6F2; --blue-st:#A9C0DE; --blue-tx:#274b6b;
+    --line:#D9DED9; --muted:#5A6B62;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:#EEEDE7;color:var(--ink);
+    font-family:"IBM Plex Sans",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  .sheet{max-width:1000px;margin:22px auto;background:var(--paper);
+    padding:34px 40px 5px;box-shadow:0 1px 30px rgba(23,36,30,.10)}
+  .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--mid);margin:0 0 8px}
+  h1{font-size:28px;line-height:1.14;font-weight:700;margin:0 0 10px;letter-spacing:-.01em;max-width:780px}
+  .lede{font-size:14.5px;line-height:1.5;color:#33433b;margin:0 0 6px;max-width:840px}
+  .lede b{color:var(--deep);font-weight:600}
+  .scale{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--muted);margin:0 0 18px}
+  .cred{display:flex;border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-bottom:14px}
+  .cred div{flex:1;padding:11px 15px}
+  .cred div + div{border-left:1px solid var(--line)}
+  .cred .k{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--muted);margin-bottom:3px}
+  .cred .v{font-size:13px;font-weight:600;color:var(--ink)}
+  .cred .v em{font-style:normal;color:var(--amber)}
+  .keepadd{font-size:13.5px;font-weight:600;color:var(--deep);margin:0 0 8px}
+  .keepadd span{color:var(--muted);font-weight:400}
+  .diagram{border:1px solid var(--line);border-radius:12px;background:#fff;padding:10px 6px 6px;margin-bottom:22px}
+  svg{display:block;width:100%;height:auto}
+  h2.sec{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--mid);margin:0 0 13px;font-weight:500}
+  .cases{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .case{border:1px solid var(--line);border-radius:10px;padding:14px 16px 15px;background:#fff}
+  .case .who{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--amber);margin-bottom:5px}
+  .case h3{font-size:14.5px;margin:0 0 7px;font-weight:600;color:var(--deep)}
+  .case h3 .q{color:var(--ink);font-weight:500;font-style:italic}
+  .case p{font-size:12.6px;line-height:1.45;margin:0 0 8px;color:#33433b}
+  .case .val{font-family:"IBM Plex Mono",monospace;font-size:10.5px;color:var(--muted);
+    border-top:1px dashed var(--line);padding-top:7px}
+  .case .val b{color:var(--ink);font-weight:500}
+  .foot{margin-top:20px;padding-top:14px;border-top:2px solid var(--deep);
+    font-size:13px;line-height:1.5;color:#33433b}
+  .foot b{color:var(--deep)}
+  .acc{margin-top:10px;font-family:"IBM Plex Mono",monospace;font-size:10.5px;line-height:1.5;color:var(--muted)}
+  @media print{body{background:#fff}.sheet{box-shadow:none;margin:0;max-width:none}}
+  @media(max-width:720px){.cases{grid-template-columns:1fr}.cred{flex-direction:column}.cred div+div{border-left:none;border-top:1px solid var(--line)}}
+</style>
+</head>
+<body>
+<div class="sheet">
+  <p class="eyebrow">Operational intelligence architecture</p>
+  <h1><span style="color:#2E6B4F">AgroMind + WhatsApp</span> fit into the operation you already run</h1>
+  <p class="lede">Your machines and field sensors already report to an operations dashboard. AgroMind does not rebuild that. It adds a <b>WhatsApp channel</b> to the existing alert flow, and an <b>agriculture AI agent</b> that helps people understand the data, ask questions, and decide. It runs <b>today, on real field data</b>.</p>
+
+  <div class="cred">
+    <div><div class="k">Proven now</div><div class="v">Demo on real <em>AlgoFarm</em> data</div></div>
+    <div><div class="k">We keep</div><div class="v">Your sensors + dashboard</div></div>
+    <div><div class="k">We add</div><div class="v">WhatsApp + AI agent</div></div>
+    <div><div class="k">Reach</div><div class="v">Controllers, managers, field</div></div>
+  </div>
+
+  <p class="keepadd">Keep your sensors, trackers, and dashboard. <span>Add AgroMind and a WhatsApp channel around them.</span></p>
+
+  <div class="diagram">
+
+
+  <svg viewBox="0 0 960 560" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif">
+    <defs>
+      <marker id="g" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0.5 L7 4 L0 7.5 Z" fill="#4E8C6F"/></marker>
+      <marker id="gs" markerWidth="8" markerHeight="8" refX="2" refY="4" orient="auto"><path d="M7 0.5 L0 4 L7 7.5 Z" fill="#4E8C6F"/></marker>
+      <marker id="a" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0.5 L7 4 L0 7.5 Z" fill="#C08A45"/></marker>
+      <marker id="m" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0.5 L7 4 L0 7.5 Z" fill="#9DB2C9"/></marker>
+    </defs>
+
+    <!-- inputs (text only) -->
+    <text x="150" y="86" text-anchor="middle" font-size="13" font-weight="600" fill="#9a6f39">Knowledge</text>
+    <text x="150" y="103" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" fill="#a98a5f">agronomy · crop rules · history</text>
+    <path d="M232 96 Q300 118 344 118" fill="none" stroke="#C08A45" stroke-width="1.4" marker-end="url(#a)"/>
+    <text x="812" y="86" text-anchor="middle" font-size="13" font-weight="600" fill="#9a6f39">Financial market (commodity)</text>
+    <text x="812" y="103" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" fill="#a98a5f">prices · risk · timing</text>
+    <path d="M726 96 Q660 118 616 118" fill="none" stroke="#C08A45" stroke-width="1.4" marker-end="url(#a)"/>
+
+    <!-- existing machine-to-machine (text on dashed line) -->
+    <text x="480" y="292" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" fill="#8497ac">Existing machine-to-machine</text>
+    <line x1="240" y1="305" x2="720" y2="305" stroke="#9DB2C9" stroke-width="1.4" stroke-dasharray="5 5" marker-end="url(#m)"/>
+
+    <!-- diamond loop edges -->
+    <line x1="238" y1="262" x2="345" y2="152" stroke="#4E8C6F" stroke-width="1.6" marker-end="url(#g)"/>
+    <text x="262" y="205" text-anchor="middle" font-size="11" fill="#4E8C6F">Field signals</text>
+    <line x1="615" y1="152" x2="722" y2="262" stroke="#4E8C6F" stroke-width="1.6" marker-end="url(#g)"/>
+    <text x="700" y="205" text-anchor="middle" font-size="11" fill="#4E8C6F">Insights</text>
+    <line x1="345" y1="440" x2="238" y2="344" stroke="#4E8C6F" stroke-width="1.6" marker-end="url(#g)"/>
+    <text x="258" y="400" text-anchor="middle" font-size="11" fill="#4E8C6F">To operators</text>
+    <!-- dashboard <-> communication two-way -->
+    <line x1="600" y1="430" x2="742" y2="346" stroke="#4E8C6F" stroke-width="1.6" marker-start="url(#gs)" marker-end="url(#g)"/>
+    <text x="706" y="398" text-anchor="middle" font-size="11" fill="#4E8C6F">Alerts / Actions</text>
+
+    <!-- managers (text only) -->
+    <line x1="616" y1="476" x2="676" y2="476" stroke="#4E8C6F" stroke-width="1.6" marker-end="url(#g)"/>
+    <text x="686" y="472" font-size="13" font-weight="600" fill="#2b4a68">Managers</text>
+    <text x="686" y="489" font-family="IBM Plex Mono, monospace" font-size="11" fill="#6b7f96">+ authorized roles</text>
+
+    <!-- ===== 4 boxes ===== -->
+    <!-- AgroMind -->
+    <rect x="345" y="74" width="270" height="94" rx="14" fill="#1E4D3A"/>
+    <text x="480" y="110" text-anchor="middle" font-size="21" font-weight="700" fill="#FBFAF7" letter-spacing="-.3">AgroMind</text>
+    <text x="480" y="130" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" fill="#A9C6B5">agriculture AI agent</text>
+    <text x="480" y="149" text-anchor="middle" font-size="11" fill="#DDEAE1">ML · Math · Orchestration · Root Cause</text>
+
+    <!-- Field -->
+    <rect x="70" y="250" width="168" height="92" rx="12" fill="#E8EEF6" stroke="#B9CBE2"/>
+    <text x="154" y="290" text-anchor="middle" font-size="15" font-weight="700" fill="#2b4a68">Field</text>
+    <text x="154" y="309" text-anchor="middle" font-size="11" fill="#43617f">sensors · trackers · operators</text>
+    <text x="154" y="325" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" fill="#7089a3">speed · stops · dose · flow</text>
+
+    <!-- Dashboard -->
+    <rect x="722" y="250" width="168" height="92" rx="12" fill="#E8EEF6" stroke="#B9CBE2"/>
+    <text x="806" y="290" text-anchor="middle" font-size="15" font-weight="700" fill="#2b4a68">Dashboard</text>
+    <text x="806" y="309" text-anchor="middle" font-size="11" fill="#43617f">your ops system (ZFarm)</text>
+    <text x="806" y="325" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" fill="#7089a3">source of truth</text>
+
+    <!-- Communication -->
+    <rect x="345" y="435" width="270" height="94" rx="14" fill="#E9F2EC" stroke="#3F7D5F" stroke-width="1.3"/>
+    <text x="480" y="464" text-anchor="middle" font-size="15" font-weight="700" fill="#1E4D3A">Communication</text>
+    <text x="480" y="483" text-anchor="middle" font-size="11" fill="#2f5e47">WhatsApp channel</text>
+    <text x="480" y="499" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" fill="#4f7d64">For operators · managers · controllers</text>
+
+    <!-- legend -->
+    <g font-family="IBM Plex Mono, monospace" font-size="11">
+      <rect x="70" y="12" width="13" height="8" rx="2" fill="#E8EEF6" stroke="#B9CBE2"/>
+      <text x="90" y="19" fill="#5A6B62">Your existing systems</text>
+      <rect x="300" y="12" width="13" height="8" rx="2" fill="#1E4D3A"/>
+      <text x="320" y="19" fill="#5A6B62">What AgroMind adds</text>
+      <rect x="520" y="12" width="13" height="8" rx="2" fill="#F0E0C8" stroke="#D8BD90"/>
+      <text x="540" y="19" fill="#5A6B62">AgroMind inputs</text>
+    </g>
+  </svg>
+  </div>
+
+  <h2 class="sec">What each role can ask</h2>
+  <div class="cases">
+    <div class="case">
+      <div class="who">Grower / agronomist</div>
+      <h3><span class="q">"Is it suitable to spray Field 081 now?"</span></h3>
+      <p>AgroMind checks wind, temperature, humidity, forecast, product constraints, and field readiness, then explains whether to proceed, wait, or ask for agronomic approval.</p>
+      <div class="val"><b>The call stays with the grower,</b> backed by evidence.</div>
+    </div>
+    <div class="case">
+      <div class="who">Controller / engineer</div>
+      <h3><span class="q">"Why are machine stops increasing today?"</span></h3>
+      <p>AgroMind compares alert history, stop reasons, machines, fields, and maintenance context to find the pattern and recommend the next inspection.</p>
+      <div class="val"><b>Faster root cause,</b> less downtime.</div>
+    </div>
+    <div class="case">
+      <div class="who">Manager</div>
+      <h3><span class="q">"What needs my attention across the operation?"</span></h3>
+      <p>AgroMind prioritizes unresolved exceptions by affected hectares, duration, operational impact, ownership, and escalation status.</p>
+      <div class="val"><b>Attention goes where it matters.</b></div>
+    </div>
+    <div class="case">
+      <div class="who">Field team</div>
+      <h3><span class="q">"What should I inspect in this field?"</span></h3>
+      <p>AgroMind combines scouting observations, imagery, field history, and current conditions into a short checklist and a follow-up action.</p>
+      <div class="val"><b>Clear next actions</b> in the field.</div>
+    </div>
+  </div>
+
+  <p class="foot"><b>How it fits.</b> AgroMind sits alongside your dashboard and your WEED-IT hardware, it does not replace them. Your sensors, maps, and grower relationships stay yours. We add the communication channel and the reasoning that turns field signals into coordinated action.</p>
+  <p class="acc">Accuracy note: the demo proves the interaction pattern on real snapshot data with simulated operational events. Live telemetry, weather, and dashboard systems are integration targets until connectors, permissions, and operational policies are in place.</p>
+  <p style="text-align:center;font-size:11px;color:#888;margin-top:20px;">© 2026 Algo-Rythmn Corp. All rights reserved.</p>
+</div>
+</body>
+</html>
