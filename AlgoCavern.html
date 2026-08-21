@@ -368,7 +368,7 @@
         <div>
           <div class="eyebrow rv">AlgoCompliance &amp; AlgoPricing</div>
           <h1 class="rv h1-grad">AlgoCavern</h1>
-          <p class="lede rv">Two tools under one platform. AlgoCompliance checks every incoming load against the rules and flags what is not compliant before intake acceptance. AlgoPricing prices each load on its true net value to recover, not its volume. The reading and arithmetic are handled. Every call stays with your team.</p>
+          <p class="lede rv">Two tools under one platform. AlgoCompliance checks every incoming load against the rules and flags what is not compliant before intake acceptance. AlgoPricing reads each load's composition and prices it on the net value it can recover. The reading and arithmetic are handled. Every call stays with your team.</p>
           <div class="covpills rv">
             <span class="cpill">Directive 058 compliance checks</span>
             <span class="cpill">Net-value intake pricing</span>
@@ -377,71 +377,55 @@
         </div>
         <!-- right: cavern cross-section background (hidden below 960px) -->
         <div class="cov-right rv">
-          <svg viewBox="0 0 260 370" width="100%" style="display:block" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <radialGradient id="cav-glow-bg" cx="50%" cy="62%" r="55%">
-      <stop offset="0%" stop-color="#0e2a70" stop-opacity=".55"/>
-      <stop offset="100%" stop-color="#020814" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="cav-void" cx="50%" cy="40%" r="70%">
-      <stop offset="0%" stop-color="#12295c" stop-opacity=".9"/>
-      <stop offset="100%" stop-color="#05102e" stop-opacity=".98"/>
-    </radialGradient>
-    <linearGradient id="g-oil" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#d8b477" stop-opacity=".62"/>
-      <stop offset="100%" stop-color="#b98f4e" stop-opacity=".42"/>
-    </linearGradient>
-    <linearGradient id="g-brine" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#3aa0ee" stop-opacity=".5"/>
-      <stop offset="100%" stop-color="#1f5fb0" stop-opacity=".42"/>
-    </linearGradient>
-    <linearGradient id="g-solid" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#41527a" stop-opacity=".7"/>
-      <stop offset="100%" stop-color="#26324e" stop-opacity=".92"/>
-    </linearGradient>
-    <radialGradient id="node" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#bfe6ff"/><stop offset="100%" stop-color="#2eb8ff"/>
-    </radialGradient>
-    <clipPath id="cvn"><path d="M130,150 C176,150 212,192 212,240 C212,292 176,346 130,346 C84,346 48,292 48,240 C48,192 84,150 130,150 Z"/></clipPath>
-  </defs>
-
-  <ellipse cx="130" cy="250" rx="150" ry="128" fill="url(#cav-glow-bg)"/>
-
-  <!-- surface + geological strata -->
-  <rect x="0" y="0" width="260" height="18" fill="rgba(6,14,46,.7)"/>
-  <line x1="0" y1="18" x2="260" y2="18" stroke="rgba(46,184,255,.30)" stroke-width="1.2"/>
-  <line x1="0" y1="46"  x2="260" y2="46"  stroke="rgba(255,255,255,.045)" stroke-width=".8"/>
-  <line x1="0" y1="80"  x2="260" y2="80"  stroke="rgba(255,255,255,.038)" stroke-width=".7"/>
-  <line x1="0" y1="116" x2="260" y2="116" stroke="rgba(255,255,255,.03)" stroke-width=".6"/>
-  <!-- salt formation band + halo around cavern -->
-  <path d="M130,138 C186,138 228,188 228,244 C228,304 186,360 130,360 C74,360 32,304 32,244 C32,188 74,138 130,138 Z" fill="rgba(150,180,225,.05)" stroke="rgba(150,180,225,.08)" stroke-width="1"/>
-
-  <!-- injection well from surface -->
-  <line x1="126" y1="18" x2="126" y2="151" stroke="rgba(46,184,255,.45)" stroke-width="1"/>
-  <line x1="134" y1="18" x2="134" y2="151" stroke="rgba(46,184,255,.45)" stroke-width="1"/>
-  <rect x="126" y="18" width="8" height="133" fill="rgba(46,184,255,.06)"/>
-  <rect x="121" y="12" width="18" height="8" rx="1.5" fill="rgba(46,184,255,.5)"/>
-
-  <!-- cavern body -->
-  <path d="M130,150 C176,150 212,192 212,240 C212,292 176,346 130,346 C84,346 48,292 48,240 C48,192 84,150 130,150 Z" fill="url(#cav-void)"/>
-  <g clip-path="url(#cvn)">
-    <rect x="40" y="300" width="180" height="60" fill="url(#g-solid)"/>
-    <rect x="40" y="212" width="180" height="88" fill="url(#g-brine)"/>
-    <rect x="40" y="176" width="180" height="36" fill="url(#g-oil)"/>
-    <line x1="40" y1="212" x2="220" y2="212" stroke="rgba(255,255,255,.16)" stroke-width="1"/>
-    <line x1="40" y1="300" x2="220" y2="300" stroke="rgba(0,0,0,.28)" stroke-width="1.4"/>
-    <line x1="40" y1="176" x2="220" y2="176" stroke="rgba(216,180,119,.28)" stroke-width=".9"/>
-    <!-- roof dome sheen -->
-    <path d="M62,168 C90,150 170,150 198,168" fill="none" stroke="rgba(255,255,255,.10)" stroke-width="1.4"/>
-  </g>
-  <path d="M130,150 C176,150 212,192 212,240 C212,292 176,346 130,346 C84,346 48,292 48,240 C48,192 84,150 130,150 Z" fill="none" stroke="rgba(46,184,255,.42)" stroke-width="1.6"/>
-
-  <!-- injection point + droplets into the oil layer -->
-  <circle cx="130" cy="151" r="5" fill="url(#node)"/>
-  <circle cx="130" cy="151" r="9.5" fill="none" stroke="rgba(46,184,255,.22)" stroke-width="1"/>
-  <circle cx="130" cy="165" r="1.6" fill="rgba(190,230,255,.7)"/>
-  <circle cx="130" cy="174" r="1.3" fill="rgba(190,230,255,.45)"/>
-</svg>
+          <svg viewBox="0 0 260 370" width="100%" style="display:block">
+            <defs>
+              <radialGradient id="cav-bg" cx="50%" cy="42%" r="58%">
+                <stop offset="0%" stop-color="#1a3a88" stop-opacity=".75"/>
+                <stop offset="100%" stop-color="#030d2e" stop-opacity=".98"/>
+              </radialGradient>
+              <radialGradient id="cav-glow-bg" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#0a2468" stop-opacity=".5"/>
+                <stop offset="100%" stop-color="#020814" stop-opacity="0"/>
+              </radialGradient>
+              <linearGradient id="g-oil" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#78c8f8" stop-opacity=".4"/>
+                <stop offset="100%" stop-color="#2eb8ff" stop-opacity=".18"/>
+              </linearGradient>
+              <linearGradient id="g-mix" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#7898c0" stop-opacity=".32"/>
+                <stop offset="100%" stop-color="#4a6898" stop-opacity=".14"/>
+              </linearGradient>
+              <linearGradient id="g-norm" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#c99b52" stop-opacity=".42"/>
+                <stop offset="100%" stop-color="#a07830" stop-opacity=".2"/>
+              </linearGradient>
+              <clipPath id="cvn-clip">
+                <ellipse cx="118" cy="248" rx="106" ry="88"/>
+              </clipPath>
+            </defs>
+            <ellipse cx="118" cy="248" rx="140" ry="118" fill="url(#cav-glow-bg)"/>
+            <rect x="0" y="0" width="240" height="20" fill="rgba(6,14,46,.72)"/>
+            <line x1="0" y1="20" x2="240" y2="20" stroke="rgba(46,184,255,.28)" stroke-width="1.2"/>
+            <line x1="0" y1="44"  x2="240" y2="44"  stroke="rgba(255,255,255,.04)" stroke-width=".8"/>
+            <line x1="0" y1="72"  x2="240" y2="72"  stroke="rgba(255,255,255,.035)" stroke-width=".7"/>
+            <line x1="0" y1="104" x2="240" y2="104" stroke="rgba(255,255,255,.03)" stroke-width=".6"/>
+            <line x1="0" y1="140" x2="240" y2="140" stroke="rgba(255,255,255,.025)" stroke-width=".6"/>
+            <rect x="115" y="20" width="6" height="142" fill="rgba(46,184,255,.07)"/>
+            <line x1="115" y1="20" x2="115" y2="162" stroke="rgba(46,184,255,.38)" stroke-width=".9"/>
+            <line x1="121" y1="20" x2="121" y2="162" stroke="rgba(46,184,255,.38)" stroke-width=".9"/>
+            <ellipse cx="118" cy="248" rx="118" ry="100" fill="rgba(8,24,72,.22)" stroke="rgba(46,184,255,.05)" stroke-width="8"/>
+            <ellipse cx="118" cy="248" rx="106" ry="88" fill="url(#cav-bg)"/>
+            <g clip-path="url(#cvn-clip)">
+              <rect x="12" y="248" width="212" height="90" fill="url(#g-oil)"/>
+              <rect x="12" y="204" width="212" height="44" fill="url(#g-mix)"/>
+              <rect x="12" y="160" width="212" height="44" fill="url(#g-norm)"/>
+              <line x1="12" y1="248" x2="224" y2="248" stroke="rgba(255,255,255,.1)"  stroke-width="1"/>
+              <line x1="12" y1="204" x2="224" y2="204" stroke="rgba(255,255,255,.07)" stroke-width="1"/>
+            </g>
+            <ellipse cx="118" cy="248" rx="106" ry="88" fill="none" stroke="rgba(46,184,255,.38)" stroke-width="1.6"/>
+            <circle cx="118" cy="160" r="5.5" fill="rgba(46,184,255,.45)" stroke="rgba(46,184,255,.9)" stroke-width="1.1"/>
+            <circle cx="118" cy="160" r="10" fill="none" stroke="rgba(46,184,255,.18)" stroke-width="1"/>
+          </svg>
         </div>
       </div>
     </div>
@@ -458,7 +442,7 @@
           <h2 class="rv">We build AI tools.<br>Run by the people in the field.</h2>
           <ul class="points">
             <li class="rv"><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span>An AI company focused on <strong>document intelligence and decision support</strong></span></li>
-            <li class="rv"><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span><strong>AlgoCavern is built and running</strong> on Alberta synthetic and public data — a live demo is available today</span></li>
+            <li class="rv"><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span><strong>AlgoCavern is built and running</strong> on Alberta synthetic and public data, and a live demo is available today</span></li>
             <li class="rv"><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span>We know software and data. <strong>The field team owns disposal, chemistry, and the edge cases</strong></span></li>
             <li class="rv"><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span>This only works as a <strong>partnership</strong>, and we would rather say that now than pretend otherwise</span></li>
           </ul>
@@ -498,7 +482,7 @@
     <div class="blob" style="width:800px;height:800px;background:radial-gradient(circle,rgba(46,184,255,.07) 0%,transparent 52%);bottom:-320px;left:-240px"></div>
     <div class="wrap">
       <div class="eyebrow rv">The premise</div>
-      <h2 class="rv">Paperwork is the <br>Bottleneck.</h2>
+      <h2 class="rv">Paperwork is the <br>bottleneck.</h2>
       <p class="lede rv">Approvals, lab reports, regulator filings, and per-load pricing eat hours that could go to judgment. Reading and arithmetic is where software helps. The judgment stays with your team.</p>
       <div class="tasks">
         <div class="task sw rv"><div class="tl">Software handles</div><h4>Check load compliance</h4></div>
@@ -517,7 +501,7 @@
       <h2 class="rv">Two solutions. Experts<br>in the chair.</h2>
       <div class="sols">
         <div class="sol rv"><div class="edge"></div><div class="num">SOLUTION 1</div><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg></div><h3>AlgoCompliance</h3><p>Reads each incoming load's manifest, SDS, and lab report, checks it against Directive 058 and related rules, and flags what is not compliant before intake acceptance. Drafts the compliance report too.</p></div>
-        <div class="sol rv"><div class="edge"></div><div class="num">SOLUTION 2</div><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div><h3>AlgoPricing</h3><p>Breaks each load into its components, nets recovered-oil value against disposal cost, and prices the gate on what the load is truly worth to recover. Not flat volume fees.</p></div>
+        <div class="sol rv"><div class="edge"></div><div class="num">SOLUTION 2</div><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div><h3>AlgoPricing</h3><p>Prices each load on the injection capacity and permanent cavern space it consumes, plus any recovery value, benchmarked to the customer's next-best option.</p></div>
       </div>
       <div class="foundation rv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l9 5-9 5-9-5 9-5zM3 12l9 5 9-5"/></svg><span>Both are built and running on a working demo platform. Drop in a lab analytical or a manifest, or ask in plain language, and it responds immediately.</span></div>
     </div>
@@ -533,11 +517,11 @@
           <h2 class="rv">Checks every load against<br>the rules before intake acceptance.</h2>
           <ul class="points">
             <li class="rv"><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span>Reads each incoming document against the <strong>Facility Protocol</strong> and AER Directives 058 and 047</span></li>
-            <li class="rv"><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span>Every check is traced to a specific rule — the compliance officer sees the source, not just the result</span></li>
+            <li class="rv"><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span>Every check is traced to a specific rule, so the compliance officer sees the source behind the result</span></li>
             <li class="rv"><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span>Flags problems, reasons about patterns, and <strong>drafts the response paperwork</strong> ready to attach</span></li>
-            <li class="rv"><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span>Delivers a clear verdict <strong>before a load is accepted</strong> — accept, query, or reject</span></li>
+            <li class="rv"><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span>Delivers a clear verdict <strong>before a load is accepted</strong>: accept, query, or reject</span></li>
           </ul>
-          <div class="honest rv"><b>Every flag shows its source.</b> An aid to the compliance officer's judgment — officer sign-off required. Not legal advice.</div>
+          <div class="honest rv"><b>Every flag shows its source.</b> An aid to the compliance officer's judgment. Officer sign-off required. Not legal advice.</div>
         </div>
         <!-- Mockup: document intake → regulation scan → analysis output -->
         <div class="rv" style="border-radius:18px;overflow:hidden;border:1px solid rgba(46,184,255,.22);box-shadow:0 18px 44px rgba(0,0,0,.45),0 0 0 1px rgba(0,0,0,.3)">
@@ -601,7 +585,7 @@
             <!-- Verdict -->
             <div style="background:rgba(226,116,95,.12);border:1px solid rgba(226,116,95,.36);border-radius:9px;padding:9px 12px;margin-bottom:9px">
               <div style="font-family:var(--mono);font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:#e2745f;margin-bottom:3px">Verdict</div>
-              <div style="font-size:12.5px;color:#fad4c8;font-weight:700;line-height:1.3">Hold at scale — review required</div>
+              <div style="font-size:12.5px;color:#fad4c8;font-weight:700;line-height:1.3">Hold at scale, review required</div>
               <div style="font-family:var(--mono);font-size:9px;color:#b05840;margin-top:4px">2 items flagged · compliance report drafted</div>
             </div>
             <!-- Drafted output status -->
@@ -624,11 +608,12 @@
       <div class="split">
         <div>
           <h2 class="rv">Prices each load on its net value.</h2>
+          <p class="lede rv" style="margin-top:14px;margin-bottom:16px">Rig-side drying now strips drill cuttings to 3-5% oil, down from around 25%. The recovery that used to subsidize disposal is gone, so each load has to price on what it truly costs to take.</p>
           <ul class="points">
             <li class="rv"><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span>Prices each load against two limited resources: <strong>how much injection capacity it uses</strong> and how much cavern space it permanently retires</span></li>
-            <li class="rv"><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span>Calculates the <strong>cost floor</strong> for each load, then sets the gate price above it — margin is explicit on every quote</span></li>
-            <li class="rv"><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span>Benchmarks against the customer's <strong>nearest alternative</strong> to price at the ceiling, not at cost</span></li>
-            <li class="rv"><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span>Load rankings <strong>shift as the facility fills</strong> — a blended rate cannot price both regimes correctly</span></li>
+            <li class="rv"><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span>Calculates the <strong>cost floor</strong> for each load, then sets the gate price above it, so margin is explicit on every quote</span></li>
+            <li class="rv"><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span>Benchmarks against the generator's <strong>next-best option</strong>, the trucking hours the facility saves them, and prices toward that ceiling</span></li>
+            <li class="rv"><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span>Load rankings <strong>shift as the facility fills</strong>, and a blended rate cannot price both regimes correctly</span></li>
           </ul>
 
         </div>
@@ -639,19 +624,19 @@
           <div style="display:flex;flex-direction:column;gap:0;margin-top:14px;border-top:1px solid rgba(255,255,255,.08);padding-top:14px">
             <div style="display:flex;gap:10px;align-items:baseline;margin-bottom:9px">
               <span style="flex:0 0 5px;width:5px;height:5px;border-radius:50%;background:#2eb8ff;margin-top:1px"></span>
-              <span style="font-size:13px;color:#c8ddf4;line-height:1.5"><strong style="color:#fff">Every load you take is worth something different to you.</strong> One flat rate can't do that.</span>
+              <span style="font-size:13px;color:#c8ddf4;line-height:1.5"><strong style="color:#fff">No two loads are worth the same.</strong> A flat rate charges as if they were.</span>
             </div>
             <div style="display:flex;gap:10px;align-items:baseline;margin-bottom:9px">
               <span style="flex:0 0 5px;width:5px;height:5px;border-radius:50%;background:#2eb8ff;margin-top:1px"></span>
-              <span style="font-size:13px;color:#c8ddf4;line-height:1.5"><strong style="color:#fff">Our tool prices each load where it lands,</strong> and it moves as oil and disposal prices move. Steady margin across the whole book.</span>
+              <span style="font-size:13px;color:#c8ddf4;line-height:1.5"><strong style="color:#fff">AlgoPricing prices each load where it lands,</strong> and it moves as oil and disposal prices move. Steady margin across the whole book.</span>
             </div>
             <div style="display:flex;gap:10px;align-items:baseline">
               <span style="flex:0 0 5px;width:5px;height:5px;border-radius:50%;background:#6080b8;margin-top:1px"></span>
-              <span style="font-family:var(--mono);font-size:11px;color:#5878a0;line-height:1.5">These numbers just show the logic. On your real loads, that's what the pilot proves.</span>
+              <span style="font-family:var(--mono);font-size:11px;color:#5878a0;line-height:1.5">These numbers show the logic. The pilot proves it on real facility loads.</span>
             </div>
           </div>
         </div>
-        <div class="honest rv"><b>Decision support, not an automatic price.</b> Inputs are the load composition and current market prices. The team sets the margin and signs off on every quote.</div></div>
+        <div class="honest rv"><b>Decision support that leaves the final price with the team.</b> Inputs are the load composition and current market prices. The team sets the margin and signs off on every quote.</div></div>
       </div>
     </div>
     <div class="foot"><div class="brand">© 2026 Algo-Rythmn Corp. All rights reserved.</div><div class="pgnum"><b>06</b> / 10</div></div>
@@ -674,9 +659,9 @@
             <div style="font-family:var(--display);font-size:18px;font-weight:600;color:#fff;letter-spacing:-.02em">AlgoCompliance</div>
           </div>
           <div style="display:flex;flex-direction:column;gap:13px">
-            <div style="display:flex;gap:11px;align-items:baseline"><span style="width:5px;height:5px;border-radius:50%;background:#2eb8ff;flex:0 0 5px;margin-top:1px"></span><div><strong style="color:#fff;font-size:14px">Misclassification caught at intake</strong><br><span style="font-size:12.5px;color:#607898">Flagged before signing the manifest, not after</span></div></div>
-            <div style="display:flex;gap:11px;align-items:baseline"><span style="width:5px;height:5px;border-radius:50%;background:#2eb8ff;flex:0 0 5px;margin-top:1px"></span><div><strong style="color:#fff;font-size:14px">Classification risk surfaced at the gate</strong><br><span style="font-size:12.5px;color:#607898">Not discovered after the load is in the ground</span></div></div>
-            <div style="display:flex;gap:11px;align-items:baseline"><span style="width:5px;height:5px;border-radius:50%;background:#2eb8ff;flex:0 0 5px;margin-top:1px"></span><div><strong style="color:#fff;font-size:14px">Compliance reports drafted, not built by hand</strong><br><span style="font-size:12.5px;color:#607898">Ready for officer review, not starting from blank</span></div></div>
+            <div style="display:flex;gap:11px;align-items:baseline"><span style="width:5px;height:5px;border-radius:50%;background:#2eb8ff;flex:0 0 5px;margin-top:1px"></span><div><strong style="color:#fff;font-size:14px">Misclassification caught at intake</strong><br><span style="font-size:12.5px;color:#607898">Flagged at the gate, before the manifest is signed</span></div></div>
+            <div style="display:flex;gap:11px;align-items:baseline"><span style="width:5px;height:5px;border-radius:50%;background:#2eb8ff;flex:0 0 5px;margin-top:1px"></span><div><strong style="color:#fff;font-size:14px">Classification risk surfaced at the gate</strong><br><span style="font-size:12.5px;color:#607898">Surfaced while the load can still be turned away</span></div></div>
+            <div style="display:flex;gap:11px;align-items:baseline"><span style="width:5px;height:5px;border-radius:50%;background:#2eb8ff;flex:0 0 5px;margin-top:1px"></span><div><strong style="color:#fff;font-size:14px">Compliance reports drafted automatically</strong><br><span style="font-size:12.5px;color:#607898">Ready for officer review from the first draft</span></div></div>
             <div style="display:flex;gap:11px;align-items:baseline"><span style="width:5px;height:5px;border-radius:50%;background:#2eb8ff;flex:0 0 5px;margin-top:1px"></span><div><strong style="color:#fff;font-size:14px">Automatically current on D058 scope changes</strong><br><span style="font-size:12.5px;color:#607898">June 2026 updates reflected in every check</span></div></div>
           </div>
         </div>
@@ -688,7 +673,7 @@
             <div style="font-family:var(--display);font-size:18px;font-weight:600;color:#fff;letter-spacing:-.02em">AlgoPricing</div>
           </div>
           <div style="display:flex;flex-direction:column;gap:13px">
-            <div style="display:flex;gap:11px;align-items:baseline"><span style="width:5px;height:5px;border-radius:50%;background:#c99b52;flex:0 0 5px;margin-top:1px"></span><div><strong style="color:#fff;font-size:14px">Route high-margin loads to the caverns</strong><br><span style="font-size:12.5px;color:#8a6830">Steer low-value dirt elsewhere, not into finite space</span></div></div>
+            <div style="display:flex;gap:11px;align-items:baseline"><span style="width:5px;height:5px;border-radius:50%;background:#c99b52;flex:0 0 5px;margin-top:1px"></span><div><strong style="color:#fff;font-size:14px">Route high-margin loads to the caverns</strong><br><span style="font-size:12.5px;color:#8a6830">Reserve finite cavern space for waste that earns it</span></div></div>
             <div style="display:flex;gap:11px;align-items:baseline"><span style="width:5px;height:5px;border-radius:50%;background:#c99b52;flex:0 0 5px;margin-top:1px"></span><div><strong style="color:#fff;font-size:14px">Win new MSAs on blended portfolio margin</strong><br><span style="font-size:12.5px;color:#8a6830">Whole rate sheet modelled before answering an RFP</span></div></div>
             <div style="display:flex;gap:11px;align-items:baseline"><span style="width:5px;height:5px;border-radius:50%;background:#c99b52;flex:0 0 5px;margin-top:1px"></span><div><strong style="color:#fff;font-size:14px">See margin bleed on contracts not yet due for renewal</strong><br><span style="font-size:12.5px;color:#8a6830">Know what to renegotiate before renewal comes up</span></div></div>
             <div style="display:flex;gap:11px;align-items:baseline"><span style="width:5px;height:5px;border-radius:50%;background:#c99b52;flex:0 0 5px;margin-top:1px"></span><div><strong style="color:#fff;font-size:14px">Price the loads MSAs do not cover</strong><br><span style="font-size:12.5px;color:#8a6830">Off-spec, emergency, and reclassified loads at real value</span></div></div>
@@ -723,7 +708,7 @@
       <h2 class="rv">The ground rules.</h2>
       <div class="nots">
         <div class="not rv"><span class="xi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L3 7v5c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-9-5z"/></svg></span><div><h3>Humans stay in control.</h3><p>Officers and estimators stay. The tool takes the reading and the math off their plate.</p></div></div>
-        <div class="not rv"><span class="xi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></span><div><h3>Traceable to the source.</h3><p>Every output cites its source document and passage. When confidence is low the tool flags it rather than guessing. It extracts and verifies, it does not invent answers.</p></div></div>
+        <div class="not rv"><span class="xi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></span><div><h3>Traceable to the source.</h3><p>Every output cites its source document and passage. When confidence is low the tool flags the item for a person. It extracts and verifies against the source.</p></div></div>
         <div class="not rv"><span class="xi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></span><div><h3>We follow your lead.</h3><p>We defer to the field team on chemistry and edge cases not yet encountered.</p></div></div>
         <div class="not rv"><span class="xi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></span><div><h3>Nothing leaves your facility.</h3><p>AlgoCompliance reads intake documents: manifests, SDS, and lab analyticals. They stay in the facility environment and are never used to train or improve any model. Nothing leaves the tenancy.</p></div></div>
       </div>
