@@ -114,7 +114,7 @@
   ul.points li .tick svg{width:14px;height:14px;color:var(--green)}
   .dark ul.points li .tick{background:rgba(120,200,248,.16)}
   .dark ul.points li .tick svg{color:var(--mint)}
-  .honest{margin-top:26px;border-left:3px solid var(--green);background:rgba(16,96,176,.08);padding:14px 18px;border-radius:0 12px 12px 0;font-size:15px;color:var(--green-d);max-width:60ch}
+  .honest{margin-top:26px;border-left:3px solid var(--green);background:rgba(16,96,176,.08);padding:14px 18px;border-radius:0 12px 12px 0;font-size:15px;color:var(--mint);max-width:60ch}
   .honest b{color:var(--green-d)}
 
   /* visual panels */
@@ -484,8 +484,8 @@
     <div class="blob" style="width:800px;height:800px;background:radial-gradient(circle,rgba(46,184,255,.07) 0%,transparent 52%);bottom:-320px;left:-240px"></div>
     <div class="wrap">
       <div class="eyebrow rv">The problem</div>
-      <h2 class="rv">The flat tipping fee<br>was built for a different era.</h2>
-      <p class="lede rv">Rig-side drying now strips drill cuttings down to roughly 3-5% oil, well below the 20-25% these facilities were built around. A flat rate priced for the old yields is now paying to take dry, heavy solids at the same rate as recoverable oil, and every cubic meter of cavern space filled with low-value waste is space that cannot be sold again.</p>
+      <h2 class="rv">The flat tipping fee<br>was priced for a different recovery rate.</h2>
+      <p class="lede rv">Rig-side drying now strips drill cuttings down to roughly 3-5% oil, well below the 20-25% that previously defined the typical inbound stream. The flat rate, priced for that higher-yield baseline, now charges the same for dry, heavy solids as for recoverable oil, and every cubic meter of cavern space filled with low-value waste is space that cannot be sold again.</p>
       <div class="tasks">
         <div class="task sw rv"><div class="tl">Software handles</div><h4>Check load compliance</h4></div>
         <div class="task sw rv"><div class="tl">Software handles</div><h4>Parse lab analyticals</h4></div>
@@ -548,7 +548,7 @@
           <h2 class="rv">Same fleet of loads.<br>Two very different rate sheets.</h2>
           <p class="lede rv" style="margin-top:14px;margin-bottom:16px">Rig-side drying now strips drill cuttings to 3-5% oil, down from around 25%. The recovery that used to subsidize disposal is gone, so each load has to price on what it truly costs to take.</p>
           <ul class="points">
-            <li class="rv"><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span>Prices each load against two limited resources: <strong>how much injection capacity it uses</strong> and how much cavern space it permanently retires</span></li>
+            <li class="rv"><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span>Prices each load against two limited resources: <strong>how much injection capacity it uses</strong> and how much cavern space it consumes</span></li>
             <li class="rv"><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span>Calculates the <strong>cost floor</strong> for each load, then sets the gate price above it, so margin is explicit on every quote</span></li>
             <li class="rv"><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span>Benchmarks against the generator's <strong>next-best option</strong>, the trucking hours the facility saves them, and prices toward that ceiling</span></li>
             <li class="rv"><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span>Load rankings <strong>shift as the facility fills</strong>, and a blended rate cannot price both regimes correctly</span></li>
@@ -570,7 +570,7 @@
             </div>
             <div style="display:flex;gap:10px;align-items:baseline">
               <span style="flex:0 0 5px;width:5px;height:5px;border-radius:50%;background:#6080b8;margin-top:1px"></span>
-              <span style="font-family:var(--mono);font-size:11px;color:#5878a0;line-height:1.5">These numbers show the logic. The pilot proves it on real facility loads.</span>
+              <span style="font-family:var(--mono);font-size:11px;color:#5878a0;line-height:1.5">These numbers show the logic. The pilot validates it on real facility loads.</span>
             </div>
           </div>
         </div>
@@ -691,7 +691,7 @@
             <div style="font-family:var(--display);font-size:18px;font-weight:600;color:#fff;letter-spacing:-.02em">AlgoCompliance</div>
           </div>
           <div style="display:flex;flex-direction:column;gap:13px">
-            <div style="display:flex;gap:11px;align-items:baseline"><span style="width:5px;height:5px;border-radius:50%;background:#2eb8ff;flex:0 0 5px;margin-top:1px"></span><div><strong style="color:#fff;font-size:14px">Misclassification caught at intake</strong><br><span style="font-size:12.5px;color:#607898">Flagged at the gate, before the manifest is signed</span></div></div>
+            <div style="display:flex;gap:11px;align-items:baseline"><span style="width:5px;height:5px;border-radius:50%;background:#2eb8ff;flex:0 0 5px;margin-top:1px"></span><div><strong style="color:#fff;font-size:14px">Misclassification flagged at intake</strong><br><span style="font-size:12.5px;color:#607898">Flagged at the gate, before the manifest is signed</span></div></div>
             <div style="display:flex;gap:11px;align-items:baseline"><span style="width:5px;height:5px;border-radius:50%;background:#2eb8ff;flex:0 0 5px;margin-top:1px"></span><div><strong style="color:#fff;font-size:14px">Classification risk surfaced at the gate</strong><br><span style="font-size:12.5px;color:#607898">Surfaced while the load can still be turned away</span></div></div>
             <div style="display:flex;gap:11px;align-items:baseline"><span style="width:5px;height:5px;border-radius:50%;background:#2eb8ff;flex:0 0 5px;margin-top:1px"></span><div><strong style="color:#fff;font-size:14px">Compliance reports drafted automatically</strong><br><span style="font-size:12.5px;color:#607898">Ready for officer review from the first draft</span></div></div>
             <div style="display:flex;gap:11px;align-items:baseline"><span style="width:5px;height:5px;border-radius:50%;background:#2eb8ff;flex:0 0 5px;margin-top:1px"></span><div><strong style="color:#fff;font-size:14px">Automatically current on D058 scope changes</strong><br><span style="font-size:12.5px;color:#607898">June 2026 updates reflected in every check</span></div></div>
