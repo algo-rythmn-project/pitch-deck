@@ -1,0 +1,1668 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cavern 3 Simulator</title>
+<style>
+/* ============================================================
+   Tokens. Light is the base. Two dark paths redefine tokens only:
+   the un-stamped system-dark case, and the explicit [data-theme].
+   ============================================================ */
+:root{
+  --font-ui:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --font-mono:ui-monospace,"SF Mono","JetBrains Mono","Cascadia Mono",Menlo,Consolas,"Liberation Mono",monospace;
+
+  --bg:#EDF0F2; --surface:#FFFFFF; --surface-2:#F5F7F9; --surface-3:#EAEEF1;
+  --line:#E0E5E9; --line-strong:#C3CCD3;
+  --ink:#101519; --ink-2:#48545C; --ink-3:#7A868E;
+
+  --sediment:#B07C22; --brine:#2C7FB8; --oil:#2E7D46;
+  --sediment-soft:#B07C221F; --brine-soft:#2C7FB81F; --oil-soft:#2E7D461F;
+  --alert:#B23A22; --alert-soft:#B23A2214;
+
+  --grid:#EBEFF2; --focus:#2C7FB8;
+  --shadow:0 1px 1px rgba(16,21,25,.04), 0 6px 18px -8px rgba(16,21,25,.14);
+  --hatch:#DDE3E8;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0D1113; --surface:#151A1D; --surface-2:#1B2125; --surface-3:#222A2F;
+    --line:#262E33; --line-strong:#37424A;
+    --ink:#E9ECEE; --ink-2:#A5AEB4; --ink-3:#76818A;
+    --sediment:#B8863A; --brine:#4B93C8; --oil:#43975C;
+    --sediment-soft:#B8863A2B; --brine-soft:#4B93C82B; --oil-soft:#43975C2B;
+    --alert:#D5654A; --alert-soft:#D5654A1F;
+    --grid:#20272B;
+    --shadow:none;
+    --hatch:#222A2F;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0D1113; --surface:#151A1D; --surface-2:#1B2125; --surface-3:#222A2F;
+  --line:#262E33; --line-strong:#37424A;
+  --ink:#E9ECEE; --ink-2:#A5AEB4; --ink-3:#76818A;
+  --sediment:#B8863A; --brine:#4B93C8; --oil:#43975C;
+  --sediment-soft:#B8863A2B; --brine-soft:#4B93C82B; --oil-soft:#43975C2B;
+  --alert:#D5654A; --alert-soft:#D5654A1F;
+  --grid:#20272B;
+  --shadow:none;
+  --hatch:#222A2F;
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--bg); color:var(--ink); font-family:var(--font-ui);
+  font-size:14px; line-height:1.5; -webkit-font-smoothing:antialiased;
+}
+.mono,.num{font-family:var(--font-mono);font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1}
+.wrap{max-width:1560px;margin:0 auto;padding:0 24px 72px}
+
+/* ---------------- masthead ---------------- */
+header.top{background:var(--surface);border-bottom:1px solid var(--line);
+  box-shadow:inset 0 3px 0 0 var(--brine)}
+.top-inner{max-width:1560px;margin:0 auto;padding:26px 24px 22px;
+  display:grid;grid-template-columns:minmax(300px,1.05fr) minmax(280px,1fr) auto;
+  gap:34px;align-items:start}
+@media(max-width:900px){.top-inner{grid-template-columns:minmax(0,1fr) auto}
+  .top-inner .provenance{grid-column:1/-1;margin-top:4px}}
+.eyebrow{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ink-3);font-weight:500}
+h1{font-size:31px;line-height:1.08;margin:9px 0 8px;letter-spacing:-.028em;font-weight:640;text-wrap:balance}
+.sub{color:var(--ink-2);max-width:66ch;margin:0;font-size:14.5px}
+.provenance{margin-top:4px;font-size:12px;color:var(--ink-3);
+  border-left:2px solid var(--line-strong);padding-left:13px;line-height:1.6}
+.provenance b{color:var(--ink-2);font-weight:620}
+.theme-btn{border:1px solid var(--line-strong);background:var(--surface-2);color:var(--ink-2);
+  border-radius:8px;padding:7px 13px;font-size:11.5px;cursor:pointer;font-family:var(--font-mono);
+  letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+.theme-btn:hover{border-color:var(--ink-3);color:var(--ink)}
+.theme-btn:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+
+/* ---------------- panels ---------------- */
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:10px;
+  box-shadow:var(--shadow);overflow:hidden}
+.panel-hd{padding:13px 17px 12px;border-bottom:1px solid var(--line);display:flex;
+  align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;background:var(--surface)}
+.panel-hd h2{font-family:var(--font-mono);font-size:11.5px;margin:0;letter-spacing:.13em;
+  text-transform:uppercase;font-weight:600;color:var(--ink)}
+.panel-hd .hint{font-size:11.5px;color:var(--ink-3)}
+.panel-bd{padding:16px 17px}
+
+.row{display:grid;gap:16px;margin-top:16px;align-items:stretch}
+.row-main{grid-template-columns:minmax(316px,1fr) minmax(340px,1.12fr) minmax(430px,1.36fr)}
+@media(max-width:1240px){.row-main{grid-template-columns:repeat(auto-fit,minmax(340px,1fr))}}
+.row > .panel,.row > .stack{display:flex;flex-direction:column;min-width:0}
+.row > .panel > .panel-bd{flex:1;min-height:0;display:flex;flex-direction:column}
+.stack{display:grid;gap:16px;align-content:start;min-width:0}
+.stack > .panel{min-width:0}
+
+/* segmented x-axis switch */
+.seg{display:inline-flex;border:1px solid var(--line-strong);border-radius:7px;overflow:hidden}
+.seg button{font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  padding:5px 9px;border:0;background:var(--surface);color:var(--ink-3);cursor:pointer;line-height:1.4}
+.seg button + button{border-left:1px solid var(--line)}
+.seg button:hover{color:var(--ink)}
+.seg button.on{background:var(--brine);color:#fff}
+.seg button:focus-visible{outline:2px solid var(--focus);outline-offset:-2px}
+.seg button:disabled{opacity:.4;cursor:not-allowed}
+
+/* state panel as a ledger statement across the page */
+.state-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.state-col{padding:16px 18px;border-right:1px solid var(--line);min-width:0}
+.state-col:last-child{border-right:none}
+.state-col h4{font-family:var(--font-mono);font-size:10px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--ink-3);font-weight:500;margin:0 0 9px;padding-bottom:7px;border-bottom:1px solid var(--line-strong)}
+.hero{display:flex;flex-direction:column;justify-content:center;background:var(--surface-2)}
+.hero .hv{font-family:var(--font-mono);font-size:33px;font-weight:640;letter-spacing:-.035em;
+  font-variant-numeric:tabular-nums;line-height:1.05}
+.hero .hu{font-size:12px;color:var(--ink-2);margin-top:7px;line-height:1.45}
+.hero .hs{font-family:var(--font-mono);font-size:11px;color:var(--ink-3);margin-top:9px;
+  padding-top:9px;border-top:1px solid var(--line)}
+
+/* ---------------- precondition ---------------- */
+.pre{margin-top:20px}
+.pre-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(198px,1fr));
+  border-top:1px solid var(--line)}
+.tile{padding:15px 17px;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.tile:last-child{border-right:none}
+.tile .k{font-family:var(--font-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink-3);font-weight:500}
+.tile .v{font-family:var(--font-mono);font-size:23px;font-weight:600;margin-top:7px;letter-spacing:-.03em;
+  font-variant-numeric:tabular-nums}
+.tile .v small{font-size:12px;font-weight:400;color:var(--ink-2);letter-spacing:0}
+.tile .s{font-size:11.5px;color:var(--ink-3);margin-top:6px;line-height:1.45}
+.ratio{padding:18px 17px}
+.rb{display:grid;grid-template-columns:200px minmax(0,1fr) 122px;gap:14px;align-items:center;margin-bottom:11px}
+.rb:last-of-type{margin-bottom:0}
+.rb-lab{font-size:12.5px;color:var(--ink-2);line-height:1.35}
+.rb-lab b{color:var(--ink);font-weight:620;display:block}
+.rb-track{height:20px;background:var(--surface-3);border-radius:4px;position:relative;overflow:hidden}
+.rb-fill{height:100%;border-radius:4px 0 0 4px}
+.rb-floor{position:absolute;top:-4px;bottom:-4px;width:1.5px;background:var(--ink);opacity:.65}
+.rb-val{font-family:var(--font-mono);font-size:12px;text-align:right;color:var(--ink-3);
+  font-variant-numeric:tabular-nums;line-height:1.4}
+.rb-val b{color:var(--ink);font-weight:620;font-size:13.5px;display:block}
+.rb-axis{display:grid;grid-template-columns:200px minmax(0,1fr) 122px;gap:14px;margin-top:7px}
+.rb-axis > span:nth-child(2){position:relative;height:14px}
+.rb-axis em{position:absolute;font-family:var(--font-mono);font-size:10px;color:var(--ink-3);
+  font-style:normal;letter-spacing:.04em;transform:translateX(-50%);white-space:nowrap}
+.pre-note{margin:16px 0 0;font-size:13px;color:var(--ink-2);max-width:104ch;line-height:1.6}
+.pre-note b{color:var(--ink);font-weight:620}
+
+/* ---------------- controls ---------------- */
+.btnrow{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:12px}
+.btnrow.tight{margin-top:-5px}
+button.ctl.sm{font-size:12px;padding:6px 11px;color:var(--ink-2)}
+button.ctl.sm:hover{color:var(--ink)}
+button.ctl{font-family:var(--font-ui);font-size:12.5px;padding:7px 13px;border-radius:7px;cursor:pointer;
+  border:1px solid var(--line-strong);background:var(--surface-2);color:var(--ink);
+  transition:border-color .12s,background .12s}
+button.ctl:hover{border-color:var(--ink-3);background:var(--surface-3)}
+button.ctl:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+button.ctl.primary{background:var(--brine);border-color:var(--brine);color:#fff;font-weight:600}
+button.ctl.primary:hover{filter:brightness(1.07)}
+.sliders{display:grid;gap:13px}
+.sl{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:3px 12px;align-items:baseline}
+.sl label{font-size:12.5px;color:var(--ink-2)}
+.sl .out{font-family:var(--font-mono);font-size:13px;font-weight:600;text-align:right;white-space:nowrap;
+  font-variant-numeric:tabular-nums}
+.sl .out .aux{color:var(--ink-3);font-weight:400;font-size:11.5px}
+.sl input[type=range]{grid-column:1/-1;width:100%;accent-color:var(--brine);height:18px;margin:1px 0 0}
+.sl .note{grid-column:1/-1;font-size:11px;color:var(--ink-3);margin-top:-2px;line-height:1.42}
+.sl .note .mono{font-size:10.5px}
+
+/* ---------------- state table ---------------- */
+table.ro{width:100%;border-collapse:collapse;font-size:12.5px}
+table.ro td{padding:6px 0;border-bottom:1px solid var(--line)}
+table.ro tr:last-child td{border-bottom:none}
+table.ro td.k{color:var(--ink-2)}
+table.ro td.v{text-align:right;font-family:var(--font-mono);font-weight:600;white-space:nowrap;
+  font-variant-numeric:tabular-nums}
+table.ro td.u{text-align:right;color:var(--ink-3);width:46px;padding-left:9px;font-weight:400;font-size:11px}
+@media (prefers-reduced-motion: reduce){
+  .fate div{transition:none}
+  *{scroll-behavior:auto}
+}
+tr.sec td{padding:15px 0 5px;font-family:var(--font-mono);font-size:10px;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--ink-3);font-weight:500;border-bottom:1px solid var(--line-strong)}
+tr.sec:first-child td{padding-top:0}
+tr.tot td{border-bottom:none;border-top:1px solid var(--line-strong);padding-top:8px}
+.swatch{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:8px}
+
+/* ---------------- charts ---------------- */
+.plot{position:relative}
+svg.chart{display:block;width:100%;height:auto;overflow:visible}
+svg.fill{height:100%;width:100%;flex:1;min-height:220px}
+.legend{display:flex;flex-wrap:wrap;gap:15px;font-size:11.5px;color:var(--ink-2);margin-top:9px}
+.legend span.i{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:10px;height:10px;border-radius:2px;display:inline-block;flex:none}
+.legend i.line{height:2px;width:15px;border-radius:1px}
+.tip{position:absolute;top:6px;pointer-events:none;display:none;z-index:3;max-width:min(255px,92%);
+  background:var(--surface);border:1px solid var(--line-strong);border-radius:7px;padding:9px 11px;
+  box-shadow:0 4px 16px -6px rgba(0,0,0,.28);font-size:11.5px;white-space:nowrap}
+.tip .th{font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink-3);margin-bottom:6px}
+.tip table{border-collapse:collapse}
+.tip td{padding:2px 0}
+.tip td.n{font-family:var(--font-mono);text-align:right;padding-left:14px;font-weight:600;
+  font-variant-numeric:tabular-nums}
+.chart-note{margin:9px 0 0;font-size:11.5px;color:var(--ink-3);line-height:1.5}
+
+/* ---------------- fate ---------------- */
+.fate{display:flex;height:38px;border-radius:7px;overflow:hidden;gap:2px;background:var(--line)}
+.fate div{display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);
+  font-size:12px;font-weight:600;color:#fff;min-width:0;overflow:hidden;white-space:nowrap;
+  transition:width .28s cubic-bezier(.4,0,.2,1)}
+.fate-key{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0;margin-top:14px;
+  border-top:1px solid var(--line)}
+.fate-key div{font-size:11.5px;color:var(--ink-2);padding:12px 16px 2px 0;line-height:1.45}
+.fate-key div + div{border-left:1px solid var(--line);padding-left:16px}
+.fate-key b{display:block;color:var(--ink);font-size:13.5px;font-weight:640;margin-bottom:3px;
+  font-family:var(--font-mono);letter-spacing:-.01em}
+.closure{display:flex;align-items:flex-start;gap:10px;font-size:11.5px;color:var(--ink-2);
+  border-top:1px solid var(--line);padding-top:12px;margin-top:14px;flex-wrap:wrap;line-height:1.5}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--oil);flex:none;margin-top:4px}
+.dot.bad{background:var(--alert)}
+
+/* ---------------- model ---------------- */
+.model{margin-top:24px}
+.model-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(430px,1fr))}
+.mcell{padding:18px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);min-width:0}
+.mcell h3{font-family:var(--font-mono);font-size:11px;margin:0 0 11px;letter-spacing:.11em;
+  text-transform:uppercase;color:var(--ink);font-weight:600}
+.mcell h3 span{color:var(--brine)}
+.eq{background:var(--surface-2);border:1px solid var(--line);border-radius:7px;padding:12px 13px;
+  font-family:var(--font-mono);font-size:12px;line-height:1.9;overflow-x:auto;color:var(--ink);
+  white-space:nowrap;font-variant-numeric:tabular-nums}
+.mcell p{margin:11px 0 0;font-size:12.5px;color:var(--ink-2);line-height:1.6}
+.mcell p b{color:var(--ink);font-weight:620}
+.srctab{width:100%;border-collapse:collapse;font-size:12px}
+.srctab th{text-align:left;font-family:var(--font-mono);font-size:10px;letter-spacing:.11em;
+  text-transform:uppercase;color:var(--ink-3);font-weight:500;padding:0 12px 8px 0;
+  border-bottom:1px solid var(--line-strong)}
+.srctab td{padding:7px 12px 7px 0;border-bottom:1px solid var(--line);vertical-align:top}
+.srctab td.n{text-align:right;font-family:var(--font-mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+.srctab td.s{color:var(--ink-3);font-size:11.5px}
+.srctab tr.ours td{background:var(--brine-soft)}
+ol.lim{margin:0;padding-left:20px;font-size:12.5px;color:var(--ink-2);line-height:1.6}
+ol.lim li{margin-bottom:10px;padding-left:3px}
+ol.lim li::marker{font-family:var(--font-mono);color:var(--ink-3);font-size:11px}
+ol.lim b{color:var(--ink);font-weight:620}
+.scroller{overflow-x:auto}
+footer.foot{margin-top:24px;padding-top:18px;border-top:1px solid var(--line);font-size:11.5px;
+  color:var(--ink-3);max-width:92ch;line-height:1.6}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-inner">
+    <div>
+      <div class="eyebrow">Algo-Rythmn &middot; Pure Environmental &middot; internal working tool</div>
+      <h1>Cavern 3 Simulator</h1>
+      <p class="sub">One waste-disposal cavern, run forward day by day. Every cubic metre received is
+      tracked into the phase it ends up in, and the capacity ledger is a consequence of the physics
+      rather than an assumption laid on top of it.</p>
+    </div>
+    <div>
+      <div class="provenance">
+        <b>Physics mirrors the reconciliation engine</b> &mdash;
+        <span class="mono">physics.py</span>, <span class="mono">density.py</span> and
+        <span class="mono">models.py</span> in the cavern codebase. Every constant is that codebase's
+        own default, listed with its line number in <i>The model</i> below, and the port is checked
+        against it day by day by <span class="mono">sim/verify_against_reference_engine.py</span>.
+        <b>The settling layer is ours</b> &mdash; the codebase has no settling model, so the
+        settled / pending split the Capacity Ledger sells is derived here from Stokes' law and marked
+        as such wherever it appears.
+        <b>Loads are simulated</b> on a fixed seed. No Pure operating data is used anywhere on this page.
+      </div>
+    </div>
+    <button class="theme-btn" id="themeBtn" type="button">Theme: system</button>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- ============ PRECONDITION ============ -->
+  <section class="panel pre">
+    <div class="panel-hd">
+      <h2>Before day one &mdash; what the void cost to make</h2>
+      <span class="hint">Fixed precondition, not simulated. Figures from the regulatory record.</span>
+    </div>
+    <div class="pre-grid">
+      <div class="tile">
+        <div class="k">Cavern 3 void</div>
+        <div class="v"><span id="pv-void">337,590</span> <small>m&sup3;</small></div>
+        <div class="s">675,180 m&sup3; filed for the two Hangingstone caverns, halved. 2020 ABAER 004 &para;119.</div>
+      </div>
+      <div class="tile">
+        <div class="k">Washwater, as filed</div>
+        <div class="v"><span id="pv-wash">3,500,000</span> <small>m&sup3;</small></div>
+        <div class="s">7,000,000 m&sup3; filed for the two caverns, halved. Same paragraph.</div>
+      </div>
+      <div class="tile">
+        <div class="k">Filed wash ratio</div>
+        <div class="v">10.37 <small>: 1</small></div>
+        <div class="s">The AER did this division itself: &ldquo;over 10 m&sup3; of washwater for every 1 m&sup3; of cavern space created.&rdquo;</div>
+      </div>
+      <div class="tile">
+        <div class="k">Thermodynamic floor</div>
+        <div class="v">5.93 <small>: 1</small></div>
+        <div class="s">Freshwater needed to reach saturation. Derived below from the codebase's own constants.</div>
+      </div>
+      <div class="tile">
+        <div class="k">At the 09-19 well's rate condition</div>
+        <div class="v">1,167 <small>days</small></div>
+        <div class="s">3,500,000 m&sup3; at 3,000 m&sup3;/day. That is one well's condition, not a facility ceiling &mdash; but on that well alone it is 3.2 years of flat-out injection to make one hole.</div>
+      </div>
+    </div>
+    <div class="ratio">
+      <div class="rb">
+        <div class="rb-lab"><b>Thermodynamic floor</b>saturate, nothing wasted</div>
+        <div class="rb-track"><div class="rb-fill" style="width:57.2%;background:var(--oil)"></div><div class="rb-floor" style="left:57.2%"></div></div>
+        <div class="rb-val"><b>5.93 : 1</b>the ideal</div>
+      </div>
+      <div class="rb">
+        <div class="rb-lab"><b>Pure's rebuttal, &para;122</b>&ldquo;the ratio&hellip;would be 6 to 1&rdquo;</div>
+        <div class="rb-track"><div class="rb-fill" style="width:57.9%;background:var(--brine)"></div><div class="rb-floor" style="left:57.2%"></div></div>
+        <div class="rb-val"><b>6.00 : 1</b>98.8% of ideal</div>
+      </div>
+      <div class="rb">
+        <div class="rb-lab"><b>Pure's own application, &para;119</b>7,000,000 / 675,180</div>
+        <div class="rb-track"><div class="rb-fill" style="width:100%;background:var(--sediment)"></div><div class="rb-floor" style="left:57.2%"></div></div>
+        <div class="rb-val"><b>10.37 : 1</b>57.2% of ideal</div>
+      </div>
+      <div class="rb-axis">
+        <span></span>
+        <span>
+          <em style="left:0%;transform:none">0</em>
+          <em style="left:57.2%">5.93 &mdash; the floor</em>
+          <em style="left:100%;transform:translateX(-100%)">10.37</em>
+        </span>
+        <span></span>
+      </div>
+      <p class="pre-note">
+        Two numbers from the same hearing, four paragraphs apart, differ by a factor of 1.7. The filed
+        ratio means <b>42.8 per cent of the washwater does no dissolving work</b>. The rebuttal ratio
+        means the cavern is washed to within 1.2 per cent of the thermodynamic maximum, which no field
+        operation achieves. Both cannot be right, and the gap between them is roughly
+        <b>1,475,000 m&sup3; of disposal capacity per cavern</b>.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ INSTRUMENT ROW ============ -->
+  <div class="row row-main">
+
+    <section class="panel">
+      <div class="panel-hd"><h2>Controls</h2><span class="hint">seed 42, reproducible</span></div>
+      <div class="panel-bd">
+        <div class="btnrow">
+          <button class="ctl primary" id="bLoad" type="button">Receive one load</button>
+          <button class="ctl" id="bPlay" type="button">&#9654;&nbsp; Play</button>
+        </div>
+        <div class="btnrow tight">
+          <button class="ctl sm" id="bDay" type="button">+1 day</button>
+          <button class="ctl sm" id="bMonth" type="button">+30 days</button>
+          <button class="ctl sm" id="bRun" type="button">Run to floor</button>
+          <button class="ctl sm" id="bReset" type="button">Reset</button>
+        </div>
+        <p id="runNote" style="display:none;margin:-4px 0 12px;font-size:12px;color:var(--alert);line-height:1.45"></p>
+        <div class="sliders">
+          <div class="sl">
+            <label for="sRate">Loads received per day</label>
+            <span class="out"><span id="oRate">8</span> <span class="aux">= <span id="oRateV">320</span> m&sup3;/d</span></span>
+            <input type="range" id="sRate" min="0" max="60" step="1" value="8">
+            <div class="note">One load is 40 m&sup3;, the truck capacity used at the 2020 hearing (&para;24). Facility-level estimates there were 27 trucks/day (Suncor) and 60 (Pure); only the solids-bearing share reaches a cavern.</div>
+          </div>
+          <div class="sl">
+            <label for="sSolids">Solids cut, by volume of load</label>
+            <span class="out"><span id="oSolids">25.0</span> %</span>
+            <input type="range" id="sSolids" min="14" max="38" step="0.5" value="25">
+            <div class="note">Codebase draws N(0.25, 0.035) clipped to [0.14, 0.38]. <span class="mono">synthetic.py:121</span></div>
+          </div>
+          <div class="sl">
+            <label for="sOil">Oil cut, by volume of load</label>
+            <span class="out"><span id="oOil">5.5</span> %</span>
+            <input type="range" id="sOil" min="2" max="10" step="0.1" value="5.5">
+            <div class="note">Codebase draws N(0.055, 0.012) clipped to [0.02, 0.10]. <span class="mono">synthetic.py:122</span></div>
+          </div>
+          <div class="sl">
+            <label for="sD50">Particle d&#8325;&#8320;</label>
+            <span class="out"><span id="oD50">20</span> &micro;m <span class="aux">&rarr; <span id="oSettle">8.7</span> d to clear</span></span>
+            <input type="range" id="sD50" min="5" max="60" step="1" value="20">
+            <div class="note">Ours. At 20 &micro;m the clearing time reproduces the &ldquo;clearing over the next 9 days&rdquo; in the Capacity Ledger.</div>
+          </div>
+          <div class="sl">
+            <label for="sFloor">Clean-brine standoff, the operating floor</label>
+            <span class="out"><span id="oFloor">30</span> m</span>
+            <input type="range" id="sFloor" min="0" max="80" step="1" value="30">
+            <div class="note">Brine column that must remain above the pile. A policy, not a constant. Argonne: a cavern is full &ldquo;when return of disposed material with the displaced fluid becomes a problem.&rdquo;</div>
+          </div>
+          <div class="sl">
+            <label for="sOilKeep">Oil blanket maintained</label>
+            <span class="out"><span id="oOilKeep">2.0</span> m <span class="aux">= <span id="oOilKeepV">5,655</span> m&sup3;</span></span>
+            <input type="range" id="sOilKeep" min="0" max="20" step="0.5" value="2">
+            <div class="note">Oil above this is bailed to surface; the void refills with returning brine, the movement D047 &para;41 describes. Push it to 20 m to see a cavern that never recovers oil.</div>
+          </div>
+          <div class="sl">
+            <label for="sSpeed">Playback</label>
+            <span class="out"><span id="oSpeed">4</span> <span class="aux">days/second</span></span>
+            <input type="range" id="sSpeed" min="1" max="60" step="1" value="4">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-hd">
+        <h2>Cavern 3</h2>
+        <span class="hint mono" id="clock">day 0</span>
+      </div>
+      <div class="panel-bd" style="padding-top:10px">
+        <svg class="chart fill" id="cavern" viewBox="0 0 400 624" role="img" aria-label="Cavern cross-section"></svg>
+      </div>
+    </section>
+
+    <div class="stack">
+      <section class="panel">
+        <div class="panel-hd">
+          <h2>A &nbsp;&middot;&nbsp; Capacity ledger</h2>
+          <span class="seg" id="segA">
+            <button type="button" data-x="d" class="on">Time</button><button type="button" data-x="recv">Waste received</button>
+          </span>
+        </div>
+        <div class="panel-bd">
+          <div class="plot">
+            <svg class="chart" id="chartA" viewBox="0 0 760 262" role="img" aria-label="Capacity ledger over time"></svg>
+            <div class="tip" id="tipA"></div>
+          </div>
+          <div class="legend">
+            <span class="i"><i class="line" style="background:var(--brine)"></i>Settled capacity</span>
+            <span class="i"><i class="line" style="background:var(--oil)"></i>Available to promise</span>
+            <span class="i"><i style="background:var(--oil-soft);border:1px solid var(--oil)"></i>Pending settlement</span>
+            <span class="i"><i style="background:var(--alert-soft);border:1px solid var(--alert)"></i>Below the floor</span>
+          </div>
+          <p class="chart-note" id="noteA"></p>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-hd">
+          <h2>B &nbsp;&middot;&nbsp; Phase volumes</h2>
+          <span class="seg" id="segB">
+            <button type="button" data-x="d" class="on">Time</button><button type="button" data-x="recv">Waste received</button>
+          </span>
+        </div>
+        <div class="panel-bd">
+          <div class="plot">
+            <svg class="chart" id="chartB" viewBox="0 0 760 262" role="img" aria-label="Phase volumes over time"></svg>
+            <div class="tip" id="tipB"></div>
+          </div>
+          <div class="legend">
+            <span class="i"><i style="background:var(--sediment)"></i>Settled bed</span>
+            <span class="i"><i style="background:var(--brine);opacity:.45"></i>Suspended grains</span>
+            <span class="i"><i style="background:var(--brine)"></i>Free brine</span>
+            <span class="i"><i style="background:var(--oil)"></i>Oil blanket</span>
+            <span class="i"><i class="line" style="background:var(--ink-3)"></i>Mined void</span>
+          </div>
+          <p class="chart-note">All four bands sum to the mined void, which is the closure identity drawn. The void itself is flat because disposal runs on saturated carrier fluid and dissolves nothing: everything that moves is the waste rearranging itself inside a fixed hole.</p>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- ============ STATE ============ -->
+  <section class="panel" style="margin-top:16px">
+    <div class="panel-hd">
+      <h2>State, right now</h2>
+      <span class="hint">the four phase volumes must sum to the mined void</span>
+    </div>
+    <div class="state-grid">
+      <div class="state-col">
+        <h4>Phase volumes</h4>
+        <table class="ro">
+          <tr><td class="k"><span class="swatch" style="background:var(--oil)"></span>Oil blanket</td><td class="v" id="r-oil">0</td><td class="u">m&sup3;</td></tr>
+          <tr><td class="k"><span class="swatch" style="background:var(--brine)"></span>Free brine</td><td class="v" id="r-brine">0</td><td class="u">m&sup3;</td></tr>
+          <tr><td class="k"><span class="swatch" style="background:var(--brine);opacity:.45"></span>Suspended grains</td><td class="v" id="r-susp">0</td><td class="u">m&sup3;</td></tr>
+          <tr><td class="k"><span class="swatch" style="background:var(--sediment)"></span>Settled bed, bulk</td><td class="v" id="r-bed">0</td><td class="u">m&sup3;</td></tr>
+          <tr class="tot"><td class="k">Mined void</td><td class="v" id="r-void">0</td><td class="u">m&sup3;</td></tr>
+        </table>
+      </div>
+      <div class="state-col">
+        <h4>Capacity ledger</h4>
+        <table class="ro">
+          <tr><td class="k">Settled capacity</td><td class="v" id="r-settled">0</td><td class="u">m&sup3;</td></tr>
+          <tr><td class="k">Pending settlement</td><td class="v" id="r-pending">0</td><td class="u">m&sup3;</td></tr>
+          <tr class="tot"><td class="k">Available to promise</td><td class="v" id="r-atp">0</td><td class="u">m&sup3;</td></tr>
+          <tr><td class="k">Standoff above the pile</td><td class="v" id="r-standoff">0</td><td class="u">m</td></tr>
+          <tr><td class="k">Bed porosity &phi;<sub>s</sub></td><td class="v" id="r-phi">0.400</td><td class="u"></td></tr>
+        </table>
+      </div>
+      <div class="state-col">
+        <h4>Cumulative</h4>
+        <table class="ro">
+          <tr><td class="k">Waste received</td><td class="v" id="r-recv">0</td><td class="u">m&sup3;</td></tr>
+          <tr><td class="k">Loads received</td><td class="v" id="r-loads">0</td><td class="u"></td></tr>
+          <tr><td class="k">Brine displaced out</td><td class="v" id="r-out">0</td><td class="u">m&sup3;</td></tr>
+          <tr><td class="k">Brine returned in</td><td class="v" id="r-ret">0</td><td class="u">m&sup3;</td></tr>
+          <tr><td class="k">Oil recovered to surface</td><td class="v" id="r-oilrec">0</td><td class="u">m&sup3;</td></tr>
+        </table>
+      </div>
+      <div class="state-col hero">
+        <h4>Available to promise</h4>
+        <div class="hv" id="h-atp">0</div>
+        <div class="hu" id="h-sub">cubic metres the intake desk could sell today</div>
+        <div class="hs" id="h-life"></div>
+      </div>
+    </div>
+    <div class="panel-bd" style="padding-top:0">
+      <div class="closure" id="closure">
+        <span class="dot" id="closureDot"></span>
+        <span>Largest closure residual of
+          <span class="mono" style="color:var(--ink)">void &minus; brine &minus; grains &minus; bed &minus; oil</span>
+          seen so far: <b class="mono" id="closureVal">0.0e+0</b> m&sup3;, against the codebase's
+          <span class="mono">1e-5</span> tolerance (<span class="mono">models.py:227</span>).
+          <span id="poreNote" style="color:var(--ink-3)"></span></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FATE ============ -->
+  <section class="panel" style="margin-top:16px">
+    <div class="panel-hd">
+      <h2>C &nbsp;&middot;&nbsp; Where each cubic metre received ends up</h2>
+      <span class="hint">at the cuts set in Controls</span>
+    </div>
+    <div class="panel-bd">
+      <div class="fate" id="fate"></div>
+      <div class="fate-key" id="fateKey"></div>
+    </div>
+  </section>
+
+  <!-- ============ MODEL ============ -->
+  <section class="panel model">
+    <div class="panel-hd">
+      <h2>The model, in full</h2>
+      <span class="hint">nothing here is hidden and nothing here is fitted</span>
+    </div>
+    <div class="model-grid">
+
+      <div class="mcell">
+        <h3><span>01</span> &nbsp;The closure identity</h3>
+        <div class="eq">V<sub>void</sub> &minus; V<sub>brine</sub> &minus; V<sub>grains</sub> &minus; V<sub>bed</sub> &minus; V<sub>oil</sub> = 0</div>
+        <p>This is the whole engine. Every step ends by driving this residual to zero, and the only free
+        variable left to do it with is the volume of brine displaced out of the annulus. Nothing is
+        solved by adjusting a phase to make the books balance.</p>
+        <p>The codebase writes it without the suspended-grain term, because it has no suspension:
+        <span class="mono">physics.py</span> <b>phase_volumes()</b>. Switch settling off here and the two
+        are identical, which is what the verification script checks.</p>
+      </div>
+
+      <div class="mcell">
+        <h3><span>02</span> &nbsp;Brine density</h3>
+        <div class="eq">&rho;<sub>L</sub> = 998.2 + 764.4&middot;w<sub>NaCl</sub> + 350&middot;w<sub>other</sub> &minus; 0.3&middot;(T &minus; 20)</div>
+        <p>Straight from <span class="mono">density.py</span>, coefficients unchanged. At saturation
+        w<sub>NaCl</sub> = 0.264 it returns <b>1,200.0 kg/m&sup3;</b> carrying <b>316.8 kg</b> of NaCl per
+        cubic metre. The model's own docstring calls it an engineering placeholder, not a site-calibrated
+        equation of state, and it refuses any w<sub>NaCl</sub> above 0.28.</p>
+      </div>
+
+      <div class="mcell">
+        <h3><span>03</span> &nbsp;Where the wash ratio comes from</h3>
+        <div class="eq">1 m&sup3; halite &rarr; 2165 &times; 0.98 = 2,121.7 kg NaCl
+<br>brine = 2121.7 / 316.8   = 6.697 m&sup3;
+<br>fresh = 6.697 &times; 0.8848 = 5.926 m&sup3;</div>
+        <p>So <b>5.93 m&sup3; of freshwater per m&sup3; of void is the floor</b>, and it is a floor because
+        it assumes every litre leaves fully saturated. At 100 per cent pure halite it is 6.05. Any figure
+        below that is not a tight operation, it is an arithmetic error.</p>
+      </div>
+
+      <div class="mcell">
+        <h3><span>04</span> &nbsp;Insolubles refill the void as it is cut</h3>
+        <div class="eq">m<sub>ins</sub> = 2165 &times; (1 &minus; 0.98) = 43.3 kg / m&sup3; rock
+<br>V<sub>bulk</sub> = 43.3 / (2650 &times; (1 &minus; &phi;<sub>s</sub>))</div>
+        <p>At the fresh porosity used here, &phi;<sub>s</sub> = 0.40, that is <b>0.0272 m&sup3;</b>, so
+        <b>2.72 per cent of every cubic metre mined refills itself immediately</b>. Compacted to the
+        codebase's asymptote of 0.25 it settles back to 2.18 per cent. This is one of the two sinks in
+        the Phase 00 material, and the codebase's own salt-purity default is what sets its size.</p>
+      </div>
+
+      <div class="mcell">
+        <h3><span>05</span> &nbsp;Sediment volume and compaction</h3>
+        <div class="eq">V<sub>bed</sub> = M<sub>s</sub> / (&rho;<sub>grain</sub>(1 &minus; &phi;<sub>s</sub>))
+<br>d&phi;<sub>s</sub>/dt = &minus;k<sub>c</sub>(&phi;<sub>s</sub> &minus; &phi;<sub>s,&infin;</sub>)
+<br>&phi;<sub>s</sub>(t) = &phi;<sub>s,&infin;</sub> + (&phi;<sub>s,0</sub> &minus; &phi;<sub>s,&infin;</sub>)e<sup>&minus;k<sub>c</sub>t</sup></div>
+        <p>Both from <span class="mono">physics.py</span> <b>sediment_volume_m3()</b> and
+        <b>compacted_porosity()</b>. With k<sub>c</sub> = 0.001/day the bed has a <b>693-day half-life</b>
+        toward its asymptote, so a cavern recovers a few per cent of its bed volume over the first few
+        years without anything being removed.</p>
+      </div>
+
+      <div class="mcell">
+        <h3><span>06</span> &nbsp;Settling &mdash; the part the codebase does not have</h3>
+        <div class="eq">v = (&rho;<sub>p</sub> &minus; &rho;<sub>f</sub>) &middot; g &middot; d&sup2; / (18 &micro;)</div>
+        <p>Stokes, with &rho;<sub>p</sub> = 2650 kg/m&sup3; from the codebase and &micro; interpolated
+        linearly from 1.002 mPa&middot;s at fresh water to 1.99 mPa&middot;s at saturation. That
+        interpolation is <b>ours</b> and is the one piece of physics on this page with no counterpart in
+        either artifact.</p>
+        <p>It reproduces both claims the proposal makes without showing the arithmetic: solids fall
+        <b>2.26&times; slower</b> in saturated brine than in water (the deck says &ldquo;two to three
+        times&rdquo;), and at d&#8325;&#8320; = 20 &micro;m a load clears a 119 m column in
+        <b>8.7 days</b> (the deck says &ldquo;clearing over the next 9 days&rdquo;).</p>
+      </div>
+
+      <div class="mcell">
+        <h3><span>07</span> &nbsp;Why settling costs capacity twice</h3>
+        <div class="eq">suspended  V = M<sub>s</sub> / &rho;<sub>grain</sub>
+<br>settled    V = M<sub>s</sub> / (&rho;<sub>grain</sub>(1 &minus; &phi;<sub>s</sub>))
+<br>gain = &phi;<sub>s</sub> / (1 &minus; &phi;<sub>s</sub>) = 33.3% at &phi;<sub>s</sub> = 0.25</div>
+        <p>A grain in suspension displaces its own volume. The same grain in the bed drags pore space
+        with it. <b>Landing costs a third more space than floating did</b>, and that is the whole content
+        of the settled-versus-pending distinction, in one line, derived rather than asserted.</p>
+      </div>
+
+      <div class="mcell">
+        <h3><span>08</span> &nbsp;Capacity consumed per m&sup3; received</h3>
+        <div class="eq">c = f<sub>solids</sub> &middot; (1650 / 2650) / (1 &minus; &phi;<sub>s</sub>) + f<sub>oil</sub></div>
+        <p>At the codebase's central cuts &mdash; 25 per cent solids, 5.5 per cent oil &mdash; and a
+        compacted bed, <b>c = 0.263</b>, falling to about 0.21 once the oil blanket is at target and oil
+        leaves as product. Roughly <b>one cubic metre in four or five of what arrives stays</b>; the rest
+        leaves as displaced brine and needs a home of its own. Every headline number on this page is this
+        one line integrated forward.</p>
+      </div>
+
+      <div class="mcell" style="grid-column:1/-1">
+        <h3><span>09</span> &nbsp;Every constant, and where it comes from</h3>
+        <div class="scroller">
+        <table class="srctab">
+          <thead><tr><th>Quantity</th><th style="text-align:right">Value</th><th>Unit</th><th>Source</th></tr></thead>
+          <tbody>
+            <tr><td>Halite density &rho;<sub>rock</sub></td><td class="n">2165</td><td>kg/m&sup3;</td><td class="s"><span class="mono">models.py:222</span></td></tr>
+            <tr><td>Salt purity, mass fraction</td><td class="n">0.98</td><td></td><td class="s"><span class="mono">models.py:223</span></td></tr>
+            <tr><td>Solids grain density &rho;<sub>grain</sub></td><td class="n">2650</td><td>kg/m&sup3;</td><td class="s"><span class="mono">models.py:224</span></td></tr>
+            <tr><td>Asymptotic bed porosity &phi;<sub>s,&infin;</sub></td><td class="n">0.25</td><td></td><td class="s"><span class="mono">models.py:225</span></td></tr>
+            <tr><td>Compaction rate k<sub>c</sub></td><td class="n">0.001</td><td>/day</td><td class="s"><span class="mono">models.py:226</span></td></tr>
+            <tr><td>Closure tolerance</td><td class="n">1e-5</td><td>m&sup3;</td><td class="s"><span class="mono">models.py:227</span></td></tr>
+            <tr><td>Reference water density</td><td class="n">998.2</td><td>kg/m&sup3;</td><td class="s"><span class="mono">density.py</span></td></tr>
+            <tr><td>NaCl density coefficient</td><td class="n">764.4</td><td>kg/m&sup3;</td><td class="s"><span class="mono">density.py</span></td></tr>
+            <tr><td>Other-dissolved coefficient</td><td class="n">350.0</td><td>kg/m&sup3;</td><td class="s"><span class="mono">density.py</span></td></tr>
+            <tr><td>Temperature coefficient</td><td class="n">0.3</td><td>kg/m&sup3;&middot;&deg;C</td><td class="s"><span class="mono">density.py</span></td></tr>
+            <tr><td>Saturation w<sub>NaCl</sub></td><td class="n">0.264</td><td></td><td class="s"><span class="mono">density.py</span> docstring</td></tr>
+            <tr><td>Solids density within a load</td><td class="n">1650</td><td>kg/m&sup3;</td><td class="s"><span class="mono">synthetic.py:126</span></td></tr>
+            <tr><td>Solids cut, mean and sd</td><td class="n">0.25 &plusmn; 0.035</td><td></td><td class="s"><span class="mono">synthetic.py:121</span>, clipped to [0.14, 0.38]</td></tr>
+            <tr><td>Oil cut, mean and sd</td><td class="n">0.055 &plusmn; 0.012</td><td></td><td class="s"><span class="mono">synthetic.py:122</span>, clipped to [0.02, 0.10]</td></tr>
+            <tr><td>Two-cavern capacity, as filed</td><td class="n">675,180</td><td>m&sup3;</td><td class="s">2020 ABAER 004 &para;119 &mdash; Hangingstone, planned</td></tr>
+            <tr><td>Two-cavern washwater, as filed</td><td class="n">7,000,000</td><td>m&sup3;</td><td class="s">2020 ABAER 004 &para;119</td></tr>
+            <tr><td>Wash ratio claimed in rebuttal</td><td class="n">6 : 1</td><td></td><td class="s">2020 ABAER 004 &para;122</td></tr>
+            <tr><td>Truck capacity</td><td class="n">40</td><td>m&sup3;</td><td class="s">2020 ABAER 004 &para;24</td></tr>
+            <tr><td>09-19 well injection rate condition</td><td class="n">3,000</td><td>m&sup3;/day</td><td class="s">2022 ABAER 004 &para;84(b), 12-month daily average. <b>One well, not a facility ceiling.</b></td></tr>
+            <tr class="ours"><td>Brine viscosity, fresh to saturated</td><td class="n">1.002 &rarr; 1.99</td><td>mPa&middot;s</td><td class="s"><b>ours</b> &mdash; standard values, linearly interpolated</td></tr>
+            <tr class="ours"><td>Cavern diameter</td><td class="n">60</td><td>m</td><td class="s"><b>ours</b> &mdash; stated geometry assumption, gives a 119.4 m column</td></tr>
+            <tr class="ours"><td>Fresh bed porosity &phi;<sub>s,0</sub></td><td class="n">0.40</td><td></td><td class="s"><b>ours</b> &mdash; the codebase supplies only the asymptote</td></tr>
+          </tbody>
+        </table>
+        </div>
+      </div>
+
+      <div class="mcell" style="grid-column:1/-1;border-bottom:none">
+        <h3><span>10</span> &nbsp;What this model does not do</h3>
+        <ol class="lim">
+          <li><b>Pore brine is not inventoried.</b> The codebase's liquid mass corresponds to free brine
+          only, while the bed's bulk volume already contains its pore space. Mirroring that here means
+          every settling event books a small displaced-brine volume that in a real cavern would simply
+          stay in the pores. The running total of that artefact is shown live beside the closure check.
+          It is a seam in the model being bought, not a rounding error, and it is worth naming before a
+          client finds it.</li>
+          <li><b>The time step is one day.</b> Pending settlement therefore cannot resolve a clearing
+          time shorter than that, and its floor is whatever one day of intake brings. The number is
+          meaningful below roughly 20 &micro;m and pinned above it. That matters, because the sensitivity
+          runs out at the same place: at 40 loads a day the pending band is 2.5 per cent of settled
+          capacity at d&#8325;&#8320; = 5 &micro;m, 0.6 per cent at 10 &micro;m, and 0.16 per cent at
+          20 &micro;m. The settled-versus-pending distinction is real, but on this geometry it is a
+          sub-one-per-cent correction unless the fines are much finer than assumed, and the number that
+          actually decides the cavern's life is the settled bed.</li>
+          <li><b>Oil recovery is instantaneous.</b> The blanket is bailed back to its target within the
+          same step it exceeds it, and the void that frees up refills immediately with returning brine.
+          A real bail-out has a rate, a tank, and a schedule. Set the blanket target to the top of its
+          range to see the other extreme, a cavern that never recovers oil, which costs about fifteen per
+          cent of the void over a full life.</li>
+          <li><b>Salt creep is absent.</b> The Phase 00 material names it as one of two sinks and marks
+          it &ldquo;not modelled in this simulation.&rdquo; It is absent from the codebase too. Nothing
+          on this page closes that gap.</li>
+          <li><b>No incidental leaching during disposal.</b> Disposal runs on saturated carrier fluid,
+          so dissolution is set to zero and the void is flat after day one. Real operations leach a
+          little, and the regulator limits how much.</li>
+          <li><b>A right cylinder, 60 m across.</b> Real solution-mined caverns are pear-shaped, so the
+          mapping from volume to depth here is indicative. Volumes are exact; the heights and the
+          standoff reading are not.</li>
+          <li><b>The clean-brine floor is a policy, not a measurement.</b> Argonne describes the failure
+          mode but gives no threshold. The slider is where a number would go once one exists.</li>
+          <li><b>One cavern, in isolation.</b> Pure operates at least four, and the Phase 00 material's
+          third mechanism is that two of them share one balance by design. Nothing here models a
+          transfer.</li>
+          <li><b>Loads are simulated.</b> Fixed seed, cuts drawn from the codebase's own distributions.
+          Nothing on this page has touched Pure's operating data.</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <footer class="foot">
+    Built for the 26 August 2026 weekly review. The physics layer reproduces the reconciliation
+    engine and is verified against it by
+    <span class="mono">sim/verify_against_reference_engine.py</span>, which runs the same load
+    sequence through both engines and compares phase volumes day by day. Regulatory figures are quoted from the
+    decisions named above and can be re-checked in <span class="mono">refs/_text/</span>. Findings that
+    came out of building this are recorded in
+    <span class="mono">docs/26_defect_register_ledger_materials.md</span>.
+  </footer>
+</div>
+
+<script>
+// ==== ENGINE START ====
+// Mirrors the reconciliation engine: physics.py, density.py and models.py.
+// The suspension / settling layer has no counterpart there and is marked OURS.
+
+const PARAMS = {
+  rock_density_kg_m3: 2165.0,          // models.py:222
+  salt_purity_mass_fraction: 0.98,     // models.py:223
+  solids_grain_density_kg_m3: 2650.0,  // models.py:224
+  asymptotic_sediment_porosity: 0.25,  // models.py:225
+  compaction_rate_per_day: 0.001,      // models.py:226
+  closure_tolerance_m3: 1e-5           // models.py:227
+};
+
+const DENS = {
+  reference_water_density_kg_m3: 998.2,
+  nacl_mass_fraction_coefficient: 764.4,
+  other_mass_fraction_coefficient: 350.0,
+  temperature_coefficient_kg_m3_c: 0.3,
+  reference_temperature_c: 20.0,
+  maximum_valid_nacl_mass_fraction: 0.28
+};
+
+const WASTE = {
+  solids_density_kg_m3: 1650.0,        // synthetic.py:126
+  water_density_kg_m3: 998.2           // synthetic.py:127
+};
+
+// OURS: viscosity endpoints, standard values at 20 C.
+const MU_WATER = 1.002e-3, MU_SAT = 1.99e-3, W_SAT = 0.264, G = 9.81;
+
+function brineDensity(wN, wO, T){
+  if (!(wN >= 0 && wN <= DENS.maximum_valid_nacl_mass_fraction))
+    throw new Error('NaCl mass fraction outside the density model range: ' + wN);
+  if (wO < 0 || wN + wO >= 1) throw new Error('invalid dissolved-material mass fractions');
+  const r = DENS.reference_water_density_kg_m3
+          + DENS.nacl_mass_fraction_coefficient * wN
+          + DENS.other_mass_fraction_coefficient * wO
+          - DENS.temperature_coefficient_kg_m3_c * (T - DENS.reference_temperature_c);
+  if (r <= 0) throw new Error('density correlation returned a non-positive density');
+  return r;
+}
+
+function liquidMass(s){ return s.nacl_kg + s.water_kg + s.other_kg; }
+function liquidDensity(s, T){
+  const m = liquidMass(s);
+  if (m <= 0) return brineDensity(0, 0, T);
+  return brineDensity(s.nacl_kg / m, s.other_kg / m, T);
+}
+function liquidVolume(s, T){
+  const m = liquidMass(s);
+  return m === 0 ? 0 : m / liquidDensity(s, T);
+}
+function suspendedMass(s){ let a = 0; for (const p of s.suspended) a += p.mass_kg; return a; }
+function suspendedGrainVolume(s){ return suspendedMass(s) / PARAMS.solids_grain_density_kg_m3; }
+function bedVolume(s){
+  return s.bed_solids_kg === 0
+    ? 0
+    : s.bed_solids_kg / (PARAMS.solids_grain_density_kg_m3 * (1 - s.phi));
+}
+
+function phases(s, T){
+  const brine = liquidVolume(s, T);
+  const grains = suspendedGrainVolume(s);
+  const bed = bedVolume(s);
+  return {
+    void_m3: s.void_m3, free_brine_m3: brine, suspended_m3: grains,
+    bed_m3: bed, oil_m3: s.oil_m3,
+    closure_residual_m3: s.void_m3 - brine - grains - bed - s.oil_m3
+  };
+}
+
+function compactedPorosity(phi0, days){
+  const a = PARAMS.asymptotic_sediment_porosity;
+  return a + (phi0 - a) * Math.exp(-PARAMS.compaction_rate_per_day * days);
+}
+
+// OURS: Stokes terminal velocity in m/s.
+function stokesVelocity(d50_m, wN){
+  const rho_f = brineDensity(Math.min(wN, DENS.maximum_valid_nacl_mass_fraction), 0, 20);
+  const mu = MU_WATER + (MU_SAT - MU_WATER) * Math.min(1, Math.max(0, wN / W_SAT));
+  const drop = PARAMS.solids_grain_density_kg_m3 - rho_f;
+  if (drop <= 0) return 0;
+  return drop * G * d50_m * d50_m / (18 * mu);
+}
+
+// A freshly washed cavern: saturated brine, no oil, and the insolubles the wash liberated.
+function freshCavern(void_m3, opts){
+  opts = opts || {};
+  const phi0 = opts.phi0 !== undefined ? opts.phi0 : 0.40;
+  const retain = opts.insoluble_retention !== undefined ? opts.insoluble_retention : 1.0;
+  const ins_kg = void_m3 * PARAMS.rock_density_kg_m3
+               * (1 - PARAMS.salt_purity_mass_fraction) * retain;
+  const bed = ins_kg / (PARAMS.solids_grain_density_kg_m3 * (1 - phi0));
+  const brine = void_m3 - bed;
+  const rho = brineDensity(W_SAT, 0, 20);
+  const mass = brine * rho;
+  return {
+    day: 0, void_m3: void_m3,
+    nacl_kg: mass * W_SAT, water_kg: mass * (1 - W_SAT), other_kg: 0,
+    bed_solids_kg: ins_kg, oil_m3: 0, phi: phi0,
+    suspended: [],
+    received_m3: 0, displaced_m3: 0, returned_m3: 0, oil_recovered_m3: 0,
+    pore_artefact_m3: 0, worst_residual: 0
+  };
+}
+
+// One time step. `loads` is a list of {volume_m3, f_solids, f_oil}.
+// Returns the well-mixed outflow required to close the cavern.
+// A step either completes or leaves the state exactly as it found it: a half-applied
+// step would show a cavern in a physically impossible position.
+function step(s, dt_days, loads, cfg){
+  const backup = Object.assign({}, s, {
+    suspended: s.suspended.map(p => ({ mass_kg: p.mass_kg, remaining_days: p.remaining_days }))
+  });
+  try {
+    return stepUnchecked(s, dt_days, loads, cfg);
+  } catch (err){
+    for (const k in backup) s[k] = backup[k];
+    throw err;
+  }
+}
+
+function stepUnchecked(s, dt_days, loads, cfg){
+  const T = cfg.temperature_c !== undefined ? cfg.temperature_c : 20.0;
+
+  // 1. compaction  (physics.py compacted_porosity)
+  s.phi = compactedPorosity(s.phi, dt_days);
+
+  // 2. settling    (OURS)
+  const keep = [];
+  for (const p of s.suspended){
+    p.remaining_days -= dt_days;
+    if (p.remaining_days <= 0){
+      s.bed_solids_kg += p.mass_kg;
+      s.pore_artefact_m3 += (p.mass_kg / PARAMS.solids_grain_density_kg_m3)
+                          * (s.phi / (1 - s.phi));
+    } else keep.push(p);
+  }
+  s.suspended = keep;
+
+  // 3. received loads  (physics.py advance_state, waste_loads branch)
+  const mL = liquidMass(s);
+  const wN_now = mL > 0 ? s.nacl_kg / mL : 0;
+  const fallHeight = Math.max(1, liquidVolume(s, T) / cfg.area_m2);
+  const v = stokesVelocity(cfg.d50_m, wN_now);
+  const settleDays = v > 0 ? fallHeight / (v * 86400) : Infinity;
+
+  for (const L of loads){
+    const fs = L.f_solids, fo = L.f_oil, fw = 1 - fs - fo;
+    const solids_kg = L.volume_m3 * fs * WASTE.solids_density_kg_m3;
+    s.water_kg += L.volume_m3 * fw * WASTE.water_density_kg_m3;
+    s.oil_m3   += L.volume_m3 * fo;
+    s.received_m3 += L.volume_m3;
+    if (solids_kg > 0){
+      // instant_settle reproduces the codebase exactly: it has no suspension layer.
+      if (cfg.instant_settle) s.bed_solids_kg += solids_kg;
+      else s.suspended.push({ mass_kg: solids_kg, remaining_days: settleDays });
+    }
+  }
+
+  // 4. oil recovery  (physics.py advance_state, oil_operations branch)
+  //    Policy: bail the blanket back down to its target thickness. The void that
+  //    frees up is refilled by brine returning from surface infrastructure, which is
+  //    the movement D047 para 41 describes.
+  if (cfg.oil_target_m3 !== undefined && s.oil_m3 > cfg.oil_target_m3){
+    const recovered = s.oil_m3 - cfg.oil_target_m3;
+    s.oil_m3 -= recovered;
+    s.oil_recovered_m3 += recovered;
+  }
+
+  // 5. dissolution during disposal: zero, carrier fluid is saturated.
+  const rock_kg = cfg.dissolved_rock_kg || 0;
+  if (rock_kg > 0){
+    s.nacl_kg       += PARAMS.salt_purity_mass_fraction * rock_kg;
+    s.bed_solids_kg += (1 - PARAMS.salt_purity_mass_fraction) * rock_kg;
+    s.void_m3       += rock_kg / PARAMS.rock_density_kg_m3;
+  }
+
+  // 6. close by displacing well-mixed liquid  (physics.py required_well_mixed_outflow)
+  let ph = phases(s, T);
+  let out = { volume_m3: 0, density_kg_m3: liquidDensity(s, T), nacl_kg_m3: 0 };
+  if (ph.closure_residual_m3 < -PARAMS.closure_tolerance_m3){
+    const V_out = -ph.closure_residual_m3;
+    const V_liq = ph.free_brine_m3;
+    if (V_out > V_liq + PARAMS.closure_tolerance_m3)
+      throw new Error('required outflow exceeds available liquid');
+    const frac = (V_liq - V_out) / V_liq;
+    out = { volume_m3: V_out, density_kg_m3: liquidDensity(s, T), nacl_kg_m3: s.nacl_kg / V_liq };
+    s.nacl_kg  *= frac;
+    s.water_kg *= frac;
+    s.other_kg *= frac;
+    s.displaced_m3 += V_out;
+  } else if (ph.closure_residual_m3 > PARAMS.closure_tolerance_m3){
+    // underfilled: top up with saturated brine so the cavern stays liquid-full
+    const V_in = ph.closure_residual_m3;
+    const rho = liquidDensity(s, T);
+    const m = liquidMass(s);
+    const wN = m > 0 ? s.nacl_kg / m : W_SAT;
+    const wO = m > 0 ? s.other_kg / m : 0;
+    const add = V_in * rho;
+    s.nacl_kg  += add * wN;
+    s.other_kg += add * wO;
+    s.water_kg += add * (1 - wN - wO);
+    s.returned_m3 += V_in;
+  }
+
+  s.day += dt_days;
+  ph = phases(s, T);
+  s.worst_residual = Math.max(s.worst_residual, Math.abs(ph.closure_residual_m3));
+  return out;
+}
+
+// The ledger the intake desk would quote.
+function ledger(s, cfg){
+  const T = cfg.temperature_c !== undefined ? cfg.temperature_c : 20.0;
+  const ph = phases(s, T);
+  const settled = ph.free_brine_m3;
+  const pending = suspendedGrainVolume(s) * (s.phi / (1 - s.phi));
+  const floor_m3 = cfg.standoff_m * cfg.area_m2;
+  const blanketFilling = cfg.oil_target_m3 === undefined || s.oil_m3 < cfg.oil_target_m3;
+  const c = cfg.f_solids * (WASTE.solids_density_kg_m3 / PARAMS.solids_grain_density_kg_m3)
+            / (1 - s.phi) + (blanketFilling ? cfg.f_oil : 0);
+  const headroom = Math.max(0, settled - pending - floor_m3);
+  return {
+    settled_m3: settled,
+    pending_m3: pending,
+    available_m3: settled - pending,
+    floor_m3: floor_m3,
+    standoff_m: ph.free_brine_m3 / cfg.area_m2,
+    consumed_per_m3: c,
+    blanket_filling: blanketFilling,
+    acceptable_waste_m3: c > 0 ? headroom / c : Infinity,
+    phases: ph
+  };
+}
+
+// Reproducible PRNG so a run can be repeated exactly.
+function mulberry32(a){
+  return function(){
+    a |= 0; a = a + 0x6D2B79F5 | 0;
+    let t = Math.imul(a ^ a >>> 15, 1 | a);
+    t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+    return ((t ^ t >>> 14) >>> 0) / 4294967296;
+  };
+}
+function gaussFrom(rnd){
+  let u = 0, v = 0;
+  while (u === 0) u = rnd();
+  while (v === 0) v = rnd();
+  return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v);
+}
+// ==== ENGINE END ====
+
+/* =========================== APPLICATION =========================== */
+(function(){
+'use strict';
+
+const $ = id => document.getElementById(id);
+const SVGNS = 'http://www.w3.org/2000/svg';
+function el(tag, attrs, parent){
+  const e = document.createElementNS(SVGNS, tag);
+  if (attrs) for (const k in attrs) e.setAttribute(k, attrs[k]);
+  if (parent) parent.appendChild(e);
+  return e;
+}
+const fmt = (x, d) => !isFinite(x) ? '∞'
+  : x.toLocaleString('en-CA', { minimumFractionDigits: d || 0, maximumFractionDigits: d || 0 });
+const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+
+/* ---------- fixed site definition ---------- */
+const VOID_TWO_CAVERNS = 675180;      // 2020 ABAER 004 para 119, Hangingstone, planned
+const WASH_TWO_CAVERNS = 7000000;     // 2020 ABAER 004 para 119
+const VOID = VOID_TWO_CAVERNS / 2;
+const DIAMETER = 60;                  // ours, stated assumption
+const AREA = Math.PI * (DIAMETER / 2) * (DIAMETER / 2);
+const HEIGHT = VOID / AREA;
+const LOAD_M3 = 40;                   // 2020 ABAER 004 para 24
+
+$('pv-void').textContent = fmt(VOID);
+$('pv-wash').textContent = fmt(WASH_TWO_CAVERNS / 2);
+
+/* ---------- control defaults, so Reset really resets ---------- */
+const SLIDERS = ['sRate','sSolids','sOil','sD50','sFloor','sOilKeep','sSpeed'];
+const DEFAULTS = {};
+SLIDERS.forEach(id => { DEFAULTS[id] = $(id).getAttribute('value'); });
+
+/* ---------- state ---------- */
+let S, rnd, series, cfg, playing = false, lastT = 0, acc = 0, particles = [], animId = null;
+let loadsCount = 0, lastChartDraw = 0;
+const xMode = { A: 'd', B: 'd' };
+const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function readCfg(){
+  return {
+    area_m2: AREA,
+    d50_m: (+$('sD50').value) * 1e-6,
+    standoff_m: +$('sFloor').value,
+    f_solids: (+$('sSolids').value) / 100,
+    f_oil: (+$('sOil').value) / 100,
+    oil_target_m3: (+$('sOilKeep').value) * AREA,
+    rate: +$('sRate').value,
+    speed: +$('sSpeed').value,
+    temperature_c: 20.0
+  };
+}
+
+function reset(restoreControls){
+  if (restoreControls) SLIDERS.forEach(id => { $(id).value = DEFAULTS[id]; });
+  cfg = readCfg();
+  S = freshCavern(VOID, { phi0: 0.40 });
+  rnd = mulberry32(42);                       // same seed discipline as the codebase
+  series = [];
+  particles = [];
+  loadsCount = 0;
+  lastChartDraw = 0;
+  record();
+  playing = false;
+  $('bPlay').innerHTML = '&#9654;&nbsp; Play';
+  $('runNote').style.display = 'none';
+  $('runNote').textContent = '';
+  syncOutputs();
+  render();
+}
+
+function record(){
+  const L = ledger(S, cfg);
+  series.push({
+    d: S.day, recv: S.received_m3, void: S.void_m3, bed: L.phases.bed_m3,
+    brine: L.phases.free_brine_m3, susp: L.phases.suspended_m3, oil: L.phases.oil_m3,
+    settled: L.settled_m3, atp: L.available_m3, floor: L.floor_m3
+  });
+  if (series.length > 40000) series.splice(0, 20000);
+}
+
+function drawLoads(n){
+  const out = [];
+  for (let i = 0; i < n; i++){
+    const fs = Math.min(0.38, Math.max(0.14, cfg.f_solids + 0.035 * gaussFrom(rnd)));
+    const fo = Math.min(0.10, Math.max(0.02, cfg.f_oil + 0.012 * gaussFrom(rnd)));
+    const vol = Math.max(20, LOAD_M3 + LOAD_M3 * 0.12 * gaussFrom(rnd));
+    out.push({ volume_m3: vol, f_solids: fs, f_oil: fo });
+  }
+  return out;
+}
+
+function advance(days, animate, throttle){
+  cfg = readCfg();
+  let arrived = 0;
+  for (let i = 0; i < days; i++){
+    const whole = Math.floor(cfg.rate);
+    const n = whole + (rnd() < cfg.rate - whole ? 1 : 0);
+    try { step(S, 1, drawLoads(n), cfg); }
+    catch (err){ playing = false; note('the engine refused a step (' + err.message + ')'); break; }
+    loadsCount += n;
+    arrived += n;
+    record();
+  }
+  render(throttle);
+  // one spawn per call, so a 60 day/s playback does not fire sixty times a frame
+  if (animate && arrived > 0 && !REDUCED) spawn(Math.min(12, 3 + arrived));
+}
+
+function receiveOne(){
+  cfg = readCfg();
+  try { step(S, 0, drawLoads(1), cfg); loadsCount += 1; }
+  catch (err){ note('the engine refused a step (' + err.message + ')'); }
+  record();
+  if (!REDUCED) spawn(12);
+  render();
+}
+
+function note(msg){
+  const n = $('runNote');
+  n.textContent = msg ? 'Run stopped early: ' + msg + '. The reading below is the state at that point, not a full life.' : '';
+  n.style.display = msg ? 'block' : 'none';
+}
+
+/* ---------- cavern drawing ---------- */
+const CAV = { x0: 106, x1: 294, top: 118, bot: 584, wellX: 200 };
+
+function cavernGeom(){
+  const L = ledger(S, cfg);
+  const H = CAV.bot - CAV.top;
+  const fBed = L.phases.bed_m3 / S.void_m3;
+  const fOil = L.phases.oil_m3 / S.void_m3;
+  return { L, H, bedTop: CAV.bot - H * fBed, oilBot: CAV.top + H * fOil };
+}
+
+function cavPath(){
+  const { x0, x1, top, bot } = CAV, r = 24;
+  return 'M ' + x0 + ' ' + (top + r) +
+    ' Q ' + x0 + ' ' + top + ' ' + (x0 + r) + ' ' + top +
+    ' L ' + (x1 - r) + ' ' + top +
+    ' Q ' + x1 + ' ' + top + ' ' + x1 + ' ' + (top + r) +
+    ' L ' + x1 + ' ' + (bot - 14) +
+    ' Q ' + x1 + ' ' + bot + ' ' + (x1 - 20) + ' ' + bot +
+    ' L ' + (x0 + 20) + ' ' + bot +
+    ' Q ' + x0 + ' ' + bot + ' ' + x0 + ' ' + (bot - 14) + ' Z';
+}
+
+function drawCavern(){
+  const svg = $('cavern');
+  const keptLayer = svg.querySelector('#player');   // survives the rebuild, so particles keep flying
+  svg.textContent = '';
+  const g = cavernGeom();
+  const ink3 = css('--ink-3'), lineC = css('--line'), lineS = css('--line-strong'),
+        surf = css('--surface'), surf2 = css('--surface-2'), hatch = css('--hatch'),
+        cBri = css('--brine'), cSed = css('--sediment'), cOil = css('--oil'), cAlert = css('--alert');
+
+  const defs = el('defs', null, svg);
+  el('path', { d: cavPath() }, el('clipPath', { id: 'cavclip' }, defs));
+  const pat = el('pattern', { id: 'salt', width: 9, height: 9,
+    patternUnits: 'userSpaceOnUse', patternTransform: 'rotate(45)' }, defs);
+  el('rect', { width: 9, height: 9, fill: surf2 }, pat);
+  el('line', { x1: 0, y1: 0, x2: 0, y2: 9, stroke: hatch, 'stroke-width': 2 }, pat);
+
+  // formations
+  el('rect', { x: 0, y: 46, width: 400, height: 40, fill: surf2 }, svg);
+  el('rect', { x: 0, y: 86, width: 400, height: 538, fill: 'url(#salt)' }, svg);
+  el('line', { x1: 0, y1: 46, x2: 400, y2: 46, stroke: lineS, 'stroke-width': 1 }, svg);
+  el('line', { x1: 0, y1: 86, x2: 400, y2: 86, stroke: lineS, 'stroke-width': 1 }, svg);
+  const band = (y, t) => el('text', { x: 8, y: y, fill: ink3, 'font-size': 8.5,
+    'letter-spacing': 1.4, 'font-family': 'var(--font-mono)' }, svg).textContent = t;
+  band(16, 'SURFACE'); band(61, 'OVERBURDEN'); band(101, 'SALT');
+
+  // wellhead and lines
+  el('rect', { x: CAV.wellX - 15, y: 28, width: 30, height: 18, rx: 2, fill: surf, stroke: lineS }, svg);
+  el('line', { x1: CAV.wellX - 27, y1: 37, x2: CAV.wellX - 15, y2: 37, stroke: cSed,
+    'stroke-width': 2.5, 'stroke-linecap': 'round' }, svg);
+  el('line', { x1: CAV.wellX + 15, y1: 37, x2: CAV.wellX + 27, y2: 37, stroke: cBri,
+    'stroke-width': 2.5, 'stroke-linecap': 'round' }, svg);
+  el('text', { x: CAV.wellX - 31, y: 25, fill: cSed, 'font-size': 9, 'text-anchor': 'end' }, svg)
+    .textContent = 'waste in';
+  el('text', { x: CAV.wellX + 31, y: 25, fill: cBri, 'font-size': 9 }, svg).textContent = 'brine out';
+  el('line', { x1: CAV.wellX - 7, y1: 44, x2: CAV.wellX - 7, y2: CAV.top + 6, stroke: lineS, 'stroke-width': 2 }, svg);
+  el('line', { x1: CAV.wellX + 7, y1: 44, x2: CAV.wellX + 7, y2: CAV.top + 6, stroke: lineS, 'stroke-width': 2 }, svg);
+
+  // body and phases
+  el('path', { d: cavPath(), fill: surf, stroke: lineS, 'stroke-width': 1.5 }, svg);
+  const inner = el('g', { 'clip-path': 'url(#cavclip)' }, svg);
+  el('rect', { x: 90, y: CAV.top - 10, width: 220, height: g.oilBot - CAV.top + 10, fill: cOil }, inner);
+  el('rect', { x: 90, y: g.oilBot, width: 220, height: Math.max(0, g.bedTop - g.oilBot), fill: cBri, opacity: .84 }, inner);
+  el('rect', { x: 90, y: g.bedTop, width: 220, height: CAV.bot - g.bedTop + 12, fill: cSed }, inner);
+  el('line', { x1: 90, y1: g.oilBot, x2: 310, y2: g.oilBot, stroke: surf, 'stroke-width': 2 }, inner);
+  el('line', { x1: 90, y1: g.bedTop, x2: 310, y2: g.bedTop, stroke: surf, 'stroke-width': 2 }, inner);
+
+  const outlet = Math.min(g.bedTop - 13, CAV.bot - 38);
+  el('line', { x1: CAV.wellX, y1: CAV.top - 4, x2: CAV.wellX, y2: outlet, stroke: surf,
+    'stroke-width': 3.4, opacity: .38, 'stroke-linecap': 'round' }, inner);
+  el('line', { x1: CAV.wellX, y1: CAV.top - 4, x2: CAV.wellX, y2: outlet, stroke: lineS,
+    'stroke-width': 1.6, 'stroke-linecap': 'round' }, inner);
+  el('circle', { cx: CAV.wellX, cy: outlet, r: 3, fill: lineS }, inner);
+  const layer = keptLayer || el('g', { id: 'player' });
+  layer.setAttribute('clip-path', 'url(#cavclip)');
+  svg.appendChild(layer);
+
+  // Clean-brine floor. The standoff is a brine-column height, so the level it marks is the
+  // height the pile may reach, not a volume measured up from the cavern floor.
+  const breached = g.L.settled_m3 <= g.L.floor_m3;
+  if (cfg.standoff_m > 0){
+    const frac = Math.max(0, Math.min(1,
+      (S.void_m3 - g.L.floor_m3 - g.L.phases.oil_m3) / S.void_m3));
+    const floorY = CAV.bot - g.H * frac;
+    el('line', { x1: CAV.x0 - 8, y1: floorY, x2: CAV.x1 + 8, y2: floorY,
+      stroke: breached ? cAlert : ink3, 'stroke-width': 1.5, 'stroke-dasharray': '5 4' }, svg);
+    el('text', { x: CAV.x1 - 7, y: floorY - 7, fill: breached ? cAlert : surf, 'font-size': 8.5,
+      'text-anchor': 'end', 'font-weight': 600, 'font-family': 'var(--font-mono)' }, svg)
+      .textContent = breached ? 'FLOOR BREACHED'
+                              : 'the pile stops here · ' + cfg.standoff_m + ' m';
+  }
+
+  // direct labels: identity is never colour alone
+  const lab = (y, t, c, sub) => {
+    if (y < CAV.top + 9 || y > CAV.bot - 5) return;
+    el('text', { x: CAV.x0 - 13, y: y, fill: c, 'font-size': 10.5, 'text-anchor': 'end',
+      'font-weight': 620 }, svg).textContent = t;
+    if (sub) el('text', { x: CAV.x0 - 13, y: y + 12, fill: ink3, 'font-size': 9.5,
+      'text-anchor': 'end', 'font-family': 'var(--font-mono)' }, svg).textContent = sub;
+  };
+  lab((CAV.top + g.oilBot) / 2 + 3, 'Oil', cOil, fmt(g.L.phases.oil_m3) + ' m³');
+  lab((g.oilBot + g.bedTop) / 2 - 5, 'Free brine', cBri, fmt(g.L.phases.free_brine_m3) + ' m³');
+  lab((g.bedTop + CAV.bot) / 2 + 3, 'Settled bed', cSed, fmt(g.L.phases.bed_m3) + ' m³');
+
+  // depth scale
+  const sx = CAV.x1 + 42;
+  el('line', { x1: sx, y1: CAV.top, x2: sx, y2: CAV.bot, stroke: lineS, 'stroke-width': 1 }, svg);
+  for (let m = 0; m <= HEIGHT + 0.5; m += 20){
+    const y = CAV.top + (m / HEIGHT) * g.H;
+    el('line', { x1: sx, y1: y, x2: sx + (m % 40 === 0 ? 6 : 3), y2: y, stroke: lineS }, svg);
+    if (m % 40 === 0)
+      el('text', { x: sx + 9, y: y + 3, fill: ink3, 'font-size': 8,
+        'font-family': 'var(--font-mono)' }, svg).textContent = m;
+  }
+  el('text', { x: 398, y: CAV.top - 15, fill: ink3, 'font-size': 8, 'text-anchor': 'end',
+    'font-family': 'var(--font-mono)' }, svg).textContent = 'm below roof';
+  el('text', { x: 200, y: 610, fill: ink3, 'font-size': 9, 'text-anchor': 'middle',
+    'font-family': 'var(--font-mono)' }, svg)
+    .textContent = '⌀ ' + DIAMETER + ' m assumed · ' + HEIGHT.toFixed(0) +
+                   ' m column · heights ∝ volume';
+}
+
+/* ---------- particles ---------- */
+const MAX_PARTICLES = 140;
+function spawn(n){
+  if (particles.length >= MAX_PARTICLES) return;   // rapid stepping must not pile up a bank of dots
+  const g = cavernGeom();
+  const outlet = Math.min(g.bedTop - 13, CAV.bot - 38);
+  for (let i = 0; i < n; i++){
+    const solid = i % 3 !== 0;
+    particles.push({
+      kind: solid ? 'solid' : 'oil', t: -i * 0.055, outlet: outlet,
+      tx: CAV.x0 + 16 + Math.random() * (CAV.x1 - CAV.x0 - 32),
+      ty: solid ? g.bedTop - 2 : g.oilBot + 2
+    });
+  }
+  for (let i = 0; i < Math.ceil(n / 2); i++){
+    particles.push({ kind: 'brine', t: -i * 0.08,
+      x: CAV.x0 + 22 + Math.random() * (CAV.x1 - CAV.x0 - 44),
+      y: g.oilBot + 20 + Math.random() * 40 });
+  }
+  if (particles.length > MAX_PARTICLES) particles.splice(0, particles.length - MAX_PARTICLES);
+  if (!animId){ lastFrame = 0; animId = requestAnimationFrame(tickParticles); }
+}
+
+let lastFrame = 0;
+function tickParticles(now){
+  const layer = $('player');
+  animId = null;
+  const dt = lastFrame ? Math.min(0.05, (now - lastFrame) / 1000) : 0.016;
+  lastFrame = now;
+  if (!layer){ particles = []; return; }
+  layer.textContent = '';
+  const cSed = css('--sediment'), cOil = css('--oil'), cBri = css('--brine');
+  const alive = [];
+  for (const p of particles){
+    p.t += dt;
+    if (p.t < 0){ alive.push(p); continue; }
+    let x, y, c, r = 2.2, o = .9;
+    if (p.kind === 'brine'){
+      const u = Math.min(1, p.t / 1.6);
+      if (u >= 1) continue;
+      x = p.x; y = p.y - u * 90; c = cBri; r = 1.8; o = .75 * (1 - u);
+    } else {
+      const down = Math.min(1, p.t / 0.85);
+      if (down < 1){ x = CAV.wellX; y = 60 + (p.outlet - 60) * down; }
+      else {
+        const u = Math.min(1, (p.t - 0.85) / 1.5);
+        if (u >= 1) continue;
+        const e = u * u * (3 - 2 * u);
+        x = CAV.wellX + (p.tx - CAV.wellX) * e;
+        y = p.outlet + (p.ty - p.outlet) * e;
+      }
+      c = p.kind === 'solid' ? cSed : cOil;
+    }
+    el('circle', { cx: x.toFixed(1), cy: y.toFixed(1), r: r, fill: c, opacity: o.toFixed(2) }, layer);
+    alive.push(p);
+  }
+  particles = alive;
+  if (particles.length) animId = requestAnimationFrame(tickParticles);
+  else lastFrame = 0;
+}
+
+/* ---------- charts ---------- */
+const CW = 760, CH = 262, CP = { l: 56, r: 16, t: 30, b: 28 };
+
+function sample(){
+  const n = series.length, max = 620;
+  if (n <= max) return series;
+  const stride = Math.ceil(n / max), out = [];
+  for (let i = 0; i < n; i += stride) out.push(series[i]);
+  if (out[out.length - 1] !== series[n - 1]) out.push(series[n - 1]);
+  return out;
+}
+
+// Capacity against time *and* against waste, as asked for. One descriptor covers both.
+function xAxisFor(which, d){
+  const last = d[d.length - 1];
+  if (xMode[which] === 'recv' && last.recv > 0){
+    return {
+      key: 'recv', max: last.recv, unit: 'cubic metres received',
+      tick: v => fmt(v / 1000, 0) + 'k',
+      label: r => fmt(r.recv) + ' m³ received'
+    };
+  }
+  const max = Math.max(30, last.d);
+  const years = max >= 730;
+  return {
+    key: 'd', max: max, unit: (years ? 'years' : 'days') + ' from first load',
+    tick: v => years ? (v / 365).toFixed(1) : fmt(v),
+    label: r => years ? (r.d / 365).toFixed(2) + ' years' : 'day ' + fmt(r.d)
+  };
+}
+
+function axes(svg, ax, ymax, ylab){
+  const lineC = css('--line-strong'), grid = css('--grid'), ink3 = css('--ink-3');
+  for (let i = 0; i <= 4; i++){
+    const v = ymax * i / 4, y = CH - CP.b - (CH - CP.t - CP.b) * (i / 4);
+    el('line', { x1: CP.l, y1: y, x2: CW - CP.r, y2: y, stroke: i === 0 ? lineC : grid, 'stroke-width': 1 }, svg);
+    el('text', { x: CP.l - 9, y: y + 3.5, fill: ink3, 'font-size': 10, 'text-anchor': 'end',
+      'font-family': 'var(--font-mono)' }, svg).textContent = fmt(v / 1000, 0) + 'k';
+  }
+  for (let i = 0; i <= 5; i++){
+    const v = ax.max * i / 5, x = CP.l + (CW - CP.l - CP.r) * (i / 5);
+    el('text', { x: x, y: CH - CP.b + 16, fill: ink3, 'font-size': 10, 'text-anchor': 'middle',
+      'font-family': 'var(--font-mono)' }, svg).textContent = ax.tick(v);
+  }
+  el('text', { x: CW - CP.r, y: CH - 2, fill: ink3, 'font-size': 10, 'text-anchor': 'end' }, svg)
+    .textContent = ax.unit;
+  el('text', { x: CP.l, y: CP.t - 11, fill: ink3, 'font-size': 10,
+    'font-family': 'var(--font-mono)' }, svg).textContent = ylab;
+}
+
+const XS = (v, xmax) => CP.l + (CW - CP.l - CP.r) * (xmax > 0 ? v / xmax : 0);
+const YS = (v, ymax) => CH - CP.b - (CH - CP.t - CP.b) * (v / ymax);
+
+function hover(svg, tipId, d, ax, ymax, marks, rowsFor){
+  const xmax = ax.max;
+  const g = el('g', null, svg);
+  g.style.display = 'none';
+  const line = el('line', { y1: CP.t, y2: CH - CP.b, stroke: css('--ink-3'),
+    'stroke-width': 1, 'stroke-dasharray': '3 3' }, g);
+  const dots = marks.map(m => el('circle', { r: 3.4, fill: m.colour,
+    stroke: css('--surface'), 'stroke-width': 2 }, g));
+  const tip = $(tipId);
+  const hit = el('rect', { x: CP.l, y: CP.t, width: CW - CP.l - CP.r, height: CH - CP.t - CP.b,
+    fill: 'transparent' }, svg);
+  hit.style.cursor = 'crosshair';
+  const move = ev => {
+    const box = svg.getBoundingClientRect();
+    const px = (ev.clientX - box.left) / box.width * CW;
+    let best = 0, bd = Infinity;
+    for (let i = 0; i < d.length; i++){
+      const dd = Math.abs(XS(d[i][ax.key], xmax) - px);
+      if (dd < bd){ bd = dd; best = i; }
+    }
+    const r = d[best], x = XS(r[ax.key], xmax);
+    g.style.display = '';
+    line.setAttribute('x1', x); line.setAttribute('x2', x);
+    marks.forEach((m, i) => { dots[i].setAttribute('cx', x); dots[i].setAttribute('cy', YS(m.value(r), ymax)); });
+    tip.innerHTML = rowsFor(r);
+    tip.style.display = 'block';
+    const pct = (x / CW) * 100;
+    tip.style.left = pct + '%';
+    tip.style.transform = pct > 47 ? 'translateX(calc(-100% - 12px))' : 'translateX(12px)';
+  };
+  hit.addEventListener('pointermove', move);
+  hit.addEventListener('pointerleave', () => { g.style.display = 'none'; tip.style.display = 'none'; });
+}
+
+function tipHTML(title, rows){
+  return '<div class="th">' + title + '</div><table>' + rows.map(r =>
+    '<tr><td><span class="swatch" style="background:' + r.c + '"></span>' + r.k +
+    '</td><td class="n">' + r.v + '</td></tr>').join('') + '</table>';
+}
+
+function drawChartA(){
+  const svg = $('chartA'); svg.textContent = '';
+  const d = sample();
+  const ax = xAxisFor('A', d), xmax = ax.max;
+  const ymax = Math.max(VOID * 1.02, 1);
+  axes(svg, ax, ymax, 'm³');
+
+  const fl = d[d.length - 1].floor;
+  if (fl > 0){
+    el('rect', { x: CP.l, y: YS(fl, ymax), width: CW - CP.l - CP.r,
+      height: CH - CP.b - YS(fl, ymax), fill: css('--alert-soft') }, svg);
+    el('line', { x1: CP.l, y1: YS(fl, ymax), x2: CW - CP.r, y2: YS(fl, ymax),
+      stroke: css('--alert'), 'stroke-width': 1, 'stroke-dasharray': '5 4' }, svg);
+  }
+
+  // pending ribbon, so two coincident lines are never mistaken for one
+  let rib = '';
+  for (let i = 0; i < d.length; i++) rib += (i ? 'L' : 'M') + XS(d[i][ax.key], xmax).toFixed(1) + ' ' + YS(d[i].settled, ymax).toFixed(1);
+  for (let i = d.length - 1; i >= 0; i--) rib += 'L' + XS(d[i][ax.key], xmax).toFixed(1) + ' ' + YS(d[i].atp, ymax).toFixed(1);
+  el('path', { d: rib + 'Z', fill: css('--oil-soft'), stroke: 'none' }, svg);
+
+  const path = (key, colour) => {
+    let s = '';
+    for (let i = 0; i < d.length; i++) s += (i ? 'L' : 'M') + XS(d[i][ax.key], xmax).toFixed(1) + ' ' + YS(d[i][key], ymax).toFixed(1);
+    el('path', { d: s, fill: 'none', stroke: colour, 'stroke-width': 2,
+      'stroke-linejoin': 'round', 'stroke-linecap': 'round' }, svg);
+  };
+  path('atp', css('--oil'));
+  path('settled', css('--brine'));
+
+  const last = d[d.length - 1], lx = XS(last[ax.key], xmax), ly = YS(last.settled, ymax);
+  const flip = lx > CW - CP.r - 66;
+  el('circle', { cx: lx, cy: ly, r: 3.4, fill: css('--brine'),
+    stroke: css('--surface'), 'stroke-width': 2 }, svg);
+  el('text', { x: lx + (flip ? -9 : 9), y: ly - 9, fill: css('--brine'), 'font-size': 10.5,
+    'font-weight': 620, 'text-anchor': flip ? 'end' : 'start',
+    'font-family': 'var(--font-mono)' }, svg).textContent = fmt(last.settled) + ' m³';
+
+  hover(svg, 'tipA', d, ax, ymax,
+    [{ colour: css('--brine'), value: r => r.settled }, { colour: css('--oil'), value: r => r.atp }],
+    r => tipHTML(ax.label(r), [
+      { c: css('--brine'), k: 'Settled capacity', v: fmt(r.settled) + ' m³' },
+      { c: css('--oil'), k: 'Available to promise', v: fmt(r.atp) + ' m³' },
+      { c: css('--alert'), k: 'Clean-brine floor', v: fmt(r.floor) + ' m³' }
+    ]));
+
+  const gap = last.settled - last.atp;
+  $('noteA').textContent = 'Pending settlement today is ' + fmt(gap, 1) + ' m³, which is ' +
+    (100 * gap / Math.max(1, last.settled)).toFixed(3) + ' per cent of settled capacity, so the band ' +
+    (gap / ymax > 0.01 ? 'is visible above.'
+      : 'is thinner than a line at this scale. The gap is real and is what the intake desk must not sell twice; it is simply small next to a cavern.');
+}
+
+function drawChartB(){
+  const svg = $('chartB'); svg.textContent = '';
+  const d = sample();
+  const ax = xAxisFor('B', d), xmax = ax.max;
+  const ymax = VOID * 1.02;
+  axes(svg, ax, ymax, 'm³');
+
+  const band = (lo, hi, colour, opacity) => {
+    let s = '';
+    for (let i = 0; i < d.length; i++) s += (i ? 'L' : 'M') + XS(d[i][ax.key], xmax).toFixed(1) + ' ' + YS(hi(d[i]), ymax).toFixed(1);
+    for (let i = d.length - 1; i >= 0; i--) s += 'L' + XS(d[i][ax.key], xmax).toFixed(1) + ' ' + YS(lo(d[i]), ymax).toFixed(1);
+    el('path', { d: s + 'Z', fill: colour, opacity: opacity || 1, stroke: css('--surface'), 'stroke-width': 2 }, svg);
+  };
+  // the four terms of the closure identity, in the order they sit in the cavern
+  const b1 = r => r.bed, b2 = r => r.bed + r.susp,
+        b3 = r => r.bed + r.susp + r.brine, b4 = r => r.bed + r.susp + r.brine + r.oil;
+  band(() => 0, b1, css('--sediment'));
+  band(b1, b2, css('--brine'), .45);
+  band(b2, b3, css('--brine'));
+  band(b3, b4, css('--oil'));
+
+  let s = '';
+  for (let i = 0; i < d.length; i++) s += (i ? 'L' : 'M') + XS(d[i][ax.key], xmax).toFixed(1) + ' ' + YS(d[i].void, ymax).toFixed(1);
+  el('path', { d: s, fill: 'none', stroke: css('--ink-3'), 'stroke-width': 1.5, 'stroke-dasharray': '4 3' }, svg);
+
+  hover(svg, 'tipB', d, ax, ymax,
+    [{ colour: css('--sediment'), value: b1 }, { colour: css('--brine'), value: b3 },
+     { colour: css('--oil'), value: b4 }],
+    r => tipHTML(ax.label(r), [
+      { c: css('--oil'), k: 'Oil blanket', v: fmt(r.oil) + ' m³' },
+      { c: css('--brine'), k: 'Free brine', v: fmt(r.brine) + ' m³' },
+      { c: css('--brine'), k: 'Suspended grains', v: fmt(r.susp, 1) + ' m³' },
+      { c: css('--sediment'), k: 'Settled bed', v: fmt(r.bed) + ' m³' },
+      { c: css('--ink-3'), k: 'Sum = mined void', v: fmt(r.void) + ' m³' }
+    ]));
+}
+
+function drawFate(){
+  const L = ledger(S, cfg);
+  const bed = cfg.f_solids * (WASTE.solids_density_kg_m3 / PARAMS.solids_grain_density_kg_m3) / (1 - S.phi);
+  const oil = cfg.f_oil;
+  const outv = Math.max(0, 1 - bed - oil);
+  const bar = $('fate'); bar.textContent = '';
+  const seg = (w, colour, label) => {
+    const dv = document.createElement('div');
+    dv.style.width = (w * 100).toFixed(2) + '%';
+    dv.style.background = colour;
+    dv.textContent = (w * 100) >= 9 ? label : '';
+    bar.appendChild(dv);
+  };
+  seg(bed, css('--sediment'), (bed * 100).toFixed(1) + '%');
+  seg(oil, css('--oil'), (oil * 100).toFixed(1) + '%');
+  seg(outv, css('--brine'), (outv * 100).toFixed(1) + '%');
+
+  const filling = L.blanket_filling;
+  $('fateKey').innerHTML =
+    '<div><b>' + (bed * 100).toFixed(1) + '% → settled bed</b>Permanent. Capacity gone for good, and the only term that sets how long the cavern lasts.</div>' +
+    '<div><b>' + (oil * 100).toFixed(1) + '% → ' + (filling ? 'oil blanket' : 'oil recovered') + '</b>' +
+      (filling
+        ? 'Still building the blanket to its ' + fmt(cfg.oil_target_m3 / AREA, 1) + ' m target, so it is consuming void.'
+        : 'Blanket is at target, so oil leaves as product. ' + fmt(S.oil_recovered_m3) + ' m³ recovered so far.') + '</div>' +
+    '<div><b>' + (outv * 100).toFixed(1) + '% → displaced brine</b>Leaves the cavern and needs disposal capacity of its own.</div>' +
+    (L.acceptable_waste_m3 <= 0
+      ? '<div><b style="color:var(--alert)">Floor reached</b>The standoff is down to ' + L.standoff_m.toFixed(1) +
+        ' m. On this policy the cavern is full after ' + fmt(S.received_m3) + ' m³ received, ' +
+        (S.received_m3 / S.void_m3).toFixed(2) + ' times its own void.</div>'
+      : '<div><b>' + fmt(L.acceptable_waste_m3) + ' m³ left</b>' +
+        fmt(L.acceptable_waste_m3 / LOAD_M3) + ' more loads before the floor' +
+        (cfg.rate > 0 ? ', or ' + (L.acceptable_waste_m3 / (cfg.rate * LOAD_M3) / 365).toFixed(1) + ' years at this rate' : '') +
+        '.</div>');
+
+  const ok = S.worst_residual <= PARAMS.closure_tolerance_m3;
+  $('closureDot').className = 'dot' + (ok ? '' : ' bad');
+  $('closureVal').textContent = S.worst_residual.toExponential(1);
+  $('poreNote').textContent = 'Of the ' + fmt(S.displaced_m3) + ' m³ displaced so far, ' +
+    fmt(S.pore_artefact_m3) + ' m³ (' +
+    (S.displaced_m3 > 0 ? (100 * S.pore_artefact_m3 / S.displaced_m3).toFixed(1) : '0.0') +
+    ' per cent) is the pore-brine bookkeeping artefact of limitation 1, not real flow.';
+}
+
+/* ---------- readout ---------- */
+function render(throttle){
+  const L = ledger(S, cfg);
+  $('clock').textContent = 'day ' + fmt(S.day) + '  ·  ' + (S.day / 365).toFixed(2) + ' years';
+  $('r-oil').textContent = fmt(L.phases.oil_m3);
+  $('r-brine').textContent = fmt(L.phases.free_brine_m3);
+  $('r-susp').textContent = fmt(L.phases.suspended_m3, 1);
+  $('r-bed').textContent = fmt(L.phases.bed_m3);
+  $('r-void').textContent = fmt(L.phases.void_m3);
+  $('r-settled').textContent = fmt(L.settled_m3);
+  $('r-pending').textContent = '−' + fmt(L.pending_m3, 1);
+  $('r-atp').textContent = fmt(L.available_m3);
+  $('r-standoff').textContent = L.standoff_m.toFixed(1);
+  $('r-recv').textContent = fmt(S.received_m3);
+  $('r-out').textContent = fmt(S.displaced_m3);
+  $('r-ret').textContent = fmt(S.returned_m3);
+  $('r-oilrec').textContent = fmt(S.oil_recovered_m3);
+  $('r-phi').textContent = S.phi.toFixed(3);
+  $('r-loads').textContent = fmt(loadsCount);
+  const breached = L.settled_m3 <= L.floor_m3;
+  $('r-atp').style.color = breached ? 'var(--alert)' : '';
+
+  $('h-atp').textContent = fmt(L.available_m3);
+  $('h-atp').style.color = breached ? 'var(--alert)' : '';
+  $('h-sub').textContent = breached
+    ? 'cubic metres, but the clean-brine floor is already breached'
+    : 'cubic metres the intake desk could sell today';
+  $('h-life').textContent = breached
+    ? 'Full after ' + fmt(S.received_m3) + ' m³, ' + (S.received_m3 / S.void_m3).toFixed(2) + '× its own void'
+    : (cfg.rate > 0
+        ? (L.acceptable_waste_m3 / (cfg.rate * LOAD_M3) / 365).toFixed(1) + ' years left at ' + cfg.rate + ' loads/day'
+        : fmt(L.acceptable_waste_m3) + ' m³ of waste still acceptable');
+
+  drawCavern();
+  const now = performance.now();
+  if (!throttle || now - lastChartDraw > 110){
+    lastChartDraw = now;
+    drawChartA(); drawChartB(); drawFate();
+  }
+}
+
+/* ---------- wiring ---------- */
+function syncOutputs(){
+  cfg = readCfg();
+  $('oRate').textContent = cfg.rate;
+  $('oRateV').textContent = fmt(cfg.rate * LOAD_M3);
+  $('oSolids').textContent = (cfg.f_solids * 100).toFixed(1);
+  $('oOil').textContent = (cfg.f_oil * 100).toFixed(1);
+  $('oD50').textContent = $('sD50').value;
+  $('oFloor').textContent = cfg.standoff_m;
+  $('oOilKeep').textContent = (+$('sOilKeep').value).toFixed(1);
+  $('oOilKeepV').textContent = fmt(cfg.oil_target_m3);
+  $('oSpeed').textContent = cfg.speed;
+  const mL = liquidMass(S), wN = mL > 0 ? S.nacl_kg / mL : W_SAT;
+  const v = stokesVelocity(cfg.d50_m, wN);
+  const h = Math.max(1, liquidVolume(S, 20) / AREA);
+  $('oSettle').textContent = v > 0 ? (h / (v * 86400)).toFixed(1) : '∞';
+}
+
+SLIDERS.forEach(id => $(id).addEventListener('input', () => { syncOutputs(); render(); }));
+
+['A', 'B'].forEach(which => {
+  const seg = $('seg' + which);
+  seg.addEventListener('click', ev => {
+    const b = ev.target.closest('button');
+    if (!b) return;
+    xMode[which] = b.dataset.x;
+    [...seg.querySelectorAll('button')].forEach(x => x.classList.toggle('on', x === b));
+    lastChartDraw = 0;
+    render();
+  });
+});
+
+$('bLoad').addEventListener('click', () => { receiveOne(); syncOutputs(); });
+$('bDay').addEventListener('click', () => { advance(1, true); syncOutputs(); });
+$('bMonth').addEventListener('click', () => { advance(30, true); syncOutputs(); });
+$('bReset').addEventListener('click', () => reset(true));
+
+const RUN_HORIZON_DAYS = 18250;   // fifty years; a run that gets here is telling you something
+
+$('bRun').addEventListener('click', () => {
+  cfg = readCfg();
+  let stopped = cfg.rate === 0 ? 'intake is set to zero' : null;
+  const startDay = S.day;
+  while (!stopped){
+    const L = ledger(S, cfg);
+    if (L.settled_m3 <= L.floor_m3) break;
+    if (S.day - startDay >= RUN_HORIZON_DAYS){ stopped = 'fifty years elapsed without reaching the floor'; break; }
+    const before = S.received_m3;
+    const halted = advanceQuiet(30);
+    if (halted){ stopped = halted; break; }
+    if (S.received_m3 === before && cfg.rate > 0){ stopped = 'the cavern stopped accepting'; break; }
+  }
+  render(); syncOutputs(); note(stopped);
+});
+
+// null if the whole span ran, or a reason string if the engine refused a step
+function advanceQuiet(days){
+  for (let i = 0; i < days; i++){
+    const whole = Math.floor(cfg.rate);
+    const n = whole + (rnd() < cfg.rate - whole ? 1 : 0);
+    try { step(S, 1, drawLoads(n), cfg); }
+    catch (e){ return 'the engine refused a step (' + e.message + ')'; }
+    loadsCount += n;
+    record();
+  }
+  return null;
+}
+
+$('bPlay').addEventListener('click', () => {
+  playing = !playing;
+  $('bPlay').innerHTML = playing ? '&#10073;&#10073;&nbsp; Pause' : '&#9654;&nbsp; Play';
+  if (playing){ lastT = performance.now(); acc = 0; requestAnimationFrame(loop); }
+  else render();
+});
+
+function loop(t){
+  if (!playing) return;
+  acc += Math.min(0.25, (t - lastT) / 1000) * cfg.speed;
+  lastT = t;
+  let steps = 0;
+  while (acc >= 1 && steps < 400){ acc -= 1; steps++; }
+  if (steps){
+    advance(steps, true, true);
+    syncOutputs();
+    const L = ledger(S, cfg);
+    if (L.settled_m3 <= L.floor_m3){
+      playing = false;
+      $('bPlay').innerHTML = '&#9654;&nbsp; Play';
+      render();
+      return;
+    }
+  }
+  requestAnimationFrame(loop);
+}
+
+/* ---------- theme: light, dark, or follow the system ---------- */
+const THEMES = ['system', 'light', 'dark'];
+let themeIx = 0;
+function applyTheme(){
+  const t = THEMES[themeIx];
+  if (t === 'system') document.documentElement.removeAttribute('data-theme');
+  else document.documentElement.setAttribute('data-theme', t);
+  $('themeBtn').textContent = 'Theme: ' + t;
+  render();
+}
+$('themeBtn').addEventListener('click', () => { themeIx = (themeIx + 1) % THEMES.length; applyTheme(); });
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+  if (THEMES[themeIx] === 'system') render();
+});
+
+reset(true);
+})();
+</script>
+</body>
+</html>
