@@ -86,6 +86,18 @@ a{color:inherit;}
   color:var(--muted);margin-bottom:1.1rem;}
 .panel .note{font-size:.9rem;color:var(--body);margin:1rem 0 0;}
 svg{display:block;width:100%;height:auto;}
+/* balance the problem section: the left panel stretches to the right column's height */
+.balance{align-items:stretch;}
+.balance > div{display:flex;flex-direction:column;}
+.balance .panel{flex:1 1 auto;}
+.balance .panel svg{flex:1 1 auto;height:100%;min-height:230px;max-height:340px;margin:auto 0;}
+.balance .panel .note{margin-top:auto;padding-top:1rem;}
+.balance .mech:last-child{margin-bottom:0;}
+.balance > div:last-child{justify-content:space-between;}
+@media (max-width:900px){
+  .balance .panel svg{height:auto;min-height:0;max-height:none;margin:0;}
+  .balance .panel .note{margin-top:1rem;}
+}
 .legend{display:flex;gap:1.2rem;font-size:.85rem;color:var(--body);margin-top:.8rem;
   flex-wrap:wrap;}
 .legend i{display:inline-block;width:.7rem;height:.7rem;border-radius:2px;margin-right:.4rem;}
@@ -254,7 +266,7 @@ svg{display:block;width:100%;height:auto;}
       <div class="label">The product vision</div>
       <p class="big">Every cubic metre of void accounted for, from the first wash hour of Cavern 3 onward, under one model that never needs re-deriving.</p>
     </div>
-    <p class="foot"></p>
+    <p class="foot">Algo-Rythmn · The Cavern Capacity Ledger</p>
     <p class="copy">© 2026 Algo-Rythmn Corp. All rights reserved. Confidential.</p>
 
   </div>
@@ -266,9 +278,9 @@ svg{display:block;width:100%;height:auto;}
     <p class="eyebrow warn">02 · The problem</p>
     <h2>The residual: one figure carries every difference</h2>
     <p class="kicker">Each of these is common across solution-mined disposal. Together they leave no cost per cubic metre behind the space that gets sold.</p>
-    <div class="grid g2">
+    <div class="grid g2 balance">
       <div class="panel">
-        <div class="ptitle">Sonar volume is interpreted, not measured</div>
+        <div class="ptitle">The sonar reading itself may be ambiguous</div>
         <svg viewBox="0 0 480 220" role="img" aria-label="An acoustic return trace with a fuzzy boundary zone; two interpreters draw the cavern wall at different points inside that zone, producing two different volumes from the same raw data">
           <line x1="38" y1="170" x2="455" y2="170" stroke="currentColor" stroke-width="1" opacity=".5"/>
           <text x="38" y="188" font-size="13" fill="currentColor" opacity=".65">near wellbore</text>
@@ -287,25 +299,25 @@ svg{display:block;width:100%;height:auto;}
           <text x="379" y="18" font-size="12" fill="var(--purple)" text-anchor="middle" font-weight="600">reads 74,800 m³</text>
           <text x="185" y="207" font-size="12" fill="var(--warn)" text-anchor="middle" font-weight="700">same trace → 73,000 ± 1,800 m³</text>
         </svg>
-        <p class="note">Two readings of the same trace can sit 2.5% apart, both of them sound. The instrument returns a signal, not a boundary — the wall position has to be read off a zone where the return is genuinely fuzzy.</p>
+        <p class="note">Two readings of the same trace can sit 2.5% apart, both of them sound. The instrument returns a signal, and the wall position has to be read off a zone where that signal is genuinely fuzzy.</p>
       </div>
       <div>
-        <h3 style="font-size:1.35rem;margin-bottom:1.3rem">Five mechanisms pull the three records apart</h3>
+        <h3 style="font-size:1.35rem;margin-bottom:1.3rem">Five things that could be moving the void-space numbers</h3>
         <div class="mech"><div class="dot" style="background:var(--teal)">1</div><div>
-          <h3>Sonar volume comes from interpreting a return</h3>
-          <p>Two readings of one trace can sit 2.5% apart, both of them sound.</p></div></div>
+          <h3>The sonar reading itself may be ambiguous</h3>
+          <p>Two people reading the same trace can land 2.5% apart, both of them sound.</p></div></div>
         <div class="mech"><div class="dot" style="background:var(--warn)">2</div><div>
-          <h3>Solids are solved by difference</h3>
-          <p>Meter drift, leak-off and undocumented transfers all resolve into one figure.</p></div></div>
+          <h3>Solids may be absorbing differences that are not solids</h3>
+          <p>Meter drift, an unnoticed leak or an untracked transfer all land in the remainder.</p></div></div>
         <div class="mech"><div class="dot" style="background:var(--teal)">3</div><div>
-          <h3>Two caverns share one balance by design</h3>
-          <p>Cavern 2 returns feed Cavern 1, so a single transfer moves both books.</p></div></div>
+          <h3>A transfer between caverns may be moving both balances</h3>
+          <p>Cavern 2 returns feed Cavern 1, so one undated movement shifts both sides.</p></div></div>
         <div class="mech"><div class="dot" style="background:var(--teal)">4</div><div>
-          <h3>The 7:1 wash ratio carries planning weight</h3>
-          <p>It describes the thermodynamic floor, and three planning numbers inherit it.</p></div></div>
+          <h3>The 7:1 wash ratio may be carrying more weight than it can</h3>
+          <p>It describes a physical floor, and several other estimates inherit it.</p></div></div>
         <div class="mech"><div class="dot" style="background:var(--teal)">5</div><div>
-          <h3>Two sinks rarely modelled anywhere</h3>
-          <p>Insolubles refill new space and halite creeps closed. Both consume capacity.</p></div></div>
+          <h3>Two sinks are rarely modelled anywhere</h3>
+          <p>Insolubles refill washed space and salt creeps inward. Both shrink usable volume.</p></div></div>
       </div>
     </div>
     <p class="foot">Sonar diagram is illustrative. The ±2.5% interpretation spread shown is consistent with published sonar uncertainty ranges. No site data is used.</p>
