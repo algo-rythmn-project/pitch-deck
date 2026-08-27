@@ -1,0 +1,288 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<title>Five Mechanisms — Diagrams</title>
+<style>
+:root{
+  --bg:#FAFBFB; --card:#FFFFFF; --ink:#141B1D; --ink2:#3D4C4F; --muted:#6B7B7E;
+  --rule:#D7E0E0; --rule2:#E9EFEF;
+  --brine:#0E6E73; --solids:#8A5F22; --sonar:#6A3FC0; --warn:#9C3B23;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#12181A; --card:#182022; --ink:#EAF1F1; --ink2:#B7C4C4; --muted:#7E9090;
+    --rule:#2B3638; --rule2:#212B2C;
+    --brine:#4FC4CB; --solids:#D69A4E; --sonar:#A98CE8; --warn:#E08064;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#12181A; --card:#182022; --ink:#EAF1F1; --ink2:#B7C4C4; --muted:#7E9090;
+  --rule:#2B3638; --rule2:#212B2C;
+  --brine:#4FC4CB; --solids:#D69A4E; --sonar:#A98CE8; --warn:#E08064;
+}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  padding:32px 20px 60px;}
+.wrap{max-width:840px;margin:0 auto;}
+header{margin-bottom:28px;}
+.eyebrow{font-family:"SF Mono",ui-monospace,Menlo,monospace;font-size:11px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--brine);margin-bottom:8px;font-weight:600;}
+h1{font-size:26px;font-weight:700;letter-spacing:-.01em;margin:0 0 8px;line-height:1.15;}
+.lede{color:var(--ink2);font-size:14.5px;line-height:1.55;max-width:640px;}
+
+.fig{background:var(--card);border:1px solid var(--rule);border-radius:10px;
+  padding:20px 22px 18px;margin-bottom:22px;}
+.fig .num{display:inline-flex;align-items:center;gap:8px;font-family:"SF Mono",ui-monospace,Menlo,monospace;
+  font-size:11px;letter-spacing:.1em;color:var(--brine);font-weight:600;margin-bottom:4px;}
+.fig h2{font-size:16.5px;font-weight:700;margin:2px 0 10px;letter-spacing:-.003em;}
+svg{display:block;width:100%;height:auto;color:var(--ink2);margin:6px 0 10px;}
+figcaption{font-size:13px;line-height:1.55;color:var(--ink2);border-top:1px solid var(--rule2);
+  padding-top:10px;margin-top:2px;}
+figcaption b{color:var(--ink);font-weight:600;}
+.accent-brine{color:var(--brine);}
+.accent-solids{color:var(--solids);}
+.accent-sonar{color:var(--sonar);}
+.accent-warn{color:var(--warn);}
+footer{margin-top:8px;font-family:"SF Mono",ui-monospace,Menlo,monospace;font-size:11px;
+  color:var(--muted);border-top:1px solid var(--rule);padding-top:14px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">Companion to &ldquo;Reconciling the Cavern Record&rdquo;</div>
+  <h1>Five mechanisms that pull the ledgers apart</h1>
+  <p class="lede">Each of these is a distinct failure mode, not a variation on one theme &mdash; a fix for one does nothing for the others. This shows the mechanism behind each, not just the name.</p>
+</header>
+
+<!-- ============ 1: Sonar is interpreted ============ -->
+<div class="fig">
+  <div class="num">01</div>
+  <h2>Sonar volume is interpreted, not measured</h2>
+  <figure>
+    <svg viewBox="0 0 760 220" role="img" aria-label="An acoustic return trace with a fuzzy boundary zone; two different interpreters draw the cavern wall at different points inside that zone, producing two different volumes from the same raw data">
+      <!-- axes -->
+      <line x1="60" y1="170" x2="720" y2="170" stroke="currentColor" stroke-width="1" opacity=".5"/>
+      <text x="60" y="188" font-size="11" fill="currentColor" opacity=".65">near wellbore</text>
+      <text x="720" y="188" font-size="11" fill="currentColor" opacity=".65" text-anchor="end">cavern wall</text>
+
+      <!-- ambiguous zone -->
+      <rect x="450" y="45" width="180" height="125" fill="var(--sonar)" opacity=".12"/>
+      <text x="540" y="212" font-size="11" fill="var(--sonar)" text-anchor="middle" font-weight="600">ambiguous return zone</text>
+
+      <!-- raw acoustic trace -->
+      <polyline points="70,150 110,140 150,152 190,135 230,148 270,120 310,142 350,110 390,130
+                         420,95 445,115 465,80 480,105 495,70 510,100 525,60 540,95 555,50
+                         565,90 580,45 600,60 630,55 670,58 710,56"
+        fill="none" stroke="currentColor" stroke-width="1.6" opacity=".8"/>
+
+      <!-- interpreter A boundary -->
+      <line x1="480" y1="45" x2="480" y2="170" stroke="var(--brine)" stroke-width="2" stroke-dasharray="5 4"/>
+      <circle cx="480" cy="105" r="3.4" fill="var(--brine)"/>
+      <text x="480" y="34" font-size="12" fill="var(--brine)" text-anchor="middle" font-weight="700">Interpreter A</text>
+
+      <!-- interpreter B boundary -->
+      <line x1="600" y1="45" x2="600" y2="170" stroke="var(--sonar)" stroke-width="2" stroke-dasharray="5 4"/>
+      <circle cx="600" cy="60" r="3.4" fill="var(--sonar)"/>
+      <text x="600" y="34" font-size="12" fill="var(--sonar)" text-anchor="middle" font-weight="700">Interpreter B</text>
+
+      <!-- readout callouts with example volumes, staggered so they never collide -->
+      <text x="480" y="192" font-size="11" fill="var(--brine)" text-anchor="middle" font-weight="600">reads 71,200 m&sup3;</text>
+      <text x="600" y="18" font-size="11" fill="var(--sonar)" text-anchor="middle" font-weight="600">reads 74,800 m&sup3;</text>
+
+      <!-- example quantity banner -->
+      <text x="330" y="205" font-size="11.5" fill="var(--warn)" text-anchor="middle" font-weight="700">same trace &rarr; 73,000 &plusmn; 1,800 m&sup3;</text>
+    </svg>
+    <figcaption><b>What it shows.</b> The instrument returns a signal, not a boundary &mdash; the wall has to be read off a zone where the return is genuinely fuzzy. Two people (or the same person, years apart) can draw that line a few percent apart from the identical raw trace &mdash; here, 71,200 m&sup3; against 74,800 m&sup3;, a &plusmn;1,800 m&sup3; (&plusmn;2.5%) spread with no error in either individual reading.</figcaption>
+  </figure>
+</div>
+
+<!-- ============ 2: Solids by difference ============ -->
+<div class="fig">
+  <div class="num">02</div>
+  <h2>Solving for solids by difference</h2>
+  <figure>
+    <svg viewBox="0 0 760 240" role="img" aria-label="Three unrelated, independent error sources — meter drift, an unlogged leak, an unrecorded transfer — feed into a single subtraction; because they are independent, their combined uncertainty is the quadrature sum of the three, not the simple sum">
+      <!-- three sources, each with an example magnitude -->
+      <g font-size="12" fill="currentColor">
+        <rect x="20" y="20" width="180" height="40" rx="6" fill="none" stroke="currentColor" stroke-width="1.3" opacity=".75"/>
+        <text x="110" y="38" text-anchor="middle">meter drift</text>
+        <text x="110" y="53" text-anchor="middle" font-size="10" fill="var(--warn)" font-weight="600">&plusmn;400 m&sup3;/mo</text>
+
+        <rect x="20" y="85" width="180" height="40" rx="6" fill="none" stroke="currentColor" stroke-width="1.3" opacity=".75"/>
+        <text x="110" y="103" text-anchor="middle">unlogged leak-off</text>
+        <text x="110" y="118" text-anchor="middle" font-size="10" fill="var(--warn)" font-weight="600">&plusmn;150 m&sup3;/mo</text>
+
+        <rect x="20" y="150" width="180" height="40" rx="6" fill="none" stroke="currentColor" stroke-width="1.3" opacity=".75"/>
+        <text x="110" y="168" text-anchor="middle">unrecorded transfer</text>
+        <text x="110" y="183" text-anchor="middle" font-size="10" fill="var(--warn)" font-weight="600">&plusmn;2,000 m&sup3; one-off</text>
+      </g>
+
+      <!-- arrows converging -->
+      <path d="M200 40 L 330 100" fill="none" stroke="currentColor" stroke-width="1.4" opacity=".6" marker-end="url(#arrow1)"/>
+      <path d="M200 105 L 330 105" fill="none" stroke="currentColor" stroke-width="1.4" opacity=".6" marker-end="url(#arrow1)"/>
+      <path d="M200 170 L 330 110" fill="none" stroke="currentColor" stroke-width="1.4" opacity=".6" marker-end="url(#arrow1)"/>
+
+      <!-- the single equation box -->
+      <rect x="335" y="75" width="190" height="60" rx="6" fill="var(--warn)" opacity=".12" stroke="var(--warn)" stroke-width="1.5"/>
+      <text x="430" y="100" text-anchor="middle" font-size="11.5" fill="var(--warn)" font-weight="700">total void</text>
+      <text x="430" y="116" text-anchor="middle" font-size="11.5" fill="var(--warn)" font-weight="700">&minus; known brine</text>
+
+      <!-- output arrow -->
+      <path d="M525 105 L 620 105" fill="none" stroke="var(--warn)" stroke-width="1.8" marker-end="url(#arrow2)"/>
+
+      <rect x="625" y="72" width="115" height="66" rx="6" fill="none" stroke="var(--solids)" stroke-width="1.6"/>
+      <text x="682" y="92" text-anchor="middle" font-size="11.5" fill="var(--solids)" font-weight="700">solids</text>
+      <text x="682" y="106" text-anchor="middle" font-size="9.5" fill="var(--solids)">(by difference)</text>
+      <text x="682" y="122" text-anchor="middle" font-size="10.5" fill="var(--solids)" font-weight="700">14,200 &plusmn; 2,045 m&sup3;</text>
+
+      <!-- quadrature vs naive-sum annotation -->
+      <text x="380" y="205" text-anchor="middle" font-size="10.5" fill="currentColor" opacity=".75">independent errors combine in quadrature, not by simple addition</text>
+      <text x="380" y="222" text-anchor="middle" font-size="11" fill="var(--warn)" font-weight="600">&radic;(400&sup2;+150&sup2;+2000&sup2;) &asymp; 2,045 m&sup3; &nbsp;&mdash;&nbsp; not 400+150+2,000 = 2,550 m&sup3;</text>
+
+      <defs>
+        <marker id="arrow1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0 0 L10 5 L0 10 z" fill="currentColor" opacity=".6"/>
+        </marker>
+        <marker id="arrow2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+          <path d="M0 0 L10 5 L0 10 z" fill="var(--warn)"/>
+        </marker>
+      </defs>
+    </svg>
+    <figcaption><b>What it shows.</b> With one subtraction as the only model, three physically unrelated, statistically independent problems &mdash; a meter drifting &plusmn;400 m&sup3;/month, a leak nobody logged at &plusmn;150 m&sup3;/month, a transfer nobody dated at &plusmn;2,000 m&sup3; &mdash; all land in the same place: a "solids" figure of, say, 14,200 m&sup3; that is really 14,200 &plusmn; 2,045 m&sup3;. Because the three sources are independent, their combined uncertainty is the square root of the sum of their squares (variances add; standard deviations don't) &mdash; &radic;(400&sup2;+150&sup2;+2000&sup2;) &asymp; 2,045 m&sup3; &mdash; smaller than the naive 2,550 m&sup3; you'd get by just adding the three &plusmn; figures, because independent errors partly cancel rather than always stacking in the same direction. The component model gives each source its own equation instead, so they stop being interchangeable in the first place.</figcaption>
+  </figure>
+</div>
+
+<!-- ============ 3: Coupled caverns ============ -->
+<div class="fig">
+  <div class="num">03</div>
+  <h2>The two caverns share one balance</h2>
+  <figure>
+    <svg viewBox="0 0 760 230" role="img" aria-label="Cavern 2 and Cavern 1 connected by a brine-return line; an undated transfer between them makes Cavern 2 appear to be losing water while Cavern 1 appears to be gaining it from nowhere">
+      <!-- Cavern 2 -->
+      <rect x="40" y="50" width="220" height="120" rx="8" fill="none" stroke="currentColor" stroke-width="1.5"/>
+      <text x="150" y="40" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">Cavern 2</text>
+      <rect x="55" y="130" width="190" height="30" fill="var(--brine)" opacity=".22"/>
+      <text x="150" y="150" text-anchor="middle" font-size="10.5" fill="currentColor" opacity=".7">brine</text>
+
+      <!-- Cavern 1 -->
+      <rect x="500" y="50" width="220" height="120" rx="8" fill="none" stroke="currentColor" stroke-width="1.5"/>
+      <text x="610" y="40" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">Cavern 1</text>
+      <rect x="515" y="110" width="190" height="50" fill="var(--brine)" opacity=".22"/>
+      <text x="610" y="140" text-anchor="middle" font-size="10.5" fill="currentColor" opacity=".7">brine</text>
+
+      <!-- transfer pipe -->
+      <path d="M260 110 L 500 110" fill="none" stroke="var(--sonar)" stroke-width="2.2" marker-end="url(#arrow3)"/>
+      <text x="380" y="98" text-anchor="middle" font-size="11" fill="var(--sonar)" font-weight="700">brine return</text>
+      <text x="380" y="128" text-anchor="middle" font-size="10.5" fill="var(--sonar)">2,000 &plusmn; 300 m&sup3; (undated)</text>
+
+      <!-- callouts -->
+      <text x="150" y="188" text-anchor="middle" font-size="11.5" fill="var(--warn)" font-weight="700">&minus;(2,000 &plusmn; 300) m&sup3; balance gap</text>
+      <text x="610" y="188" text-anchor="middle" font-size="11.5" fill="var(--warn)" font-weight="700">+(2,000 &plusmn; 300) m&sup3; balance gap</text>
+      <text x="380" y="210" text-anchor="middle" font-size="11" fill="currentColor" opacity=".65">one real transfer, read as two separate anomalies</text>
+
+      <defs>
+        <marker id="arrow3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+          <path d="M0 0 L10 5 L0 10 z" fill="var(--sonar)"/>
+        </marker>
+      </defs>
+    </svg>
+    <figcaption><b>What it shows.</b> Cavern 2's returns feed Cavern 1 by design, so the two are one coupled system, not two independent ones. An undated transfer doesn't cancel out &mdash; a transfer of roughly 2,000 &plusmn; 300 m&sup3; shows up as a mystery deficit of that size in one cavern's balance and a mystery surplus of the same size in the other, and without the transfer log neither can be traced back to its real cause.</figcaption>
+  </figure>
+</div>
+
+<!-- ============ 4: Wash ratio overloaded ============ -->
+<div class="fig">
+  <div class="num">04</div>
+  <h2>The wash ratio is carrying more weight than it can</h2>
+  <figure>
+    <svg viewBox="0 0 760 232" role="img" aria-label="7 to 1, the thermodynamic floor, sits at the root of a fan-out into three downstream forecasts; an error at the root propagates into all three, each shown with an example before and after quantity">
+      <!-- root -->
+      <rect x="14" y="79" width="210" height="66" rx="7" fill="var(--warn)" opacity=".12" stroke="var(--warn)" stroke-width="1.6"/>
+      <text x="119" y="99" text-anchor="middle" font-size="12" fill="var(--warn)" font-weight="700">7:1 assumed</text>
+      <text x="119" y="114" text-anchor="middle" font-size="10" fill="var(--warn)">(thermodynamic floor)</text>
+      <text x="119" y="132" text-anchor="middle" font-size="11.5" fill="var(--warn)" font-weight="700">11 &plusmn; 1 : 1 actual</text>
+
+      <!-- fan out -->
+      <path d="M224 95 L 470 34"  fill="none" stroke="currentColor" stroke-width="1.4" opacity=".55" marker-end="url(#arrow4)"/>
+      <path d="M224 112 L 470 112" fill="none" stroke="currentColor" stroke-width="1.4" opacity=".55" marker-end="url(#arrow4)"/>
+      <path d="M224 129 L 470 190" fill="none" stroke="currentColor" stroke-width="1.4" opacity=".55" marker-end="url(#arrow4)"/>
+
+      <rect x="475" y="10" width="270" height="50" rx="6" fill="none" stroke="currentColor" stroke-width="1.3"/>
+      <text x="610" y="28" text-anchor="middle" font-size="11.5" fill="currentColor">water budget</text>
+      <text x="610" y="44" text-anchor="middle" font-size="10.5" fill="var(--warn)" font-weight="600">700k &rarr; 1.1M &plusmn; 0.1M m&sup3;</text>
+
+      <rect x="475" y="87" width="270" height="50" rx="6" fill="none" stroke="currentColor" stroke-width="1.3"/>
+      <text x="610" y="105" text-anchor="middle" font-size="11.5" fill="currentColor">cost per m&sup3; created</text>
+      <text x="610" y="121" text-anchor="middle" font-size="10.5" fill="var(--warn)" font-weight="600">$23 &rarr; $37 &plusmn; $4</text>
+
+      <rect x="475" y="164" width="270" height="50" rx="6" fill="none" stroke="currentColor" stroke-width="1.3"/>
+      <text x="610" y="182" text-anchor="middle" font-size="11.5" fill="currentColor">wash-duration forecast</text>
+      <text x="610" y="198" text-anchor="middle" font-size="10.5" fill="var(--warn)" font-weight="600">14 &rarr; 22 &plusmn; 2 months</text>
+
+      <defs>
+        <marker id="arrow4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7.5" markerHeight="7.5" orient="auto-start-reverse">
+          <path d="M0 0 L10 5 L0 10 z" fill="currentColor" opacity=".55"/>
+        </marker>
+      </defs>
+    </svg>
+    <figcaption><b>What it shows.</b> 7:1 is the best-case floor, not a typical achieved ratio &mdash; illustrative actuals run closer to 11 &plusmn; 1 : 1 &mdash; but three separate planning numbers get derived from the floor as if it were routine. Carry the assumption forward and a 700,000 m&sup3; water budget needs to be 1.1M &plusmn; 0.1M m&sup3;, a $23/m&sup3; cost estimate is really $37 &plusmn; $4, and a 14-month wash forecast is really 22 &plusmn; 2 months &mdash; all wrong together, in the same direction, before the project starts.</figcaption>
+  </figure>
+</div>
+
+<!-- ============ 5: Two uncounted sinks ============ -->
+<div class="fig">
+  <div class="num">05</div>
+  <h2>Two sinks that are rarely modelled anywhere</h2>
+  <figure>
+    <svg viewBox="0 0 760 275" role="img" aria-label="Volume dissolved minus solids growth equals usable volume delivered, with solids growth broken into the known spin-cut fraction and the hidden insolubles fraction; salt creep shown separately as a further mechanism this two-year simulation does not model">
+      <!-- box A: dissolved -->
+      <rect x="16" y="60" width="150" height="70" rx="7" fill="var(--brine)" opacity=".14" stroke="var(--brine)" stroke-width="1.5"/>
+      <text x="91" y="84" text-anchor="middle" font-size="11.5" font-weight="700" fill="currentColor">volume dissolved</text>
+      <text x="91" y="102" text-anchor="middle" font-size="12" fill="var(--brine)" font-weight="700">35,204 m&sup3;</text>
+      <text x="91" y="117" text-anchor="middle" font-size="9.5" fill="currentColor" opacity=".65">/ 2 yr</text>
+
+      <path d="M172 95 L 214 95" fill="none" stroke="currentColor" stroke-width="1.6" marker-end="url(#arrow5)"/>
+      <text x="193" y="84" text-anchor="middle" font-size="10" fill="currentColor" opacity=".7">minus</text>
+
+      <!-- box B: solids growth, split -->
+      <rect x="218" y="30" width="300" height="140" rx="7" fill="var(--solids)" opacity=".10" stroke="var(--solids)" stroke-width="1.5"/>
+      <text x="368" y="48" text-anchor="middle" font-size="11.5" font-weight="700" fill="var(--solids)">solids growth: 24,114 m&sup3;</text>
+
+      <rect x="232" y="60" width="272" height="42" rx="5" fill="none" stroke="currentColor" stroke-width="1.1" opacity=".6"/>
+      <text x="368" y="77" text-anchor="middle" font-size="10.5" fill="currentColor">spin-cut from waste &mdash; known, tracked</text>
+      <text x="368" y="93" text-anchor="middle" font-size="11.5" fill="currentColor" font-weight="700">22,002 m&sup3;</text>
+
+      <rect x="232" y="110" width="272" height="42" rx="5" fill="var(--warn)" opacity=".14" stroke="var(--warn)" stroke-width="1.3"/>
+      <text x="368" y="127" text-anchor="middle" font-size="10.5" fill="var(--warn)" font-weight="600">insolubles &mdash; hidden, unless modelled</text>
+      <text x="368" y="143" text-anchor="middle" font-size="11.5" fill="var(--warn)" font-weight="700">2,112 m&sup3; (&plusmn;6% of dissolved)</text>
+
+      <path d="M524 95 L 566 95" fill="none" stroke="currentColor" stroke-width="1.6" marker-end="url(#arrow5)"/>
+      <text x="545" y="84" text-anchor="middle" font-size="10" fill="currentColor" opacity=".7">equals</text>
+
+      <!-- box C: usable -->
+      <rect x="570" y="60" width="174" height="70" rx="7" fill="var(--brine)" opacity=".14" stroke="var(--brine)" stroke-width="1.5"/>
+      <text x="657" y="84" text-anchor="middle" font-size="11.5" font-weight="700" fill="currentColor">usable delivered</text>
+      <text x="657" y="102" text-anchor="middle" font-size="12" fill="var(--brine)" font-weight="700">11,085 m&sup3;</text>
+      <text x="657" y="117" text-anchor="middle" font-size="9.5" fill="currentColor" opacity=".65">/ 2 yr</text>
+
+      <!-- separate creep note, explicitly outside the closed accounting above -->
+      <rect x="218" y="196" width="300" height="60" rx="7" fill="none" stroke="var(--warn)" stroke-width="1.3" stroke-dasharray="4 3"/>
+      <text x="368" y="216" text-anchor="middle" font-size="10.5" fill="var(--warn)" font-weight="700">not modelled in this simulation</text>
+      <text x="368" y="233" text-anchor="middle" font-size="10.5" fill="currentColor">salt creep, illustrative rate</text>
+      <text x="368" y="249" text-anchor="middle" font-size="11" fill="var(--warn)" font-weight="700">&asymp;360 &plusmn; 120 m&sup3;/yr, additional</text>
+
+      <defs>
+        <marker id="arrow5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+          <path d="M0 0 L10 5 L0 10 z" fill="currentColor"/>
+        </marker>
+      </defs>
+    </svg>
+    <figcaption><b>What it shows.</b> In the two-year simulation, 35,204 m&sup3; of true dissolution minus 24,114 m&sup3; of solids growth closes to 11,085 m&sup3; of usable capacity (the remaining ~5 m&sup3; is the oil blanket, negligible). Of that solids growth, 22,002 m&sup3; is spin-cut arriving with the waste itself &mdash; expected, and already tracked on intake &mdash; while 2,112 m&sup3; (&plusmn;6% of everything dissolved) is insolubles released by the salt itself, which nothing tracks unless the model accounts for it. Salt creep is a separate, real mechanism this particular simulation does not include; the rate shown is illustrative only, not part of the numbers to its left.</figcaption>
+  </figure>
+</div>
+
+<footer>Companion diagram set &middot; illustrates the mechanisms in &ldquo;Reconciling the Cavern Record,&rdquo; &sect;01 &middot; not client-facing</footer>
+</div>
+</body></html>
