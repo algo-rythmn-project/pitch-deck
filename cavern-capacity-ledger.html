@@ -268,33 +268,29 @@ svg{display:block;width:100%;height:auto;}
     <p class="kicker">Each of these is common across solution-mined disposal. Together they leave no cost per cubic metre behind the space that gets sold.</p>
     <div class="grid g2">
       <div class="panel">
-        <div class="ptitle">Void growth over one eight-month window</div>
-        <svg viewBox="0 0 480 210" role="img" aria-label="Bar chart comparing 496 cubic metres read from surveys against 9,384 cubic metres of modelled true growth">
-          <line x1="70" y1="18" x2="70" y2="150" stroke="#E4EDED" stroke-width="1"/>
-          <line x1="172" y1="18" x2="172" y2="150" stroke="#E4EDED" stroke-width="1"/>
-          <line x1="274" y1="18" x2="274" y2="150" stroke="#E4EDED" stroke-width="1"/>
-          <line x1="376" y1="18" x2="376" y2="150" stroke="#E4EDED" stroke-width="1"/>
-          <line x1="460" y1="18" x2="460" y2="150" stroke="#E4EDED" stroke-width="1"/>
-          <rect x="70" y="34" width="6" height="40" fill="#6A3FC0" rx="2"/>
-          <text x="86" y="59" font-family="Calibri,Arial" font-size="14" fill="#38484A">496 m³</text>
-          <rect x="70" y="94" width="330" height="40" fill="#0E6E73" rx="2"/>
-          <text x="410" y="119" font-family="Calibri,Arial" font-size="14" fill="#38484A">9,384 m³</text>
-          <line x1="70" y1="150" x2="460" y2="150" stroke="#CBD9D9" stroke-width="1"/>
-          <text x="70" y="168" font-family="Calibri,Arial" font-size="11" fill="#6B7B7E" text-anchor="middle">0</text>
-          <text x="172" y="168" font-family="Calibri,Arial" font-size="11" fill="#6B7B7E" text-anchor="middle">3,000</text>
-          <text x="274" y="168" font-family="Calibri,Arial" font-size="11" fill="#6B7B7E" text-anchor="middle">6,000</text>
-          <text x="376" y="168" font-family="Calibri,Arial" font-size="11" fill="#6B7B7E" text-anchor="middle">9,000</text>
+        <div class="ptitle">Sonar volume is interpreted, not measured</div>
+        <svg viewBox="0 0 480 220" role="img" aria-label="An acoustic return trace with a fuzzy boundary zone; two interpreters draw the cavern wall at different points inside that zone, producing two different volumes from the same raw data">
+          <line x1="38" y1="170" x2="455" y2="170" stroke="currentColor" stroke-width="1" opacity=".5"/>
+          <text x="38" y="188" font-size="13" fill="currentColor" opacity=".65">near wellbore</text>
+          <text x="455" y="188" font-size="13" fill="currentColor" opacity=".65" text-anchor="end">cavern wall</text>
+          <rect x="284" y="45" width="114" height="125" fill="var(--purple)" opacity=".12"/>
+          <text x="341" y="213" font-size="13" fill="var(--purple)" text-anchor="middle" font-weight="600">ambiguous return zone</text>
+          <polyline points="44,150 70,140 95,152 120,135 145,148 171,120 196,142 221,110 247,130 265,95 281,115 294,80 303,105 313,70 322,100 332,60 341,95 351,50 357,90 367,45 379,60 398,55 423,58 449,56"
+            fill="none" stroke="currentColor" stroke-width="1.6" opacity=".8"/>
+          <line x1="303" y1="45" x2="303" y2="170" stroke="var(--teal)" stroke-width="2" stroke-dasharray="5 4"/>
+          <circle cx="303" cy="105" r="4" fill="var(--teal)"/>
+          <text x="303" y="34" font-size="13" fill="var(--teal)" text-anchor="middle" font-weight="700">Interpreter A</text>
+          <line x1="379" y1="45" x2="379" y2="170" stroke="var(--purple)" stroke-width="2" stroke-dasharray="5 4"/>
+          <circle cx="379" cy="60" r="4" fill="var(--purple)"/>
+          <text x="379" y="34" font-size="13" fill="var(--purple)" text-anchor="middle" font-weight="700">Interpreter B</text>
+          <text x="303" y="193" font-size="12" fill="var(--teal)" text-anchor="middle" font-weight="600">reads 71,200 m³</text>
+          <text x="379" y="18" font-size="12" fill="var(--purple)" text-anchor="middle" font-weight="600">reads 74,800 m³</text>
+          <text x="185" y="207" font-size="12" fill="var(--warn)" text-anchor="middle" font-weight="700">same trace → 73,000 ± 1,800 m³</text>
         </svg>
-        <div class="legend">
-          <span><i style="background:#6A3FC0"></i>Read from surveys</span>
-          <span><i style="background:#0E6E73"></i>True growth, modelled</span>
-        </div>
-        <p class="note">Four surveys, each carrying a few percent of interpretive drift, each sound on its own. Read together they understate growth by roughly 19×.</p>
+        <p class="note">Two readings of the same trace can sit 2.5% apart, both of them sound. The instrument returns a signal, not a boundary — the wall position has to be read off a zone where the return is genuinely fuzzy.</p>
       </div>
       <div>
-        <h3 style="font-size:1.35rem;margin-bottom:1.3rem">
-          <a class="mechlink" href="https://deck.algo-rythmn.ai/cavern-ledger-mechanisms" target="_blank" rel="noopener">Five mechanisms pull the three records apart <span class="arrow-ico">↗</span></a>
-        </h3>
+        <h3 style="font-size:1.35rem;margin-bottom:1.3rem">Five mechanisms pull the three records apart</h3>
         <div class="mech"><div class="dot" style="background:var(--teal)">1</div><div>
           <h3>Sonar volume comes from interpreting a return</h3>
           <p>Two readings of one trace can sit 2.5% apart, both of them sound.</p></div></div>
@@ -312,7 +308,7 @@ svg{display:block;width:100%;height:auto;}
           <p>Insolubles refill new space and halite creeps closed. Both consume capacity.</p></div></div>
       </div>
     </div>
-    <p class="foot">Chart is simulated using parameters inside the ranges discussed on 21 August 2026. Site operating data is not used.</p>
+    <p class="foot">Sonar diagram is illustrative. The ±2.5% interpretation spread shown is consistent with published sonar uncertainty ranges. No site data is used.</p>
     <p class="copy">© 2026 Algo-Rythmn Corp. All rights reserved. Confidential.</p>
 
   </div>
@@ -490,8 +486,7 @@ svg{display:block;width:100%;height:auto;}
       <div class="arrow">→</div>
       <div class="step"><h3>Cavern 2</h3><p>History reconstructed, one shared balance</p></div>
       <div class="arrow">→</div>
-      <div class="step on"><h3>Cavern 3</h3><p>Instrumented from the first cubic metre</p>
-        <a href="http://deck.algo-rythmn.ai/cavern3-simulator" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:.3rem;margin-top:.7rem;font-size:.88rem;color:var(--teall);text-decoration:none;border-bottom:1px solid var(--teall);padding-bottom:1px;">Capacity simulator <span style="font-size:.8em">↗</span></a></div>
+      <div class="step on"><h3>Cavern 3</h3><p>Instrumented from the first cubic metre</p></div>
     </div>
     <div class="grid g2" style="margin-top:2.4rem">
       <div>
