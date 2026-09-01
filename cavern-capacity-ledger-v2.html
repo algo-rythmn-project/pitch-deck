@@ -1,0 +1,666 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Cavern Capacity Ledger · Algo-Rythmn</title>
+<style>
+:root{
+  --ink:#101819; --ink2:#1B2628; --ink3:#24312F;
+  --paper:#FFFFFF; --soft:#F1F6F6; --soft2:#E4EDED;
+  --teal:#0E6E73; --teall:#4FC4CB;
+  --amber:#8A5F22; --amberl:#C89246;
+  --purple:#6A3FC0; --purplel:#A98CE8;
+  --warn:#9C3B23;
+  --muted:#6B7B7E; --mutedl:#8FA2A3;
+  --body:#91a7aa;
+  --serif:Cambria,"Bookman Old Style","Times New Roman",Georgia,serif;
+  --sans:Calibri,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  --pad:clamp(1.5rem,5vw,5.5rem);
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);
+  font-size:17px;line-height:1.5;-webkit-font-smoothing:antialiased;}
+
+#progress{position:fixed;top:0;left:0;height:3px;width:0;background:var(--teal);z-index:60;
+  transition:width .08s linear;}
+
+.slide{padding:clamp(3rem,7vw,5.5rem) var(--pad) clamp(2.5rem,5vw,4rem);
+  border-bottom:1px solid var(--soft2);}
+.slide.dark{background:var(--ink);color:#EAF1F1;border-bottom-color:#222E30;}
+.inner{max-width:1180px;margin:0 auto;position:relative;}
+.eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--teal);margin:0 0 .9rem;}
+.dark .eyebrow{color:var(--teall);}
+.eyebrow.warn{color:var(--warn);}
+.eyebrow.amber{color:var(--amberl);}
+h1{font-family:var(--serif);font-weight:700;font-size:clamp(2.4rem,6vw,4.2rem);
+  line-height:1.06;margin:0 0 1.4rem;letter-spacing:-.015em;}
+h2{font-family:var(--serif);font-weight:700;font-size:clamp(1.55rem,3.3vw,2.45rem);
+  line-height:1.15;margin:0 0 .8rem;letter-spacing:-.01em;}
+h3{font-family:var(--serif);font-weight:700;font-size:1.18rem;margin:0 0 .45rem;}
+.kicker{font-style:italic;color:var(--muted);font-size:clamp(1rem,1.6vw,1.12rem);
+  margin:0 0 2.4rem;max-width:66ch;}
+.dark .kicker{color:var(--mutedl);}
+p{margin:0 0 .8rem;}
+a{color:inherit;}
+
+.grid{display:grid;gap:1.4rem;}
+.g3{grid-template-columns:repeat(3,1fr);}
+.g2{grid-template-columns:1fr 1fr;}
+.card{background:var(--soft);border-radius:12px;padding:1.5rem 1.6rem;}
+.dark .card{background:var(--ink2);}
+.card p{color:var(--body);font-size:.98rem;margin:0;}
+.dark .card p{color:#B9C8C8;}
+.label{font-size:.72rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--teal);margin-bottom:.7rem;}
+.dark .label,.oncard .label{color:var(--teall);}
+.dot{width:1.9rem;height:1.9rem;border-radius:50%;display:flex;align-items:center;
+  justify-content:center;font-weight:700;font-size:.82rem;color:#fff;flex:0 0 1.9rem;}
+
+/* title */
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(2rem,5vw,4rem);align-items:center;}
+.hero h1{font-size:clamp(2.8rem,6.5vw,4.6rem);margin-bottom:1rem;}
+.promise{font-family:var(--serif);font-size:clamp(1.25rem,2.6vw,1.75rem);color:var(--teall);
+  margin:0 0 2rem;}
+.meta{border-top:1px solid #2F3E40;padding-top:1.1rem;font-size:.95rem;color:var(--mutedl);}
+.meta b{color:#E6EFEF;}
+.xsec{background:var(--ink2);border-radius:14px;padding:1.6rem;}
+.band{border-radius:7px;padding:.75rem 1rem;margin-bottom:.45rem;display:flex;
+  justify-content:space-between;align-items:center;gap:1rem;color:#fff;font-size:.95rem;}
+.band span{color:#E9F2F2;font-size:.87rem;text-align:right;}
+
+/* mission */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem;}
+.big{font-family:var(--serif);font-size:clamp(1.05rem,2vw,1.25rem);line-height:1.45;margin:0;}
+.anchors{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;margin-top:2.2rem;}
+.anchors > div{border-top:1px solid var(--soft2);padding-top:1rem;}
+.anchors h3{color:var(--teal);font-size:1.12rem;margin-bottom:.3rem;}
+.anchors p{font-size:.95rem;color:var(--body);margin:0;}
+
+/* enemy */
+.enemy{display:grid;grid-template-columns:1.85fr 1fr;gap:1.4rem;align-items:start;}
+.spot{display:flex;gap:.9rem;align-items:flex-start;background:var(--ink2);
+  border-radius:9px;padding:.95rem 1.1rem;margin-bottom:.6rem;}
+.spot.flag{background:var(--ink3);}
+.spot h3{font-family:var(--sans);font-size:1rem;font-weight:700;margin:.05rem 0 .15rem;color:#fff;}
+.spot p{font-size:.92rem;color:var(--mutedl);margin:0;}
+.cost{background:var(--ink2);border-radius:12px;padding:1.5rem 1.6rem;}
+.cost .num{font-family:var(--serif);font-size:3.2rem;font-weight:700;color:#fff;line-height:1;
+  margin:.2rem 0 .8rem;}
+.cost p{font-size:.95rem;color:#C3D2D2;}
+.cost hr{border:0;border-top:1px solid #31413F;margin:1.1rem 0;}
+
+/* solution flow */
+.flow{display:grid;grid-template-columns:1fr auto 1.05fr auto 1fr;gap:.9rem;align-items:center;}
+.src{background:var(--soft);border-radius:9px;padding:.85rem 1rem .85rem 1.15rem;
+  margin-bottom:.7rem;border-left:5px solid var(--teal);}
+.src b{display:block;font-size:1rem;}
+.src span{font-size:.9rem;color:#5A6A6C;}
+.core{background:var(--ink);color:#fff;border-radius:14px;padding:1.6rem;text-align:center;}
+.core h3{font-size:1.35rem;color:#fff;margin:.6rem 0 1rem;}
+.core hr{border:0;border-top:1px solid #31413F;margin:0 0 1rem;}
+.core p{font-size:.93rem;color:#B9C8C8;margin:0;}
+.out{background:var(--soft);border-radius:14px;padding:1.5rem 1.6rem;}
+.out h3{font-size:1.12rem;margin-bottom:.1rem;}
+.out p{font-size:.9rem;color:#5A6A6C;margin:0 0 1.1rem;}
+.arrow{color:var(--soft2);font-size:1.3rem;text-align:center;}
+
+/* product in action */
+.step{display:flex;gap:.9rem;margin-bottom:1.1rem;align-items:flex-start;}
+.step h3{font-family:var(--sans);font-size:1rem;font-weight:700;margin:.05rem 0 .15rem;color:#fff;}
+.step p{font-size:.92rem;color:var(--mutedl);margin:0;}
+.pull{font-family:var(--serif);font-weight:700;color:var(--teall);font-size:1.1rem;margin:0;}
+
+/* comparison */
+.col{border-radius:12px;padding:1.6rem 1.7rem;}
+.col.old{background:var(--soft);}
+.col.new{background:var(--ink);color:#E1EBEB;}
+.col .method{font-family:var(--serif);font-weight:700;font-size:1.15rem;line-height:1.4;
+  margin:0 0 1.2rem;}
+.col hr{border:0;border-top:1px solid var(--soft2);margin:0 0 1rem;}
+.col.new hr{border-top-color:#31413F;}
+.col ul{list-style:none;margin:0;padding:0;}
+.col li{position:relative;padding-left:1.3rem;margin-bottom:.7rem;font-size:.98rem;color:var(--muted);}
+.col.new li{color:#E1EBEB;}
+.col li::before{content:"";position:absolute;left:0;top:.5em;width:.5rem;height:.5rem;
+  border-radius:50%;background:var(--muted);}
+.col.new li::before{background:var(--teall);}
+.closer{text-align:center;font-style:italic;color:var(--muted);margin-top:1.7rem;font-size:1rem;}
+
+/* capex */
+.pt{display:flex;gap:.9rem;margin-bottom:1.5rem;align-items:flex-start;}
+.pt h3{font-size:1.2rem;color:#fff;margin-bottom:.3rem;}
+.pt p{font-size:.96rem;color:#B9C8C8;margin:0;}
+.risk{background:var(--ink2);border-radius:12px;padding:1.5rem 1.6rem;}
+.riskrow{margin-bottom:1.2rem;}
+.riskrow .k{font-size:.92rem;color:#C3D2D2;margin-bottom:.4rem;}
+.riskbar{display:flex;align-items:center;gap:.6rem;}
+.riskbar .b{height:1.05rem;border-radius:4px;}
+.riskbar .v{font-family:var(--serif);font-weight:700;font-size:1.1rem;color:#fff;}
+.risk hr{border:0;border-top:1px solid #31413F;margin:1.1rem 0;}
+.risk p{font-size:.94rem;color:#E4EEEE;margin:0;}
+
+/* implementation */
+.nots > div{margin-bottom:1.1rem;}
+.nots h3{color:#fff;font-size:1.12rem;margin-bottom:.15rem;}
+.nots p{font-size:.94rem;color:#B9C8C8;margin:0;}
+.reads{list-style:none;margin:0 0 1.3rem;padding:0;}
+.reads li{position:relative;padding-left:1.3rem;margin-bottom:.7rem;font-size:1rem;color:var(--muted);}
+.reads li::before{content:"";position:absolute;left:0;top:.55em;width:.45rem;height:.45rem;
+  border-radius:50%;background:var(--teal);}
+
+/* next step */
+.stages{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;}
+.stage{background:var(--ink2);border-radius:10px;padding:1.4rem 1.5rem;border-top:5px solid var(--teal);}
+.stage .days{font-size:.75rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--mutedl);margin-bottom:.5rem;}
+.stage h3{color:#fff;font-size:1.3rem;margin-bottom:.6rem;}
+.stage p{font-size:.94rem;color:#B9C8C8;margin:0;}
+.sdg{margin-top:2rem;}
+.sdg .r{display:grid;grid-template-columns:9rem 1fr;gap:1rem;padding:.45rem 0;align-items:baseline;}
+.sdg .r .k{font-size:.75rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--teall);}
+.sdg .r .v{font-size:1rem;color:#E1EBEB;}
+.terms{background:var(--ink3);border-radius:9px;padding:1rem 1.3rem;margin-top:1.6rem;
+  text-align:center;font-weight:700;font-size:1rem;color:#DCE8E8;}
+
+/* footers */
+.foot{margin-top:2.4rem;margin-bottom:2.4rem;font-size:.83rem;color:var(--muted);}
+.dark .foot{color:#6E7E80;}
+.copy{margin-top:.5rem;font-size:.76rem;color:#9AA9AB;}
+.dark .copy{color:#5C6C6E;}
+.pageno{position:absolute;right:0;bottom:0;font-family:var(--serif);font-size:.85rem;
+  letter-spacing:.06em;color:var(--muted);}
+.dark .pageno{color:#6E7E80;}
+.pageno b{font-weight:700;color:var(--teal);}
+.dark .pageno b{color:var(--teall);}
+
+@media (max-width:900px){
+  .hero,.split,.enemy,.g2,.g3,.anchors,.stages,.flow,.compare{grid-template-columns:1fr;}
+  .arrow{display:none;}
+  .pageno{position:static;display:block;text-align:right;margin-top:.6rem;}
+  .sdg .r{grid-template-columns:1fr;gap:.2rem;}
+  body{font-size:16px;}
+}
+</style>
+<style>
+/* additions */
+.rank{display:flex;gap:.9rem;align-items:flex-start;background:var(--soft);
+  border-radius:9px;padding:.9rem 1.1rem;margin-bottom:.6rem;}
+.rank h3{font-family:var(--sans);font-size:1rem;font-weight:700;margin:.05rem 0 .15rem;}
+.rank p{font-size:.92rem;color:var(--muted);margin:0;}
+.dark .rank{background:var(--ink2);}
+.dark .rank h3{color:#fff;}
+.dark .rank p{color:var(--mutedl);}
+.cardlist{list-style:none;margin:0;padding:0;}
+.cardlist li{position:relative;padding-left:1.15rem;margin-bottom:.55rem;
+  font-size:.96rem;color:var(--muted);}
+.cardlist li::before{content:"";position:absolute;left:0;top:.6em;width:.42rem;height:.42rem;
+  border-radius:50%;background:var(--teal);}
+.dark .cardlist li{color:#C3D2D2;}
+.dark .cardlist li::before{background:var(--teall);}
+.acct{background:var(--ink);border-radius:12px;padding:1.5rem 1.6rem;color:#E4EEEE;}
+.acct .r{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;
+  padding:.55rem 0;}
+.acct .r .v{font-family:var(--serif);font-weight:700;font-size:1.25rem;color:#fff;}
+.acct .r.total{border-top:1px solid #31413F;margin-top:.4rem;padding-top:.9rem;}
+.acct .r.total .v{color:var(--teall);font-size:1.6rem;}
+.acct .note{font-size:.86rem;color:#8FA2A3;font-style:italic;margin:.9rem 0 0;}
+.state{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.6rem;}
+.state div{border-top:4px solid var(--teal);padding-top:.8rem;}
+.state h3{font-size:1.05rem;margin-bottom:.15rem;}
+.state p{font-size:.9rem;color:var(--muted);margin:0;}
+.dark .state div{border-top-color:var(--teall);}
+.dark .state h3{color:#fff;}
+.dark .state p{color:var(--mutedl);}
+.ws{display:grid;grid-template-columns:3.2rem 1fr;gap:.8rem;padding:.5rem 0;align-items:baseline;}
+.ws .k{font-size:.78rem;font-weight:700;letter-spacing:.1em;color:var(--teall);}
+.ws .v{font-size:.98rem;color:#E1EBEB;}
+.phz{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:1.8rem;}
+.phz .k{font-size:.72rem;font-weight:700;letter-spacing:.13em;color:#6E7E80;margin-bottom:.2rem;}
+.phz .v{font-size:.95rem;color:#B9C8C8;}
+@media (max-width:900px){ .state,.phz{grid-template-columns:1fr 1fr;} }
+</style>
+</head>
+<body>
+<div id="progress"></div>
+
+<!-- 1 · TITLE -->
+<section class="slide dark">
+  <div class="inner">
+    <p class="eyebrow">Algo-Rythmn</p>
+    <div class="hero">
+      <div>
+        <h1>The Cavern<br>Capacity Ledger</h1>
+        <p class="promise">Know your true volume before the hole is drilled.</p>
+        <div class="meta">
+          <p style="margin:0">Prepared by <b>Algo-Rythmn</b> &nbsp;·&nbsp; Status <b>Confidential draft for discussion</b> &nbsp;·&nbsp; Second meeting</p>
+        </div>
+      </div>
+      <div class="xsec">
+        <div class="label" style="color:#8FA2A3">Cavern cross-section</div>
+        <div class="band" style="background:var(--amberl)"><b>Oil blanket</b><span>protects the roof</span></div>
+        <div class="band" style="background:var(--teal);padding-top:2.2rem;padding-bottom:2.2rem"><b>Usable void (brine)</b><span>what can be sold</span></div>
+        <div class="band" style="background:var(--amber);padding-top:1.2rem;padding-bottom:1.2rem"><b>Settled solids</b><span>grows with every load</span></div>
+        <div class="band" style="background:var(--ink3)"><b>Reserve below draw point</b><span>held back</span></div>
+        <p style="font-size:.88rem;color:var(--mutedl);margin:1.1rem 0 0">Three records describe this picture today: metered water and brine, load-level intake, and periodic sonar.</p>
+      </div>
+    </div>
+    <p class="foot">Algo-Rythmn Corp · Calgary · algo-rythmn.ai</p>
+    <p class="copy">© 2026 Algo-Rythmn Corp. All rights reserved. Confidential.</p>
+    <div class="pageno"><b>01</b> / 11</div>
+  </div>
+</section>
+
+<!-- 2 · WHAT WE HEARD -->
+<section class="slide">
+  <div class="inner">
+    <p class="eyebrow">01 · What we heard</p>
+    <h2>The problem as it was described to us</h2>
+    <p class="kicker">These are the priorities as we understood them from the first meeting.</p>
+    <div class="grid g3">
+      <div class="card">
+        <div class="label">Three records that never agree</div>
+        <ul class="cardlist">
+          <li>Metered water and brine volumes</li>
+          <li>Load-level intake records</li>
+          <li>Periodic sonar surveys</li>
+          <li>None reconciled against the others</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="label">Three questions stay open</div>
+        <ul class="cardlist">
+          <li>How much usable capacity exists today</li>
+          <li>What a cubic metre of new void costs</li>
+          <li>Whether Cavern 3 pays for itself</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="label" style="color:var(--warn)">One unexplained result</div>
+        <ul class="cardlist">
+          <li>Cavern 2 came in under its pitched capacity</li>
+          <li>Coincident with a change in oil-blanket communication on the returns</li>
+          <li>Never quantified, never attributed</li>
+        </ul>
+      </div>
+    </div>
+    <h3 style="font-size:1.3rem;margin:2.4rem 0 1.1rem">How we ranked the priorities</h3>
+    <div class="rank"><div class="dot" style="background:var(--teal)">1</div><div>
+      <h3>Get Cavern 3 approved</h3>
+      <p>An evidence-backed case in front of the board, built on figures already proven.</p></div></div>
+    <div class="rank"><div class="dot" style="background:var(--teal)">2</div><div>
+      <h3>Know what exists today</h3>
+      <p>Usable void per cavern, stated with a confidence range that can be quoted.</p></div></div>
+    <div class="rank"><div class="dot" style="background:var(--teal)">3</div><div>
+      <h3>Know what a cubic metre costs</h3>
+      <p>Cost per cubic metre created, measured rather than assumed.</p></div></div>
+    <div class="rank"><div class="dot" style="background:var(--amberl)">4</div><div>
+      <h3>Explain Cavern 2</h3>
+      <p>The shortfall quantified and located, with no blame attached to anyone.</p></div></div>
+    <div class="rank"><div class="dot" style="background:var(--amberl)">5</div><div>
+      <h3>Earn more per load</h3>
+      <p>Each load priced against real remaining capacity rather than a flat tier.</p></div></div>
+    <p class="foot">Amber numbering marks our inference rather than something stated directly.</p>
+    <p class="copy">© 2026 Algo-Rythmn Corp. All rights reserved. Confidential.</p>
+    <div class="pageno"><b>02</b> / 11</div>
+  </div>
+</section>
+
+<!-- 3 · WHY NOW -->
+<section class="slide">
+  <div class="inner">
+    <p class="eyebrow">02 · Why now</p>
+    <h2>Cavern 3 carries the intake, and the clock is already running</h2>
+    <div class="split">
+      <div>
+        <div class="rank"><div class="dot" style="background:var(--teal)">1</div><div>
+          <h3>Cavern 1 sits at its capacity constraint</h3>
+          <p>Remaining void is the number the intake desk is quoting against every day.</p></div></div>
+        <div class="rank"><div class="dot" style="background:var(--teal)">2</div><div>
+          <h3>Cavern 2 growth has stalled</h3>
+          <p>The reason is unquantified, so the same risk carries straight into the next build.</p></div></div>
+        <div class="rank"><div class="dot" style="background:var(--warn)">3</div><div>
+          <h3>Without a third cavern, loads get turned away</h3>
+          <p>Volume that leaves the gate once tends to stay at the gate it moved to.</p></div></div>
+        <div class="rank" style="margin-bottom:0"><div class="dot" style="background:var(--teal)">4</div><div>
+          <h3>The pre-spud window closes once</h3>
+          <p>Instrumentation specified before drilling costs a fraction of the same work retrofitted.</p></div></div>
+      </div>
+      <div class="cost">
+        <div class="label" style="color:var(--amberl)">Where the risk actually sits</div>
+        <div class="num">8× vs 2×</div>
+        <p>Cost per cubic metre delivered swings roughly eight times on volume against roughly two times on capital spend.</p>
+        <hr>
+        <p style="color:#E4EEEE">Capital range under discussion: $3.5M to $7M. Every cubic metre of usable void carries roughly $320 to $360 of intake revenue at 3.2 to 3.6 cubic metres of waste per cubic metre created.</p>
+        <hr>
+        <p style="color:#fff;font-weight:700">Volume assurance is where the board conversation belongs.</p>
+      </div>
+    </div>
+    <p class="foot">Capital range and throughput ratios as discussed on 21 August 2026. Revenue per cubic metre is derived from those figures, not from site accounts.</p>
+    <p class="copy">© 2026 Algo-Rythmn Corp. All rights reserved. Confidential.</p>
+    <div class="pageno"><b>03</b> / 11</div>
+  </div>
+</section>
+
+<!-- 4 · THE ENEMY -->
+<section class="slide dark">
+  <div class="inner">
+    <p class="eyebrow amber">03 · The enemy</p>
+    <h2>A $3.5M to $7M decision, made without a reconciled number</h2>
+    <p class="kicker">Five things are moving the void-space numbers today.</p>
+    <div class="enemy">
+      <div>
+        <div class="spot"><div class="dot" style="background:var(--teal)">1</div><div>
+          <h3>Sonar interpretation is subjective</h3>
+          <p>Third-party reads of the same trace can land 2.5% apart, both of them sound.</p></div></div>
+        <div class="spot flag"><div class="dot" style="background:var(--warn)">2</div><div>
+          <h3>The remainder trap</h3>
+          <p>Meter drift and unnoticed leak-off get categorised as solid waste.</p></div></div>
+        <div class="spot"><div class="dot" style="background:var(--teal)">3</div><div>
+          <h3>Transfers between Caverns 1 and 2</h3>
+          <p>Cavern 2 returns feed Cavern 1, so one undated movement shifts both balances.</p></div></div>
+        <div class="spot"><div class="dot" style="background:var(--teal)">4</div><div>
+          <h3>A static 7:1 wash ratio</h3>
+          <p>It describes a physical floor, and several planning numbers inherit it.</p></div></div>
+        <div class="spot"><div class="dot" style="background:var(--teal)">5</div><div>
+          <h3>Unmodelled physical sinks</h3>
+          <p>Insolubles refill washed space and salt creeps inward. Both shrink usable volume.</p></div></div>
+      </div>
+      <div class="cost">
+        <div class="label" style="color:var(--amberl)">What it costs</div>
+        <div class="num">19×</div>
+        <p>Gap between what a survey pair read and true void growth in our simulated cavern over eight months. Both readings were defensible. The return itself is fuzzy.</p>
+        <hr>
+        <p style="color:#E4EEEE">No cost per cubic metre to create space. None to deplete it. Nothing underneath the capital case.</p>
+      </div>
+    </div>
+    <p class="foot">The 19× figure comes from a two-year simulation using parameters inside the ranges discussed on 21 August 2026. Site operating data is not used.</p>
+    <p class="copy">© 2026 Algo-Rythmn Corp. All rights reserved. Confidential.</p>
+    <div class="pageno"><b>04</b> / 11</div>
+  </div>
+</section>
+
+<!-- 5 · THE SOLUTION -->
+<section class="slide">
+  <div class="inner">
+    <p class="eyebrow">04 · The solution</p>
+    <h2>The Cavern Capacity Ledger</h2>
+    <p class="kicker">Three fragmented records in. One reconciled account out.</p>
+    <div class="flow">
+      <div>
+        <div class="src"><b>Ignition telemetry</b><span>flows, pressures, temperatures</span></div>
+        <div class="src" style="border-left-color:var(--amber)"><b>Historical waste cuts</b><span>load tickets and spin results</span></div>
+        <div class="src" style="border-left-color:var(--purple);margin-bottom:0"><b>Sonar archive</b><span>every survey, every contractor</span></div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="core">
+        <div class="label">The ledger</div>
+        <h3>Thermodynamic<br>mass balance</h3>
+        <hr>
+        <p>Every component carries its own rate of change, tied together by the fact that they must always fill the mined void.</p>
+      </div>
+      <div class="arrow">→</div>
+      <div class="out">
+        <div class="label">One output</div>
+        <h3>Usable volume</h3><p>per cavern, live</p>
+        <h3>Cost per cubic metre</h3><p>to create and to deplete</p>
+        <h3>A stated interval</h3><p style="margin-bottom:0">on every figure</p>
+      </div>
+    </div>
+    <p class="closer" style="text-align:left;margin-top:2rem">The physics is engineering. The layer Algo-Rythmn adds is the estimation on top of it: fusing three disagreeing instruments and reporting how far the answer can be trusted.</p>
+    <p class="foot">Algo-Rythmn · The Cavern Capacity Ledger</p>
+    <p class="copy">© 2026 Algo-Rythmn Corp. All rights reserved. Confidential.</p>
+    <div class="pageno"><b>05</b> / 11</div>
+  </div>
+</section>
+
+<!-- 6 · PRODUCT IN ACTION -->
+<section class="slide">
+  <div class="inner">
+    <p class="eyebrow">05 · Product in action</p>
+    <h2>Filling the gap when the survey goes blind</h2>
+    <p class="kicker">A case from Cavern 2, where the acoustic survey has nothing usable to report.</p>
+    <div class="grid g2">
+      <div class="card">
+        <div class="label" style="color:var(--warn)">The input</div>
+        <h3 style="font-size:1.35rem;margin-bottom:1.1rem">The acoustic survey is blind</h3>
+        <div class="band" style="background:var(--amberl)"><b>Oil blanket at the roof</b><span>signal blocked</span></div>
+        <div class="band" style="background:var(--teal);padding-top:1.5rem;padding-bottom:1.5rem"><b>Brine</b><span>clear return</span></div>
+        <div class="band" style="background:var(--amber);padding-top:1rem;padding-bottom:1rem"><b>Dense suspended slurry at the floor</b><span>signal scattered</span></div>
+        <p style="margin:1.1rem 0 0;color:#5A6A6C;font-size:.96rem">Both boundaries the survey exists to find are the two it cannot see.</p>
+      </div>
+      <div class="card oncard" style="background:var(--ink);color:#fff">
+        <div class="label">The ledger output</div>
+        <h3 style="font-size:1.35rem;margin-bottom:1.2rem;color:#fff">The ledger stops leaning on the sonar</h3>
+        <div class="step"><div class="dot" style="background:var(--teal)">1</div><div>
+          <h3>Roof volume</h3>
+          <p>From thermodynamic fluid-pressure tracking, against the blanket interface.</p></div></div>
+        <div class="step"><div class="dot" style="background:var(--teal)">2</div><div>
+          <h3>Floor volume</h3>
+          <p>Modelled bottom-up from historical waste-spin mass and settling rate.</p></div></div>
+        <div class="step"><div class="dot" style="background:var(--teal)">3</div><div>
+          <h3>Both reported with an interval</h3>
+          <p>So the board can see how far the number can be pushed.</p></div></div>
+        <p class="pull">Volume recovered where the survey reported nothing.</p>
+      </div>
+    </div>
+    <p class="foot">Algo-Rythmn · The Cavern Capacity Ledger</p>
+    <p class="copy">© 2026 Algo-Rythmn Corp. All rights reserved. Confidential.</p>
+    <div class="pageno"><b>06</b> / 11</div>
+  </div>
+</section>
+
+<!-- 7 · SIDE BY SIDE -->
+<section class="slide">
+  <div class="inner">
+    <p class="eyebrow">06 · Side by side</p>
+    <h2>Assumptions against the ledger</h2>
+    <div class="grid g2">
+      <div class="col old">
+        <div class="label" style="color:var(--muted)">The old way</div>
+        <p class="method">Volume from subjective sonar snapshots, plus an assumed 7:1 wash ratio.</p>
+        <hr>
+        <div class="label" style="color:var(--muted)">The result</div>
+        <ul>
+          <li>Depletion rate unknown between surveys</li>
+          <li>Return on capital cannot be quantified</li>
+          <li>Gate price set without reference to capacity cost</li>
+        </ul>
+      </div>
+      <div class="col new">
+        <div class="label" style="color:var(--teall)">The ledger</div>
+        <p class="method">Volume from continuous material mass balance, with flow rates calibrated against every instrument.</p>
+        <hr>
+        <div class="label" style="color:var(--teall)">The result</div>
+        <ul>
+          <li>Depletion tracked on every load and wash hour</li>
+          <li>Cost per cubic metre stated with its interval</li>
+          <li>Gate price traced to the void each load consumes</li>
+        </ul>
+      </div>
+    </div>
+    <p class="closer">Same question either way. The gain shows up in commitments that can be made with confidence.</p>
+    <p class="foot">Algo-Rythmn · The Cavern Capacity Ledger</p>
+    <p class="copy">© 2026 Algo-Rythmn Corp. All rights reserved. Confidential.</p>
+    <div class="pageno"><b>07</b> / 11</div>
+  </div>
+</section>
+
+<!-- 8 · DAILY OPERATING PICTURE -->
+<section class="slide dark">
+  <div class="inner">
+    <p class="eyebrow">07 · What it looks like day to day</p>
+    <h2>One capacity figure the intake desk can quote against</h2>
+    <p class="kicker">Four layers tracked continuously, resolving to a single number that updates with every load.</p>
+    <div class="state">
+      <div><h3>Oil blanket</h3><p>depth and integrity</p></div>
+      <div><h3>Brine</h3><p>level and saturation</p></div>
+      <div><h3>Settled solids</h3><p>floor build-up</p></div>
+      <div><h3>Usable void</h3><p>with a confidence range</p></div>
+    </div>
+    <div class="grid g2">
+      <div class="acct">
+        <div class="label">Live capacity statement · illustrative</div>
+        <div class="r"><div>Settled capacity</div><div class="v">35,585 m³</div></div>
+        <div class="r"><div>Pending settlement · 14 loads, clearing over 9 days</div><div class="v">− 1,240 m³</div></div>
+        <div class="r total"><div><b>Available to promise</b></div><div class="v">34,345 m³</div></div>
+        <p class="note">Settled capacity only. Pending loads are excluded until they clear.</p>
+      </div>
+      <div class="card">
+        <div class="label">Where the money shows up</div>
+        <ul class="cardlist">
+          <li>Void currently held back as safety margin against an unknown number comes back into play</li>
+          <li>Every recovered cubic metre carries roughly $320 to $360 of intake revenue</li>
+          <li>Each load quoted against the void it will genuinely occupy once settled</li>
+          <li>Gate price traced to cost per cubic metre created rather than a blended tier</li>
+          <li>Fast-settling and solids-heavy loads stop paying the same rate</li>
+        </ul>
+      </div>
+    </div>
+    <p class="foot">Figures illustrative. Real values come from the site record during the study.</p>
+    <p class="copy">© 2026 Algo-Rythmn Corp. All rights reserved. Confidential.</p>
+    <div class="pageno"><b>08</b> / 11</div>
+  </div>
+</section>
+
+<!-- 9 · METHOD -->
+<section class="slide">
+  <div class="inner">
+    <p class="eyebrow">08 · Method, in outline</p>
+    <h2>What sits underneath this, and where it stops</h2>
+    <div class="grid g2">
+      <div class="card">
+        <div class="label">What it is</div>
+        <ul class="cardlist">
+          <li>A physical model of the cavern, with stratification, settling, dissolution and closure each carried on their own terms</li>
+          <li>One constraint that always has to close: oil plus brine plus settled solids plus reserve equals the mined void, at every point in time</li>
+          <li>Look-ahead filtering of the Kalman family, which carries uncertainty forward rather than discarding it</li>
+          <li>Validated the way a trading model is validated: walk-forward, out-of-sample, with confidence intervals reported</li>
+        </ul>
+      </div>
+      <div class="card oncard" style="background:var(--ink);color:#fff">
+        <div class="label">Where the work stops</div>
+        <ul class="cardlist">
+          <li>Cavern engineering stays with the site and its contractors. That expertise is theirs</li>
+          <li>The call on any individual load stays with the operator</li>
+          <li>Existing systems stay where they are, and reconciliation runs alongside them</li>
+          <li>Misses get reported. Every figure arrives with the range around it</li>
+          <li>If the record will not carry the build, the study says so and recommends against it</li>
+        </ul>
+      </div>
+    </div>
+    <p class="closer" style="text-align:left">The detail is the deliverable.</p>
+    <p class="foot">Algo-Rythmn · The Cavern Capacity Ledger</p>
+    <p class="copy">© 2026 Algo-Rythmn Corp. All rights reserved. Confidential.</p>
+    <div class="pageno"><b>09</b> / 11</div>
+  </div>
+</section>
+
+<!-- 10 · IMPLEMENTATION -->
+<section class="slide">
+  <div class="inner">
+    <p class="eyebrow">09 · Implementation</p>
+    <h2>We orchestrate. We do not disrupt.</h2>
+    <p class="kicker">The ledger runs alongside the systems already in place.</p>
+    <div class="grid g2">
+      <div>
+        <div class="label">What we read</div>
+        <ul class="reads">
+          <li>Ignition historian data, by direct read or CSV export</li>
+          <li>Historical sonar files, as supplied by the contractor</li>
+          <li>Waste sample spin logs and load tickets</li>
+          <li>Capital ledger and utility records, including the power-split work</li>
+          <li>Gate records and load mix, for the pricing work</li>
+        </ul>
+        <p style="font-size:.95rem;color:var(--muted)">Direct read-only access to the historian saves weeks against a client-side export across a decade of history.</p>
+      </div>
+      <div class="card oncard nots" style="background:var(--ink);color:#fff">
+        <div class="label">What we do not touch</div>
+        <div><h3>No IT overhaul</h3><p>Existing systems stay exactly where they are.</p></div>
+        <div><h3>No new hardware during the study</h3><p>Cavern 3 instrumentation is specified at the end of it, ahead of spud.</p></div>
+        <div><h3>No change to operations</h3><p>Nobody on site works differently while the ledger runs.</p></div>
+        <div style="margin-bottom:0"><h3>No replacement of judgement</h3><p>The call on any load stays with the operator.</p></div>
+      </div>
+    </div>
+    <p class="foot">Cavern 3 is the one chance to specify measurement before spud rather than retrofit it later.</p>
+    <p class="copy">© 2026 Algo-Rythmn Corp. All rights reserved. Confidential.</p>
+    <div class="pageno"><b>10</b> / 11</div>
+  </div>
+</section>
+
+<!-- 11 · THE ASK -->
+<section class="slide dark">
+  <div class="inner">
+    <p class="eyebrow">10 · The next step</p>
+    <h2>An eight-week study, ahead of spud</h2>
+    <p class="kicker">Fixed fee, three milestones, six workstreams. No commitment to anything downstream.</p>
+    <div class="grid g2">
+      <div class="card">
+        <div class="label">Six workstreams</div>
+        <div class="ws"><div class="k">WS1</div><div class="v">Source system walk and gap register</div></div>
+        <div class="ws"><div class="k">WS2</div><div class="v">Mass balance closed per cavern per year</div></div>
+        <div class="ws"><div class="k">WS3</div><div class="v">Sonar archive re-interpreted to one reference</div></div>
+        <div class="ws"><div class="k">WS4</div><div class="v">Ledger prototype and validation report</div></div>
+        <div class="ws"><div class="k">WS5</div><div class="v">Cavern 3 instrumentation specification</div></div>
+        <div class="ws"><div class="k">WS6</div><div class="v">Findings memo and costed build plan</div></div>
+      </div>
+      <div class="card">
+        <div class="label">What it needs to start</div>
+        <ul class="cardlist">
+          <li>A designated point of contact on site to coordinate data access</li>
+          <li>Read-only access to the Ignition historian</li>
+          <li>An introduction to the sonar contractor, for raw traces</li>
+          <li>Two half-days with operations, to reconstruct the event timeline and any transfers not held in a system of record</li>
+          <li>Capital ledger, utility records and gate records</li>
+        </ul>
+      </div>
+    </div>
+    <div class="sdg">
+      <div class="r"><div class="k">The deliverable</div><div class="v">A defensible capacity figure for Caverns 1 and 2, with the Cavern 2 shortfall quantified and located.</div></div>
+      <div class="r"><div class="k">The specification</div><div class="v">The measurement set for Cavern 3, in hand before drilling starts.</div></div>
+      <div class="r"><div class="k">The finding</div><div class="v">An explicit statement of whether the existing record can carry the full build.</div></div>
+    </div>
+    <div class="terms">Fixed fee · 8 weeks · no commitment to anything downstream. If the record will not carry the build, that answer arrives before anyone drills.</div>
+    <div class="phz">
+      <div><div class="k">AFTER, IF WORTH IT</div><div class="v">Build Cavern 3 measured from the first cubic metre</div></div>
+      <div><div class="k">THEN</div><div class="v">Live capacity, updated with every load</div></div>
+      <div><div class="k">THEN</div><div class="v">Gate price set against real remaining void</div></div>
+      <div><div class="k">THEN</div><div class="v">Forecast capacity and cost weeks ahead</div></div>
+    </div>
+    <p class="foot">The four stages above are shown for direction. Nothing beyond the eight-week study is being asked for today. Technical specification and the two-year simulation available on request.</p>
+    <p class="copy">© 2026 Algo-Rythmn Corp. All rights reserved. Confidential.</p>
+    <div class="pageno"><b>11</b> / 11</div>
+  </div>
+</section>
+
+<script>
+(function(){
+  var bar = document.getElementById('progress');
+  function update(){
+    var h = document.documentElement;
+    var max = h.scrollHeight - h.clientHeight;
+    bar.style.width = (max > 0 ? (h.scrollTop || document.body.scrollTop) / max * 100 : 0) + '%';
+  }
+  window.addEventListener('scroll', update, {passive:true});
+  window.addEventListener('resize', update);
+  update();
+
+  var els = document.querySelectorAll('.slide .inner > *');
+  if ('IntersectionObserver' in window) {
+    els.forEach(function(el){ el.style.opacity = 0; el.style.transform = 'translateY(14px)';
+      el.style.transition = 'opacity .5s ease, transform .5s ease'; });
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting) { e.target.style.opacity = 1; e.target.style.transform = 'none';
+          io.unobserve(e.target); }
+      });
+    }, {rootMargin: '0px 0px -8% 0px', threshold: 0.05});
+    els.forEach(function(el){ io.observe(el); });
+  }
+})();
+</script>
+</body>
+</html>
